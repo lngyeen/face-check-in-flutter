@@ -1,0 +1,147 @@
+---
+description: "This rule governs general Flutter/Dart development best practices applicable to any project. It should be considered whenever: (1) Planning new Flutter features, widgets, or components, (2) Modifying existing Dart/Flutter code, (3) Reviewing or fixing bugs, (4) Making architectural decisions, (5) Creating new Dart files or refactoring existing ones. The rule promotes consistent coding style, performance, and maintainable code structure, regardless of the specific state management or architecture used. Apply this rule to maintain code quality and prevent common pitfalls in any Flutter/Dart project."
+globs:
+alwaysApply: false
+---
+"This rule governs general Flutter/Dart development best practices applicable to any project. It should be considered whenever: (1) Planning new Flutter features, widgets, or components, (2) Modifying existing Dart/Flutter code, (3) Reviewing or fixing bugs, (4) Making architectural decisions, (5) Creating new Dart files or refactoring existing ones. The rule promotes consistent coding style, performance, and maintainable code structure, regardless of the specific state management or architecture used. Apply this rule to maintain code quality and prevent common pitfalls in any Flutter/Dart project."
+
+# General Flutter/Dart Best Practices
+
+## Critical Rules
+
+- **Performance First**:
+    - **Use `const` Widely**: Always use `const` for constructors of widgets (`const Text(...)`, `const Padding(...)`) and for variables whenever possible. This is the single most effective way to prevent unnecessary widget rebuilds.
+    - **Profile Your App**: Regularly use Flutter DevTools to profile performance (CPU, memory) and inspect the widget tree. Identify and fix performance bottlenecks early.
+
+- **Smart Widget Structure**:
+    - **Split Large `build` Methods**: A `build` method should not exceed 40 lines. Refactor complex UI into smaller, reusable `StatelessWidget` or `StatefulWidget` classes. Prefer creating new widget classes over private methods that return `Widget`, as classes have their own `BuildContext` and participate correctly in the element tree.
+    - **Avoid Deep Nesting**: Flatten deep widget trees where possible. Use `Builder` widgets, cascade notation (`..`), or refactor to reduce nesting and improve readability.
+
+- **Clean Architecture & State Management**:
+    - **Strict Separation of Concerns**: Isolate UI, business logic (BLoC, Provider, Riverpod, etc.), and data layers (repositories, data sources). Widgets should only reflect state, not fetch data or contain business logic.
+    - **Immutability is Key**: Use immutable classes for state and models (`@immutable` annotation). This prevents side effects and simplifies state management. Prefer packages like `freezed` to generate immutable classes.
+
+- **Robust & Safe Code**:
+    - **Embrace Null Safety**: Leverage Dart's null safety. Avoid the bang operator (`!`) wherever possible. Use null-aware operators (`?.`, `??`) and local type promotion to handle nullability gracefully.
+    - **Handle Asynchrony with Care**: Use `async/await` for asynchronous operations. Always wrap calls in `try-catch` blocks to handle exceptions. For UI, use `FutureBuilder` or `StreamBuilder` correctly, ensuring the future/stream is created outside the `build` method.
+    - **Enforce Linting**: Use a strict set of linter rules in `analysis_options.yaml`. Start with `flutter_lints` and add more rules as needed to maintain high code quality and consistency across the team.
+
+- **Consistent Naming & Formatting**:
+    - **Follow Dart Style Guide**: Adhere strictly to Dart naming conventions (`UpperCamelCase` for types, `lowerCamelCase` for members/variables, `snake_case` for files/directories).
+    - **Auto-format Code**: Always run `dart format .` before committing code to ensure consistent formatting.
+
+## Examples
+
+<example>
+  // Good: Immutable state, const widgets, and logic separation.
+  // In your state management layer:
+  @immutable
+  class UserProfileState {
+    const UserProfileState({required this.name, required this.email});
+    final String name;
+    final String email;
+  }
+
+  // In your widget file:
+  class UserProfileView extends StatelessWidget {
+    const UserProfileView({super.key, required this.userState});
+    final UserProfileState userState;
+
+    @override
+    Widget build(BuildContext context) {
+      // Small build method, delegates to smaller widgets.
+      // Uses const where possible.
+      return Column(
+        children: [
+          const Header(title: 'User Profile'),
+          _UserInfo(userState: userState),
+        ],
+      );
+    }
+  }
+
+  class _UserInfo extends StatelessWidget {
+    const _UserInfo({required this.userState});
+    final UserProfileState userState;
+
+    @override
+    Widget build(BuildContext context) {
+      // All widgets are const where their parameters are known at compile time.
+      return Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(userState.name, style: Theme.of(context).textTheme.headlineSmall),
+              const SizedBox(height: 8),
+              Text(userState.email),
+            ],
+          ),
+        ),
+      );
+    }
+  }
+</example>
+
+<example type="invalid">
+  // Bad: Mutable state, logic in widget, no const, deep nesting.
+  class UserProfileState { // Not immutable
+    String? name;
+    String? email;
+  }
+
+  class UserProfileView extends StatefulWidget {
+    const UserProfileView({super.key});
+    @override
+    State<UserProfileView> createState() => _UserProfileViewState();
+  }
+
+  class _UserProfileViewState extends State<UserProfileView> {
+    final _userState = UserProfileState();
+    bool _isLoading = true;
+
+    @override
+    void initState() {
+      super.initState();
+      // Bad: Business logic directly in the widget's state class.
+      _fetchUser();
+    }
+
+    Future<void> _fetchUser() async {
+      try {
+        // final response = await http.get(Uri.parse('https://api.example.com/user'));
+        // final data = json.decode(response.body);
+        setState(() {
+          // _userState.name = data['name']; // Mutating state
+          // _userState.email = data['email'];
+          _userState.name = "John Doe";
+          _userState.email = "john.doe@example.com";
+          _isLoading = false;
+        });
+      } catch (e) {
+        // ... error handling
+      }
+    }
+
+    @override
+    Widget build(BuildContext context) {
+      // Bad: Long build method, no `const`, mixes UI with loading state.
+      return Scaffold(
+        appBar: AppBar(title: Text("Profile")), // Not const
+        body: _isLoading
+            ? Center(child: CircularProgressIndicator()) // Not const
+            : Padding( // Not const
+                padding: EdgeInsets.all(16.0), // Not const
+                child: Column( // Not const
+                  children: [
+                    Text(_userState.name!), // Bad: Using bang operator!
+                    SizedBox(height: 8), // Not const
+                    Text(_userState.email!), // Bad: Using bang operator!
+                  ],
+                ),
+              ),
+      );
+    }
+  }
+</example>
