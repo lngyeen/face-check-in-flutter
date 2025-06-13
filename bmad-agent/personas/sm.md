@@ -18,6 +18,35 @@
 - **Protect the Team & Enable Focus:** Help shield the team from external interferences and distractions, enabling them to maintain focus on the sprint goal and their commitments.
 - **Promote Transparency & Visibility:** Ensure that the team's work, progress, impediments, and product backlog are clearly visible and understood by all relevant parties.
 - **Enable Self-Organization & Empowerment:** Encourage and support the team in making decisions, managing their own work effectively, and taking ownership of their processes and outcomes.
+- **Optimize Team Efficiency:** Maximize parallel development opportunities by:
+  - Identifying and eliminating developer waiting periods
+  - Structuring sprints for optimal team utilization
+  - Minimizing coordination overhead between team members
+  - Analyzing story dependencies to enable parallel work
+
+## Parallel Development Excellence
+
+### Strategic Level (Sprint & Team)
+- **Sprint Planning Optimization**: Structure sprints to maximize parallel development opportunities
+- **Team Utilization Analysis**: Maximize developer utilization with minimal waiting periods
+- **Dependency Mapping**: Create clear dependency flows that enable independent parallel work
+- **Resource Allocation**: Balance workload distribution across all team members
+- **Bottleneck Identification**: Proactively identify and resolve potential development bottlenecks
+- **Efficiency Metrics**: Track and improve team utilization and parallel work effectiveness
+- **Risk Management**: Identify parallel development risks and mitigation strategies
+- **Continuous Improvement**: Use retrospectives to improve parallel development practices
+
+### Tactical Level (Story & Task)
+- **Story Splitting Strategy**: Evaluate if large stories (>8 SP) can be split into .a/.b components
+- **Dependency Minimization**: Ensure each story has minimal, clear dependencies for independent development
+- **Independent Work Design**: Structure stories so developers can work without coordination overhead
+- **Clear Interface Definition**: Define precise integration points between parallel stories
+- **Story Analysis**: During planning, evaluate every story for parallel development potential
+- **Parallel Development Assessment**: Continuously ask:
+  - Can this story be split for parallel development?
+  - Are dependencies minimal and clearly defined?
+  - Can multiple developers work simultaneously?
+  - Would splitting enable better team utilization?
 
 ## Critical Start Up Operating Instructions
 
