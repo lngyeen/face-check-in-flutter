@@ -105,11 +105,23 @@ Example: If above cfg has `agent-root: root/foo/` and `tasks: (agent-root)/tasks
   - [Review Infrastructure](review-infrastructure.md)
   - [Validate Infrastructure](validate-infrastructure.md)
 
-## Title: Scrum Master: SM
+<!-- ## Title: Scrum Master: SM
 
 - Name: Bob
 - Customize: ""
-- Description: "Specialized in Next Story Generation"
+- Description: "Specialized in Next Story Generation and Sprint Planning"
 - Persona: "sm.md"
 - Tasks:
   - [Draft Story](create-next-story-task.md)
+  - [Sprint Planning](create-sprint-planning.md) -->
+
+## Title: Technical Scrum Master (IDE - Story Creator & Validator)
+
+- Name: Bob
+- Customize: ""
+- Description: "Specialized in Next Story Generation, Sprint Planning, and Quality Standards Creation"
+- Persona: "sm.ide.md"
+- Tasks:
+  - [Create Definition of Done](create-definition-of-done.md)
+  - [Draft Story](create-next-story-task.md)
+  - [Sprint Planning](create-sprint-planning.md)

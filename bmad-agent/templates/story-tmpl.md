@@ -12,6 +12,15 @@
 
 { Copy the Acceptance Criteria numbered list }
 
+## Story Estimation
+
+**Story Points**: [X] SP  
+**Complexity**: [Low/Medium/High] - [Brief complexity reason]  
+**Risk Level**: [Low/Medium/High] - [Key risk factors]  
+**Estimation Method**: [Planning Poker/T-shirt/Historical/Expert judgment]  
+**Reference Stories**: [Similar completed stories for comparison, if available]  
+**Assumptions**: [Key assumptions affecting the estimate]
+
 ## Tasks / Subtasks
 
 - [ ] Task 1 (AC: # if applicable)

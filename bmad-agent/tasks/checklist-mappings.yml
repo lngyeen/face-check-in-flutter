@@ -53,3 +53,19 @@ story-dod-checklist:
   default_locations:
     - docs/stories/*.md
 
+sprint-planning-checklist:
+  checklist_file: bmad-agent/checklists/sprint-planning-checklist.md
+  required_docs:
+    - prd.md
+    - architecture.md
+  optional_docs:
+    - frontend-architecture.md
+    - existing-stories
+    - previous-sprint-data
+  default_locations:
+    - docs/prd.md
+    - docs/architecture.md
+    - docs/frontend-architecture.md
+    - docs/stories/
+    - docs/sprints/
+

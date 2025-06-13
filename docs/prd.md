@@ -95,7 +95,7 @@ The core interaction is "zero-touch". The application automatically starts the r
 
 ### Epic 1: Project Foundation & Core UI Shell
 
-**Epic Goal**: To establish a solid technical foundation for the Flutter application, including project creation, BLoC structure, and building the main UI that displays a live camera feed automatically upon launch.
+**Epic Goal**: To establish a solid technical foundation for the Flutter application, including project creation, backend integration setup, BLoC structure, and building the main UI that displays a live camera feed automatically upon launch.
 
 #### **Story 1.1: Project Initialization & BLoC Structure**
 * **As a** developer, **I want** to set up a new Flutter project with the required BLoC architecture and dependencies, **so that** we have a clean, structured foundation.

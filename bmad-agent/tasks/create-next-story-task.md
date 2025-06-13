@@ -89,10 +89,16 @@ To identify the next logical story based on project progress and epic definition
   - `Status: Draft`
   - `Story` (User Story statement from Epic)
   - `Acceptance Criteria (ACs)` (from Epic, to be refined if needed based on context)
+  - `Story Estimation` (provide initial estimate based on complexity analysis and similar stories)
 - **`Dev Technical Guidance` section (CRITICAL):**
   - Based on all context gathered (Step 3 & 4), embed concise but critical snippets of information, specific data structures, API endpoint details, precise references to _specific sections_ in other documents (e.g., "See `Data Models Doc#User-Schema-ValidationRules` for details"), or brief explanations of how architectural patterns apply to _this story_.
   - If UI story, provide specific references to Component/Style Guides relevant to _this story's elements_.
   - The aim is to make this section the Dev Agent's primary source for _story-specific_ technical context.
+- **`Story Estimation` section:**
+  - Provide initial story point estimate based on complexity analysis, risk assessment, and comparison to similar completed stories
+  - Document estimation method used (Planning Poker, T-shirt sizing, historical comparison, expert judgment)
+  - List key assumptions that affect the estimate
+  - Note any reference stories used for comparison
 - **`Tasks / Subtasks` section:**
   - Generate a detailed, sequential list of technical tasks and subtasks the Dev Agent must perform to complete the story, informed by the gathered context.
   - Link tasks to ACs where applicable (e.g., `Task 1 (AC: 1, 3)`).

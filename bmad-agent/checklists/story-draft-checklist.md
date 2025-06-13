@@ -10,7 +10,16 @@ The Scrum Master should use this checklist to validate that each story contains 
 - [ ] Dependencies on previous stories are identified (if applicable)
 - [ ] Business context and value are clear
 
-## 2. TECHNICAL IMPLEMENTATION GUIDANCE
+## 2. ESTIMATION & PLANNING
+
+- [ ] Story points estimate is provided with clear rationale
+- [ ] Complexity level is identified and justified
+- [ ] Risk factors are documented and assessed
+- [ ] Estimation method is specified (Planning Poker, T-shirt, etc.)
+- [ ] Reference stories are cited for comparison (if available)
+- [ ] Key assumptions affecting estimate are documented
+
+## 3. TECHNICAL IMPLEMENTATION GUIDANCE
 
 - [ ] Key files to create/modify are identified (not necessarily exhaustive)
 - [ ] Technologies specifically needed for this story are mentioned
@@ -19,21 +28,21 @@ The Scrum Master should use this checklist to validate that each story contains 
 - [ ] Required environment variables are listed (if applicable)
 - [ ] Any exceptions to standard coding patterns are noted
 
-## 3. REFERENCE EFFECTIVENESS
+## 4. REFERENCE EFFECTIVENESS
 
 - [ ] References to external documents point to specific relevant sections
 - [ ] Critical information from previous stories is summarized (not just referenced)
 - [ ] Context is provided for why references are relevant
 - [ ] References use consistent format (e.g., `docs/filename.md#section`)
 
-## 4. SELF-CONTAINMENT ASSESSMENT
+## 5. SELF-CONTAINMENT ASSESSMENT
 
 - [ ] Core information needed is included (not overly reliant on external docs)
 - [ ] Implicit assumptions are made explicit
 - [ ] Domain-specific terms or concepts are explained
 - [ ] Edge cases or error scenarios are addressed
 
-## 5. TESTING GUIDANCE
+## 6. TESTING GUIDANCE
 
 - [ ] Required testing approach is outlined
 - [ ] Key test scenarios are identified
@@ -45,10 +54,11 @@ The Scrum Master should use this checklist to validate that each story contains 
 | Category                             | Status            | Issues |
 | ------------------------------------ | ----------------- | ------ |
 | 1. Goal & Context Clarity            | PASS/FAIL/PARTIAL |        |
-| 2. Technical Implementation Guidance | PASS/FAIL/PARTIAL |        |
-| 3. Reference Effectiveness           | PASS/FAIL/PARTIAL |        |
-| 4. Self-Containment Assessment       | PASS/FAIL/PARTIAL |        |
-| 5. Testing Guidance                  | PASS/FAIL/PARTIAL |        |
+| 2. Estimation & Planning             | PASS/FAIL/PARTIAL |        |
+| 3. Technical Implementation Guidance | PASS/FAIL/PARTIAL |        |
+| 4. Reference Effectiveness           | PASS/FAIL/PARTIAL |        |
+| 5. Self-Containment Assessment       | PASS/FAIL/PARTIAL |        |
+| 6. Testing Guidance                  | PASS/FAIL/PARTIAL |        |
 
 **Final Assessment:**
 

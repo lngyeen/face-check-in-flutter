@@ -39,12 +39,19 @@ lib/
 
 ### **3.0 WebSocket Communication Protocol**
 
-**3.1 Client (Flutter App) to Server Message**
+**3.1 Backend Configuration**
+
+* **Development Environment**: `ws://192.168.1.234:3009`
+* **Connection Timeout**: 30 seconds
+* **Retry Policy**: 3 attempts with 3-second delays
+* **Protocol**: Raw WebSocket communication
+
+**3.2 Client (Flutter App) to Server Message**
 
 * **Format**: The application will send the raw **base64 string of the image frame** directly over the WebSocket connection, with no JSON wrapping.
-    * *(Note: This needs final confirmation with the backend team as per our discussion.)*
+* **Status**: ✅ **Confirmed** - Backend ready at `ws://192.168.1.234:3009`
 
-**3.2 Server to Client (Flutter App) Messages**
+**3.3 Server to Client (Flutter App) Messages**
 
 The server will respond with a JSON message. The client will determine the outcome based on the contents of the `data.faces` array.
 
@@ -67,7 +74,7 @@ The server will respond with a JSON message. The client will determine the outco
     }
     ```
 
-* **Success Response Structure**:
+* **Success Response Structure** (Real Sample Data):
     ```json
     {
       "type": "frameResult",
@@ -87,16 +94,55 @@ The server will respond with a JSON message. The client will determine the outco
         "cameraId": "camera_001",
         "timestamp": "2024-03-20T10:30:00.000Z",
         "processingTime": 250,
-        "isCheckinSent": true
+        "isCheckinSent": true,
+        "originalSize": {"width": 1920, "height": 1080},
+        "processedSize": {"width": 640, "height": 480},
+        "annotatedImage": "base64_encoded_image_string_here"
       }
     }
     ```
 
-### **4.0 Error Handling Strategy**
+### **4.0 Error Handling & Risk Mitigation Strategy**
 
-* **WebSocket Connection Failure**: The `WebSocketService` will automatically attempt to **reconnect 3 times**, with a 3-second delay between each attempt. If all retries fail, an error state will be triggered in the UI.
-* **Timeout**: If the application streams for **30 seconds** without receiving any response from the server, it will be treated as a timeout error. The application will stop streaming and reset its state.
-* **Invalid Messages**: If an unexpected message format is received from the server, the application will log the error to the debug view and ignore the message, preventing a crash.
+#### **4.1 WebSocket Connection Management**
+* **Backend URL**: `ws://192.168.1.234:3009` (Development Environment - Confirmed Ready)
+* **Connection Failure**: The `WebSocketService` will automatically attempt to **reconnect 3 times**, with a 3-second delay between each attempt. If all retries fail, an error state will be triggered in the UI.
+* **Connection Timeout**: If connection cannot be established within **30 seconds**, treat as timeout error.
+* **Connection Loss During Streaming**: Automatically pause streaming, attempt reconnection, resume when connection restored.
+
+#### **4.2 Backend Service Dependency Risks**
+* **Backend Unavailability**: 
+  - **Development**: Backend confirmed available at `ws://192.168.1.234:3009`
+  - **Testing**: Real backend responses available for testing
+  - **Graceful Degradation**: Show "Backend unavailable" status to user
+  - **Backup Plan**: Use mock WebSocket server if needed
+* **API Response Timeout**: If no response received within **30 seconds** of streaming start, stop streaming and reset state
+* **Invalid Backend Responses**: Log malformed messages, continue operation without crashing
+* **Backend Version Mismatch**: Implement version checking in WebSocket handshake
+
+#### **4.3 Development Environment Risks**
+* **Network Configuration**: Document network requirements for backend access
+* **Certificate Issues**: Handle SSL certificate validation for development environments  
+* **Firewall/Proxy**: Provide configuration guidance for corporate networks
+* **Backend Setup**: Include backend service health check endpoints
+
+#### **4.4 Production Deployment Risks**
+* **Backend Endpoint Configuration**: Environment-specific configuration management
+* **Service Discovery**: Dynamic backend endpoint resolution if required
+* **Load Balancing**: Handle multiple backend instances gracefully
+* **Service Monitoring**: Implement backend service health monitoring
+
+#### **4.5 Data Processing Risks**
+* **Image Processing Failure**: Skip failed frames, continue streaming with next frame
+* **Memory Pressure**: Implement frame dropping and quality reduction under memory pressure
+* **Device Performance**: Adapt frame rate and quality based on device capabilities
+* **Storage Limitations**: Ensure no persistent storage of sensitive image data
+
+#### **4.6 Fallback Strategies**
+* **Offline Mode**: Display clear offline status, queue operations if feasible
+* **Reduced Functionality**: Graceful degradation with clear user communication
+* **Manual Override**: Allow manual check-in trigger for critical situations (post-MVP)
+* **Service Recovery**: Automatic service restoration when conditions improve
 
 ### **5.0 Definitive Tech Stack Selections**
 
