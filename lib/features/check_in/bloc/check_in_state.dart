@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
 
 part 'check_in_state.freezed.dart';
 
@@ -88,4 +89,58 @@ class CheckInState with _$CheckInState {
     /// Number of frames processed
     @Default(0) int framesProcessed,
   }) = _CheckInState;
+}
+
+// --- UI Helper Extensions ---
+
+extension CameraStatusX on CameraStatus {
+  String get displayText => toString().split('.').last.toUpperCase();
+
+  Color get displayColor {
+    switch (this) {
+      case CameraStatus.ready:
+        return Colors.green;
+      case CameraStatus.error:
+        return Colors.red;
+      case CameraStatus.initial:
+        return Colors.orange;
+      default:
+        return Colors.grey;
+    }
+  }
+}
+
+extension ConnectionStatusX on ConnectionStatus {
+  String get displayText => toString().split('.').last.toUpperCase();
+
+  Color get displayColor {
+    switch (this) {
+      case ConnectionStatus.connected:
+        return Colors.green;
+      case ConnectionStatus.failed:
+        return Colors.red;
+      case ConnectionStatus.connecting:
+        return Colors.orange;
+      case ConnectionStatus.disconnected:
+      default:
+        return Colors.grey;
+    }
+  }
+}
+
+extension StreamingStatusX on StreamingStatus {
+  String get displayText => toString().split('.').last.toUpperCase();
+
+  Color get displayColor {
+    switch (this) {
+      case StreamingStatus.active:
+        return Colors.green;
+      case StreamingStatus.error:
+        return Colors.red;
+      case StreamingStatus.idle:
+      case StreamingStatus.paused:
+      default:
+        return Colors.grey;
+    }
+  }
 }

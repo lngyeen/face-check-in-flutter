@@ -35,8 +35,6 @@ mixin _$CheckInEvent {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -64,8 +62,6 @@ mixin _$CheckInEvent {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -89,8 +85,6 @@ mixin _$CheckInEvent {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -118,8 +112,6 @@ mixin _$CheckInEvent {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -143,8 +135,6 @@ mixin _$CheckInEvent {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -168,8 +158,6 @@ mixin _$CheckInEvent {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -259,8 +247,6 @@ class _$AppStartedImpl implements AppStarted {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -292,8 +278,6 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -321,8 +305,6 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -357,8 +339,6 @@ class _$AppStartedImpl implements AppStarted {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -386,8 +366,6 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -415,8 +393,6 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -493,8 +469,6 @@ class _$AppDisposedImpl implements AppDisposed {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -526,8 +500,6 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -555,8 +527,6 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -591,8 +561,6 @@ class _$AppDisposedImpl implements AppDisposed {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -620,8 +588,6 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -649,8 +615,6 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -728,8 +692,6 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -761,8 +723,6 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -790,8 +750,6 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -826,8 +784,6 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -855,8 +811,6 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -884,8 +838,6 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -992,8 +944,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -1025,8 +975,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -1054,8 +1002,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -1090,8 +1036,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -1119,8 +1063,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -1148,8 +1090,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -1236,8 +1176,6 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -1269,8 +1207,6 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -1298,8 +1234,6 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -1334,8 +1268,6 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -1363,8 +1295,6 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -1392,8 +1322,6 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -1471,8 +1399,6 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -1504,8 +1430,6 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -1533,8 +1457,6 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -1569,8 +1491,6 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -1598,8 +1518,6 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -1627,8 +1545,6 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -1706,8 +1622,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -1739,8 +1653,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -1768,8 +1680,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -1804,8 +1714,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -1833,8 +1741,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -1862,8 +1768,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -1969,8 +1873,6 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -2002,8 +1904,6 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -2031,8 +1931,6 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -2067,8 +1965,6 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -2096,8 +1992,6 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -2125,8 +2019,6 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -2213,8 +2105,6 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -2246,8 +2136,6 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -2275,8 +2163,6 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -2311,8 +2197,6 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -2340,8 +2224,6 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -2369,8 +2251,6 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -2447,8 +2327,6 @@ class _$StreamingStartedImpl implements StreamingStarted {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -2480,8 +2358,6 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -2509,8 +2385,6 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -2545,8 +2419,6 @@ class _$StreamingStartedImpl implements StreamingStarted {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -2574,8 +2446,6 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -2603,8 +2473,6 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -2681,8 +2549,6 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -2714,8 +2580,6 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -2743,8 +2607,6 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -2779,8 +2641,6 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -2808,8 +2668,6 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -2837,8 +2695,6 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -2946,8 +2802,6 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -2979,8 +2833,6 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -3008,8 +2860,6 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -3044,8 +2894,6 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -3073,8 +2921,6 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -3102,8 +2948,6 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -3189,8 +3033,6 @@ class _$FrameProcessedImpl implements FrameProcessed {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -3222,8 +3064,6 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -3251,8 +3091,6 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -3287,8 +3125,6 @@ class _$FrameProcessedImpl implements FrameProcessed {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -3316,8 +3152,6 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -3345,8 +3179,6 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -3450,8 +3282,6 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -3483,8 +3313,6 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -3512,8 +3340,6 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -3548,8 +3374,6 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -3577,8 +3401,6 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -3606,8 +3428,6 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -3692,8 +3512,6 @@ class _$ErrorClearedImpl implements ErrorCleared {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -3725,8 +3543,6 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -3754,8 +3570,6 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -3790,8 +3604,6 @@ class _$ErrorClearedImpl implements ErrorCleared {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -3819,8 +3631,6 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -3848,8 +3658,6 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -3956,8 +3764,6 @@ class _$ToastRequestedImpl implements ToastRequested {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -3989,8 +3795,6 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -4018,8 +3822,6 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -4054,8 +3856,6 @@ class _$ToastRequestedImpl implements ToastRequested {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -4083,8 +3883,6 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -4112,8 +3910,6 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -4137,474 +3933,6 @@ abstract class ToastRequested implements CheckInEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ToastRequestedImplCopyWith<_$ToastRequestedImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ToastShownImplCopyWith<$Res> {
-  factory _$$ToastShownImplCopyWith(
-    _$ToastShownImpl value,
-    $Res Function(_$ToastShownImpl) then,
-  ) = __$$ToastShownImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ToastShownImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$ToastShownImpl>
-    implements _$$ToastShownImplCopyWith<$Res> {
-  __$$ToastShownImplCopyWithImpl(
-    _$ToastShownImpl _value,
-    $Res Function(_$ToastShownImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$ToastShownImpl implements ToastShown {
-  const _$ToastShownImpl();
-
-  @override
-  String toString() {
-    return 'CheckInEvent.toastShown()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ToastShownImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() appStarted,
-    required TResult Function() appDisposed,
-    required TResult Function() cameraInitRequested,
-    required TResult Function(CameraStatus status) cameraStatusChanged,
-    required TResult Function() cameraPreviewStarted,
-    required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
-    required TResult Function(ConnectionStatus status) connectionStatusChanged,
-    required TResult Function() disconnectionRequested,
-    required TResult Function() streamingStarted,
-    required TResult Function() streamingStopped,
-    required TResult Function(StreamingStatus status) streamingStatusChanged,
-    required TResult Function() frameProcessed,
-    required TResult Function(String message) errorOccurred,
-    required TResult Function() errorCleared,
-    required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
-    required TResult Function() debugModeToggled,
-    required TResult Function() statisticsReset,
-    required TResult Function(
-      bool success,
-      String message,
-      String? employeeName,
-    )
-    recognitionResultReceived,
-  }) {
-    return toastShown();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? appStarted,
-    TResult? Function()? appDisposed,
-    TResult? Function()? cameraInitRequested,
-    TResult? Function(CameraStatus status)? cameraStatusChanged,
-    TResult? Function()? cameraPreviewStarted,
-    TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
-    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
-    TResult? Function()? disconnectionRequested,
-    TResult? Function()? streamingStarted,
-    TResult? Function()? streamingStopped,
-    TResult? Function(StreamingStatus status)? streamingStatusChanged,
-    TResult? Function()? frameProcessed,
-    TResult? Function(String message)? errorOccurred,
-    TResult? Function()? errorCleared,
-    TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
-    TResult? Function()? debugModeToggled,
-    TResult? Function()? statisticsReset,
-    TResult? Function(bool success, String message, String? employeeName)?
-    recognitionResultReceived,
-  }) {
-    return toastShown?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? appStarted,
-    TResult Function()? appDisposed,
-    TResult Function()? cameraInitRequested,
-    TResult Function(CameraStatus status)? cameraStatusChanged,
-    TResult Function()? cameraPreviewStarted,
-    TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
-    TResult Function(ConnectionStatus status)? connectionStatusChanged,
-    TResult Function()? disconnectionRequested,
-    TResult Function()? streamingStarted,
-    TResult Function()? streamingStopped,
-    TResult Function(StreamingStatus status)? streamingStatusChanged,
-    TResult Function()? frameProcessed,
-    TResult Function(String message)? errorOccurred,
-    TResult Function()? errorCleared,
-    TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
-    TResult Function()? debugModeToggled,
-    TResult Function()? statisticsReset,
-    TResult Function(bool success, String message, String? employeeName)?
-    recognitionResultReceived,
-    required TResult orElse(),
-  }) {
-    if (toastShown != null) {
-      return toastShown();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(AppStarted value) appStarted,
-    required TResult Function(AppDisposed value) appDisposed,
-    required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
-    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
-    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
-    required TResult Function(ConnectionRequested value) connectionRequested,
-    required TResult Function(ConnectionStatusChanged value)
-    connectionStatusChanged,
-    required TResult Function(DisconnectionRequested value)
-    disconnectionRequested,
-    required TResult Function(StreamingStarted value) streamingStarted,
-    required TResult Function(StreamingStopped value) streamingStopped,
-    required TResult Function(StreamingStatusChanged value)
-    streamingStatusChanged,
-    required TResult Function(FrameProcessed value) frameProcessed,
-    required TResult Function(ErrorOccurred value) errorOccurred,
-    required TResult Function(ErrorCleared value) errorCleared,
-    required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
-    required TResult Function(DebugModeToggled value) debugModeToggled,
-    required TResult Function(StatisticsReset value) statisticsReset,
-    required TResult Function(RecognitionResultReceived value)
-    recognitionResultReceived,
-  }) {
-    return toastShown(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AppStarted value)? appStarted,
-    TResult? Function(AppDisposed value)? appDisposed,
-    TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
-    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
-    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
-    TResult? Function(ConnectionRequested value)? connectionRequested,
-    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
-    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
-    TResult? Function(StreamingStarted value)? streamingStarted,
-    TResult? Function(StreamingStopped value)? streamingStopped,
-    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
-    TResult? Function(FrameProcessed value)? frameProcessed,
-    TResult? Function(ErrorOccurred value)? errorOccurred,
-    TResult? Function(ErrorCleared value)? errorCleared,
-    TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
-    TResult? Function(DebugModeToggled value)? debugModeToggled,
-    TResult? Function(StatisticsReset value)? statisticsReset,
-    TResult? Function(RecognitionResultReceived value)?
-    recognitionResultReceived,
-  }) {
-    return toastShown?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(AppStarted value)? appStarted,
-    TResult Function(AppDisposed value)? appDisposed,
-    TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
-    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
-    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
-    TResult Function(ConnectionRequested value)? connectionRequested,
-    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
-    TResult Function(DisconnectionRequested value)? disconnectionRequested,
-    TResult Function(StreamingStarted value)? streamingStarted,
-    TResult Function(StreamingStopped value)? streamingStopped,
-    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
-    TResult Function(FrameProcessed value)? frameProcessed,
-    TResult Function(ErrorOccurred value)? errorOccurred,
-    TResult Function(ErrorCleared value)? errorCleared,
-    TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
-    TResult Function(DebugModeToggled value)? debugModeToggled,
-    TResult Function(StatisticsReset value)? statisticsReset,
-    TResult Function(RecognitionResultReceived value)?
-    recognitionResultReceived,
-    required TResult orElse(),
-  }) {
-    if (toastShown != null) {
-      return toastShown(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ToastShown implements CheckInEvent {
-  const factory ToastShown() = _$ToastShownImpl;
-}
-
-/// @nodoc
-abstract class _$$ToastDismissedImplCopyWith<$Res> {
-  factory _$$ToastDismissedImplCopyWith(
-    _$ToastDismissedImpl value,
-    $Res Function(_$ToastDismissedImpl) then,
-  ) = __$$ToastDismissedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ToastDismissedImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$ToastDismissedImpl>
-    implements _$$ToastDismissedImplCopyWith<$Res> {
-  __$$ToastDismissedImplCopyWithImpl(
-    _$ToastDismissedImpl _value,
-    $Res Function(_$ToastDismissedImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$ToastDismissedImpl implements ToastDismissed {
-  const _$ToastDismissedImpl();
-
-  @override
-  String toString() {
-    return 'CheckInEvent.toastDismissed()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ToastDismissedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() appStarted,
-    required TResult Function() appDisposed,
-    required TResult Function() cameraInitRequested,
-    required TResult Function(CameraStatus status) cameraStatusChanged,
-    required TResult Function() cameraPreviewStarted,
-    required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
-    required TResult Function(ConnectionStatus status) connectionStatusChanged,
-    required TResult Function() disconnectionRequested,
-    required TResult Function() streamingStarted,
-    required TResult Function() streamingStopped,
-    required TResult Function(StreamingStatus status) streamingStatusChanged,
-    required TResult Function() frameProcessed,
-    required TResult Function(String message) errorOccurred,
-    required TResult Function() errorCleared,
-    required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
-    required TResult Function() debugModeToggled,
-    required TResult Function() statisticsReset,
-    required TResult Function(
-      bool success,
-      String message,
-      String? employeeName,
-    )
-    recognitionResultReceived,
-  }) {
-    return toastDismissed();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? appStarted,
-    TResult? Function()? appDisposed,
-    TResult? Function()? cameraInitRequested,
-    TResult? Function(CameraStatus status)? cameraStatusChanged,
-    TResult? Function()? cameraPreviewStarted,
-    TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
-    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
-    TResult? Function()? disconnectionRequested,
-    TResult? Function()? streamingStarted,
-    TResult? Function()? streamingStopped,
-    TResult? Function(StreamingStatus status)? streamingStatusChanged,
-    TResult? Function()? frameProcessed,
-    TResult? Function(String message)? errorOccurred,
-    TResult? Function()? errorCleared,
-    TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
-    TResult? Function()? debugModeToggled,
-    TResult? Function()? statisticsReset,
-    TResult? Function(bool success, String message, String? employeeName)?
-    recognitionResultReceived,
-  }) {
-    return toastDismissed?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? appStarted,
-    TResult Function()? appDisposed,
-    TResult Function()? cameraInitRequested,
-    TResult Function(CameraStatus status)? cameraStatusChanged,
-    TResult Function()? cameraPreviewStarted,
-    TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
-    TResult Function(ConnectionStatus status)? connectionStatusChanged,
-    TResult Function()? disconnectionRequested,
-    TResult Function()? streamingStarted,
-    TResult Function()? streamingStopped,
-    TResult Function(StreamingStatus status)? streamingStatusChanged,
-    TResult Function()? frameProcessed,
-    TResult Function(String message)? errorOccurred,
-    TResult Function()? errorCleared,
-    TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
-    TResult Function()? debugModeToggled,
-    TResult Function()? statisticsReset,
-    TResult Function(bool success, String message, String? employeeName)?
-    recognitionResultReceived,
-    required TResult orElse(),
-  }) {
-    if (toastDismissed != null) {
-      return toastDismissed();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(AppStarted value) appStarted,
-    required TResult Function(AppDisposed value) appDisposed,
-    required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
-    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
-    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
-    required TResult Function(ConnectionRequested value) connectionRequested,
-    required TResult Function(ConnectionStatusChanged value)
-    connectionStatusChanged,
-    required TResult Function(DisconnectionRequested value)
-    disconnectionRequested,
-    required TResult Function(StreamingStarted value) streamingStarted,
-    required TResult Function(StreamingStopped value) streamingStopped,
-    required TResult Function(StreamingStatusChanged value)
-    streamingStatusChanged,
-    required TResult Function(FrameProcessed value) frameProcessed,
-    required TResult Function(ErrorOccurred value) errorOccurred,
-    required TResult Function(ErrorCleared value) errorCleared,
-    required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
-    required TResult Function(DebugModeToggled value) debugModeToggled,
-    required TResult Function(StatisticsReset value) statisticsReset,
-    required TResult Function(RecognitionResultReceived value)
-    recognitionResultReceived,
-  }) {
-    return toastDismissed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AppStarted value)? appStarted,
-    TResult? Function(AppDisposed value)? appDisposed,
-    TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
-    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
-    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
-    TResult? Function(ConnectionRequested value)? connectionRequested,
-    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
-    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
-    TResult? Function(StreamingStarted value)? streamingStarted,
-    TResult? Function(StreamingStopped value)? streamingStopped,
-    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
-    TResult? Function(FrameProcessed value)? frameProcessed,
-    TResult? Function(ErrorOccurred value)? errorOccurred,
-    TResult? Function(ErrorCleared value)? errorCleared,
-    TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
-    TResult? Function(DebugModeToggled value)? debugModeToggled,
-    TResult? Function(StatisticsReset value)? statisticsReset,
-    TResult? Function(RecognitionResultReceived value)?
-    recognitionResultReceived,
-  }) {
-    return toastDismissed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(AppStarted value)? appStarted,
-    TResult Function(AppDisposed value)? appDisposed,
-    TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
-    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
-    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
-    TResult Function(ConnectionRequested value)? connectionRequested,
-    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
-    TResult Function(DisconnectionRequested value)? disconnectionRequested,
-    TResult Function(StreamingStarted value)? streamingStarted,
-    TResult Function(StreamingStopped value)? streamingStopped,
-    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
-    TResult Function(FrameProcessed value)? frameProcessed,
-    TResult Function(ErrorOccurred value)? errorOccurred,
-    TResult Function(ErrorCleared value)? errorCleared,
-    TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
-    TResult Function(DebugModeToggled value)? debugModeToggled,
-    TResult Function(StatisticsReset value)? statisticsReset,
-    TResult Function(RecognitionResultReceived value)?
-    recognitionResultReceived,
-    required TResult orElse(),
-  }) {
-    if (toastDismissed != null) {
-      return toastDismissed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ToastDismissed implements CheckInEvent {
-  const factory ToastDismissed() = _$ToastDismissedImpl;
 }
 
 /// @nodoc
@@ -4666,8 +3994,6 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -4699,8 +4025,6 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -4728,8 +4052,6 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -4764,8 +4086,6 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -4793,8 +4113,6 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -4822,8 +4140,6 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -4900,8 +4216,6 @@ class _$StatisticsResetImpl implements StatisticsReset {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -4933,8 +4247,6 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -4962,8 +4274,6 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -4998,8 +4308,6 @@ class _$StatisticsResetImpl implements StatisticsReset {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -5027,8 +4335,6 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -5056,8 +4362,6 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
@@ -5189,8 +4493,6 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     required TResult Function(String message) errorOccurred,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
-    required TResult Function() toastShown,
-    required TResult Function() toastDismissed,
     required TResult Function() debugModeToggled,
     required TResult Function() statisticsReset,
     required TResult Function(
@@ -5222,8 +4524,6 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(String message)? errorOccurred,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
-    TResult? Function()? toastShown,
-    TResult? Function()? toastDismissed,
     TResult? Function()? debugModeToggled,
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
@@ -5251,8 +4551,6 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(String message)? errorOccurred,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
-    TResult Function()? toastShown,
-    TResult Function()? toastDismissed,
     TResult Function()? debugModeToggled,
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
@@ -5287,8 +4585,6 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(ToastShown value) toastShown,
-    required TResult Function(ToastDismissed value) toastDismissed,
     required TResult Function(DebugModeToggled value) debugModeToggled,
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
@@ -5316,8 +4612,6 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(ToastShown value)? toastShown,
-    TResult? Function(ToastDismissed value)? toastDismissed,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
@@ -5345,8 +4639,6 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(ToastShown value)? toastShown,
-    TResult Function(ToastDismissed value)? toastDismissed,
     TResult Function(DebugModeToggled value)? debugModeToggled,
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?

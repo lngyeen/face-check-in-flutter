@@ -37,28 +37,18 @@ class CheckInScreen extends StatelessWidget {
         ],
       ),
       body: BlocListener<CheckInBloc, CheckInState>(
+        listenWhen:
+            (previous, current) =>
+                previous.toastStatus != current.toastStatus &&
+                current.toastStatus == ToastStatus.showing,
         listener: (context, state) {
-          // Handle toast messages
-          if (state.toastStatus == ToastStatus.showing &&
-              state.toastMessage != null) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(
-                  SnackBar(
-                    content: Text(state.toastMessage!),
-                    duration: const Duration(seconds: 3),
-                  ),
-                )
-                .closed
-                .then((_) {
-                  // Notify the BLoC that the toast has been dismissed by the user
-                  // or timed out, so it can update the state if necessary.
-                  context.read<CheckInBloc>().add(
-                    const CheckInEvent.toastDismissed(),
-                  );
-                });
-
-            // Notify the BLoC that the toast has been shown, so it can handle the timeout.
-            context.read<CheckInBloc>().add(const CheckInEvent.toastShown());
+          if (state.toastMessage != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.toastMessage!),
+                duration: const Duration(seconds: 3),
+              ),
+            );
           }
         },
         child: BlocBuilder<CheckInBloc, CheckInState>(
@@ -82,20 +72,20 @@ class CheckInScreen extends StatelessWidget {
                           const SizedBox(height: 16),
                           _buildStatusRow(
                             'Camera',
-                            _getStatusText(state.cameraStatus),
-                            _getStatusColor(state.cameraStatus),
+                            state.cameraStatus.displayText,
+                            state.cameraStatus.displayColor,
                           ),
                           const SizedBox(height: 8),
                           _buildStatusRow(
                             'Connection',
-                            _getStatusText(state.connectionStatus),
-                            _getStatusColor(state.connectionStatus),
+                            state.connectionStatus.displayText,
+                            state.connectionStatus.displayColor,
                           ),
                           const SizedBox(height: 8),
                           _buildStatusRow(
                             'Streaming',
-                            _getStatusText(state.streamingStatus),
-                            _getStatusColor(state.streamingStatus),
+                            state.streamingStatus.displayText,
+                            state.streamingStatus.displayColor,
                           ),
                         ],
                       ),
@@ -236,9 +226,9 @@ class CheckInScreen extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.1),
+            color: color.withAlpha(30),
             borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: color.withValues(alpha: 0.3)),
+            border: Border.all(color: color.withAlpha(70)),
           ),
           child: Text(
             status,
@@ -251,27 +241,5 @@ class CheckInScreen extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  String _getStatusText(dynamic status) {
-    return status.toString().split('.').last.toUpperCase();
-  }
-
-  Color _getStatusColor(dynamic status) {
-    final statusString = status.toString();
-
-    if (statusString.contains('ready') ||
-        statusString.contains('connected') ||
-        statusString.contains('active')) {
-      return Colors.green;
-    } else if (statusString.contains('error') ||
-        statusString.contains('failed')) {
-      return Colors.red;
-    } else if (statusString.contains('connecting') ||
-        statusString.contains('initial')) {
-      return Colors.orange;
-    } else {
-      return Colors.grey;
-    }
   }
 }

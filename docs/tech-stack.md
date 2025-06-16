@@ -4,7 +4,7 @@
 
 | Category | Technology / Library | Recommended Version | Description / Purpose |
 | :--- | :--- | :--- | :--- |
-| **Language** | Dart | ^3.4.0 | The primary language for Flutter development. |
+| **Language** | Dart | ^3.7.0 | The primary language for Flutter development. |
 | **Framework** | Flutter | ^3.22.0 | The primary framework for building the user interface. |
 | **State Management** | `flutter_bloc` | ^8.1.0 | The primary library for implementing the BLoC pattern. |
 | **Code Generation** | `freezed` | ^2.5.0 | To generate robust and immutable data classes/states. |
@@ -17,4 +17,4 @@
 | **Testing** | `flutter_test` | from SDK | Built-in tools for Unit and Widget testing. |
 | | `bloc_test` | ^9.1.0 | A dedicated library to facilitate testing BLoCs. |
 | | `mocktail` | ^1.0.0 | A mocking library for creating test doubles. |
-| **Linting** | `flutter_lints` | ^4.0.0 | A set of rules to analyze and ensure code quality. | 
+| **Linting** | `flutter_lints` | ^5.0.0 | A set of rules to analyze and ensure code quality. | 

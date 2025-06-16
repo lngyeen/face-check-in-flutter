@@ -1,3 +1,4 @@
+import 'package:face_check_in_flutter/core/di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../features/check_in/bloc/check_in_bloc.dart';
@@ -12,7 +13,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CheckInBloc()..add(const CheckInEvent.appStarted()),
+      create:
+          (context) =>
+              getIt<CheckInBloc>()..add(const CheckInEvent.appStarted()),
       child: MaterialApp(
         title: 'FaceCheckIn Employee',
         debugShowCheckedModeBanner: false,
