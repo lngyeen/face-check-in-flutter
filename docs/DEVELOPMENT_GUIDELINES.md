@@ -97,13 +97,36 @@ Events are organized by category:
 
 ## 🔨 Development Workflow
 
+### **TDD Workflow (Mandatory)**
+1. **🔴 RED Phase**: Write failing test first
+2. **🟢 GREEN Phase**: Write minimal code to pass
+3. **🔵 REFACTOR Phase**: Improve code quality
+4. **📋 Documentation**: Update test documentation
+
 ### Code Generation
 When modifying state or event classes, run:
 ```bash
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-### Testing
+### **TDD Testing Workflow**
+```bash
+# TDD Development Cycle
+# 1. Write failing test first
+flutter test test/your_feature_test.dart
+
+# 2. Implement minimal code
+# 3. Run tests to verify they pass
+flutter test
+
+# 4. Refactor and verify tests still pass
+flutter test --coverage
+
+# Coverage reporting (90% minimum for TDD)
+genhtml coverage/lcov.info -o coverage/html
+```
+
+### Standard Testing
 ```bash
 # Run all tests
 flutter test

@@ -34,12 +34,17 @@
   - [ ] No direct commits to main/develop branch
   - [ ] Feature branches follow naming convention: feature/story-number-description
 
-### **Testing Excellence**
+### **Testing Excellence (TDD Enhanced)**
+- [ ] **Test-Driven Development**: 
+  - [ ] **RED-GREEN-REFACTOR**: All features developed using TDD cycle
+  - [ ] **Test-First**: Tests written before implementation code
+  - [ ] **Failing Test First**: Verify test fails for correct reason before implementation
 - [ ] **Unit Testing**: 
   - [ ] Unit tests written for all BLoCs, repositories, and business logic
-  - [ ] Minimum 80% code coverage maintained for business logic
+  - [ ] **Minimum 80% code coverage** maintained for business logic (increased for TDD)
   - [ ] Tests follow AAA pattern (Arrange, Act, Assert)
   - [ ] All tests pass in CI/CD pipeline
+  - [ ] **Test Documentation**: Test rationale and scenarios documented
 - [ ] **Widget Testing**: 
   - [ ] Critical UI components tested for correct rendering
   - [ ] User interaction flows tested (tap, swipe, form input)

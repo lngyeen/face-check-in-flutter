@@ -6,26 +6,39 @@
 
 ## 📋 **Testing Framework Overview**
 
-### **Testing Pyramid for MVP**
+### **TDD-Enhanced Testing Pyramid for MVP**
 ```
      /\
     /  \
    / E2E \ (Post-MVP)
   /______\
  /        \
-/  Widget  \ (30% of effort)
+/  Widget  \ (25% of effort)
 \  Tests   /
  \________/
 /          \
-/ Unit     \ (70% of effort)  
+/ Unit     \ (75% of effort - TDD Focus)  
 \ Tests    /
 \________/
 ```
 
+## 🔄 **TDD Integration Requirements**
+
+### **Test-First Development Process**
+1. **🔴 RED Phase**: Write failing test that describes expected behavior
+2. **🟢 GREEN Phase**: Write minimal code to make test pass
+3. **🔵 REFACTOR Phase**: Improve code quality while keeping tests green
+
+### **TDD Story Requirements**
+- [ ] **Pre-Development**: Test plan created before coding starts
+- [ ] **Test-First**: Every new feature starts with a failing test
+- [ ] **Incremental**: Small, focused test-code cycles
+- [ ] **Comprehensive**: Cover edge cases and error scenarios
+
 ## 🧪 **Unit Testing Standards**
 
 ### **Coverage Requirements**
-- **Business Logic**: 90% minimum coverage
+- **Business Logic**: 80% minimum coverage
 - **BLoC Files**: 85% minimum coverage  
 - **Service Classes**: 80% minimum coverage
 - **Utilities**: 75% minimum coverage

@@ -19,7 +19,12 @@
 - **[Operational Guidelines](operational-guidelines.md)** - Coding standards, testing strategy, and error handling
 - **[Sequence Diagrams](sequence-diagrams.md)** - Core workflow diagrams for check-in process
 - **[Infrastructure & Deployment](infra-deployment.md)** - Deployment strategy and distribution methods
-- **[Testing Strategy](testing-strategy.md)** - QA approach and testing protocols
+
+### **Testing & Quality Assurance**
+- **[Testing Strategy](front-end-testing-strategy.md)** - Comprehensive QA approach with TDD integration
+- **[TDD Workflow Guidelines](tdd-workflow-guidelines.md)** - Test-Driven Development process and best practices
+- **[Definition of Done](definition-of-done.md)** - Quality gates and TDD requirements
+- **[Story Template (TDD Enhanced)](story-template-tdd-enhanced.md)** - TDD-ready story format
 - **[Deployment Guide](deployment-guide.md)** - DevOps processes and environment setup
 
 ### **Frontend Documentation**
