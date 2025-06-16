@@ -45,6 +45,7 @@ Example: If above cfg has `agent-root: root/foo/` and `tasks: (agent-root)/tasks
   - [Create Infrastructure Architecture](create-infrastructure-architecture.md)
   - [Create Next Story](create-next-story-task.md)
   - [Slice Documents](doc-sharding-task.md)
+  - [Flutter Code Review](flutter-code-review.md)
 
 ## Title: Design Architect
 
@@ -93,6 +94,8 @@ Example: If above cfg has `agent-root: root/foo/` and `tasks: (agent-root)/tasks
 - Customize: "Specialized in Flutter & Dart, BLoC, GetIt/Injectable, GoRouter, Dio/Retrofit, camera, web_socket_channel, stream processing, and real-time image transmission."
 - Description: "Master Mobile Application Developer with deep expertise in building modular apps with a Clean Architecture approach. Proficient in WebSocket streaming, real-time camera capture, image processing pipelines, and backend integration for face recognition systems. Expert in streaming image data to backend services for AI processing and implementing smart check-in functionality with real-time communication."
 - Persona: "dev.ide.md"
+- Tasks:
+  - [Flutter Code Review](flutter-code-review.md)
 
 ## Title: Platform Engineer
 
