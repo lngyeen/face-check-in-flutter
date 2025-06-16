@@ -104,15 +104,18 @@ Please provide brief answers - I'll ask for details if needed.
 FOR EACH story needed for sprint:
 1. Identify next logical story from epic
 2. Assess AI suitability for story type
-3. Create story with AI-informed estimation:
+3. Create story file at: docs/stories/{epic}.{story}.story.md
+   - Example: docs/stories/1.1.story.md, docs/stories/2.3.story.md
+   - Follow consistent naming: {epic_number}.{story_number}.story.md
+4. Create story with AI-informed estimation:
    - Base complexity assessment
    - AI suitability analysis (High/Medium/Low)
    - Team AI experience adjustments
    - AI tool productivity multipliers
    - Human oversight requirements
-4. Generate AI-appropriate technical guidance
-5. Structure tasks for AI-human collaboration
-6. Add to sprint backlog with AI annotations
+5. Generate AI-appropriate technical guidance
+6. Structure tasks for AI-human collaboration
+7. Add to sprint backlog with AI annotations and story file references
 ```
 
 ### **AI-Informed Estimation Matrix:**
@@ -210,11 +213,13 @@ Load `bmad-agent/templates/sprint-planning-tmpl.md` and populate with:
 - AI-specific quality standards and DoD customizations
 
 #### **AI-Informed Story Breakdown:**
-- All created stories with AI suitability ratings
+- All created stories with AI suitability ratings and file locations
+- Story file references: `docs/stories/{epic}.{story}.story.md` format
 - AI-enhanced estimates with methodology explanation
-- Task assignments optimized for AI-human collaboration
+- Task assignments optimized for AI-human collaboration with story file assignments
 - Dependencies and AI-specific integration points
 - AI optimization strategies and productivity enhancement plans
+- Clear story file status management (Draft → Approved → InProgress → Review → Complete)
 
 #### **AI-Optimized Parallel Development Strategy:**
 - Work streams designed for AI coding patterns
@@ -248,8 +253,11 @@ Create `docs/sprints/sprint-[sprint-number]-plan.md` with:
 5. **AI-Optimized Sprint Plan** - Complete plan maximizing AI coding effectiveness
 
 ### **AI-Specific File Artifacts:**
-- `docs/stories/[epic].[story].story.md` - Stories with AI suitability annotations
-- `docs/sprints/sprint-[sprint-number]-plan.md` - AI-optimized sprint plan
+- **Story Files**: `docs/stories/{epic}.{story}.story.md` (e.g., `docs/stories/1.1.story.md`, `docs/stories/2.3.story.md`)
+  - Stories with AI suitability annotations
+  - Dev persona requires these files for task execution
+  - Must include Status field (Draft/Approved/InProgress/Review/Complete)
+- **Sprint Plan**: `docs/sprints/sprint-{sprint-number}-plan.md` - AI-optimized sprint plan with story file references
 
 ## AI-Specific Success Criteria
 

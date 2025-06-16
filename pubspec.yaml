@@ -35,6 +35,22 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
+  # BLoC State Management
+  flutter_bloc: ^8.1.0
+
+  # WebSocket Communication
+  web_socket_channel: ^2.4.0
+
+  # Camera Integration
+  camera: ^0.11.0
+
+  # Permissions Handling
+  permission_handler: ^11.3.0
+
+  # Code Generation
+  freezed_annotation: ^2.4.0
+  json_annotation: ^4.9.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -45,6 +61,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+
+  # Code Generation Tools
+  freezed: ^2.5.0
+  json_serializable: ^6.8.0
+  build_runner: ^2.4.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
