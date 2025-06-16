@@ -64,12 +64,6 @@ class CheckInEvent with _$CheckInEvent {
   /// Request to show a toast message
   const factory CheckInEvent.toastRequested(String message) = ToastRequested;
 
-  /// Toast has been shown and should be dismissed after a delay
-  const factory CheckInEvent.toastShown() = ToastShown;
-
-  /// Toast has been dismissed
-  const factory CheckInEvent.toastDismissed() = ToastDismissed;
-
   // Debug events
   /// Toggle debug mode
   const factory CheckInEvent.debugModeToggled() = DebugModeToggled;

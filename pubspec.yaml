@@ -52,6 +52,10 @@ dependencies:
   freezed_annotation: ^2.4.0
   json_annotation: ^4.9.0
 
+  # Dependency Injection
+  get_it: ^7.7.0
+  injectable: ^2.4.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +71,9 @@ dev_dependencies:
   freezed: ^2.5.0
   json_serializable: ^6.8.0
   build_runner: ^2.4.0
+
+  # Dependency Injection Generator
+  injectable_generator: ^2.6.1
 
   # TDD Enhanced Testing Dependencies
   bloc_test: ^9.1.0

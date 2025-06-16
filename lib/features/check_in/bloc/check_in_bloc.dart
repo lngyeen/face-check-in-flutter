@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 import 'check_in_event.dart';
 import 'check_in_state.dart';
 
 /// Main BLoC for managing check-in feature state
 /// Handles camera, WebSocket, streaming, and UI state management
+@injectable
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   CheckInBloc() : super(const CheckInState()) {
     // App lifecycle events
@@ -34,8 +36,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<ErrorOccurred>(_onErrorOccurred);
     on<ErrorCleared>(_onErrorCleared);
     on<ToastRequested>(_onToastRequested);
-    on<ToastShown>(_onToastShown);
-    on<ToastDismissed>(_onToastDismissed);
 
     // Debug events
     on<DebugModeToggled>(_onDebugModeToggled);
@@ -272,25 +272,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         toastMessage: event.message,
       ),
     );
-  }
-
-  Future<void> _onToastShown(
-    ToastShown event,
-    Emitter<CheckInState> emit,
-  ) async {
-    // After the toast is shown, wait for a duration and then dismiss it.
-    await Future.delayed(const Duration(seconds: 3));
-    if (!isClosed) {
-      add(const CheckInEvent.toastDismissed());
-    }
-  }
-
-  Future<void> _onToastDismissed(
-    ToastDismissed event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('🍞 CheckInBloc: Toast dismissed');
-
+    // Reset the status back to none so it can be triggered again.
     emit(state.copyWith(toastStatus: ToastStatus.none, toastMessage: null));
   }
 
