@@ -8,6 +8,9 @@
 .buildlog/
 .history
 
+# FVM (Flutter Version Management)
+.fvm/
+
 
 
 # Flutter repo-specific

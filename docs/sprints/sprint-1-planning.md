@@ -300,14 +300,14 @@ gantt
 
 | Day | Senior Dev #1 (60 SP) | Senior Dev #2 (54 SP) | QA Engineer (30 SP) | AI Focus Areas | Integration Points |
 |-----|----------------------|----------------------|-------------------|---------------|------------------|
-| **Day 1** | Story 1.1: Project setup + BLoC | Environment setup, Epic planning | Test framework + automation | AI-assisted project scaffolding | Initial setup coordination |
-| **Day 2** | Story 1.1: Complete (8 SP) ✅ | Story 1.3: Debug view start | Test coverage planning | AI code generation for boilerplate | Interface definitions |
-| **Day 3** | Story 1.2: Camera preview + Architecture opt. | Story 1.3: Continue development | Epic 1 testing scenarios | AI-powered UI generation | **Integration checkpoint 1** |
+| **Day 1** | Story 1.1 (`docs/stories/1.1.story.md`): Project setup + BLoC | Environment setup, Epic planning | Test framework + automation | AI-assisted project scaffolding | Initial setup coordination + Story status: Draft→Approved |
+| **Day 2** | Story 1.1: Complete (8 SP) ✅ | Story 1.3 (`docs/stories/1.3.story.md`): Debug view start | Test coverage planning | AI code generation for boilerplate | Interface definitions |
+| **Day 3** | Story 1.2 (`docs/stories/1.2.story.md`): Camera preview + Architecture opt. | Story 1.3: Continue development | Epic 1 testing scenarios | AI-powered UI generation | **Integration checkpoint 1** |
 | **Day 4** | Story 1.2: Permissions + preview | Story 1.3: Complete (5 SP) ✅ | Automated test creation | AI error handling generation | Debug view integration |
 | **Day 5** | Story 1.2: Complete (13 SP) + Arch opt. ✅ | Code quality improvements start | Epic 1 comprehensive testing | AI performance optimization | **Epic 1 completion** |
-| **Day 6** | Story 2.1: WebSocket setup | Code quality + Story 2.3 prep | Error handling & validation | AI networking code generation | WebSocket architecture design |
-| **Day 7** | Story 2.1: Complete (8 SP) + Perf opt. ✅ | Story 2.3: Toast components | Validation testing framework | AI UI component generation | **Epic 2 integration ready** |
-| **Day 8** | Story 2.2: Frame streaming + Perf | Story 2.3: Message handling + UI polish | End-to-end test scenarios | AI streaming optimization | Integration testing |
+| **Day 6** | Story 2.1 (`docs/stories/2.1.story.md`): WebSocket setup | Code quality + Story 2.3 prep | Error handling & validation | AI networking code generation | WebSocket architecture design |
+| **Day 7** | Story 2.1: Complete (8 SP) + Perf opt. ✅ | Story 2.3 (`docs/stories/2.3.story.md`): Toast components | Validation testing framework | AI UI component generation | **Epic 2 integration ready** |
+| **Day 8** | Story 2.2 (`docs/stories/2.2.story.md`): Frame streaming + Perf | Story 2.3: Message handling + UI polish | End-to-end test scenarios | AI streaming optimization | Integration testing |
 | **Day 9** | Story 2.2: Complete (13 SP) + Integration ✅ | Story 2.3: Complete (8 SP) + Polish ✅ | Full system testing | AI integration assistance | **MVP feature complete** |
 | **Day 10** | Final optimization + Integration support | Final UI polish + Documentation | DoD validation + Sign-off | AI-powered final review | **Sprint review prep** |
 
@@ -338,14 +338,21 @@ gantt
 
 ### **Sprint Stories (Priority Order) - Cursor AI-Enhanced Sprint:**
 
-| Priority | Story ID | Story Title | Assignee | SP | Dependencies | Sprint Day | AI Suitability |
-|----------|----------|-------------|----------|----|--------------|-----------| --------------|
-| 1 | 1.1 | Project Foundation & BLoC Architecture | Senior Dev #1 | 16 | None | Day 1-3 | Excellent |
-| 2 | 1.2 | Camera Integration & Permissions | Senior Dev #1 | 15 | 1.1 | Day 4-6 | Good |
-| 3 | 1.3 | Debug System Implementation | Senior Dev #2 | 6 | 1.1 | Day 2-4 | Excellent |
-| 4 | 2.1 | WebSocket Service & Connection Management | Senior Dev #2 | 12 | 1.1, 1.2 | Day 5-7 | Good |
-| 5 | 2.2 | Frame Streaming & Processing | Senior Dev #1 | 16 | 2.1, 1.2 | Day 7-9 | Fair |
-| 6 | 2.3 | Response Processing & User Feedback | Senior Dev #2 | 5 | 2.1 | Day 8-9 | Excellent |
+| Priority | Story ID | Story Title | Story File | Assignee | SP | Dependencies | Sprint Day | AI Suitability |
+|----------|----------|-------------|------------|----------|----|--------------|-----------| --------------|
+| 1 | 1.1 | Project Foundation & BLoC Architecture | `docs/stories/1.1.story.md` | Senior Dev #1 | 16 | None | Day 1-3 | Excellent |
+| 2 | 1.2 | Camera Integration & Permissions | `docs/stories/1.2.story.md` | Senior Dev #1 | 15 | 1.1 | Day 4-6 | Good |
+| 3 | 1.3 | Debug System Implementation | `docs/stories/1.3.story.md` | Senior Dev #2 | 6 | 1.1 | Day 2-4 | Excellent |
+| 4 | 2.1 | WebSocket Service & Connection Management | `docs/stories/2.1.story.md` | Senior Dev #2 | 12 | 1.1, 1.2 | Day 5-7 | Good |
+| 5 | 2.2 | Frame Streaming & Processing | `docs/stories/2.2.story.md` | Senior Dev #1 | 16 | 2.1, 1.2 | Day 7-9 | Fair |
+| 6 | 2.3 | Response Processing & User Feedback | `docs/stories/2.3.story.md` | Senior Dev #2 | 5 | 2.1 | Day 8-9 | Excellent |
+
+**Story File Management:**
+- **Location**: All stories are located in `docs/stories/` directory
+- **Naming Convention**: `{epic_number}.{story_number}.story.md` format
+- **Status Tracking**: Each story file includes Status field for Dev persona workflow
+- **Current Status**: All stories are in **Draft** status and need to be updated to **Approved** before development starts
+- **Dev Assignment**: Story files are primary reference for assigned developers
 
 **Core MVP Stories Total: 70 Story Points**
 
@@ -522,9 +529,11 @@ Each story must meet all criteria from `docs/definition-of-done.md`:
 - [ ] **Functional**: Full camera → WebSocket → response pipeline working
 - [ ] **Performance**: 3-second recognition time achieved  
 - [ ] **Quality**: All DoD criteria met
+- [ ] **Story Files**: All story files in `docs/stories/` have Status: Complete
 - [ ] **Integration**: Epic 1 ↔ Epic 2 seamlessly integrated
 - [ ] **Documentation**: Technical documentation updated
 - [ ] **Testing**: Complete test suite passing
+- [ ] **Story Workflow**: Story file workflow properly followed (Draft→Approved→InProgress→Review→Complete)
 
 ## 🎯 **MVP Demo Preparation**
 
@@ -551,10 +560,17 @@ Each story must meet all criteria from `docs/definition-of-done.md`:
 
 **Next Steps:**
 1. **Team Approval**: Review and approve this sprint plan
-2. **Environment Setup**: Ensure all team members have development environment ready
-3. **Backend Coordination**: Confirm WebSocket API availability and format
-4. **Sprint Kickoff**: Begin Day 1 with Story 1.1 development
-5. **Success Monitoring**: Track daily progress against this plan
+2. **Story Status Update**: Update all story files from Draft to Approved status
+   - `docs/stories/1.1.story.md` - Status: Draft → Approved
+   - `docs/stories/1.2.story.md` - Status: Draft → Approved  
+   - `docs/stories/1.3.story.md` - Status: Draft → Approved
+   - `docs/stories/2.1.story.md` - Status: Draft → Approved
+   - `docs/stories/2.2.story.md` - Status: Draft → Approved
+   - `docs/stories/2.3.story.md` - Status: Draft → Approved
+3. **Environment Setup**: Ensure all team members have development environment ready
+4. **Backend Coordination**: Confirm WebSocket API availability and format
+5. **Sprint Kickoff**: Begin Day 1 with Story 1.1 development
+6. **Success Monitoring**: Track daily progress against this plan
 
 **Sprint Success Commitment**: This plan delivers a complete MVP with camera integration, real-time WebSocket streaming, and face recognition feedback within 2 weeks using Cursor AI-enhanced parallel development and proven Technical Scrum Master methodology.
 
