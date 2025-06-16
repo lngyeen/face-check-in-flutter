@@ -96,6 +96,7 @@ Example: If above cfg has `agent-root: root/foo/` and `tasks: (agent-root)/tasks
 - Persona: "dev.ide.md"
 - Tasks:
   - [Flutter Code Review](flutter-code-review.md)
+  - [Execute Story Cycle](dev-execute-story-cycle.md)
 
 ## Title: Platform Engineer
 

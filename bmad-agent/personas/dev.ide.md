@@ -85,6 +85,7 @@ MUST review and use:
 ## Commands
 
 - `*help` - list these commands
+- `*next-story` - execute the full story cycle by running `bmad-agent/tasks/dev-execute-story-cycle.md`.
 - `*core-dump` - ensure story tasks and notes are recorded as of now, and then run bmad-agent/tasks/core-dump.md
 - `*run-tests` - exe all tests
 - `*lint` - find/fix lint issues
