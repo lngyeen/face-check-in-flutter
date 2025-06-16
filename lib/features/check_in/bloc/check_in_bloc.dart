@@ -8,7 +8,7 @@ import 'check_in_state.dart';
 /// Main BLoC for managing check-in feature state
 /// Handles camera, WebSocket, streaming, and UI state management
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
-  CheckInBloc() : super(CheckInState.initial()) {
+  CheckInBloc() : super(const CheckInState()) {
     // App lifecycle events
     on<AppStarted>(_onAppStarted);
     on<AppDisposed>(_onAppDisposed);
@@ -34,6 +34,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<ErrorOccurred>(_onErrorOccurred);
     on<ErrorCleared>(_onErrorCleared);
     on<ToastRequested>(_onToastRequested);
+    on<ToastShown>(_onToastShown);
     on<ToastDismissed>(_onToastDismissed);
 
     // Debug events
@@ -54,11 +55,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
-      // Initialize app state
-      await Future.delayed(
-        const Duration(milliseconds: 500),
-      ); // Simulate initialization
-
+      // Initialize app state - removed artificial delay
       emit(
         state.copyWith(
           isLoading: false,
@@ -269,13 +266,23 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('🍞 CheckInBloc: Toast requested: ${event.message}');
-
     emit(
       state.copyWith(
         toastStatus: ToastStatus.showing,
         toastMessage: event.message,
       ),
     );
+  }
+
+  Future<void> _onToastShown(
+    ToastShown event,
+    Emitter<CheckInState> emit,
+  ) async {
+    // After the toast is shown, wait for a duration and then dismiss it.
+    await Future.delayed(const Duration(seconds: 3));
+    if (!isClosed) {
+      add(const CheckInEvent.toastDismissed());
+    }
   }
 
   Future<void> _onToastDismissed(

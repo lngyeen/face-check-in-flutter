@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+// Add a type definition for the connector function for clarity and ease of use.
+typedef WebSocketConnector = WebSocketChannel Function(Uri uri);
+
 /// WebSocket service for backend communication
 /// Handles connection, reconnection, and message exchange with face recognition backend
 class WebSocketService {
@@ -14,12 +17,18 @@ class WebSocketService {
   String _url = _defaultUrl;
   bool _isConnected = false;
   int _retryCount = 0;
+  bool _isDisposed = false;
 
   // Stream controllers for connection status and messages
   final StreamController<bool> _connectionStatusController =
       StreamController<bool>.broadcast();
   final StreamController<Map<String, dynamic>> _messageController =
       StreamController<Map<String, dynamic>>.broadcast();
+
+  // Expose a way to override the connector for testing purposes.
+  // In a real app, this would likely be handled by a proper DI framework.
+  @visibleForTesting
+  WebSocketConnector connector = WebSocketChannel.connect;
 
   /// Stream of connection status changes
   Stream<bool> get connectionStatus => _connectionStatusController.stream;
@@ -78,11 +87,16 @@ class WebSocketService {
       return true;
     }
 
+    if (_isDisposed) {
+      debugPrint('⚠️ WebSocketService: Cannot connect, service is disposed.');
+      return false;
+    }
+
     final urlToConnect = customUrl ?? _url;
     debugPrint('🌐 WebSocketService: Connecting to $urlToConnect');
 
     try {
-      _channel = WebSocketChannel.connect(Uri.parse(urlToConnect));
+      _channel = connector(Uri.parse(urlToConnect));
 
       // Wait for connection with timeout
       await _channel!.ready.timeout(
@@ -92,7 +106,7 @@ class WebSocketService {
 
       _isConnected = true;
       _retryCount = 0;
-      _connectionStatusController.add(true);
+      if (!_isDisposed) _connectionStatusController.add(true);
 
       // Listen for incoming messages
       _channel!.stream.listen(
@@ -106,7 +120,7 @@ class WebSocketService {
     } catch (e) {
       debugPrint('❌ WebSocketService: Connection failed: $e');
       _isConnected = false;
-      _connectionStatusController.add(false);
+      if (!_isDisposed) _connectionStatusController.add(false);
 
       // Attempt retry if within retry limit
       if (_retryCount < _maxRetryAttempts) {
@@ -142,7 +156,7 @@ class WebSocketService {
     }
 
     _channel = null;
-    _connectionStatusController.add(false);
+    if (!_isDisposed) _connectionStatusController.add(false);
 
     debugPrint('✅ WebSocketService: Disconnected');
   }
@@ -180,6 +194,7 @@ class WebSocketService {
 
   /// Handle incoming messages from backend
   void _handleMessage(dynamic message) {
+    if (_isDisposed) return;
     try {
       final Map<String, dynamic> parsedMessage = jsonDecode(message.toString());
       debugPrint(
@@ -194,6 +209,7 @@ class WebSocketService {
 
   /// Handle WebSocket errors
   void _handleError(dynamic error) {
+    if (_isDisposed) return;
     debugPrint('❌ WebSocketService: WebSocket error: $error');
 
     _isConnected = false;
@@ -212,6 +228,7 @@ class WebSocketService {
 
   /// Handle WebSocket disconnection
   void _handleDisconnection() {
+    if (_isDisposed) return;
     debugPrint('🔴 WebSocketService: WebSocket disconnected');
 
     _isConnected = false;
@@ -232,7 +249,7 @@ class WebSocketService {
   /// Dispose of the service and clean up resources
   void dispose() {
     debugPrint('🔴 WebSocketService: Disposing...');
-
+    _isDisposed = true;
     disconnect();
     _connectionStatusController.close();
     _messageController.close();

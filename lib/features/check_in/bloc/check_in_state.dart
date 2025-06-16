@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'check_in_state.dart';
 part 'check_in_state.freezed.dart';
 
 /// Represents the current status of the camera
@@ -89,7 +88,4 @@ class CheckInState with _$CheckInState {
     /// Number of frames processed
     @Default(0) int framesProcessed,
   }) = _CheckInState;
-
-  /// Initial state factory
-  factory CheckInState.initial() => const CheckInState();
 }

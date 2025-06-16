@@ -41,21 +41,24 @@ class CheckInScreen extends StatelessWidget {
           // Handle toast messages
           if (state.toastStatus == ToastStatus.showing &&
               state.toastMessage != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.toastMessage!),
-                duration: const Duration(seconds: 3),
-              ),
-            );
+            ScaffoldMessenger.of(context)
+                .showSnackBar(
+                  SnackBar(
+                    content: Text(state.toastMessage!),
+                    duration: const Duration(seconds: 3),
+                  ),
+                )
+                .closed
+                .then((_) {
+                  // Notify the BLoC that the toast has been dismissed by the user
+                  // or timed out, so it can update the state if necessary.
+                  context.read<CheckInBloc>().add(
+                    const CheckInEvent.toastDismissed(),
+                  );
+                });
 
-            // Dismiss toast after showing
-            Future.delayed(const Duration(seconds: 3), () {
-              if (context.mounted) {
-                context.read<CheckInBloc>().add(
-                  const CheckInEvent.toastDismissed(),
-                );
-              }
-            });
+            // Notify the BLoC that the toast has been shown, so it can handle the timeout.
+            context.read<CheckInBloc>().add(const CheckInEvent.toastShown());
           }
         },
         child: BlocBuilder<CheckInBloc, CheckInState>(
