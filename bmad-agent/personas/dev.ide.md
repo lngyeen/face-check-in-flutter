@@ -89,3 +89,4 @@ MUST review and use:
 - `*run-tests` - exe all tests
 - `*lint` - find/fix lint issues
 - `*explain {something}` - teach or inform {something}
+- `*flutter-review` - execute Flutter Code Review task for pull request analysis
