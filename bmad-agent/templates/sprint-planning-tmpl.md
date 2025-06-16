@@ -36,9 +36,15 @@
 - 🔴 AI-Challenging Stories: [Z] SP ([%] of sprint)
 
 ## AI-Optimized Sprint Backlog
-| Story ID | Title | Epic | Base Est | AI Suitability | AI Multiplier | AI-Enhanced Est | Assignee | Priority | Dependencies | Stream |
-|----------|-------|------|----------|----------------|---------------|-----------------|----------|----------|--------------|--------|
-| [ID] | [Title] | [Epic] | [X] SP | [Excellent/Good/Fair/Poor] | [Multiplier] | [Y] SP | [Name] | [High/Med/Low] | [Deps] | [A/B/C] |
+| Story ID | Title | Story File | Epic | Base Est | AI Suitability | AI Multiplier | AI-Enhanced Est | Assignee | Priority | Dependencies | Stream |
+|----------|-------|------------|------|----------|----------------|---------------|-----------------|----------|----------|--------------|--------|
+| [ID] | [Title] | `docs/stories/{epic}.{story}.story.md` | [Epic] | [X] SP | [Excellent/Good/Fair/Poor] | [Multiplier] | [Y] SP | [Name] | [High/Med/Low] | [Deps] | [A/B/C] |
+
+**Story File Management:**
+- **Location**: All stories must be created in `docs/stories/` directory
+- **Naming Convention**: `{epic_number}.{story_number}.story.md` (e.g., `1.1.story.md`, `2.3.story.md`)
+- **Status Tracking**: Each story file must include Status field for Dev persona workflow
+- **Dev Assignment**: Story files are primary reference for assigned developers
 
 **AI-Enhanced Summary:**
 - **Total Planned (AI-Enhanced)**: [Y] SP
@@ -136,10 +142,10 @@ gantt
 
 ### Detailed Daily Assignments
 **Day 1 - AI-Enhanced Sprint Kickoff:**
-- [Team Member 1] (Multi-Tool): [AI-optimized story/task with AI suitability: Excellent]
-- [Team Member 2] (Optimized): [AI-optimized story/task with AI suitability: Excellent]  
-- [Team Member 3] (Standard): [AI-optimized story/task with AI suitability: Good]
-- **Team**: Environment setup, AI context initialization, branch creation, AI workflow standup
+- [Team Member 1] (Multi-Tool): [Story ID] - `docs/stories/{epic}.{story}.story.md` [AI suitability: Excellent]
+- [Team Member 2] (Optimized): [Story ID] - `docs/stories/{epic}.{story}.story.md` [AI suitability: Excellent]  
+- [Team Member 3] (Standard): [Story ID] - `docs/stories/{epic}.{story}.story.md` [AI suitability: Good]
+- **Team**: Environment setup, AI context initialization, story file status updates (Draft→Approved), branch creation, AI workflow standup
 
 **Day 2 - AI-Accelerated Development:**
 - [Team Member 1] (Multi-Tool): [AI-optimized story/task with 4.5x productivity]
@@ -202,12 +208,14 @@ gantt
 
 **Sprint-Level AI DoD:**
 - [ ] Sprint goal [X]% achieved with AI productivity gains
+- [ ] All story files in `docs/stories/` have Status: Complete
 - [ ] All stories meet AI-enhanced DoD
 - [ ] Demo ready with AI productivity showcase
 - [ ] Technical debt addressed (including AI code quality)
 - [ ] No regression issues from AI-generated code
 - [ ] AI productivity metrics documented
 - [ ] AI lessons learned captured
+- [ ] Story file workflow properly followed (Draft→Approved→InProgress→Review→Complete)
 
 ## AI-Enhanced Success Metrics
 - **AI Velocity**: Target [Y] SP completed (AI-enhanced)
