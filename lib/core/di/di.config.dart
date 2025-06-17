@@ -12,6 +12,8 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../data/services/permission_service_impl.dart' as _i372;
+import '../../domain/services/permission_service.dart' as _i474;
 import '../../features/check_in/bloc/check_in_bloc.dart' as _i435;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -21,7 +23,12 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i435.CheckInBloc>(() => _i435.CheckInBloc());
+    gh.lazySingleton<_i474.PermissionService>(
+      () => _i372.PermissionServiceImpl(),
+    );
+    gh.factory<_i435.CheckInBloc>(
+      () => _i435.CheckInBloc(gh<_i474.PermissionService>()),
+    );
     return this;
   }
 }

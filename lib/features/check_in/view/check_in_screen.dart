@@ -3,13 +3,49 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/check_in_bloc.dart';
-import '../bloc/check_in_event.dart';
-import '../bloc/check_in_state.dart';
+import '../widgets/camera_preview_widget.dart';
 
 /// Main check-in screen
 /// This is a placeholder implementation that will be expanded in future stories
-class CheckInScreen extends StatelessWidget {
+class CheckInScreen extends StatefulWidget {
   const CheckInScreen({super.key});
+
+  @override
+  State<CheckInScreen> createState() => _CheckInScreenState();
+}
+
+class _CheckInScreenState extends State<CheckInScreen>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    context.read<CheckInBloc>().add(
+      const CheckInEvent.cameraPermissionRequested(),
+    );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final bloc = context.read<CheckInBloc>();
+    switch (state) {
+      case AppLifecycleState.resumed:
+        bloc.add(const CheckInEvent.cameraResumed());
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+      case AppLifecycleState.hidden:
+        bloc.add(const CheckInEvent.cameraPaused());
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,38 +130,11 @@ class CheckInScreen extends StatelessWidget {
 
                   const SizedBox(height: 16),
 
-                  // Camera Preview Placeholder
-                  Expanded(
+                  // Camera Preview
+                  const Expanded(
                     child: Card(
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.camera_alt_outlined,
-                              size: 64,
-                              color: Colors.grey[400],
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              'Camera Preview',
-                              style: Theme.of(context).textTheme.headlineMedium
-                                  ?.copyWith(color: Colors.grey[600]),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'Will be implemented in Story 1.2',
-                              style: Theme.of(context).textTheme.bodyMedium
-                                  ?.copyWith(color: Colors.grey[500]),
-                            ),
-                          ],
-                        ),
-                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: CameraPreviewWidget(),
                     ),
                   ),
 

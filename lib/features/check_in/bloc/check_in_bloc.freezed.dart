@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'check_in_event.dart';
+part of 'check_in_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -21,7 +21,14 @@ mixin _$CheckInEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -33,6 +40,7 @@ mixin _$CheckInEvent {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -48,7 +56,14 @@ mixin _$CheckInEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -60,6 +75,7 @@ mixin _$CheckInEvent {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -71,7 +87,14 @@ mixin _$CheckInEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -83,6 +106,7 @@ mixin _$CheckInEvent {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -95,7 +119,17 @@ mixin _$CheckInEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -110,6 +144,7 @@ mixin _$CheckInEvent {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -121,7 +156,15 @@ mixin _$CheckInEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -133,6 +176,7 @@ mixin _$CheckInEvent {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -144,7 +188,15 @@ mixin _$CheckInEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -156,6 +208,7 @@ mixin _$CheckInEvent {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -233,7 +286,14 @@ class _$AppStartedImpl implements AppStarted {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -245,6 +305,7 @@ class _$AppStartedImpl implements AppStarted {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -264,7 +325,14 @@ class _$AppStartedImpl implements AppStarted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -276,6 +344,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -291,7 +360,14 @@ class _$AppStartedImpl implements AppStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -303,6 +379,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -322,7 +399,17 @@ class _$AppStartedImpl implements AppStarted {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -337,6 +424,7 @@ class _$AppStartedImpl implements AppStarted {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -352,7 +440,15 @@ class _$AppStartedImpl implements AppStarted {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -364,6 +460,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -379,7 +476,15 @@ class _$AppStartedImpl implements AppStarted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -391,6 +496,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -455,7 +561,14 @@ class _$AppDisposedImpl implements AppDisposed {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -467,6 +580,7 @@ class _$AppDisposedImpl implements AppDisposed {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -486,7 +600,14 @@ class _$AppDisposedImpl implements AppDisposed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -498,6 +619,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -513,7 +635,14 @@ class _$AppDisposedImpl implements AppDisposed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -525,6 +654,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -544,7 +674,17 @@ class _$AppDisposedImpl implements AppDisposed {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -559,6 +699,7 @@ class _$AppDisposedImpl implements AppDisposed {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -574,7 +715,15 @@ class _$AppDisposedImpl implements AppDisposed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -586,6 +735,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -601,7 +751,15 @@ class _$AppDisposedImpl implements AppDisposed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -613,6 +771,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -630,6 +789,834 @@ class _$AppDisposedImpl implements AppDisposed {
 
 abstract class AppDisposed implements CheckInEvent {
   const factory AppDisposed() = _$AppDisposedImpl;
+}
+
+/// @nodoc
+abstract class _$$CameraPermissionRequestedImplCopyWith<$Res> {
+  factory _$$CameraPermissionRequestedImplCopyWith(
+    _$CameraPermissionRequestedImpl value,
+    $Res Function(_$CameraPermissionRequestedImpl) then,
+  ) = __$$CameraPermissionRequestedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CameraPermissionRequestedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$CameraPermissionRequestedImpl>
+    implements _$$CameraPermissionRequestedImplCopyWith<$Res> {
+  __$$CameraPermissionRequestedImplCopyWithImpl(
+    _$CameraPermissionRequestedImpl _value,
+    $Res Function(_$CameraPermissionRequestedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
+  const _$CameraPermissionRequestedImpl();
+
+  @override
+  String toString() {
+    return 'CheckInEvent.cameraPermissionRequested()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CameraPermissionRequestedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function() connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionRequested();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function()? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionRequested?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function()? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraPermissionRequested != null) {
+      return cameraPermissionRequested();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionRequested?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraPermissionRequested != null) {
+      return cameraPermissionRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CameraPermissionRequested implements CheckInEvent {
+  const factory CameraPermissionRequested() = _$CameraPermissionRequestedImpl;
+}
+
+/// @nodoc
+abstract class _$$CameraPermissionGrantedImplCopyWith<$Res> {
+  factory _$$CameraPermissionGrantedImplCopyWith(
+    _$CameraPermissionGrantedImpl value,
+    $Res Function(_$CameraPermissionGrantedImpl) then,
+  ) = __$$CameraPermissionGrantedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CameraPermissionGrantedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$CameraPermissionGrantedImpl>
+    implements _$$CameraPermissionGrantedImplCopyWith<$Res> {
+  __$$CameraPermissionGrantedImplCopyWithImpl(
+    _$CameraPermissionGrantedImpl _value,
+    $Res Function(_$CameraPermissionGrantedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
+  const _$CameraPermissionGrantedImpl();
+
+  @override
+  String toString() {
+    return 'CheckInEvent.cameraPermissionGranted()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CameraPermissionGrantedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function() connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionGranted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function()? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionGranted?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function()? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraPermissionGranted != null) {
+      return cameraPermissionGranted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionGranted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionGranted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraPermissionGranted != null) {
+      return cameraPermissionGranted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CameraPermissionGranted implements CheckInEvent {
+  const factory CameraPermissionGranted() = _$CameraPermissionGrantedImpl;
+}
+
+/// @nodoc
+abstract class _$$CameraPermissionDeniedImplCopyWith<$Res> {
+  factory _$$CameraPermissionDeniedImplCopyWith(
+    _$CameraPermissionDeniedImpl value,
+    $Res Function(_$CameraPermissionDeniedImpl) then,
+  ) = __$$CameraPermissionDeniedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CameraPermissionDeniedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$CameraPermissionDeniedImpl>
+    implements _$$CameraPermissionDeniedImplCopyWith<$Res> {
+  __$$CameraPermissionDeniedImplCopyWithImpl(
+    _$CameraPermissionDeniedImpl _value,
+    $Res Function(_$CameraPermissionDeniedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
+  const _$CameraPermissionDeniedImpl();
+
+  @override
+  String toString() {
+    return 'CheckInEvent.cameraPermissionDenied()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CameraPermissionDeniedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function() connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionDenied();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function()? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionDenied?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function()? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraPermissionDenied != null) {
+      return cameraPermissionDenied();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionDenied(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+  }) {
+    return cameraPermissionDenied?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraPermissionDenied != null) {
+      return cameraPermissionDenied(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CameraPermissionDenied implements CheckInEvent {
+  const factory CameraPermissionDenied() = _$CameraPermissionDeniedImpl;
 }
 
 /// @nodoc
@@ -678,7 +1665,14 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -690,6 +1684,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -709,7 +1704,14 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -721,6 +1723,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -736,7 +1739,14 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -748,6 +1758,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -767,7 +1778,17 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -782,6 +1803,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -797,7 +1819,15 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -809,6 +1839,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -824,7 +1855,15 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -836,6 +1875,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -853,6 +1893,1106 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
 
 abstract class CameraInitRequested implements CheckInEvent {
   const factory CameraInitRequested() = _$CameraInitRequestedImpl;
+}
+
+/// @nodoc
+abstract class _$$CameraStartedImplCopyWith<$Res> {
+  factory _$$CameraStartedImplCopyWith(
+    _$CameraStartedImpl value,
+    $Res Function(_$CameraStartedImpl) then,
+  ) = __$$CameraStartedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CameraStartedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$CameraStartedImpl>
+    implements _$$CameraStartedImplCopyWith<$Res> {
+  __$$CameraStartedImplCopyWithImpl(
+    _$CameraStartedImpl _value,
+    $Res Function(_$CameraStartedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CameraStartedImpl implements CameraStarted {
+  const _$CameraStartedImpl();
+
+  @override
+  String toString() {
+    return 'CheckInEvent.cameraStarted()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$CameraStartedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function() connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+  }) {
+    return cameraStarted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function()? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+  }) {
+    return cameraStarted?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function()? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraStarted != null) {
+      return cameraStarted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+  }) {
+    return cameraStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+  }) {
+    return cameraStarted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraStarted != null) {
+      return cameraStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CameraStarted implements CheckInEvent {
+  const factory CameraStarted() = _$CameraStartedImpl;
+}
+
+/// @nodoc
+abstract class _$$CameraPausedImplCopyWith<$Res> {
+  factory _$$CameraPausedImplCopyWith(
+    _$CameraPausedImpl value,
+    $Res Function(_$CameraPausedImpl) then,
+  ) = __$$CameraPausedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CameraPausedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$CameraPausedImpl>
+    implements _$$CameraPausedImplCopyWith<$Res> {
+  __$$CameraPausedImplCopyWithImpl(
+    _$CameraPausedImpl _value,
+    $Res Function(_$CameraPausedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CameraPausedImpl implements CameraPaused {
+  const _$CameraPausedImpl();
+
+  @override
+  String toString() {
+    return 'CheckInEvent.cameraPaused()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$CameraPausedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function() connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+  }) {
+    return cameraPaused();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function()? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+  }) {
+    return cameraPaused?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function()? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraPaused != null) {
+      return cameraPaused();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+  }) {
+    return cameraPaused(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+  }) {
+    return cameraPaused?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraPaused != null) {
+      return cameraPaused(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CameraPaused implements CheckInEvent {
+  const factory CameraPaused() = _$CameraPausedImpl;
+}
+
+/// @nodoc
+abstract class _$$CameraResumedImplCopyWith<$Res> {
+  factory _$$CameraResumedImplCopyWith(
+    _$CameraResumedImpl value,
+    $Res Function(_$CameraResumedImpl) then,
+  ) = __$$CameraResumedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CameraResumedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$CameraResumedImpl>
+    implements _$$CameraResumedImplCopyWith<$Res> {
+  __$$CameraResumedImplCopyWithImpl(
+    _$CameraResumedImpl _value,
+    $Res Function(_$CameraResumedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CameraResumedImpl implements CameraResumed {
+  const _$CameraResumedImpl();
+
+  @override
+  String toString() {
+    return 'CheckInEvent.cameraResumed()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$CameraResumedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function() connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+  }) {
+    return cameraResumed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function()? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+  }) {
+    return cameraResumed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function()? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraResumed != null) {
+      return cameraResumed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+  }) {
+    return cameraResumed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+  }) {
+    return cameraResumed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraResumed != null) {
+      return cameraResumed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CameraResumed implements CheckInEvent {
+  const factory CameraResumed() = _$CameraResumedImpl;
+}
+
+/// @nodoc
+abstract class _$$CameraStoppedImplCopyWith<$Res> {
+  factory _$$CameraStoppedImplCopyWith(
+    _$CameraStoppedImpl value,
+    $Res Function(_$CameraStoppedImpl) then,
+  ) = __$$CameraStoppedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CameraStoppedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$CameraStoppedImpl>
+    implements _$$CameraStoppedImplCopyWith<$Res> {
+  __$$CameraStoppedImplCopyWithImpl(
+    _$CameraStoppedImpl _value,
+    $Res Function(_$CameraStoppedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CameraStoppedImpl implements CameraStopped {
+  const _$CameraStoppedImpl();
+
+  @override
+  String toString() {
+    return 'CheckInEvent.cameraStopped()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$CameraStoppedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function() connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+  }) {
+    return cameraStopped();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function()? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+  }) {
+    return cameraStopped?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function()? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraStopped != null) {
+      return cameraStopped();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+  }) {
+    return cameraStopped(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+  }) {
+    return cameraStopped?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraStopped != null) {
+      return cameraStopped(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CameraStopped implements CheckInEvent {
+  const factory CameraStopped() = _$CameraStoppedImpl;
 }
 
 /// @nodoc
@@ -930,7 +3070,14 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -942,6 +3089,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -961,7 +3109,14 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -973,6 +3128,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -988,7 +3144,14 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -1000,6 +3163,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -1019,7 +3183,17 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -1034,6 +3208,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -1049,7 +3224,15 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -1061,6 +3244,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -1076,7 +3260,15 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -1088,6 +3280,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -1162,7 +3355,14 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -1174,6 +3374,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -1193,7 +3394,14 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -1205,6 +3413,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -1220,7 +3429,14 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -1232,6 +3448,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -1251,7 +3468,17 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -1266,6 +3493,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -1281,7 +3509,15 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -1293,6 +3529,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -1308,7 +3545,15 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -1320,6 +3565,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -1385,7 +3631,14 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -1397,6 +3650,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -1416,7 +3670,14 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -1428,6 +3689,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -1443,7 +3705,14 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -1455,6 +3724,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -1474,7 +3744,17 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -1489,6 +3769,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -1504,7 +3785,15 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -1516,6 +3805,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -1531,7 +3821,15 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -1543,6 +3841,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -1608,7 +3907,14 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -1620,6 +3926,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -1639,7 +3946,14 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -1651,6 +3965,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -1666,7 +3981,14 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -1678,6 +4000,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -1697,7 +4020,17 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -1712,6 +4045,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -1727,7 +4061,15 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -1739,6 +4081,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -1754,7 +4097,15 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -1766,6 +4117,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -1859,7 +4211,14 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -1871,6 +4230,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -1890,7 +4250,14 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -1902,6 +4269,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -1917,7 +4285,14 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -1929,6 +4304,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -1948,7 +4324,17 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -1963,6 +4349,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -1978,7 +4365,15 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -1990,6 +4385,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -2005,7 +4401,15 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -2017,6 +4421,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -2091,7 +4496,14 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -2103,6 +4515,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -2122,7 +4535,14 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -2134,6 +4554,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -2149,7 +4570,14 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -2161,6 +4589,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -2180,7 +4609,17 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -2195,6 +4634,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -2210,7 +4650,15 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -2222,6 +4670,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -2237,7 +4686,15 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -2249,6 +4706,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -2313,7 +4771,14 @@ class _$StreamingStartedImpl implements StreamingStarted {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -2325,6 +4790,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -2344,7 +4810,14 @@ class _$StreamingStartedImpl implements StreamingStarted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -2356,6 +4829,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -2371,7 +4845,14 @@ class _$StreamingStartedImpl implements StreamingStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -2383,6 +4864,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -2402,7 +4884,17 @@ class _$StreamingStartedImpl implements StreamingStarted {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -2417,6 +4909,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -2432,7 +4925,15 @@ class _$StreamingStartedImpl implements StreamingStarted {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -2444,6 +4945,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -2459,7 +4961,15 @@ class _$StreamingStartedImpl implements StreamingStarted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -2471,6 +4981,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -2535,7 +5046,14 @@ class _$StreamingStoppedImpl implements StreamingStopped {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -2547,6 +5065,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -2566,7 +5085,14 @@ class _$StreamingStoppedImpl implements StreamingStopped {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -2578,6 +5104,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -2593,7 +5120,14 @@ class _$StreamingStoppedImpl implements StreamingStopped {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -2605,6 +5139,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -2624,7 +5159,17 @@ class _$StreamingStoppedImpl implements StreamingStopped {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -2639,6 +5184,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -2654,7 +5200,15 @@ class _$StreamingStoppedImpl implements StreamingStopped {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -2666,6 +5220,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -2681,7 +5236,15 @@ class _$StreamingStoppedImpl implements StreamingStopped {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -2693,6 +5256,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -2788,7 +5352,14 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -2800,6 +5371,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -2819,7 +5391,14 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -2831,6 +5410,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -2846,7 +5426,14 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -2858,6 +5445,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -2877,7 +5465,17 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -2892,6 +5490,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -2907,7 +5506,15 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -2919,6 +5526,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -2934,7 +5542,15 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -2946,6 +5562,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -3019,7 +5636,14 @@ class _$FrameProcessedImpl implements FrameProcessed {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -3031,6 +5655,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -3050,7 +5675,14 @@ class _$FrameProcessedImpl implements FrameProcessed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -3062,6 +5694,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -3077,7 +5710,14 @@ class _$FrameProcessedImpl implements FrameProcessed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -3089,6 +5729,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -3108,7 +5749,17 @@ class _$FrameProcessedImpl implements FrameProcessed {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -3123,6 +5774,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -3138,7 +5790,15 @@ class _$FrameProcessedImpl implements FrameProcessed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -3150,6 +5810,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -3165,7 +5826,15 @@ class _$FrameProcessedImpl implements FrameProcessed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -3177,6 +5846,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -3268,7 +5938,14 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -3280,6 +5957,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -3299,7 +5977,14 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -3311,6 +5996,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -3326,7 +6012,14 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -3338,6 +6031,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -3357,7 +6051,17 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -3372,6 +6076,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -3387,7 +6092,15 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -3399,6 +6112,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -3414,7 +6128,15 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -3426,6 +6148,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -3450,6 +6173,316 @@ abstract class ErrorOccurred implements CheckInEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorOccurredImplCopyWith<_$ErrorOccurredImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CameraErrorImplCopyWith<$Res> {
+  factory _$$CameraErrorImplCopyWith(
+    _$CameraErrorImpl value,
+    $Res Function(_$CameraErrorImpl) then,
+  ) = __$$CameraErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$CameraErrorImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$CameraErrorImpl>
+    implements _$$CameraErrorImplCopyWith<$Res> {
+  __$$CameraErrorImplCopyWithImpl(
+    _$CameraErrorImpl _value,
+    $Res Function(_$CameraErrorImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? error = null}) {
+    return _then(
+      _$CameraErrorImpl(
+        null == error
+            ? _value.error
+            : error // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$CameraErrorImpl implements CameraError {
+  const _$CameraErrorImpl(this.error);
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'CheckInEvent.cameraError(error: $error)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CameraErrorImpl &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CameraErrorImplCopyWith<_$CameraErrorImpl> get copyWith =>
+      __$$CameraErrorImplCopyWithImpl<_$CameraErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function() connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+  }) {
+    return cameraError(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function()? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+  }) {
+    return cameraError?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function()? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraError != null) {
+      return cameraError(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+  }) {
+    return cameraError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+  }) {
+    return cameraError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (cameraError != null) {
+      return cameraError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CameraError implements CheckInEvent {
+  const factory CameraError(final String error) = _$CameraErrorImpl;
+
+  String get error;
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CameraErrorImplCopyWith<_$CameraErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3498,7 +6531,14 @@ class _$ErrorClearedImpl implements ErrorCleared {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -3510,6 +6550,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -3529,7 +6570,14 @@ class _$ErrorClearedImpl implements ErrorCleared {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -3541,6 +6589,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -3556,7 +6605,14 @@ class _$ErrorClearedImpl implements ErrorCleared {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -3568,6 +6624,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -3587,7 +6644,17 @@ class _$ErrorClearedImpl implements ErrorCleared {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -3602,6 +6669,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -3617,7 +6685,15 @@ class _$ErrorClearedImpl implements ErrorCleared {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -3629,6 +6705,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -3644,7 +6721,15 @@ class _$ErrorClearedImpl implements ErrorCleared {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -3656,6 +6741,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -3750,7 +6836,14 @@ class _$ToastRequestedImpl implements ToastRequested {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -3762,6 +6855,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -3781,7 +6875,14 @@ class _$ToastRequestedImpl implements ToastRequested {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -3793,6 +6894,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -3808,7 +6910,14 @@ class _$ToastRequestedImpl implements ToastRequested {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -3820,6 +6929,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -3839,7 +6949,17 @@ class _$ToastRequestedImpl implements ToastRequested {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -3854,6 +6974,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -3869,7 +6990,15 @@ class _$ToastRequestedImpl implements ToastRequested {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -3881,6 +7010,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -3896,7 +7026,15 @@ class _$ToastRequestedImpl implements ToastRequested {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -3908,6 +7046,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -3980,7 +7119,14 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -3992,6 +7138,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -4011,7 +7158,14 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -4023,6 +7177,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -4038,7 +7193,14 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -4050,6 +7212,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -4069,7 +7232,17 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -4084,6 +7257,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -4099,7 +7273,15 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -4111,6 +7293,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -4126,7 +7309,15 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -4138,6 +7329,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -4202,7 +7394,14 @@ class _$StatisticsResetImpl implements StatisticsReset {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -4214,6 +7413,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -4233,7 +7433,14 @@ class _$StatisticsResetImpl implements StatisticsReset {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -4245,6 +7452,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -4260,7 +7468,14 @@ class _$StatisticsResetImpl implements StatisticsReset {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -4272,6 +7487,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -4291,7 +7507,17 @@ class _$StatisticsResetImpl implements StatisticsReset {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -4306,6 +7532,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -4321,7 +7548,15 @@ class _$StatisticsResetImpl implements StatisticsReset {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -4333,6 +7568,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -4348,7 +7584,15 @@ class _$StatisticsResetImpl implements StatisticsReset {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -4360,6 +7604,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -4479,7 +7724,14 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
   TResult when<TResult extends Object?>({
     required TResult Function() appStarted,
     required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
@@ -4491,6 +7743,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
     required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
     required TResult Function(String message) toastRequested,
     required TResult Function() debugModeToggled,
@@ -4510,7 +7763,14 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appStarted,
     TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
@@ -4522,6 +7782,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
     TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
     TResult? Function(String message)? toastRequested,
     TResult? Function()? debugModeToggled,
@@ -4537,7 +7798,14 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appStarted,
     TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
@@ -4549,6 +7817,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
     TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
     TResult Function(String message)? toastRequested,
     TResult Function()? debugModeToggled,
@@ -4568,7 +7837,17 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
   TResult map<TResult extends Object?>({
     required TResult Function(AppStarted value) appStarted,
     required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
     required TResult Function(CameraStatusChanged value) cameraStatusChanged,
     required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
     required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
@@ -4583,6 +7862,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
     required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
     required TResult Function(ToastRequested value) toastRequested,
     required TResult Function(DebugModeToggled value) debugModeToggled,
@@ -4598,7 +7878,15 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AppStarted value)? appStarted,
     TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
     TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -4610,6 +7898,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
     TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
     TResult? Function(ToastRequested value)? toastRequested,
     TResult? Function(DebugModeToggled value)? debugModeToggled,
@@ -4625,7 +7914,15 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AppStarted value)? appStarted,
     TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
     TResult Function(CameraStatusChanged value)? cameraStatusChanged,
     TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
     TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
@@ -4637,6 +7934,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
     TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
     TResult Function(ToastRequested value)? toastRequested,
     TResult Function(DebugModeToggled value)? debugModeToggled,
@@ -4668,4 +7966,495 @@ abstract class RecognitionResultReceived implements CheckInEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RecognitionResultReceivedImplCopyWith<_$RecognitionResultReceivedImpl>
   get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$CheckInState {
+  /// Current camera status
+  CameraStatus get cameraStatus => throw _privateConstructorUsedError;
+
+  /// Current permission status
+  PermissionStatus get permissionStatus => throw _privateConstructorUsedError;
+
+  /// Current WebSocket connection status
+  ConnectionStatus get connectionStatus => throw _privateConstructorUsedError;
+
+  /// Current frame streaming status
+  StreamingStatus get streamingStatus => throw _privateConstructorUsedError;
+
+  /// Whether the app is in a loading state
+  bool get isLoading => throw _privateConstructorUsedError;
+
+  /// Current error message, if any
+  String? get errorMessage => throw _privateConstructorUsedError;
+
+  /// Camera controller instance
+  CameraController? get cameraController => throw _privateConstructorUsedError;
+
+  /// Current toast notification status
+  ToastStatus get toastStatus => throw _privateConstructorUsedError;
+
+  /// Message to display in toast notification
+  String? get toastMessage => throw _privateConstructorUsedError;
+
+  /// Whether debug mode is enabled
+  bool get isDebugMode => throw _privateConstructorUsedError;
+
+  /// Last recognition result timestamp
+  DateTime? get lastRecognitionTime => throw _privateConstructorUsedError;
+
+  /// Number of frames processed
+  int get framesProcessed => throw _privateConstructorUsedError;
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $CheckInStateCopyWith<CheckInState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CheckInStateCopyWith<$Res> {
+  factory $CheckInStateCopyWith(
+    CheckInState value,
+    $Res Function(CheckInState) then,
+  ) = _$CheckInStateCopyWithImpl<$Res, CheckInState>;
+  @useResult
+  $Res call({
+    CameraStatus cameraStatus,
+    PermissionStatus permissionStatus,
+    ConnectionStatus connectionStatus,
+    StreamingStatus streamingStatus,
+    bool isLoading,
+    String? errorMessage,
+    CameraController? cameraController,
+    ToastStatus toastStatus,
+    String? toastMessage,
+    bool isDebugMode,
+    DateTime? lastRecognitionTime,
+    int framesProcessed,
+  });
+}
+
+/// @nodoc
+class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
+    implements $CheckInStateCopyWith<$Res> {
+  _$CheckInStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cameraStatus = null,
+    Object? permissionStatus = null,
+    Object? connectionStatus = null,
+    Object? streamingStatus = null,
+    Object? isLoading = null,
+    Object? errorMessage = freezed,
+    Object? cameraController = freezed,
+    Object? toastStatus = null,
+    Object? toastMessage = freezed,
+    Object? isDebugMode = null,
+    Object? lastRecognitionTime = freezed,
+    Object? framesProcessed = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            cameraStatus:
+                null == cameraStatus
+                    ? _value.cameraStatus
+                    : cameraStatus // ignore: cast_nullable_to_non_nullable
+                        as CameraStatus,
+            permissionStatus:
+                null == permissionStatus
+                    ? _value.permissionStatus
+                    : permissionStatus // ignore: cast_nullable_to_non_nullable
+                        as PermissionStatus,
+            connectionStatus:
+                null == connectionStatus
+                    ? _value.connectionStatus
+                    : connectionStatus // ignore: cast_nullable_to_non_nullable
+                        as ConnectionStatus,
+            streamingStatus:
+                null == streamingStatus
+                    ? _value.streamingStatus
+                    : streamingStatus // ignore: cast_nullable_to_non_nullable
+                        as StreamingStatus,
+            isLoading:
+                null == isLoading
+                    ? _value.isLoading
+                    : isLoading // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            errorMessage:
+                freezed == errorMessage
+                    ? _value.errorMessage
+                    : errorMessage // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            cameraController:
+                freezed == cameraController
+                    ? _value.cameraController
+                    : cameraController // ignore: cast_nullable_to_non_nullable
+                        as CameraController?,
+            toastStatus:
+                null == toastStatus
+                    ? _value.toastStatus
+                    : toastStatus // ignore: cast_nullable_to_non_nullable
+                        as ToastStatus,
+            toastMessage:
+                freezed == toastMessage
+                    ? _value.toastMessage
+                    : toastMessage // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            isDebugMode:
+                null == isDebugMode
+                    ? _value.isDebugMode
+                    : isDebugMode // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            lastRecognitionTime:
+                freezed == lastRecognitionTime
+                    ? _value.lastRecognitionTime
+                    : lastRecognitionTime // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            framesProcessed:
+                null == framesProcessed
+                    ? _value.framesProcessed
+                    : framesProcessed // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$CheckInStateImplCopyWith<$Res>
+    implements $CheckInStateCopyWith<$Res> {
+  factory _$$CheckInStateImplCopyWith(
+    _$CheckInStateImpl value,
+    $Res Function(_$CheckInStateImpl) then,
+  ) = __$$CheckInStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    CameraStatus cameraStatus,
+    PermissionStatus permissionStatus,
+    ConnectionStatus connectionStatus,
+    StreamingStatus streamingStatus,
+    bool isLoading,
+    String? errorMessage,
+    CameraController? cameraController,
+    ToastStatus toastStatus,
+    String? toastMessage,
+    bool isDebugMode,
+    DateTime? lastRecognitionTime,
+    int framesProcessed,
+  });
+}
+
+/// @nodoc
+class __$$CheckInStateImplCopyWithImpl<$Res>
+    extends _$CheckInStateCopyWithImpl<$Res, _$CheckInStateImpl>
+    implements _$$CheckInStateImplCopyWith<$Res> {
+  __$$CheckInStateImplCopyWithImpl(
+    _$CheckInStateImpl _value,
+    $Res Function(_$CheckInStateImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cameraStatus = null,
+    Object? permissionStatus = null,
+    Object? connectionStatus = null,
+    Object? streamingStatus = null,
+    Object? isLoading = null,
+    Object? errorMessage = freezed,
+    Object? cameraController = freezed,
+    Object? toastStatus = null,
+    Object? toastMessage = freezed,
+    Object? isDebugMode = null,
+    Object? lastRecognitionTime = freezed,
+    Object? framesProcessed = null,
+  }) {
+    return _then(
+      _$CheckInStateImpl(
+        cameraStatus:
+            null == cameraStatus
+                ? _value.cameraStatus
+                : cameraStatus // ignore: cast_nullable_to_non_nullable
+                    as CameraStatus,
+        permissionStatus:
+            null == permissionStatus
+                ? _value.permissionStatus
+                : permissionStatus // ignore: cast_nullable_to_non_nullable
+                    as PermissionStatus,
+        connectionStatus:
+            null == connectionStatus
+                ? _value.connectionStatus
+                : connectionStatus // ignore: cast_nullable_to_non_nullable
+                    as ConnectionStatus,
+        streamingStatus:
+            null == streamingStatus
+                ? _value.streamingStatus
+                : streamingStatus // ignore: cast_nullable_to_non_nullable
+                    as StreamingStatus,
+        isLoading:
+            null == isLoading
+                ? _value.isLoading
+                : isLoading // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        errorMessage:
+            freezed == errorMessage
+                ? _value.errorMessage
+                : errorMessage // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        cameraController:
+            freezed == cameraController
+                ? _value.cameraController
+                : cameraController // ignore: cast_nullable_to_non_nullable
+                    as CameraController?,
+        toastStatus:
+            null == toastStatus
+                ? _value.toastStatus
+                : toastStatus // ignore: cast_nullable_to_non_nullable
+                    as ToastStatus,
+        toastMessage:
+            freezed == toastMessage
+                ? _value.toastMessage
+                : toastMessage // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        isDebugMode:
+            null == isDebugMode
+                ? _value.isDebugMode
+                : isDebugMode // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        lastRecognitionTime:
+            freezed == lastRecognitionTime
+                ? _value.lastRecognitionTime
+                : lastRecognitionTime // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        framesProcessed:
+            null == framesProcessed
+                ? _value.framesProcessed
+                : framesProcessed // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$CheckInStateImpl implements _CheckInState {
+  const _$CheckInStateImpl({
+    this.cameraStatus = CameraStatus.initial,
+    this.permissionStatus = PermissionStatus.initial,
+    this.connectionStatus = ConnectionStatus.disconnected,
+    this.streamingStatus = StreamingStatus.idle,
+    this.isLoading = false,
+    this.errorMessage,
+    this.cameraController,
+    this.toastStatus = ToastStatus.none,
+    this.toastMessage,
+    this.isDebugMode = false,
+    this.lastRecognitionTime,
+    this.framesProcessed = 0,
+  });
+
+  /// Current camera status
+  @override
+  @JsonKey()
+  final CameraStatus cameraStatus;
+
+  /// Current permission status
+  @override
+  @JsonKey()
+  final PermissionStatus permissionStatus;
+
+  /// Current WebSocket connection status
+  @override
+  @JsonKey()
+  final ConnectionStatus connectionStatus;
+
+  /// Current frame streaming status
+  @override
+  @JsonKey()
+  final StreamingStatus streamingStatus;
+
+  /// Whether the app is in a loading state
+  @override
+  @JsonKey()
+  final bool isLoading;
+
+  /// Current error message, if any
+  @override
+  final String? errorMessage;
+
+  /// Camera controller instance
+  @override
+  final CameraController? cameraController;
+
+  /// Current toast notification status
+  @override
+  @JsonKey()
+  final ToastStatus toastStatus;
+
+  /// Message to display in toast notification
+  @override
+  final String? toastMessage;
+
+  /// Whether debug mode is enabled
+  @override
+  @JsonKey()
+  final bool isDebugMode;
+
+  /// Last recognition result timestamp
+  @override
+  final DateTime? lastRecognitionTime;
+
+  /// Number of frames processed
+  @override
+  @JsonKey()
+  final int framesProcessed;
+
+  @override
+  String toString() {
+    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CheckInStateImpl &&
+            (identical(other.cameraStatus, cameraStatus) ||
+                other.cameraStatus == cameraStatus) &&
+            (identical(other.permissionStatus, permissionStatus) ||
+                other.permissionStatus == permissionStatus) &&
+            (identical(other.connectionStatus, connectionStatus) ||
+                other.connectionStatus == connectionStatus) &&
+            (identical(other.streamingStatus, streamingStatus) ||
+                other.streamingStatus == streamingStatus) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage) &&
+            (identical(other.cameraController, cameraController) ||
+                other.cameraController == cameraController) &&
+            (identical(other.toastStatus, toastStatus) ||
+                other.toastStatus == toastStatus) &&
+            (identical(other.toastMessage, toastMessage) ||
+                other.toastMessage == toastMessage) &&
+            (identical(other.isDebugMode, isDebugMode) ||
+                other.isDebugMode == isDebugMode) &&
+            (identical(other.lastRecognitionTime, lastRecognitionTime) ||
+                other.lastRecognitionTime == lastRecognitionTime) &&
+            (identical(other.framesProcessed, framesProcessed) ||
+                other.framesProcessed == framesProcessed));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    cameraStatus,
+    permissionStatus,
+    connectionStatus,
+    streamingStatus,
+    isLoading,
+    errorMessage,
+    cameraController,
+    toastStatus,
+    toastMessage,
+    isDebugMode,
+    lastRecognitionTime,
+    framesProcessed,
+  );
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CheckInStateImplCopyWith<_$CheckInStateImpl> get copyWith =>
+      __$$CheckInStateImplCopyWithImpl<_$CheckInStateImpl>(this, _$identity);
+}
+
+abstract class _CheckInState implements CheckInState {
+  const factory _CheckInState({
+    final CameraStatus cameraStatus,
+    final PermissionStatus permissionStatus,
+    final ConnectionStatus connectionStatus,
+    final StreamingStatus streamingStatus,
+    final bool isLoading,
+    final String? errorMessage,
+    final CameraController? cameraController,
+    final ToastStatus toastStatus,
+    final String? toastMessage,
+    final bool isDebugMode,
+    final DateTime? lastRecognitionTime,
+    final int framesProcessed,
+  }) = _$CheckInStateImpl;
+
+  /// Current camera status
+  @override
+  CameraStatus get cameraStatus;
+
+  /// Current permission status
+  @override
+  PermissionStatus get permissionStatus;
+
+  /// Current WebSocket connection status
+  @override
+  ConnectionStatus get connectionStatus;
+
+  /// Current frame streaming status
+  @override
+  StreamingStatus get streamingStatus;
+
+  /// Whether the app is in a loading state
+  @override
+  bool get isLoading;
+
+  /// Current error message, if any
+  @override
+  String? get errorMessage;
+
+  /// Camera controller instance
+  @override
+  CameraController? get cameraController;
+
+  /// Current toast notification status
+  @override
+  ToastStatus get toastStatus;
+
+  /// Message to display in toast notification
+  @override
+  String? get toastMessage;
+
+  /// Whether debug mode is enabled
+  @override
+  bool get isDebugMode;
+
+  /// Last recognition result timestamp
+  @override
+  DateTime? get lastRecognitionTime;
+
+  /// Number of frames processed
+  @override
+  int get framesProcessed;
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CheckInStateImplCopyWith<_$CheckInStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

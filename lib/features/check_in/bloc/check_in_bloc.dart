@@ -1,22 +1,37 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
+import 'package:camera/camera.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'check_in_event.dart';
-import 'check_in_state.dart';
+import 'package:face_check_in_flutter/domain/services/permission_service.dart'
+    as ps;
+
+part 'check_in_bloc.freezed.dart';
+part 'check_in_event.dart';
+part 'check_in_state.dart';
 
 /// Main BLoC for managing check-in feature state
 /// Handles camera, WebSocket, streaming, and UI state management
 @injectable
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
-  CheckInBloc() : super(const CheckInState()) {
+  final ps.PermissionService _permissionService;
+
+  CheckInBloc(this._permissionService) : super(const CheckInState()) {
     // App lifecycle events
     on<AppStarted>(_onAppStarted);
     on<AppDisposed>(_onAppDisposed);
 
-    // Camera events
+    // Camera permission events
+    on<CameraPermissionRequested>(_onCameraPermissionRequested);
+
+    // Camera lifecycle events
     on<CameraInitRequested>(_onCameraInitRequested);
+    on<CameraStarted>(_onCameraStarted);
+    on<CameraPaused>(_onCameraPaused);
+    on<CameraResumed>(_onCameraResumed);
+    on<CameraStopped>(_onCameraStopped);
     on<CameraStatusChanged>(_onCameraStatusChanged);
     on<CameraPreviewStarted>(_onCameraPreviewStarted);
     on<CameraPreviewStopped>(_onCameraPreviewStopped);
@@ -55,7 +70,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
-      // Initialize app state - removed artificial delay
+      // The permission will now be requested by the UI when needed.
+      // add(const CheckInEvent.cameraPermissionRequested());
       emit(
         state.copyWith(
           isLoading: false,
@@ -81,7 +97,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('🔴 CheckInBloc: App disposing - cleaning up...');
-
+    await state.cameraController?.dispose();
     // Clean up resources
     emit(
       state.copyWith(
@@ -92,8 +108,40 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         errorMessage: null,
         toastStatus: ToastStatus.none,
         toastMessage: null,
+        cameraController: null,
       ),
     );
+  }
+
+  // Camera permission handlers
+  Future<void> _onCameraPermissionRequested(
+    CameraPermissionRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    emit(state.copyWith(cameraStatus: CameraStatus.permissionRequesting));
+    debugPrint('📷 CheckInBloc: Requesting camera permission...');
+    final status = await _permissionService.requestCameraPermission();
+    if (status == ps.PermissionStatus.granted) {
+      debugPrint('✅ CheckInBloc: Camera permission granted.');
+      emit(state.copyWith(permissionStatus: PermissionStatus.granted));
+      add(const CheckInEvent.cameraInitRequested());
+    } else {
+      debugPrint('❌ CheckInBloc: Camera permission denied.');
+      if (status == ps.PermissionStatus.permanentlyDenied) {
+        // Open app settings if permission is permanently denied
+        _permissionService.openAppSettings();
+      }
+      final newStatus =
+          status == ps.PermissionStatus.permanentlyDenied
+              ? PermissionStatus.permanentlyDenied
+              : PermissionStatus.denied;
+      emit(
+        state.copyWith(
+          permissionStatus: newStatus,
+          cameraStatus: CameraStatus.permissionDenied,
+        ),
+      );
+    }
   }
 
   // Camera event handlers (placeholders for future integration)
@@ -103,18 +151,89 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) async {
     debugPrint('📷 CheckInBloc: Camera initialization requested');
 
-    emit(state.copyWith(cameraStatus: CameraStatus.initial, isLoading: true));
-
-    // Placeholder for camera initialization logic
-    // This will be implemented in Story 1.2
-    await Future.delayed(const Duration(milliseconds: 1000));
+    if (state.permissionStatus != PermissionStatus.granted) {
+      debugPrint(
+        '❌ CheckInBloc: Camera permission not granted. Aborting initialization.',
+      );
+      add(const CheckInEvent.cameraPermissionRequested());
+      return;
+    }
 
     emit(
+      state.copyWith(cameraStatus: CameraStatus.initializing, isLoading: true),
+    );
+
+    try {
+      final cameras = await availableCameras();
+      if (cameras.isEmpty) {
+        throw Exception('No cameras available');
+      }
+      final controller = CameraController(
+        cameras.first,
+        ResolutionPreset.medium,
+      );
+      await controller.initialize();
+
+      emit(
+        state.copyWith(
+          cameraStatus: CameraStatus.ready,
+          cameraController: controller,
+          isLoading: false,
+          toastStatus: ToastStatus.showing,
+          toastMessage: 'Camera ready',
+        ),
+      );
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Camera initialization failed: $e');
+      emit(
+        state.copyWith(
+          cameraStatus: CameraStatus.error,
+          errorMessage: 'Failed to initialize camera: $e',
+          isLoading: false,
+        ),
+      );
+    }
+  }
+
+  Future<void> _onCameraStarted(
+    CameraStarted event,
+    Emitter<CheckInState> emit,
+  ) async {
+    if (state.cameraController?.value.isStreamingImages ?? false) {
+      return;
+    }
+    await state.cameraController?.startImageStream((image) {
+      // Process image in another story
+    });
+    emit(state.copyWith(cameraStatus: CameraStatus.streaming));
+  }
+
+  Future<void> _onCameraPaused(
+    CameraPaused event,
+    Emitter<CheckInState> emit,
+  ) async {
+    if (state.cameraController?.value.isStreamingImages ?? false) {
+      await state.cameraController?.stopImageStream();
+    }
+    emit(state.copyWith(cameraStatus: CameraStatus.paused));
+  }
+
+  Future<void> _onCameraResumed(
+    CameraResumed event,
+    Emitter<CheckInState> emit,
+  ) async {
+    add(const CheckInEvent.cameraStarted());
+  }
+
+  Future<void> _onCameraStopped(
+    CameraStopped event,
+    Emitter<CheckInState> emit,
+  ) async {
+    await state.cameraController?.dispose();
+    emit(
       state.copyWith(
-        cameraStatus: CameraStatus.ready,
-        isLoading: false,
-        toastStatus: ToastStatus.showing,
-        toastMessage: 'Camera ready (placeholder)',
+        cameraStatus: CameraStatus.initial,
+        cameraController: null,
       ),
     );
   }
@@ -334,7 +453,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
   @override
   Future<void> close() {
-    debugPrint('🔴 CheckInBloc: Closing...');
+    state.cameraController?.dispose();
     return super.close();
   }
 }
