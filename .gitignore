@@ -5,13 +5,13 @@
 *.pyc
 *.swp
 .DS_Store
+.atom/
 .buildlog/
 .history
+.idea/
 
 # FVM (Flutter Version Management)
 .fvm/
-
-
 
 # Flutter repo-specific
 /bin/cache/
