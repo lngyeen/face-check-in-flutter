@@ -1,8 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'check_in_state.dart';
-
-part 'check_in_event.freezed.dart';
+part of 'check_in_bloc.dart';
 
 /// Events for the check-in feature
 /// Defines all possible user interactions and system events
@@ -15,10 +11,38 @@ class CheckInEvent with _$CheckInEvent {
   /// App is being disposed
   const factory CheckInEvent.appDisposed() = AppDisposed;
 
-  // Camera events (placeholders for future integration)
+  // Camera permission events
+  /// Request camera permission
+  const factory CheckInEvent.cameraPermissionRequested() =
+      CameraPermissionRequested;
+
+  /// Camera permission has been granted
+  const factory CheckInEvent.cameraPermissionGranted() =
+      CameraPermissionGranted;
+
+  /// Camera permission has been denied
+  const factory CheckInEvent.cameraPermissionDenied() = CameraPermissionDenied;
+
+  // Camera lifecycle events
   /// Request to initialize the camera
   const factory CheckInEvent.cameraInitRequested() = CameraInitRequested;
 
+  /// Camera has been successfully initialized
+  const factory CheckInEvent.cameraInitialized() = CameraInitialized;
+
+  /// Request to start the camera
+  const factory CheckInEvent.cameraStarted() = CameraStarted;
+
+  /// Request to pause the camera
+  const factory CheckInEvent.cameraPaused() = CameraPaused;
+
+  /// Request to resume the camera
+  const factory CheckInEvent.cameraResumed() = CameraResumed;
+
+  /// Request to stop the camera
+  const factory CheckInEvent.cameraStopped() = CameraStopped;
+
+  // Camera events
   /// Camera status has changed
   const factory CheckInEvent.cameraStatusChanged(CameraStatus status) =
       CameraStatusChanged;
@@ -29,7 +53,7 @@ class CheckInEvent with _$CheckInEvent {
   /// Request to stop camera preview
   const factory CheckInEvent.cameraPreviewStopped() = CameraPreviewStopped;
 
-  // WebSocket events (placeholders for future integration)
+  // WebSocket events
   /// Request to connect to WebSocket backend
   const factory CheckInEvent.connectionRequested() = ConnectionRequested;
 
@@ -58,6 +82,9 @@ class CheckInEvent with _$CheckInEvent {
   /// An error has occurred
   const factory CheckInEvent.errorOccurred(String message) = ErrorOccurred;
 
+  /// A camera-specific error has occurred
+  const factory CheckInEvent.cameraError(String error) = CameraError;
+
   /// Error has been cleared
   const factory CheckInEvent.errorCleared() = ErrorCleared;
 
@@ -71,7 +98,7 @@ class CheckInEvent with _$CheckInEvent {
   /// Reset all statistics
   const factory CheckInEvent.statisticsReset() = StatisticsReset;
 
-  // Backend response events (placeholders for future integration)
+  // Backend response events
   /// Recognition result received from backend
   const factory CheckInEvent.recognitionResultReceived({
     required bool success,

@@ -1,10 +1,14 @@
+import 'package:bloc/bloc.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:permission_handler/permission_handler.dart' as ph;
 
-import 'check_in_event.dart';
-import 'check_in_state.dart';
+part 'check_in_bloc.freezed.dart';
+part 'check_in_event.dart';
+part 'check_in_state.dart';
 
 /// Main BLoC for managing check-in feature state
 /// Handles camera, WebSocket, streaming, and UI state management
@@ -15,7 +19,10 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<AppStarted>(_onAppStarted);
     on<AppDisposed>(_onAppDisposed);
 
-    // Camera events
+    // Camera permission events
+    on<CameraPermissionRequested>(_onCameraPermissionRequested);
+
+    // Camera lifecycle events
     on<CameraInitRequested>(_onCameraInitRequested);
     on<CameraStatusChanged>(_onCameraStatusChanged);
     on<CameraPreviewStarted>(_onCameraPreviewStarted);
@@ -55,6 +62,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
+      add(const CheckInEvent.cameraPermissionRequested());
       // Initialize app state - removed artificial delay
       emit(
         state.copyWith(
@@ -81,7 +89,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('🔴 CheckInBloc: App disposing - cleaning up...');
-
+    await state.cameraController?.dispose();
     // Clean up resources
     emit(
       state.copyWith(
@@ -92,8 +100,32 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         errorMessage: null,
         toastStatus: ToastStatus.none,
         toastMessage: null,
+        cameraController: null,
       ),
     );
+  }
+
+  // Camera permission handlers
+  Future<void> _onCameraPermissionRequested(
+    CameraPermissionRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    emit(state.copyWith(cameraStatus: CameraStatus.permissionRequesting));
+    debugPrint('📷 CheckInBloc: Requesting camera permission...');
+    final status = await ph.Permission.camera.request();
+    if (status.isGranted) {
+      debugPrint('✅ CheckInBloc: Camera permission granted.');
+      emit(state.copyWith(permissionStatus: PermissionStatus.granted));
+      add(const CheckInEvent.cameraInitRequested());
+    } else {
+      debugPrint('❌ CheckInBloc: Camera permission denied.');
+      emit(
+        state.copyWith(
+          permissionStatus: PermissionStatus.denied,
+          cameraStatus: CameraStatus.permissionDenied,
+        ),
+      );
+    }
   }
 
   // Camera event handlers (placeholders for future integration)
@@ -103,20 +135,48 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) async {
     debugPrint('📷 CheckInBloc: Camera initialization requested');
 
-    emit(state.copyWith(cameraStatus: CameraStatus.initial, isLoading: true));
-
-    // Placeholder for camera initialization logic
-    // This will be implemented in Story 1.2
-    await Future.delayed(const Duration(milliseconds: 1000));
+    if (state.permissionStatus != PermissionStatus.granted) {
+      debugPrint(
+        '❌ CheckInBloc: Camera permission not granted. Aborting initialization.',
+      );
+      add(const CheckInEvent.cameraPermissionRequested());
+      return;
+    }
 
     emit(
-      state.copyWith(
-        cameraStatus: CameraStatus.ready,
-        isLoading: false,
-        toastStatus: ToastStatus.showing,
-        toastMessage: 'Camera ready (placeholder)',
-      ),
+      state.copyWith(cameraStatus: CameraStatus.initializing, isLoading: true),
     );
+
+    try {
+      final cameras = await availableCameras();
+      if (cameras.isEmpty) {
+        throw Exception('No cameras available');
+      }
+      final controller = CameraController(
+        cameras.first,
+        ResolutionPreset.medium,
+      );
+      await controller.initialize();
+
+      emit(
+        state.copyWith(
+          cameraStatus: CameraStatus.ready,
+          cameraController: controller,
+          isLoading: false,
+          toastStatus: ToastStatus.showing,
+          toastMessage: 'Camera ready',
+        ),
+      );
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Camera initialization failed: $e');
+      emit(
+        state.copyWith(
+          cameraStatus: CameraStatus.error,
+          errorMessage: 'Failed to initialize camera: $e',
+          isLoading: false,
+        ),
+      );
+    }
   }
 
   Future<void> _onCameraStatusChanged(

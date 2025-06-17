@@ -1,18 +1,45 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/material.dart';
-
-part 'check_in_state.freezed.dart';
+part of 'check_in_bloc.dart';
 
 /// Represents the current status of the camera
 enum CameraStatus {
   /// Camera is not initialized
   initial,
 
+  /// Requesting camera permissions
+  permissionRequesting,
+
+  /// Camera permissions were denied
+  permissionDenied,
+
+  /// Camera is initializing
+  initializing,
+
   /// Camera is ready and working
   ready,
 
+  /// Camera is actively streaming
+  streaming,
+
+  /// Camera is paused
+  paused,
+
   /// Camera has encountered an error
   error,
+}
+
+/// Represents the current permission status
+enum PermissionStatus {
+  /// Initial permission state
+  initial,
+
+  /// Permission granted by user
+  granted,
+
+  /// Permission denied by user
+  denied,
+
+  /// Permission permanently denied by user
+  permanentlyDenied,
 }
 
 /// Represents the current WebSocket connection status
@@ -62,6 +89,9 @@ class CheckInState with _$CheckInState {
     /// Current camera status
     @Default(CameraStatus.initial) CameraStatus cameraStatus,
 
+    /// Current permission status
+    @Default(PermissionStatus.initial) PermissionStatus permissionStatus,
+
     /// Current WebSocket connection status
     @Default(ConnectionStatus.disconnected) ConnectionStatus connectionStatus,
 
@@ -73,6 +103,9 @@ class CheckInState with _$CheckInState {
 
     /// Current error message, if any
     String? errorMessage,
+
+    /// Camera controller instance
+    CameraController? cameraController,
 
     /// Current toast notification status
     @Default(ToastStatus.none) ToastStatus toastStatus,
@@ -103,7 +136,11 @@ extension CameraStatusX on CameraStatus {
       case CameraStatus.error:
         return Colors.red;
       case CameraStatus.initial:
+      case CameraStatus.permissionRequesting:
+      case CameraStatus.initializing:
         return Colors.orange;
+      case CameraStatus.permissionDenied:
+        return Colors.red;
       default:
         return Colors.grey;
     }
