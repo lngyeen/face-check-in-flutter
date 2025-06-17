@@ -1,7 +1,8 @@
-import 'package:bloc/bloc.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bloc/bloc.dart';
+import 'package:camera/camera.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
@@ -24,6 +25,11 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
     // Camera lifecycle events
     on<CameraInitRequested>(_onCameraInitRequested);
+    on<CameraInitialized>(_onCameraInitialized);
+    on<CameraStarted>(_onCameraStarted);
+    on<CameraPaused>(_onCameraPaused);
+    on<CameraResumed>(_onCameraResumed);
+    on<CameraStopped>(_onCameraStopped);
     on<CameraStatusChanged>(_onCameraStatusChanged);
     on<CameraPreviewStarted>(_onCameraPreviewStarted);
     on<CameraPreviewStopped>(_onCameraPreviewStopped);
@@ -177,6 +183,56 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         ),
       );
     }
+  }
+
+  Future<void> _onCameraInitialized(
+    CameraInitialized event,
+    Emitter<CheckInState> emit,
+  ) async {
+    // This event is handled within _onCameraInitRequested
+  }
+
+  Future<void> _onCameraStarted(
+    CameraStarted event,
+    Emitter<CheckInState> emit,
+  ) async {
+    if (state.cameraController?.value.isStreamingImages ?? false) {
+      return;
+    }
+    await state.cameraController?.startImageStream((image) {
+      // Process image in another story
+    });
+    emit(state.copyWith(cameraStatus: CameraStatus.streaming));
+  }
+
+  Future<void> _onCameraPaused(
+    CameraPaused event,
+    Emitter<CheckInState> emit,
+  ) async {
+    if (state.cameraController?.value.isStreamingImages ?? false) {
+      await state.cameraController?.stopImageStream();
+    }
+    emit(state.copyWith(cameraStatus: CameraStatus.paused));
+  }
+
+  Future<void> _onCameraResumed(
+    CameraResumed event,
+    Emitter<CheckInState> emit,
+  ) async {
+    add(const CheckInEvent.cameraStarted());
+  }
+
+  Future<void> _onCameraStopped(
+    CameraStopped event,
+    Emitter<CheckInState> emit,
+  ) async {
+    await state.cameraController?.dispose();
+    emit(
+      state.copyWith(
+        cameraStatus: CameraStatus.initial,
+        cameraController: null,
+      ),
+    );
   }
 
   Future<void> _onCameraStatusChanged(
@@ -394,7 +450,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
   @override
   Future<void> close() {
-    debugPrint('🔴 CheckInBloc: Closing...');
+    state.cameraController?.dispose();
     return super.close();
   }
 }

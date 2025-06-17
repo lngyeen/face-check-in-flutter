@@ -7,8 +7,42 @@ import '../widgets/camera_preview_widget.dart';
 
 /// Main check-in screen
 /// This is a placeholder implementation that will be expanded in future stories
-class CheckInScreen extends StatelessWidget {
+class CheckInScreen extends StatefulWidget {
   const CheckInScreen({super.key});
+
+  @override
+  State<CheckInScreen> createState() => _CheckInScreenState();
+}
+
+class _CheckInScreenState extends State<CheckInScreen>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final bloc = context.read<CheckInBloc>();
+    switch (state) {
+      case AppLifecycleState.resumed:
+        bloc.add(const CheckInEvent.cameraResumed());
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+      case AppLifecycleState.hidden:
+        bloc.add(const CheckInEvent.cameraPaused());
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
