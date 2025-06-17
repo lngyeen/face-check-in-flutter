@@ -1,0 +1,104 @@
+---
+description: This rule enforces the standard file structure for Flutter BLoC components, especially when using the freezed package. It should be applied whenever creating or refactoring BLoC-related files (bloc, event, state). The rule ensures a clean separation of concerns and leverages Dart's 'part' and 'part of' mechanism correctly. By centralizing imports in the main bloc file, it prevents dependency clutter, simplifies the build process, and results in a single, consolidated '.freezed.dart' file, which is the desired best practice
+globs:
+alwaysApply: false
+---
+# Flutter BLoC File Structure Standard
+
+## Critical Rules
+
+- When generating BLoC files (`_bloc.dart`, `_event.dart`, `_state.dart`), you MUST use the `part` and `part of` directive structure.
+- The main `..._bloc.dart` file is the central point. It MUST contain ALL `import` statements required by itself, the event file, and the state file.
+- The `..._bloc.dart` file MUST declare `part '..._event.dart';`, `part '..._state.dart';`, and `part '..._bloc.freezed.dart';` (when using freezed).
+- The `..._event.dart` and `..._state.dart` files MUST begin with the `part of '..._bloc.dart';` directive as their very first line of code.
+- The `..._event.dart` and `..._state.dart` files MUST NOT contain any `import` statements or `library` declarations. All dependencies should be resolved through the main bloc file.
+
+## Examples
+
+<example>
+  Here is an example of a **correctly** structured BLoC. All imports are centralized in the main BLoC file, and `part`/`part of` directives are used. This results in a single, consolidated `user_bloc.freezed.dart` file.
+
+  **`user_bloc.dart`**
+  ```dart
+  library;
+
+  import 'package:bloc/bloc.dart';
+  import 'package:freezed_annotation/freezed_annotation.dart';
+  import 'package:flutter/material.dart';
+
+  part 'user_event.dart';
+  part 'user_state.dart';
+  part 'user_bloc.freezed.dart'; // Correct: A single freezed file for all parts.
+
+  class UserBloc extends Bloc<UserEvent, UserState> {
+    // ... bloc logic ...
+  }
+  ```
+
+  **`user_event.dart`**
+  ```dart
+  part of 'user_bloc.dart'; // Correct: No imports, part of the main BLoC.
+
+  @freezed
+  class UserEvent with _$UserEvent {
+    const factory UserEvent.started() = _Started;
+  }
+  ```
+
+  **`user_state.dart`**
+  ```dart
+  part of 'user_bloc.dart'; // Correct: No imports, part of the main BLoC.
+
+  @freezed
+  class UserState with _$UserState {
+    const factory UserState.initial() = _Initial;
+    // The 'Color' type is available here because 'material.dart' is imported in 'user_bloc.dart'.
+    const factory UserState.loadSuccess({required Color color}) = _LoadSuccess;
+  }
+  ```
+</example>
+
+<example type="invalid">
+  Here is an example of an **incorrectly** structured BLoC. Instead of using `part of`, the event and state files are treated as separate libraries and imported. This leads to scattered dependencies and the generation of multiple `.freezed.dart` files (e.g., `user_event.freezed.dart`, `user_state.freezed.dart`), which is the non-standard pattern to be avoided.
+
+  **`user_bloc.dart`**
+  ```dart
+  import 'package:bloc/bloc.dart';
+  import 'user_event.dart';   // WRONG: Should use 'part'.
+  import 'user_state.dart';   // WRONG: Should use 'part'.
+
+  class UserBloc extends Bloc<UserEvent, UserState> {
+    // ... bloc logic ...
+  }
+  ```
+
+  **`user_event.dart`**
+  ```dart
+  library; // WRONG: Becomes a separate library.
+
+  import 'package:freezed_annotation/freezed_annotation.dart'; // WRONG: Dependencies are scattered.
+
+  part 'user_event.freezed.dart'; // WRONG: Generates a separate freezed file.
+
+  @freezed
+  class UserEvent with _$UserEvent {
+    const factory UserEvent.started() = _Started;
+  }
+  ```
+
+  **`user_state.dart`**
+  ```dart
+  library; // WRONG: Becomes a separate library.
+
+  import 'package:flutter/material.dart'; // WRONG: Dependencies are scattered.
+  import 'package:freezed_annotation/freezed_annotation.dart';
+
+  part 'user_state.freezed.dart'; // WRONG: Generates a separate freezed file.
+
+  @freezed
+  class UserState with _$UserState {
+    const factory UserState.initial() = _Initial;
+    const factory UserState.loadSuccess({required Color color}) = _LoadSuccess;
+  }
+  ```
+</example>

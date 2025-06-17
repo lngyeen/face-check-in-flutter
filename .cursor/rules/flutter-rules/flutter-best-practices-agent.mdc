@@ -1,10 +1,8 @@
 ---
-description: "This rule governs general Flutter/Dart development best practices applicable to any project. It should be considered whenever: (1) Planning new Flutter features, widgets, or components, (2) Modifying existing Dart/Flutter code, (3) Reviewing or fixing bugs, (4) Making architectural decisions, (5) Creating new Dart files or refactoring existing ones. The rule promotes consistent coding style, performance, and maintainable code structure, regardless of the specific state management or architecture used. Apply this rule to maintain code quality and prevent common pitfalls in any Flutter/Dart project."
+description: This rule governs general Flutter/Dart development best practices applicable to any project. It should be considered whenever: (1) Planning new Flutter features, widgets, or components, (2) Modifying existing Dart/Flutter code, (3) Reviewing or fixing bugs, (4) Making architectural decisions, (5) Creating new Dart files or refactoring existing ones. The rule promotes consistent coding style, performance, and maintainable code structure, regardless of the specific state management or architecture used. Apply this rule to maintain code quality and prevent common pitfalls in any Flutter/Dart project.
 globs:
 alwaysApply: false
 ---
-"This rule governs general Flutter/Dart development best practices applicable to any project. It should be considered whenever: (1) Planning new Flutter features, widgets, or components, (2) Modifying existing Dart/Flutter code, (3) Reviewing or fixing bugs, (4) Making architectural decisions, (5) Creating new Dart files or refactoring existing ones. The rule promotes consistent coding style, performance, and maintainable code structure, regardless of the specific state management or architecture used. Apply this rule to maintain code quality and prevent common pitfalls in any Flutter/Dart project."
-
 # General Flutter/Dart Best Practices
 
 ## Critical Rules
