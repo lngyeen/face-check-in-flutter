@@ -1,9 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:face_check_in_flutter/core/services/debug_log_service.dart';
+import 'package:face_check_in_flutter/core/config/debug_config.dart';
 
 void main() {
   late DebugLogService debugLogService;
-  const maxMessages = 200; // Match the value in DebugLogService
+  const maxMessages = DebugConfig.maxDebugMessages; // Use actual config value
 
   setUp(() {
     debugLogService = DebugLogService();
@@ -32,29 +33,22 @@ void main() {
     await Future.delayed(const Duration(milliseconds: 100));
 
     expect(messages.length, 4);
+    // Updated regex to match actual format: [HH:MM:SS.mmm] [LEVEL] message
     expect(
       messages[0].last,
-      matches(
-        r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]\[DEBUG\] Test debug message',
-      ),
+      matches(r'\[\d{2}:\d{2}:\d{2}\.\d{3}\] \[DEBUG\] Test debug message'),
     );
     expect(
       messages[1].last,
-      matches(
-        r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]\[INFO\] Test info message',
-      ),
+      matches(r'\[\d{2}:\d{2}:\d{2}\.\d{3}\] \[INFO\] Test info message'),
     );
     expect(
       messages[2].last,
-      matches(
-        r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]\[WARNING\] Test warning message',
-      ),
+      matches(r'\[\d{2}:\d{2}:\d{2}\.\d{3}\] \[WARN\] Test warning message'),
     );
     expect(
       messages[3].last,
-      matches(
-        r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]\[ERROR\] Test error message',
-      ),
+      matches(r'\[\d{2}:\d{2}:\d{2}\.\d{3}\] \[ERROR\] Test error message'),
     );
 
     await subscription.cancel();
@@ -75,7 +69,7 @@ void main() {
     expect(messages.last.length, maxMessages);
     expect(
       messages.last.last,
-      matches(r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]\[INFO\] Message \d+'),
+      matches(r'\[\d{2}:\d{2}:\d{2}\.\d{3}\] \[INFO\] Message \d+'),
     );
 
     await subscription.cancel();

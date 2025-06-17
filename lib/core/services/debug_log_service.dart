@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import '../config/debug_config.dart';
 
 /// Service for managing debug logs
