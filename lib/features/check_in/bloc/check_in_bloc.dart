@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
-import 'package:flutter/foundation.dart';
 
 part 'check_in_bloc.freezed.dart';
 part 'check_in_event.dart';

@@ -141,7 +141,8 @@ extension CameraStatusX on CameraStatus {
         return Colors.orange;
       case CameraStatus.permissionDenied:
         return Colors.red;
-      default:
+      case CameraStatus.streaming:
+      case CameraStatus.paused:
         return Colors.grey;
     }
   }
@@ -159,7 +160,6 @@ extension ConnectionStatusX on ConnectionStatus {
       case ConnectionStatus.connecting:
         return Colors.orange;
       case ConnectionStatus.disconnected:
-      default:
         return Colors.grey;
     }
   }
@@ -176,7 +176,6 @@ extension StreamingStatusX on StreamingStatus {
         return Colors.red;
       case StreamingStatus.idle:
       case StreamingStatus.paused:
-      default:
         return Colors.grey;
     }
   }

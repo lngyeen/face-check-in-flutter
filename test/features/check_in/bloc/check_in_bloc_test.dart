@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:bloc_test/bloc_test.dart';
@@ -10,8 +9,6 @@ import 'package:camera_platform_interface/camera_platform_interface.dart'
     as cpi;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart'
-    as ph;
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:stream_transform/stream_transform.dart';
 
@@ -85,7 +82,6 @@ class FakeCameraPlatform extends Fake
     );
   }
 
-  @override
   Stream<cpi.CameraEvent> cameraEvents(int cameraId) {
     return _cameraEventStreamController.stream;
   }
@@ -95,12 +91,10 @@ class FakeCameraPlatform extends Fake
     isCameraInitialized = false;
   }
 
-  @override
   Future<void> startImageStream(int cameraId) async {
     isPreviewStreaming = true;
   }
 
-  @override
   Future<void> stopImageStream(int cameraId) async {
     isPreviewStreaming = false;
   }
