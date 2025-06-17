@@ -25,7 +25,6 @@ mixin _$CheckInEvent {
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -61,7 +60,6 @@ mixin _$CheckInEvent {
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -93,7 +91,6 @@ mixin _$CheckInEvent {
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -129,7 +126,6 @@ mixin _$CheckInEvent {
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -165,7 +161,6 @@ mixin _$CheckInEvent {
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -198,7 +193,6 @@ mixin _$CheckInEvent {
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -270,18 +264,12 @@ class __$$AppStartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AppStartedImpl with DiagnosticableTreeMixin implements AppStarted {
+class _$AppStartedImpl implements AppStarted {
   const _$AppStartedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.appStarted()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'CheckInEvent.appStarted'));
   }
 
   @override
@@ -302,7 +290,6 @@ class _$AppStartedImpl with DiagnosticableTreeMixin implements AppStarted {
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -342,7 +329,6 @@ class _$AppStartedImpl with DiagnosticableTreeMixin implements AppStarted {
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -378,7 +364,6 @@ class _$AppStartedImpl with DiagnosticableTreeMixin implements AppStarted {
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -421,7 +406,6 @@ class _$AppStartedImpl with DiagnosticableTreeMixin implements AppStarted {
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -461,7 +445,6 @@ class _$AppStartedImpl with DiagnosticableTreeMixin implements AppStarted {
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -498,7 +481,6 @@ class _$AppStartedImpl with DiagnosticableTreeMixin implements AppStarted {
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -557,18 +539,12 @@ class __$$AppDisposedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AppDisposedImpl with DiagnosticableTreeMixin implements AppDisposed {
+class _$AppDisposedImpl implements AppDisposed {
   const _$AppDisposedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.appDisposed()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'CheckInEvent.appDisposed'));
   }
 
   @override
@@ -589,7 +565,6 @@ class _$AppDisposedImpl with DiagnosticableTreeMixin implements AppDisposed {
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -629,7 +604,6 @@ class _$AppDisposedImpl with DiagnosticableTreeMixin implements AppDisposed {
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -665,7 +639,6 @@ class _$AppDisposedImpl with DiagnosticableTreeMixin implements AppDisposed {
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -708,7 +681,6 @@ class _$AppDisposedImpl with DiagnosticableTreeMixin implements AppDisposed {
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -748,7 +720,6 @@ class _$AppDisposedImpl with DiagnosticableTreeMixin implements AppDisposed {
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -785,7 +756,6 @@ class _$AppDisposedImpl with DiagnosticableTreeMixin implements AppDisposed {
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -844,22 +814,12 @@ class __$$CameraPermissionRequestedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPermissionRequestedImpl
-    with DiagnosticableTreeMixin
-    implements CameraPermissionRequested {
+class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
   const _$CameraPermissionRequestedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraPermissionRequested()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(
-      DiagnosticsProperty('type', 'CheckInEvent.cameraPermissionRequested'),
-    );
   }
 
   @override
@@ -881,7 +841,6 @@ class _$CameraPermissionRequestedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -921,7 +880,6 @@ class _$CameraPermissionRequestedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -957,7 +915,6 @@ class _$CameraPermissionRequestedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -1000,7 +957,6 @@ class _$CameraPermissionRequestedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -1040,7 +996,6 @@ class _$CameraPermissionRequestedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -1077,7 +1032,6 @@ class _$CameraPermissionRequestedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -1136,22 +1090,12 @@ class __$$CameraPermissionGrantedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPermissionGrantedImpl
-    with DiagnosticableTreeMixin
-    implements CameraPermissionGranted {
+class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
   const _$CameraPermissionGrantedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraPermissionGranted()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(
-      DiagnosticsProperty('type', 'CheckInEvent.cameraPermissionGranted'),
-    );
   }
 
   @override
@@ -1173,7 +1117,6 @@ class _$CameraPermissionGrantedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -1213,7 +1156,6 @@ class _$CameraPermissionGrantedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -1249,7 +1191,6 @@ class _$CameraPermissionGrantedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -1292,7 +1233,6 @@ class _$CameraPermissionGrantedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -1332,7 +1272,6 @@ class _$CameraPermissionGrantedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -1369,7 +1308,6 @@ class _$CameraPermissionGrantedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -1428,21 +1366,12 @@ class __$$CameraPermissionDeniedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPermissionDeniedImpl
-    with DiagnosticableTreeMixin
-    implements CameraPermissionDenied {
+class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
   const _$CameraPermissionDeniedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraPermissionDenied()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraPermissionDenied'));
   }
 
   @override
@@ -1464,7 +1393,6 @@ class _$CameraPermissionDeniedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -1504,7 +1432,6 @@ class _$CameraPermissionDeniedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -1540,7 +1467,6 @@ class _$CameraPermissionDeniedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -1583,7 +1509,6 @@ class _$CameraPermissionDeniedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -1623,7 +1548,6 @@ class _$CameraPermissionDeniedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -1660,7 +1584,6 @@ class _$CameraPermissionDeniedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -1719,21 +1642,12 @@ class __$$CameraInitRequestedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraInitRequestedImpl
-    with DiagnosticableTreeMixin
-    implements CameraInitRequested {
+class _$CameraInitRequestedImpl implements CameraInitRequested {
   const _$CameraInitRequestedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraInitRequested()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraInitRequested'));
   }
 
   @override
@@ -1755,7 +1669,6 @@ class _$CameraInitRequestedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -1795,7 +1708,6 @@ class _$CameraInitRequestedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -1831,7 +1743,6 @@ class _$CameraInitRequestedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -1874,7 +1785,6 @@ class _$CameraInitRequestedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -1914,7 +1824,6 @@ class _$CameraInitRequestedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -1951,7 +1860,6 @@ class _$CameraInitRequestedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -1988,296 +1896,6 @@ abstract class CameraInitRequested implements CheckInEvent {
 }
 
 /// @nodoc
-abstract class _$$CameraInitializedImplCopyWith<$Res> {
-  factory _$$CameraInitializedImplCopyWith(
-    _$CameraInitializedImpl value,
-    $Res Function(_$CameraInitializedImpl) then,
-  ) = __$$CameraInitializedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CameraInitializedImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$CameraInitializedImpl>
-    implements _$$CameraInitializedImplCopyWith<$Res> {
-  __$$CameraInitializedImplCopyWithImpl(
-    _$CameraInitializedImpl _value,
-    $Res Function(_$CameraInitializedImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$CameraInitializedImpl
-    with DiagnosticableTreeMixin
-    implements CameraInitialized {
-  const _$CameraInitializedImpl();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CheckInEvent.cameraInitialized()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraInitialized'));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CameraInitializedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() appStarted,
-    required TResult Function() appDisposed,
-    required TResult Function() cameraPermissionRequested,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
-    required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
-    required TResult Function() cameraStarted,
-    required TResult Function() cameraPaused,
-    required TResult Function() cameraResumed,
-    required TResult Function() cameraStopped,
-    required TResult Function(CameraStatus status) cameraStatusChanged,
-    required TResult Function() cameraPreviewStarted,
-    required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
-    required TResult Function(ConnectionStatus status) connectionStatusChanged,
-    required TResult Function() disconnectionRequested,
-    required TResult Function() streamingStarted,
-    required TResult Function() streamingStopped,
-    required TResult Function(StreamingStatus status) streamingStatusChanged,
-    required TResult Function() frameProcessed,
-    required TResult Function(String message) errorOccurred,
-    required TResult Function(String error) cameraError,
-    required TResult Function() errorCleared,
-    required TResult Function(String message) toastRequested,
-    required TResult Function() debugModeToggled,
-    required TResult Function() statisticsReset,
-    required TResult Function(
-      bool success,
-      String message,
-      String? employeeName,
-    )
-    recognitionResultReceived,
-  }) {
-    return cameraInitialized();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? appStarted,
-    TResult? Function()? appDisposed,
-    TResult? Function()? cameraPermissionRequested,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
-    TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
-    TResult? Function()? cameraStarted,
-    TResult? Function()? cameraPaused,
-    TResult? Function()? cameraResumed,
-    TResult? Function()? cameraStopped,
-    TResult? Function(CameraStatus status)? cameraStatusChanged,
-    TResult? Function()? cameraPreviewStarted,
-    TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
-    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
-    TResult? Function()? disconnectionRequested,
-    TResult? Function()? streamingStarted,
-    TResult? Function()? streamingStopped,
-    TResult? Function(StreamingStatus status)? streamingStatusChanged,
-    TResult? Function()? frameProcessed,
-    TResult? Function(String message)? errorOccurred,
-    TResult? Function(String error)? cameraError,
-    TResult? Function()? errorCleared,
-    TResult? Function(String message)? toastRequested,
-    TResult? Function()? debugModeToggled,
-    TResult? Function()? statisticsReset,
-    TResult? Function(bool success, String message, String? employeeName)?
-    recognitionResultReceived,
-  }) {
-    return cameraInitialized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? appStarted,
-    TResult Function()? appDisposed,
-    TResult Function()? cameraPermissionRequested,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
-    TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
-    TResult Function()? cameraStarted,
-    TResult Function()? cameraPaused,
-    TResult Function()? cameraResumed,
-    TResult Function()? cameraStopped,
-    TResult Function(CameraStatus status)? cameraStatusChanged,
-    TResult Function()? cameraPreviewStarted,
-    TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
-    TResult Function(ConnectionStatus status)? connectionStatusChanged,
-    TResult Function()? disconnectionRequested,
-    TResult Function()? streamingStarted,
-    TResult Function()? streamingStopped,
-    TResult Function(StreamingStatus status)? streamingStatusChanged,
-    TResult Function()? frameProcessed,
-    TResult Function(String message)? errorOccurred,
-    TResult Function(String error)? cameraError,
-    TResult Function()? errorCleared,
-    TResult Function(String message)? toastRequested,
-    TResult Function()? debugModeToggled,
-    TResult Function()? statisticsReset,
-    TResult Function(bool success, String message, String? employeeName)?
-    recognitionResultReceived,
-    required TResult orElse(),
-  }) {
-    if (cameraInitialized != null) {
-      return cameraInitialized();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(AppStarted value) appStarted,
-    required TResult Function(AppDisposed value) appDisposed,
-    required TResult Function(CameraPermissionRequested value)
-    cameraPermissionRequested,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
-    required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
-    required TResult Function(CameraStarted value) cameraStarted,
-    required TResult Function(CameraPaused value) cameraPaused,
-    required TResult Function(CameraResumed value) cameraResumed,
-    required TResult Function(CameraStopped value) cameraStopped,
-    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
-    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
-    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
-    required TResult Function(ConnectionRequested value) connectionRequested,
-    required TResult Function(ConnectionStatusChanged value)
-    connectionStatusChanged,
-    required TResult Function(DisconnectionRequested value)
-    disconnectionRequested,
-    required TResult Function(StreamingStarted value) streamingStarted,
-    required TResult Function(StreamingStopped value) streamingStopped,
-    required TResult Function(StreamingStatusChanged value)
-    streamingStatusChanged,
-    required TResult Function(FrameProcessed value) frameProcessed,
-    required TResult Function(ErrorOccurred value) errorOccurred,
-    required TResult Function(CameraError value) cameraError,
-    required TResult Function(ErrorCleared value) errorCleared,
-    required TResult Function(ToastRequested value) toastRequested,
-    required TResult Function(DebugModeToggled value) debugModeToggled,
-    required TResult Function(StatisticsReset value) statisticsReset,
-    required TResult Function(RecognitionResultReceived value)
-    recognitionResultReceived,
-  }) {
-    return cameraInitialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AppStarted value)? appStarted,
-    TResult? Function(AppDisposed value)? appDisposed,
-    TResult? Function(CameraPermissionRequested value)?
-    cameraPermissionRequested,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
-    TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
-    TResult? Function(CameraStarted value)? cameraStarted,
-    TResult? Function(CameraPaused value)? cameraPaused,
-    TResult? Function(CameraResumed value)? cameraResumed,
-    TResult? Function(CameraStopped value)? cameraStopped,
-    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
-    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
-    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
-    TResult? Function(ConnectionRequested value)? connectionRequested,
-    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
-    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
-    TResult? Function(StreamingStarted value)? streamingStarted,
-    TResult? Function(StreamingStopped value)? streamingStopped,
-    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
-    TResult? Function(FrameProcessed value)? frameProcessed,
-    TResult? Function(ErrorOccurred value)? errorOccurred,
-    TResult? Function(CameraError value)? cameraError,
-    TResult? Function(ErrorCleared value)? errorCleared,
-    TResult? Function(ToastRequested value)? toastRequested,
-    TResult? Function(DebugModeToggled value)? debugModeToggled,
-    TResult? Function(StatisticsReset value)? statisticsReset,
-    TResult? Function(RecognitionResultReceived value)?
-    recognitionResultReceived,
-  }) {
-    return cameraInitialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(AppStarted value)? appStarted,
-    TResult Function(AppDisposed value)? appDisposed,
-    TResult Function(CameraPermissionRequested value)?
-    cameraPermissionRequested,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
-    TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
-    TResult Function(CameraStarted value)? cameraStarted,
-    TResult Function(CameraPaused value)? cameraPaused,
-    TResult Function(CameraResumed value)? cameraResumed,
-    TResult Function(CameraStopped value)? cameraStopped,
-    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
-    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
-    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
-    TResult Function(ConnectionRequested value)? connectionRequested,
-    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
-    TResult Function(DisconnectionRequested value)? disconnectionRequested,
-    TResult Function(StreamingStarted value)? streamingStarted,
-    TResult Function(StreamingStopped value)? streamingStopped,
-    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
-    TResult Function(FrameProcessed value)? frameProcessed,
-    TResult Function(ErrorOccurred value)? errorOccurred,
-    TResult Function(CameraError value)? cameraError,
-    TResult Function(ErrorCleared value)? errorCleared,
-    TResult Function(ToastRequested value)? toastRequested,
-    TResult Function(DebugModeToggled value)? debugModeToggled,
-    TResult Function(StatisticsReset value)? statisticsReset,
-    TResult Function(RecognitionResultReceived value)?
-    recognitionResultReceived,
-    required TResult orElse(),
-  }) {
-    if (cameraInitialized != null) {
-      return cameraInitialized(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CameraInitialized implements CheckInEvent {
-  const factory CameraInitialized() = _$CameraInitializedImpl;
-}
-
-/// @nodoc
 abstract class _$$CameraStartedImplCopyWith<$Res> {
   factory _$$CameraStartedImplCopyWith(
     _$CameraStartedImpl value,
@@ -2300,20 +1918,12 @@ class __$$CameraStartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraStartedImpl
-    with DiagnosticableTreeMixin
-    implements CameraStarted {
+class _$CameraStartedImpl implements CameraStarted {
   const _$CameraStartedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraStarted()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'CheckInEvent.cameraStarted'));
   }
 
   @override
@@ -2334,7 +1944,6 @@ class _$CameraStartedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -2374,7 +1983,6 @@ class _$CameraStartedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -2410,7 +2018,6 @@ class _$CameraStartedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -2453,7 +2060,6 @@ class _$CameraStartedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -2493,7 +2099,6 @@ class _$CameraStartedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -2530,7 +2135,6 @@ class _$CameraStartedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -2589,18 +2193,12 @@ class __$$CameraPausedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPausedImpl with DiagnosticableTreeMixin implements CameraPaused {
+class _$CameraPausedImpl implements CameraPaused {
   const _$CameraPausedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraPaused()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'CheckInEvent.cameraPaused'));
   }
 
   @override
@@ -2621,7 +2219,6 @@ class _$CameraPausedImpl with DiagnosticableTreeMixin implements CameraPaused {
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -2661,7 +2258,6 @@ class _$CameraPausedImpl with DiagnosticableTreeMixin implements CameraPaused {
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -2697,7 +2293,6 @@ class _$CameraPausedImpl with DiagnosticableTreeMixin implements CameraPaused {
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -2740,7 +2335,6 @@ class _$CameraPausedImpl with DiagnosticableTreeMixin implements CameraPaused {
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -2780,7 +2374,6 @@ class _$CameraPausedImpl with DiagnosticableTreeMixin implements CameraPaused {
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -2817,7 +2410,6 @@ class _$CameraPausedImpl with DiagnosticableTreeMixin implements CameraPaused {
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -2876,20 +2468,12 @@ class __$$CameraResumedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraResumedImpl
-    with DiagnosticableTreeMixin
-    implements CameraResumed {
+class _$CameraResumedImpl implements CameraResumed {
   const _$CameraResumedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraResumed()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'CheckInEvent.cameraResumed'));
   }
 
   @override
@@ -2910,7 +2494,6 @@ class _$CameraResumedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -2950,7 +2533,6 @@ class _$CameraResumedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -2986,7 +2568,6 @@ class _$CameraResumedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -3029,7 +2610,6 @@ class _$CameraResumedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -3069,7 +2649,6 @@ class _$CameraResumedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -3106,7 +2685,6 @@ class _$CameraResumedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -3165,20 +2743,12 @@ class __$$CameraStoppedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraStoppedImpl
-    with DiagnosticableTreeMixin
-    implements CameraStopped {
+class _$CameraStoppedImpl implements CameraStopped {
   const _$CameraStoppedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraStopped()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'CheckInEvent.cameraStopped'));
   }
 
   @override
@@ -3199,7 +2769,6 @@ class _$CameraStoppedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -3239,7 +2808,6 @@ class _$CameraStoppedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -3275,7 +2843,6 @@ class _$CameraStoppedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -3318,7 +2885,6 @@ class _$CameraStoppedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -3358,7 +2924,6 @@ class _$CameraStoppedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -3395,7 +2960,6 @@ class _$CameraStoppedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -3468,25 +3032,15 @@ class __$$CameraStatusChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraStatusChangedImpl
-    with DiagnosticableTreeMixin
-    implements CameraStatusChanged {
+class _$CameraStatusChangedImpl implements CameraStatusChanged {
   const _$CameraStatusChangedImpl(this.status);
 
   @override
   final CameraStatus status;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraStatusChanged(status: $status)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraStatusChanged'))
-      ..add(DiagnosticsProperty('status', status));
   }
 
   @override
@@ -3520,7 +3074,6 @@ class _$CameraStatusChangedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -3560,7 +3113,6 @@ class _$CameraStatusChangedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -3596,7 +3148,6 @@ class _$CameraStatusChangedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -3639,7 +3190,6 @@ class _$CameraStatusChangedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -3679,7 +3229,6 @@ class _$CameraStatusChangedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -3716,7 +3265,6 @@ class _$CameraStatusChangedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -3784,21 +3332,12 @@ class __$$CameraPreviewStartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPreviewStartedImpl
-    with DiagnosticableTreeMixin
-    implements CameraPreviewStarted {
+class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
   const _$CameraPreviewStartedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraPreviewStarted()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraPreviewStarted'));
   }
 
   @override
@@ -3820,7 +3359,6 @@ class _$CameraPreviewStartedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -3860,7 +3398,6 @@ class _$CameraPreviewStartedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -3896,7 +3433,6 @@ class _$CameraPreviewStartedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -3939,7 +3475,6 @@ class _$CameraPreviewStartedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -3979,7 +3514,6 @@ class _$CameraPreviewStartedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -4016,7 +3550,6 @@ class _$CameraPreviewStartedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -4075,21 +3608,12 @@ class __$$CameraPreviewStoppedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPreviewStoppedImpl
-    with DiagnosticableTreeMixin
-    implements CameraPreviewStopped {
+class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
   const _$CameraPreviewStoppedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraPreviewStopped()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraPreviewStopped'));
   }
 
   @override
@@ -4111,7 +3635,6 @@ class _$CameraPreviewStoppedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -4151,7 +3674,6 @@ class _$CameraPreviewStoppedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -4187,7 +3709,6 @@ class _$CameraPreviewStoppedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -4230,7 +3751,6 @@ class _$CameraPreviewStoppedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -4270,7 +3790,6 @@ class _$CameraPreviewStoppedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -4307,7 +3826,6 @@ class _$CameraPreviewStoppedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -4366,21 +3884,12 @@ class __$$ConnectionRequestedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ConnectionRequestedImpl
-    with DiagnosticableTreeMixin
-    implements ConnectionRequested {
+class _$ConnectionRequestedImpl implements ConnectionRequested {
   const _$ConnectionRequestedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.connectionRequested()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.connectionRequested'));
   }
 
   @override
@@ -4402,7 +3911,6 @@ class _$ConnectionRequestedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -4442,7 +3950,6 @@ class _$ConnectionRequestedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -4478,7 +3985,6 @@ class _$ConnectionRequestedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -4521,7 +4027,6 @@ class _$ConnectionRequestedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -4561,7 +4066,6 @@ class _$ConnectionRequestedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -4598,7 +4102,6 @@ class _$ConnectionRequestedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -4671,25 +4174,15 @@ class __$$ConnectionStatusChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ConnectionStatusChangedImpl
-    with DiagnosticableTreeMixin
-    implements ConnectionStatusChanged {
+class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
   const _$ConnectionStatusChangedImpl(this.status);
 
   @override
   final ConnectionStatus status;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.connectionStatusChanged(status: $status)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.connectionStatusChanged'))
-      ..add(DiagnosticsProperty('status', status));
   }
 
   @override
@@ -4722,7 +4215,6 @@ class _$ConnectionStatusChangedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -4762,7 +4254,6 @@ class _$ConnectionStatusChangedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -4798,7 +4289,6 @@ class _$ConnectionStatusChangedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -4841,7 +4331,6 @@ class _$ConnectionStatusChangedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -4881,7 +4370,6 @@ class _$ConnectionStatusChangedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -4918,7 +4406,6 @@ class _$ConnectionStatusChangedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -4986,21 +4473,12 @@ class __$$DisconnectionRequestedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DisconnectionRequestedImpl
-    with DiagnosticableTreeMixin
-    implements DisconnectionRequested {
+class _$DisconnectionRequestedImpl implements DisconnectionRequested {
   const _$DisconnectionRequestedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.disconnectionRequested()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.disconnectionRequested'));
   }
 
   @override
@@ -5022,7 +4500,6 @@ class _$DisconnectionRequestedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -5062,7 +4539,6 @@ class _$DisconnectionRequestedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -5098,7 +4574,6 @@ class _$DisconnectionRequestedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -5141,7 +4616,6 @@ class _$DisconnectionRequestedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -5181,7 +4655,6 @@ class _$DisconnectionRequestedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -5218,7 +4691,6 @@ class _$DisconnectionRequestedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -5277,21 +4749,12 @@ class __$$StreamingStartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StreamingStartedImpl
-    with DiagnosticableTreeMixin
-    implements StreamingStarted {
+class _$StreamingStartedImpl implements StreamingStarted {
   const _$StreamingStartedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.streamingStarted()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.streamingStarted'));
   }
 
   @override
@@ -5312,7 +4775,6 @@ class _$StreamingStartedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -5352,7 +4814,6 @@ class _$StreamingStartedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -5388,7 +4849,6 @@ class _$StreamingStartedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -5431,7 +4891,6 @@ class _$StreamingStartedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -5471,7 +4930,6 @@ class _$StreamingStartedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -5508,7 +4966,6 @@ class _$StreamingStartedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -5567,21 +5024,12 @@ class __$$StreamingStoppedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StreamingStoppedImpl
-    with DiagnosticableTreeMixin
-    implements StreamingStopped {
+class _$StreamingStoppedImpl implements StreamingStopped {
   const _$StreamingStoppedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.streamingStopped()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.streamingStopped'));
   }
 
   @override
@@ -5602,7 +5050,6 @@ class _$StreamingStoppedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -5642,7 +5089,6 @@ class _$StreamingStoppedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -5678,7 +5124,6 @@ class _$StreamingStoppedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -5721,7 +5166,6 @@ class _$StreamingStoppedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -5761,7 +5205,6 @@ class _$StreamingStoppedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -5798,7 +5241,6 @@ class _$StreamingStoppedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -5871,25 +5313,15 @@ class __$$StreamingStatusChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StreamingStatusChangedImpl
-    with DiagnosticableTreeMixin
-    implements StreamingStatusChanged {
+class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
   const _$StreamingStatusChangedImpl(this.status);
 
   @override
   final StreamingStatus status;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.streamingStatusChanged(status: $status)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.streamingStatusChanged'))
-      ..add(DiagnosticsProperty('status', status));
   }
 
   @override
@@ -5924,7 +5356,6 @@ class _$StreamingStatusChangedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -5964,7 +5395,6 @@ class _$StreamingStatusChangedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -6000,7 +5430,6 @@ class _$StreamingStatusChangedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -6043,7 +5472,6 @@ class _$StreamingStatusChangedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -6083,7 +5511,6 @@ class _$StreamingStatusChangedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -6120,7 +5547,6 @@ class _$StreamingStatusChangedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -6188,20 +5614,12 @@ class __$$FrameProcessedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FrameProcessedImpl
-    with DiagnosticableTreeMixin
-    implements FrameProcessed {
+class _$FrameProcessedImpl implements FrameProcessed {
   const _$FrameProcessedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.frameProcessed()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'CheckInEvent.frameProcessed'));
   }
 
   @override
@@ -6222,7 +5640,6 @@ class _$FrameProcessedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -6262,7 +5679,6 @@ class _$FrameProcessedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -6298,7 +5714,6 @@ class _$FrameProcessedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -6341,7 +5756,6 @@ class _$FrameProcessedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -6381,7 +5795,6 @@ class _$FrameProcessedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -6418,7 +5831,6 @@ class _$FrameProcessedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -6491,25 +5903,15 @@ class __$$ErrorOccurredImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorOccurredImpl
-    with DiagnosticableTreeMixin
-    implements ErrorOccurred {
+class _$ErrorOccurredImpl implements ErrorOccurred {
   const _$ErrorOccurredImpl(this.message);
 
   @override
   final String message;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.errorOccurred(message: $message)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.errorOccurred'))
-      ..add(DiagnosticsProperty('message', message));
   }
 
   @override
@@ -6540,7 +5942,6 @@ class _$ErrorOccurredImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -6580,7 +5981,6 @@ class _$ErrorOccurredImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -6616,7 +6016,6 @@ class _$ErrorOccurredImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -6659,7 +6058,6 @@ class _$ErrorOccurredImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -6699,7 +6097,6 @@ class _$ErrorOccurredImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -6736,7 +6133,6 @@ class _$ErrorOccurredImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -6817,23 +6213,15 @@ class __$$CameraErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraErrorImpl with DiagnosticableTreeMixin implements CameraError {
+class _$CameraErrorImpl implements CameraError {
   const _$CameraErrorImpl(this.error);
 
   @override
   final String error;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.cameraError(error: $error)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraError'))
-      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
@@ -6864,7 +6252,6 @@ class _$CameraErrorImpl with DiagnosticableTreeMixin implements CameraError {
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -6904,7 +6291,6 @@ class _$CameraErrorImpl with DiagnosticableTreeMixin implements CameraError {
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -6940,7 +6326,6 @@ class _$CameraErrorImpl with DiagnosticableTreeMixin implements CameraError {
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -6983,7 +6368,6 @@ class _$CameraErrorImpl with DiagnosticableTreeMixin implements CameraError {
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -7023,7 +6407,6 @@ class _$CameraErrorImpl with DiagnosticableTreeMixin implements CameraError {
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -7060,7 +6443,6 @@ class _$CameraErrorImpl with DiagnosticableTreeMixin implements CameraError {
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -7127,18 +6509,12 @@ class __$$ErrorClearedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorClearedImpl with DiagnosticableTreeMixin implements ErrorCleared {
+class _$ErrorClearedImpl implements ErrorCleared {
   const _$ErrorClearedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.errorCleared()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'CheckInEvent.errorCleared'));
   }
 
   @override
@@ -7159,7 +6535,6 @@ class _$ErrorClearedImpl with DiagnosticableTreeMixin implements ErrorCleared {
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -7199,7 +6574,6 @@ class _$ErrorClearedImpl with DiagnosticableTreeMixin implements ErrorCleared {
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -7235,7 +6609,6 @@ class _$ErrorClearedImpl with DiagnosticableTreeMixin implements ErrorCleared {
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -7278,7 +6651,6 @@ class _$ErrorClearedImpl with DiagnosticableTreeMixin implements ErrorCleared {
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -7318,7 +6690,6 @@ class _$ErrorClearedImpl with DiagnosticableTreeMixin implements ErrorCleared {
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -7355,7 +6726,6 @@ class _$ErrorClearedImpl with DiagnosticableTreeMixin implements ErrorCleared {
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -7428,25 +6798,15 @@ class __$$ToastRequestedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ToastRequestedImpl
-    with DiagnosticableTreeMixin
-    implements ToastRequested {
+class _$ToastRequestedImpl implements ToastRequested {
   const _$ToastRequestedImpl(this.message);
 
   @override
   final String message;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.toastRequested(message: $message)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.toastRequested'))
-      ..add(DiagnosticsProperty('message', message));
   }
 
   @override
@@ -7480,7 +6840,6 @@ class _$ToastRequestedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -7520,7 +6879,6 @@ class _$ToastRequestedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -7556,7 +6914,6 @@ class _$ToastRequestedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -7599,7 +6956,6 @@ class _$ToastRequestedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -7639,7 +6995,6 @@ class _$ToastRequestedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -7676,7 +7031,6 @@ class _$ToastRequestedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -7743,21 +7097,12 @@ class __$$DebugModeToggledImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DebugModeToggledImpl
-    with DiagnosticableTreeMixin
-    implements DebugModeToggled {
+class _$DebugModeToggledImpl implements DebugModeToggled {
   const _$DebugModeToggledImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.debugModeToggled()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.debugModeToggled'));
   }
 
   @override
@@ -7778,7 +7123,6 @@ class _$DebugModeToggledImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -7818,7 +7162,6 @@ class _$DebugModeToggledImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -7854,7 +7197,6 @@ class _$DebugModeToggledImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -7897,7 +7239,6 @@ class _$DebugModeToggledImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -7937,7 +7278,6 @@ class _$DebugModeToggledImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -7974,7 +7314,6 @@ class _$DebugModeToggledImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -8033,21 +7372,12 @@ class __$$StatisticsResetImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StatisticsResetImpl
-    with DiagnosticableTreeMixin
-    implements StatisticsReset {
+class _$StatisticsResetImpl implements StatisticsReset {
   const _$StatisticsResetImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.statisticsReset()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInEvent.statisticsReset'));
   }
 
   @override
@@ -8068,7 +7398,6 @@ class _$StatisticsResetImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -8108,7 +7437,6 @@ class _$StatisticsResetImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -8144,7 +7472,6 @@ class _$StatisticsResetImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -8187,7 +7514,6 @@ class _$StatisticsResetImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -8227,7 +7553,6 @@ class _$StatisticsResetImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -8264,7 +7589,6 @@ class _$StatisticsResetImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -8352,9 +7676,7 @@ class __$$RecognitionResultReceivedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RecognitionResultReceivedImpl
-    with DiagnosticableTreeMixin
-    implements RecognitionResultReceived {
+class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
   const _$RecognitionResultReceivedImpl({
     required this.success,
     required this.message,
@@ -8369,20 +7691,8 @@ class _$RecognitionResultReceivedImpl
   final String? employeeName;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInEvent.recognitionResultReceived(success: $success, message: $message, employeeName: $employeeName)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(
-        DiagnosticsProperty('type', 'CheckInEvent.recognitionResultReceived'),
-      )
-      ..add(DiagnosticsProperty('success', success))
-      ..add(DiagnosticsProperty('message', message))
-      ..add(DiagnosticsProperty('employeeName', employeeName));
   }
 
   @override
@@ -8418,7 +7728,6 @@ class _$RecognitionResultReceivedImpl
     required TResult Function() cameraPermissionGranted,
     required TResult Function() cameraPermissionDenied,
     required TResult Function() cameraInitRequested,
-    required TResult Function() cameraInitialized,
     required TResult Function() cameraStarted,
     required TResult Function() cameraPaused,
     required TResult Function() cameraResumed,
@@ -8458,7 +7767,6 @@ class _$RecognitionResultReceivedImpl
     TResult? Function()? cameraPermissionGranted,
     TResult? Function()? cameraPermissionDenied,
     TResult? Function()? cameraInitRequested,
-    TResult? Function()? cameraInitialized,
     TResult? Function()? cameraStarted,
     TResult? Function()? cameraPaused,
     TResult? Function()? cameraResumed,
@@ -8494,7 +7802,6 @@ class _$RecognitionResultReceivedImpl
     TResult Function()? cameraPermissionGranted,
     TResult Function()? cameraPermissionDenied,
     TResult Function()? cameraInitRequested,
-    TResult Function()? cameraInitialized,
     TResult Function()? cameraStarted,
     TResult Function()? cameraPaused,
     TResult Function()? cameraResumed,
@@ -8537,7 +7844,6 @@ class _$RecognitionResultReceivedImpl
     required TResult Function(CameraPermissionDenied value)
     cameraPermissionDenied,
     required TResult Function(CameraInitRequested value) cameraInitRequested,
-    required TResult Function(CameraInitialized value) cameraInitialized,
     required TResult Function(CameraStarted value) cameraStarted,
     required TResult Function(CameraPaused value) cameraPaused,
     required TResult Function(CameraResumed value) cameraResumed,
@@ -8577,7 +7883,6 @@ class _$RecognitionResultReceivedImpl
     TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult? Function(CameraInitRequested value)? cameraInitRequested,
-    TResult? Function(CameraInitialized value)? cameraInitialized,
     TResult? Function(CameraStarted value)? cameraStarted,
     TResult? Function(CameraPaused value)? cameraPaused,
     TResult? Function(CameraResumed value)? cameraResumed,
@@ -8614,7 +7919,6 @@ class _$RecognitionResultReceivedImpl
     TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
     TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
     TResult Function(CameraInitRequested value)? cameraInitRequested,
-    TResult Function(CameraInitialized value)? cameraInitialized,
     TResult Function(CameraStarted value)? cameraStarted,
     TResult Function(CameraPaused value)? cameraPaused,
     TResult Function(CameraResumed value)? cameraResumed,
@@ -8949,7 +8253,7 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CheckInStateImpl with DiagnosticableTreeMixin implements _CheckInState {
+class _$CheckInStateImpl implements _CheckInState {
   const _$CheckInStateImpl({
     this.cameraStatus = CameraStatus.initial,
     this.permissionStatus = PermissionStatus.initial,
@@ -9022,27 +8326,8 @@ class _$CheckInStateImpl with DiagnosticableTreeMixin implements _CheckInState {
   final int framesProcessed;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CheckInState'))
-      ..add(DiagnosticsProperty('cameraStatus', cameraStatus))
-      ..add(DiagnosticsProperty('permissionStatus', permissionStatus))
-      ..add(DiagnosticsProperty('connectionStatus', connectionStatus))
-      ..add(DiagnosticsProperty('streamingStatus', streamingStatus))
-      ..add(DiagnosticsProperty('isLoading', isLoading))
-      ..add(DiagnosticsProperty('errorMessage', errorMessage))
-      ..add(DiagnosticsProperty('cameraController', cameraController))
-      ..add(DiagnosticsProperty('toastStatus', toastStatus))
-      ..add(DiagnosticsProperty('toastMessage', toastMessage))
-      ..add(DiagnosticsProperty('isDebugMode', isDebugMode))
-      ..add(DiagnosticsProperty('lastRecognitionTime', lastRecognitionTime))
-      ..add(DiagnosticsProperty('framesProcessed', framesProcessed));
   }
 
   @override

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
+
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 // Add a type definition for the connector function for clarity and ease of use.

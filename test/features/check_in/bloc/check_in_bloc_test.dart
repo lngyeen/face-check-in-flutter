@@ -15,12 +15,16 @@ import 'package:permission_handler_platform_interface/permission_handler_platfor
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:stream_transform/stream_transform.dart';
 
+import 'package:face_check_in_flutter/domain/services/permission_service.dart'
+    as ps;
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 
 // --- Mocks and Fakes ---
 
 class MockCheckInBloc extends MockBloc<CheckInEvent, CheckInState>
     implements CheckInBloc {}
+
+class MockPermissionService extends Mock implements ps.PermissionService {}
 
 class FakeCameraDescription extends Fake implements cpi.CameraDescription {
   @override
@@ -37,7 +41,8 @@ class FakeCameraPlatform extends Fake
   List<cpi.CameraDescription> cameras = [FakeCameraDescription()];
   bool isCameraInitialized = false;
   bool isPreviewStreaming = false;
-  Completer<void> cameraInitialized = Completer<void>();
+  final StreamController<cpi.CameraEvent> _cameraEventStreamController =
+      StreamController<cpi.CameraEvent>.broadcast();
 
   @override
   Future<List<cpi.CameraDescription>> availableCameras() async {
@@ -67,13 +72,8 @@ class FakeCameraPlatform extends Fake
     cpi.ImageFormatGroup? imageFormatGroup,
   }) async {
     isCameraInitialized = true;
-    cameraInitialized.complete();
-  }
-
-  @override
-  Stream<cpi.CameraEvent> cameraEvents(int cameraId) {
-    return cameraInitialized.future.asStream().map(
-      (_) => cpi.CameraInitializedEvent(
+    _cameraEventStreamController.add(
+      cpi.CameraInitializedEvent(
         cameraId,
         1920,
         1080,
@@ -83,6 +83,11 @@ class FakeCameraPlatform extends Fake
         true,
       ),
     );
+  }
+
+  @override
+  Stream<cpi.CameraEvent> cameraEvents(int cameraId) {
+    return _cameraEventStreamController.stream;
   }
 
   @override
@@ -201,187 +206,116 @@ class FakeCameraPlatform extends Fake
   Future<void> unlockCaptureOrientation(int cameraId) async {}
 }
 
-class FakePermissionHandler extends Fake
-    with MockPlatformInterfaceMixin
-    implements ph.PermissionHandlerPlatform {
-  ph.PermissionStatus _permissionStatus = ph.PermissionStatus.denied;
-
-  void setPermissionStatus(ph.PermissionStatus status) {
-    _permissionStatus = status;
-  }
-
-  @override
-  Future<Map<ph.Permission, ph.PermissionStatus>> requestPermissions(
-    List<ph.Permission> permissions,
-  ) async {
-    return {for (var p in permissions) p: _permissionStatus};
-  }
-
-  @override
-  Future<ph.PermissionStatus> checkPermissionStatus(
-    ph.Permission permission,
-  ) async {
-    return _permissionStatus;
-  }
-
-  @override
-  Future<bool> openAppSettings() async => true;
-}
-
 // --- Main Test Suite ---
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late CheckInBloc checkInBloc;
-  late FakePermissionHandler fakePermissionHandler;
+  late MockPermissionService mockPermissionService;
   late FakeCameraPlatform fakeCameraPlatform;
 
   setUp(() {
-    fakePermissionHandler = FakePermissionHandler();
-    ph.PermissionHandlerPlatform.instance = fakePermissionHandler;
+    mockPermissionService = MockPermissionService();
 
     fakeCameraPlatform = FakeCameraPlatform();
     cpi.CameraPlatform.instance = fakeCameraPlatform;
 
-    checkInBloc = CheckInBloc();
+    checkInBloc = CheckInBloc(mockPermissionService);
   });
 
   tearDown(() {
     checkInBloc.close();
   });
 
-  test('initial state is correct', () {
-    expect(checkInBloc.state, const CheckInState());
-  });
+  group('CheckInBloc', () {
+    test('initial state is correct', () {
+      expect(checkInBloc.state, const CheckInState());
+    });
 
-  group('AppStarted Event', () {
-    blocTest<CheckInBloc, CheckInState>(
-      'requests camera permission and initializes camera when granted',
-      setUp: () {
-        fakePermissionHandler.setPermissionStatus(ph.PermissionStatus.granted);
-      },
-      build: () => checkInBloc,
-      act: (bloc) => bloc.add(const CheckInEvent.appStarted()),
-      expect:
-          () => <Matcher>[
-            isA<CheckInState>().having((s) => s.isLoading, 'isLoading', true),
-            isA<CheckInState>()
-                .having(
-                  (s) => s.toastMessage,
-                  'toastMessage',
-                  'App initialized successfully',
-                )
-                .having((s) => s.isLoading, 'isLoading', false),
-            isA<CheckInState>().having(
-              (s) => s.cameraStatus,
-              'cameraStatus',
-              CameraStatus.permissionRequesting,
-            ),
-            isA<CheckInState>().having(
-              (s) => s.permissionStatus,
-              'permissionStatus',
-              PermissionStatus.granted,
-            ),
-            isA<CheckInState>()
-                .having(
-                  (s) => s.cameraStatus,
-                  'cameraStatus',
-                  CameraStatus.initializing,
-                )
-                .having((s) => s.isLoading, 'isLoading', true),
-            isA<CheckInState>()
-                .having(
-                  (s) => s.cameraStatus,
-                  'cameraStatus',
-                  CameraStatus.ready,
-                )
-                .having((s) => s.isLoading, 'isLoading', false)
-                .having(
-                  (s) => s.cameraController,
-                  'cameraController',
-                  isNotNull,
-                ),
-          ],
-      verify: (_) {
-        expect(fakeCameraPlatform.isCameraInitialized, isTrue);
-      },
-    );
+    group('CameraPermissionRequested', () {
+      blocTest<CheckInBloc, CheckInState>(
+        'emits granted when permission is granted and initializes camera',
+        build: () {
+          when(
+            () => mockPermissionService.requestCameraPermission(),
+          ).thenAnswer((_) async => ps.PermissionStatus.granted);
+          return checkInBloc;
+        },
+        act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
+        expect:
+            () => [
+              const CheckInState(
+                cameraStatus: CameraStatus.permissionRequesting,
+              ),
+              const CheckInState(
+                cameraStatus: CameraStatus.permissionRequesting,
+                permissionStatus: PermissionStatus.granted,
+              ),
+              isA<CheckInState>()
+                  .having(
+                    (s) => s.cameraStatus,
+                    'cameraStatus',
+                    CameraStatus.initializing,
+                  )
+                  .having((s) => s.isLoading, 'isLoading', true)
+                  .having(
+                    (s) => s.permissionStatus,
+                    'permissionStatus',
+                    PermissionStatus.granted,
+                  ),
+              isA<CheckInState>()
+                  .having(
+                    (s) => s.cameraStatus,
+                    'cameraStatus',
+                    CameraStatus.ready,
+                  )
+                  .having((s) => s.isLoading, 'isLoading', false)
+                  .having(
+                    (s) => s.permissionStatus,
+                    'permissionStatus',
+                    PermissionStatus.granted,
+                  )
+                  .having(
+                    (s) => s.toastStatus,
+                    'toastStatus',
+                    ToastStatus.showing,
+                  )
+                  .having((s) => s.toastMessage, 'toastMessage', 'Camera ready')
+                  .having(
+                    (s) => s.cameraController,
+                    'cameraController',
+                    isA<CameraController>(),
+                  ),
+            ],
+        verify: (_) {
+          verify(
+            () => mockPermissionService.requestCameraPermission(),
+          ).called(1);
+        },
+      );
 
-    blocTest<CheckInBloc, CheckInState>(
-      'sets camera status to permissionDenied when permission is denied',
-      setUp: () {
-        fakePermissionHandler.setPermissionStatus(ph.PermissionStatus.denied);
-      },
-      build: () => checkInBloc,
-      act: (bloc) => bloc.add(const CheckInEvent.appStarted()),
-      expect:
-          () => <Matcher>[
-            isA<CheckInState>().having((s) => s.isLoading, 'isLoading', true),
-            isA<CheckInState>()
-                .having(
-                  (s) => s.toastMessage,
-                  'toastMessage',
-                  'App initialized successfully',
-                )
-                .having((s) => s.isLoading, 'isLoading', false),
-            isA<CheckInState>().having(
-              (s) => s.cameraStatus,
-              'cameraStatus',
-              CameraStatus.permissionRequesting,
-            ),
-            isA<CheckInState>()
-                .having(
-                  (s) => s.permissionStatus,
-                  'permissionStatus',
-                  PermissionStatus.denied,
-                )
-                .having(
-                  (s) => s.cameraStatus,
-                  'cameraStatus',
-                  CameraStatus.permissionDenied,
-                ),
-          ],
-      verify: (_) {
-        expect(fakeCameraPlatform.isCameraInitialized, isFalse);
-      },
-    );
-  });
-
-  group('camera related', () {
-    blocTest<CheckInBloc, CheckInState>(
-      'emits updated state on CameraInitRequested',
-      setUp: () {
-        fakePermissionHandler.setPermissionStatus(ph.PermissionStatus.granted);
-      },
-      build: () => checkInBloc,
-      act: (bloc) {
-        bloc.add(const CheckInEvent.appStarted());
-      },
-      skip: 4,
-      expect:
-          () => <Matcher>[
-            isA<CheckInState>()
-                .having(
-                  (s) => s.cameraStatus,
-                  'cameraStatus',
-                  CameraStatus.initializing,
-                )
-                .having((s) => s.isLoading, 'isLoading', true),
-            isA<CheckInState>()
-                .having(
-                  (s) => s.cameraStatus,
-                  'cameraStatus',
-                  CameraStatus.ready,
-                )
-                .having((s) => s.isLoading, 'isLoading', false)
-                .having(
-                  (s) => s.cameraController,
-                  'cameraController',
-                  isNotNull,
-                ),
-          ],
-    );
+      blocTest<CheckInBloc, CheckInState>(
+        'emits denied when permission is denied',
+        build: () {
+          when(
+            () => mockPermissionService.requestCameraPermission(),
+          ).thenAnswer((_) async => ps.PermissionStatus.denied);
+          return checkInBloc;
+        },
+        act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
+        expect:
+            () => [
+              const CheckInState(
+                cameraStatus: CameraStatus.permissionRequesting,
+              ),
+              const CheckInState(
+                cameraStatus: CameraStatus.permissionDenied,
+                permissionStatus: PermissionStatus.denied,
+              ),
+            ],
+      );
+    });
   });
 
   blocTest<CheckInBloc, CheckInState>(

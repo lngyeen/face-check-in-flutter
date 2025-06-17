@@ -27,9 +27,6 @@ class CheckInEvent with _$CheckInEvent {
   /// Request to initialize the camera
   const factory CheckInEvent.cameraInitRequested() = CameraInitRequested;
 
-  /// Camera has been successfully initialized
-  const factory CheckInEvent.cameraInitialized() = CameraInitialized;
-
   /// Request to start the camera
   const factory CheckInEvent.cameraStarted() = CameraStarted;
 

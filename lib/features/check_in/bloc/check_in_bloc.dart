@@ -1,11 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:permission_handler/permission_handler.dart' as ph;
+
+import 'package:face_check_in_flutter/domain/services/permission_service.dart'
+    as ps;
+import 'package:flutter/foundation.dart';
 
 part 'check_in_bloc.freezed.dart';
 part 'check_in_event.dart';
@@ -15,7 +17,9 @@ part 'check_in_state.dart';
 /// Handles camera, WebSocket, streaming, and UI state management
 @injectable
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
-  CheckInBloc() : super(const CheckInState()) {
+  final ps.PermissionService _permissionService;
+
+  CheckInBloc(this._permissionService) : super(const CheckInState()) {
     // App lifecycle events
     on<AppStarted>(_onAppStarted);
     on<AppDisposed>(_onAppDisposed);
@@ -25,7 +29,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
     // Camera lifecycle events
     on<CameraInitRequested>(_onCameraInitRequested);
-    on<CameraInitialized>(_onCameraInitialized);
     on<CameraStarted>(_onCameraStarted);
     on<CameraPaused>(_onCameraPaused);
     on<CameraResumed>(_onCameraResumed);
@@ -68,8 +71,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
-      add(const CheckInEvent.cameraPermissionRequested());
-      // Initialize app state - removed artificial delay
+      // The permission will now be requested by the UI when needed.
+      // add(const CheckInEvent.cameraPermissionRequested());
       emit(
         state.copyWith(
           isLoading: false,
@@ -118,16 +121,24 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) async {
     emit(state.copyWith(cameraStatus: CameraStatus.permissionRequesting));
     debugPrint('📷 CheckInBloc: Requesting camera permission...');
-    final status = await ph.Permission.camera.request();
-    if (status.isGranted) {
+    final status = await _permissionService.requestCameraPermission();
+    if (status == ps.PermissionStatus.granted) {
       debugPrint('✅ CheckInBloc: Camera permission granted.');
       emit(state.copyWith(permissionStatus: PermissionStatus.granted));
       add(const CheckInEvent.cameraInitRequested());
     } else {
       debugPrint('❌ CheckInBloc: Camera permission denied.');
+      if (status == ps.PermissionStatus.permanentlyDenied) {
+        // Open app settings if permission is permanently denied
+        _permissionService.openAppSettings();
+      }
+      final newStatus =
+          status == ps.PermissionStatus.permanentlyDenied
+              ? PermissionStatus.permanentlyDenied
+              : PermissionStatus.denied;
       emit(
         state.copyWith(
-          permissionStatus: PermissionStatus.denied,
+          permissionStatus: newStatus,
           cameraStatus: CameraStatus.permissionDenied,
         ),
       );
@@ -183,13 +194,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         ),
       );
     }
-  }
-
-  Future<void> _onCameraInitialized(
-    CameraInitialized event,
-    Emitter<CheckInState> emit,
-  ) async {
-    // This event is handled within _onCameraInitRequested
   }
 
   Future<void> _onCameraStarted(

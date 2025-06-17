@@ -20,6 +20,9 @@ class _CheckInScreenState extends State<CheckInScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    context.read<CheckInBloc>().add(
+      const CheckInEvent.cameraPermissionRequested(),
+    );
   }
 
   @override
