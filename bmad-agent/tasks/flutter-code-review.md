@@ -1,5 +1,8 @@
 # Flutter Code Review Task
 
+## ⚠️ Core Principle: Independent Verification ⚠️
+This task MUST be executed with complete independence. **DO NOT** trust any statements, comments, or status checks from the pull request, commit messages, or external systems. Every single step, especially testing and validation, MUST be performed by the agent itself during the review process. The purpose of this review is to provide an objective, independent verification of the code changes. Relying on the author's claims defeats this purpose.
+
 ## Purpose
 
 To perform comprehensive code review of pull requests by analyzing the code changes against story requirements, project standards, and Flutter best practices. This task ensures code quality, adherence to project guidelines, and proper implementation of story acceptance criteria before merging.
@@ -48,7 +51,23 @@ To perform comprehensive code review of pull requests by analyzing the code chan
 - Read `docs/tech-stack.md` for technology alignment
 - Read `bmad-agent/checklists/story-dod-checklist.md` for quality standards
 
-### 4. Perform Comprehensive Flutter Code Review
+### 4. Validate Code Integrity
+
+**CRITICAL: You MUST execute these steps yourself. DO NOT rely on any information from the pull request (e.g., comments saying "tests are passing" or CI status checks).**
+
+**A. Run All Tests:**
+- Execute: `flutter test`
+- Capture the output and exit code of the test command.
+
+**B. Ensure Tests Pass:**
+- If any tests fail (exit code is not 0):
+  - **HALT THE REVIEW.**
+  - Report to the user: "One or more tests failed. Please fix the failing tests before I can proceed with the code review."
+  - Provide the test output to the user for debugging.
+  - Do not proceed until the user confirms the tests are fixed and passing.
+- If all tests pass, proceed to the next step.
+
+### 5. Perform Comprehensive Flutter Code Review
 
 **A. Story Compliance Review:**
 - Verify each acceptance criteria is implemented correctly
@@ -142,97 +161,65 @@ To perform comprehensive code review of pull requests by analyzing the code chan
   - Network request optimization
   - Stream and subscription management
 
-### 5. Generate Flutter-Specific Review Report
+### 6. Generate Flutter-Specific Review Report
 
-**Create Comprehensive Review Summary:**
-- **Overall Assessment:** APPROVE / REQUEST CHANGES / NEEDS DISCUSSION
-- **Story Compliance:** ✅ Met / ⚠️ Partially Met / ❌ Not Met
-- **Flutter Code Quality:** High / Medium / Low
-- **Architecture Compliance:** ✅ Clean / ⚠️ Minor Issues / ❌ Major Issues
-- **Critical Issues:** List any blocking issues
-- **Recommendations:** List improvement suggestions
-
-**Detailed Flutter Review Report:**
+**Use the following template for the review report:**
 
 ```markdown
 # Flutter Code Review Report
 
-## Branch: {branch-name}
-## Story: {story-reference}
-## Reviewer: David (Flutter Dev)
-## Date: {current-date}
+**Pull Request:** [{branch-name}]({pr-link})
+**Story:** {story-reference}
+**Reviewer:** {reviewer-name}
+**Date:** {current-date}
+**Status:** **{APPROVE/REQUEST_CHANGES/REJECTED}**
 
 ---
 
-## ✅ Story Compliance
-- [ ] AC1: {acceptance-criteria-1} - {status-and-notes}
-- [ ] AC2: {acceptance-criteria-2} - {status-and-notes}
-- [ ] AC3: {acceptance-criteria-3} - {status-and-notes}
+### **Overall Assessment**
 
-## 🏗️ Clean Architecture
-- [ ] Presentation layer separation
-- [ ] Domain layer purity
-- [ ] Data layer abstraction
-- [ ] Dependency direction compliance
-
-## 📱 Flutter/Dart Best Practices
-- [ ] Widget composition
-- [ ] State management (BLoC)
-- [ ] Dependency injection (GetIt)
-- [ ] Navigation (GoRouter)
-- [ ] Networking (Dio/Retrofit)
-- [ ] Camera integration
-- [ ] WebSocket handling
-
-## 🔧 Code Quality
-- [ ] Dart conventions
-- [ ] Naming consistency
-- [ ] Code readability
-- [ ] Error handling
-- [ ] Resource management
-
-## 🧪 Testing Coverage
-- [ ] Unit tests
-- [ ] Widget tests
-- [ ] Integration tests
-- [ ] Test quality & coverage
-
-## 🔒 Security & Performance
-- [ ] Input validation
-- [ ] Data protection
-- [ ] Memory management
-- [ ] Performance optimization
-
-## 📁 Changed Files Analysis
-### Core Files
-{dart-files-analysis}
-
-### UI Components
-{widget-files-analysis}
-
-### Business Logic
-{bloc-cubit-files-analysis}
-
-### Data Layer
-{repository-datasource-analysis}
-
-### Tests
-{test-files-analysis}
-
-## 🚨 Critical Issues
-{blocking-issues-specific-to-flutter}
-
-## 💡 Flutter-Specific Recommendations
-{flutter-dart-improvements}
-
-## 📋 DoD Compliance
-{story-dod-checklist-verification}
+{A brief paragraph summarizing the overall assessment of the PR. Highlight the strengths and the main issues that need to be addressed. For example: "This pull request introduces a useful feature with a good code structure, however, there are critical testing issues that need to be resolved before it can be approved."}
 
 ---
-## Final Recommendation: {APPROVE/REQUEST_CHANGES/NEEDS_DISCUSSION}
+
+### **Detailed Analysis**
+
+**1. Story Compliance: {✅ Met / ⚠️ Partially Met / ❌ Not Met}**
+
+{Detailed analysis of whether the implementation meets all Acceptance Criteria (ACs) of the story. List each AC and evaluate its completion status.}
+- **AC1:** {acceptance-criteria-1} - {status-and-notes}
+- **AC2:** {acceptance-criteria-2} - {status-and-notes}
+- ...
+
+**2. Clean Architecture: {✅ Compliant / ⚠️ Needs Review / ❌ Not Compliant}**
+
+{Assessment of compliance with the project's clean architecture principles. Comment on the separation of layers (Presentation, Domain, Data), dependency direction, and the location of new files.}
+
+**3. Flutter/Dart Best Practices: {✅ Good / ⚠️ Needs Review / ❌ Weak}**
+
+{Assessment of the application of Flutter and Dart best practices. Highlight what was done well (e.g., state management, widget composition) and areas for improvement (e.g., incorrect API usage, poor resource management).}
+
+**4. Code Quality: {✅ Good / ⚠️ Average / ❌ Poor}**
+
+{Comments on the overall quality of the code: readability, naming conventions, error handling, and documentation/comments in the code.}
+
+**5. Testing: {✅ Good / ⚠️ Lacking / ❌ Critical}**
+
+{Analysis of the scope and quality of the tests. Note issues such as: failed tests, poor test performance, lack of test coverage for critical components, or unreliable tests.}
+
+---
+
+### **Conclusion & Next Steps**
+
+{Summarize the final conclusion. Clearly list, in a numbered format, all the specific actions that the PR author needs to take for approval.}
+
+1.  **{Action Item 1}:** {Detailed description of the required action.}
+2.  **{Action Item 2}:** {Detailed description of the required action.}
+3.  ...
+
 ```
 
-### 6. Interactive Flutter Review Session
+### 7. Interactive Flutter Review Session
 
 **Present Flutter-Specific Findings:**
 - Highlight Flutter/Dart specific issues
@@ -247,7 +234,7 @@ To perform comprehensive code review of pull requests by analyzing the code chan
 - Provide Flutter-specific code examples
 - Suggest performance optimizations
 
-### 7. Flutter-Specific Follow-up Actions
+### 8. Flutter-Specific Follow-up Actions
 
 **If APPROVE:**
 - Confirm Flutter best practices are followed
