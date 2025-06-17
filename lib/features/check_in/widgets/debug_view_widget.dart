@@ -65,7 +65,7 @@ class _DebugViewWidgetState extends State<DebugViewWidget> {
               maxHeight: MediaQuery.of(context).size.height * 0.3,
             ),
             decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.7),
+              color: Colors.black.withOpacity(0.7),
               border: Border.all(color: Colors.grey),
             ),
             child: StreamBuilder<List<String>>(
