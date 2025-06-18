@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer' as developer;
 import 'package:injectable/injectable.dart';
 import '../models/frame_data.dart';
-import '../enums/frame_capture_status.dart';
+
 import 'frame_capture_service.dart';
 
 /// Service for monitoring and validating frame capture performance on real devices
