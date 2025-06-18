@@ -2,113 +2,157 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-
+import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+
+import '../config/websocket_config.dart';
+import '../../features/check_in/bloc/check_in_bloc.dart';
 
 // Add a type definition for the connector function for clarity and ease of use.
 typedef WebSocketConnector = WebSocketChannel Function(Uri uri);
 
-/// WebSocket service for backend communication
+/// Enhanced WebSocket service for Story 2.1
 /// Handles connection, reconnection, and message exchange with face recognition backend
+/// Supports timeout, retrying, and configuration management
+@injectable
 class WebSocketService {
-  static const String _defaultUrl = 'ws://192.168.1.234:3009';
-  static const int _maxRetryAttempts = 3;
-  static const Duration _retryDelay = Duration(seconds: 3);
-
   WebSocketChannel? _channel;
-  String _url = _defaultUrl;
+  WebSocketConfig _config = WebSocketConfig.current;
   bool _isConnected = false;
   int _retryCount = 0;
   bool _isDisposed = false;
+  Timer? _timeoutTimer;
+  Timer? _retryTimer;
+  Timer? _heartbeatTimer;
 
-  // Stream controllers for connection status and messages
-  final StreamController<bool> _connectionStatusController =
-      StreamController<bool>.broadcast();
+  // Enhanced connection status tracking for Story 2.1
+  ConnectionStatus _currentStatus = ConnectionStatus.disconnected;
+  DateTime? _lastConnectionAttempt;
+  String? _lastError;
+
+  // Stream controllers for enhanced status tracking
+  final StreamController<ConnectionStatus> _connectionStatusController =
+      StreamController<ConnectionStatus>.broadcast();
   final StreamController<Map<String, dynamic>> _messageController =
       StreamController<Map<String, dynamic>>.broadcast();
+  final StreamController<ConnectionMetrics> _metricsController =
+      StreamController<ConnectionMetrics>.broadcast();
 
   // Expose a way to override the connector for testing purposes.
-  // In a real app, this would likely be handled by a proper DI framework.
   @visibleForTesting
   WebSocketConnector connector = WebSocketChannel.connect;
 
-  /// Stream of connection status changes
-  Stream<bool> get connectionStatus => _connectionStatusController.stream;
+  /// Stream of enhanced connection status changes
+  Stream<ConnectionStatus> get connectionStatus =>
+      _connectionStatusController.stream;
 
   /// Stream of incoming messages from backend
   Stream<Map<String, dynamic>> get messages => _messageController.stream;
 
+  /// Stream of connection metrics
+  Stream<ConnectionMetrics> get metrics => _metricsController.stream;
+
   /// Current connection status
+  ConnectionStatus get currentStatus => _currentStatus;
+
+  /// Whether currently connected
   bool get isConnected => _isConnected;
 
-  /// Current WebSocket URL
-  String get url => _url;
+  /// Current WebSocket configuration
+  WebSocketConfig get config => _config;
 
-  /// Set custom WebSocket URL (for different environments)
-  void setUrl(String newUrl) {
-    _url = newUrl;
-    debugPrint('🌐 WebSocketService: URL updated to $_url');
+  /// Last connection attempt timestamp
+  DateTime? get lastConnectionAttempt => _lastConnectionAttempt;
+
+  /// Last error message
+  String? get lastError => _lastError;
+
+  /// Update WebSocket configuration
+  void updateConfig(WebSocketConfig newConfig) {
+    _config = newConfig;
+    if (_config.enableLogging) {
+      debugPrint(
+        '🔧 WebSocketService: Configuration updated - ${_config.toString()}',
+      );
+    }
   }
 
   /// Test WebSocket connection without establishing persistent connection
-  /// Returns true if connection is successful, false otherwise
   Future<bool> testConnection({String? testUrl}) async {
-    final urlToTest = testUrl ?? _url;
-    debugPrint('🧪 WebSocketService: Testing connection to $urlToTest');
+    final urlToTest = testUrl ?? _config.url;
+    if (_config.enableLogging) {
+      debugPrint('🧪 WebSocketService: Testing connection to $urlToTest');
+    }
 
     try {
       final testChannel = WebSocketChannel.connect(Uri.parse(urlToTest));
-
-      // Wait for connection with timeout
-      await testChannel.ready.timeout(
-        const Duration(seconds: 5),
-        onTimeout: () => throw TimeoutException('Connection timeout'),
-      );
+      await testChannel.ready.timeout(_config.timeout);
 
       // Send test message
       testChannel.sink.add('{"type": "test", "message": "connection_test"}');
-
-      // Wait briefly for any response
       await Future.delayed(const Duration(milliseconds: 500));
-
-      // Clean up test connection
       await testChannel.sink.close();
 
-      debugPrint('✅ WebSocketService: Connection test successful');
+      if (_config.enableLogging) {
+        debugPrint('✅ WebSocketService: Connection test successful');
+      }
       return true;
     } catch (e) {
-      debugPrint('❌ WebSocketService: Connection test failed: $e');
+      if (_config.enableLogging) {
+        debugPrint('❌ WebSocketService: Connection test failed: $e');
+      }
       return false;
     }
   }
 
-  /// Connect to WebSocket backend
+  /// Enhanced connect method with full Story 2.1 support
   Future<bool> connect({String? customUrl}) async {
     if (_isConnected) {
-      debugPrint('⚠️ WebSocketService: Already connected');
+      if (_config.enableLogging) {
+        debugPrint('⚠️ WebSocketService: Already connected');
+      }
       return true;
     }
 
     if (_isDisposed) {
-      debugPrint('⚠️ WebSocketService: Cannot connect, service is disposed.');
+      if (_config.enableLogging) {
+        debugPrint('⚠️ WebSocketService: Cannot connect, service is disposed');
+      }
       return false;
     }
 
-    final urlToConnect = customUrl ?? _url;
-    debugPrint('🌐 WebSocketService: Connecting to $urlToConnect');
+    final urlToConnect = customUrl ?? _config.url;
+    _lastConnectionAttempt = DateTime.now();
+    _updateStatus(ConnectionStatus.connecting);
+
+    if (_config.enableLogging) {
+      debugPrint(
+        '🌐 WebSocketService: Connecting to $urlToConnect (attempt ${_retryCount + 1})',
+      );
+    }
 
     try {
+      // Setup timeout timer
+      _timeoutTimer = Timer(_config.timeout, () {
+        if (!_isConnected) {
+          _handleTimeout();
+        }
+      });
+
       _channel = connector(Uri.parse(urlToConnect));
+      await _channel!.ready.timeout(_config.timeout);
 
-      // Wait for connection with timeout
-      await _channel!.ready.timeout(
-        const Duration(seconds: 10),
-        onTimeout: () => throw TimeoutException('Connection timeout'),
-      );
-
+      // Connection successful
       _isConnected = true;
       _retryCount = 0;
-      if (!_isDisposed) _connectionStatusController.add(true);
+      _lastError = null;
+      _updateStatus(ConnectionStatus.connected);
+      _timeoutTimer?.cancel();
+
+      // Setup heartbeat if enabled
+      if (_config.enableHeartbeat) {
+        _startHeartbeat();
+      }
 
       // Listen for incoming messages
       _channel!.stream.listen(
@@ -117,75 +161,164 @@ class WebSocketService {
         onDone: _handleDisconnection,
       );
 
-      debugPrint('✅ WebSocketService: Connected successfully');
-      return true;
-    } catch (e) {
-      debugPrint('❌ WebSocketService: Connection failed: $e');
-      _isConnected = false;
-      if (!_isDisposed) _connectionStatusController.add(false);
-
-      // Attempt retry if within retry limit
-      if (_retryCount < _maxRetryAttempts) {
-        _retryCount++;
-        debugPrint(
-          '🔄 WebSocketService: Retrying connection (attempt $_retryCount/$_maxRetryAttempts)',
-        );
-
-        await Future.delayed(_retryDelay);
-        return await connect(customUrl: customUrl);
+      if (_config.enableLogging) {
+        debugPrint('✅ WebSocketService: Connected successfully');
       }
 
+      _updateMetrics();
+      return true;
+    } catch (e) {
+      _timeoutTimer?.cancel();
+      _lastError = e.toString();
+
+      if (_config.enableLogging) {
+        debugPrint('❌ WebSocketService: Connection failed: $e');
+      }
+
+      _isConnected = false;
+      _updateStatus(ConnectionStatus.failed);
+
+      // Attempt retry if enabled and within retry limit
+      if (_config.enableAutoReconnect && _retryCount < _config.maxRetries) {
+        _scheduleRetry();
+      }
+
+      _updateMetrics();
       return false;
     }
   }
 
-  /// Disconnect from WebSocket backend
+  /// Handle connection timeout
+  void _handleTimeout() {
+    if (_config.enableLogging) {
+      debugPrint('⏰ WebSocketService: Connection timeout occurred');
+    }
+
+    _lastError =
+        'Connection timeout after ${_config.timeout.inSeconds} seconds';
+    _isConnected = false;
+    _updateStatus(ConnectionStatus.timeout);
+
+    // Cancel connection attempt
+    _channel?.sink.close();
+    _channel = null;
+
+    // Attempt retry if enabled
+    if (_config.enableAutoReconnect && _retryCount < _config.maxRetries) {
+      _scheduleRetry();
+    }
+
+    _updateMetrics();
+  }
+
+  /// Schedule retry with exponential backoff
+  void _scheduleRetry() {
+    _retryCount++;
+    final delay = _config.getRetryDelay(_retryCount);
+
+    if (_config.enableLogging) {
+      debugPrint(
+        '🔄 WebSocketService: Scheduling retry $_retryCount/${_config.maxRetries} in ${delay.inSeconds}s',
+      );
+    }
+
+    _updateStatus(ConnectionStatus.retrying);
+
+    _retryTimer = Timer(delay, () {
+      if (!_isDisposed && !_isConnected) {
+        connect();
+      }
+    });
+  }
+
+  /// Enhanced disconnect method
   Future<void> disconnect() async {
     if (!_isConnected) {
-      debugPrint('⚠️ WebSocketService: Already disconnected');
+      if (_config.enableLogging) {
+        debugPrint('⚠️ WebSocketService: Already disconnected');
+      }
       return;
     }
 
-    debugPrint('🌐 WebSocketService: Disconnecting...');
+    if (_config.enableLogging) {
+      debugPrint('🌐 WebSocketService: Disconnecting...');
+    }
 
+    _cleanup();
+    _updateStatus(ConnectionStatus.disconnected);
+
+    if (_config.enableLogging) {
+      debugPrint('✅ WebSocketService: Disconnected');
+    }
+
+    _updateMetrics();
+  }
+
+  /// Cleanup all resources
+  void _cleanup() {
     _isConnected = false;
     _retryCount = 0;
+    _lastError = null;
+
+    _timeoutTimer?.cancel();
+    _retryTimer?.cancel();
+    _heartbeatTimer?.cancel();
+
+    _timeoutTimer = null;
+    _retryTimer = null;
+    _heartbeatTimer = null;
 
     try {
-      await _channel?.sink.close();
+      _channel?.sink.close();
     } catch (e) {
-      debugPrint('⚠️ WebSocketService: Error during disconnect: $e');
+      if (_config.enableLogging) {
+        debugPrint('⚠️ WebSocketService: Error during cleanup: $e');
+      }
     }
 
     _channel = null;
-    if (!_isDisposed) _connectionStatusController.add(false);
-
-    debugPrint('✅ WebSocketService: Disconnected');
   }
 
-  /// Send message to backend
-  /// Returns true if message was sent successfully
+  /// Start heartbeat timer
+  void _startHeartbeat() {
+    _heartbeatTimer = Timer.periodic(_config.heartbeatInterval, (timer) {
+      if (_isConnected && !_isDisposed) {
+        sendMessage({
+          'type': 'ping',
+          'timestamp': DateTime.now().millisecondsSinceEpoch,
+        });
+      }
+    });
+  }
+
+  /// Enhanced message sending with error handling
   bool sendMessage(Map<String, dynamic> message) {
     if (!_isConnected || _channel == null) {
-      debugPrint('❌ WebSocketService: Cannot send message - not connected');
+      if (_config.enableLogging) {
+        debugPrint('❌ WebSocketService: Cannot send message - not connected');
+      }
       return false;
     }
 
     try {
       final jsonMessage = jsonEncode(message);
       _channel!.sink.add(jsonMessage);
-      debugPrint(
-        '📤 WebSocketService: Message sent: ${message['type'] ?? 'unknown'}',
-      );
+
+      if (_config.enableLogging) {
+        debugPrint(
+          '📤 WebSocketService: Message sent: ${message['type'] ?? 'unknown'}',
+        );
+      }
       return true;
     } catch (e) {
-      debugPrint('❌ WebSocketService: Failed to send message: $e');
+      if (_config.enableLogging) {
+        debugPrint('❌ WebSocketService: Failed to send message: $e');
+      }
       return false;
     }
   }
 
   /// Send base64 encoded image frame to backend
-  /// This is the primary method for face recognition
   bool sendImageFrame(String base64Image) {
     return sendMessage({
       'type': 'frame',
@@ -194,66 +327,139 @@ class WebSocketService {
     });
   }
 
+  /// Update connection status and notify listeners
+  void _updateStatus(ConnectionStatus status) {
+    if (_currentStatus != status) {
+      _currentStatus = status;
+      if (!_isDisposed) {
+        _connectionStatusController.add(status);
+      }
+    }
+  }
+
+  /// Update and broadcast metrics
+  void _updateMetrics() {
+    if (!_isDisposed) {
+      final metrics = ConnectionMetrics(
+        isConnected: _isConnected,
+        currentStatus: _currentStatus,
+        url: _config.url,
+        retryCount: _retryCount,
+        maxRetries: _config.maxRetries,
+        lastConnectionAttempt: _lastConnectionAttempt,
+        lastError: _lastError,
+        config: _config,
+      );
+      _metricsController.add(metrics);
+    }
+  }
+
   /// Handle incoming messages from backend
   void _handleMessage(dynamic message) {
     if (_isDisposed) return;
+
     try {
       final Map<String, dynamic> parsedMessage = jsonDecode(message.toString());
-      debugPrint(
-        '📥 WebSocketService: Message received: ${parsedMessage['type'] ?? 'unknown'}',
-      );
+
+      if (_config.enableLogging) {
+        debugPrint(
+          '📥 WebSocketService: Message received: ${parsedMessage['type'] ?? 'unknown'}',
+        );
+      }
 
       _messageController.add(parsedMessage);
     } catch (e) {
-      debugPrint('❌ WebSocketService: Failed to parse message: $e');
+      if (_config.enableLogging) {
+        debugPrint('❌ WebSocketService: Failed to parse message: $e');
+      }
     }
   }
 
   /// Handle WebSocket errors
   void _handleError(dynamic error) {
     if (_isDisposed) return;
-    debugPrint('❌ WebSocketService: WebSocket error: $error');
 
-    _isConnected = false;
-    _connectionStatusController.add(false);
-
-    // Attempt reconnection if within retry limit
-    if (_retryCount < _maxRetryAttempts) {
-      _retryCount++;
-      debugPrint(
-        '🔄 WebSocketService: Attempting reconnection due to error (attempt $_retryCount/$_maxRetryAttempts)',
-      );
-
-      Future.delayed(_retryDelay, () => connect());
+    if (_config.enableLogging) {
+      debugPrint('❌ WebSocketService: WebSocket error: $error');
     }
+
+    _lastError = error.toString();
+    _isConnected = false;
+    _updateStatus(ConnectionStatus.failed);
+
+    // Attempt reconnection if enabled
+    if (_config.enableAutoReconnect && _retryCount < _config.maxRetries) {
+      _scheduleRetry();
+    }
+
+    _updateMetrics();
   }
 
   /// Handle WebSocket disconnection
   void _handleDisconnection() {
     if (_isDisposed) return;
-    debugPrint('🔴 WebSocketService: WebSocket disconnected');
+
+    if (_config.enableLogging) {
+      debugPrint('🔴 WebSocketService: WebSocket disconnected');
+    }
 
     _isConnected = false;
     _channel = null;
-    _connectionStatusController.add(false);
-  }
-
-  /// Get connection statistics
-  Map<String, dynamic> getConnectionStats() {
-    return {
-      'isConnected': _isConnected,
-      'url': _url,
-      'retryCount': _retryCount,
-      'maxRetryAttempts': _maxRetryAttempts,
-    };
+    _updateStatus(ConnectionStatus.disconnected);
+    _updateMetrics();
   }
 
   /// Dispose of the service and clean up resources
   void dispose() {
-    debugPrint('🔴 WebSocketService: Disposing...');
+    if (_config.enableLogging) {
+      debugPrint('🔴 WebSocketService: Disposing...');
+    }
+
     _isDisposed = true;
-    disconnect();
+    _cleanup();
     _connectionStatusController.close();
     _messageController.close();
+    _metricsController.close();
+  }
+}
+
+/// Connection metrics class for debugging and monitoring
+class ConnectionMetrics {
+  final bool isConnected;
+  final ConnectionStatus currentStatus;
+  final String url;
+  final int retryCount;
+  final int maxRetries;
+  final DateTime? lastConnectionAttempt;
+  final String? lastError;
+  final WebSocketConfig config;
+
+  const ConnectionMetrics({
+    required this.isConnected,
+    required this.currentStatus,
+    required this.url,
+    required this.retryCount,
+    required this.maxRetries,
+    required this.lastConnectionAttempt,
+    required this.lastError,
+    required this.config,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'isConnected': isConnected,
+      'currentStatus': currentStatus.name,
+      'url': url,
+      'retryCount': retryCount,
+      'maxRetries': maxRetries,
+      'lastConnectionAttempt': lastConnectionAttempt?.toIso8601String(),
+      'lastError': lastError,
+      'config': config.toMap(),
+    };
+  }
+
+  @override
+  String toString() {
+    return 'ConnectionMetrics(status: ${currentStatus.name}, connected: $isConnected, retries: $retryCount/$maxRetries)';
   }
 }

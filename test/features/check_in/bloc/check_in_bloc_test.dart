@@ -15,6 +15,7 @@ import 'package:stream_transform/stream_transform.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
+import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 
 // --- Mocks and Fakes ---
 
@@ -22,6 +23,8 @@ class MockCheckInBloc extends MockBloc<CheckInEvent, CheckInState>
     implements CheckInBloc {}
 
 class MockPermissionService extends Mock implements ps.PermissionService {}
+
+class MockWebSocketService extends Mock implements WebSocketService {}
 
 class FakeCameraDescription extends Fake implements cpi.CameraDescription {
   @override
@@ -207,15 +210,31 @@ void main() {
 
   late CheckInBloc checkInBloc;
   late MockPermissionService mockPermissionService;
+  late MockWebSocketService mockWebSocketService;
   late FakeCameraPlatform fakeCameraPlatform;
 
   setUp(() {
     mockPermissionService = MockPermissionService();
+    mockWebSocketService = MockWebSocketService();
+
+    // Setup default WebSocket service behavior
+    when(
+      () => mockWebSocketService.connectionStatus,
+    ).thenAnswer((_) => Stream<ConnectionStatus>.empty());
+    when(
+      () => mockWebSocketService.messages,
+    ).thenAnswer((_) => Stream<Map<String, dynamic>>.empty());
+    when(
+      () => mockWebSocketService.metrics,
+    ).thenAnswer((_) => Stream<ConnectionMetrics>.empty());
+    when(() => mockWebSocketService.connect()).thenAnswer((_) async => true);
+    when(() => mockWebSocketService.disconnect()).thenAnswer((_) async {});
+    when(() => mockWebSocketService.dispose()).thenAnswer((_) async {});
 
     fakeCameraPlatform = FakeCameraPlatform();
     cpi.CameraPlatform.instance = fakeCameraPlatform;
 
-    checkInBloc = CheckInBloc(mockPermissionService);
+    checkInBloc = CheckInBloc(mockPermissionService, mockWebSocketService);
   });
 
   tearDown(() {
