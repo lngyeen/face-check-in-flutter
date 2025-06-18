@@ -16,6 +16,7 @@ import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
+import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart';
 
 // --- Mocks and Fakes ---
 
@@ -25,6 +26,8 @@ class MockCheckInBloc extends MockBloc<CheckInEvent, CheckInState>
 class MockPermissionService extends Mock implements ps.PermissionService {}
 
 class MockWebSocketService extends Mock implements WebSocketService {}
+
+class MockFrameStreamingService extends Mock implements FrameStreamingService {}
 
 class FakeCameraDescription extends Fake implements cpi.CameraDescription {
   @override
@@ -211,11 +214,13 @@ void main() {
   late CheckInBloc checkInBloc;
   late MockPermissionService mockPermissionService;
   late MockWebSocketService mockWebSocketService;
+  late MockFrameStreamingService mockFrameStreamingService;
   late FakeCameraPlatform fakeCameraPlatform;
 
   setUp(() {
     mockPermissionService = MockPermissionService();
     mockWebSocketService = MockWebSocketService();
+    mockFrameStreamingService = MockFrameStreamingService();
 
     // Setup default WebSocket service behavior
     when(
@@ -234,7 +239,23 @@ void main() {
     fakeCameraPlatform = FakeCameraPlatform();
     cpi.CameraPlatform.instance = fakeCameraPlatform;
 
-    checkInBloc = CheckInBloc(mockPermissionService, mockWebSocketService);
+    // Setup default FrameStreamingService behavior
+    when(
+      () => mockFrameStreamingService.statusStream,
+    ).thenAnswer((_) => Stream<StreamingStatus>.empty());
+    when(
+      () => mockFrameStreamingService.metricsStream,
+    ).thenAnswer((_) => Stream<FrameStreamingMetrics>.empty());
+    when(
+      () => mockFrameStreamingService.errorStream,
+    ).thenAnswer((_) => Stream<FrameStreamingException>.empty());
+    when(() => mockFrameStreamingService.dispose()).thenReturn(null);
+
+    checkInBloc = CheckInBloc(
+      mockPermissionService,
+      mockWebSocketService,
+      mockFrameStreamingService,
+    );
   });
 
   tearDown(() {

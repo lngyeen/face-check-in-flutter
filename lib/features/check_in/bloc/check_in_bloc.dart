@@ -8,6 +8,8 @@ import 'package:injectable/injectable.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
+import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart';
+import 'package:face_check_in_flutter/core/models/face_detection_result.dart';
 
 part 'check_in_bloc.freezed.dart';
 part 'check_in_event.dart';
@@ -19,11 +21,18 @@ part 'check_in_state.dart';
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   final ps.PermissionService _permissionService;
   final WebSocketService _webSocketService;
+  final FrameStreamingService _frameStreamingService;
 
-  CheckInBloc(this._permissionService, this._webSocketService)
-    : super(const CheckInState()) {
+  CheckInBloc(
+    this._permissionService,
+    this._webSocketService,
+    this._frameStreamingService,
+  ) : super(const CheckInState()) {
     // Initialize WebSocket service integration
     _initializeWebSocketIntegration();
+
+    // Initialize Frame Streaming service integration
+    _initializeFrameStreamingIntegration();
 
     // App lifecycle events
     on<AppStarted>(_onAppStarted);
@@ -61,11 +70,29 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<AutoConnectionTriggered>(_onAutoConnectionTriggered);
     on<AutoConnectionToggled>(_onAutoConnectionToggled);
 
-    // Streaming events
+    // Phase 2 Frame Streaming events
+    on<StreamingStartRequested>(_onStreamingStartRequested);
     on<StreamingStarted>(_onStreamingStarted);
+    on<StreamingStopRequested>(_onStreamingStopRequested);
     on<StreamingStopped>(_onStreamingStopped);
+    on<StreamingPauseRequested>(_onStreamingPauseRequested);
+    on<StreamingPaused>(_onStreamingPaused);
+    on<StreamingResumeRequested>(_onStreamingResumeRequested);
+    on<StreamingResumed>(_onStreamingResumed);
     on<StreamingStatusChanged>(_onStreamingStatusChanged);
+    on<StreamingError>(_onStreamingError);
+
+    // Frame processing events
+    on<FrameCaptured>(_onFrameCaptured);
     on<FrameProcessed>(_onFrameProcessed);
+    on<FrameSent>(_onFrameSent);
+    on<FrameSendFailed>(_onFrameSendFailed);
+    on<StreamingMetricsUpdated>(_onStreamingMetricsUpdated);
+
+    // Face detection events
+    on<FaceDetectionResultReceived>(_onFaceDetectionResult);
+    on<FaceDetectionStatusChanged>(_onFaceDetectionStatusChanged);
+    on<FaceDetectionError>(_onFaceDetectionError);
 
     // UI events
     on<ErrorOccurred>(_onErrorOccurred);
@@ -383,46 +410,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
   }
 
-  // Streaming event handlers (placeholders for future integration)
-  Future<void> _onStreamingStarted(
-    StreamingStarted event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('📡 CheckInBloc: Frame streaming started');
-
-    emit(state.copyWith(streamingStatus: StreamingStatus.active));
-  }
-
-  Future<void> _onStreamingStopped(
-    StreamingStopped event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('📡 CheckInBloc: Frame streaming stopped');
-
-    emit(state.copyWith(streamingStatus: StreamingStatus.idle));
-  }
-
-  Future<void> _onStreamingStatusChanged(
-    StreamingStatusChanged event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('📡 CheckInBloc: Streaming status changed to ${event.status}');
-
-    emit(state.copyWith(streamingStatus: event.status));
-  }
-
-  Future<void> _onFrameProcessed(
-    FrameProcessed event,
-    Emitter<CheckInState> emit,
-  ) async {
-    emit(
-      state.copyWith(
-        framesProcessed: state.framesProcessed + 1,
-        lastRecognitionTime: DateTime.now(),
-      ),
-    );
-  }
-
   // UI event handlers
   Future<void> _onErrorOccurred(
     ErrorOccurred event,
@@ -735,10 +722,302 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
   }
 
+  /// Initialize Frame Streaming service integration for Phase 2
+  /// Creates bridge between Frame Streaming service and BLoC events
+  void _initializeFrameStreamingIntegration() {
+    // Listen to frame streaming status changes
+    _frameStreamingService.statusStream.listen((status) {
+      add(CheckInEvent.streamingStatusChanged(status));
+    });
+
+    // Listen to frame streaming metrics
+    _frameStreamingService.metricsStream.listen((metrics) {
+      add(
+        CheckInEvent.streamingMetricsUpdated(
+          frameRate: metrics.currentStreamingFps,
+          framesCaptured: metrics.totalFramesStreamed,
+          framesStreamed: metrics.successfulFrames,
+          framesFailed: metrics.failedFrames,
+          averageLatency: metrics.averageStreamingLatency,
+          totalBytes: metrics.totalBytesStreamed,
+        ),
+      );
+    });
+
+    // Listen to frame streaming errors
+    _frameStreamingService.errorStream.listen((error) {
+      add(CheckInEvent.streamingError(error.message));
+    });
+  }
+
+  // Phase 2 Frame Streaming event handlers
+
+  Future<void> _onStreamingStartRequested(
+    StreamingStartRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🎬 CheckInBloc: Starting frame streaming...');
+
+    try {
+      emit(
+        state.copyWith(
+          streamingStatus: StreamingStatus.starting,
+          streamingError: null,
+        ),
+      );
+
+      await _frameStreamingService.startStreaming();
+
+      add(const CheckInEvent.streamingStarted());
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Failed to start streaming: $e');
+      add(CheckInEvent.streamingError(e.toString()));
+    }
+  }
+
+  Future<void> _onStreamingStarted(
+    StreamingStarted event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('✅ CheckInBloc: Frame streaming started successfully');
+
+    emit(
+      state.copyWith(
+        streamingStatus: StreamingStatus.active,
+        streamingSessionStartTime: DateTime.now(),
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Frame streaming started',
+      ),
+    );
+  }
+
+  Future<void> _onStreamingStopRequested(
+    StreamingStopRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🛑 CheckInBloc: Stopping frame streaming...');
+
+    try {
+      emit(state.copyWith(streamingStatus: StreamingStatus.stopping));
+
+      await _frameStreamingService.stopStreaming();
+
+      add(const CheckInEvent.streamingStopped());
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Failed to stop streaming: $e');
+      add(CheckInEvent.streamingError(e.toString()));
+    }
+  }
+
+  Future<void> _onStreamingStopped(
+    StreamingStopped event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🔴 CheckInBloc: Frame streaming stopped');
+
+    emit(
+      state.copyWith(
+        streamingStatus: StreamingStatus.idle,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Frame streaming stopped',
+      ),
+    );
+  }
+
+  Future<void> _onStreamingPauseRequested(
+    StreamingPauseRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('⏸️ CheckInBloc: Pausing frame streaming...');
+
+    try {
+      await _frameStreamingService.pauseStreaming();
+      add(const CheckInEvent.streamingPaused());
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Failed to pause streaming: $e');
+      add(CheckInEvent.streamingError(e.toString()));
+    }
+  }
+
+  Future<void> _onStreamingPaused(
+    StreamingPaused event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('⏸️ CheckInBloc: Frame streaming paused');
+
+    emit(
+      state.copyWith(
+        streamingStatus: StreamingStatus.paused,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Frame streaming paused',
+      ),
+    );
+  }
+
+  Future<void> _onStreamingResumeRequested(
+    StreamingResumeRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('▶️ CheckInBloc: Resuming frame streaming...');
+
+    try {
+      await _frameStreamingService.resumeStreaming();
+      add(const CheckInEvent.streamingResumed());
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Failed to resume streaming: $e');
+      add(CheckInEvent.streamingError(e.toString()));
+    }
+  }
+
+  Future<void> _onStreamingResumed(
+    StreamingResumed event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('▶️ CheckInBloc: Frame streaming resumed');
+
+    emit(
+      state.copyWith(
+        streamingStatus: StreamingStatus.active,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Frame streaming resumed',
+      ),
+    );
+  }
+
+  Future<void> _onStreamingStatusChanged(
+    StreamingStatusChanged event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('📡 CheckInBloc: Streaming status changed to ${event.status}');
+    emit(state.copyWith(streamingStatus: event.status));
+  }
+
+  Future<void> _onStreamingError(
+    StreamingError event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('❌ CheckInBloc: Streaming error: ${event.error}');
+
+    emit(
+      state.copyWith(
+        streamingStatus: StreamingStatus.error,
+        streamingError: event.error,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Streaming error: ${event.error}',
+      ),
+    );
+  }
+
+  // Frame processing event handlers
+
+  Future<void> _onFrameCaptured(
+    FrameCaptured event,
+    Emitter<CheckInState> emit,
+  ) async {
+    emit(state.copyWith(framesCaptured: state.framesCaptured + 1));
+  }
+
+  Future<void> _onFrameProcessed(
+    FrameProcessed event,
+    Emitter<CheckInState> emit,
+  ) async {
+    emit(state.copyWith(framesProcessed: state.framesProcessed + 1));
+  }
+
+  Future<void> _onFrameSent(FrameSent event, Emitter<CheckInState> emit) async {
+    emit(
+      state.copyWith(
+        framesStreamed: state.framesStreamed + 1,
+        totalBytesStreamed: state.totalBytesStreamed + event.size,
+        lastFrameStreamedAt: DateTime.now(),
+      ),
+    );
+  }
+
+  Future<void> _onFrameSendFailed(
+    FrameSendFailed event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint(
+      '❌ CheckInBloc: Frame send failed: ${event.frameId} - ${event.error}',
+    );
+
+    emit(state.copyWith(framesFailed: state.framesFailed + 1));
+  }
+
+  Future<void> _onStreamingMetricsUpdated(
+    StreamingMetricsUpdated event,
+    Emitter<CheckInState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        currentFrameRate: event.frameRate,
+        framesCaptured: event.framesCaptured,
+        framesStreamed: event.framesStreamed,
+        framesFailed: event.framesFailed,
+        averageStreamingLatency: event.averageLatency,
+        totalBytesStreamed: event.totalBytes,
+      ),
+    );
+  }
+
+  // Face detection event handlers
+
+  Future<void> _onFaceDetectionResult(
+    FaceDetectionResultReceived event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint(
+      '👤 CheckInBloc: Face detection result received: ${event.faces.length} faces',
+    );
+
+    FaceDetectionStatus status;
+    if (event.faces.isEmpty) {
+      status = FaceDetectionStatus.noFace;
+    } else if (event.faces.length == 1) {
+      status = FaceDetectionStatus.faceFound;
+    } else {
+      status = FaceDetectionStatus.multipleFaces;
+    }
+
+    emit(
+      state.copyWith(
+        faceDetectionStatus: status,
+        detectedFaces: event.faces,
+        primaryFaceConfidence: event.confidence,
+        lastFaceDetectionTime: event.timestamp,
+        faceDetectionsCount: state.faceDetectionsCount + 1,
+      ),
+    );
+  }
+
+  Future<void> _onFaceDetectionStatusChanged(
+    FaceDetectionStatusChanged event,
+    Emitter<CheckInState> emit,
+  ) async {
+    emit(state.copyWith(faceDetectionStatus: event.status));
+  }
+
+  Future<void> _onFaceDetectionError(
+    FaceDetectionError event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('❌ CheckInBloc: Face detection error: ${event.error}');
+
+    emit(
+      state.copyWith(
+        faceDetectionStatus: FaceDetectionStatus.error,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Face detection error: ${event.error}',
+      ),
+    );
+  }
+
   @override
   Future<void> close() {
     state.cameraController?.dispose();
     _webSocketService.dispose();
+    _frameStreamingService.dispose();
     return super.close();
   }
 }

@@ -17,6 +17,8 @@ import '../../domain/services/permission_service.dart' as _i474;
 import '../../features/check_in/bloc/check_in_bloc.dart' as _i435;
 import '../services/frame_capture_service.dart' as _i351;
 import '../services/frame_processor.dart' as _i653;
+import '../services/frame_streaming_service.dart' as _i635;
+import '../services/performance_monitor.dart' as _i759;
 import '../services/websocket_service.dart' as _i555;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -31,14 +33,24 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i474.PermissionService>(
       () => _i372.PermissionServiceImpl(),
     );
+    gh.factory<_i351.FrameCaptureService>(
+      () => _i351.FrameCaptureService(gh<_i653.FrameProcessor>()),
+    );
+    gh.factory<_i635.FrameStreamingService>(
+      () => _i635.FrameStreamingService(
+        gh<_i351.FrameCaptureService>(),
+        gh<_i555.WebSocketService>(),
+      ),
+    );
+    gh.factory<_i759.PerformanceMonitor>(
+      () => _i759.PerformanceMonitor(gh<_i351.FrameCaptureService>()),
+    );
     gh.factory<_i435.CheckInBloc>(
       () => _i435.CheckInBloc(
         gh<_i474.PermissionService>(),
         gh<_i555.WebSocketService>(),
+        gh<_i635.FrameStreamingService>(),
       ),
-    );
-    gh.factory<_i351.FrameCaptureService>(
-      () => _i351.FrameCaptureService(gh<_i653.FrameProcessor>()),
     );
     return this;
   }
