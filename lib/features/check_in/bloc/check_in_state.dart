@@ -69,13 +69,40 @@ enum StreamingStatus {
   /// Not streaming frames
   idle,
 
+  /// Starting frame streaming
+  starting,
+
   /// Actively streaming frames
   active,
 
   /// Streaming is paused
   paused,
 
+  /// Stopping frame streaming
+  stopping,
+
   /// Streaming encountered an error
+  error,
+}
+
+/// Represents face detection status from backend responses
+enum FaceDetectionStatus {
+  /// No face detection performed
+  none,
+
+  /// Currently detecting faces
+  detecting,
+
+  /// Single face found
+  faceFound,
+
+  /// Multiple faces detected
+  multipleFaces,
+
+  /// No face detected in frame
+  noFace,
+
+  /// Face detection error
   error,
 }
 
@@ -144,6 +171,50 @@ class CheckInState with _$CheckInState {
 
     /// Connection retry timer active
     @Default(false) bool isRetryTimerActive,
+
+    // Frame streaming specific state fields for Phase 2
+    /// Current frame rate being captured/streamed
+    @Default(0.0) double currentFrameRate,
+
+    /// Total frames captured since streaming started
+    @Default(0) int framesCaptured,
+
+    /// Total frames successfully streamed
+    @Default(0) int framesStreamed,
+
+    /// Total frames failed to stream
+    @Default(0) int framesFailed,
+
+    /// Average streaming latency in milliseconds
+    @Default(0.0) double averageStreamingLatency,
+
+    /// Total bytes streamed
+    @Default(0) int totalBytesStreamed,
+
+    /// Timestamp when last frame was streamed
+    DateTime? lastFrameStreamedAt,
+
+    /// Timestamp when streaming session started
+    DateTime? streamingSessionStartTime,
+
+    // Face detection state fields for Phase 2
+    /// Current face detection status
+    @Default(FaceDetectionStatus.none) FaceDetectionStatus faceDetectionStatus,
+
+    /// List of currently detected faces
+    @Default([]) List<FaceDetectionResult> detectedFaces,
+
+    /// Confidence score of primary face (0.0 - 1.0)
+    @Default(0.0) double primaryFaceConfidence,
+
+    /// Timestamp of last face detection
+    DateTime? lastFaceDetectionTime,
+
+    /// Number of face detections performed
+    @Default(0) int faceDetectionsCount,
+
+    /// Frame streaming error message
+    String? streamingError,
   }) = _CheckInState;
 }
 
@@ -210,6 +281,9 @@ extension StreamingStatusX on StreamingStatus {
         return Colors.green;
       case StreamingStatus.error:
         return Colors.red;
+      case StreamingStatus.starting:
+      case StreamingStatus.stopping:
+        return Colors.orange;
       case StreamingStatus.idle:
       case StreamingStatus.paused:
         return Colors.grey;
