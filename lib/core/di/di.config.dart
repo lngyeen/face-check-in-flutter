@@ -15,6 +15,8 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../../data/services/permission_service_impl.dart' as _i372;
 import '../../domain/services/permission_service.dart' as _i474;
 import '../../features/check_in/bloc/check_in_bloc.dart' as _i435;
+import '../services/frame_capture_service.dart' as _i351;
+import '../services/frame_processor.dart' as _i653;
 import '../services/websocket_service.dart' as _i555;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -25,6 +27,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i555.WebSocketService>(() => _i555.WebSocketService());
+    gh.factory<_i653.FrameProcessor>(() => _i653.FrameProcessor());
     gh.lazySingleton<_i474.PermissionService>(
       () => _i372.PermissionServiceImpl(),
     );
@@ -33,6 +36,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i474.PermissionService>(),
         gh<_i555.WebSocketService>(),
       ),
+    );
+    gh.factory<_i351.FrameCaptureService>(
+      () => _i351.FrameCaptureService(gh<_i653.FrameProcessor>()),
     );
     return this;
   }
