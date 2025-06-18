@@ -43,6 +43,7 @@ enum PermissionStatus {
 }
 
 /// Represents the current WebSocket connection status
+/// Enhanced for Story 2.1 requirements
 enum ConnectionStatus {
   /// Not connected to backend
   disconnected,
@@ -55,6 +56,12 @@ enum ConnectionStatus {
 
   /// Connection failed
   failed,
+
+  /// Connection timeout occurred
+  timeout,
+
+  /// Retrying connection after failure
+  retrying,
 }
 
 /// Represents the current streaming status
@@ -121,6 +128,22 @@ class CheckInState with _$CheckInState {
 
     /// Number of frames processed
     @Default(0) int framesProcessed,
+
+    // WebSocket specific state fields for Story 2.1
+    /// Number of connection attempts made
+    @Default(0) int connectionAttempts,
+
+    /// Timestamp of last connection attempt
+    DateTime? lastConnectionAttempt,
+
+    /// WebSocket specific error message
+    String? connectionError,
+
+    /// Whether auto-connection is enabled
+    @Default(true) bool autoConnectionEnabled,
+
+    /// Connection retry timer active
+    @Default(false) bool isRetryTimerActive,
   }) = _CheckInState;
 }
 
@@ -156,12 +179,25 @@ extension ConnectionStatusX on ConnectionStatus {
       case ConnectionStatus.connected:
         return Colors.green;
       case ConnectionStatus.failed:
+      case ConnectionStatus.timeout:
         return Colors.red;
       case ConnectionStatus.connecting:
+      case ConnectionStatus.retrying:
         return Colors.orange;
       case ConnectionStatus.disconnected:
         return Colors.grey;
     }
+  }
+
+  /// Whether this status indicates an active connection attempt
+  bool get isAttemptingConnection {
+    return this == ConnectionStatus.connecting ||
+        this == ConnectionStatus.retrying;
+  }
+
+  /// Whether this status indicates a connection failure
+  bool get isFailureStatus {
+    return this == ConnectionStatus.failed || this == ConnectionStatus.timeout;
   }
 }
 

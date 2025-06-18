@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
+import 'package:face_check_in_flutter/core/config/websocket_config.dart';
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -30,7 +32,9 @@ void main() {
         expect(uri.toString(), testUrl);
         return mockWebSocketChannel;
       };
-      webSocketService.setUrl(testUrl);
+
+      // Update configuration instead of setUrl
+      webSocketService.updateConfig(WebSocketConfig(url: testUrl));
 
       // Default mock behaviors
       when(() => mockWebSocketChannel.sink).thenReturn(mockWebSocketSink);
@@ -54,11 +58,16 @@ void main() {
 
       final connectionFuture = webSocketService.connect();
 
-      expect(webSocketService.connectionStatus, emitsInOrder([true]));
+      // Use new ConnectionStatus enum values
+      expect(
+        webSocketService.connectionStatus,
+        emitsInOrder([ConnectionStatus.connecting, ConnectionStatus.connected]),
+      );
 
       await connectionFuture;
 
       expect(webSocketService.isConnected, isTrue);
+      expect(webSocketService.currentStatus, ConnectionStatus.connected);
     });
 
     test(
@@ -116,11 +125,15 @@ void main() {
 
       final disconnectFuture = webSocketService.disconnect();
 
-      expect(webSocketService.connectionStatus, emitsInOrder([false]));
+      expect(
+        webSocketService.connectionStatus,
+        emits(ConnectionStatus.disconnected),
+      );
 
       await disconnectFuture;
 
       expect(webSocketService.isConnected, isFalse);
+      expect(webSocketService.currentStatus, ConnectionStatus.disconnected);
       verify(() => mockWebSocketSink.close()).called(1);
     });
 
@@ -132,17 +145,27 @@ void main() {
 
       final connectionFuture = webSocketService.connect();
 
-      // Expect it to fail eventually after retries
+      // Expect connection attempts and retries with new enum values
       expect(
         webSocketService.connectionStatus,
-        emitsInOrder([false, false, false, false]),
+        emitsInOrder([
+          ConnectionStatus.connecting,
+          ConnectionStatus.failed,
+          ConnectionStatus.retrying,
+          ConnectionStatus.connecting,
+          ConnectionStatus.failed,
+          ConnectionStatus.retrying,
+          ConnectionStatus.connecting,
+          ConnectionStatus.failed,
+        ]),
       );
 
       final result = await connectionFuture;
       expect(result, isFalse);
 
-      final stats = webSocketService.getConnectionStats();
-      expect(stats['retryCount'], 3);
+      // Use new metrics system instead of getConnectionStats
+      expect(webSocketService.currentStatus, ConnectionStatus.failed);
+      expect(webSocketService.lastError, isNotNull);
     });
 
     test('handles stream error and attempts to reconnect', () async {
@@ -156,8 +179,8 @@ void main() {
 
       serverStreamController.addError(error);
 
-      // It should emit false for the disconnection
-      expect(webSocketService.connectionStatus, emits(false));
+      // It should emit failed status for the error
+      expect(webSocketService.connectionStatus, emits(ConnectionStatus.failed));
     });
 
     test('handles disconnection by server and updates status', () async {
@@ -172,6 +195,47 @@ void main() {
 
       // Verify the status is updated
       expect(webSocketService.isConnected, isFalse);
+      expect(webSocketService.currentStatus, ConnectionStatus.disconnected);
+    });
+
+    test('test connection works independently', () async {
+      final testResult = await webSocketService.testConnection(
+        testUrl: testUrl,
+      );
+      expect(testResult, isTrue);
+    });
+
+    test('configuration can be updated', () {
+      final newConfig = WebSocketConfig(
+        url: 'ws://new-url:8080',
+        timeout: Duration(seconds: 60),
+        maxRetries: 5,
+      );
+
+      webSocketService.updateConfig(newConfig);
+
+      expect(webSocketService.config.url, 'ws://new-url:8080');
+      expect(webSocketService.config.timeout, Duration(seconds: 60));
+      expect(webSocketService.config.maxRetries, 5);
+    });
+
+    test('metrics stream provides connection information', () async {
+      // Listen to metrics stream
+      late ConnectionMetrics receivedMetrics;
+      final subscription = webSocketService.metrics.listen((metrics) {
+        receivedMetrics = metrics;
+      });
+
+      await webSocketService.connect();
+
+      // Allow time for metrics to be emitted
+      await Future.delayed(Duration(milliseconds: 100));
+
+      expect(receivedMetrics.isConnected, isTrue);
+      expect(receivedMetrics.currentStatus, ConnectionStatus.connected);
+      expect(receivedMetrics.url, testUrl);
+
+      await subscription.cancel();
     });
   });
 }

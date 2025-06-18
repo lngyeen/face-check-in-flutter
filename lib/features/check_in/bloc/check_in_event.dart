@@ -50,7 +50,7 @@ class CheckInEvent with _$CheckInEvent {
   /// Request to stop camera preview
   const factory CheckInEvent.cameraPreviewStopped() = CameraPreviewStopped;
 
-  // WebSocket events
+  // Legacy WebSocket events (keeping for compatibility)
   /// Request to connect to WebSocket backend
   const factory CheckInEvent.connectionRequested() = ConnectionRequested;
 
@@ -60,6 +60,55 @@ class CheckInEvent with _$CheckInEvent {
 
   /// Request to disconnect from WebSocket
   const factory CheckInEvent.disconnectionRequested() = DisconnectionRequested;
+
+  // Enhanced WebSocket connection events for Story 2.1
+  /// WebSocket connection process started
+  const factory CheckInEvent.webSocketConnectionRequested() =
+      WebSocketConnectionRequested;
+
+  /// WebSocket is in connecting state
+  const factory CheckInEvent.webSocketConnecting() = WebSocketConnecting;
+
+  /// WebSocket successfully connected
+  const factory CheckInEvent.webSocketConnected() = WebSocketConnected;
+
+  /// WebSocket disconnected
+  const factory CheckInEvent.webSocketDisconnected() = WebSocketDisconnected;
+
+  /// WebSocket connection failed with error
+  const factory CheckInEvent.webSocketConnectionFailed(String error) =
+      WebSocketConnectionFailed;
+
+  /// WebSocket connection timeout occurred
+  const factory CheckInEvent.webSocketConnectionTimeout() =
+      WebSocketConnectionTimeout;
+
+  /// WebSocket is retrying connection
+  const factory CheckInEvent.webSocketRetrying(int attempt) = WebSocketRetrying;
+
+  // Enhanced WebSocket message events for Story 2.1
+  /// WebSocket message received from backend
+  const factory CheckInEvent.webSocketMessageReceived(
+    Map<String, dynamic> message,
+  ) = WebSocketMessageReceived;
+
+  /// WebSocket message sent to backend
+  const factory CheckInEvent.webSocketMessageSent(
+    Map<String, dynamic> message,
+  ) = WebSocketMessageSent;
+
+  /// WebSocket message send failed
+  const factory CheckInEvent.webSocketSendError(String error) =
+      WebSocketSendError;
+
+  // Auto-connection events for Story 2.1
+  /// Auto-connection should be triggered (camera ready)
+  const factory CheckInEvent.autoConnectionTriggered() =
+      AutoConnectionTriggered;
+
+  /// Auto-connection enabled/disabled
+  const factory CheckInEvent.autoConnectionToggled(bool enabled) =
+      AutoConnectionToggled;
 
   // Streaming events
   /// Request to start frame streaming

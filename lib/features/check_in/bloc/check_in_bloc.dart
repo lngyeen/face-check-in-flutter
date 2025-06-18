@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
+import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 
 part 'check_in_bloc.freezed.dart';
 part 'check_in_event.dart';
@@ -17,8 +18,13 @@ part 'check_in_state.dart';
 @injectable
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   final ps.PermissionService _permissionService;
+  final WebSocketService _webSocketService;
 
-  CheckInBloc(this._permissionService) : super(const CheckInState()) {
+  CheckInBloc(this._permissionService, this._webSocketService)
+    : super(const CheckInState()) {
+    // Initialize WebSocket service integration
+    _initializeWebSocketIntegration();
+
     // App lifecycle events
     on<AppStarted>(_onAppStarted);
     on<AppDisposed>(_onAppDisposed);
@@ -36,10 +42,24 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<CameraPreviewStarted>(_onCameraPreviewStarted);
     on<CameraPreviewStopped>(_onCameraPreviewStopped);
 
-    // WebSocket events
+    // Legacy WebSocket events (keeping for compatibility)
     on<ConnectionRequested>(_onConnectionRequested);
     on<ConnectionStatusChanged>(_onConnectionStatusChanged);
     on<DisconnectionRequested>(_onDisconnectionRequested);
+
+    // Enhanced WebSocket events for Story 2.1
+    on<WebSocketConnectionRequested>(_onWebSocketConnectionRequested);
+    on<WebSocketConnecting>(_onWebSocketConnecting);
+    on<WebSocketConnected>(_onWebSocketConnected);
+    on<WebSocketDisconnected>(_onWebSocketDisconnected);
+    on<WebSocketConnectionFailed>(_onWebSocketConnectionFailed);
+    on<WebSocketConnectionTimeout>(_onWebSocketConnectionTimeout);
+    on<WebSocketRetrying>(_onWebSocketRetrying);
+    on<WebSocketMessageReceived>(_onWebSocketMessageReceived);
+    on<WebSocketMessageSent>(_onWebSocketMessageSent);
+    on<WebSocketSendError>(_onWebSocketSendError);
+    on<AutoConnectionTriggered>(_onAutoConnectionTriggered);
+    on<AutoConnectionToggled>(_onAutoConnectionToggled);
 
     // Streaming events
     on<StreamingStarted>(_onStreamingStarted);
@@ -58,6 +78,52 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
     // Backend response events
     on<RecognitionResultReceived>(_onRecognitionResultReceived);
+  }
+
+  /// Initialize WebSocket service integration for Story 2.1
+  /// Creates bridge between WebSocket service and BLoC events
+  void _initializeWebSocketIntegration() {
+    // Listen to WebSocket connection status changes
+    _webSocketService.connectionStatus.listen((status) {
+      switch (status) {
+        case ConnectionStatus.connecting:
+          add(const CheckInEvent.webSocketConnecting());
+          break;
+        case ConnectionStatus.connected:
+          add(const CheckInEvent.webSocketConnected());
+          break;
+        case ConnectionStatus.disconnected:
+          add(const CheckInEvent.webSocketDisconnected());
+          break;
+        case ConnectionStatus.failed:
+          add(
+            CheckInEvent.webSocketConnectionFailed(
+              _webSocketService.lastError ?? 'Unknown connection error',
+            ),
+          );
+          break;
+        case ConnectionStatus.timeout:
+          add(const CheckInEvent.webSocketConnectionTimeout());
+          break;
+        case ConnectionStatus.retrying:
+          add(
+            CheckInEvent.webSocketRetrying(_webSocketService.config.maxRetries),
+          );
+          break;
+      }
+    });
+
+    // Listen to incoming WebSocket messages
+    _webSocketService.messages.listen((message) {
+      add(CheckInEvent.webSocketMessageReceived(message));
+    });
+
+    // Listen to WebSocket metrics for debugging
+    _webSocketService.metrics.listen((metrics) {
+      debugPrint(
+        '📊 CheckInBloc: WebSocket metrics updated - ${metrics.toString()}',
+      );
+    });
   }
 
   // App lifecycle event handlers
@@ -183,6 +249,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
           toastMessage: 'Camera ready',
         ),
       );
+
+      // Trigger auto-connection after camera becomes ready
+      add(const CheckInEvent.autoConnectionTriggered());
     } catch (e) {
       debugPrint('❌ CheckInBloc: Camera initialization failed: $e');
       emit(
@@ -451,9 +520,225 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
   }
 
+  // Enhanced WebSocket event handlers for Story 2.1
+  Future<void> _onWebSocketConnectionRequested(
+    WebSocketConnectionRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🌐 CheckInBloc: Enhanced WebSocket connection requested');
+
+    emit(
+      state.copyWith(
+        connectionStatus: ConnectionStatus.connecting,
+        connectionAttempts: 0,
+        lastConnectionAttempt: DateTime.now(),
+        connectionError: null,
+        isRetryTimerActive: false,
+      ),
+    );
+
+    // Use the WebSocket service to connect
+    final success = await _webSocketService.connect();
+
+    if (!success) {
+      // Connection will be handled by WebSocket service status updates
+      debugPrint('❌ CheckInBloc: WebSocket connection failed');
+    }
+  }
+
+  Future<void> _onWebSocketConnecting(
+    WebSocketConnecting event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🌐 CheckInBloc: WebSocket connecting...');
+
+    emit(
+      state.copyWith(
+        connectionStatus: ConnectionStatus.connecting,
+        lastConnectionAttempt: DateTime.now(),
+      ),
+    );
+  }
+
+  Future<void> _onWebSocketConnected(
+    WebSocketConnected event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('✅ CheckInBloc: WebSocket connected successfully');
+
+    emit(
+      state.copyWith(
+        connectionStatus: ConnectionStatus.connected,
+        connectionError: null,
+        isRetryTimerActive: false,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Connected to backend',
+      ),
+    );
+  }
+
+  Future<void> _onWebSocketDisconnected(
+    WebSocketDisconnected event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🔴 CheckInBloc: WebSocket disconnected');
+
+    emit(
+      state.copyWith(
+        connectionStatus: ConnectionStatus.disconnected,
+        streamingStatus: StreamingStatus.idle,
+        isRetryTimerActive: false,
+      ),
+    );
+  }
+
+  Future<void> _onWebSocketConnectionFailed(
+    WebSocketConnectionFailed event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('❌ CheckInBloc: WebSocket connection failed: ${event.error}');
+
+    emit(
+      state.copyWith(
+        connectionStatus: ConnectionStatus.failed,
+        connectionError: event.error,
+        connectionAttempts: state.connectionAttempts + 1,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Connection failed: ${event.error}',
+      ),
+    );
+  }
+
+  Future<void> _onWebSocketConnectionTimeout(
+    WebSocketConnectionTimeout event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('⏰ CheckInBloc: WebSocket connection timeout');
+
+    emit(
+      state.copyWith(
+        connectionStatus: ConnectionStatus.timeout,
+        connectionError: 'Connection timeout',
+        connectionAttempts: state.connectionAttempts + 1,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Connection timeout',
+      ),
+    );
+  }
+
+  Future<void> _onWebSocketRetrying(
+    WebSocketRetrying event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint(
+      '🔄 CheckInBloc: WebSocket retrying connection (attempt ${event.attempt})',
+    );
+
+    emit(
+      state.copyWith(
+        connectionStatus: ConnectionStatus.retrying,
+        connectionAttempts: event.attempt,
+        isRetryTimerActive: true,
+        lastConnectionAttempt: DateTime.now(),
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Retrying connection (${event.attempt})...',
+      ),
+    );
+  }
+
+  Future<void> _onWebSocketMessageReceived(
+    WebSocketMessageReceived event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint(
+      '📥 CheckInBloc: WebSocket message received: ${event.message['type']}',
+    );
+
+    // Handle different message types
+    final messageType = event.message['type'] as String?;
+
+    switch (messageType) {
+      case 'recognition_result':
+        add(
+          CheckInEvent.recognitionResultReceived(
+            success: event.message['success'] ?? false,
+            message: event.message['message'] ?? '',
+            employeeName: event.message['employee_name'],
+          ),
+        );
+        break;
+
+      case 'pong':
+        // Handle heartbeat response
+        debugPrint('💓 CheckInBloc: Heartbeat response received');
+        break;
+
+      default:
+        debugPrint('❓ CheckInBloc: Unknown message type: $messageType');
+    }
+  }
+
+  Future<void> _onWebSocketMessageSent(
+    WebSocketMessageSent event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint(
+      '📤 CheckInBloc: WebSocket message sent: ${event.message['type']}',
+    );
+
+    // Could update UI to show message send status if needed
+    // For now, just log
+  }
+
+  Future<void> _onWebSocketSendError(
+    WebSocketSendError event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('❌ CheckInBloc: WebSocket send error: ${event.error}');
+
+    emit(
+      state.copyWith(
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Send error: ${event.error}',
+      ),
+    );
+  }
+
+  Future<void> _onAutoConnectionTriggered(
+    AutoConnectionTriggered event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🔄 CheckInBloc: Auto-connection triggered');
+
+    // Only auto-connect if camera is ready and we're not already connected
+    if (state.cameraStatus == CameraStatus.ready &&
+        state.connectionStatus == ConnectionStatus.disconnected &&
+        state.autoConnectionEnabled) {
+      debugPrint('✅ CheckInBloc: Camera ready, starting auto-connection');
+      add(const CheckInEvent.webSocketConnectionRequested());
+    }
+  }
+
+  Future<void> _onAutoConnectionToggled(
+    AutoConnectionToggled event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🔄 CheckInBloc: Auto-connection toggled: ${event.enabled}');
+
+    emit(
+      state.copyWith(
+        autoConnectionEnabled: event.enabled,
+        toastStatus: ToastStatus.showing,
+        toastMessage:
+            'Auto-connection ${event.enabled ? 'enabled' : 'disabled'}',
+      ),
+    );
+  }
+
   @override
   Future<void> close() {
     state.cameraController?.dispose();
+    _webSocketService.dispose();
     return super.close();
   }
 }
