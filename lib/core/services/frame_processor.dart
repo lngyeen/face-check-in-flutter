@@ -5,7 +5,6 @@ import 'dart:ui' as ui;
 import 'package:camera/camera.dart';
 import 'package:injectable/injectable.dart';
 import '../models/frame_data.dart';
-import '../enums/frame_capture_status.dart';
 
 /// Exception thrown when frame processing fails
 class FrameProcessingException implements Exception {
@@ -67,7 +66,7 @@ class FrameProcessor {
         processingTimeMs: stopwatch.elapsedMilliseconds,
         quality: _jpegQuality,
       );
-    } catch (e, stackTrace) {
+    } catch (e) {
       stopwatch.stop();
       throw FrameProcessingException(
         'Failed to process frame after ${stopwatch.elapsedMilliseconds}ms',

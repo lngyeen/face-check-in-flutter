@@ -123,10 +123,12 @@ class FrameCaptureMetrics with _$FrameCaptureMetrics {
   String get throughputString {
     if (sessionDurationSeconds == 0) return '0 B/s';
     final bytesPerSecond = totalBytesProcessed / sessionDurationSeconds;
-    if (bytesPerSecond < 1024)
+    if (bytesPerSecond < 1024) {
       return '${bytesPerSecond.toStringAsFixed(1)} B/s';
-    if (bytesPerSecond < 1024 * 1024)
+    }
+    if (bytesPerSecond < 1024 * 1024) {
       return '${(bytesPerSecond / 1024).toStringAsFixed(1)} KB/s';
+    }
     return '${(bytesPerSecond / (1024 * 1024)).toStringAsFixed(1)} MB/s';
   }
 }
