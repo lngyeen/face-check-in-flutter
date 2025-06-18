@@ -112,17 +112,83 @@ class CheckInEvent with _$CheckInEvent {
 
   // Streaming events
   /// Request to start frame streaming
+  const factory CheckInEvent.streamingStartRequested() =
+      StreamingStartRequested;
+
+  /// Frame streaming successfully started
   const factory CheckInEvent.streamingStarted() = StreamingStarted;
 
   /// Request to stop frame streaming
+  const factory CheckInEvent.streamingStopRequested() = StreamingStopRequested;
+
+  /// Frame streaming successfully stopped
   const factory CheckInEvent.streamingStopped() = StreamingStopped;
+
+  /// Request to pause frame streaming
+  const factory CheckInEvent.streamingPauseRequested() =
+      StreamingPauseRequested;
+
+  /// Frame streaming paused
+  const factory CheckInEvent.streamingPaused() = StreamingPaused;
+
+  /// Request to resume frame streaming
+  const factory CheckInEvent.streamingResumeRequested() =
+      StreamingResumeRequested;
+
+  /// Frame streaming resumed
+  const factory CheckInEvent.streamingResumed() = StreamingResumed;
 
   /// Streaming status has changed
   const factory CheckInEvent.streamingStatusChanged(StreamingStatus status) =
       StreamingStatusChanged;
 
-  /// A frame has been processed
-  const factory CheckInEvent.frameProcessed() = FrameProcessed;
+  /// Frame streaming error occurred
+  const factory CheckInEvent.streamingError(String error) = StreamingError;
+
+  // Frame processing events
+  /// A frame has been captured
+  const factory CheckInEvent.frameCaptured(String frameId) = FrameCaptured;
+
+  /// A frame has been processed and encoded
+  const factory CheckInEvent.frameProcessed(String frameId) = FrameProcessed;
+
+  /// A frame has been sent to backend
+  const factory CheckInEvent.frameSent(
+    String frameId,
+    int size,
+    double latency,
+  ) = FrameSent;
+
+  /// Frame send failed
+  const factory CheckInEvent.frameSendFailed(String frameId, String error) =
+      FrameSendFailed;
+
+  /// Streaming metrics updated
+  const factory CheckInEvent.streamingMetricsUpdated({
+    required double frameRate,
+    required int framesCaptured,
+    required int framesStreamed,
+    required int framesFailed,
+    required double averageLatency,
+    required int totalBytes,
+  }) = StreamingMetricsUpdated;
+
+  // Face detection events
+  /// Face detection result received from backend
+  const factory CheckInEvent.faceDetectionResult({
+    required List<FaceDetectionResult> faces,
+    required double confidence,
+    required DateTime timestamp,
+  }) = FaceDetectionResultReceived;
+
+  /// Face detection status changed
+  const factory CheckInEvent.faceDetectionStatusChanged(
+    FaceDetectionStatus status,
+  ) = FaceDetectionStatusChanged;
+
+  /// Face detection error occurred
+  const factory CheckInEvent.faceDetectionError(String error) =
+      FaceDetectionError;
 
   // UI events
   /// An error has occurred
