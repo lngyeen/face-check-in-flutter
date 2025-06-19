@@ -10,6 +10,9 @@ import 'package:face_check_in_flutter/domain/services/permission_service.dart'
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart';
 import 'package:face_check_in_flutter/core/models/face_detection_result.dart';
+import 'package:face_check_in_flutter/core/enums/streaming_status.dart';
+import 'package:face_check_in_flutter/core/enums/connection_status.dart';
+import 'package:face_check_in_flutter/core/enums/face_detection_status.dart';
 
 part 'check_in_bloc.freezed.dart';
 part 'check_in_event.dart';
@@ -747,6 +750,17 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Listen to frame streaming errors
     _frameStreamingService.errorStream.listen((error) {
       add(CheckInEvent.streamingError(error.message));
+    });
+
+    // Phase 3: Listen to face detection responses
+    _frameStreamingService.faceDetectionStream.listen((response) {
+      add(
+        CheckInEvent.faceDetectionResult(
+          faces: response.faces,
+          confidence: response.overallConfidence,
+          timestamp: response.timestamp ?? DateTime.now(),
+        ),
+      );
     });
   }
 

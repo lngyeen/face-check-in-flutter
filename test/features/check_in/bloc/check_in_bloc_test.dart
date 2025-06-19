@@ -17,6 +17,9 @@ import 'package:face_check_in_flutter/domain/services/permission_service.dart'
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart';
+import 'package:face_check_in_flutter/core/services/response_processor.dart';
+import 'package:face_check_in_flutter/core/enums/connection_status.dart';
+import 'package:face_check_in_flutter/core/enums/streaming_status.dart';
 
 // --- Mocks and Fakes ---
 
@@ -249,6 +252,9 @@ void main() {
     when(
       () => mockFrameStreamingService.errorStream,
     ).thenAnswer((_) => Stream<FrameStreamingException>.empty());
+    when(
+      () => mockFrameStreamingService.faceDetectionStream,
+    ).thenAnswer((_) => Stream<FaceDetectionResponse>.empty());
     when(() => mockFrameStreamingService.dispose()).thenReturn(null);
 
     checkInBloc = CheckInBloc(
@@ -274,6 +280,15 @@ void main() {
           when(
             () => mockPermissionService.requestCameraPermission(),
           ).thenAnswer((_) async => ps.PermissionStatus.granted);
+
+          // Mock auto-connection behavior
+          when(
+            () => mockWebSocketService.connect(),
+          ).thenAnswer((_) async => true);
+          when(
+            () => mockWebSocketService.currentStatus,
+          ).thenReturn(ConnectionStatus.connected);
+
           return checkInBloc;
         },
         act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
@@ -320,6 +335,18 @@ void main() {
                     (s) => s.cameraController,
                     'cameraController',
                     isA<CameraController>(),
+                  ),
+              // Auto-connection state after camera is ready
+              isA<CheckInState>()
+                  .having(
+                    (s) => s.cameraStatus,
+                    'cameraStatus',
+                    CameraStatus.ready,
+                  )
+                  .having(
+                    (s) => s.connectionStatus,
+                    'connectionStatus',
+                    ConnectionStatus.connecting,
                   ),
             ],
         verify: (_) {
