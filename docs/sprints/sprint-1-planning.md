@@ -45,7 +45,7 @@
 **✅ ENVIRONMENT:**
 
 - **Development Setup**: Complete - Cursor setup optimized for Flutter
-- **External Dependencies**: Backend WebSocket service ready (ws://192.168.1.234:3009)
+- **External Dependencies**: Backend WebSocket service ready (wss://facedetection-ws.owt.vn)
 - **AI Tool Performance**: Excellent - no performance bottlenecks identified
 
 ## 🔧 **Template Configuration**

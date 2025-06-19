@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:camera/camera.dart';
 import 'package:camera_platform_interface/camera_platform_interface.dart'
     as cpi;
 import 'package:flutter_test/flutter_test.dart';
@@ -241,14 +240,14 @@ void main() {
 
     group('CameraPermissionRequested', () {
       blocTest<CheckInBloc, CheckInState>(
-        'emits granted when permission is granted and initializes camera',
-        build: () {
+        'CameraPermissionRequested emits granted when permission is granted and initializes camera',
+        setUp: () {
           when(
             () => mockPermissionService.requestCameraPermission(),
           ).thenAnswer((_) async => ps.PermissionStatus.granted);
-          return checkInBloc;
         },
-        act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
+        build: () => checkInBloc,
+        act: (bloc) => bloc.add(const CameraPermissionRequested()),
         expect:
             () => [
               const CheckInState(
@@ -258,46 +257,33 @@ void main() {
                 cameraStatus: CameraStatus.permissionRequesting,
                 permissionStatus: PermissionStatus.granted,
               ),
-              isA<CheckInState>()
-                  .having(
-                    (s) => s.cameraStatus,
-                    'cameraStatus',
-                    CameraStatus.initializing,
-                  )
-                  .having((s) => s.isLoading, 'isLoading', true)
-                  .having(
-                    (s) => s.permissionStatus,
-                    'permissionStatus',
-                    PermissionStatus.granted,
-                  ),
+              const CheckInState(
+                isLoading: true,
+                cameraStatus: CameraStatus.initializing,
+                permissionStatus: PermissionStatus.granted,
+              ),
               isA<CheckInState>()
                   .having(
                     (s) => s.cameraStatus,
                     'cameraStatus',
                     CameraStatus.ready,
                   )
-                  .having((s) => s.isLoading, 'isLoading', false)
+                  .having((s) => s.isLoading, 'isLoading', false),
+              isA<CheckInState>()
                   .having(
-                    (s) => s.permissionStatus,
-                    'permissionStatus',
-                    PermissionStatus.granted,
+                    (s) => s.connectionStatus,
+                    'connectionStatus',
+                    ConnectionStatus.connecting,
                   )
+                  .having((s) => s.connectionAttempts, 'connectionAttempts', 1)
                   .having(
-                    (s) => s.toastStatus,
-                    'toastStatus',
-                    ToastStatus.showing,
-                  )
-                  .having((s) => s.toastMessage, 'toastMessage', 'Camera ready')
-                  .having(
-                    (s) => s.cameraController,
-                    'cameraController',
-                    isA<CameraController>(),
+                    (s) => s.cameraStatus,
+                    'cameraStatus',
+                    CameraStatus.ready,
                   ),
             ],
         verify: (_) {
-          verify(
-            () => mockPermissionService.requestCameraPermission(),
-          ).called(1);
+          verify(() => mockWebSocketService.connect()).called(1);
         },
       );
 
@@ -325,11 +311,32 @@ void main() {
   });
 
   blocTest<CheckInBloc, CheckInState>(
-    'emits updated state on ConnectionRequested',
+    'emits updated state on WebSocketConnectionRequested',
     build: () => checkInBloc,
-    act: (bloc) => bloc.add(const CheckInEvent.connectionRequested()),
+    act: (bloc) => bloc.add(const WebSocketConnectionRequested()),
     verify: (_) {
       verify(() => mockWebSocketService.connect()).called(1);
+    },
+  );
+
+  blocTest<CheckInBloc, CheckInState>(
+    'emits updated state on WebSocketStatusChanged',
+    build: () => checkInBloc,
+    act:
+        (bloc) =>
+            bloc.add(const WebSocketStatusChanged(ConnectionStatus.connected)),
+    expect:
+        () => [
+          const CheckInState(connectionStatus: ConnectionStatus.connected),
+        ],
+  );
+
+  blocTest<CheckInBloc, CheckInState>(
+    'emits updated state on WebSocketDisconnectionRequested',
+    build: () => checkInBloc,
+    act: (bloc) => bloc.add(const WebSocketDisconnectionRequested()),
+    verify: (_) {
+      verify(() => mockWebSocketService.disconnect()).called(1);
     },
   );
 

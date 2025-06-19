@@ -83,7 +83,10 @@ Events are organized by category:
 ## 🌐 Backend Integration
 
 ### WebSocket Configuration
-- **Default URL**: `ws://192.168.1.234:3009`
+- **WebSocket URL**:
+  - **Default URL**: `wss://facedetection-ws.owt.vn`
+  - The `WebSocketService` is configured to connect to this URL by default in the development environment.
+  - To change the URL for testing, modify the `WebSocketConfig.development` factory in `lib/core/services/websocket_service.dart`.
 - **Protocol**: Raw base64 image frames
 - **Response Format**: JSON with frameResult type and faces array
 - **Retry Logic**: 3 attempts with 3-second delays

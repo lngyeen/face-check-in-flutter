@@ -22,6 +22,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   final ps.PermissionService _permissionService;
   final WebSocketService _webSocketService;
   StreamSubscription? _webSocketStatusSubscription;
+  StreamSubscription? _webSocketMessageSubscription;
 
   CheckInBloc(this._permissionService, this._webSocketService)
     : super(const CheckInState()) {
@@ -43,9 +44,10 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<CameraPreviewStopped>(_onCameraPreviewStopped);
 
     // WebSocket events
-    on<ConnectionRequested>(_onConnectionRequested);
-    on<ConnectionStatusChanged>(_onConnectionStatusChanged);
-    on<DisconnectionRequested>(_onDisconnectionRequested);
+    on<WebSocketConnectionRequested>(_onWebSocketConnectionRequested);
+    on<WebSocketStatusChanged>(_onWebSocketStatusChanged);
+    on<WebSocketDisconnectionRequested>(_onWebSocketDisconnectionRequested);
+    on<WebSocketMessageReceived>(_onWebSocketMessageReceived);
 
     // Streaming events
     on<StreamingStarted>(_onStreamingStarted);
@@ -73,10 +75,19 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) async {
     debugPrint('🚀 CheckInBloc: App started - initializing...');
     _webSocketService.initialize();
+
+    _webSocketStatusSubscription?.cancel();
     _webSocketStatusSubscription = _webSocketService.connectionStatusStream
         .listen((status) {
-          add(ConnectionStatusChanged(status));
+          add(WebSocketStatusChanged(status));
         });
+
+    _webSocketMessageSubscription?.cancel();
+    _webSocketMessageSubscription = _webSocketService.messageStream.listen((
+      message,
+    ) {
+      add(WebSocketMessageReceived(message));
+    });
 
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
@@ -110,6 +121,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     debugPrint('🔴 CheckInBloc: App disposing - cleaning up...');
     await state.cameraController?.dispose();
     await _webSocketStatusSubscription?.cancel();
+    await _webSocketMessageSubscription?.cancel();
     _webSocketService.dispose();
     // Clean up resources
     emit(
@@ -181,11 +193,25 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       if (cameras.isEmpty) {
         throw Exception('No cameras available');
       }
-      final controller = CameraController(
-        cameras.first,
-        ResolutionPreset.medium,
+
+      // Find the front camera
+      final frontCamera = cameras.firstWhere(
+        (camera) => camera.lensDirection == CameraLensDirection.front,
+        orElse: () => cameras.first, // Fallback to the first camera
       );
+
+      final controller = CameraController(
+        frontCamera,
+        ResolutionPreset.high,
+        enableAudio: false, // Audio is not needed for face check-in
+        imageFormatGroup: ImageFormatGroup.yuv420,
+      );
+
       await controller.initialize();
+
+      // Set auto focus and exposure after initialization
+      await controller.setFocusMode(FocusMode.auto);
+      await controller.setExposureMode(ExposureMode.auto);
 
       emit(
         state.copyWith(
@@ -196,7 +222,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
           toastMessage: 'Camera ready',
         ),
       );
-      add(const ConnectionRequested());
+
+      add(const WebSocketConnectionRequested());
     } catch (e) {
       debugPrint('❌ CheckInBloc: Camera initialization failed: $e');
       emit(
@@ -229,14 +256,17 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     if (state.cameraController?.value.isStreamingImages ?? false) {
       await state.cameraController?.stopImageStream();
     }
-    emit(state.copyWith(cameraStatus: CameraStatus.paused));
+    await state.cameraController?.dispose();
+    emit(
+      state.copyWith(cameraStatus: CameraStatus.paused, cameraController: null),
+    );
   }
 
   Future<void> _onCameraResumed(
     CameraResumed event,
     Emitter<CheckInState> emit,
   ) async {
-    add(const CheckInEvent.cameraStarted());
+    add(const CheckInEvent.cameraInitRequested());
   }
 
   Future<void> _onCameraStopped(
@@ -246,8 +276,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     await state.cameraController?.dispose();
     emit(
       state.copyWith(
-        cameraStatus: CameraStatus.initial,
         cameraController: null,
+        cameraStatus: CameraStatus.initial,
       ),
     );
   }
@@ -278,31 +308,49 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   }
 
   // WebSocket event handlers
-  Future<void> _onConnectionRequested(
-    ConnectionRequested event,
+  Future<void> _onWebSocketConnectionRequested(
+    WebSocketConnectionRequested event,
     Emitter<CheckInState> emit,
   ) async {
+    emit(
+      state.copyWith(
+        connectionStatus: ConnectionStatus.connecting,
+        connectionAttempts: state.connectionAttempts + 1,
+        connectionError: null,
+      ),
+    );
     await _webSocketService.connect();
   }
 
-  Future<void> _onConnectionStatusChanged(
-    ConnectionStatusChanged event,
+  Future<void> _onWebSocketStatusChanged(
+    WebSocketStatusChanged event,
     Emitter<CheckInState> emit,
   ) async {
     emit(state.copyWith(connectionStatus: event.status));
-    if (event.status == ConnectionStatus.connected) {
-      // Potentially start streaming here if auto-connect is desired
+    if (event.status == ConnectionStatus.failed) {
+      emit(state.copyWith(connectionError: 'Connection Failed'));
+    } else {
+      emit(state.copyWith(connectionError: null));
     }
   }
 
-  Future<void> _onDisconnectionRequested(
-    DisconnectionRequested event,
+  Future<void> _onWebSocketDisconnectionRequested(
+    WebSocketDisconnectionRequested event,
     Emitter<CheckInState> emit,
   ) async {
     await _webSocketService.disconnect();
   }
 
-  // Streaming event handlers (placeholders for future integration)
+  Future<void> _onWebSocketMessageReceived(
+    WebSocketMessageReceived event,
+    Emitter<CheckInState> emit,
+  ) async {
+    // Handle incoming message from backend
+    // This will be implemented in more detail in story 2.3
+    debugPrint('📥 CheckInBloc: Message received: ${event.message}');
+  }
+
+  // Streaming event handlers
   Future<void> _onStreamingStarted(
     StreamingStarted event,
     Emitter<CheckInState> emit,

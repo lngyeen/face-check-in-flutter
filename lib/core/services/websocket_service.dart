@@ -1,23 +1,47 @@
 import 'dart:async';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
+
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-class WebSocketConfig {
-  final String url;
-  final Duration connectionTimeout;
-  final int maxRetryAttempts;
-  final Duration retryDelay;
+part 'websocket_service.freezed.dart';
 
-  const WebSocketConfig({
-    required this.url,
-    this.connectionTimeout = const Duration(seconds: 30),
-    this.maxRetryAttempts = 3,
-    this.retryDelay = const Duration(seconds: 3),
-  });
+/// Represents the current WebSocket connection status
+enum ConnectionStatus {
+  /// Not connected to backend
+  disconnected,
 
-  static final development = WebSocketConfig(url: 'ws://192.168.1.234:3009');
-  // Add other environments if needed (staging, production)
+  /// Attempting to connect
+  connecting,
+
+  /// Successfully connected
+  connected,
+
+  /// Connection failed
+  failed,
+
+  /// Connection timed out
+  timeout,
+
+  /// Retrying to connect
+  retrying,
+}
+
+@freezed
+class WebSocketConfig with _$WebSocketConfig {
+  const factory WebSocketConfig({
+    required String url,
+    @Default(Duration(seconds: 30)) Duration connectionTimeout,
+    @Default(3) int maxRetryAttempts,
+    @Default(Duration(seconds: 3)) Duration retryDelay,
+  }) = _WebSocketConfig;
+
+  static final development = WebSocketConfig(
+    url: 'wss://facedetection-ws.owt.vn',
+  );
+  static final production = WebSocketConfig(
+    url: 'wss://your_production_ws_url',
+  );
 }
 
 @lazySingleton
@@ -44,12 +68,8 @@ class WebSocketService {
   ConnectionStatus _currentStatus = ConnectionStatus.disconnected;
   ConnectionStatus get currentStatus => _currentStatus;
 
-  void initialize({
-    WebSocketConfig config = const WebSocketConfig(
-      url: 'ws://192.168.1.234:3009',
-    ),
-  }) {
-    _config = config;
+  void initialize({WebSocketConfig? config}) {
+    _config = config ?? WebSocketConfig.development;
     updateStatus(ConnectionStatus.disconnected);
   }
 
@@ -122,8 +142,9 @@ class WebSocketService {
   void handleDone() {
     _timeoutTimer?.cancel();
     if (_statusController.isClosed ||
-        _currentStatus == ConnectionStatus.disconnected)
+        _currentStatus == ConnectionStatus.disconnected) {
       return;
+    }
     // If it was connected, try to reconnect.
     if (_currentStatus == ConnectionStatus.connected) {
       handleError('Connection closed unexpectedly');
