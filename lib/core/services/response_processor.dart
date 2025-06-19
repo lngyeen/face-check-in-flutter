@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer' as developer;
 import 'package:injectable/injectable.dart';
 import '../models/face_detection_result.dart';
-import '../../features/check_in/bloc/check_in_bloc.dart';
+import '../enums/face_detection_status.dart';
 
 /// Exception thrown when response processing operations fail
 class ResponseProcessingException implements Exception {
@@ -227,11 +227,27 @@ class ResponseProcessor {
 
       default:
         developer.log(
-          'Unknown message type: $messageType, ignoring',
+          'Unknown message type: $messageType, creating unknown response',
           name: 'ResponseProcessor',
           level: 900,
         );
-        return null;
+        DateTime? timestamp;
+        try {
+          final timestampData = json['timestamp'];
+          if (timestampData is String) {
+            timestamp = DateTime.parse(timestampData);
+          } else if (timestampData is int) {
+            timestamp = DateTime.fromMillisecondsSinceEpoch(timestampData);
+          }
+        } catch (e) {
+          timestamp = null;
+        }
+
+        return FaceDetectionResponse(
+          type: ResponseMessageType.unknown,
+          faces: [],
+          timestamp: timestamp,
+        );
     }
   }
 
