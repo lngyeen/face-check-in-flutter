@@ -170,9 +170,19 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       }
       final controller = CameraController(
         cameras.first,
-        ResolutionPreset.medium,
+        ResolutionPreset.veryHigh,
+        imageFormatGroup: ImageFormatGroup.bgra8888,
+        enableAudio: false,
       );
       await controller.initialize();
+
+      try {
+        await controller.setFocusMode(FocusMode.auto);
+        await controller.setExposureMode(ExposureMode.auto);
+      } on CameraException catch (e) {
+        debugPrint('Error setting camera modes: $e');
+        // Silently fail if modes are not supported, as camera can still function
+      }
 
       emit(
         state.copyWith(
@@ -215,14 +225,17 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     if (state.cameraController?.value.isStreamingImages ?? false) {
       await state.cameraController?.stopImageStream();
     }
-    emit(state.copyWith(cameraStatus: CameraStatus.paused));
+    await state.cameraController?.dispose();
+    emit(
+      state.copyWith(cameraStatus: CameraStatus.paused, cameraController: null),
+    );
   }
 
   Future<void> _onCameraResumed(
     CameraResumed event,
     Emitter<CheckInState> emit,
   ) async {
-    add(const CheckInEvent.cameraStarted());
+    add(const CheckInEvent.cameraInitRequested());
   }
 
   Future<void> _onCameraStopped(

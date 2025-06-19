@@ -9,6 +9,7 @@
 .buildlog/
 .history
 .idea/
+.vscode/
 
 # FVM (Flutter Version Management)
 .fvm/
