@@ -59,13 +59,12 @@ To perform comprehensive code review of pull requests by analyzing the code chan
 - Execute: `flutter test`
 - Capture the output and exit code of the test command.
 
-**B. Ensure Tests Pass:**
+**B. Handle Test Results:**
 - If any tests fail (exit code is not 0):
-  - **HALT THE REVIEW.**
-  - Report to the user: "One or more tests failed. Please fix the failing tests before I can proceed with the code review."
-  - Provide the test output to the user for debugging.
-  - Do not proceed until the user confirms the tests are fixed and passing.
-- If all tests pass, proceed to the next step.
+  - **Record the failure as a CRITICAL issue.** The final review status will automatically be `REQUEST_CHANGES`.
+  - The review report MUST begin by stating that tests are failing and this is a blocking issue that must be resolved first.
+  - **Continue the review** to gather other feedback on architecture, code quality, and best practices. This provides the author with all feedback in a single pass.
+- If all tests pass, proceed with the review as normal.
 
 ### 5. Perform Comprehensive Flutter Code Review
 
@@ -184,28 +183,28 @@ To perform comprehensive code review of pull requests by analyzing the code chan
 
 ### **Detailed Analysis**
 
-**1. Story Compliance: {✅ Met / ⚠️ Partially Met / ❌ Not Met}**
+**1. Testing: {✅ Good / ⚠️ Lacking / ❌ Critical}**
+
+{Analysis of the scope and quality of the tests. Note issues such as: failed tests, poor test performance, lack of test coverage for critical components, or unreliable tests.}
+
+**2. Story Compliance: {✅ Met / ⚠️ Partially Met / ❌ Not Met}**
 
 {Detailed analysis of whether the implementation meets all Acceptance Criteria (ACs) of the story. List each AC and evaluate its completion status.}
 - **AC1:** {acceptance-criteria-1} - {status-and-notes}
 - **AC2:** {acceptance-criteria-2} - {status-and-notes}
 - ...
 
-**2. Clean Architecture: {✅ Compliant / ⚠️ Needs Review / ❌ Not Compliant}**
+**3. Clean Architecture: {✅ Compliant / ⚠️ Needs Review / ❌ Not Compliant}**
 
 {Assessment of compliance with the project's clean architecture principles. Comment on the separation of layers (Presentation, Domain, Data), dependency direction, and the location of new files.}
 
-**3. Flutter/Dart Best Practices: {✅ Good / ⚠️ Needs Review / ❌ Weak}**
+**4. Flutter/Dart Best Practices: {✅ Good / ⚠️ Needs Review / ❌ Weak}**
 
 {Assessment of the application of Flutter and Dart best practices. Highlight what was done well (e.g., state management, widget composition) and areas for improvement (e.g., incorrect API usage, poor resource management).}
 
-**4. Code Quality: {✅ Good / ⚠️ Average / ❌ Poor}**
+**5. Code Quality: {✅ Good / ⚠️ Average / ❌ Poor}**
 
 {Comments on the overall quality of the code: readability, naming conventions, error handling, and documentation/comments in the code.}
-
-**5. Testing: {✅ Good / ⚠️ Lacking / ❌ Critical}**
-
-{Analysis of the scope and quality of the tests. Note issues such as: failed tests, poor test performance, lack of test coverage for critical components, or unreliable tests.}
 
 ---
 
@@ -218,6 +217,8 @@ To perform comprehensive code review of pull requests by analyzing the code chan
 3.  ...
 
 ```
+
+**CRITICAL: After generating the report, you MUST STOP and present the summary to the user. Ask the user for the next action, providing options like 'post the report to the PR', 'proceed with fixing the issues', or 'suggest code edits'. DO NOT take any action without explicit user consent.**
 
 ### 7. Interactive Flutter Review Session
 

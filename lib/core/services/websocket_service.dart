@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../config/websocket_config.dart';
-import '../../features/check_in/bloc/check_in_bloc.dart';
+import '../enums/connection_status.dart';
 
 // Add a type definition for the connector function for clarity and ease of use.
 typedef WebSocketConnector = WebSocketChannel Function(Uri uri);
@@ -85,7 +85,7 @@ class WebSocketService {
     }
 
     try {
-      final testChannel = WebSocketChannel.connect(Uri.parse(urlToTest));
+      final testChannel = connector(Uri.parse(urlToTest));
       await testChannel.ready.timeout(_config.timeout);
 
       // Send test message

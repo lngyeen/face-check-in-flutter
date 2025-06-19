@@ -16,6 +16,12 @@ import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
+import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart';
+import 'package:face_check_in_flutter/core/services/response_processor.dart';
+import 'package:face_check_in_flutter/core/enums/connection_status.dart';
+import 'package:face_check_in_flutter/core/enums/streaming_status.dart';
+import 'package:face_check_in_flutter/core/enums/face_detection_status.dart';
+import 'package:face_check_in_flutter/core/models/face_detection_result.dart';
 
 // --- Mocks and Fakes ---
 
@@ -25,6 +31,8 @@ class MockCheckInBloc extends MockBloc<CheckInEvent, CheckInState>
 class MockPermissionService extends Mock implements ps.PermissionService {}
 
 class MockWebSocketService extends Mock implements WebSocketService {}
+
+class MockFrameStreamingService extends Mock implements FrameStreamingService {}
 
 class FakeCameraDescription extends Fake implements cpi.CameraDescription {
   @override
@@ -211,11 +219,13 @@ void main() {
   late CheckInBloc checkInBloc;
   late MockPermissionService mockPermissionService;
   late MockWebSocketService mockWebSocketService;
+  late MockFrameStreamingService mockFrameStreamingService;
   late FakeCameraPlatform fakeCameraPlatform;
 
   setUp(() {
     mockPermissionService = MockPermissionService();
     mockWebSocketService = MockWebSocketService();
+    mockFrameStreamingService = MockFrameStreamingService();
 
     // Setup default WebSocket service behavior
     when(
@@ -234,7 +244,26 @@ void main() {
     fakeCameraPlatform = FakeCameraPlatform();
     cpi.CameraPlatform.instance = fakeCameraPlatform;
 
-    checkInBloc = CheckInBloc(mockPermissionService, mockWebSocketService);
+    // Setup default FrameStreamingService behavior
+    when(
+      () => mockFrameStreamingService.statusStream,
+    ).thenAnswer((_) => Stream<StreamingStatus>.empty());
+    when(
+      () => mockFrameStreamingService.metricsStream,
+    ).thenAnswer((_) => Stream<FrameStreamingMetrics>.empty());
+    when(
+      () => mockFrameStreamingService.errorStream,
+    ).thenAnswer((_) => Stream<FrameStreamingException>.empty());
+    when(
+      () => mockFrameStreamingService.faceDetectionStream,
+    ).thenAnswer((_) => Stream<FaceDetectionResponse>.empty());
+    when(() => mockFrameStreamingService.dispose()).thenReturn(null);
+
+    checkInBloc = CheckInBloc(
+      mockPermissionService,
+      mockWebSocketService,
+      mockFrameStreamingService,
+    );
   });
 
   tearDown(() {
@@ -253,6 +282,15 @@ void main() {
           when(
             () => mockPermissionService.requestCameraPermission(),
           ).thenAnswer((_) async => ps.PermissionStatus.granted);
+
+          // Mock auto-connection behavior
+          when(
+            () => mockWebSocketService.connect(),
+          ).thenAnswer((_) async => true);
+          when(
+            () => mockWebSocketService.currentStatus,
+          ).thenReturn(ConnectionStatus.connected);
+
           return checkInBloc;
         },
         act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
@@ -300,6 +338,18 @@ void main() {
                     'cameraController',
                     isA<CameraController>(),
                   ),
+              // Auto-connection state after camera is ready
+              isA<CheckInState>()
+                  .having(
+                    (s) => s.cameraStatus,
+                    'cameraStatus',
+                    CameraStatus.ready,
+                  )
+                  .having(
+                    (s) => s.connectionStatus,
+                    'connectionStatus',
+                    ConnectionStatus.connecting,
+                  ),
             ],
         verify: (_) {
           verify(
@@ -329,55 +379,88 @@ void main() {
             ],
       );
     });
+
+    blocTest<CheckInBloc, CheckInState>(
+      'emits updated state on ConnectionRequested',
+      build: () => checkInBloc,
+      act: (bloc) => bloc.add(const CheckInEvent.connectionRequested()),
+      wait: const Duration(milliseconds: 2000),
+      expect:
+          () => [
+            const CheckInState(
+              connectionStatus: ConnectionStatus.connecting,
+              isLoading: true,
+            ),
+            const CheckInState(
+              connectionStatus: ConnectionStatus.connected,
+              isLoading: false,
+              toastStatus: ToastStatus.showing,
+              toastMessage: 'Connected to backend (placeholder)',
+            ),
+          ],
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'emits debug mode toggled state',
+      build: () => checkInBloc,
+      act: (bloc) => bloc.add(const CheckInEvent.debugModeToggled()),
+      expect:
+          () => [
+            const CheckInState(
+              isDebugMode: true,
+              toastStatus: ToastStatus.showing,
+              toastMessage: 'Debug mode enabled',
+            ),
+          ],
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'resets statistics on StatisticsReset',
+      build: () => checkInBloc,
+      seed: () => const CheckInState(framesProcessed: 10),
+      act: (bloc) => bloc.add(const CheckInEvent.statisticsReset()),
+      expect:
+          () => [
+            const CheckInState(
+              framesProcessed: 0,
+              lastRecognitionTime: null,
+              toastStatus: ToastStatus.showing,
+              toastMessage: 'Statistics reset',
+            ),
+          ],
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'emits correct state for face detection result',
+      build: () => checkInBloc,
+      act:
+          (bloc) => bloc.add(
+            CheckInEvent.faceDetectionResult(
+              faces: [
+                FaceDetectionResult(
+                  id: '1',
+                  confidence: 0.9,
+                  x: 10,
+                  y: 20,
+                  width: 30,
+                  height: 40,
+                ),
+              ],
+              confidence: 0.9,
+              timestamp: DateTime.now(),
+            ),
+          ),
+      expect:
+          () => [
+            isA<CheckInState>()
+                .having(
+                  (s) => s.faceDetectionStatus,
+                  'status',
+                  FaceDetectionStatus.faceFound,
+                )
+                .having((s) => s.detectedFaces.length, 'face count', 1)
+                .having((s) => s.primaryFaceConfidence, 'confidence', 0.9),
+          ],
+    );
   });
-
-  blocTest<CheckInBloc, CheckInState>(
-    'emits updated state on ConnectionRequested',
-    build: () => checkInBloc,
-    act: (bloc) => bloc.add(const CheckInEvent.connectionRequested()),
-    wait: const Duration(milliseconds: 2000),
-    expect:
-        () => [
-          const CheckInState(
-            connectionStatus: ConnectionStatus.connecting,
-            isLoading: true,
-          ),
-          const CheckInState(
-            connectionStatus: ConnectionStatus.connected,
-            isLoading: false,
-            toastStatus: ToastStatus.showing,
-            toastMessage: 'Connected to backend (placeholder)',
-          ),
-        ],
-  );
-
-  blocTest<CheckInBloc, CheckInState>(
-    'emits debug mode toggled state',
-    build: () => checkInBloc,
-    act: (bloc) => bloc.add(const CheckInEvent.debugModeToggled()),
-    expect:
-        () => [
-          const CheckInState(
-            isDebugMode: true,
-            toastStatus: ToastStatus.showing,
-            toastMessage: 'Debug mode enabled',
-          ),
-        ],
-  );
-
-  blocTest<CheckInBloc, CheckInState>(
-    'resets statistics on StatisticsReset',
-    build: () => checkInBloc,
-    seed: () => const CheckInState(framesProcessed: 10),
-    act: (bloc) => bloc.add(const CheckInEvent.statisticsReset()),
-    expect:
-        () => [
-          const CheckInState(
-            framesProcessed: 0,
-            lastRecognitionTime: null,
-            toastStatus: ToastStatus.showing,
-            toastMessage: 'Statistics reset',
-          ),
-        ],
-  );
 }
