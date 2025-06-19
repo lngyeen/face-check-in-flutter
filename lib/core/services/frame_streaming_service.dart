@@ -3,6 +3,9 @@ import 'dart:developer' as developer;
 import 'package:injectable/injectable.dart';
 import 'frame_capture_service.dart';
 import 'websocket_service.dart';
+import 'response_processor.dart';
+import 'face_detection_history.dart';
+import 'response_error_handler.dart';
 import '../models/frame_data.dart';
 import '../../features/check_in/bloc/check_in_bloc.dart';
 
@@ -121,10 +124,19 @@ class FrameStreamingMetrics {
 /// Service responsible for streaming captured frames to backend via WebSocket
 @injectable
 class FrameStreamingService {
-  FrameStreamingService(this._frameCaptureService, this._webSocketService);
+  FrameStreamingService(
+    this._frameCaptureService,
+    this._webSocketService,
+    this._responseProcessor,
+    this._faceDetectionHistory,
+    this._errorHandler,
+  );
 
   final FrameCaptureService _frameCaptureService;
   final WebSocketService _webSocketService;
+  final ResponseProcessor _responseProcessor;
+  final FaceDetectionHistory _faceDetectionHistory;
+  final ResponseErrorHandler _errorHandler;
 
   // State management
   StreamingStatus _status = StreamingStatus.idle;
@@ -134,6 +146,7 @@ class FrameStreamingService {
   Timer? _metricsTimer;
   StreamSubscription<FrameData>? _frameSubscription;
   StreamSubscription<ConnectionStatus>? _connectionSubscription;
+  StreamSubscription<dynamic>? _responseSubscription;
 
   // Performance tracking
   final List<DateTime> _frameSentTimes = [];
@@ -147,6 +160,8 @@ class FrameStreamingService {
       StreamController<FrameStreamingMetrics>.broadcast();
   final StreamController<FrameStreamingException> _errorController =
       StreamController<FrameStreamingException>.broadcast();
+  final StreamController<FaceDetectionResponse> _faceDetectionController =
+      StreamController<FaceDetectionResponse>.broadcast();
 
   // Getters
   StreamingStatus get status => _status;
@@ -156,6 +171,8 @@ class FrameStreamingService {
   Stream<StreamingStatus> get statusStream => _statusController.stream;
   Stream<FrameStreamingMetrics> get metricsStream => _metricsController.stream;
   Stream<FrameStreamingException> get errorStream => _errorController.stream;
+  Stream<FaceDetectionResponse> get faceDetectionStream =>
+      _faceDetectionController.stream;
 
   /// Starts frame streaming
   Future<void> startStreaming() async {
@@ -230,6 +247,15 @@ class FrameStreamingService {
         },
       );
 
+      // Subscribe to WebSocket responses for face detection
+      _responseSubscription = _webSocketService.messages.listen(
+        _onResponseReceived,
+        onError: _onResponseError,
+      );
+
+      // Start face detection session
+      _faceDetectionHistory.startNewSession();
+
       // Start metrics tracking
       _startMetricsTracking();
 
@@ -275,8 +301,10 @@ class FrameStreamingService {
       // Cancel subscriptions
       await _frameSubscription?.cancel();
       await _connectionSubscription?.cancel();
+      await _responseSubscription?.cancel();
       _frameSubscription = null;
       _connectionSubscription = null;
+      _responseSubscription = null;
 
       // Stop metrics tracking
       _metricsTimer?.cancel();
@@ -357,10 +385,12 @@ class FrameStreamingService {
   void dispose() {
     _frameSubscription?.cancel();
     _connectionSubscription?.cancel();
+    _responseSubscription?.cancel();
     _metricsTimer?.cancel();
     _statusController.close();
     _metricsController.close();
     _errorController.close();
+    _faceDetectionController.close();
     _frameSentTimes.clear();
     _latencyHistory.clear();
   }
@@ -531,5 +561,72 @@ class FrameStreamingService {
     }
 
     _metricsController.add(_metrics);
+  }
+
+  /// Handle WebSocket response messages for face detection
+  void _onResponseReceived(Map<String, dynamic> message) {
+    if (_status != StreamingStatus.active) return;
+
+    try {
+      final startTime = DateTime.now();
+
+      // Process response with error handling
+      _errorHandler
+          .processResponseSafely(
+            message: message,
+            processor: _responseProcessor,
+          )
+          .then((response) {
+            final processingTime = DateTime.now().difference(startTime);
+
+            if (response != null) {
+              // Add to history
+              _faceDetectionHistory.addDetectionResult(
+                response: response,
+                processingTime: processingTime,
+                frameId: response.frameId,
+              );
+
+              // Emit face detection event
+              _faceDetectionController.add(response);
+
+              developer.log(
+                'Face detection response processed: ${response.faceCount} faces, confidence: ${response.overallConfidence.toStringAsFixed(2)}',
+                name: 'FrameStreamingService',
+                level: 700,
+              );
+            }
+          })
+          .catchError((error) {
+            developer.log(
+              'Failed to process response: $error',
+              name: 'FrameStreamingService',
+              level: 1000,
+            );
+          });
+    } catch (e, stackTrace) {
+      developer.log(
+        'Error in response handler: $e',
+        name: 'FrameStreamingService',
+        error: e,
+        stackTrace: stackTrace,
+        level: 1000,
+      );
+    }
+  }
+
+  /// Handle WebSocket response errors
+  void _onResponseError(Object error) {
+    developer.log(
+      'WebSocket response error: $error',
+      name: 'FrameStreamingService',
+      level: 1000,
+    );
+
+    final exception = FrameStreamingException(
+      'WebSocket response error',
+      error,
+    );
+    _errorController.add(exception);
   }
 }

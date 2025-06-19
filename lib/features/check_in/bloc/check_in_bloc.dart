@@ -761,6 +761,17 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     _frameStreamingService.errorStream.listen((error) {
       add(CheckInEvent.streamingError(error.message));
     });
+
+    // Phase 3: Listen to face detection responses
+    _frameStreamingService.faceDetectionStream.listen((response) {
+      add(
+        CheckInEvent.faceDetectionResult(
+          faces: response.faces,
+          confidence: response.overallConfidence,
+          timestamp: response.timestamp ?? DateTime.now(),
+        ),
+      );
+    });
   }
 
   // Phase 2 Frame Streaming event handlers

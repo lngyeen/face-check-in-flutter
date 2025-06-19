@@ -17,6 +17,7 @@ import 'package:face_check_in_flutter/domain/services/permission_service.dart'
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart';
+import 'package:face_check_in_flutter/core/services/response_processor.dart';
 
 // --- Mocks and Fakes ---
 
@@ -249,6 +250,9 @@ void main() {
     when(
       () => mockFrameStreamingService.errorStream,
     ).thenAnswer((_) => Stream<FrameStreamingException>.empty());
+    when(
+      () => mockFrameStreamingService.faceDetectionStream,
+    ).thenAnswer((_) => Stream<FaceDetectionResponse>.empty());
     when(() => mockFrameStreamingService.dispose()).thenReturn(null);
 
     checkInBloc = CheckInBloc(
