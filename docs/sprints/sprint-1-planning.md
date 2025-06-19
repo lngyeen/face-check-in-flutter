@@ -187,7 +187,7 @@
 | 2 | 1.2 | Live Camera Integration & Permissions | `docs/stories/1.2.story.md` | Senior Dev #1 | 15 | High | Medium | Complete | 1.1 |
 | 3 | 1.3 | Debug System Implementation | `docs/stories/1.3.story.md` | Senior Dev #2 | 6 | Medium | Low | Complete | 1.1 |
 | 4 | 2.1 | WebSocket Connection & Service Foundation | `docs/stories/2.1.story.md` | Senior Dev #2 | 12 | High | Medium | Complete | 1.1, 1.2 |
-| 5 | 2.2 | Camera Frame Streaming & Processing | `docs/stories/2.2.story.md` | Senior Dev #1 | 16 | Very High | High | In Progress | 2.1, 1.2 |
+| 5 | 2.2 | Camera Frame Streaming & Processing | `docs/stories/2.2.story.md` | Senior Dev #1 | 16 | Very High | High | Review | 2.1, 1.2 |
 | 6 | 2.3 | Backend Response Processing & User Feedback | `docs/stories/2.3.story.md` | Senior Dev #2 | 5 | Medium | Low-Medium | Approved | 2.1 |
 
 ### **Additional Scope (70 Story Points of Enhanced Capacity)**
