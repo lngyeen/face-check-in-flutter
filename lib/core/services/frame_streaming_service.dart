@@ -7,7 +7,8 @@ import 'response_processor.dart';
 import 'face_detection_history.dart';
 import 'response_error_handler.dart';
 import '../models/frame_data.dart';
-import '../../features/check_in/bloc/check_in_bloc.dart';
+import '../enums/streaming_status.dart';
+import '../enums/connection_status.dart';
 
 /// Exception thrown when frame streaming operations fail
 class FrameStreamingException implements Exception {
@@ -19,34 +20,6 @@ class FrameStreamingException implements Exception {
   @override
   String toString() =>
       'FrameStreamingException: $message${cause != null ? ' (caused by: $cause)' : ''}';
-}
-
-/// Extension for StreamingStatus utility methods
-extension StreamingStatusExtension on StreamingStatus {
-  bool get canStart =>
-      this == StreamingStatus.idle || this == StreamingStatus.error;
-  bool get canStop =>
-      this == StreamingStatus.active || this == StreamingStatus.paused;
-  bool get canPause => this == StreamingStatus.active;
-  bool get canResume => this == StreamingStatus.paused;
-  bool get isActive => this == StreamingStatus.active;
-
-  String get description {
-    switch (this) {
-      case StreamingStatus.idle:
-        return 'Ready to start streaming';
-      case StreamingStatus.starting:
-        return 'Starting frame streaming...';
-      case StreamingStatus.active:
-        return 'Streaming frames';
-      case StreamingStatus.paused:
-        return 'Frame streaming paused';
-      case StreamingStatus.stopping:
-        return 'Stopping frame streaming...';
-      case StreamingStatus.error:
-        return 'Frame streaming error';
-    }
-  }
 }
 
 /// Metrics for frame streaming performance
