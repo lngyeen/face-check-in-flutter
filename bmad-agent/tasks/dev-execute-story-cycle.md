@@ -50,28 +50,30 @@
 
 ---
 
-### **Phase 2: Iterative Development Cycle**
+### **Phase 2: Autonomous & Incremental Development Cycle**
 
-1.  **Begin Loop**: Iterate through each sub-task listed in the loaded story file.
-2.  **For each sub-task**:
-    -   **A. Announce Task**: "Starting Task `[Task #]`: `[Task Description]`."
-    -   **B. Code Implementation**: Create/edit files, write logic, and create tests relevant to the current sub-task.
-    -   **C. Self-Correction**: Run tests, analyze failures, and apply fixes for the current sub-task.
-    -   **D. Update Story File**:
-        -   Mark the current sub-task as complete with `[x]`.
-        -   Add detailed progress notes under the task or in a dedicated "Progress Notes" section.
-    -   **E. Commit Task Progress**:
-        -   Stage all changes: `git add .`
-        -   Commit with a detailed, conventional message.
-        -   **Commit Message Template**:
-            ```
-            feat: Complete Story [Story ID] Task [#] - [Sub-task Title]
+1.  **Initiate Development Loop**: Begin iterating through each sub-task in the loaded story file. This loop is the core of autonomous development.
+2.  **Execute Sub-Task Workflow (for each sub-task)**:
+    -   **A. Announce**: Clearly state the current focus: "Starting Task `[Task #]`: `[Task Description]`."
+    -   **B. Implement & Test**: Write or modify code, create necessary tests, and ensure the implementation directly addresses the sub-task requirements.
+    -   **C. Self-Correct**: Run all relevant tests. If failures occur, analyze the root cause, apply fixes, and re-test until all tests for the current sub-task pass.
+    -   **D. CRITICAL: Document & Commit Progress**: This step is mandatory after each sub-task is completed and validated.
+        -   **i. Update Story File**:
+            -   **Action**: Modify the story markdown file (`docs/stories/...`).
+            -   Mark the completed sub-task with `[x]`.
+            -   Add concise, meaningful progress notes directly under the sub-task.
+        -   **ii. Stage and Commit Changes**:
+            -   **Action**: Stage all modified files, including the updated story file: `git add .`.
+            -   **Action**: Commit using the standardized conventional commit format. The commit MUST bundle the code changes *and* the story file update together.
+            -   **Commit Message Template**:
+                ```
+                feat: Complete Story [Story ID] Task [#] - [Sub-task Title]
 
-            - [Detailed implementation note 1]
-            - [Detailed implementation note 2]
+                - [Detailed implementation note 1 about code changes]
+                - [Detailed implementation note 2 if necessary]
 
-            Story [Story ID] Progress: [X/Y] tasks complete.
-            ```
+                Story [Story ID] Progress: [X/Y] tasks complete.
+                ```
 
 ---
 
