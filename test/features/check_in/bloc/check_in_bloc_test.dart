@@ -20,6 +20,8 @@ import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart
 import 'package:face_check_in_flutter/core/services/response_processor.dart';
 import 'package:face_check_in_flutter/core/enums/connection_status.dart';
 import 'package:face_check_in_flutter/core/enums/streaming_status.dart';
+import 'package:face_check_in_flutter/core/enums/face_detection_status.dart';
+import 'package:face_check_in_flutter/core/models/face_detection_result.dart';
 
 // --- Mocks and Fakes ---
 
@@ -377,55 +379,88 @@ void main() {
             ],
       );
     });
+
+    blocTest<CheckInBloc, CheckInState>(
+      'emits updated state on ConnectionRequested',
+      build: () => checkInBloc,
+      act: (bloc) => bloc.add(const CheckInEvent.connectionRequested()),
+      wait: const Duration(milliseconds: 2000),
+      expect:
+          () => [
+            const CheckInState(
+              connectionStatus: ConnectionStatus.connecting,
+              isLoading: true,
+            ),
+            const CheckInState(
+              connectionStatus: ConnectionStatus.connected,
+              isLoading: false,
+              toastStatus: ToastStatus.showing,
+              toastMessage: 'Connected to backend (placeholder)',
+            ),
+          ],
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'emits debug mode toggled state',
+      build: () => checkInBloc,
+      act: (bloc) => bloc.add(const CheckInEvent.debugModeToggled()),
+      expect:
+          () => [
+            const CheckInState(
+              isDebugMode: true,
+              toastStatus: ToastStatus.showing,
+              toastMessage: 'Debug mode enabled',
+            ),
+          ],
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'resets statistics on StatisticsReset',
+      build: () => checkInBloc,
+      seed: () => const CheckInState(framesProcessed: 10),
+      act: (bloc) => bloc.add(const CheckInEvent.statisticsReset()),
+      expect:
+          () => [
+            const CheckInState(
+              framesProcessed: 0,
+              lastRecognitionTime: null,
+              toastStatus: ToastStatus.showing,
+              toastMessage: 'Statistics reset',
+            ),
+          ],
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'emits correct state for face detection result',
+      build: () => checkInBloc,
+      act:
+          (bloc) => bloc.add(
+            CheckInEvent.faceDetectionResult(
+              faces: [
+                FaceDetectionResult(
+                  id: '1',
+                  confidence: 0.9,
+                  x: 10,
+                  y: 20,
+                  width: 30,
+                  height: 40,
+                ),
+              ],
+              confidence: 0.9,
+              timestamp: DateTime.now(),
+            ),
+          ),
+      expect:
+          () => [
+            isA<CheckInState>()
+                .having(
+                  (s) => s.faceDetectionStatus,
+                  'status',
+                  FaceDetectionStatus.faceFound,
+                )
+                .having((s) => s.detectedFaces.length, 'face count', 1)
+                .having((s) => s.primaryFaceConfidence, 'confidence', 0.9),
+          ],
+    );
   });
-
-  blocTest<CheckInBloc, CheckInState>(
-    'emits updated state on ConnectionRequested',
-    build: () => checkInBloc,
-    act: (bloc) => bloc.add(const CheckInEvent.connectionRequested()),
-    wait: const Duration(milliseconds: 2000),
-    expect:
-        () => [
-          const CheckInState(
-            connectionStatus: ConnectionStatus.connecting,
-            isLoading: true,
-          ),
-          const CheckInState(
-            connectionStatus: ConnectionStatus.connected,
-            isLoading: false,
-            toastStatus: ToastStatus.showing,
-            toastMessage: 'Connected to backend (placeholder)',
-          ),
-        ],
-  );
-
-  blocTest<CheckInBloc, CheckInState>(
-    'emits debug mode toggled state',
-    build: () => checkInBloc,
-    act: (bloc) => bloc.add(const CheckInEvent.debugModeToggled()),
-    expect:
-        () => [
-          const CheckInState(
-            isDebugMode: true,
-            toastStatus: ToastStatus.showing,
-            toastMessage: 'Debug mode enabled',
-          ),
-        ],
-  );
-
-  blocTest<CheckInBloc, CheckInState>(
-    'resets statistics on StatisticsReset',
-    build: () => checkInBloc,
-    seed: () => const CheckInState(framesProcessed: 10),
-    act: (bloc) => bloc.add(const CheckInEvent.statisticsReset()),
-    expect:
-        () => [
-          const CheckInState(
-            framesProcessed: 0,
-            lastRecognitionTime: null,
-            toastStatus: ToastStatus.showing,
-            toastMessage: 'Statistics reset',
-          ),
-        ],
-  );
 }
