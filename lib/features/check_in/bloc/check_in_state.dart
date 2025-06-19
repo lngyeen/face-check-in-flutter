@@ -55,6 +55,12 @@ enum ConnectionStatus {
 
   /// Connection failed
   failed,
+
+  /// Connection timed out
+  timeout,
+
+  /// Retrying to connect
+  retrying,
 }
 
 /// Represents the current streaming status
@@ -156,8 +162,10 @@ extension ConnectionStatusX on ConnectionStatus {
       case ConnectionStatus.connected:
         return Colors.green;
       case ConnectionStatus.failed:
+      case ConnectionStatus.timeout:
         return Colors.red;
       case ConnectionStatus.connecting:
+      case ConnectionStatus.retrying:
         return Colors.orange;
       case ConnectionStatus.disconnected:
         return Colors.grey;

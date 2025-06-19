@@ -12,6 +12,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:stream_transform/stream_transform.dart';
 
+import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
@@ -22,6 +23,8 @@ class MockCheckInBloc extends MockBloc<CheckInEvent, CheckInState>
     implements CheckInBloc {}
 
 class MockPermissionService extends Mock implements ps.PermissionService {}
+
+class MockWebSocketService extends Mock implements WebSocketService {}
 
 class FakeCameraDescription extends Fake implements cpi.CameraDescription {
   @override
@@ -207,15 +210,24 @@ void main() {
 
   late CheckInBloc checkInBloc;
   late MockPermissionService mockPermissionService;
+  late MockWebSocketService mockWebSocketService;
   late FakeCameraPlatform fakeCameraPlatform;
 
   setUp(() {
     mockPermissionService = MockPermissionService();
-
+    mockWebSocketService = MockWebSocketService();
     fakeCameraPlatform = FakeCameraPlatform();
     cpi.CameraPlatform.instance = fakeCameraPlatform;
 
-    checkInBloc = CheckInBloc(mockPermissionService);
+    // Mock the connection status stream
+    when(
+      () => mockWebSocketService.connectionStatusStream,
+    ).thenAnswer((_) => Stream.fromIterable([]));
+    when(() => mockWebSocketService.initialize()).thenAnswer((_) {});
+    when(() => mockWebSocketService.connect()).thenAnswer((_) async {});
+    when(() => mockWebSocketService.disconnect()).thenAnswer((_) async {});
+
+    checkInBloc = CheckInBloc(mockPermissionService, mockWebSocketService);
   });
 
   tearDown(() {
@@ -316,20 +328,9 @@ void main() {
     'emits updated state on ConnectionRequested',
     build: () => checkInBloc,
     act: (bloc) => bloc.add(const CheckInEvent.connectionRequested()),
-    wait: const Duration(milliseconds: 2000),
-    expect:
-        () => [
-          const CheckInState(
-            connectionStatus: ConnectionStatus.connecting,
-            isLoading: true,
-          ),
-          const CheckInState(
-            connectionStatus: ConnectionStatus.connected,
-            isLoading: false,
-            toastStatus: ToastStatus.showing,
-            toastMessage: 'Connected to backend (placeholder)',
-          ),
-        ],
+    verify: (_) {
+      verify(() => mockWebSocketService.connect()).called(1);
+    },
   );
 
   blocTest<CheckInBloc, CheckInState>(

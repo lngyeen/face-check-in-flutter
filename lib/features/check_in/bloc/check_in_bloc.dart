@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
@@ -5,6 +7,7 @@ import 'package:camera/camera.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
 
@@ -17,8 +20,11 @@ part 'check_in_state.dart';
 @injectable
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   final ps.PermissionService _permissionService;
+  final WebSocketService _webSocketService;
+  StreamSubscription? _webSocketStatusSubscription;
 
-  CheckInBloc(this._permissionService) : super(const CheckInState()) {
+  CheckInBloc(this._permissionService, this._webSocketService)
+    : super(const CheckInState()) {
     // App lifecycle events
     on<AppStarted>(_onAppStarted);
     on<AppDisposed>(_onAppDisposed);
@@ -66,6 +72,11 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('🚀 CheckInBloc: App started - initializing...');
+    _webSocketService.initialize();
+    _webSocketStatusSubscription = _webSocketService.connectionStatusStream
+        .listen((status) {
+          add(ConnectionStatusChanged(status));
+        });
 
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
@@ -98,6 +109,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) async {
     debugPrint('🔴 CheckInBloc: App disposing - cleaning up...');
     await state.cameraController?.dispose();
+    await _webSocketStatusSubscription?.cancel();
+    _webSocketService.dispose();
     // Clean up resources
     emit(
       state.copyWith(
@@ -183,6 +196,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
           toastMessage: 'Camera ready',
         ),
       );
+      add(const ConnectionRequested());
     } catch (e) {
       debugPrint('❌ CheckInBloc: Camera initialization failed: $e');
       emit(
@@ -263,55 +277,29 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Placeholder - will be implemented in Story 1.2
   }
 
-  // WebSocket event handlers (placeholders for future integration)
+  // WebSocket event handlers
   Future<void> _onConnectionRequested(
     ConnectionRequested event,
     Emitter<CheckInState> emit,
   ) async {
-    debugPrint('🌐 CheckInBloc: WebSocket connection requested');
-
-    emit(
-      state.copyWith(
-        connectionStatus: ConnectionStatus.connecting,
-        isLoading: true,
-      ),
-    );
-
-    // Placeholder for WebSocket connection logic
-    // This will be implemented in Story 2.1
-    await Future.delayed(const Duration(milliseconds: 2000));
-
-    emit(
-      state.copyWith(
-        connectionStatus: ConnectionStatus.connected,
-        isLoading: false,
-        toastStatus: ToastStatus.showing,
-        toastMessage: 'Connected to backend (placeholder)',
-      ),
-    );
+    await _webSocketService.connect();
   }
 
   Future<void> _onConnectionStatusChanged(
     ConnectionStatusChanged event,
     Emitter<CheckInState> emit,
   ) async {
-    debugPrint('🌐 CheckInBloc: Connection status changed to ${event.status}');
-
     emit(state.copyWith(connectionStatus: event.status));
+    if (event.status == ConnectionStatus.connected) {
+      // Potentially start streaming here if auto-connect is desired
+    }
   }
 
   Future<void> _onDisconnectionRequested(
     DisconnectionRequested event,
     Emitter<CheckInState> emit,
   ) async {
-    debugPrint('🌐 CheckInBloc: WebSocket disconnection requested');
-
-    emit(
-      state.copyWith(
-        connectionStatus: ConnectionStatus.disconnected,
-        streamingStatus: StreamingStatus.idle,
-      ),
-    );
+    await _webSocketService.disconnect();
   }
 
   // Streaming event handlers (placeholders for future integration)
