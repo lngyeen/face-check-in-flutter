@@ -183,9 +183,9 @@
 
 | P | ID | Story Title | Story File | Assignee | SP | Complexity | Risk | Status | Dependencies |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | 1.1 | Project Foundation & BLoC Architecture | `docs/stories/1.1.story.md` | Senior Dev #1 | 16 | High | Medium | Review | None |
-| 2 | 1.2 | Live Camera Integration & Permissions | `docs/stories/1.2.story.md` | Senior Dev #1 | 15 | High | Medium | Approved | 1.1 |
-| 3 | 1.3 | Debug System Implementation | `docs/stories/1.3.story.md` | Senior Dev #2 | 6 | Medium | Low | Approved | 1.1 |
+| 1 | 1.1 | Project Foundation & BLoC Architecture | `docs/stories/1.1.story.md` | Senior Dev #1 | 16 | High | Medium | Done | None |
+| 2 | 1.2 | Live Camera Integration & Permissions | `docs/stories/1.2.story.md` | Senior Dev #1 | 15 | High | Medium | Done | 1.1 |
+| 3 | 1.3 | Debug System Implementation | `docs/stories/1.3.story.md` | Senior Dev #2 | 6 | Medium | Low | Done | 1.1 |
 | 4 | 2.1 | WebSocket Connection & Service Foundation | `docs/stories/2.1.story.md` | Senior Dev #1 | 12 | High | Medium | Approved | 1.1, 1.2 |
 | 5 | 2.2 | Camera Frame Streaming & Processing | `docs/stories/2.2.story.md` | Senior Dev #1 | 16 | Very High | High | Approved | 2.1, 1.2 |
 | 6 | 2.3 | Backend Response Processing & User Feedback | `docs/stories/2.3.story.md` | Senior Dev #2 | 5 | Medium | Low-Medium | Approved | 2.1 |
