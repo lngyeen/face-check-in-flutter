@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
+import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
 
@@ -574,23 +576,46 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) async {
     try {
       final faces =
-          event.faces.map((faceData) {
-            final box = faceData['box'] as List<dynamic>;
-            final boundingBox = Rect.fromLTWH(
-              (box[0] as num).toDouble(),
-              (box[1] as num).toDouble(),
-              (box[2] as num).toDouble(),
-              (box[3] as num).toDouble(),
-            );
-            final confidence = (faceData['confidence'] as num).toDouble();
+          event.faces
+              .map((faceData) => FaceDetectionResult.fromJson(faceData))
+              .toList();
 
-            return Face(boundingBox: boundingBox, confidence: confidence);
-          }).toList();
+      final now = DateTime.now();
+      FaceDetectionStatus newFaceStatus;
+      double newFaceConfidence = 0.0;
+
+      if (faces.isEmpty) {
+        newFaceStatus = FaceDetectionStatus.noFace;
+      } else if (faces.length == 1) {
+        final face = faces.first;
+        newFaceConfidence = face.confidence;
+        newFaceStatus =
+            face.confidence > 0.7
+                ? FaceDetectionStatus.faceFound
+                : FaceDetectionStatus.detecting;
+      } else {
+        newFaceStatus = FaceDetectionStatus.multipleFaces;
+        newFaceConfidence = faces.map((f) => f.confidence).reduce(max);
+      }
+
+      // History tracking to prevent flickering
+      var finalFaceStatus = newFaceStatus;
+      if (newFaceStatus == FaceDetectionStatus.noFace &&
+          state.faceStatus == FaceDetectionStatus.faceFound) {
+        if (state.lastFaceDetection != null &&
+            now.difference(state.lastFaceDetection!).inMilliseconds < 500) {
+          // 500ms tolerance
+          finalFaceStatus =
+              FaceDetectionStatus.faceFound; // Keep old status for a bit
+        }
+      }
 
       emit(
         state.copyWith(
           detectedFaces: faces,
-          lastRecognitionTime: DateTime.now(),
+          faceStatus: finalFaceStatus,
+          faceConfidence: newFaceConfidence,
+          lastFaceDetection: now,
         ),
       );
     } catch (e) {

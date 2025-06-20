@@ -11369,10 +11369,14 @@ mixin _$CheckInState {
   int get failedRecognitions => throw _privateConstructorUsedError;
 
   /// Detected faces
-  List<Face> get detectedFaces => throw _privateConstructorUsedError;
+  List<FaceDetectionResult> get detectedFaces =>
+      throw _privateConstructorUsedError;
 
   /// Last frame sent time
   DateTime? get lastFrameSentTime => throw _privateConstructorUsedError;
+  FaceDetectionStatus get faceStatus => throw _privateConstructorUsedError;
+  double get faceConfidence => throw _privateConstructorUsedError;
+  DateTime? get lastFaceDetection => throw _privateConstructorUsedError;
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.
@@ -11406,8 +11410,11 @@ abstract class $CheckInStateCopyWith<$Res> {
     int totalFramesProcessed,
     int successfulRecognitions,
     int failedRecognitions,
-    List<Face> detectedFaces,
+    List<FaceDetectionResult> detectedFaces,
     DateTime? lastFrameSentTime,
+    FaceDetectionStatus faceStatus,
+    double faceConfidence,
+    DateTime? lastFaceDetection,
   });
 }
 
@@ -11445,6 +11452,9 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
     Object? failedRecognitions = null,
     Object? detectedFaces = null,
     Object? lastFrameSentTime = freezed,
+    Object? faceStatus = null,
+    Object? faceConfidence = null,
+    Object? lastFaceDetection = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -11537,11 +11547,26 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
                 null == detectedFaces
                     ? _value.detectedFaces
                     : detectedFaces // ignore: cast_nullable_to_non_nullable
-                        as List<Face>,
+                        as List<FaceDetectionResult>,
             lastFrameSentTime:
                 freezed == lastFrameSentTime
                     ? _value.lastFrameSentTime
                     : lastFrameSentTime // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            faceStatus:
+                null == faceStatus
+                    ? _value.faceStatus
+                    : faceStatus // ignore: cast_nullable_to_non_nullable
+                        as FaceDetectionStatus,
+            faceConfidence:
+                null == faceConfidence
+                    ? _value.faceConfidence
+                    : faceConfidence // ignore: cast_nullable_to_non_nullable
+                        as double,
+            lastFaceDetection:
+                freezed == lastFaceDetection
+                    ? _value.lastFaceDetection
+                    : lastFaceDetection // ignore: cast_nullable_to_non_nullable
                         as DateTime?,
           )
           as $Val,
@@ -11576,8 +11601,11 @@ abstract class _$$CheckInStateImplCopyWith<$Res>
     int totalFramesProcessed,
     int successfulRecognitions,
     int failedRecognitions,
-    List<Face> detectedFaces,
+    List<FaceDetectionResult> detectedFaces,
     DateTime? lastFrameSentTime,
+    FaceDetectionStatus faceStatus,
+    double faceConfidence,
+    DateTime? lastFaceDetection,
   });
 }
 
@@ -11614,6 +11642,9 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
     Object? failedRecognitions = null,
     Object? detectedFaces = null,
     Object? lastFrameSentTime = freezed,
+    Object? faceStatus = null,
+    Object? faceConfidence = null,
+    Object? lastFaceDetection = freezed,
   }) {
     return _then(
       _$CheckInStateImpl(
@@ -11706,11 +11737,26 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
             null == detectedFaces
                 ? _value._detectedFaces
                 : detectedFaces // ignore: cast_nullable_to_non_nullable
-                    as List<Face>,
+                    as List<FaceDetectionResult>,
         lastFrameSentTime:
             freezed == lastFrameSentTime
                 ? _value.lastFrameSentTime
                 : lastFrameSentTime // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        faceStatus:
+            null == faceStatus
+                ? _value.faceStatus
+                : faceStatus // ignore: cast_nullable_to_non_nullable
+                    as FaceDetectionStatus,
+        faceConfidence:
+            null == faceConfidence
+                ? _value.faceConfidence
+                : faceConfidence // ignore: cast_nullable_to_non_nullable
+                    as double,
+        lastFaceDetection:
+            freezed == lastFaceDetection
+                ? _value.lastFaceDetection
+                : lastFaceDetection // ignore: cast_nullable_to_non_nullable
                     as DateTime?,
       ),
     );
@@ -11738,8 +11784,11 @@ class _$CheckInStateImpl with DiagnosticableTreeMixin implements _CheckInState {
     this.totalFramesProcessed = 0,
     this.successfulRecognitions = 0,
     this.failedRecognitions = 0,
-    final List<Face> detectedFaces = const [],
+    final List<FaceDetectionResult> detectedFaces = const [],
     this.lastFrameSentTime,
+    this.faceStatus = FaceDetectionStatus.none,
+    this.faceConfidence = 0.0,
+    this.lastFaceDetection,
   }) : _detectedFaces = detectedFaces;
 
   /// Current camera status
@@ -11820,12 +11869,12 @@ class _$CheckInStateImpl with DiagnosticableTreeMixin implements _CheckInState {
   final int failedRecognitions;
 
   /// Detected faces
-  final List<Face> _detectedFaces;
+  final List<FaceDetectionResult> _detectedFaces;
 
   /// Detected faces
   @override
   @JsonKey()
-  List<Face> get detectedFaces {
+  List<FaceDetectionResult> get detectedFaces {
     if (_detectedFaces is EqualUnmodifiableListView) return _detectedFaces;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_detectedFaces);
@@ -11834,10 +11883,18 @@ class _$CheckInStateImpl with DiagnosticableTreeMixin implements _CheckInState {
   /// Last frame sent time
   @override
   final DateTime? lastFrameSentTime;
+  @override
+  @JsonKey()
+  final FaceDetectionStatus faceStatus;
+  @override
+  @JsonKey()
+  final double faceConfidence;
+  @override
+  final DateTime? lastFaceDetection;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, connectionAttempts: $connectionAttempts, connectionError: $connectionError, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed, totalFramesProcessed: $totalFramesProcessed, successfulRecognitions: $successfulRecognitions, failedRecognitions: $failedRecognitions, detectedFaces: $detectedFaces, lastFrameSentTime: $lastFrameSentTime)';
+    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, connectionAttempts: $connectionAttempts, connectionError: $connectionError, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed, totalFramesProcessed: $totalFramesProcessed, successfulRecognitions: $successfulRecognitions, failedRecognitions: $failedRecognitions, detectedFaces: $detectedFaces, lastFrameSentTime: $lastFrameSentTime, faceStatus: $faceStatus, faceConfidence: $faceConfidence, lastFaceDetection: $lastFaceDetection)';
   }
 
   @override
@@ -11865,7 +11922,10 @@ class _$CheckInStateImpl with DiagnosticableTreeMixin implements _CheckInState {
       )
       ..add(DiagnosticsProperty('failedRecognitions', failedRecognitions))
       ..add(DiagnosticsProperty('detectedFaces', detectedFaces))
-      ..add(DiagnosticsProperty('lastFrameSentTime', lastFrameSentTime));
+      ..add(DiagnosticsProperty('lastFrameSentTime', lastFrameSentTime))
+      ..add(DiagnosticsProperty('faceStatus', faceStatus))
+      ..add(DiagnosticsProperty('faceConfidence', faceConfidence))
+      ..add(DiagnosticsProperty('lastFaceDetection', lastFaceDetection));
   }
 
   @override
@@ -11912,7 +11972,13 @@ class _$CheckInStateImpl with DiagnosticableTreeMixin implements _CheckInState {
               _detectedFaces,
             ) &&
             (identical(other.lastFrameSentTime, lastFrameSentTime) ||
-                other.lastFrameSentTime == lastFrameSentTime));
+                other.lastFrameSentTime == lastFrameSentTime) &&
+            (identical(other.faceStatus, faceStatus) ||
+                other.faceStatus == faceStatus) &&
+            (identical(other.faceConfidence, faceConfidence) ||
+                other.faceConfidence == faceConfidence) &&
+            (identical(other.lastFaceDetection, lastFaceDetection) ||
+                other.lastFaceDetection == lastFaceDetection));
   }
 
   @override
@@ -11937,6 +12003,9 @@ class _$CheckInStateImpl with DiagnosticableTreeMixin implements _CheckInState {
     failedRecognitions,
     const DeepCollectionEquality().hash(_detectedFaces),
     lastFrameSentTime,
+    faceStatus,
+    faceConfidence,
+    lastFaceDetection,
   ]);
 
   /// Create a copy of CheckInState
@@ -11967,8 +12036,11 @@ abstract class _CheckInState implements CheckInState {
     final int totalFramesProcessed,
     final int successfulRecognitions,
     final int failedRecognitions,
-    final List<Face> detectedFaces,
+    final List<FaceDetectionResult> detectedFaces,
     final DateTime? lastFrameSentTime,
+    final FaceDetectionStatus faceStatus,
+    final double faceConfidence,
+    final DateTime? lastFaceDetection,
   }) = _$CheckInStateImpl;
 
   /// Current camera status
@@ -12037,11 +12109,17 @@ abstract class _CheckInState implements CheckInState {
 
   /// Detected faces
   @override
-  List<Face> get detectedFaces;
+  List<FaceDetectionResult> get detectedFaces;
 
   /// Last frame sent time
   @override
   DateTime? get lastFrameSentTime;
+  @override
+  FaceDetectionStatus get faceStatus;
+  @override
+  double get faceConfidence;
+  @override
+  DateTime? get lastFaceDetection;
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.

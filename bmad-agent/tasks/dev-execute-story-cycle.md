@@ -29,7 +29,10 @@
         -   **If not found**: Announce "No 'Approved' or 'InProgress' stories are assigned to `[Selected Identity]`. Halting." and end the task.
         -   **If found**: 
             - Announce the story: "Found assigned story: `[Story ID] - [Story Title]`."
-            - **Action**: Load the corresponding story file (path from the `Story File` column) to prepare for implementation.
+            - **Action**: Load the corresponding story file (path from the `Story File` column).
+            - **Action**: Check the loaded story file to determine its completion status by checking if all tasks (`- [ ]`) are marked as complete (`- [x]`).
+                - **If complete**: Announce "Story `[Story ID]` is already marked as fully complete. No further action is needed." and end the task.
+                - **If incomplete**: Announce "Story `[Story ID]` has pending tasks. I will now proceed with implementation." and continue to the next step.
 
 5.  **Intelligent Branch Creation**:
     -   **Action**: Analyze the story's title to determine the appropriate branch prefix.
@@ -56,7 +59,7 @@
 
 2.  **Begin Phase Loop**: Iterate through each identified Phase sequentially.
     -   **A. Announce Phase**: "Starting Phase: `[Phase Title]`."
-    -   **B. Begin Task Loop**: For each `Task` within the current Phase:
+    -   **B. Begin Task Loop**: For each `Task` within the current Phase, check if it is marked complete (`[x]`). If it is not, execute the following steps. If complete, silently skip to the next task.
         -   **i. Announce Task**: "Starting Task: `[Task Title]`."
         -   **ii. Execute Sub-Tasks**: Focus ONLY on the currently announced task. Complete all of its sub-tasks (`- [ ]`). Do not proceed to other tasks in the story file. Implement code, write tests, and perform self-correction for the current task only.
         -   **iii. Run Tests & Fix**: Run all relevant unit and widget tests. If any tests fail due to the changes, fix them until all tests pass.

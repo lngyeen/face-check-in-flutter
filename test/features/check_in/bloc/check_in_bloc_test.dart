@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:camera_platform_interface/camera_platform_interface.dart'
     as cpi;
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -198,13 +197,12 @@ void main() {
       blocTest<CheckInBloc, CheckInState>(
         'StreamingFailed should update status to error and set message',
         build: () => checkInBloc,
-        act:
-            (bloc) => bloc.add(const CheckInEvent.streamingFailed('error msg')),
+        act: (bloc) => bloc.add(const CheckInEvent.streamingFailed('error')),
         expect:
             () => <CheckInState>[
               const CheckInState(
                 streamingStatus: StreamingStatus.error,
-                errorMessage: 'error msg',
+                errorMessage: 'error',
               ),
             ],
       );
@@ -217,7 +215,7 @@ void main() {
         act:
             (bloc) => bloc.add(
               const CheckInEvent.webSocketMessageReceived(
-                '{"type": "frameResult", "faces": [{"box": [10.0, 20.0, 30.0, 40.0], "confidence": 0.9}]}',
+                '{"type": "frameResult", "faces": [{"x": 10.0, "y": 20.0, "width": 30.0, "height": 40.0, "confidence": 0.9}]}',
               ),
             ),
         expect:
@@ -225,10 +223,11 @@ void main() {
               predicate<CheckInState>((state) {
                 if (state.detectedFaces.length != 1) return false;
                 final face = state.detectedFaces.first;
-                return face.boundingBox ==
-                        const Rect.fromLTWH(10, 20, 30, 40) &&
-                    face.confidence == 0.9 &&
-                    state.lastRecognitionTime != null;
+                return face.x == 10.0 &&
+                    face.y == 20.0 &&
+                    face.width == 30.0 &&
+                    face.height == 40.0 &&
+                    face.confidence == 0.9;
               }),
             ],
       );
@@ -324,6 +323,149 @@ void main() {
                 failedRecognitions: 1,
                 toastStatus: ToastStatus.showing,
                 toastMessage: 'Recognition failed: Not recognized',
+              ),
+            ],
+      );
+    });
+
+    group('FrameResultReceived', () {
+      final tFaceLowConfidence = {
+        'x': 10.0,
+        'y': 20.0,
+        'width': 100.0,
+        'height': 100.0,
+        'confidence': 0.5,
+      };
+      final tFaceHighConfidence = {
+        'x': 10.0,
+        'y': 20.0,
+        'width': 100.0,
+        'height': 100.0,
+        'confidence': 0.8,
+      };
+
+      blocTest<CheckInBloc, CheckInState>(
+        'emits noFace status when no faces are received',
+        build: () => checkInBloc,
+        act:
+            (bloc) =>
+                bloc.add(const CheckInEvent.frameResultReceived(faces: [])),
+        expect:
+            () => <dynamic>[
+              isA<CheckInState>()
+                  .having(
+                    (s) => s.faceStatus,
+                    'faceStatus',
+                    FaceDetectionStatus.noFace,
+                  )
+                  .having((s) => s.detectedFaces, 'detectedFaces', isEmpty),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'emits detecting status for one face with low confidence',
+        build: () => checkInBloc,
+        act:
+            (bloc) => bloc.add(
+              CheckInEvent.frameResultReceived(faces: [tFaceLowConfidence]),
+            ),
+        expect:
+            () => <dynamic>[
+              isA<CheckInState>()
+                  .having(
+                    (s) => s.faceStatus,
+                    'faceStatus',
+                    FaceDetectionStatus.detecting,
+                  )
+                  .having((s) => s.faceConfidence, 'faceConfidence', 0.5)
+                  .having(
+                    (s) => s.detectedFaces.length,
+                    'detectedFaces.length',
+                    1,
+                  ),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'emits faceFound status for one face with high confidence',
+        build: () => checkInBloc,
+        act:
+            (bloc) => bloc.add(
+              CheckInEvent.frameResultReceived(faces: [tFaceHighConfidence]),
+            ),
+        expect:
+            () => <dynamic>[
+              isA<CheckInState>()
+                  .having(
+                    (s) => s.faceStatus,
+                    'faceStatus',
+                    FaceDetectionStatus.faceFound,
+                  )
+                  .having((s) => s.faceConfidence, 'faceConfidence', 0.8),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'emits multipleFaces status for multiple faces',
+        build: () => checkInBloc,
+        act:
+            (bloc) => bloc.add(
+              CheckInEvent.frameResultReceived(
+                faces: [tFaceLowConfidence, tFaceHighConfidence],
+              ),
+            ),
+        expect:
+            () => <dynamic>[
+              isA<CheckInState>()
+                  .having(
+                    (s) => s.faceStatus,
+                    'faceStatus',
+                    FaceDetectionStatus.multipleFaces,
+                  )
+                  .having((s) => s.faceConfidence, 'faceConfidence', 0.8),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'history logic prevents flickering from faceFound to noFace',
+        build: () => checkInBloc,
+        seed:
+            () => CheckInState(
+              faceStatus: FaceDetectionStatus.faceFound,
+              lastFaceDetection: DateTime.now(),
+            ),
+        act:
+            (bloc) =>
+                bloc.add(const CheckInEvent.frameResultReceived(faces: [])),
+        expect:
+            () => <dynamic>[
+              isA<CheckInState>().having(
+                (s) => s.faceStatus,
+                'faceStatus',
+                FaceDetectionStatus.faceFound,
+              ),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'history logic allows change to noFace after a delay',
+        build: () => checkInBloc,
+        seed:
+            () => CheckInState(
+              faceStatus: FaceDetectionStatus.faceFound,
+              lastFaceDetection: DateTime.now().subtract(
+                const Duration(milliseconds: 600),
+              ),
+            ),
+        act:
+            (bloc) =>
+                bloc.add(const CheckInEvent.frameResultReceived(faces: [])),
+        expect:
+            () => <dynamic>[
+              isA<CheckInState>().having(
+                (s) => s.faceStatus,
+                'faceStatus',
+                FaceDetectionStatus.noFace,
               ),
             ],
       );

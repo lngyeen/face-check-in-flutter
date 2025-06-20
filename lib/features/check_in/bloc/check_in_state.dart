@@ -66,6 +66,15 @@ enum ToastStatus {
   showing,
 }
 
+enum FaceDetectionStatus {
+  none,
+  detecting,
+  faceFound,
+  multipleFaces,
+  noFace,
+  error,
+}
+
 /// Main state for the check-in feature
 /// Contains all state information needed for camera, WebSocket, and UI management
 @freezed
@@ -121,19 +130,14 @@ class CheckInState with _$CheckInState {
     @Default(0) int failedRecognitions,
 
     /// Detected faces
-    @Default([]) List<Face> detectedFaces,
+    @Default([]) List<FaceDetectionResult> detectedFaces,
 
     /// Last frame sent time
     DateTime? lastFrameSentTime,
+    @Default(FaceDetectionStatus.none) FaceDetectionStatus faceStatus,
+    @Default(0.0) double faceConfidence,
+    DateTime? lastFaceDetection,
   }) = _CheckInState;
-}
-
-class Face {
-  final Rect boundingBox;
-  final double confidence;
-  final String? name;
-
-  Face({required this.boundingBox, required this.confidence, this.name});
 }
 
 // --- UI Helper Extensions ---
