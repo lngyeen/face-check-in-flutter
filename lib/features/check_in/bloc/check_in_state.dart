@@ -122,6 +122,9 @@ class CheckInState with _$CheckInState {
 
     /// Detected faces
     @Default([]) List<Face> detectedFaces,
+
+    /// Last frame sent time
+    DateTime? lastFrameSentTime,
   }) = _CheckInState;
 }
 

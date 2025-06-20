@@ -282,12 +282,18 @@ class __$$AppStartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AppStartedImpl implements AppStarted {
+class _$AppStartedImpl with DiagnosticableTreeMixin implements AppStarted {
   const _$AppStartedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.appStarted()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'CheckInEvent.appStarted'));
   }
 
   @override
@@ -575,12 +581,18 @@ class __$$AppDisposedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AppDisposedImpl implements AppDisposed {
+class _$AppDisposedImpl with DiagnosticableTreeMixin implements AppDisposed {
   const _$AppDisposedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.appDisposed()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'CheckInEvent.appDisposed'));
   }
 
   @override
@@ -868,12 +880,22 @@ class __$$CameraPermissionRequestedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
+class _$CameraPermissionRequestedImpl
+    with DiagnosticableTreeMixin
+    implements CameraPermissionRequested {
   const _$CameraPermissionRequestedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraPermissionRequested()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(
+      DiagnosticsProperty('type', 'CheckInEvent.cameraPermissionRequested'),
+    );
   }
 
   @override
@@ -1162,12 +1184,22 @@ class __$$CameraPermissionGrantedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
+class _$CameraPermissionGrantedImpl
+    with DiagnosticableTreeMixin
+    implements CameraPermissionGranted {
   const _$CameraPermissionGrantedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraPermissionGranted()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(
+      DiagnosticsProperty('type', 'CheckInEvent.cameraPermissionGranted'),
+    );
   }
 
   @override
@@ -1456,12 +1488,21 @@ class __$$CameraPermissionDeniedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
+class _$CameraPermissionDeniedImpl
+    with DiagnosticableTreeMixin
+    implements CameraPermissionDenied {
   const _$CameraPermissionDeniedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraPermissionDenied()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraPermissionDenied'));
   }
 
   @override
@@ -1750,12 +1791,21 @@ class __$$CameraInitRequestedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraInitRequestedImpl implements CameraInitRequested {
+class _$CameraInitRequestedImpl
+    with DiagnosticableTreeMixin
+    implements CameraInitRequested {
   const _$CameraInitRequestedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraInitRequested()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraInitRequested'));
   }
 
   @override
@@ -2044,12 +2094,20 @@ class __$$CameraStartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraStartedImpl implements CameraStarted {
+class _$CameraStartedImpl
+    with DiagnosticableTreeMixin
+    implements CameraStarted {
   const _$CameraStartedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraStarted()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'CheckInEvent.cameraStarted'));
   }
 
   @override
@@ -2337,12 +2395,18 @@ class __$$CameraPausedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPausedImpl implements CameraPaused {
+class _$CameraPausedImpl with DiagnosticableTreeMixin implements CameraPaused {
   const _$CameraPausedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraPaused()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'CheckInEvent.cameraPaused'));
   }
 
   @override
@@ -2630,12 +2694,20 @@ class __$$CameraResumedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraResumedImpl implements CameraResumed {
+class _$CameraResumedImpl
+    with DiagnosticableTreeMixin
+    implements CameraResumed {
   const _$CameraResumedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraResumed()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'CheckInEvent.cameraResumed'));
   }
 
   @override
@@ -2923,12 +2995,20 @@ class __$$CameraStoppedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraStoppedImpl implements CameraStopped {
+class _$CameraStoppedImpl
+    with DiagnosticableTreeMixin
+    implements CameraStopped {
   const _$CameraStoppedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraStopped()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'CheckInEvent.cameraStopped'));
   }
 
   @override
@@ -3230,15 +3310,25 @@ class __$$CameraStatusChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraStatusChangedImpl implements CameraStatusChanged {
+class _$CameraStatusChangedImpl
+    with DiagnosticableTreeMixin
+    implements CameraStatusChanged {
   const _$CameraStatusChangedImpl(this.status);
 
   @override
   final CameraStatus status;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraStatusChanged(status: $status)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraStatusChanged'))
+      ..add(DiagnosticsProperty('status', status));
   }
 
   @override
@@ -3548,12 +3638,21 @@ class __$$CameraPreviewStartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
+class _$CameraPreviewStartedImpl
+    with DiagnosticableTreeMixin
+    implements CameraPreviewStarted {
   const _$CameraPreviewStartedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraPreviewStarted()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraPreviewStarted'));
   }
 
   @override
@@ -3842,12 +3941,21 @@ class __$$CameraPreviewStoppedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
+class _$CameraPreviewStoppedImpl
+    with DiagnosticableTreeMixin
+    implements CameraPreviewStopped {
   const _$CameraPreviewStoppedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraPreviewStopped()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraPreviewStopped'));
   }
 
   @override
@@ -4137,12 +4245,21 @@ class __$$WebSocketConnectionRequestedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$WebSocketConnectionRequestedImpl
+    with DiagnosticableTreeMixin
     implements WebSocketConnectionRequested {
   const _$WebSocketConnectionRequestedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.webSocketConnectionRequested()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(
+      DiagnosticsProperty('type', 'CheckInEvent.webSocketConnectionRequested'),
+    );
   }
 
   @override
@@ -4446,15 +4563,25 @@ class __$$WebSocketStatusChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
+class _$WebSocketStatusChangedImpl
+    with DiagnosticableTreeMixin
+    implements WebSocketStatusChanged {
   const _$WebSocketStatusChangedImpl(this.status);
 
   @override
   final ConnectionStatus status;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.webSocketStatusChanged(status: $status)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.webSocketStatusChanged'))
+      ..add(DiagnosticsProperty('status', status));
   }
 
   @override
@@ -4767,12 +4894,24 @@ class __$$WebSocketDisconnectionRequestedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$WebSocketDisconnectionRequestedImpl
+    with DiagnosticableTreeMixin
     implements WebSocketDisconnectionRequested {
   const _$WebSocketDisconnectionRequestedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.webSocketDisconnectionRequested()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(
+      DiagnosticsProperty(
+        'type',
+        'CheckInEvent.webSocketDisconnectionRequested',
+      ),
+    );
   }
 
   @override
@@ -5076,15 +5215,27 @@ class __$$WebSocketMessageReceivedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
+class _$WebSocketMessageReceivedImpl
+    with DiagnosticableTreeMixin
+    implements WebSocketMessageReceived {
   const _$WebSocketMessageReceivedImpl(this.message);
 
   @override
   final String message;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.webSocketMessageReceived(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        DiagnosticsProperty('type', 'CheckInEvent.webSocketMessageReceived'),
+      )
+      ..add(DiagnosticsProperty('message', message));
   }
 
   @override
@@ -5393,12 +5544,21 @@ class __$$StreamingStartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StreamingStartedImpl implements StreamingStarted {
+class _$StreamingStartedImpl
+    with DiagnosticableTreeMixin
+    implements StreamingStarted {
   const _$StreamingStartedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.streamingStarted()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.streamingStarted'));
   }
 
   @override
@@ -5686,12 +5846,21 @@ class __$$StreamingStoppedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StreamingStoppedImpl implements StreamingStopped {
+class _$StreamingStoppedImpl
+    with DiagnosticableTreeMixin
+    implements StreamingStopped {
   const _$StreamingStoppedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.streamingStopped()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.streamingStopped'));
   }
 
   @override
@@ -5993,15 +6162,25 @@ class __$$StreamingStatusChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
+class _$StreamingStatusChangedImpl
+    with DiagnosticableTreeMixin
+    implements StreamingStatusChanged {
   const _$StreamingStatusChangedImpl(this.status);
 
   @override
   final StreamingStatus status;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.streamingStatusChanged(status: $status)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.streamingStatusChanged'))
+      ..add(DiagnosticsProperty('status', status));
   }
 
   @override
@@ -6312,12 +6491,20 @@ class __$$FrameProcessedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FrameProcessedImpl implements FrameProcessed {
+class _$FrameProcessedImpl
+    with DiagnosticableTreeMixin
+    implements FrameProcessed {
   const _$FrameProcessedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.frameProcessed()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'CheckInEvent.frameProcessed'));
   }
 
   @override
@@ -6619,15 +6806,25 @@ class __$$FrameCapturedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FrameCapturedImpl implements _FrameCaptured {
+class _$FrameCapturedImpl
+    with DiagnosticableTreeMixin
+    implements _FrameCaptured {
   const _$FrameCapturedImpl(this.image);
 
   @override
   final CameraImage image;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.frameCaptured(image: $image)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.frameCaptured'))
+      ..add(DiagnosticsProperty('image', image));
   }
 
   @override
@@ -6947,15 +7144,25 @@ class __$$ErrorOccurredImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorOccurredImpl implements ErrorOccurred {
+class _$ErrorOccurredImpl
+    with DiagnosticableTreeMixin
+    implements ErrorOccurred {
   const _$ErrorOccurredImpl(this.message);
 
   @override
   final String message;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.errorOccurred(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.errorOccurred'))
+      ..add(DiagnosticsProperty('message', message));
   }
 
   @override
@@ -7275,15 +7482,23 @@ class __$$CameraErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CameraErrorImpl implements CameraError {
+class _$CameraErrorImpl with DiagnosticableTreeMixin implements CameraError {
   const _$CameraErrorImpl(this.error);
 
   @override
   final String error;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.cameraError(error: $error)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.cameraError'))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
@@ -7589,12 +7804,18 @@ class __$$ErrorClearedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorClearedImpl implements ErrorCleared {
+class _$ErrorClearedImpl with DiagnosticableTreeMixin implements ErrorCleared {
   const _$ErrorClearedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.errorCleared()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'CheckInEvent.errorCleared'));
   }
 
   @override
@@ -7896,15 +8117,25 @@ class __$$ToastRequestedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ToastRequestedImpl implements ToastRequested {
+class _$ToastRequestedImpl
+    with DiagnosticableTreeMixin
+    implements ToastRequested {
   const _$ToastRequestedImpl(this.message);
 
   @override
   final String message;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.toastRequested(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.toastRequested'))
+      ..add(DiagnosticsProperty('message', message));
   }
 
   @override
@@ -8213,12 +8444,21 @@ class __$$DebugModeToggledImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DebugModeToggledImpl implements DebugModeToggled {
+class _$DebugModeToggledImpl
+    with DiagnosticableTreeMixin
+    implements DebugModeToggled {
   const _$DebugModeToggledImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.debugModeToggled()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.debugModeToggled'));
   }
 
   @override
@@ -8506,12 +8746,21 @@ class __$$StatisticsResetImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StatisticsResetImpl implements StatisticsReset {
+class _$StatisticsResetImpl
+    with DiagnosticableTreeMixin
+    implements StatisticsReset {
   const _$StatisticsResetImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.statisticsReset()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInEvent.statisticsReset'));
   }
 
   @override
@@ -8828,7 +9077,9 @@ class __$$RecognitionResultReceivedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
+class _$RecognitionResultReceivedImpl
+    with DiagnosticableTreeMixin
+    implements RecognitionResultReceived {
   const _$RecognitionResultReceivedImpl({
     required this.success,
     required this.message,
@@ -8843,8 +9094,20 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
   final String? employeeName;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CheckInEvent.recognitionResultReceived(success: $success, message: $message, employeeName: $employeeName)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        DiagnosticsProperty('type', 'CheckInEvent.recognitionResultReceived'),
+      )
+      ..add(DiagnosticsProperty('success', success))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('employeeName', employeeName));
   }
 
   @override
@@ -9191,6 +9454,9 @@ mixin _$CheckInState {
   /// Detected faces
   List<Face> get detectedFaces => throw _privateConstructorUsedError;
 
+  /// Last frame sent time
+  DateTime? get lastFrameSentTime => throw _privateConstructorUsedError;
+
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -9224,6 +9490,7 @@ abstract class $CheckInStateCopyWith<$Res> {
     int successfulRecognitions,
     int failedRecognitions,
     List<Face> detectedFaces,
+    DateTime? lastFrameSentTime,
   });
 }
 
@@ -9260,6 +9527,7 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
     Object? successfulRecognitions = null,
     Object? failedRecognitions = null,
     Object? detectedFaces = null,
+    Object? lastFrameSentTime = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -9353,6 +9621,11 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
                     ? _value.detectedFaces
                     : detectedFaces // ignore: cast_nullable_to_non_nullable
                         as List<Face>,
+            lastFrameSentTime:
+                freezed == lastFrameSentTime
+                    ? _value.lastFrameSentTime
+                    : lastFrameSentTime // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
           )
           as $Val,
     );
@@ -9387,6 +9660,7 @@ abstract class _$$CheckInStateImplCopyWith<$Res>
     int successfulRecognitions,
     int failedRecognitions,
     List<Face> detectedFaces,
+    DateTime? lastFrameSentTime,
   });
 }
 
@@ -9422,6 +9696,7 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
     Object? successfulRecognitions = null,
     Object? failedRecognitions = null,
     Object? detectedFaces = null,
+    Object? lastFrameSentTime = freezed,
   }) {
     return _then(
       _$CheckInStateImpl(
@@ -9515,6 +9790,11 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
                 ? _value._detectedFaces
                 : detectedFaces // ignore: cast_nullable_to_non_nullable
                     as List<Face>,
+        lastFrameSentTime:
+            freezed == lastFrameSentTime
+                ? _value.lastFrameSentTime
+                : lastFrameSentTime // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
       ),
     );
   }
@@ -9522,7 +9802,7 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CheckInStateImpl implements _CheckInState {
+class _$CheckInStateImpl with DiagnosticableTreeMixin implements _CheckInState {
   const _$CheckInStateImpl({
     this.cameraStatus = CameraStatus.initial,
     this.permissionStatus = PermissionStatus.initial,
@@ -9542,6 +9822,7 @@ class _$CheckInStateImpl implements _CheckInState {
     this.successfulRecognitions = 0,
     this.failedRecognitions = 0,
     final List<Face> detectedFaces = const [],
+    this.lastFrameSentTime,
   }) : _detectedFaces = detectedFaces;
 
   /// Current camera status
@@ -9633,9 +9914,41 @@ class _$CheckInStateImpl implements _CheckInState {
     return EqualUnmodifiableListView(_detectedFaces);
   }
 
+  /// Last frame sent time
   @override
-  String toString() {
-    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, connectionAttempts: $connectionAttempts, connectionError: $connectionError, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed, totalFramesProcessed: $totalFramesProcessed, successfulRecognitions: $successfulRecognitions, failedRecognitions: $failedRecognitions, detectedFaces: $detectedFaces)';
+  final DateTime? lastFrameSentTime;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, connectionAttempts: $connectionAttempts, connectionError: $connectionError, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed, totalFramesProcessed: $totalFramesProcessed, successfulRecognitions: $successfulRecognitions, failedRecognitions: $failedRecognitions, detectedFaces: $detectedFaces, lastFrameSentTime: $lastFrameSentTime)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CheckInState'))
+      ..add(DiagnosticsProperty('cameraStatus', cameraStatus))
+      ..add(DiagnosticsProperty('permissionStatus', permissionStatus))
+      ..add(DiagnosticsProperty('connectionStatus', connectionStatus))
+      ..add(DiagnosticsProperty('streamingStatus', streamingStatus))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
+      ..add(DiagnosticsProperty('errorMessage', errorMessage))
+      ..add(DiagnosticsProperty('cameraController', cameraController))
+      ..add(DiagnosticsProperty('connectionAttempts', connectionAttempts))
+      ..add(DiagnosticsProperty('connectionError', connectionError))
+      ..add(DiagnosticsProperty('toastStatus', toastStatus))
+      ..add(DiagnosticsProperty('toastMessage', toastMessage))
+      ..add(DiagnosticsProperty('isDebugMode', isDebugMode))
+      ..add(DiagnosticsProperty('lastRecognitionTime', lastRecognitionTime))
+      ..add(DiagnosticsProperty('framesProcessed', framesProcessed))
+      ..add(DiagnosticsProperty('totalFramesProcessed', totalFramesProcessed))
+      ..add(
+        DiagnosticsProperty('successfulRecognitions', successfulRecognitions),
+      )
+      ..add(DiagnosticsProperty('failedRecognitions', failedRecognitions))
+      ..add(DiagnosticsProperty('detectedFaces', detectedFaces))
+      ..add(DiagnosticsProperty('lastFrameSentTime', lastFrameSentTime));
   }
 
   @override
@@ -9680,11 +9993,13 @@ class _$CheckInStateImpl implements _CheckInState {
             const DeepCollectionEquality().equals(
               other._detectedFaces,
               _detectedFaces,
-            ));
+            ) &&
+            (identical(other.lastFrameSentTime, lastFrameSentTime) ||
+                other.lastFrameSentTime == lastFrameSentTime));
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     cameraStatus,
     permissionStatus,
@@ -9704,7 +10019,8 @@ class _$CheckInStateImpl implements _CheckInState {
     successfulRecognitions,
     failedRecognitions,
     const DeepCollectionEquality().hash(_detectedFaces),
-  );
+    lastFrameSentTime,
+  ]);
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.
@@ -9735,6 +10051,7 @@ abstract class _CheckInState implements CheckInState {
     final int successfulRecognitions,
     final int failedRecognitions,
     final List<Face> detectedFaces,
+    final DateTime? lastFrameSentTime,
   }) = _$CheckInStateImpl;
 
   /// Current camera status
@@ -9804,6 +10121,10 @@ abstract class _CheckInState implements CheckInState {
   /// Detected faces
   @override
   List<Face> get detectedFaces;
+
+  /// Last frame sent time
+  @override
+  DateTime? get lastFrameSentTime;
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.

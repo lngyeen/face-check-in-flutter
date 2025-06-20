@@ -507,10 +507,22 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) async {
     if (state.streamingStatus != StreamingStatus.active) return;
 
+    final now = DateTime.now();
+    if (state.lastFrameSentTime != null &&
+        now.difference(state.lastFrameSentTime!).inMilliseconds < 66) {
+      // Throttle the frame rate to ~15 FPS
+      return;
+    }
+
     final base64Image = await _convertImageToBase64(event.image);
     if (base64Image != null) {
       _webSocketService.sendMessage(base64Image);
-      emit(state.copyWith(framesProcessed: state.framesProcessed + 1));
+      emit(
+        state.copyWith(
+          framesProcessed: state.framesProcessed + 1,
+          lastFrameSentTime: now,
+        ),
+      );
     }
   }
 
