@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:camera_platform_interface/camera_platform_interface.dart'
     as cpi;
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -204,6 +205,125 @@ void main() {
               const CheckInState(
                 streamingStatus: StreamingStatus.error,
                 errorMessage: 'error msg',
+              ),
+            ],
+      );
+    });
+
+    group('WebSocketMessageReceived', () {
+      blocTest<CheckInBloc, CheckInState>(
+        'emits state with detectedFaces when a valid frameResult is received',
+        build: () => checkInBloc,
+        act:
+            (bloc) => bloc.add(
+              const CheckInEvent.webSocketMessageReceived(
+                '{"type": "frameResult", "faces": [{"box": [10.0, 20.0, 30.0, 40.0], "confidence": 0.9}]}',
+              ),
+            ),
+        expect:
+            () => [
+              predicate<CheckInState>((state) {
+                if (state.detectedFaces.length != 1) return false;
+                final face = state.detectedFaces.first;
+                return face.boundingBox ==
+                        const Rect.fromLTWH(10, 20, 30, 40) &&
+                    face.confidence == 0.9 &&
+                    state.lastRecognitionTime != null;
+              }),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'emits error when frameResult has invalid "faces" data',
+        build: () => checkInBloc,
+        act:
+            (bloc) => bloc.add(
+              const CheckInEvent.webSocketMessageReceived(
+                '{"type": "frameResult", "faces": "not-a-list"}',
+              ),
+            ),
+        expect:
+            () => <CheckInState>[
+              const CheckInState(
+                errorMessage: 'Invalid "faces" data in frameResult: not-a-list',
+                toastStatus: ToastStatus.showing,
+                toastMessage:
+                    'Error: Invalid "faces" data in frameResult: not-a-list',
+              ),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'emits error when json is malformed',
+        build: () => checkInBloc,
+        act:
+            (bloc) => bloc.add(
+              const CheckInEvent.webSocketMessageReceived(
+                '{"type": "frameResult", "faces": [}',
+              ),
+            ),
+        expect:
+            () => [
+              predicate<CheckInState>((state) {
+                final hasError = state.errorMessage!.startsWith(
+                  'Failed to decode WebSocket message:',
+                );
+                final hasToast = state.toastMessage!.startsWith(
+                  'Error: Failed to decode WebSocket message:',
+                );
+                return hasError &&
+                    hasToast &&
+                    state.toastStatus == ToastStatus.showing;
+              }),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'does not change state for unknown message type',
+        build: () => checkInBloc,
+        act:
+            (bloc) => bloc.add(
+              const CheckInEvent.webSocketMessageReceived(
+                '{"type": "unknown_type"}',
+              ),
+            ),
+        expect: () => <CheckInState>[],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'emits state with success for valid recognition_result',
+        build: () => checkInBloc,
+        act:
+            (bloc) => bloc.add(
+              const CheckInEvent.webSocketMessageReceived(
+                '{"type": "recognition_result", "success": true, "message": "Welcome", "employeeName": "John Doe"}',
+              ),
+            ),
+        expect:
+            () => <CheckInState>[
+              const CheckInState(
+                successfulRecognitions: 1,
+                toastStatus: ToastStatus.showing,
+                toastMessage: 'Recognition success: John Doe',
+              ),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'emits state with failure for failed recognition_result',
+        build: () => checkInBloc,
+        act:
+            (bloc) => bloc.add(
+              const CheckInEvent.webSocketMessageReceived(
+                '{"type": "recognition_result", "success": false, "message": "Not recognized"}',
+              ),
+            ),
+        expect:
+            () => <CheckInState>[
+              const CheckInState(
+                failedRecognitions: 1,
+                toastStatus: ToastStatus.showing,
+                toastMessage: 'Recognition failed: Not recognized',
               ),
             ],
       );

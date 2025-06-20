@@ -114,9 +114,12 @@ class CheckInEvent with _$CheckInEvent {
 
   // Backend response events
   /// Recognition result received from backend
-  const factory CheckInEvent.recognitionResultReceived({
-    required bool success,
-    required String message,
-    String? employeeName,
-  }) = RecognitionResultReceived;
+  const factory CheckInEvent.recognitionResultReceived(
+    Map<String, dynamic> data,
+  ) = RecognitionResultReceived;
+
+  /// Frame result received from backend
+  const factory CheckInEvent.frameResultReceived({
+    required List<Map<String, dynamic>> faces,
+  }) = FrameResultReceived;
 }

@@ -71,6 +71,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
     // Backend response events
     on<RecognitionResultReceived>(_onRecognitionResultReceived);
+    on<FrameResultReceived>(_onFrameResultReceived);
 
     // Internal events for stream processing
     on<_FrameCaptured>(_onFrameCaptured);
@@ -353,30 +354,44 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     WebSocketMessageReceived event,
     Emitter<CheckInState> emit,
   ) async {
+    // This is a placeholder. The actual implementation will depend on the
+    // backend message format.
+    debugPrint('Received message from WebSocket: ${event.message}');
+
+    // Example of handling a simple JSON message
     try {
       final decodedMessage = jsonDecode(event.message) as Map<String, dynamic>;
-      final facesData = decodedMessage['faces'] as List?;
-      if (facesData == null) return;
+      final messageType = decodedMessage['type'] as String?;
 
-      final faces =
-          facesData.map((faceData) {
-            final box = faceData['box'] as List<dynamic>;
-            return Face(
-              boundingBox: Rect.fromLTRB(
-                box[0].toDouble(),
-                box[1].toDouble(),
-                box[2].toDouble(),
-                box[3].toDouble(),
-              ),
-              confidence: faceData['confidence']?.toDouble() ?? 0.0,
-              name: faceData['name'] as String?,
+      switch (messageType) {
+        case 'connection_ack':
+          // Handle connection acknowledgment
+          debugPrint('WebSocket connection acknowledged by server.');
+          break;
+        case 'recognition_result':
+          // Add event to handle recognition result
+          add(RecognitionResultReceived(decodedMessage));
+          break;
+        case 'frameResult':
+          final facesData = decodedMessage['faces'];
+          if (facesData is List) {
+            final faces = List<Map<String, dynamic>>.from(facesData);
+            add(CheckInEvent.frameResultReceived(faces: faces));
+          } else {
+            add(
+              ErrorOccurred('Invalid "faces" data in frameResult: $facesData'),
             );
-          }).toList();
-
-      emit(state.copyWith(detectedFaces: faces));
+          }
+          break;
+        default:
+          debugPrint('Unknown WebSocket message type: $messageType');
+          // Handle unknown message type
+          break;
+      }
+    } on FormatException catch (e) {
+      add(ErrorOccurred('Failed to decode WebSocket message: $e'));
     } catch (e) {
-      debugPrint('Error decoding websocket message: $e');
-      add(ErrorOccurred('Error processing server response: $e'));
+      add(ErrorOccurred('Error processing WebSocket message: $e'));
     }
   }
 
@@ -529,8 +544,58 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     RecognitionResultReceived event,
     Emitter<CheckInState> emit,
   ) async {
-    // Implement logic to handle recognition results
-    // This will be part of a future task
+    final success = event.data['success'] as bool? ?? false;
+    final message = event.data['message'] as String? ?? 'No message';
+
+    if (success) {
+      final employeeName = event.data['employeeName'] as String?;
+      emit(
+        state.copyWith(
+          successfulRecognitions: state.successfulRecognitions + 1,
+          toastStatus: ToastStatus.showing,
+          toastMessage:
+              'Recognition success: ${employeeName ?? 'Unknown Employee'}',
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          failedRecognitions: state.failedRecognitions + 1,
+          toastStatus: ToastStatus.showing,
+          toastMessage: 'Recognition failed: $message',
+        ),
+      );
+    }
+  }
+
+  Future<void> _onFrameResultReceived(
+    FrameResultReceived event,
+    Emitter<CheckInState> emit,
+  ) async {
+    try {
+      final faces =
+          event.faces.map((faceData) {
+            final box = faceData['box'] as List<dynamic>;
+            final boundingBox = Rect.fromLTWH(
+              (box[0] as num).toDouble(),
+              (box[1] as num).toDouble(),
+              (box[2] as num).toDouble(),
+              (box[3] as num).toDouble(),
+            );
+            final confidence = (faceData['confidence'] as num).toDouble();
+
+            return Face(boundingBox: boundingBox, confidence: confidence);
+          }).toList();
+
+      emit(
+        state.copyWith(
+          detectedFaces: faces,
+          lastRecognitionTime: DateTime.now(),
+        ),
+      );
+    } catch (e) {
+      add(ErrorOccurred('Error processing frame result: $e'));
+    }
   }
 
   // New handler for captured frames
