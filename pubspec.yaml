@@ -37,8 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # BLoC State Management
-  flutter_bloc: ^8.1.0
-  bloc: ^8.1.0
+  flutter_bloc: ^8.0.0
+  bloc: ^8.0.0
 
   # WebSocket Communication
   web_socket_channel: ^2.4.0
@@ -76,7 +76,7 @@ dev_dependencies:
   injectable_generator: ^2.6.1
 
   # TDD Enhanced Testing Dependencies
-  bloc_test: ^9.1.0
+  bloc_test: ^9.0.0
   mocktail: ^1.0.4
   fake_async: ^1.3.1
   test: ^1.24.0

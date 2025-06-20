@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:isolate';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +15,11 @@ import 'package:injectable/injectable.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 
-part 'check_in_bloc.freezed.dart';
 part 'check_in_event.dart';
 part 'check_in_state.dart';
+part 'check_in_bloc.freezed.dart';
 
 /// Main BLoC for managing check-in feature state
 /// Handles camera, WebSocket, streaming, and UI state management
