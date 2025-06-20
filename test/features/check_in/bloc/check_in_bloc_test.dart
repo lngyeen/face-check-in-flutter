@@ -17,24 +17,21 @@ import 'package:permission_handler/permission_handler.dart' as ps;
 
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
+import 'package:face_check_in_flutter/domain/services/camera_service.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'check_in_bloc_test.mocks.dart';
 
 // --- Mocks and Fakes ---
 
-@GenerateMocks([
-  PermissionService,
-  WebSocketService,
-  CameraService,
-  cpi.CameraController,
-])
+@GenerateMocks(
+  [ps.PermissionService, WebSocketService, CameraService, cpi.CameraController],
+  customMocks: [
+    MockSpec<ps.PermissionService>(as: #MockPermissionServiceCustom),
+  ],
+)
 class MockCheckInBloc extends MockBloc<CheckInEvent, CheckInState>
     implements CheckInBloc {}
-
-class MockPermissionService extends Mock implements ps.PermissionService {}
-
-class MockWebSocketService extends Mock implements WebSocketService {}
 
 class FakeCameraDescription extends Fake implements cpi.CameraDescription {
   @override

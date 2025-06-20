@@ -82,7 +82,7 @@ class ImageConverter {
       height: height,
       bytes: yuv420.buffer,
       format: img.Format.uint8,
-      order: img.ChannelOrder.yuv,
+      order: img.ChannelOrder.rgb,
     );
 
     return img.copyRotate(image, angle: 90);

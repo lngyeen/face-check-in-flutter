@@ -25,6 +25,8 @@ enum CameraStatus {
   ready,
   error,
   permissionDenied,
+  streaming,
+  paused,
 }
 
 enum ConnectionStatus {
@@ -808,6 +810,10 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         return Colors.orange;
       case CameraStatus.ready:
         return Colors.green;
+      case CameraStatus.streaming:
+        return Colors.purple;
+      case CameraStatus.paused:
+        return Colors.amber;
       case CameraStatus.error:
       case CameraStatus.permissionDenied:
         return Colors.red;

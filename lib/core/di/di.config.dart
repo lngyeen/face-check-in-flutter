@@ -18,6 +18,7 @@ import '../../domain/services/camera_service.dart' as _i910;
 import '../../domain/services/permission_service.dart' as _i474;
 import '../../features/check_in/bloc/check_in_bloc.dart' as _i435;
 import '../services/frame_capture_service.dart' as _i351;
+import '../services/frame_streaming_service.dart' as _i635;
 import '../services/websocket_service.dart' as _i555;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -40,6 +41,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i474.PermissionService>(),
         gh<_i555.WebSocketService>(),
         gh<_i910.CameraService>(),
+      ),
+    );
+    gh.lazySingleton<_i635.FrameStreamingService>(
+      () => _i635.FrameStreamingService(
+        gh<_i351.FrameCaptureService>(),
+        gh<_i555.WebSocketService>(),
       ),
     );
     return this;
