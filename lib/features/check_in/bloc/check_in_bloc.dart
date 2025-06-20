@@ -9,8 +9,11 @@ import 'package:injectable/injectable.dart';
 import 'package:permission_handler/permission_handler.dart' as ps;
 
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
+import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart';
 import 'package:face_check_in_flutter/domain/services/camera_service.dart';
+import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart'
+    as frame_streaming;
 
 part 'check_in_bloc.freezed.dart';
 part 'check_in_event.dart';
@@ -36,6 +39,7 @@ enum ConnectionStatus {
   timeout,
 }
 
+// Use StreamingStatus from FrameStreamingService
 enum StreamingStatus { idle, active, error }
 
 enum ToastStatus { none, showing }
@@ -70,14 +74,19 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   final PermissionService _permissionService;
   final WebSocketService _webSocketService;
   final CameraService _cameraService;
+  final FrameStreamingService _frameStreamingService;
 
   CheckInBloc(
     this._permissionService,
     this._webSocketService,
     this._cameraService,
+    this._frameStreamingService,
   ) : super(const CheckInState()) {
     // Initialize WebSocket service integration
     _initializeWebSocketIntegration();
+
+    // Initialize Frame Streaming service integration
+    _initializeFrameStreamingIntegration();
 
     // App lifecycle events
     on<AppStarted>(_onAppStarted);
@@ -116,6 +125,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<AutoConnectionToggled>(_onAutoConnectionToggled);
 
     // Streaming events
+    on<StreamingStartRequested>(_onStreamingStartRequested);
+    on<StreamingStopRequested>(_onStreamingStopRequested);
     on<StreamingStarted>(_onStreamingStarted);
     on<StreamingStopped>(_onStreamingStopped);
     on<StreamingStatusChanged>(_onStreamingStatusChanged);
@@ -156,6 +167,41 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     });
   }
 
+  /// Convert FrameStreamingService.StreamingStatus to CheckInBloc.StreamingStatus
+  StreamingStatus _mapStreamingStatus(frame_streaming.StreamingStatus status) {
+    switch (status) {
+      case frame_streaming.StreamingStatus.idle:
+        return StreamingStatus.idle;
+      case frame_streaming.StreamingStatus.starting:
+      case frame_streaming.StreamingStatus.active:
+        return StreamingStatus.active;
+      case frame_streaming.StreamingStatus.paused:
+      case frame_streaming.StreamingStatus.stopping:
+      case frame_streaming.StreamingStatus.error:
+        return StreamingStatus.error;
+    }
+  }
+
+  /// Initialize Frame Streaming service integration
+  void _initializeFrameStreamingIntegration() {
+    // Listen to streaming status changes from FrameStreamingService
+    _frameStreamingService.statusStream
+        .listen((status) {
+          final mappedStatus = _mapStreamingStatus(status);
+          add(CheckInEvent.streamingStatusChanged(mappedStatus));
+        })
+        .onError((error) {
+          debugPrint('❌ FrameStreamingService status error: $error');
+          add(CheckInEvent.errorOccurred('Streaming error: $error'));
+        });
+
+    // Listen to frame metrics for debugging
+    _frameStreamingService.metricsStream.listen((metrics) {
+      debugPrint('📊 Frame metrics: $metrics');
+      // Could trigger frame processed event here if needed
+    });
+  }
+
   // App lifecycle event handlers
   Future<void> _onAppStarted(
     AppStarted event,
@@ -193,6 +239,12 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('🔴 CheckInBloc: App disposing - cleaning up...');
+
+    // Stop streaming if active
+    if (state.streamingStatus == StreamingStatus.active) {
+      await _frameStreamingService.stopStreaming();
+    }
+
     await state.cameraController?.dispose();
     // Clean up resources
     emit(
@@ -430,22 +482,70 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) async {
     debugPrint('🌐 CheckInBloc: WebSocket disconnection requested');
 
-    emit(
-      state.copyWith(
-        connectionStatus: ConnectionStatus.disconnected,
-        streamingStatus: StreamingStatus.idle,
-      ),
-    );
+    emit(state.copyWith(connectionStatus: ConnectionStatus.disconnected));
   }
 
-  // Streaming event handlers (placeholders for future integration)
+  // Streaming event handlers
+  Future<void> _onStreamingStartRequested(
+    StreamingStartRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('📡 CheckInBloc: Frame streaming start requested');
+
+    try {
+      // Check prerequisites
+      if (state.cameraStatus != CameraStatus.ready) {
+        throw Exception('Camera not ready for streaming');
+      }
+
+      if (state.connectionStatus != ConnectionStatus.connected) {
+        throw Exception('WebSocket not connected');
+      }
+
+      // Start streaming via service
+      await _frameStreamingService.startStreaming();
+
+      debugPrint('✅ CheckInBloc: Frame streaming start request completed');
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Failed to start streaming: $e');
+      emit(
+        state.copyWith(
+          errorMessage: 'Failed to start streaming: $e',
+          streamingStatus: StreamingStatus.error,
+        ),
+      );
+    }
+  }
+
+  Future<void> _onStreamingStopRequested(
+    StreamingStopRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('📡 CheckInBloc: Frame streaming stop requested');
+
+    try {
+      // Stop streaming via service
+      await _frameStreamingService.stopStreaming();
+
+      debugPrint('✅ CheckInBloc: Frame streaming stop request completed');
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Failed to stop streaming: $e');
+      emit(state.copyWith(errorMessage: 'Failed to stop streaming: $e'));
+    }
+  }
+
   Future<void> _onStreamingStarted(
     StreamingStarted event,
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('📡 CheckInBloc: Frame streaming started');
-
-    emit(state.copyWith(streamingStatus: StreamingStatus.active));
+    emit(
+      state.copyWith(
+        streamingStatus: StreamingStatus.active,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Frame streaming started',
+      ),
+    );
   }
 
   Future<void> _onStreamingStopped(
@@ -453,8 +553,13 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('📡 CheckInBloc: Frame streaming stopped');
-
-    emit(state.copyWith(streamingStatus: StreamingStatus.idle));
+    emit(
+      state.copyWith(
+        streamingStatus: StreamingStatus.idle,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Frame streaming stopped',
+      ),
+    );
   }
 
   Future<void> _onStreamingStatusChanged(
@@ -462,7 +567,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('📡 CheckInBloc: Streaming status changed to ${event.status}');
-
     emit(state.copyWith(streamingStatus: event.status));
   }
 
@@ -470,12 +574,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     FrameProcessed event,
     Emitter<CheckInState> emit,
   ) async {
-    emit(
-      state.copyWith(
-        framesProcessed: state.framesProcessed + 1,
-        lastRecognitionTime: DateTime.now(),
-      ),
-    );
+    // Update frame processing metrics
+    emit(state.copyWith(framesProcessed: state.framesProcessed + 1));
   }
 
   // UI event handlers
@@ -641,8 +741,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     emit(
       state.copyWith(
         connectionStatus: ConnectionStatus.disconnected,
-        streamingStatus: StreamingStatus.idle,
-        isRetryTimerActive: false,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Disconnected from backend',
       ),
     );
   }

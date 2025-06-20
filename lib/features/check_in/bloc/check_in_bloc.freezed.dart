@@ -595,6 +595,8 @@ mixin _$CheckInEvent {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -644,6 +646,8 @@ mixin _$CheckInEvent {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -689,6 +693,8 @@ mixin _$CheckInEvent {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -747,6 +753,10 @@ mixin _$CheckInEvent {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -797,6 +807,8 @@ mixin _$CheckInEvent {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -846,6 +858,8 @@ mixin _$CheckInEvent {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -959,6 +973,8 @@ class _$AppStartedImpl implements AppStarted {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -1012,6 +1028,8 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -1061,6 +1079,8 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -1126,6 +1146,10 @@ class _$AppStartedImpl implements AppStarted {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -1180,6 +1204,8 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -1233,6 +1259,8 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -1333,6 +1361,8 @@ class _$AppDisposedImpl implements AppDisposed {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -1386,6 +1416,8 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -1435,6 +1467,8 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -1500,6 +1534,10 @@ class _$AppDisposedImpl implements AppDisposed {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -1554,6 +1592,8 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -1607,6 +1647,8 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -1708,6 +1750,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -1761,6 +1805,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -1810,6 +1856,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -1875,6 +1923,10 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -1929,6 +1981,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -1982,6 +2036,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -2083,6 +2139,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -2136,6 +2194,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -2185,6 +2245,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -2250,6 +2312,10 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -2304,6 +2370,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -2357,6 +2425,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -2458,6 +2528,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -2511,6 +2583,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -2560,6 +2634,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -2625,6 +2701,10 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -2679,6 +2759,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -2732,6 +2814,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -2833,6 +2917,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -2886,6 +2972,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -2935,6 +3023,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -3000,6 +3090,10 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -3054,6 +3148,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -3107,6 +3203,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -3207,6 +3305,8 @@ class _$CameraStartedImpl implements CameraStarted {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -3260,6 +3360,8 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -3309,6 +3411,8 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -3374,6 +3478,10 @@ class _$CameraStartedImpl implements CameraStarted {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -3428,6 +3536,8 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -3481,6 +3591,8 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -3581,6 +3693,8 @@ class _$CameraPausedImpl implements CameraPaused {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -3634,6 +3748,8 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -3683,6 +3799,8 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -3748,6 +3866,10 @@ class _$CameraPausedImpl implements CameraPaused {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -3802,6 +3924,8 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -3855,6 +3979,8 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -3955,6 +4081,8 @@ class _$CameraResumedImpl implements CameraResumed {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -4008,6 +4136,8 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -4057,6 +4187,8 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -4122,6 +4254,10 @@ class _$CameraResumedImpl implements CameraResumed {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -4176,6 +4312,8 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -4229,6 +4367,8 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -4329,6 +4469,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -4382,6 +4524,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -4431,6 +4575,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -4496,6 +4642,10 @@ class _$CameraStoppedImpl implements CameraStopped {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -4550,6 +4700,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -4603,6 +4755,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -4733,6 +4887,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -4786,6 +4942,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -4835,6 +4993,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -4900,6 +5060,10 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -4954,6 +5118,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -5007,6 +5173,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -5117,6 +5285,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -5170,6 +5340,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -5219,6 +5391,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -5284,6 +5458,10 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -5338,6 +5516,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -5391,6 +5571,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -5492,6 +5674,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -5545,6 +5729,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -5594,6 +5780,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -5659,6 +5847,10 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -5713,6 +5905,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -5766,6 +5960,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -5899,6 +6095,8 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -5952,6 +6150,8 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -6001,6 +6201,8 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -6066,6 +6268,10 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -6120,6 +6326,8 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -6173,6 +6381,8 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -6311,6 +6521,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -6364,6 +6576,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -6413,6 +6627,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -6478,6 +6694,10 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -6532,6 +6752,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -6585,6 +6807,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -6695,6 +6919,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -6748,6 +6974,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -6797,6 +7025,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -6862,6 +7092,10 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -6916,6 +7150,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -6969,6 +7205,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -7071,6 +7309,8 @@ class _$WebSocketConnectionRequestedImpl
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -7124,6 +7364,8 @@ class _$WebSocketConnectionRequestedImpl
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -7173,6 +7415,8 @@ class _$WebSocketConnectionRequestedImpl
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -7238,6 +7482,10 @@ class _$WebSocketConnectionRequestedImpl
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -7292,6 +7540,8 @@ class _$WebSocketConnectionRequestedImpl
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -7345,6 +7595,8 @@ class _$WebSocketConnectionRequestedImpl
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -7447,6 +7699,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -7500,6 +7754,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -7549,6 +7805,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -7614,6 +7872,10 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -7668,6 +7930,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -7721,6 +7985,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -7821,6 +8087,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -7874,6 +8142,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -7923,6 +8193,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -7988,6 +8260,10 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -8042,6 +8318,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -8095,6 +8373,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -8196,6 +8476,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -8249,6 +8531,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -8298,6 +8582,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -8363,6 +8649,10 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -8417,6 +8707,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -8470,6 +8762,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -8599,6 +8893,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -8652,6 +8948,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -8701,6 +8999,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -8766,6 +9066,10 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -8820,6 +9124,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -8873,6 +9179,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -8983,6 +9291,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -9036,6 +9346,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -9085,6 +9397,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -9150,6 +9464,10 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -9204,6 +9522,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -9257,6 +9577,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -9387,6 +9709,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -9440,6 +9764,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -9489,6 +9815,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -9554,6 +9882,10 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -9608,6 +9940,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -9661,6 +9995,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -9805,6 +10141,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -9858,6 +10196,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -9907,6 +10247,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -9972,6 +10314,10 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -10026,6 +10372,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -10079,6 +10427,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -10226,6 +10576,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -10279,6 +10631,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -10328,6 +10682,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -10393,6 +10749,10 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -10447,6 +10807,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -10500,6 +10862,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -10639,6 +11003,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -10692,6 +11058,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -10741,6 +11109,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -10806,6 +11176,10 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -10860,6 +11234,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -10913,6 +11289,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -11023,6 +11401,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -11076,6 +11456,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -11125,6 +11507,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -11190,6 +11574,10 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -11244,6 +11632,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -11297,6 +11687,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -11428,6 +11820,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -11481,6 +11875,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -11530,6 +11926,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -11595,6 +11993,10 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -11649,6 +12051,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -11702,6 +12106,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -11736,6 +12142,784 @@ abstract class AutoConnectionToggled implements CheckInEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AutoConnectionToggledImplCopyWith<_$AutoConnectionToggledImpl>
   get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$StreamingStartRequestedImplCopyWith<$Res> {
+  factory _$$StreamingStartRequestedImplCopyWith(
+    _$StreamingStartRequestedImpl value,
+    $Res Function(_$StreamingStartRequestedImpl) then,
+  ) = __$$StreamingStartRequestedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$StreamingStartRequestedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$StreamingStartRequestedImpl>
+    implements _$$StreamingStartRequestedImplCopyWith<$Res> {
+  __$$StreamingStartRequestedImplCopyWithImpl(
+    _$StreamingStartRequestedImpl _value,
+    $Res Function(_$StreamingStartRequestedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$StreamingStartRequestedImpl implements StreamingStartRequested {
+  const _$StreamingStartRequestedImpl();
+
+  @override
+  String toString() {
+    return 'CheckInEvent.streamingStartRequested()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StreamingStartRequestedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function(bool isAutoConnect) connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() webSocketConnectionRequested,
+    required TResult Function() webSocketConnecting,
+    required TResult Function() webSocketConnected,
+    required TResult Function() webSocketDisconnected,
+    required TResult Function(String error) webSocketConnectionFailed,
+    required TResult Function() webSocketConnectionTimeout,
+    required TResult Function(int attempt) webSocketRetrying,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageReceived,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageSent,
+    required TResult Function(String error) webSocketSendError,
+    required TResult Function() autoConnectionTriggered,
+    required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
+  }) {
+    return streamingStartRequested();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? webSocketConnectionRequested,
+    TResult? Function()? webSocketConnecting,
+    TResult? Function()? webSocketConnected,
+    TResult? Function()? webSocketDisconnected,
+    TResult? Function(String error)? webSocketConnectionFailed,
+    TResult? Function()? webSocketConnectionTimeout,
+    TResult? Function(int attempt)? webSocketRetrying,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult? Function(String error)? webSocketSendError,
+    TResult? Function()? autoConnectionTriggered,
+    TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
+  }) {
+    return streamingStartRequested?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function(bool isAutoConnect)? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? webSocketConnectionRequested,
+    TResult Function()? webSocketConnecting,
+    TResult Function()? webSocketConnected,
+    TResult Function()? webSocketDisconnected,
+    TResult Function(String error)? webSocketConnectionFailed,
+    TResult Function()? webSocketConnectionTimeout,
+    TResult Function(int attempt)? webSocketRetrying,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult Function(String error)? webSocketSendError,
+    TResult Function()? autoConnectionTriggered,
+    TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (streamingStartRequested != null) {
+      return streamingStartRequested();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(WebSocketConnectionRequested value)
+    webSocketConnectionRequested,
+    required TResult Function(WebSocketConnecting value) webSocketConnecting,
+    required TResult Function(WebSocketConnected value) webSocketConnected,
+    required TResult Function(WebSocketDisconnected value)
+    webSocketDisconnected,
+    required TResult Function(WebSocketConnectionFailed value)
+    webSocketConnectionFailed,
+    required TResult Function(WebSocketConnectionTimeout value)
+    webSocketConnectionTimeout,
+    required TResult Function(WebSocketRetrying value) webSocketRetrying,
+    required TResult Function(WebSocketMessageReceived value)
+    webSocketMessageReceived,
+    required TResult Function(WebSocketMessageSent value) webSocketMessageSent,
+    required TResult Function(WebSocketSendError value) webSocketSendError,
+    required TResult Function(AutoConnectionTriggered value)
+    autoConnectionTriggered,
+    required TResult Function(AutoConnectionToggled value)
+    autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
+  }) {
+    return streamingStartRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult? Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult? Function(WebSocketConnected value)? webSocketConnected,
+    TResult? Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult? Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult? Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult? Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult? Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult? Function(WebSocketSendError value)? webSocketSendError,
+    TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
+  }) {
+    return streamingStartRequested?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult Function(WebSocketConnected value)? webSocketConnected,
+    TResult Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult Function(WebSocketSendError value)? webSocketSendError,
+    TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (streamingStartRequested != null) {
+      return streamingStartRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class StreamingStartRequested implements CheckInEvent {
+  const factory StreamingStartRequested() = _$StreamingStartRequestedImpl;
+}
+
+/// @nodoc
+abstract class _$$StreamingStopRequestedImplCopyWith<$Res> {
+  factory _$$StreamingStopRequestedImplCopyWith(
+    _$StreamingStopRequestedImpl value,
+    $Res Function(_$StreamingStopRequestedImpl) then,
+  ) = __$$StreamingStopRequestedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$StreamingStopRequestedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$StreamingStopRequestedImpl>
+    implements _$$StreamingStopRequestedImplCopyWith<$Res> {
+  __$$StreamingStopRequestedImplCopyWithImpl(
+    _$StreamingStopRequestedImpl _value,
+    $Res Function(_$StreamingStopRequestedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$StreamingStopRequestedImpl implements StreamingStopRequested {
+  const _$StreamingStopRequestedImpl();
+
+  @override
+  String toString() {
+    return 'CheckInEvent.streamingStopRequested()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StreamingStopRequestedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function(bool isAutoConnect) connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() webSocketConnectionRequested,
+    required TResult Function() webSocketConnecting,
+    required TResult Function() webSocketConnected,
+    required TResult Function() webSocketDisconnected,
+    required TResult Function(String error) webSocketConnectionFailed,
+    required TResult Function() webSocketConnectionTimeout,
+    required TResult Function(int attempt) webSocketRetrying,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageReceived,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageSent,
+    required TResult Function(String error) webSocketSendError,
+    required TResult Function() autoConnectionTriggered,
+    required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
+  }) {
+    return streamingStopRequested();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? webSocketConnectionRequested,
+    TResult? Function()? webSocketConnecting,
+    TResult? Function()? webSocketConnected,
+    TResult? Function()? webSocketDisconnected,
+    TResult? Function(String error)? webSocketConnectionFailed,
+    TResult? Function()? webSocketConnectionTimeout,
+    TResult? Function(int attempt)? webSocketRetrying,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult? Function(String error)? webSocketSendError,
+    TResult? Function()? autoConnectionTriggered,
+    TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
+  }) {
+    return streamingStopRequested?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function(bool isAutoConnect)? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? webSocketConnectionRequested,
+    TResult Function()? webSocketConnecting,
+    TResult Function()? webSocketConnected,
+    TResult Function()? webSocketDisconnected,
+    TResult Function(String error)? webSocketConnectionFailed,
+    TResult Function()? webSocketConnectionTimeout,
+    TResult Function(int attempt)? webSocketRetrying,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult Function(String error)? webSocketSendError,
+    TResult Function()? autoConnectionTriggered,
+    TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (streamingStopRequested != null) {
+      return streamingStopRequested();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(WebSocketConnectionRequested value)
+    webSocketConnectionRequested,
+    required TResult Function(WebSocketConnecting value) webSocketConnecting,
+    required TResult Function(WebSocketConnected value) webSocketConnected,
+    required TResult Function(WebSocketDisconnected value)
+    webSocketDisconnected,
+    required TResult Function(WebSocketConnectionFailed value)
+    webSocketConnectionFailed,
+    required TResult Function(WebSocketConnectionTimeout value)
+    webSocketConnectionTimeout,
+    required TResult Function(WebSocketRetrying value) webSocketRetrying,
+    required TResult Function(WebSocketMessageReceived value)
+    webSocketMessageReceived,
+    required TResult Function(WebSocketMessageSent value) webSocketMessageSent,
+    required TResult Function(WebSocketSendError value) webSocketSendError,
+    required TResult Function(AutoConnectionTriggered value)
+    autoConnectionTriggered,
+    required TResult Function(AutoConnectionToggled value)
+    autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
+  }) {
+    return streamingStopRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult? Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult? Function(WebSocketConnected value)? webSocketConnected,
+    TResult? Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult? Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult? Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult? Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult? Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult? Function(WebSocketSendError value)? webSocketSendError,
+    TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
+  }) {
+    return streamingStopRequested?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult Function(WebSocketConnected value)? webSocketConnected,
+    TResult Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult Function(WebSocketSendError value)? webSocketSendError,
+    TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (streamingStopRequested != null) {
+      return streamingStopRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class StreamingStopRequested implements CheckInEvent {
+  const factory StreamingStopRequested() = _$StreamingStopRequestedImpl;
 }
 
 /// @nodoc
@@ -11811,6 +12995,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -11864,6 +13050,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -11913,6 +13101,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -11978,6 +13168,10 @@ class _$StreamingStartedImpl implements StreamingStarted {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -12032,6 +13226,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -12085,6 +13281,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -12185,6 +13383,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -12238,6 +13438,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -12287,6 +13489,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -12352,6 +13556,10 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -12406,6 +13614,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -12459,6 +13669,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -12590,6 +13802,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -12643,6 +13857,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -12692,6 +13908,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -12757,6 +13975,10 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -12811,6 +14033,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -12864,6 +14088,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -12973,6 +14199,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -13026,6 +14254,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -13075,6 +14305,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -13140,6 +14372,10 @@ class _$FrameProcessedImpl implements FrameProcessed {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -13194,6 +14430,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -13247,6 +14485,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -13374,6 +14614,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -13427,6 +14669,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -13476,6 +14720,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -13541,6 +14787,10 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -13595,6 +14845,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -13648,6 +14900,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -13783,6 +15037,8 @@ class _$CameraErrorImpl implements CameraError {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -13836,6 +15092,8 @@ class _$CameraErrorImpl implements CameraError {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -13885,6 +15143,8 @@ class _$CameraErrorImpl implements CameraError {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -13950,6 +15210,10 @@ class _$CameraErrorImpl implements CameraError {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -14004,6 +15268,8 @@ class _$CameraErrorImpl implements CameraError {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -14057,6 +15323,8 @@ class _$CameraErrorImpl implements CameraError {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -14165,6 +15433,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -14218,6 +15488,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -14267,6 +15539,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -14332,6 +15606,10 @@ class _$ErrorClearedImpl implements ErrorCleared {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -14386,6 +15664,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -14439,6 +15719,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -14569,6 +15851,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -14622,6 +15906,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -14671,6 +15957,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -14736,6 +16024,10 @@ class _$ToastRequestedImpl implements ToastRequested {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -14790,6 +16082,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -14843,6 +16137,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -14951,6 +16247,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -15004,6 +16302,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -15053,6 +16353,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -15118,6 +16420,10 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -15172,6 +16478,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -15225,6 +16533,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -15325,6 +16635,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -15378,6 +16690,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -15427,6 +16741,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -15492,6 +16808,10 @@ class _$StatisticsResetImpl implements StatisticsReset {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -15546,6 +16866,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -15599,6 +16921,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -15754,6 +17078,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -15807,6 +17133,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -15856,6 +17184,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -15921,6 +17251,10 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -15975,6 +17309,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -16028,6 +17364,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -16143,6 +17481,8 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -16196,6 +17536,8 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -16245,6 +17587,8 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -16310,6 +17654,10 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -16364,6 +17712,8 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -16417,6 +17767,8 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -16547,6 +17899,8 @@ class _$WebSocketErrorImpl implements WebSocketError {
     required TResult Function(String error) webSocketSendError,
     required TResult Function() autoConnectionTriggered,
     required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
@@ -16600,6 +17954,8 @@ class _$WebSocketErrorImpl implements WebSocketError {
     TResult? Function(String error)? webSocketSendError,
     TResult? Function()? autoConnectionTriggered,
     TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
@@ -16649,6 +18005,8 @@ class _$WebSocketErrorImpl implements WebSocketError {
     TResult Function(String error)? webSocketSendError,
     TResult Function()? autoConnectionTriggered,
     TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
@@ -16714,6 +18072,10 @@ class _$WebSocketErrorImpl implements WebSocketError {
     autoConnectionTriggered,
     required TResult Function(AutoConnectionToggled value)
     autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
     required TResult Function(StreamingStarted value) streamingStarted,
     required TResult Function(StreamingStopped value) streamingStopped,
     required TResult Function(StreamingStatusChanged value)
@@ -16768,6 +18130,8 @@ class _$WebSocketErrorImpl implements WebSocketError {
     TResult? Function(WebSocketSendError value)? webSocketSendError,
     TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
     TResult? Function(StreamingStarted value)? streamingStarted,
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
@@ -16821,6 +18185,8 @@ class _$WebSocketErrorImpl implements WebSocketError {
     TResult Function(WebSocketSendError value)? webSocketSendError,
     TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
     TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
     TResult Function(StreamingStarted value)? streamingStarted,
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,

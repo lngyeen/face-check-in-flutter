@@ -36,17 +36,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i351.FrameCaptureService>(
       () => _i351.FrameCaptureService(gh<_i910.CameraService>()),
     );
+    gh.lazySingleton<_i635.FrameStreamingService>(
+      () => _i635.FrameStreamingService(
+        gh<_i351.FrameCaptureService>(),
+        gh<_i555.WebSocketService>(),
+      ),
+    );
     gh.factory<_i435.CheckInBloc>(
       () => _i435.CheckInBloc(
         gh<_i474.PermissionService>(),
         gh<_i555.WebSocketService>(),
         gh<_i910.CameraService>(),
-      ),
-    );
-    gh.lazySingleton<_i635.FrameStreamingService>(
-      () => _i635.FrameStreamingService(
-        gh<_i351.FrameCaptureService>(),
-        gh<_i555.WebSocketService>(),
+        gh<_i635.FrameStreamingService>(),
       ),
     );
     return this;
