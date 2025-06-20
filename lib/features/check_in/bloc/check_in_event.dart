@@ -73,9 +73,18 @@ class CheckInEvent with _$CheckInEvent {
   /// Request to stop frame streaming
   const factory CheckInEvent.streamingStopped() = StreamingStopped;
 
+  /// Request to pause frame streaming
+  const factory CheckInEvent.streamingPaused() = StreamingPaused;
+
+  /// Request to resume frame streaming
+  const factory CheckInEvent.streamingResumed() = StreamingResumed;
+
   /// Streaming status has changed
   const factory CheckInEvent.streamingStatusChanged(StreamingStatus status) =
       StreamingStatusChanged;
+
+  /// A streaming error has occurred
+  const factory CheckInEvent.streamingFailed(String error) = StreamingFailed;
 
   /// A frame has been processed
   const factory CheckInEvent.frameProcessed() = FrameProcessed;

@@ -1,14 +1,14 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:camera/camera.dart';
 import 'package:camera_platform_interface/camera_platform_interface.dart'
     as cpi;
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
-import 'package:face_check_in_flutter/domain/services/permission_service.dart'
-    as ps;
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
+import 'package:face_check_in_flutter/domain/services/permission_service.dart'
+    as ps;
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 
 class MockPermissionService extends Mock implements ps.PermissionService {}
 
@@ -148,6 +148,62 @@ void main() {
               const CheckInState(
                 cameraStatus: CameraStatus.streaming,
                 streamingStatus: StreamingStatus.idle,
+              ),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'StreamingPaused should update status to paused when active',
+        build: () => checkInBloc,
+        seed: () => const CheckInState(streamingStatus: StreamingStatus.active),
+        act: (bloc) => bloc.add(const CheckInEvent.streamingPaused()),
+        expect:
+            () => <CheckInState>[
+              const CheckInState(streamingStatus: StreamingStatus.paused),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'StreamingPaused should not do anything when not active',
+        build: () => checkInBloc,
+        seed: () => const CheckInState(streamingStatus: StreamingStatus.idle),
+        act: (bloc) => bloc.add(const CheckInEvent.streamingPaused()),
+        expect: () => <CheckInState>[],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'StreamingResumed should update status to active when paused',
+        build: () => checkInBloc,
+        seed: () => const CheckInState(streamingStatus: StreamingStatus.paused),
+        act: (bloc) => bloc.add(const CheckInEvent.streamingResumed()),
+        expect:
+            () => <CheckInState>[
+              const CheckInState(streamingStatus: StreamingStatus.active),
+              const CheckInState(
+                streamingStatus: StreamingStatus.active,
+                cameraStatus: CameraStatus.streaming,
+              ),
+            ],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'StreamingResumed should not do anything when not paused',
+        build: () => checkInBloc,
+        seed: () => const CheckInState(streamingStatus: StreamingStatus.active),
+        act: (bloc) => bloc.add(const CheckInEvent.streamingResumed()),
+        expect: () => <CheckInState>[],
+      );
+
+      blocTest<CheckInBloc, CheckInState>(
+        'StreamingFailed should update status to error and set message',
+        build: () => checkInBloc,
+        act:
+            (bloc) => bloc.add(const CheckInEvent.streamingFailed('error msg')),
+        expect:
+            () => <CheckInState>[
+              const CheckInState(
+                streamingStatus: StreamingStatus.error,
+                errorMessage: 'error msg',
               ),
             ],
       );

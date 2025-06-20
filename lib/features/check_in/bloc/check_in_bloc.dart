@@ -1,8 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:isolate';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +12,6 @@ import 'package:injectable/injectable.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 
 part 'check_in_event.dart';
 part 'check_in_state.dart';
@@ -58,6 +54,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Streaming events
     on<StreamingStarted>(_onStreamingStarted);
     on<StreamingStopped>(_onStreamingStopped);
+    on<StreamingPaused>(_onStreamingPaused);
+    on<StreamingResumed>(_onStreamingResumed);
+    on<StreamingFailed>(_onStreamingFailed);
     on<StreamingStatusChanged>(_onStreamingStatusChanged);
     on<FrameProcessed>(_onFrameProcessed);
 
@@ -253,7 +252,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       return;
     }
     await state.cameraController?.startImageStream((image) {
-      // Process image in another story
+      add(_FrameCaptured(image));
     });
     emit(state.copyWith(cameraStatus: CameraStatus.streaming));
   }
@@ -395,9 +394,39 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     StreamingStopped event,
     Emitter<CheckInState> emit,
   ) async {
-    if (state.streamingStatus != StreamingStatus.active) return;
+    if (state.streamingStatus == StreamingStatus.idle) return;
     await state.cameraController?.stopImageStream();
     emit(state.copyWith(streamingStatus: StreamingStatus.idle));
+  }
+
+  Future<void> _onStreamingPaused(
+    StreamingPaused event,
+    Emitter<CheckInState> emit,
+  ) async {
+    if (state.streamingStatus != StreamingStatus.active) return;
+    await state.cameraController?.stopImageStream();
+    emit(state.copyWith(streamingStatus: StreamingStatus.paused));
+  }
+
+  Future<void> _onStreamingResumed(
+    StreamingResumed event,
+    Emitter<CheckInState> emit,
+  ) async {
+    if (state.streamingStatus != StreamingStatus.paused) return;
+    emit(state.copyWith(streamingStatus: StreamingStatus.active));
+    add(const CameraStarted());
+  }
+
+  Future<void> _onStreamingFailed(
+    StreamingFailed event,
+    Emitter<CheckInState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        streamingStatus: StreamingStatus.error,
+        errorMessage: event.error,
+      ),
+    );
   }
 
   Future<void> _onStreamingStatusChanged(

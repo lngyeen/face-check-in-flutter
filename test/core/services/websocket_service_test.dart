@@ -1,9 +1,10 @@
 import 'dart:async';
-import 'package:face_check_in_flutter/core/services/websocket_service.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+
+import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 
 // Mocks created with mocktail
 class MockWebSocketChannel extends Mock implements WebSocketChannel {}
