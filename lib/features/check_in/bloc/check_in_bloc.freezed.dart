@@ -35,11 +35,12 @@ mixin _$CheckInEvent {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -71,11 +72,12 @@ mixin _$CheckInEvent {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -103,11 +105,12 @@ mixin _$CheckInEvent {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -149,6 +152,7 @@ mixin _$CheckInEvent {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -184,6 +188,7 @@ mixin _$CheckInEvent {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -219,6 +224,7 @@ mixin _$CheckInEvent {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -312,11 +318,12 @@ class _$AppStartedImpl implements AppStarted {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -352,11 +359,12 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -388,11 +396,12 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -441,6 +450,7 @@ class _$AppStartedImpl implements AppStarted {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -480,6 +490,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -519,6 +530,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -599,11 +611,12 @@ class _$AppDisposedImpl implements AppDisposed {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -639,11 +652,12 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -675,11 +689,12 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -728,6 +743,7 @@ class _$AppDisposedImpl implements AppDisposed {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -767,6 +783,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -806,6 +823,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -887,11 +905,12 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -927,11 +946,12 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -963,11 +983,12 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -1016,6 +1037,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -1055,6 +1077,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -1094,6 +1117,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -1175,11 +1199,12 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -1215,11 +1240,12 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -1251,11 +1277,12 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -1304,6 +1331,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -1343,6 +1371,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -1382,6 +1411,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -1463,11 +1493,12 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -1503,11 +1534,12 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -1539,11 +1571,12 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -1592,6 +1625,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -1631,6 +1665,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -1670,6 +1705,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -1751,11 +1787,12 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -1791,11 +1828,12 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -1827,11 +1865,12 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -1880,6 +1919,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -1919,6 +1959,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -1958,6 +1999,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -2038,11 +2080,12 @@ class _$CameraStartedImpl implements CameraStarted {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -2078,11 +2121,12 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -2114,11 +2158,12 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -2167,6 +2212,7 @@ class _$CameraStartedImpl implements CameraStarted {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -2206,6 +2252,7 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -2245,6 +2292,7 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -2325,11 +2373,12 @@ class _$CameraPausedImpl implements CameraPaused {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -2365,11 +2414,12 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -2401,11 +2451,12 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -2454,6 +2505,7 @@ class _$CameraPausedImpl implements CameraPaused {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -2493,6 +2545,7 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -2532,6 +2585,7 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -2612,11 +2666,12 @@ class _$CameraResumedImpl implements CameraResumed {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -2652,11 +2707,12 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -2688,11 +2744,12 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -2741,6 +2798,7 @@ class _$CameraResumedImpl implements CameraResumed {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -2780,6 +2838,7 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -2819,6 +2878,7 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -2899,11 +2959,12 @@ class _$CameraStoppedImpl implements CameraStopped {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -2939,11 +3000,12 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -2975,11 +3037,12 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -3028,6 +3091,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -3067,6 +3131,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -3106,6 +3171,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -3216,11 +3282,12 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -3256,11 +3323,12 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -3292,11 +3360,12 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -3345,6 +3414,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -3384,6 +3454,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -3423,6 +3494,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -3513,11 +3585,12 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -3553,11 +3626,12 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -3589,11 +3663,12 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -3642,6 +3717,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -3681,6 +3757,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -3720,6 +3797,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -3801,11 +3879,12 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -3841,11 +3920,12 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -3877,11 +3957,12 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -3930,6 +4011,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -3969,6 +4051,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -4008,6 +4091,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -4090,11 +4174,12 @@ class _$WebSocketConnectionRequestedImpl
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -4130,11 +4215,12 @@ class _$WebSocketConnectionRequestedImpl
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -4166,11 +4252,12 @@ class _$WebSocketConnectionRequestedImpl
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -4219,6 +4306,7 @@ class _$WebSocketConnectionRequestedImpl
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -4258,6 +4346,7 @@ class _$WebSocketConnectionRequestedImpl
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -4297,6 +4386,7 @@ class _$WebSocketConnectionRequestedImpl
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -4409,11 +4499,12 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -4449,11 +4540,12 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -4485,11 +4577,12 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -4538,6 +4631,7 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -4577,6 +4671,7 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -4616,6 +4711,7 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -4708,11 +4804,12 @@ class _$WebSocketDisconnectionRequestedImpl
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -4748,11 +4845,12 @@ class _$WebSocketDisconnectionRequestedImpl
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -4784,11 +4882,12 @@ class _$WebSocketDisconnectionRequestedImpl
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -4837,6 +4936,7 @@ class _$WebSocketDisconnectionRequestedImpl
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -4876,6 +4976,7 @@ class _$WebSocketDisconnectionRequestedImpl
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -4915,6 +5016,7 @@ class _$WebSocketDisconnectionRequestedImpl
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -4944,7 +5046,7 @@ abstract class _$$WebSocketMessageReceivedImplCopyWith<$Res> {
     $Res Function(_$WebSocketMessageReceivedImpl) then,
   ) = __$$WebSocketMessageReceivedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({dynamic message});
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -4960,13 +5062,13 @@ class __$$WebSocketMessageReceivedImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = freezed}) {
+  $Res call({Object? message = null}) {
     return _then(
       _$WebSocketMessageReceivedImpl(
-        freezed == message
+        null == message
             ? _value.message
             : message // ignore: cast_nullable_to_non_nullable
-                as dynamic,
+                as String,
       ),
     );
   }
@@ -4978,7 +5080,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   const _$WebSocketMessageReceivedImpl(this.message);
 
   @override
-  final dynamic message;
+  final String message;
 
   @override
   String toString() {
@@ -4990,12 +5092,11 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WebSocketMessageReceivedImpl &&
-            const DeepCollectionEquality().equals(other.message, message));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(runtimeType, message);
 
   /// Create a copy of CheckInEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -5026,11 +5127,12 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -5066,11 +5168,12 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -5102,11 +5205,12 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -5155,6 +5259,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -5194,6 +5299,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -5233,6 +5339,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -5251,10 +5358,10 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
 }
 
 abstract class WebSocketMessageReceived implements CheckInEvent {
-  const factory WebSocketMessageReceived(final dynamic message) =
+  const factory WebSocketMessageReceived(final String message) =
       _$WebSocketMessageReceivedImpl;
 
-  dynamic get message;
+  String get message;
 
   /// Create a copy of CheckInEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -5322,11 +5429,12 @@ class _$StreamingStartedImpl implements StreamingStarted {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -5362,11 +5470,12 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -5398,11 +5507,12 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -5451,6 +5561,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -5490,6 +5601,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -5529,6 +5641,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -5609,11 +5722,12 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -5649,11 +5763,12 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -5685,11 +5800,12 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -5738,6 +5854,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -5777,6 +5894,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -5816,6 +5934,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -5927,11 +6046,12 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -5967,11 +6087,12 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -6003,11 +6124,12 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -6056,6 +6178,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -6095,6 +6218,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -6134,6 +6258,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -6223,11 +6348,12 @@ class _$FrameProcessedImpl implements FrameProcessed {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -6263,11 +6389,12 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -6299,11 +6426,12 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -6352,6 +6480,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -6391,6 +6520,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -6430,6 +6560,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -6449,6 +6580,334 @@ class _$FrameProcessedImpl implements FrameProcessed {
 
 abstract class FrameProcessed implements CheckInEvent {
   const factory FrameProcessed() = _$FrameProcessedImpl;
+}
+
+/// @nodoc
+abstract class _$$FrameCapturedImplCopyWith<$Res> {
+  factory _$$FrameCapturedImplCopyWith(
+    _$FrameCapturedImpl value,
+    $Res Function(_$FrameCapturedImpl) then,
+  ) = __$$FrameCapturedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CameraImage image});
+}
+
+/// @nodoc
+class __$$FrameCapturedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$FrameCapturedImpl>
+    implements _$$FrameCapturedImplCopyWith<$Res> {
+  __$$FrameCapturedImplCopyWithImpl(
+    _$FrameCapturedImpl _value,
+    $Res Function(_$FrameCapturedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? image = null}) {
+    return _then(
+      _$FrameCapturedImpl(
+        null == image
+            ? _value.image
+            : image // ignore: cast_nullable_to_non_nullable
+                as CameraImage,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$FrameCapturedImpl implements _FrameCaptured {
+  const _$FrameCapturedImpl(this.image);
+
+  @override
+  final CameraImage image;
+
+  @override
+  String toString() {
+    return 'CheckInEvent.frameCaptured(image: $image)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FrameCapturedImpl &&
+            (identical(other.image, image) || other.image == image));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, image);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FrameCapturedImplCopyWith<_$FrameCapturedImpl> get copyWith =>
+      __$$FrameCapturedImplCopyWithImpl<_$FrameCapturedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function() webSocketConnectionRequested,
+    required TResult Function(ConnectionStatus status) webSocketStatusChanged,
+    required TResult Function() webSocketDisconnectionRequested,
+    required TResult Function(String message) webSocketMessageReceived,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+  }) {
+    return frameCaptured(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function()? webSocketConnectionRequested,
+    TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
+    TResult? Function()? webSocketDisconnectionRequested,
+    TResult? Function(String message)? webSocketMessageReceived,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+  }) {
+    return frameCaptured?.call(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function()? webSocketConnectionRequested,
+    TResult Function(ConnectionStatus status)? webSocketStatusChanged,
+    TResult Function()? webSocketDisconnectionRequested,
+    TResult Function(String message)? webSocketMessageReceived,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (frameCaptured != null) {
+      return frameCaptured(image);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(WebSocketConnectionRequested value)
+    webSocketConnectionRequested,
+    required TResult Function(WebSocketStatusChanged value)
+    webSocketStatusChanged,
+    required TResult Function(WebSocketDisconnectionRequested value)
+    webSocketDisconnectionRequested,
+    required TResult Function(WebSocketMessageReceived value)
+    webSocketMessageReceived,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+  }) {
+    return frameCaptured(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
+    TResult? Function(WebSocketDisconnectionRequested value)?
+    webSocketDisconnectionRequested,
+    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+  }) {
+    return frameCaptured?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
+    TResult Function(WebSocketDisconnectionRequested value)?
+    webSocketDisconnectionRequested,
+    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    required TResult orElse(),
+  }) {
+    if (frameCaptured != null) {
+      return frameCaptured(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FrameCaptured implements CheckInEvent {
+  const factory _FrameCaptured(final CameraImage image) = _$FrameCapturedImpl;
+
+  CameraImage get image;
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FrameCapturedImplCopyWith<_$FrameCapturedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -6537,11 +6996,12 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -6577,11 +7037,12 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -6613,11 +7074,12 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -6666,6 +7128,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -6705,6 +7168,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -6744,6 +7208,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -6859,11 +7324,12 @@ class _$CameraErrorImpl implements CameraError {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -6899,11 +7365,12 @@ class _$CameraErrorImpl implements CameraError {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -6935,11 +7402,12 @@ class _$CameraErrorImpl implements CameraError {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -6988,6 +7456,7 @@ class _$CameraErrorImpl implements CameraError {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -7027,6 +7496,7 @@ class _$CameraErrorImpl implements CameraError {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -7066,6 +7536,7 @@ class _$CameraErrorImpl implements CameraError {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -7154,11 +7625,12 @@ class _$ErrorClearedImpl implements ErrorCleared {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -7194,11 +7666,12 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -7230,11 +7703,12 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -7283,6 +7757,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -7322,6 +7797,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -7361,6 +7837,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -7471,11 +7948,12 @@ class _$ToastRequestedImpl implements ToastRequested {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -7511,11 +7989,12 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -7547,11 +8026,12 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -7600,6 +8080,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -7639,6 +8120,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -7678,6 +8160,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -7766,11 +8249,12 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -7806,11 +8290,12 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -7842,11 +8327,12 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -7895,6 +8381,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -7934,6 +8421,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -7973,6 +8461,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -8053,11 +8542,12 @@ class _$StatisticsResetImpl implements StatisticsReset {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -8093,11 +8583,12 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -8129,11 +8620,12 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -8182,6 +8674,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -8221,6 +8714,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -8260,6 +8754,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -8395,11 +8890,12 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     required TResult Function() webSocketConnectionRequested,
     required TResult Function(ConnectionStatus status) webSocketStatusChanged,
     required TResult Function() webSocketDisconnectionRequested,
-    required TResult Function(dynamic message) webSocketMessageReceived,
+    required TResult Function(String message) webSocketMessageReceived,
     required TResult Function() streamingStarted,
     required TResult Function() streamingStopped,
     required TResult Function(StreamingStatus status) streamingStatusChanged,
     required TResult Function() frameProcessed,
+    required TResult Function(CameraImage image) frameCaptured,
     required TResult Function(String message) errorOccurred,
     required TResult Function(String error) cameraError,
     required TResult Function() errorCleared,
@@ -8435,11 +8931,12 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function()? webSocketConnectionRequested,
     TResult? Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? webSocketDisconnectionRequested,
-    TResult? Function(dynamic message)? webSocketMessageReceived,
+    TResult? Function(String message)? webSocketMessageReceived,
     TResult? Function()? streamingStarted,
     TResult? Function()? streamingStopped,
     TResult? Function(StreamingStatus status)? streamingStatusChanged,
     TResult? Function()? frameProcessed,
+    TResult? Function(CameraImage image)? frameCaptured,
     TResult? Function(String message)? errorOccurred,
     TResult? Function(String error)? cameraError,
     TResult? Function()? errorCleared,
@@ -8471,11 +8968,12 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function()? webSocketConnectionRequested,
     TResult Function(ConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? webSocketDisconnectionRequested,
-    TResult Function(dynamic message)? webSocketMessageReceived,
+    TResult Function(String message)? webSocketMessageReceived,
     TResult Function()? streamingStarted,
     TResult Function()? streamingStopped,
     TResult Function(StreamingStatus status)? streamingStatusChanged,
     TResult Function()? frameProcessed,
+    TResult Function(CameraImage image)? frameCaptured,
     TResult Function(String message)? errorOccurred,
     TResult Function(String error)? cameraError,
     TResult Function()? errorCleared,
@@ -8524,6 +9022,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     required TResult Function(StreamingStatusChanged value)
     streamingStatusChanged,
     required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(_FrameCaptured value) frameCaptured,
     required TResult Function(ErrorOccurred value) errorOccurred,
     required TResult Function(CameraError value) cameraError,
     required TResult Function(ErrorCleared value) errorCleared,
@@ -8563,6 +9062,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(StreamingStopped value)? streamingStopped,
     TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(_FrameCaptured value)? frameCaptured,
     TResult? Function(ErrorOccurred value)? errorOccurred,
     TResult? Function(CameraError value)? cameraError,
     TResult? Function(ErrorCleared value)? errorCleared,
@@ -8602,6 +9102,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(StreamingStopped value)? streamingStopped,
     TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
     TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(_FrameCaptured value)? frameCaptured,
     TResult Function(ErrorOccurred value)? errorOccurred,
     TResult Function(CameraError value)? cameraError,
     TResult Function(ErrorCleared value)? errorCleared,
@@ -8678,6 +9179,18 @@ mixin _$CheckInState {
   /// Number of frames processed
   int get framesProcessed => throw _privateConstructorUsedError;
 
+  /// Total number of frames processed
+  int get totalFramesProcessed => throw _privateConstructorUsedError;
+
+  /// Number of successful recognitions
+  int get successfulRecognitions => throw _privateConstructorUsedError;
+
+  /// Number of failed recognitions
+  int get failedRecognitions => throw _privateConstructorUsedError;
+
+  /// Detected faces
+  List<Face> get detectedFaces => throw _privateConstructorUsedError;
+
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -8707,6 +9220,10 @@ abstract class $CheckInStateCopyWith<$Res> {
     bool isDebugMode,
     DateTime? lastRecognitionTime,
     int framesProcessed,
+    int totalFramesProcessed,
+    int successfulRecognitions,
+    int failedRecognitions,
+    List<Face> detectedFaces,
   });
 }
 
@@ -8739,6 +9256,10 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
     Object? isDebugMode = null,
     Object? lastRecognitionTime = freezed,
     Object? framesProcessed = null,
+    Object? totalFramesProcessed = null,
+    Object? successfulRecognitions = null,
+    Object? failedRecognitions = null,
+    Object? detectedFaces = null,
   }) {
     return _then(
       _value.copyWith(
@@ -8812,6 +9333,26 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
                     ? _value.framesProcessed
                     : framesProcessed // ignore: cast_nullable_to_non_nullable
                         as int,
+            totalFramesProcessed:
+                null == totalFramesProcessed
+                    ? _value.totalFramesProcessed
+                    : totalFramesProcessed // ignore: cast_nullable_to_non_nullable
+                        as int,
+            successfulRecognitions:
+                null == successfulRecognitions
+                    ? _value.successfulRecognitions
+                    : successfulRecognitions // ignore: cast_nullable_to_non_nullable
+                        as int,
+            failedRecognitions:
+                null == failedRecognitions
+                    ? _value.failedRecognitions
+                    : failedRecognitions // ignore: cast_nullable_to_non_nullable
+                        as int,
+            detectedFaces:
+                null == detectedFaces
+                    ? _value.detectedFaces
+                    : detectedFaces // ignore: cast_nullable_to_non_nullable
+                        as List<Face>,
           )
           as $Val,
     );
@@ -8842,6 +9383,10 @@ abstract class _$$CheckInStateImplCopyWith<$Res>
     bool isDebugMode,
     DateTime? lastRecognitionTime,
     int framesProcessed,
+    int totalFramesProcessed,
+    int successfulRecognitions,
+    int failedRecognitions,
+    List<Face> detectedFaces,
   });
 }
 
@@ -8873,6 +9418,10 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
     Object? isDebugMode = null,
     Object? lastRecognitionTime = freezed,
     Object? framesProcessed = null,
+    Object? totalFramesProcessed = null,
+    Object? successfulRecognitions = null,
+    Object? failedRecognitions = null,
+    Object? detectedFaces = null,
   }) {
     return _then(
       _$CheckInStateImpl(
@@ -8946,6 +9495,26 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
                 ? _value.framesProcessed
                 : framesProcessed // ignore: cast_nullable_to_non_nullable
                     as int,
+        totalFramesProcessed:
+            null == totalFramesProcessed
+                ? _value.totalFramesProcessed
+                : totalFramesProcessed // ignore: cast_nullable_to_non_nullable
+                    as int,
+        successfulRecognitions:
+            null == successfulRecognitions
+                ? _value.successfulRecognitions
+                : successfulRecognitions // ignore: cast_nullable_to_non_nullable
+                    as int,
+        failedRecognitions:
+            null == failedRecognitions
+                ? _value.failedRecognitions
+                : failedRecognitions // ignore: cast_nullable_to_non_nullable
+                    as int,
+        detectedFaces:
+            null == detectedFaces
+                ? _value._detectedFaces
+                : detectedFaces // ignore: cast_nullable_to_non_nullable
+                    as List<Face>,
       ),
     );
   }
@@ -8969,7 +9538,11 @@ class _$CheckInStateImpl implements _CheckInState {
     this.isDebugMode = false,
     this.lastRecognitionTime,
     this.framesProcessed = 0,
-  });
+    this.totalFramesProcessed = 0,
+    this.successfulRecognitions = 0,
+    this.failedRecognitions = 0,
+    final List<Face> detectedFaces = const [],
+  }) : _detectedFaces = detectedFaces;
 
   /// Current camera status
   @override
@@ -9033,9 +9606,36 @@ class _$CheckInStateImpl implements _CheckInState {
   @JsonKey()
   final int framesProcessed;
 
+  /// Total number of frames processed
+  @override
+  @JsonKey()
+  final int totalFramesProcessed;
+
+  /// Number of successful recognitions
+  @override
+  @JsonKey()
+  final int successfulRecognitions;
+
+  /// Number of failed recognitions
+  @override
+  @JsonKey()
+  final int failedRecognitions;
+
+  /// Detected faces
+  final List<Face> _detectedFaces;
+
+  /// Detected faces
+  @override
+  @JsonKey()
+  List<Face> get detectedFaces {
+    if (_detectedFaces is EqualUnmodifiableListView) return _detectedFaces;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_detectedFaces);
+  }
+
   @override
   String toString() {
-    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, connectionAttempts: $connectionAttempts, connectionError: $connectionError, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed)';
+    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, connectionAttempts: $connectionAttempts, connectionError: $connectionError, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed, totalFramesProcessed: $totalFramesProcessed, successfulRecognitions: $successfulRecognitions, failedRecognitions: $failedRecognitions, detectedFaces: $detectedFaces)';
   }
 
   @override
@@ -9070,7 +9670,17 @@ class _$CheckInStateImpl implements _CheckInState {
             (identical(other.lastRecognitionTime, lastRecognitionTime) ||
                 other.lastRecognitionTime == lastRecognitionTime) &&
             (identical(other.framesProcessed, framesProcessed) ||
-                other.framesProcessed == framesProcessed));
+                other.framesProcessed == framesProcessed) &&
+            (identical(other.totalFramesProcessed, totalFramesProcessed) ||
+                other.totalFramesProcessed == totalFramesProcessed) &&
+            (identical(other.successfulRecognitions, successfulRecognitions) ||
+                other.successfulRecognitions == successfulRecognitions) &&
+            (identical(other.failedRecognitions, failedRecognitions) ||
+                other.failedRecognitions == failedRecognitions) &&
+            const DeepCollectionEquality().equals(
+              other._detectedFaces,
+              _detectedFaces,
+            ));
   }
 
   @override
@@ -9090,6 +9700,10 @@ class _$CheckInStateImpl implements _CheckInState {
     isDebugMode,
     lastRecognitionTime,
     framesProcessed,
+    totalFramesProcessed,
+    successfulRecognitions,
+    failedRecognitions,
+    const DeepCollectionEquality().hash(_detectedFaces),
   );
 
   /// Create a copy of CheckInState
@@ -9117,6 +9731,10 @@ abstract class _CheckInState implements CheckInState {
     final bool isDebugMode,
     final DateTime? lastRecognitionTime,
     final int framesProcessed,
+    final int totalFramesProcessed,
+    final int successfulRecognitions,
+    final int failedRecognitions,
+    final List<Face> detectedFaces,
   }) = _$CheckInStateImpl;
 
   /// Current camera status
@@ -9170,6 +9788,22 @@ abstract class _CheckInState implements CheckInState {
   /// Number of frames processed
   @override
   int get framesProcessed;
+
+  /// Total number of frames processed
+  @override
+  int get totalFramesProcessed;
+
+  /// Number of successful recognitions
+  @override
+  int get successfulRecognitions;
+
+  /// Number of failed recognitions
+  @override
+  int get failedRecognitions;
+
+  /// Detected faces
+  @override
+  List<Face> get detectedFaces;
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.

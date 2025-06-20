@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
@@ -66,6 +67,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
     // Backend response events
     on<RecognitionResultReceived>(_onRecognitionResultReceived);
+
+    // Internal events for stream processing
+    on<_FrameCaptured>(_onFrameCaptured);
   }
 
   // App lifecycle event handlers
@@ -345,9 +349,31 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     WebSocketMessageReceived event,
     Emitter<CheckInState> emit,
   ) async {
-    // Handle incoming message from backend
-    // This will be implemented in more detail in story 2.3
-    debugPrint('📥 CheckInBloc: Message received: ${event.message}');
+    try {
+      final decodedMessage = jsonDecode(event.message) as Map<String, dynamic>;
+      final facesData = decodedMessage['faces'] as List?;
+      if (facesData == null) return;
+
+      final faces =
+          facesData.map((faceData) {
+            final box = faceData['box'] as List<dynamic>;
+            return Face(
+              boundingBox: Rect.fromLTRB(
+                box[0].toDouble(),
+                box[1].toDouble(),
+                box[2].toDouble(),
+                box[3].toDouble(),
+              ),
+              confidence: faceData['confidence']?.toDouble() ?? 0.0,
+              name: faceData['name'] as String?,
+            );
+          }).toList();
+
+      emit(state.copyWith(detectedFaces: faces));
+    } catch (e) {
+      debugPrint('Error decoding websocket message: $e');
+      add(ErrorOccurred('Error processing server response: $e'));
+    }
   }
 
   // Streaming event handlers
@@ -355,17 +381,17 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     StreamingStarted event,
     Emitter<CheckInState> emit,
   ) async {
-    debugPrint('📡 CheckInBloc: Frame streaming started');
-
+    if (state.streamingStatus == StreamingStatus.active) return;
     emit(state.copyWith(streamingStatus: StreamingStatus.active));
+    add(const CameraStarted());
   }
 
   Future<void> _onStreamingStopped(
     StreamingStopped event,
     Emitter<CheckInState> emit,
   ) async {
-    debugPrint('📡 CheckInBloc: Frame streaming stopped');
-
+    if (state.streamingStatus != StreamingStatus.active) return;
+    await state.cameraController?.stopImageStream();
     emit(state.copyWith(streamingStatus: StreamingStatus.idle));
   }
 
@@ -469,22 +495,17 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     RecognitionResultReceived event,
     Emitter<CheckInState> emit,
   ) async {
-    debugPrint(
-      '🎯 CheckInBloc: Recognition result received - Success: ${event.success}',
-    );
+    // Implement logic to handle recognition results
+    // This will be part of a future task
+  }
 
-    final message =
-        event.success
-            ? 'Welcome ${event.employeeName ?? 'Employee'}!'
-            : event.message;
-
-    emit(
-      state.copyWith(
-        lastRecognitionTime: DateTime.now(),
-        toastStatus: ToastStatus.showing,
-        toastMessage: message,
-      ),
-    );
+  // New handler for captured frames
+  Future<void> _onFrameCaptured(
+    _FrameCaptured event,
+    Emitter<CheckInState> emit,
+  ) async {
+    // Frame processing logic will go here.
+    // For now, this is a placeholder.
   }
 
   @override

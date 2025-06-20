@@ -63,7 +63,7 @@ class CheckInEvent with _$CheckInEvent {
 
   // WebSocket message events
   /// A message was received from the WebSocket server.
-  const factory CheckInEvent.webSocketMessageReceived(dynamic message) =
+  const factory CheckInEvent.webSocketMessageReceived(String message) =
       WebSocketMessageReceived;
 
   // Streaming events
@@ -79,6 +79,9 @@ class CheckInEvent with _$CheckInEvent {
 
   /// A frame has been processed
   const factory CheckInEvent.frameProcessed() = FrameProcessed;
+
+  /// A frame has been captured
+  const factory CheckInEvent.frameCaptured(CameraImage image) = _FrameCaptured;
 
   // UI events
   /// An error has occurred

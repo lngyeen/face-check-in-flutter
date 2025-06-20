@@ -160,9 +160,9 @@ class __$$WebSocketConfigImplCopyWithImpl<$Res>
 class _$WebSocketConfigImpl implements _WebSocketConfig {
   const _$WebSocketConfigImpl({
     required this.url,
-    this.connectionTimeout = const Duration(seconds: 10),
+    this.connectionTimeout = const Duration(seconds: 30),
     this.maxRetryAttempts = 3,
-    this.retryDelay = const Duration(seconds: 5),
+    this.retryDelay = const Duration(seconds: 3),
   });
 
   @override

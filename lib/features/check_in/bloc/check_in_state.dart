@@ -110,7 +110,27 @@ class CheckInState with _$CheckInState {
 
     /// Number of frames processed
     @Default(0) int framesProcessed,
+
+    /// Total number of frames processed
+    @Default(0) int totalFramesProcessed,
+
+    /// Number of successful recognitions
+    @Default(0) int successfulRecognitions,
+
+    /// Number of failed recognitions
+    @Default(0) int failedRecognitions,
+
+    /// Detected faces
+    @Default([]) List<Face> detectedFaces,
   }) = _CheckInState;
+}
+
+class Face {
+  final Rect boundingBox;
+  final double confidence;
+  final String? name;
+
+  Face({required this.boundingBox, required this.confidence, this.name});
 }
 
 // --- UI Helper Extensions ---
