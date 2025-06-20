@@ -8,8 +8,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:permission_handler/permission_handler.dart' as ps;
 
-import 'package:face_check_in_flutter/domain/services/permission_service.dart'
-    as ps;
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart';
 import 'package:face_check_in_flutter/domain/services/camera_service.dart';
@@ -825,5 +823,108 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Implement the logic to return the appropriate color based on the connection status
     // This is a placeholder and should be implemented based on your specific requirements
     return Colors.grey; // Placeholder return, actual implementation needed
+  }
+}
+
+/// Extension to provide display text for CameraStatus enum
+extension CameraStatusDisplay on CameraStatus {
+  String get displayText {
+    switch (this) {
+      case CameraStatus.initial:
+        return 'Initial';
+      case CameraStatus.permissionRequesting:
+        return 'Requesting Permission...';
+      case CameraStatus.initializing:
+        return 'Initializing...';
+      case CameraStatus.ready:
+        return 'Ready';
+      case CameraStatus.streaming:
+        return 'Streaming';
+      case CameraStatus.paused:
+        return 'Paused';
+      case CameraStatus.error:
+        return 'Error';
+      case CameraStatus.permissionDenied:
+        return 'Permission Denied';
+    }
+  }
+
+  Color get displayColor {
+    switch (this) {
+      case CameraStatus.initial:
+      case CameraStatus.permissionDenied:
+        return Colors.grey;
+      case CameraStatus.permissionRequesting:
+      case CameraStatus.initializing:
+        return Colors.orange;
+      case CameraStatus.ready:
+        return Colors.green;
+      case CameraStatus.streaming:
+        return Colors.blue;
+      case CameraStatus.paused:
+        return Colors.yellow;
+      case CameraStatus.error:
+        return Colors.red;
+    }
+  }
+}
+
+/// Extension to provide display text for ConnectionStatus enum
+extension ConnectionStatusDisplay on ConnectionStatus {
+  String get displayText {
+    switch (this) {
+      case ConnectionStatus.disconnected:
+        return 'Disconnected';
+      case ConnectionStatus.connecting:
+        return 'Connecting...';
+      case ConnectionStatus.connected:
+        return 'Connected';
+      case ConnectionStatus.failed:
+        return 'Connection Failed';
+      case ConnectionStatus.retrying:
+        return 'Retrying...';
+      case ConnectionStatus.timeout:
+        return 'Connection Timeout';
+    }
+  }
+
+  Color get displayColor {
+    switch (this) {
+      case ConnectionStatus.disconnected:
+        return Colors.grey;
+      case ConnectionStatus.connecting:
+      case ConnectionStatus.retrying:
+        return Colors.orange;
+      case ConnectionStatus.connected:
+        return Colors.green;
+      case ConnectionStatus.failed:
+      case ConnectionStatus.timeout:
+        return Colors.red;
+    }
+  }
+}
+
+/// Extension to provide display text for StreamingStatus enum
+extension StreamingStatusDisplay on StreamingStatus {
+  String get displayText {
+    switch (this) {
+      case StreamingStatus.idle:
+        return 'Idle';
+      case StreamingStatus.active:
+        return 'Active';
+      case StreamingStatus.error:
+        return 'Error';
+    }
+  }
+
+  Color get displayColor {
+    switch (this) {
+      case StreamingStatus.idle:
+        return Colors.grey;
+      case StreamingStatus.active:
+        return Colors.green;
+      case StreamingStatus.error:
+        return Colors.red;
+    }
   }
 }

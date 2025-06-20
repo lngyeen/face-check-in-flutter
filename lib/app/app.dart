@@ -15,9 +15,11 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (context) =>
-              getIt<CheckInBloc>()..add(const CheckInEvent.appStarted()),
+      create: (context) {
+        final bloc = getIt<CheckInBloc>();
+        bloc.add(const CheckInEvent.appStarted());
+        return bloc;
+      },
       child: MaterialApp(
         title: 'FaceCheckIn Employee',
         debugShowCheckedModeBanner: false,
