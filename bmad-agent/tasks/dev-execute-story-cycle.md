@@ -58,10 +58,10 @@
     -   **A. Announce Phase**: "Starting Phase: `[Phase Title]`."
     -   **B. Begin Task Loop**: For each `Task` within the current Phase:
         -   **i. Announce Task**: "Starting Task: `[Task Title]`."
-        -   **ii. Execute Sub-Tasks**: Complete all sub-tasks (`- [ ]`) listed under the current Task. Implement code, write tests, and perform self-correction.
+        -   **ii. Execute Sub-Tasks**: Focus ONLY on the currently announced task. Complete all of its sub-tasks (`- [ ]`). Do not proceed to other tasks in the story file. Implement code, write tests, and perform self-correction for the current task only.
         -   **iii. Run Tests & Fix**: Run all relevant unit and widget tests. If any tests fail due to the changes, fix them until all tests pass.
         -   **iv. Update Story & Report Progress**:
-            -   **Action**: Once all sub-tasks for the current Task are complete and tests are passing, update the story file by marking the main task and all its sub-tasks as complete with `[x]`.
+            -   **Action**: Once all sub-tasks for the current Task are complete and tests are passing, update the story file by marking ONLY the current main task and all its sub-tasks as complete with `[x]`. Do NOT mark any other tasks.
             -   **Action**: Announce completion of the Task and provide a summary of the work done.
                 -   **Announcement Template**:
                     ```
@@ -117,5 +117,4 @@
 
 ### **Phase 4: Autonomous Version Control & Handoff**
 
-1.  **Execute Git Push**: `git push origin [generated-branch-name]`
-2.  **Final Announce**: Announce completion, push confirmation, and readiness for the next cycle. 
+1.  **Final Announce**: Announce completion and readiness for the next cycle.
