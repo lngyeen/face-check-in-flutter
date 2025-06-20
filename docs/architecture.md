@@ -82,15 +82,17 @@ This structure makes navigation intuitive and enforces a clear testing strategy.
 
 **3.1 Backend Configuration**
 
-* **Development Environment**: `ws://192.168.1.234:3009`
+* **Development Environment**: `wss://facedetection-ws.owt.vn`
+* **Production Environment**: `wss://your_production_ws_url`
+* **Protocols**: `WSS`
 * **Connection Timeout**: 30 seconds
 * **Retry Policy**: 3 attempts with 3-second delays
-* **Protocol**: Raw WebSocket communication
+* **Authentication**: None (currently)
+* **Status**: ✅ **Confirmed** - Backend ready at `wss://facedetection-ws.owt.vn`
 
 **3.2 Client (Flutter App) to Server Message**
 
 * **Format**: The application will send the raw **base64 string of the image frame** directly over the WebSocket connection, with no JSON wrapping.
-* **Status**: ✅ **Confirmed** - Backend ready at `ws://192.168.1.234:3009`
 
 **3.3 Server to Client (Flutter App) Messages**
 
@@ -146,14 +148,14 @@ The server will respond with a JSON message. The client will determine the outco
 ### **4.0 Error Handling & Risk Mitigation Strategy**
 
 #### **4.1 WebSocket Connection Management**
-* **Backend URL**: `ws://192.168.1.234:3009` (Development Environment - Confirmed Ready)
+* **Backend URL**: `wss://facedetection-ws.owt.vn` (Development Environment - Confirmed Ready)
 * **Connection Failure**: The `WebSocketService` will automatically attempt to **reconnect 3 times**, with a 3-second delay between each attempt. If all retries fail, an error state will be triggered in the UI.
 * **Connection Timeout**: If connection cannot be established within **30 seconds**, treat as timeout error.
 * **Connection Loss During Streaming**: Automatically pause streaming, attempt reconnection, resume when connection restored.
 
 #### **4.2 Backend Service Dependency Risks**
 * **Backend Unavailability**: 
-  - **Development**: Backend confirmed available at `ws://192.168.1.234:3009`
+  - **Development**: Backend confirmed available at `wss://facedetection-ws.owt.vn`
   - **Testing**: Real backend responses available for testing
   - **Graceful Degradation**: Show "Backend unavailable" status to user
   - **Backup Plan**: Use mock WebSocket server if needed

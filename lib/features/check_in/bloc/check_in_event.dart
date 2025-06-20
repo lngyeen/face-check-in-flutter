@@ -1,14 +1,12 @@
 part of 'check_in_bloc.dart';
 
-/// Events for the check-in feature
-/// Defines all possible user interactions and system events
 @freezed
 class CheckInEvent with _$CheckInEvent {
   // App lifecycle events
-  /// App has started and needs initialization
+  /// The application has started and is ready for initialization.
   const factory CheckInEvent.appStarted() = AppStarted;
 
-  /// App is being disposed
+  /// The application is being disposed.
   const factory CheckInEvent.appDisposed() = AppDisposed;
 
   // Camera permission events
@@ -50,16 +48,23 @@ class CheckInEvent with _$CheckInEvent {
   /// Request to stop camera preview
   const factory CheckInEvent.cameraPreviewStopped() = CameraPreviewStopped;
 
-  // WebSocket events
-  /// Request to connect to WebSocket backend
-  const factory CheckInEvent.connectionRequested() = ConnectionRequested;
+  // WebSocket connection events
+  /// Request to connect to the WebSocket server.
+  const factory CheckInEvent.webSocketConnectionRequested() =
+      WebSocketConnectionRequested;
 
-  /// WebSocket connection status has changed
-  const factory CheckInEvent.connectionStatusChanged(ConnectionStatus status) =
-      ConnectionStatusChanged;
+  /// The WebSocket connection status has changed.
+  const factory CheckInEvent.webSocketStatusChanged(ConnectionStatus status) =
+      WebSocketStatusChanged;
 
-  /// Request to disconnect from WebSocket
-  const factory CheckInEvent.disconnectionRequested() = DisconnectionRequested;
+  /// Request to disconnect from the WebSocket server.
+  const factory CheckInEvent.webSocketDisconnectionRequested() =
+      WebSocketDisconnectionRequested;
+
+  // WebSocket message events
+  /// A message was received from the WebSocket server.
+  const factory CheckInEvent.webSocketMessageReceived(dynamic message) =
+      WebSocketMessageReceived;
 
   // Streaming events
   /// Request to start frame streaming

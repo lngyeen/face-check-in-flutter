@@ -26,20 +26,23 @@
 ## Error Handling Strategy
 
 ### WebSocket Connection Management
-* **Backend URL**: `ws://192.168.1.234:3009` (Development Environment - Confirmed Ready)
+* **Backend URL**: `wss://facedetection-ws.owt.vn` (Development Environment - Confirmed Ready)
 * **Connection Failure**: The `WebSocketService` will automatically attempt to **reconnect 3 times**, with a 3-second delay between each attempt. If all retries fail, an error state will be triggered in the UI.
 * **Connection Timeout**: If connection cannot be established within **30 seconds**, treat as timeout error.
 * **Connection Loss During Streaming**: Automatically pause streaming, attempt reconnection, resume when connection restored.
 
 ### Backend Service Dependency Risks
 * **Backend Unavailability**: 
-  - **Development**: Backend confirmed available at `ws://192.168.1.234:3009`
+  - **Development**: Backend confirmed available at `wss://facedetection-ws.owt.vn`
   - **Testing**: Real backend responses available for testing
   - **Graceful Degradation**: Show "Backend unavailable" status to user
   - **Backup Plan**: Use mock WebSocket server if needed
 * **API Response Timeout**: If no response received within **30 seconds** of streaming start, stop streaming and reset state
 * **Invalid Backend Responses**: Log malformed messages, continue operation without crashing
 * **Backend Version Mismatch**: Implement version checking in WebSocket handshake
+* **API Changes**:
+  - **Monitoring**: Regular checks with the backend team for upcoming changes.
+  - **Mitigation**: Use of data contracts (`freezed` models) to detect breaking changes early.
 
 ### Security Best Practices
 * **Data Processing**: Ensure no persistent storage of sensitive image data

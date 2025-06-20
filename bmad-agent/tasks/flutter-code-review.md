@@ -9,7 +9,7 @@ To perform comprehensive code review of pull requests by analyzing the code chan
 
 ## Inputs for this Task
 
-- **Branch name** (provided by user when task is initiated)
+- **Pull Request URL** (provided by user when task is initiated)
 - **Story file** (automatically located based on branch naming convention or user specification)
 - **Project standards** (from `docs/operational-guidelines.md`)
 - **Current codebase** (for context and comparison)
@@ -19,16 +19,19 @@ To perform comprehensive code review of pull requests by analyzing the code chan
 
 ### 1. Gather Review Context
 
-**Branch Information Collection:**
-- Ask user: "What branch should I review? Please provide the branch name."
-- If branch follows naming convention (e.g., `feature/epic-X-story-Y`), extract story reference
-- If no clear story reference in branch name, ask: "Which story file should I reference for this review? (e.g., `1.2.story.md`)"
+**Pull Request Information Collection:**
+- Ask user: "Please provide the Pull Request URL for review."
+- From the URL, parse the PR number.
+- Use a tool like `fetch_pull_request` with the PR number to get PR details (e.g., via GitHub API).
+- From the response, get the source branch (`{branch-name}`) and target branch (`{target-branch}`).
+- If the source branch name follows the convention (e.g., `feature/epic-X-story-Y`), extract the story reference.
+- If no clear story reference in the branch name, ask: "Which story file should I reference for this review? (e.g., `1.2.story.md`)"
 
 **Pull Code and Analyze Changes:**
 - Execute: `git fetch origin`
 - Execute: `git checkout {branch-name}`
-- Execute: `git diff main...{branch-name} --name-only` to get changed files
-- Execute: `git diff main...{branch-name}` to get detailed changes
+- Execute: `git diff {target-branch}...{branch-name} --name-only` to get changed files
+- Execute: `git diff {target-branch}...{branch-name}` to get detailed changes
 - Document all changed files and their modification types (new, modified, deleted)
 
 ### 2. Load Story Context
@@ -167,7 +170,8 @@ To perform comprehensive code review of pull requests by analyzing the code chan
 ```markdown
 # Flutter Code Review Report
 
-**Pull Request:** [{branch-name}]({pr-link})
+**Pull Request:** [PR #{pr-number}]({pr-link})
+**Reviewing:** `{branch-name}` into `{target-branch}`
 **Story:** {story-reference}
 **Reviewer:** {reviewer-name}
 **Date:** {current-date}

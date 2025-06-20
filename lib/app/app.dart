@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:face_check_in_flutter/core/di/di.dart';
 
 import '../features/check_in/bloc/check_in_bloc.dart';
-import '../features/check_in/view/check_in_screen.dart';
+import '../features/check_in/screens/check_in_screen.dart';
 
 /// Main application widget
 /// Configures BLoC providers, theme, and routing for the face check-in app

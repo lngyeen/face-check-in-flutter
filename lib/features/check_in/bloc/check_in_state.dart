@@ -42,21 +42,6 @@ enum PermissionStatus {
   permanentlyDenied,
 }
 
-/// Represents the current WebSocket connection status
-enum ConnectionStatus {
-  /// Not connected to backend
-  disconnected,
-
-  /// Attempting to connect
-  connecting,
-
-  /// Successfully connected
-  connected,
-
-  /// Connection failed
-  failed,
-}
-
 /// Represents the current streaming status
 enum StreamingStatus {
   /// Not streaming frames
@@ -107,6 +92,10 @@ class CheckInState with _$CheckInState {
     /// Camera controller instance
     CameraController? cameraController,
 
+    // WebSocket specific state
+    @Default(0) int connectionAttempts,
+    String? connectionError,
+
     /// Current toast notification status
     @Default(ToastStatus.none) ToastStatus toastStatus,
 
@@ -143,23 +132,6 @@ extension CameraStatusX on CameraStatus {
         return Colors.red;
       case CameraStatus.streaming:
       case CameraStatus.paused:
-        return Colors.grey;
-    }
-  }
-}
-
-extension ConnectionStatusX on ConnectionStatus {
-  String get displayText => toString().split('.').last.toUpperCase();
-
-  Color get displayColor {
-    switch (this) {
-      case ConnectionStatus.connected:
-        return Colors.green;
-      case ConnectionStatus.failed:
-        return Colors.red;
-      case ConnectionStatus.connecting:
-        return Colors.orange;
-      case ConnectionStatus.disconnected:
         return Colors.grey;
     }
   }
