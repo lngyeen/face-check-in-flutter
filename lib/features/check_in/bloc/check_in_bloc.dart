@@ -1,27 +1,81 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:permission_handler/permission_handler.dart' as ps;
 
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
+import 'package:face_check_in_flutter/domain/services/permission_service.dart';
+import 'package:face_check_in_flutter/domain/services/camera_service.dart';
 
 part 'check_in_bloc.freezed.dart';
 part 'check_in_event.dart';
-part 'check_in_state.dart';
+
+// --- STATE DEFINITIONS ---
+enum CameraStatus {
+  initial,
+  permissionRequesting,
+  initializing,
+  ready,
+  error,
+  permissionDenied,
+}
+
+enum ConnectionStatus {
+  disconnected,
+  connecting,
+  connected,
+  failed,
+  retrying,
+  timeout,
+}
+
+enum StreamingStatus { idle, active, error }
+
+enum ToastStatus { none, showing }
+
+@freezed
+class CheckInState with _$CheckInState {
+  const factory CheckInState({
+    @Default(CameraStatus.initial) CameraStatus cameraStatus,
+    @Default(ps.PermissionStatus.denied) ps.PermissionStatus permissionStatus,
+    @Default(ConnectionStatus.disconnected) ConnectionStatus connectionStatus,
+    @Default(StreamingStatus.idle) StreamingStatus streamingStatus,
+    @Default(false) bool isLoading,
+    String? errorMessage,
+    CameraController? cameraController,
+    @Default(ToastStatus.none) ToastStatus toastStatus,
+    String? toastMessage,
+    @Default(false) bool isDebugMode,
+    DateTime? lastRecognitionTime,
+    @Default(0) int framesProcessed,
+    @Default(0) int connectionAttempts,
+    DateTime? lastConnectionAttempt,
+    String? connectionError,
+    @Default(true) bool autoConnectionEnabled,
+    @Default(false) bool isRetryTimerActive,
+  }) = _CheckInState;
+}
 
 /// Main BLoC for managing check-in feature state
 /// Handles camera, WebSocket, streaming, and UI state management
 @injectable
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
-  final ps.PermissionService _permissionService;
+  final PermissionService _permissionService;
   final WebSocketService _webSocketService;
+  final CameraService _cameraService;
 
-  CheckInBloc(this._permissionService, this._webSocketService)
-    : super(const CheckInState()) {
+  CheckInBloc(
+    this._permissionService,
+    this._webSocketService,
+    this._cameraService,
+  ) : super(const CheckInState()) {
     // Initialize WebSocket service integration
     _initializeWebSocketIntegration();
 
@@ -83,34 +137,10 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   /// Initialize WebSocket service integration for Story 2.1
   /// Creates bridge between WebSocket service and BLoC events
   void _initializeWebSocketIntegration() {
-    // Listen to WebSocket connection status changes
     _webSocketService.connectionStatus.listen((status) {
-      switch (status) {
-        case ConnectionStatus.connecting:
-          add(const CheckInEvent.webSocketConnecting());
-          break;
-        case ConnectionStatus.connected:
-          add(const CheckInEvent.webSocketConnected());
-          break;
-        case ConnectionStatus.disconnected:
-          add(const CheckInEvent.webSocketDisconnected());
-          break;
-        case ConnectionStatus.failed:
-          add(
-            CheckInEvent.webSocketConnectionFailed(
-              _webSocketService.lastError ?? 'Unknown connection error',
-            ),
-          );
-          break;
-        case ConnectionStatus.timeout:
-          add(const CheckInEvent.webSocketConnectionTimeout());
-          break;
-        case ConnectionStatus.retrying:
-          add(
-            CheckInEvent.webSocketRetrying(_webSocketService.config.maxRetries),
-          );
-          break;
-      }
+      add(CheckInEvent.connectionStatusChanged(status));
+    })..onError((error) {
+      add(CheckInEvent.webSocketError(error.toString()));
     });
 
     // Listen to incoming WebSocket messages
@@ -185,28 +215,40 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     emit(state.copyWith(cameraStatus: CameraStatus.permissionRequesting));
-    debugPrint('📷 CheckInBloc: Requesting camera permission...');
-    final status = await _permissionService.requestCameraPermission();
-    if (status == ps.PermissionStatus.granted) {
-      debugPrint('✅ CheckInBloc: Camera permission granted.');
-      emit(state.copyWith(permissionStatus: PermissionStatus.granted));
-      add(const CheckInEvent.cameraInitRequested());
-    } else {
-      debugPrint('❌ CheckInBloc: Camera permission denied.');
-      if (status == ps.PermissionStatus.permanentlyDenied) {
-        // Open app settings if permission is permanently denied
-        _permissionService.openAppSettings();
+    final permission = await _permissionService.requestCameraPermission();
+    emit(state.copyWith(permissionStatus: permission));
+
+    if (permission.isGranted) {
+      try {
+        emit(
+          state.copyWith(
+            cameraStatus: CameraStatus.initializing,
+            isLoading: true,
+          ),
+        );
+        await _cameraService.initialize();
+        emit(
+          state.copyWith(
+            cameraStatus: CameraStatus.ready,
+            isLoading: false,
+            cameraController: _cameraService.controller,
+            toastStatus: ToastStatus.showing,
+            toastMessage: 'Camera ready',
+          ),
+        );
+        // Auto-connect after camera is ready
+        add(const CheckInEvent.connectionRequested(isAutoConnect: true));
+      } catch (e) {
+        emit(
+          state.copyWith(
+            cameraStatus: CameraStatus.error,
+            isLoading: false,
+            errorMessage: e.toString(),
+          ),
+        );
       }
-      final newStatus =
-          status == ps.PermissionStatus.permanentlyDenied
-              ? PermissionStatus.permanentlyDenied
-              : PermissionStatus.denied;
-      emit(
-        state.copyWith(
-          permissionStatus: newStatus,
-          cameraStatus: CameraStatus.permissionDenied,
-        ),
-      );
+    } else {
+      emit(state.copyWith(cameraStatus: CameraStatus.permissionDenied));
     }
   }
 
@@ -753,5 +795,29 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     state.cameraController?.dispose();
     _webSocketService.dispose();
     return super.close();
+  }
+
+  // Helper method to get color based on camera status for UI
+  Color getCameraStatusColor(CameraStatus status) {
+    switch (status) {
+      case CameraStatus.initial:
+        return Colors.grey;
+      case CameraStatus.permissionRequesting:
+        return Colors.blue;
+      case CameraStatus.initializing:
+        return Colors.orange;
+      case CameraStatus.ready:
+        return Colors.green;
+      case CameraStatus.error:
+      case CameraStatus.permissionDenied:
+        return Colors.red;
+    }
+  }
+
+  // Helper method to get color based on connection status for UI
+  Color getConnectionStatusColor(ConnectionStatus status) {
+    // Implement the logic to return the appropriate color based on the connection status
+    // This is a placeholder and should be implemented based on your specific requirements
+    return Colors.grey; // Placeholder return, actual implementation needed
   }
 }
