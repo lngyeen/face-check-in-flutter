@@ -74,6 +74,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Backend response events
     on<RecognitionResultReceived>(_onRecognitionResultReceived);
     on<FrameResultReceived>(_onFrameResultReceived);
+    on<ResponseErrorReceived>(_onResponseErrorReceived);
 
     // Internal events for stream processing
     on<_FrameCaptured>(_onFrameCaptured);
@@ -356,26 +357,19 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     WebSocketMessageReceived event,
     Emitter<CheckInState> emit,
   ) async {
-    // This is a placeholder. The actual implementation will depend on the
-    // backend message format.
-    debugPrint('Received message from WebSocket: ${event.message}');
-
-    // Example of handling a simple JSON message
     try {
-      final decodedMessage = jsonDecode(event.message) as Map<String, dynamic>;
-      final messageType = decodedMessage['type'] as String?;
+      final data = json.decode(event.message) as Map<String, dynamic>;
+      final type = data['type'] as String?;
 
-      switch (messageType) {
+      switch (type) {
         case 'connection_ack':
-          // Handle connection acknowledgment
           debugPrint('WebSocket connection acknowledged by server.');
           break;
         case 'recognition_result':
-          // Add event to handle recognition result
-          add(RecognitionResultReceived(decodedMessage));
+          add(RecognitionResultReceived(data));
           break;
         case 'frameResult':
-          final facesData = decodedMessage['faces'];
+          final facesData = data['faces'];
           if (facesData is List) {
             final faces = List<Map<String, dynamic>>.from(facesData);
             add(CheckInEvent.frameResultReceived(faces: faces));
@@ -385,9 +379,16 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
             );
           }
           break;
+        case 'error':
+          add(
+            ResponseErrorReceived(
+              error: data['error'] as String? ?? 'Unknown error',
+              message: data['message'] as String?,
+            ),
+          );
+          break;
         default:
-          debugPrint('Unknown WebSocket message type: $messageType');
-          // Handle unknown message type
+          debugPrint('Unknown WebSocket message type: $type');
           break;
       }
     } on FormatException catch (e) {
@@ -621,6 +622,18 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     } catch (e) {
       add(ErrorOccurred('Error processing frame result: $e'));
     }
+  }
+
+  void _onResponseErrorReceived(
+    ResponseErrorReceived event,
+    Emitter<CheckInState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        faceStatus: FaceDetectionStatus.backendError,
+        responseError: BackendError(error: event.error, message: event.message),
+      ),
+    );
   }
 
   // New handler for captured frames

@@ -122,4 +122,10 @@ class CheckInEvent with _$CheckInEvent {
   const factory CheckInEvent.frameResultReceived({
     required List<Map<String, dynamic>> faces,
   }) = FrameResultReceived;
+
+  /// An error was received from the backend
+  const factory CheckInEvent.responseErrorReceived({
+    required String error,
+    String? message,
+  }) = ResponseErrorReceived;
 }

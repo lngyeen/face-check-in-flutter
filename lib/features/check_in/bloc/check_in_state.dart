@@ -72,6 +72,7 @@ enum FaceDetectionStatus {
   faceFound,
   multipleFaces,
   noFace,
+  backendError,
   error,
 }
 
@@ -137,6 +138,7 @@ class CheckInState with _$CheckInState {
     @Default(FaceDetectionStatus.none) FaceDetectionStatus faceStatus,
     @Default(0.0) double faceConfidence,
     DateTime? lastFaceDetection,
+    BackendError? responseError,
   }) = _CheckInState;
 }
 
@@ -178,4 +180,10 @@ extension StreamingStatusX on StreamingStatus {
         return Colors.grey;
     }
   }
+}
+
+@freezed
+class BackendError with _$BackendError {
+  const factory BackendError({required String error, String? message}) =
+      _BackendError;
 }

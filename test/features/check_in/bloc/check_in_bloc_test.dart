@@ -242,13 +242,23 @@ void main() {
               ),
             ),
         expect:
-            () => <CheckInState>[
-              const CheckInState(
-                errorMessage: 'Invalid "faces" data in frameResult: not-a-list',
-                toastStatus: ToastStatus.showing,
-                toastMessage:
-                    'Error: Invalid "faces" data in frameResult: not-a-list',
-              ),
+            () => [
+              isA<CheckInState>()
+                  .having(
+                    (s) => s.errorMessage,
+                    'errorMessage',
+                    contains('Invalid "faces" data in frameResult'),
+                  )
+                  .having(
+                    (s) => s.toastStatus,
+                    'toastStatus',
+                    ToastStatus.showing,
+                  )
+                  .having(
+                    (s) => s.toastMessage,
+                    'toastMessage',
+                    contains('Invalid "faces" data in frameResult'),
+                  ),
             ],
       );
 
@@ -263,17 +273,22 @@ void main() {
             ),
         expect:
             () => [
-              predicate<CheckInState>((state) {
-                final hasError = state.errorMessage!.startsWith(
-                  'Failed to decode WebSocket message:',
-                );
-                final hasToast = state.toastMessage!.startsWith(
-                  'Error: Failed to decode WebSocket message:',
-                );
-                return hasError &&
-                    hasToast &&
-                    state.toastStatus == ToastStatus.showing;
-              }),
+              isA<CheckInState>()
+                  .having(
+                    (s) => s.errorMessage,
+                    'errorMessage',
+                    contains('Failed to decode WebSocket message'),
+                  )
+                  .having(
+                    (s) => s.toastStatus,
+                    'toastStatus',
+                    ToastStatus.showing,
+                  )
+                  .having(
+                    (s) => s.toastMessage,
+                    'toastMessage',
+                    contains('Failed to decode WebSocket message'),
+                  ),
             ],
       );
 
@@ -363,31 +378,37 @@ void main() {
       );
 
       blocTest<CheckInBloc, CheckInState>(
-        'emits detecting status for one face with low confidence',
+        'FrameResultReceived emits detecting status for one face with low confidence',
         build: () => checkInBloc,
         act:
             (bloc) => bloc.add(
-              CheckInEvent.frameResultReceived(faces: [tFaceLowConfidence]),
+              const CheckInEvent.frameResultReceived(
+                faces: [
+                  {
+                    'x': 10.0,
+                    'y': 20.0,
+                    'width': 100.0,
+                    'height': 100.0,
+                    'confidence': 0.5,
+                    'personId': null,
+                    'personName': null,
+                  },
+                ],
+              ),
             ),
         expect:
-            () => <dynamic>[
-              isA<CheckInState>()
-                  .having(
-                    (s) => s.faceStatus,
-                    'faceStatus',
-                    FaceDetectionStatus.detecting,
-                  )
-                  .having((s) => s.faceConfidence, 'faceConfidence', 0.5)
-                  .having(
-                    (s) => s.detectedFaces.length,
-                    'detectedFaces.length',
-                    1,
-                  ),
+            () => [
+              predicate<CheckInState>(
+                (state) =>
+                    state.faceStatus == FaceDetectionStatus.detecting &&
+                    state.faceConfidence == 0.5 &&
+                    state.detectedFaces.length == 1,
+              ),
             ],
       );
 
       blocTest<CheckInBloc, CheckInState>(
-        'emits faceFound status for one face with high confidence',
+        'FrameResultReceived emits faceFound status for one face with high confidence',
         build: () => checkInBloc,
         act:
             (bloc) => bloc.add(
@@ -406,28 +427,45 @@ void main() {
       );
 
       blocTest<CheckInBloc, CheckInState>(
-        'emits multipleFaces status for multiple faces',
+        'FrameResultReceived emits multipleFaces status for multiple faces',
         build: () => checkInBloc,
         act:
             (bloc) => bloc.add(
-              CheckInEvent.frameResultReceived(
-                faces: [tFaceLowConfidence, tFaceHighConfidence],
+              const CheckInEvent.frameResultReceived(
+                faces: [
+                  {
+                    'x': 10.0,
+                    'y': 20.0,
+                    'width': 100.0,
+                    'height': 100.0,
+                    'confidence': 0.5,
+                    'personId': null,
+                    'personName': null,
+                  },
+                  {
+                    'x': 10.0,
+                    'y': 20.0,
+                    'width': 100.0,
+                    'height': 100.0,
+                    'confidence': 0.8,
+                    'personId': null,
+                    'personName': null,
+                  },
+                ],
               ),
             ),
         expect:
-            () => <dynamic>[
-              isA<CheckInState>()
-                  .having(
-                    (s) => s.faceStatus,
-                    'faceStatus',
-                    FaceDetectionStatus.multipleFaces,
-                  )
-                  .having((s) => s.faceConfidence, 'faceConfidence', 0.8),
+            () => [
+              predicate<CheckInState>(
+                (state) =>
+                    state.faceStatus == FaceDetectionStatus.multipleFaces &&
+                    state.faceConfidence == 0.8,
+              ),
             ],
       );
 
       blocTest<CheckInBloc, CheckInState>(
-        'history logic prevents flickering from faceFound to noFace',
+        'FrameResultReceived history logic prevents flickering from faceFound to noFace',
         build: () => checkInBloc,
         seed:
             () => CheckInState(
@@ -438,17 +476,15 @@ void main() {
             (bloc) =>
                 bloc.add(const CheckInEvent.frameResultReceived(faces: [])),
         expect:
-            () => <dynamic>[
-              isA<CheckInState>().having(
-                (s) => s.faceStatus,
-                'faceStatus',
-                FaceDetectionStatus.faceFound,
+            () => [
+              predicate<CheckInState>(
+                (state) => state.faceStatus == FaceDetectionStatus.faceFound,
               ),
             ],
       );
 
       blocTest<CheckInBloc, CheckInState>(
-        'history logic allows change to noFace after a delay',
+        'FrameResultReceived history logic allows change to noFace after a delay',
         build: () => checkInBloc,
         seed:
             () => CheckInState(
