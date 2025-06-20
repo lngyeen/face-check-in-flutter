@@ -1,19 +1,20 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:image/image.dart' as img;
 
-import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
+
+import '../../../core/services/image_converter.dart';
+import '../../../core/services/websocket_service.dart';
 
 part 'check_in_event.dart';
 part 'check_in_state.dart';
@@ -39,13 +40,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
     // Camera lifecycle events
     on<CameraInitRequested>(_onCameraInitRequested);
-    on<CameraStarted>(_onCameraStarted);
-    on<CameraPaused>(_onCameraPaused);
-    on<CameraResumed>(_onCameraResumed);
     on<CameraStopped>(_onCameraStopped);
-    on<CameraStatusChanged>(_onCameraStatusChanged);
-    on<CameraPreviewStarted>(_onCameraPreviewStarted);
-    on<CameraPreviewStopped>(_onCameraPreviewStopped);
 
     // WebSocket events
     on<WebSocketConnectionRequested>(_onWebSocketConnectionRequested);
@@ -56,16 +51,12 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Streaming events
     on<StreamingStarted>(_onStreamingStarted);
     on<StreamingStopped>(_onStreamingStopped);
-    on<StreamingPaused>(_onStreamingPaused);
-    on<StreamingResumed>(_onStreamingResumed);
     on<StreamingFailed>(_onStreamingFailed);
-    on<StreamingStatusChanged>(_onStreamingStatusChanged);
     on<FrameProcessed>(_onFrameProcessed);
 
     // UI events
     on<ErrorOccurred>(_onErrorOccurred);
     on<ErrorCleared>(_onErrorCleared);
-    on<ToastRequested>(_onToastRequested);
 
     // Debug events
     on<DebugModeToggled>(_onDebugModeToggled);
@@ -101,29 +92,14 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       add(WebSocketMessageReceived(message));
     });
 
-    emit(state.copyWith(isLoading: true, errorMessage: null));
-
-    try {
-      // The permission will now be requested by the UI when needed.
-      // add(const CheckInEvent.cameraPermissionRequested());
-      emit(
-        state.copyWith(
-          isLoading: false,
-          toastStatus: ToastStatus.showing,
-          toastMessage: 'App initialized successfully',
-        ),
-      );
-
-      debugPrint('✅ CheckInBloc: App initialization completed');
-    } catch (error) {
-      emit(
-        state.copyWith(
-          isLoading: false,
-          errorMessage: 'Failed to initialize app: $error',
-        ),
-      );
-      debugPrint('❌ CheckInBloc: App initialization failed: $error');
-    }
+    emit(
+      state.copyWith(
+        isLoading: false,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'App initialized successfully',
+      ),
+    );
+    debugPrint('✅ CheckInBloc: App initialization completed');
   }
 
   Future<void> _onAppDisposed(
@@ -131,23 +107,13 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('🔴 CheckInBloc: App disposing - cleaning up...');
+    await state.cameraController?.stopImageStream();
     await state.cameraController?.dispose();
     await _webSocketStatusSubscription?.cancel();
     await _webSocketMessageSubscription?.cancel();
     _webSocketService.dispose();
     // Clean up resources
-    emit(
-      state.copyWith(
-        cameraStatus: CameraStatus.initial,
-        connectionStatus: ConnectionStatus.disconnected,
-        streamingStatus: StreamingStatus.idle,
-        isLoading: false,
-        errorMessage: null,
-        toastStatus: ToastStatus.none,
-        toastMessage: null,
-        cameraController: null,
-      ),
-    );
+    emit(const CheckInState()); // Reset to initial state
   }
 
   // Camera permission handlers
@@ -181,7 +147,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     }
   }
 
-  // Camera event handlers (placeholders for future integration)
+  // Camera event handlers
   Future<void> _onCameraInitRequested(
     CameraInitRequested event,
     Emitter<CheckInState> emit,
@@ -206,22 +172,20 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         throw Exception('No cameras available');
       }
 
-      // Find the front camera
       final frontCamera = cameras.firstWhere(
         (camera) => camera.lensDirection == CameraLensDirection.front,
-        orElse: () => cameras.first, // Fallback to the first camera
+        orElse: () => cameras.first,
       );
 
       final controller = CameraController(
         frontCamera,
         ResolutionPreset.high,
-        enableAudio: false, // Audio is not needed for face check-in
+        enableAudio: false,
         imageFormatGroup: ImageFormatGroup.yuv420,
       );
 
       await controller.initialize();
 
-      // Set auto focus and exposure after initialization
       await controller.setFocusMode(FocusMode.auto);
       await controller.setExposureMode(ExposureMode.auto);
 
@@ -248,43 +212,11 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     }
   }
 
-  Future<void> _onCameraStarted(
-    CameraStarted event,
-    Emitter<CheckInState> emit,
-  ) async {
-    if (state.cameraController?.value.isStreamingImages ?? false) {
-      return;
-    }
-    await state.cameraController?.startImageStream((image) {
-      add(_FrameCaptured(image));
-    });
-    emit(state.copyWith(cameraStatus: CameraStatus.streaming));
-  }
-
-  Future<void> _onCameraPaused(
-    CameraPaused event,
-    Emitter<CheckInState> emit,
-  ) async {
-    if (state.cameraController?.value.isStreamingImages ?? false) {
-      await state.cameraController?.stopImageStream();
-    }
-    await state.cameraController?.dispose();
-    emit(
-      state.copyWith(cameraStatus: CameraStatus.paused, cameraController: null),
-    );
-  }
-
-  Future<void> _onCameraResumed(
-    CameraResumed event,
-    Emitter<CheckInState> emit,
-  ) async {
-    add(const CheckInEvent.cameraInitRequested());
-  }
-
   Future<void> _onCameraStopped(
     CameraStopped event,
     Emitter<CheckInState> emit,
   ) async {
+    await state.cameraController?.stopImageStream();
     await state.cameraController?.dispose();
     emit(
       state.copyWith(
@@ -292,31 +224,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         cameraStatus: CameraStatus.initial,
       ),
     );
-  }
-
-  Future<void> _onCameraStatusChanged(
-    CameraStatusChanged event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('📷 CheckInBloc: Camera status changed to ${event.status}');
-
-    emit(state.copyWith(cameraStatus: event.status));
-  }
-
-  Future<void> _onCameraPreviewStarted(
-    CameraPreviewStarted event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('📷 CheckInBloc: Camera preview started');
-    // Placeholder - will be implemented in Story 1.2
-  }
-
-  Future<void> _onCameraPreviewStopped(
-    CameraPreviewStopped event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('📷 CheckInBloc: Camera preview stopped');
-    // Placeholder - will be implemented in Story 1.2
   }
 
   // WebSocket event handlers
@@ -334,14 +241,14 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     await _webSocketService.connect();
   }
 
-  Future<void> _onWebSocketStatusChanged(
+  void _onWebSocketStatusChanged(
     WebSocketStatusChanged event,
     Emitter<CheckInState> emit,
-  ) async {
+  ) {
     emit(state.copyWith(connectionStatus: event.status));
     if (event.status == ConnectionStatus.failed) {
       emit(state.copyWith(connectionError: 'Connection Failed'));
-    } else {
+    } else if (event.status == ConnectionStatus.connected) {
       emit(state.copyWith(connectionError: null));
     }
   }
@@ -353,48 +260,44 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     await _webSocketService.disconnect();
   }
 
-  Future<void> _onWebSocketMessageReceived(
+  void _onWebSocketMessageReceived(
     WebSocketMessageReceived event,
     Emitter<CheckInState> emit,
-  ) async {
+  ) {
     try {
       final data = json.decode(event.message) as Map<String, dynamic>;
       final type = data['type'] as String?;
 
       switch (type) {
-        case 'connection_ack':
-          debugPrint('WebSocket connection acknowledged by server.');
-          break;
-        case 'recognition_result':
-          add(RecognitionResultReceived(data));
-          break;
         case 'frameResult':
-          final facesData = data['faces'];
-          if (facesData is List) {
-            final faces = List<Map<String, dynamic>>.from(facesData);
-            add(CheckInEvent.frameResultReceived(faces: faces));
-          } else {
-            add(
-              ErrorOccurred('Invalid "faces" data in frameResult: $facesData'),
-            );
-          }
+          final facesData =
+              (data['faces'] as List<dynamic>?)
+                  ?.map((e) => e as Map<String, dynamic>)
+                  .toList() ??
+              [];
+          add(FrameResultReceived(faces: facesData));
+          break;
+        case 'recognitionResult':
+          add(RecognitionResultReceived(data));
           break;
         case 'error':
           add(
             ResponseErrorReceived(
-              error: data['error'] as String? ?? 'Unknown error',
+              error: data['error'] as String? ?? 'Unknown Backend Error',
               message: data['message'] as String?,
             ),
           );
           break;
         default:
           debugPrint('Unknown WebSocket message type: $type');
-          break;
       }
-    } on FormatException catch (e) {
-      add(ErrorOccurred('Failed to decode WebSocket message: $e'));
     } catch (e) {
-      add(ErrorOccurred('Error processing WebSocket message: $e'));
+      add(
+        ResponseErrorReceived(
+          error: 'MessageParsingError',
+          message: 'Failed to parse message: ${event.message}. Error: $e',
+        ),
+      );
     }
   }
 
@@ -403,42 +306,80 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     StreamingStarted event,
     Emitter<CheckInState> emit,
   ) async {
-    if (state.streamingStatus == StreamingStatus.active) return;
-    emit(state.copyWith(streamingStatus: StreamingStatus.active));
-    add(const CameraStarted());
+    final controller = state.cameraController;
+
+    // --- Defensive Checks ---
+    if (controller == null) {
+      debugPrint('❌ Cannot start stream: Camera controller is null.');
+      return;
+    }
+    if (!controller.value.isInitialized) {
+      debugPrint(
+        '❌ Cannot start stream: Camera controller is not initialized.',
+      );
+      return;
+    }
+    // This is the most reliable check to prevent crashes from starting an existing stream.
+    if (controller.value.isStreamingImages) {
+      debugPrint('⏹️ Stream already active, ignoring request.');
+      // If our state is somehow out of sync, correct it.
+      if (state.streamingStatus != StreamingStatus.active) {
+        emit(state.copyWith(streamingStatus: StreamingStatus.active));
+      }
+      return;
+    }
+    if (state.connectionStatus != ConnectionStatus.connected) {
+      emit(
+        state.copyWith(
+          streamingStatus: StreamingStatus.error,
+          errorMessage: 'WebSocket not connected. Cannot start streaming.',
+        ),
+      );
+      return;
+    }
+    // --- End of Checks ---
+
+    try {
+      debugPrint('▶️ Attempting to start image stream...');
+      emit(state.copyWith(streamingStatus: StreamingStatus.starting));
+
+      await controller.startImageStream((image) {
+        // Only process frames if we are in the active state.
+        // This prevents frames from being processed while stopping.
+        if (state.streamingStatus == StreamingStatus.active) {
+          add(_FrameCaptured(image));
+        }
+      });
+
+      emit(state.copyWith(streamingStatus: StreamingStatus.active));
+      debugPrint('✅ CheckInBloc: Frame streaming started successfully.');
+    } catch (e, stackTrace) {
+      debugPrint('❌ CheckIn-Bloc: CRITICAL - Failed to start streaming: $e');
+      debugPrint(stackTrace.toString());
+      add(StreamingFailed('Failed to start streaming: $e'));
+    }
   }
 
   Future<void> _onStreamingStopped(
     StreamingStopped event,
     Emitter<CheckInState> emit,
   ) async {
-    if (state.streamingStatus == StreamingStatus.idle) return;
-    await state.cameraController?.stopImageStream();
-    emit(state.copyWith(streamingStatus: StreamingStatus.idle));
+    if (state.cameraController == null ||
+        !state.cameraController!.value.isStreamingImages) {
+      return;
+    }
+    try {
+      await state.cameraController!.stopImageStream();
+      // The camera itself is not stopped, just the stream.
+      emit(state.copyWith(streamingStatus: StreamingStatus.idle));
+      debugPrint('⏹️ CheckInBloc: Frame streaming stopped.');
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Failed to stop streaming: $e');
+      add(StreamingFailed('Failed to stop streaming: $e'));
+    }
   }
 
-  Future<void> _onStreamingPaused(
-    StreamingPaused event,
-    Emitter<CheckInState> emit,
-  ) async {
-    if (state.streamingStatus != StreamingStatus.active) return;
-    await state.cameraController?.stopImageStream();
-    emit(state.copyWith(streamingStatus: StreamingStatus.paused));
-  }
-
-  Future<void> _onStreamingResumed(
-    StreamingResumed event,
-    Emitter<CheckInState> emit,
-  ) async {
-    if (state.streamingStatus != StreamingStatus.paused) return;
-    emit(state.copyWith(streamingStatus: StreamingStatus.active));
-    add(const CameraStarted());
-  }
-
-  Future<void> _onStreamingFailed(
-    StreamingFailed event,
-    Emitter<CheckInState> emit,
-  ) async {
+  void _onStreamingFailed(StreamingFailed event, Emitter<CheckInState> emit) {
     emit(
       state.copyWith(
         streamingStatus: StreamingStatus.error,
@@ -447,73 +388,41 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
   }
 
-  Future<void> _onStreamingStatusChanged(
-    StreamingStatusChanged event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('📡 CheckInBloc: Streaming status changed to ${event.status}');
+  void _onFrameProcessed(FrameProcessed event, Emitter<CheckInState> emit) {
+    final now = DateTime.now();
+    double newFrameRate = 0.0;
 
-    emit(state.copyWith(streamingStatus: event.status));
-  }
+    if (state.lastFrameProcessTime != null) {
+      final diff = now.difference(state.lastFrameProcessTime!).inMilliseconds;
+      if (diff > 0) {
+        final currentFps = 1000 / diff;
+        // Simple moving average to smooth out the frame rate
+        newFrameRate = (state.frameRate * 0.9) + (currentFps * 0.1);
+      }
+    }
 
-  Future<void> _onFrameProcessed(
-    FrameProcessed event,
-    Emitter<CheckInState> emit,
-  ) async {
     emit(
       state.copyWith(
         framesProcessed: state.framesProcessed + 1,
-        lastRecognitionTime: DateTime.now(),
+        totalFramesProcessed: state.totalFramesProcessed + 1,
+        lastFrameProcessTime: now,
+        frameRate: newFrameRate,
       ),
     );
   }
 
   // UI event handlers
-  Future<void> _onErrorOccurred(
-    ErrorOccurred event,
-    Emitter<CheckInState> emit,
-  ) async {
+  void _onErrorOccurred(ErrorOccurred event, Emitter<CheckInState> emit) {
     debugPrint('❌ CheckInBloc: Error occurred: ${event.message}');
-
-    emit(
-      state.copyWith(
-        errorMessage: event.message,
-        isLoading: false,
-        toastStatus: ToastStatus.showing,
-        toastMessage: 'Error: ${event.message}',
-      ),
-    );
+    emit(state.copyWith(errorMessage: event.message, isLoading: false));
   }
 
-  Future<void> _onErrorCleared(
-    ErrorCleared event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('✅ CheckInBloc: Error cleared');
-
+  void _onErrorCleared(ErrorCleared event, Emitter<CheckInState> emit) {
     emit(state.copyWith(errorMessage: null));
   }
 
-  Future<void> _onToastRequested(
-    ToastRequested event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('🍞 CheckInBloc: Toast requested: ${event.message}');
-    emit(
-      state.copyWith(
-        toastStatus: ToastStatus.showing,
-        toastMessage: event.message,
-      ),
-    );
-    // Reset the status back to none so it can be triggered again.
-    emit(state.copyWith(toastStatus: ToastStatus.none, toastMessage: null));
-  }
-
   // Debug event handlers
-  Future<void> _onDebugModeToggled(
-    DebugModeToggled event,
-    Emitter<CheckInState> emit,
-  ) async {
+  void _onDebugModeToggled(DebugModeToggled event, Emitter<CheckInState> emit) {
     final newDebugMode = !state.isDebugMode;
     debugPrint('🐛 CheckInBloc: Debug mode toggled to $newDebugMode');
 
@@ -526,102 +435,61 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
   }
 
-  Future<void> _onStatisticsReset(
-    StatisticsReset event,
-    Emitter<CheckInState> emit,
-  ) async {
-    debugPrint('📊 CheckInBloc: Statistics reset');
-
+  void _onStatisticsReset(StatisticsReset event, Emitter<CheckInState> emit) {
     emit(
       state.copyWith(
         framesProcessed: 0,
-        lastRecognitionTime: null,
+        totalFramesProcessed: 0,
+        lastFrameProcessTime: null,
+        frameRate: 0.0,
+        successfulRecognitions: 0,
+        failedRecognitions: 0,
         toastStatus: ToastStatus.showing,
         toastMessage: 'Statistics reset',
       ),
     );
   }
 
-  // Backend response event handlers (placeholders for future integration)
-  Future<void> _onRecognitionResultReceived(
+  // Backend response handlers
+  void _onRecognitionResultReceived(
     RecognitionResultReceived event,
     Emitter<CheckInState> emit,
-  ) async {
-    final success = event.data['success'] as bool? ?? false;
-    final message = event.data['message'] as String? ?? 'No message';
-
-    if (success) {
-      final employeeName = event.data['employeeName'] as String?;
-      emit(
-        state.copyWith(
-          successfulRecognitions: state.successfulRecognitions + 1,
-          toastStatus: ToastStatus.showing,
-          toastMessage:
-              'Recognition success: ${employeeName ?? 'Unknown Employee'}',
-        ),
-      );
-    } else {
-      emit(
-        state.copyWith(
-          failedRecognitions: state.failedRecognitions + 1,
-          toastStatus: ToastStatus.showing,
-          toastMessage: 'Recognition failed: $message',
-        ),
-      );
-    }
+  ) {
+    emit(
+      state.copyWith(
+        successfulRecognitions: state.successfulRecognitions + 1,
+        lastRecognitionTime: DateTime.now(),
+      ),
+    );
   }
 
-  Future<void> _onFrameResultReceived(
+  void _onFrameResultReceived(
     FrameResultReceived event,
     Emitter<CheckInState> emit,
-  ) async {
-    try {
-      final faces =
-          event.faces
-              .map((faceData) => FaceDetectionResult.fromJson(faceData))
-              .toList();
+  ) {
+    final faces =
+        event.faces
+            .map((faceData) => FaceDetectionResult.fromJson(faceData))
+            .toList();
 
-      final now = DateTime.now();
-      FaceDetectionStatus newFaceStatus;
-      double newFaceConfidence = 0.0;
-
-      if (faces.isEmpty) {
-        newFaceStatus = FaceDetectionStatus.noFace;
-      } else if (faces.length == 1) {
-        final face = faces.first;
-        newFaceConfidence = face.confidence;
-        newFaceStatus =
-            face.confidence > 0.7
-                ? FaceDetectionStatus.faceFound
-                : FaceDetectionStatus.detecting;
-      } else {
-        newFaceStatus = FaceDetectionStatus.multipleFaces;
-        newFaceConfidence = faces.map((f) => f.confidence).reduce(max);
-      }
-
-      // History tracking to prevent flickering
-      var finalFaceStatus = newFaceStatus;
-      if (newFaceStatus == FaceDetectionStatus.noFace &&
-          state.faceStatus == FaceDetectionStatus.faceFound) {
-        if (state.lastFaceDetection != null &&
-            now.difference(state.lastFaceDetection!).inMilliseconds < 500) {
-          // 500ms tolerance
-          finalFaceStatus =
-              FaceDetectionStatus.faceFound; // Keep old status for a bit
-        }
-      }
-
-      emit(
-        state.copyWith(
-          detectedFaces: faces,
-          faceStatus: finalFaceStatus,
-          faceConfidence: newFaceConfidence,
-          lastFaceDetection: now,
-        ),
-      );
-    } catch (e) {
-      add(ErrorOccurred('Error processing frame result: $e'));
+    FaceDetectionStatus newStatus;
+    if (faces.isEmpty) {
+      newStatus = FaceDetectionStatus.noFace;
+    } else if (faces.length > 1) {
+      newStatus = FaceDetectionStatus.multipleFaces;
+    } else {
+      newStatus = FaceDetectionStatus.faceFound;
     }
+
+    emit(
+      state.copyWith(
+        detectedFaces: faces,
+        faceStatus: newStatus,
+        faceConfidence: faces.isNotEmpty ? faces.first.confidence : 0.0,
+        lastFaceDetection: DateTime.now(),
+        responseError: null, // Clear previous errors on a successful result
+      ),
+    );
   }
 
   void _onResponseErrorReceived(
@@ -632,71 +500,50 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       state.copyWith(
         faceStatus: FaceDetectionStatus.backendError,
         responseError: BackendError(error: event.error, message: event.message),
+        failedRecognitions: state.failedRecognitions + 1,
       ),
     );
   }
 
-  // New handler for captured frames
+  // Internal event handlers
   Future<void> _onFrameCaptured(
     _FrameCaptured event,
     Emitter<CheckInState> emit,
   ) async {
     if (state.streamingStatus != StreamingStatus.active) return;
 
-    final now = DateTime.now();
+    // Throttle frame processing to roughly 10 FPS
     if (state.lastFrameSentTime != null &&
-        now.difference(state.lastFrameSentTime!).inMilliseconds < 66) {
-      // Throttle the frame rate to ~15 FPS
+        DateTime.now().difference(state.lastFrameSentTime!).inMilliseconds <
+            100) {
       return;
     }
 
-    final base64Image = await _convertImageToBase64(event.image);
-    if (base64Image != null) {
-      _webSocketService.sendMessage(base64Image);
-      emit(
-        state.copyWith(
-          framesProcessed: state.framesProcessed + 1,
-          lastFrameSentTime: now,
-        ),
-      );
-    }
-  }
+    emit(state.copyWith(lastFrameSentTime: DateTime.now()));
 
-  Future<String?> _convertImageToBase64(CameraImage image) async {
     try {
-      // This is a compute-intensive task. Run it in a separate isolate.
-      return await compute(_convertYUV420toBase64, image);
+      // Step 1: Convert CameraImage to Image and emit for debug UI
+      final image = ImageConverter.convertCameraImageToImage(event.image);
+
+      if (image == null) {
+        // Handle conversion failure if necessary
+        return;
+      }
+
+      if (state.isDebugMode) {
+        emit(state.copyWith(debugImage: image));
+      }
+
+      // Step 2: Encode the Image to Base64
+      final base64Image = ImageConverter.encodeImageToBase64(image);
+
+      // Step 3: Send the payload
+      final payload = {'type': 'processFrame', 'image': base64Image};
+      _webSocketService.sendMessage(json.encode(payload));
+      add(const FrameProcessed());
     } catch (e) {
-      debugPrint('Error converting image to base64: $e');
-      return null;
+      debugPrint('❌ CheckInBloc: Frame processing failed: $e');
+      add(StreamingFailed('Frame processing failed: $e'));
     }
-  }
-
-  @override
-  Future<void> close() {
-    state.cameraController?.dispose();
-    return super.close();
-  }
-}
-
-/// Top-level function to run in a separate isolate
-String? _convertYUV420toBase64(CameraImage image) {
-  try {
-    final WriteBuffer allBytes = WriteBuffer();
-    for (final Plane plane in image.planes) {
-      allBytes.putUint8List(plane.bytes);
-    }
-    final bytes = allBytes.done().buffer.asUint8List();
-
-    // The image format is YUV420, which is converted to JPEG and then Base64.
-    // For direct Base64 conversion of raw YUV data, we can just encode the bytes.
-    // Note: The backend must be able to decode this raw YUV Base64 string.
-    // If the backend expects a specific image format like JPEG,
-    // an image conversion library would be needed here.
-    final String base64Image = base64Encode(bytes);
-    return base64Image;
-  } catch (e) {
-    debugPrint('Error in isolate image conversion: $e');
-    return null;
   }
 }

@@ -47,6 +47,9 @@ enum StreamingStatus {
   /// Not streaming frames
   idle,
 
+  /// Stream is being initialized
+  starting,
+
   /// Actively streaming frames
   active,
 
@@ -139,6 +142,11 @@ class CheckInState with _$CheckInState {
     @Default(0.0) double faceConfidence,
     DateTime? lastFaceDetection,
     BackendError? responseError,
+    @Default(0.0) double frameRate,
+    DateTime? lastFrameProcessTime,
+
+    /// The latest converted image for debugging purposes.
+    img.Image? debugImage,
   }) = _CheckInState;
 }
 
@@ -178,6 +186,8 @@ extension StreamingStatusX on StreamingStatus {
       case StreamingStatus.idle:
       case StreamingStatus.paused:
         return Colors.grey;
+      case StreamingStatus.starting:
+        return Colors.orange;
     }
   }
 }

@@ -1,6 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image/image.dart' as img;
+
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 
 import '../bloc/check_in_bloc.dart';
@@ -15,37 +19,13 @@ class CheckInScreen extends StatefulWidget {
   State<CheckInScreen> createState() => _CheckInScreenState();
 }
 
-class _CheckInScreenState extends State<CheckInScreen>
-    with WidgetsBindingObserver {
+class _CheckInScreenState extends State<CheckInScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
     context.read<CheckInBloc>().add(
       const CheckInEvent.cameraPermissionRequested(),
     );
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    final bloc = context.read<CheckInBloc>();
-    switch (state) {
-      case AppLifecycleState.resumed:
-        bloc.add(const CheckInEvent.cameraResumed());
-        break;
-      case AppLifecycleState.inactive:
-      case AppLifecycleState.paused:
-      case AppLifecycleState.detached:
-      case AppLifecycleState.hidden:
-        bloc.add(const CheckInEvent.cameraPaused());
-        break;
-    }
   }
 
   @override
@@ -73,21 +53,45 @@ class _CheckInScreenState extends State<CheckInScreen>
           ),
         ],
       ),
-      body: BlocListener<CheckInBloc, CheckInState>(
-        listenWhen:
-            (previous, current) =>
-                previous.toastStatus != current.toastStatus &&
-                current.toastStatus == ToastStatus.showing,
-        listener: (context, state) {
-          if (state.toastMessage != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.toastMessage!),
-                duration: const Duration(seconds: 3),
-              ),
-            );
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<CheckInBloc, CheckInState>(
+            listenWhen:
+                (p, c) =>
+                    p.toastStatus != c.toastStatus &&
+                    c.toastStatus == ToastStatus.showing,
+            listener: (context, state) {
+              if (state.toastMessage != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.toastMessage!),
+                    duration: const Duration(seconds: 3),
+                  ),
+                );
+              }
+            },
+          ),
+          BlocListener<CheckInBloc, CheckInState>(
+            listenWhen:
+                (p, c) =>
+                    p.faceStatus != c.faceStatus &&
+                    c.faceStatus == FaceDetectionStatus.backendError,
+            listener: (context, state) {
+              if (state.responseError != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'Backend Error: ${state.responseError!.error}'
+                      '${state.responseError!.message != null ? ' - ${state.responseError!.message}' : ''}',
+                    ),
+                    backgroundColor: Colors.redAccent,
+                    duration: const Duration(seconds: 4),
+                  ),
+                );
+              }
+            },
+          ),
+        ],
         child: BlocBuilder<CheckInBloc, CheckInState>(
           builder: (context, state) {
             return Padding(
@@ -124,6 +128,12 @@ class _CheckInScreenState extends State<CheckInScreen>
                             state.streamingStatus.displayText,
                             state.streamingStatus.displayColor,
                           ),
+                          const SizedBox(height: 8),
+                          _buildStatusRow(
+                            'Face Detection',
+                            state.faceStatus.name.toUpperCase(),
+                            state.faceStatus.displayColor,
+                          ),
                         ],
                       ),
                     ),
@@ -142,37 +152,77 @@ class _CheckInScreenState extends State<CheckInScreen>
                   const SizedBox(height: 16),
 
                   // Action Buttons
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed:
-                              state.isLoading
-                                  ? null
-                                  : () {
-                                    context.read<CheckInBloc>().add(
-                                      const CheckInEvent.cameraInitRequested(),
-                                    );
-                                  },
-                          icon: const Icon(Icons.camera_alt),
-                          label: const Text('Initialize Camera'),
-                        ),
+                  if (state.cameraStatus == CameraStatus.ready &&
+                      state.connectionStatus == ConnectionStatus.connected)
+                    ElevatedButton.icon(
+                      onPressed:
+                          state.isLoading
+                              ? null
+                              : () {
+                                final bloc = context.read<CheckInBloc>();
+                                if (state.streamingStatus ==
+                                    StreamingStatus.active) {
+                                  bloc.add(
+                                    const CheckInEvent.streamingStopped(),
+                                  );
+                                } else {
+                                  bloc.add(
+                                    const CheckInEvent.streamingStarted(),
+                                  );
+                                }
+                              },
+                      icon: Icon(
+                        state.streamingStatus == StreamingStatus.active
+                            ? Icons.stop_circle_outlined
+                            : Icons.play_circle_outline,
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed:
-                              state.isLoading
-                                  ? null
-                                  : () => context.read<CheckInBloc>().add(
-                                    const CheckInEvent.webSocketConnectionRequested(),
-                                  ),
-                          icon: const Icon(Icons.wifi),
-                          label: const Text('Connect to Backend'),
-                        ),
+                      label: Text(
+                        state.streamingStatus == StreamingStatus.active
+                            ? 'Stop Streaming'
+                            : 'Start Streaming',
                       ),
-                    ],
-                  ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            state.streamingStatus == StreamingStatus.active
+                                ? Colors.redAccent
+                                : Colors.green,
+                      ),
+                    )
+                  else
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed:
+                                state.isLoading ||
+                                        state.cameraStatus == CameraStatus.ready
+                                    ? null
+                                    : () {
+                                      context.read<CheckInBloc>().add(
+                                        const CheckInEvent.cameraInitRequested(),
+                                      );
+                                    },
+                            icon: const Icon(Icons.camera_alt),
+                            label: const Text('Initialize Camera'),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed:
+                                state.isLoading ||
+                                        state.connectionStatus ==
+                                            ConnectionStatus.connected
+                                    ? null
+                                    : () => context.read<CheckInBloc>().add(
+                                      const CheckInEvent.webSocketConnectionRequested(),
+                                    ),
+                            icon: const Icon(Icons.wifi),
+                            label: const Text('Connect to Backend'),
+                          ),
+                        ),
+                      ],
+                    ),
 
                   // Debug Information (if debug mode is enabled)
                   if (state.isDebugMode) ...[
@@ -190,12 +240,45 @@ class _CheckInScreenState extends State<CheckInScreen>
                                   ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 8),
+                            if (state.debugImage != null) ...[
+                              const Text(
+                                'Last Captured Frame:',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 4),
+                              Container(
+                                constraints: const BoxConstraints(
+                                  maxHeight: 100,
+                                ),
+                                child: Image.memory(
+                                  Uint8List.fromList(
+                                    img.encodeJpg(state.debugImage!),
+                                  ),
+                                  gaplessPlayback: true,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                            Text('Face Status: ${state.faceStatus.name}'),
+                            if (state.faceStatus ==
+                                FaceDetectionStatus.faceFound)
+                              Text(
+                                'Confidence: ${(state.faceConfidence * 100).toStringAsFixed(2)}%',
+                              ),
+                            if (state.responseError != null)
+                              Text(
+                                'Response Error: ${state.responseError!.error} - ${state.responseError!.message}',
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            Text(
+                              'Frame Rate: ${state.frameRate.toStringAsFixed(1)} FPS',
+                            ),
                             Text('Frames Processed: ${state.framesProcessed}'),
                             Text(
-                              'Last Recognition: ${state.lastRecognitionTime?.toString() ?? 'None'}',
+                              'Last Reco: ${state.lastRecognitionTime?.toString() ?? 'N/A'}',
                             ),
                             Text('Loading: ${state.isLoading}'),
-                            Text('Error: ${state.errorMessage ?? 'None'}'),
+                            Text('Error Msg: ${state.errorMessage ?? 'None'}'),
                             const SizedBox(height: 8),
                             ElevatedButton(
                               onPressed: () {
@@ -244,6 +327,24 @@ class _CheckInScreenState extends State<CheckInScreen>
         ),
       ],
     );
+  }
+}
+
+extension FaceDetectionStatusX on FaceDetectionStatus {
+  Color get displayColor {
+    switch (this) {
+      case FaceDetectionStatus.faceFound:
+        return Colors.green;
+      case FaceDetectionStatus.noFace:
+      case FaceDetectionStatus.detecting:
+        return Colors.orange;
+      case FaceDetectionStatus.multipleFaces:
+      case FaceDetectionStatus.backendError:
+      case FaceDetectionStatus.error:
+        return Colors.red;
+      case FaceDetectionStatus.none:
+        return Colors.grey;
+    }
   }
 }
 

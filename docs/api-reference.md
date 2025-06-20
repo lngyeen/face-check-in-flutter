@@ -14,7 +14,14 @@
 
 ### Client (Flutter App) to Server Message
 
-* **Format**: The application will send the raw **base64 string of the image frame** directly over the WebSocket connection, with no JSON wrapping.
+* **Format**: The application sends a JSON string with a `type` and `image` field.
+* **Payload Structure**:
+  ```json
+  {
+    "type": "processFrame",
+    "image": "<base64_encoded_image_string>"
+  }
+  ```
 
 ### Server to Client (Flutter App) Messages
 
