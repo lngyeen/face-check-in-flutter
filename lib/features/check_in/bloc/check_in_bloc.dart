@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
@@ -504,13 +505,50 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     _FrameCaptured event,
     Emitter<CheckInState> emit,
   ) async {
-    // Frame processing logic will go here.
-    // For now, this is a placeholder.
+    if (state.streamingStatus != StreamingStatus.active) return;
+
+    final base64Image = await _convertImageToBase64(event.image);
+    if (base64Image != null) {
+      _webSocketService.sendMessage(base64Image);
+      emit(state.copyWith(framesProcessed: state.framesProcessed + 1));
+    }
+  }
+
+  Future<String?> _convertImageToBase64(CameraImage image) async {
+    try {
+      // This is a compute-intensive task. Run it in a separate isolate.
+      return await compute(_convertYUV420toBase64, image);
+    } catch (e) {
+      debugPrint('Error converting image to base64: $e');
+      return null;
+    }
   }
 
   @override
   Future<void> close() {
     state.cameraController?.dispose();
     return super.close();
+  }
+}
+
+/// Top-level function to run in a separate isolate
+String? _convertYUV420toBase64(CameraImage image) {
+  try {
+    final WriteBuffer allBytes = WriteBuffer();
+    for (final Plane plane in image.planes) {
+      allBytes.putUint8List(plane.bytes);
+    }
+    final bytes = allBytes.done().buffer.asUint8List();
+
+    // The image format is YUV420, which is converted to JPEG and then Base64.
+    // For direct Base64 conversion of raw YUV data, we can just encode the bytes.
+    // Note: The backend must be able to decode this raw YUV Base64 string.
+    // If the backend expects a specific image format like JPEG,
+    // an image conversion library would be needed here.
+    final String base64Image = base64Encode(bytes);
+    return base64Image;
+  } catch (e) {
+    debugPrint('Error in isolate image conversion: $e');
+    return null;
   }
 }
