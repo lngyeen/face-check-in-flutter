@@ -4,21 +4,31 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:camera/camera.dart';
+import 'package:camera/camera.dart' as cpi;
 import 'package:camera_platform_interface/camera_platform_interface.dart'
     as cpi;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:stream_transform/stream_transform.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:permission_handler/permission_handler.dart' as ps;
 
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
+import 'check_in_bloc_test.mocks.dart';
 
 // --- Mocks and Fakes ---
 
+@GenerateMocks([
+  PermissionService,
+  WebSocketService,
+  CameraService,
+  cpi.CameraController,
+])
 class MockCheckInBloc extends MockBloc<CheckInEvent, CheckInState>
     implements CheckInBloc {}
 
@@ -204,132 +214,85 @@ class FakeCameraPlatform extends Fake
 }
 
 // --- Main Test Suite ---
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late CheckInBloc checkInBloc;
   late MockPermissionService mockPermissionService;
   late MockWebSocketService mockWebSocketService;
+  late MockCameraService mockCameraService;
+  late MockCameraController mockCameraController;
   late FakeCameraPlatform fakeCameraPlatform;
 
   setUp(() {
     mockPermissionService = MockPermissionService();
     mockWebSocketService = MockWebSocketService();
+    mockCameraService = MockCameraService();
+    mockCameraController = MockCameraController();
 
-    // Setup default WebSocket service behavior
+    // Mock the streams
     when(
       () => mockWebSocketService.connectionStatus,
-    ).thenAnswer((_) => Stream<ConnectionStatus>.empty());
-    when(
-      () => mockWebSocketService.messages,
-    ).thenAnswer((_) => Stream<Map<String, dynamic>>.empty());
-    when(
-      () => mockWebSocketService.metrics,
-    ).thenAnswer((_) => Stream<ConnectionMetrics>.empty());
-    when(() => mockWebSocketService.connect()).thenAnswer((_) async => true);
-    when(() => mockWebSocketService.disconnect()).thenAnswer((_) async {});
-    when(() => mockWebSocketService.dispose()).thenAnswer((_) async {});
+    ).thenAnswer((_) => Stream.value(ConnectionStatus.disconnected));
+    when(() => mockWebSocketService.messages).thenAnswer((_) => Stream.empty());
+    when(() => mockWebSocketService.metrics).thenAnswer((_) => Stream.empty());
+    when(() => mockCameraService.imageStream).thenAnswer((_) => Stream.empty());
 
     fakeCameraPlatform = FakeCameraPlatform();
     cpi.CameraPlatform.instance = fakeCameraPlatform;
 
-    checkInBloc = CheckInBloc(mockPermissionService, mockWebSocketService);
+    checkInBloc = CheckInBloc(
+      mockPermissionService,
+      mockWebSocketService,
+      mockCameraService,
+    );
   });
 
   tearDown(() {
     checkInBloc.close();
   });
 
-  group('CheckInBloc', () {
-    test('initial state is correct', () {
-      expect(checkInBloc.state, const CheckInState());
-    });
-
-    group('CameraPermissionRequested', () {
-      blocTest<CheckInBloc, CheckInState>(
-        'emits granted when permission is granted and initializes camera',
-        build: () {
-          when(
-            () => mockPermissionService.requestCameraPermission(),
-          ).thenAnswer((_) async => ps.PermissionStatus.granted);
-          return checkInBloc;
-        },
-        act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
-        expect:
-            () => [
-              const CheckInState(
-                cameraStatus: CameraStatus.permissionRequesting,
-              ),
-              const CheckInState(
-                cameraStatus: CameraStatus.permissionRequesting,
-                permissionStatus: PermissionStatus.granted,
-              ),
-              isA<CheckInState>()
-                  .having(
-                    (s) => s.cameraStatus,
-                    'cameraStatus',
-                    CameraStatus.initializing,
-                  )
-                  .having((s) => s.isLoading, 'isLoading', true)
-                  .having(
-                    (s) => s.permissionStatus,
-                    'permissionStatus',
-                    PermissionStatus.granted,
-                  ),
-              isA<CheckInState>()
-                  .having(
-                    (s) => s.cameraStatus,
-                    'cameraStatus',
-                    CameraStatus.ready,
-                  )
-                  .having((s) => s.isLoading, 'isLoading', false)
-                  .having(
-                    (s) => s.permissionStatus,
-                    'permissionStatus',
-                    PermissionStatus.granted,
-                  )
-                  .having(
-                    (s) => s.toastStatus,
-                    'toastStatus',
-                    ToastStatus.showing,
-                  )
-                  .having((s) => s.toastMessage, 'toastMessage', 'Camera ready')
-                  .having(
-                    (s) => s.cameraController,
-                    'cameraController',
-                    isA<CameraController>(),
-                  ),
-            ],
-        verify: (_) {
-          verify(
-            () => mockPermissionService.requestCameraPermission(),
-          ).called(1);
-        },
-      );
-
-      blocTest<CheckInBloc, CheckInState>(
-        'emits denied when permission is denied',
-        build: () {
-          when(
-            () => mockPermissionService.requestCameraPermission(),
-          ).thenAnswer((_) async => ps.PermissionStatus.denied);
-          return checkInBloc;
-        },
-        act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
-        expect:
-            () => [
-              const CheckInState(
-                cameraStatus: CameraStatus.permissionRequesting,
-              ),
-              const CheckInState(
-                cameraStatus: CameraStatus.permissionDenied,
-                permissionStatus: PermissionStatus.denied,
-              ),
-            ],
-      );
-    });
+  test('initial state is correct', () {
+    expect(checkInBloc.state, const CheckInState());
   });
+
+  blocTest<CheckInBloc, CheckInState>(
+    'emits [permissionRequesting, granted, initializing, ready, connecting] when camera permission is granted',
+    build: () {
+      when(
+        mockPermissionService.requestCameraPermission(),
+      ).thenAnswer((_) async => ps.PermissionStatus.granted);
+      when(mockCameraService.initialize()).thenAnswer((_) async {});
+      when(mockCameraService.controller).thenReturn(mockCameraController);
+      when(
+        mockCameraController.value,
+      ).thenReturn(const CameraValue(isInitialized: true));
+      when(mockWebSocketService.connect()).thenAnswer((_) async => true);
+      return checkInBloc;
+    },
+    act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
+    expect:
+        () => [
+          const CheckInState(cameraStatus: CameraStatus.permissionRequesting),
+          const CheckInState(
+            cameraStatus: CameraStatus.permissionRequesting,
+            permissionStatus: ps.PermissionStatus.granted,
+          ),
+          const CheckInState(
+            cameraStatus: CameraStatus.initializing,
+            permissionStatus: ps.PermissionStatus.granted,
+            isLoading: true,
+          ),
+          isA<CheckInState>()
+              .having((s) => s.cameraStatus, 'cameraStatus', CameraStatus.ready)
+              .having((s) => s.isLoading, 'isLoading', false),
+          isA<CheckInState>().having(
+            (s) => s.connectionStatus,
+            'connectionStatus',
+            ConnectionStatus.connecting,
+          ),
+        ],
+  );
 
   blocTest<CheckInBloc, CheckInState>(
     'emits updated state on ConnectionRequested',

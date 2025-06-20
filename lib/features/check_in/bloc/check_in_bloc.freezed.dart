@@ -16,6 +16,552 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
+mixin _$CheckInState {
+  CameraStatus get cameraStatus => throw _privateConstructorUsedError;
+  ps.PermissionStatus get permissionStatus =>
+      throw _privateConstructorUsedError;
+  ConnectionStatus get connectionStatus => throw _privateConstructorUsedError;
+  StreamingStatus get streamingStatus => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
+  CameraController? get cameraController => throw _privateConstructorUsedError;
+  ToastStatus get toastStatus => throw _privateConstructorUsedError;
+  String? get toastMessage => throw _privateConstructorUsedError;
+  bool get isDebugMode => throw _privateConstructorUsedError;
+  DateTime? get lastRecognitionTime => throw _privateConstructorUsedError;
+  int get framesProcessed => throw _privateConstructorUsedError;
+  int get connectionAttempts => throw _privateConstructorUsedError;
+  DateTime? get lastConnectionAttempt => throw _privateConstructorUsedError;
+  String? get connectionError => throw _privateConstructorUsedError;
+  bool get autoConnectionEnabled => throw _privateConstructorUsedError;
+  bool get isRetryTimerActive => throw _privateConstructorUsedError;
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $CheckInStateCopyWith<CheckInState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CheckInStateCopyWith<$Res> {
+  factory $CheckInStateCopyWith(
+    CheckInState value,
+    $Res Function(CheckInState) then,
+  ) = _$CheckInStateCopyWithImpl<$Res, CheckInState>;
+  @useResult
+  $Res call({
+    CameraStatus cameraStatus,
+    ps.PermissionStatus permissionStatus,
+    ConnectionStatus connectionStatus,
+    StreamingStatus streamingStatus,
+    bool isLoading,
+    String? errorMessage,
+    CameraController? cameraController,
+    ToastStatus toastStatus,
+    String? toastMessage,
+    bool isDebugMode,
+    DateTime? lastRecognitionTime,
+    int framesProcessed,
+    int connectionAttempts,
+    DateTime? lastConnectionAttempt,
+    String? connectionError,
+    bool autoConnectionEnabled,
+    bool isRetryTimerActive,
+  });
+}
+
+/// @nodoc
+class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
+    implements $CheckInStateCopyWith<$Res> {
+  _$CheckInStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cameraStatus = null,
+    Object? permissionStatus = null,
+    Object? connectionStatus = null,
+    Object? streamingStatus = null,
+    Object? isLoading = null,
+    Object? errorMessage = freezed,
+    Object? cameraController = freezed,
+    Object? toastStatus = null,
+    Object? toastMessage = freezed,
+    Object? isDebugMode = null,
+    Object? lastRecognitionTime = freezed,
+    Object? framesProcessed = null,
+    Object? connectionAttempts = null,
+    Object? lastConnectionAttempt = freezed,
+    Object? connectionError = freezed,
+    Object? autoConnectionEnabled = null,
+    Object? isRetryTimerActive = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            cameraStatus:
+                null == cameraStatus
+                    ? _value.cameraStatus
+                    : cameraStatus // ignore: cast_nullable_to_non_nullable
+                        as CameraStatus,
+            permissionStatus:
+                null == permissionStatus
+                    ? _value.permissionStatus
+                    : permissionStatus // ignore: cast_nullable_to_non_nullable
+                        as ps.PermissionStatus,
+            connectionStatus:
+                null == connectionStatus
+                    ? _value.connectionStatus
+                    : connectionStatus // ignore: cast_nullable_to_non_nullable
+                        as ConnectionStatus,
+            streamingStatus:
+                null == streamingStatus
+                    ? _value.streamingStatus
+                    : streamingStatus // ignore: cast_nullable_to_non_nullable
+                        as StreamingStatus,
+            isLoading:
+                null == isLoading
+                    ? _value.isLoading
+                    : isLoading // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            errorMessage:
+                freezed == errorMessage
+                    ? _value.errorMessage
+                    : errorMessage // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            cameraController:
+                freezed == cameraController
+                    ? _value.cameraController
+                    : cameraController // ignore: cast_nullable_to_non_nullable
+                        as CameraController?,
+            toastStatus:
+                null == toastStatus
+                    ? _value.toastStatus
+                    : toastStatus // ignore: cast_nullable_to_non_nullable
+                        as ToastStatus,
+            toastMessage:
+                freezed == toastMessage
+                    ? _value.toastMessage
+                    : toastMessage // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            isDebugMode:
+                null == isDebugMode
+                    ? _value.isDebugMode
+                    : isDebugMode // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            lastRecognitionTime:
+                freezed == lastRecognitionTime
+                    ? _value.lastRecognitionTime
+                    : lastRecognitionTime // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            framesProcessed:
+                null == framesProcessed
+                    ? _value.framesProcessed
+                    : framesProcessed // ignore: cast_nullable_to_non_nullable
+                        as int,
+            connectionAttempts:
+                null == connectionAttempts
+                    ? _value.connectionAttempts
+                    : connectionAttempts // ignore: cast_nullable_to_non_nullable
+                        as int,
+            lastConnectionAttempt:
+                freezed == lastConnectionAttempt
+                    ? _value.lastConnectionAttempt
+                    : lastConnectionAttempt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            connectionError:
+                freezed == connectionError
+                    ? _value.connectionError
+                    : connectionError // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            autoConnectionEnabled:
+                null == autoConnectionEnabled
+                    ? _value.autoConnectionEnabled
+                    : autoConnectionEnabled // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            isRetryTimerActive:
+                null == isRetryTimerActive
+                    ? _value.isRetryTimerActive
+                    : isRetryTimerActive // ignore: cast_nullable_to_non_nullable
+                        as bool,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$CheckInStateImplCopyWith<$Res>
+    implements $CheckInStateCopyWith<$Res> {
+  factory _$$CheckInStateImplCopyWith(
+    _$CheckInStateImpl value,
+    $Res Function(_$CheckInStateImpl) then,
+  ) = __$$CheckInStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    CameraStatus cameraStatus,
+    ps.PermissionStatus permissionStatus,
+    ConnectionStatus connectionStatus,
+    StreamingStatus streamingStatus,
+    bool isLoading,
+    String? errorMessage,
+    CameraController? cameraController,
+    ToastStatus toastStatus,
+    String? toastMessage,
+    bool isDebugMode,
+    DateTime? lastRecognitionTime,
+    int framesProcessed,
+    int connectionAttempts,
+    DateTime? lastConnectionAttempt,
+    String? connectionError,
+    bool autoConnectionEnabled,
+    bool isRetryTimerActive,
+  });
+}
+
+/// @nodoc
+class __$$CheckInStateImplCopyWithImpl<$Res>
+    extends _$CheckInStateCopyWithImpl<$Res, _$CheckInStateImpl>
+    implements _$$CheckInStateImplCopyWith<$Res> {
+  __$$CheckInStateImplCopyWithImpl(
+    _$CheckInStateImpl _value,
+    $Res Function(_$CheckInStateImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cameraStatus = null,
+    Object? permissionStatus = null,
+    Object? connectionStatus = null,
+    Object? streamingStatus = null,
+    Object? isLoading = null,
+    Object? errorMessage = freezed,
+    Object? cameraController = freezed,
+    Object? toastStatus = null,
+    Object? toastMessage = freezed,
+    Object? isDebugMode = null,
+    Object? lastRecognitionTime = freezed,
+    Object? framesProcessed = null,
+    Object? connectionAttempts = null,
+    Object? lastConnectionAttempt = freezed,
+    Object? connectionError = freezed,
+    Object? autoConnectionEnabled = null,
+    Object? isRetryTimerActive = null,
+  }) {
+    return _then(
+      _$CheckInStateImpl(
+        cameraStatus:
+            null == cameraStatus
+                ? _value.cameraStatus
+                : cameraStatus // ignore: cast_nullable_to_non_nullable
+                    as CameraStatus,
+        permissionStatus:
+            null == permissionStatus
+                ? _value.permissionStatus
+                : permissionStatus // ignore: cast_nullable_to_non_nullable
+                    as ps.PermissionStatus,
+        connectionStatus:
+            null == connectionStatus
+                ? _value.connectionStatus
+                : connectionStatus // ignore: cast_nullable_to_non_nullable
+                    as ConnectionStatus,
+        streamingStatus:
+            null == streamingStatus
+                ? _value.streamingStatus
+                : streamingStatus // ignore: cast_nullable_to_non_nullable
+                    as StreamingStatus,
+        isLoading:
+            null == isLoading
+                ? _value.isLoading
+                : isLoading // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        errorMessage:
+            freezed == errorMessage
+                ? _value.errorMessage
+                : errorMessage // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        cameraController:
+            freezed == cameraController
+                ? _value.cameraController
+                : cameraController // ignore: cast_nullable_to_non_nullable
+                    as CameraController?,
+        toastStatus:
+            null == toastStatus
+                ? _value.toastStatus
+                : toastStatus // ignore: cast_nullable_to_non_nullable
+                    as ToastStatus,
+        toastMessage:
+            freezed == toastMessage
+                ? _value.toastMessage
+                : toastMessage // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        isDebugMode:
+            null == isDebugMode
+                ? _value.isDebugMode
+                : isDebugMode // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        lastRecognitionTime:
+            freezed == lastRecognitionTime
+                ? _value.lastRecognitionTime
+                : lastRecognitionTime // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        framesProcessed:
+            null == framesProcessed
+                ? _value.framesProcessed
+                : framesProcessed // ignore: cast_nullable_to_non_nullable
+                    as int,
+        connectionAttempts:
+            null == connectionAttempts
+                ? _value.connectionAttempts
+                : connectionAttempts // ignore: cast_nullable_to_non_nullable
+                    as int,
+        lastConnectionAttempt:
+            freezed == lastConnectionAttempt
+                ? _value.lastConnectionAttempt
+                : lastConnectionAttempt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        connectionError:
+            freezed == connectionError
+                ? _value.connectionError
+                : connectionError // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        autoConnectionEnabled:
+            null == autoConnectionEnabled
+                ? _value.autoConnectionEnabled
+                : autoConnectionEnabled // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        isRetryTimerActive:
+            null == isRetryTimerActive
+                ? _value.isRetryTimerActive
+                : isRetryTimerActive // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$CheckInStateImpl implements _CheckInState {
+  const _$CheckInStateImpl({
+    this.cameraStatus = CameraStatus.initial,
+    this.permissionStatus = ps.PermissionStatus.denied,
+    this.connectionStatus = ConnectionStatus.disconnected,
+    this.streamingStatus = StreamingStatus.idle,
+    this.isLoading = false,
+    this.errorMessage,
+    this.cameraController,
+    this.toastStatus = ToastStatus.none,
+    this.toastMessage,
+    this.isDebugMode = false,
+    this.lastRecognitionTime,
+    this.framesProcessed = 0,
+    this.connectionAttempts = 0,
+    this.lastConnectionAttempt,
+    this.connectionError,
+    this.autoConnectionEnabled = true,
+    this.isRetryTimerActive = false,
+  });
+
+  @override
+  @JsonKey()
+  final CameraStatus cameraStatus;
+  @override
+  @JsonKey()
+  final ps.PermissionStatus permissionStatus;
+  @override
+  @JsonKey()
+  final ConnectionStatus connectionStatus;
+  @override
+  @JsonKey()
+  final StreamingStatus streamingStatus;
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  final String? errorMessage;
+  @override
+  final CameraController? cameraController;
+  @override
+  @JsonKey()
+  final ToastStatus toastStatus;
+  @override
+  final String? toastMessage;
+  @override
+  @JsonKey()
+  final bool isDebugMode;
+  @override
+  final DateTime? lastRecognitionTime;
+  @override
+  @JsonKey()
+  final int framesProcessed;
+  @override
+  @JsonKey()
+  final int connectionAttempts;
+  @override
+  final DateTime? lastConnectionAttempt;
+  @override
+  final String? connectionError;
+  @override
+  @JsonKey()
+  final bool autoConnectionEnabled;
+  @override
+  @JsonKey()
+  final bool isRetryTimerActive;
+
+  @override
+  String toString() {
+    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed, connectionAttempts: $connectionAttempts, lastConnectionAttempt: $lastConnectionAttempt, connectionError: $connectionError, autoConnectionEnabled: $autoConnectionEnabled, isRetryTimerActive: $isRetryTimerActive)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CheckInStateImpl &&
+            (identical(other.cameraStatus, cameraStatus) ||
+                other.cameraStatus == cameraStatus) &&
+            (identical(other.permissionStatus, permissionStatus) ||
+                other.permissionStatus == permissionStatus) &&
+            (identical(other.connectionStatus, connectionStatus) ||
+                other.connectionStatus == connectionStatus) &&
+            (identical(other.streamingStatus, streamingStatus) ||
+                other.streamingStatus == streamingStatus) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage) &&
+            (identical(other.cameraController, cameraController) ||
+                other.cameraController == cameraController) &&
+            (identical(other.toastStatus, toastStatus) ||
+                other.toastStatus == toastStatus) &&
+            (identical(other.toastMessage, toastMessage) ||
+                other.toastMessage == toastMessage) &&
+            (identical(other.isDebugMode, isDebugMode) ||
+                other.isDebugMode == isDebugMode) &&
+            (identical(other.lastRecognitionTime, lastRecognitionTime) ||
+                other.lastRecognitionTime == lastRecognitionTime) &&
+            (identical(other.framesProcessed, framesProcessed) ||
+                other.framesProcessed == framesProcessed) &&
+            (identical(other.connectionAttempts, connectionAttempts) ||
+                other.connectionAttempts == connectionAttempts) &&
+            (identical(other.lastConnectionAttempt, lastConnectionAttempt) ||
+                other.lastConnectionAttempt == lastConnectionAttempt) &&
+            (identical(other.connectionError, connectionError) ||
+                other.connectionError == connectionError) &&
+            (identical(other.autoConnectionEnabled, autoConnectionEnabled) ||
+                other.autoConnectionEnabled == autoConnectionEnabled) &&
+            (identical(other.isRetryTimerActive, isRetryTimerActive) ||
+                other.isRetryTimerActive == isRetryTimerActive));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    cameraStatus,
+    permissionStatus,
+    connectionStatus,
+    streamingStatus,
+    isLoading,
+    errorMessage,
+    cameraController,
+    toastStatus,
+    toastMessage,
+    isDebugMode,
+    lastRecognitionTime,
+    framesProcessed,
+    connectionAttempts,
+    lastConnectionAttempt,
+    connectionError,
+    autoConnectionEnabled,
+    isRetryTimerActive,
+  );
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CheckInStateImplCopyWith<_$CheckInStateImpl> get copyWith =>
+      __$$CheckInStateImplCopyWithImpl<_$CheckInStateImpl>(this, _$identity);
+}
+
+abstract class _CheckInState implements CheckInState {
+  const factory _CheckInState({
+    final CameraStatus cameraStatus,
+    final ps.PermissionStatus permissionStatus,
+    final ConnectionStatus connectionStatus,
+    final StreamingStatus streamingStatus,
+    final bool isLoading,
+    final String? errorMessage,
+    final CameraController? cameraController,
+    final ToastStatus toastStatus,
+    final String? toastMessage,
+    final bool isDebugMode,
+    final DateTime? lastRecognitionTime,
+    final int framesProcessed,
+    final int connectionAttempts,
+    final DateTime? lastConnectionAttempt,
+    final String? connectionError,
+    final bool autoConnectionEnabled,
+    final bool isRetryTimerActive,
+  }) = _$CheckInStateImpl;
+
+  @override
+  CameraStatus get cameraStatus;
+  @override
+  ps.PermissionStatus get permissionStatus;
+  @override
+  ConnectionStatus get connectionStatus;
+  @override
+  StreamingStatus get streamingStatus;
+  @override
+  bool get isLoading;
+  @override
+  String? get errorMessage;
+  @override
+  CameraController? get cameraController;
+  @override
+  ToastStatus get toastStatus;
+  @override
+  String? get toastMessage;
+  @override
+  bool get isDebugMode;
+  @override
+  DateTime? get lastRecognitionTime;
+  @override
+  int get framesProcessed;
+  @override
+  int get connectionAttempts;
+  @override
+  DateTime? get lastConnectionAttempt;
+  @override
+  String? get connectionError;
+  @override
+  bool get autoConnectionEnabled;
+  @override
+  bool get isRetryTimerActive;
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CheckInStateImplCopyWith<_$CheckInStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$CheckInEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -32,7 +578,7 @@ mixin _$CheckInEvent {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -65,6 +611,8 @@ mixin _$CheckInEvent {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -81,7 +629,7 @@ mixin _$CheckInEvent {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -108,6 +656,8 @@ mixin _$CheckInEvent {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -124,7 +674,7 @@ mixin _$CheckInEvent {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -151,6 +701,8 @@ mixin _$CheckInEvent {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -208,6 +760,8 @@ mixin _$CheckInEvent {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -255,6 +809,8 @@ mixin _$CheckInEvent {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -302,6 +858,8 @@ mixin _$CheckInEvent {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -384,7 +942,7 @@ class _$AppStartedImpl implements AppStarted {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -417,6 +975,8 @@ class _$AppStartedImpl implements AppStarted {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return appStarted();
   }
@@ -437,7 +997,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -464,6 +1024,8 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return appStarted?.call();
   }
@@ -484,7 +1046,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -511,6 +1073,8 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (appStarted != null) {
@@ -575,6 +1139,8 @@ class _$AppStartedImpl implements AppStarted {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return appStarted(this);
   }
@@ -626,6 +1192,8 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return appStarted?.call(this);
   }
@@ -677,6 +1245,8 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (appStarted != null) {
@@ -746,7 +1316,7 @@ class _$AppDisposedImpl implements AppDisposed {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -779,6 +1349,8 @@ class _$AppDisposedImpl implements AppDisposed {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return appDisposed();
   }
@@ -799,7 +1371,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -826,6 +1398,8 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return appDisposed?.call();
   }
@@ -846,7 +1420,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -873,6 +1447,8 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (appDisposed != null) {
@@ -937,6 +1513,8 @@ class _$AppDisposedImpl implements AppDisposed {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return appDisposed(this);
   }
@@ -988,6 +1566,8 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return appDisposed?.call(this);
   }
@@ -1039,6 +1619,8 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (appDisposed != null) {
@@ -1109,7 +1691,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -1142,6 +1724,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraPermissionRequested();
   }
@@ -1162,7 +1746,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -1189,6 +1773,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraPermissionRequested?.call();
   }
@@ -1209,7 +1795,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -1236,6 +1822,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPermissionRequested != null) {
@@ -1300,6 +1888,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraPermissionRequested(this);
   }
@@ -1351,6 +1941,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraPermissionRequested?.call(this);
   }
@@ -1402,6 +1994,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPermissionRequested != null) {
@@ -1472,7 +2066,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -1505,6 +2099,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraPermissionGranted();
   }
@@ -1525,7 +2121,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -1552,6 +2148,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraPermissionGranted?.call();
   }
@@ -1572,7 +2170,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -1599,6 +2197,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPermissionGranted != null) {
@@ -1663,6 +2263,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraPermissionGranted(this);
   }
@@ -1714,6 +2316,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraPermissionGranted?.call(this);
   }
@@ -1765,6 +2369,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPermissionGranted != null) {
@@ -1835,7 +2441,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -1868,6 +2474,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraPermissionDenied();
   }
@@ -1888,7 +2496,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -1915,6 +2523,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraPermissionDenied?.call();
   }
@@ -1935,7 +2545,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -1962,6 +2572,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPermissionDenied != null) {
@@ -2026,6 +2638,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraPermissionDenied(this);
   }
@@ -2077,6 +2691,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraPermissionDenied?.call(this);
   }
@@ -2128,6 +2744,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPermissionDenied != null) {
@@ -2198,7 +2816,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -2231,6 +2849,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraInitRequested();
   }
@@ -2251,7 +2871,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -2278,6 +2898,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraInitRequested?.call();
   }
@@ -2298,7 +2920,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -2325,6 +2947,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraInitRequested != null) {
@@ -2389,6 +3013,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraInitRequested(this);
   }
@@ -2440,6 +3066,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraInitRequested?.call(this);
   }
@@ -2491,6 +3119,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraInitRequested != null) {
@@ -2560,7 +3190,7 @@ class _$CameraStartedImpl implements CameraStarted {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -2593,6 +3223,8 @@ class _$CameraStartedImpl implements CameraStarted {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraStarted();
   }
@@ -2613,7 +3245,7 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -2640,6 +3272,8 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraStarted?.call();
   }
@@ -2660,7 +3294,7 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -2687,6 +3321,8 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraStarted != null) {
@@ -2751,6 +3387,8 @@ class _$CameraStartedImpl implements CameraStarted {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraStarted(this);
   }
@@ -2802,6 +3440,8 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraStarted?.call(this);
   }
@@ -2853,6 +3493,8 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraStarted != null) {
@@ -2922,7 +3564,7 @@ class _$CameraPausedImpl implements CameraPaused {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -2955,6 +3597,8 @@ class _$CameraPausedImpl implements CameraPaused {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraPaused();
   }
@@ -2975,7 +3619,7 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -3002,6 +3646,8 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraPaused?.call();
   }
@@ -3022,7 +3668,7 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -3049,6 +3695,8 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPaused != null) {
@@ -3113,6 +3761,8 @@ class _$CameraPausedImpl implements CameraPaused {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraPaused(this);
   }
@@ -3164,6 +3814,8 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraPaused?.call(this);
   }
@@ -3215,6 +3867,8 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPaused != null) {
@@ -3284,7 +3938,7 @@ class _$CameraResumedImpl implements CameraResumed {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -3317,6 +3971,8 @@ class _$CameraResumedImpl implements CameraResumed {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraResumed();
   }
@@ -3337,7 +3993,7 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -3364,6 +4020,8 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraResumed?.call();
   }
@@ -3384,7 +4042,7 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -3411,6 +4069,8 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraResumed != null) {
@@ -3475,6 +4135,8 @@ class _$CameraResumedImpl implements CameraResumed {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraResumed(this);
   }
@@ -3526,6 +4188,8 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraResumed?.call(this);
   }
@@ -3577,6 +4241,8 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraResumed != null) {
@@ -3646,7 +4312,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -3679,6 +4345,8 @@ class _$CameraStoppedImpl implements CameraStopped {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraStopped();
   }
@@ -3699,7 +4367,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -3726,6 +4394,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraStopped?.call();
   }
@@ -3746,7 +4416,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -3773,6 +4443,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraStopped != null) {
@@ -3837,6 +4509,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraStopped(this);
   }
@@ -3888,6 +4562,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraStopped?.call(this);
   }
@@ -3939,6 +4615,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraStopped != null) {
@@ -4038,7 +4716,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -4071,6 +4749,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraStatusChanged(status);
   }
@@ -4091,7 +4771,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -4118,6 +4798,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraStatusChanged?.call(status);
   }
@@ -4138,7 +4820,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -4165,6 +4847,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraStatusChanged != null) {
@@ -4229,6 +4913,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraStatusChanged(this);
   }
@@ -4280,6 +4966,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraStatusChanged?.call(this);
   }
@@ -4331,6 +5019,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraStatusChanged != null) {
@@ -4410,7 +5100,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -4443,6 +5133,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraPreviewStarted();
   }
@@ -4463,7 +5155,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -4490,6 +5182,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraPreviewStarted?.call();
   }
@@ -4510,7 +5204,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -4537,6 +5231,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPreviewStarted != null) {
@@ -4601,6 +5297,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraPreviewStarted(this);
   }
@@ -4652,6 +5350,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraPreviewStarted?.call(this);
   }
@@ -4703,6 +5403,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPreviewStarted != null) {
@@ -4773,7 +5475,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -4806,6 +5508,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraPreviewStopped();
   }
@@ -4826,7 +5530,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -4853,6 +5557,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraPreviewStopped?.call();
   }
@@ -4873,7 +5579,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -4900,6 +5606,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPreviewStopped != null) {
@@ -4964,6 +5672,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraPreviewStopped(this);
   }
@@ -5015,6 +5725,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraPreviewStopped?.call(this);
   }
@@ -5066,6 +5778,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraPreviewStopped != null) {
@@ -5085,6 +5799,8 @@ abstract class _$$ConnectionRequestedImplCopyWith<$Res> {
     _$ConnectionRequestedImpl value,
     $Res Function(_$ConnectionRequestedImpl) then,
   ) = __$$ConnectionRequestedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isAutoConnect});
 }
 
 /// @nodoc
@@ -5098,27 +5814,57 @@ class __$$ConnectionRequestedImplCopyWithImpl<$Res>
 
   /// Create a copy of CheckInEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? isAutoConnect = null}) {
+    return _then(
+      _$ConnectionRequestedImpl(
+        isAutoConnect:
+            null == isAutoConnect
+                ? _value.isAutoConnect
+                : isAutoConnect // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 
 class _$ConnectionRequestedImpl implements ConnectionRequested {
-  const _$ConnectionRequestedImpl();
+  const _$ConnectionRequestedImpl({this.isAutoConnect = false});
+
+  @override
+  @JsonKey()
+  final bool isAutoConnect;
 
   @override
   String toString() {
-    return 'CheckInEvent.connectionRequested()';
+    return 'CheckInEvent.connectionRequested(isAutoConnect: $isAutoConnect)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ConnectionRequestedImpl);
+            other is _$ConnectionRequestedImpl &&
+            (identical(other.isAutoConnect, isAutoConnect) ||
+                other.isAutoConnect == isAutoConnect));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, isAutoConnect);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ConnectionRequestedImplCopyWith<_$ConnectionRequestedImpl> get copyWith =>
+      __$$ConnectionRequestedImplCopyWithImpl<_$ConnectionRequestedImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -5136,7 +5882,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -5169,8 +5915,10 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
-    return connectionRequested();
+    return connectionRequested(isAutoConnect);
   }
 
   @override
@@ -5189,7 +5937,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -5216,8 +5964,10 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
-    return connectionRequested?.call();
+    return connectionRequested?.call(isAutoConnect);
   }
 
   @override
@@ -5236,7 +5986,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -5263,10 +6013,12 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (connectionRequested != null) {
-      return connectionRequested();
+      return connectionRequested(isAutoConnect);
     }
     return orElse();
   }
@@ -5327,6 +6079,8 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return connectionRequested(this);
   }
@@ -5378,6 +6132,8 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return connectionRequested?.call(this);
   }
@@ -5429,6 +6185,8 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (connectionRequested != null) {
@@ -5439,7 +6197,16 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
 }
 
 abstract class ConnectionRequested implements CheckInEvent {
-  const factory ConnectionRequested() = _$ConnectionRequestedImpl;
+  const factory ConnectionRequested({final bool isAutoConnect}) =
+      _$ConnectionRequestedImpl;
+
+  bool get isAutoConnect;
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ConnectionRequestedImplCopyWith<_$ConnectionRequestedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -5527,7 +6294,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -5560,6 +6327,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return connectionStatusChanged(status);
   }
@@ -5580,7 +6349,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -5607,6 +6376,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return connectionStatusChanged?.call(status);
   }
@@ -5627,7 +6398,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -5654,6 +6425,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (connectionStatusChanged != null) {
@@ -5718,6 +6491,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return connectionStatusChanged(this);
   }
@@ -5769,6 +6544,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return connectionStatusChanged?.call(this);
   }
@@ -5820,6 +6597,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (connectionStatusChanged != null) {
@@ -5899,7 +6678,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -5932,6 +6711,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return disconnectionRequested();
   }
@@ -5952,7 +6733,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -5979,6 +6760,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return disconnectionRequested?.call();
   }
@@ -5999,7 +6782,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -6026,6 +6809,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (disconnectionRequested != null) {
@@ -6090,6 +6875,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return disconnectionRequested(this);
   }
@@ -6141,6 +6928,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return disconnectionRequested?.call(this);
   }
@@ -6192,6 +6981,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (disconnectionRequested != null) {
@@ -6263,7 +7054,7 @@ class _$WebSocketConnectionRequestedImpl
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -6296,6 +7087,8 @@ class _$WebSocketConnectionRequestedImpl
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return webSocketConnectionRequested();
   }
@@ -6316,7 +7109,7 @@ class _$WebSocketConnectionRequestedImpl
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -6343,6 +7136,8 @@ class _$WebSocketConnectionRequestedImpl
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return webSocketConnectionRequested?.call();
   }
@@ -6363,7 +7158,7 @@ class _$WebSocketConnectionRequestedImpl
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -6390,6 +7185,8 @@ class _$WebSocketConnectionRequestedImpl
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketConnectionRequested != null) {
@@ -6454,6 +7251,8 @@ class _$WebSocketConnectionRequestedImpl
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return webSocketConnectionRequested(this);
   }
@@ -6505,6 +7304,8 @@ class _$WebSocketConnectionRequestedImpl
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return webSocketConnectionRequested?.call(this);
   }
@@ -6556,6 +7357,8 @@ class _$WebSocketConnectionRequestedImpl
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketConnectionRequested != null) {
@@ -6627,7 +7430,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -6660,6 +7463,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return webSocketConnecting();
   }
@@ -6680,7 +7485,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -6707,6 +7512,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return webSocketConnecting?.call();
   }
@@ -6727,7 +7534,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -6754,6 +7561,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketConnecting != null) {
@@ -6818,6 +7627,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return webSocketConnecting(this);
   }
@@ -6869,6 +7680,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return webSocketConnecting?.call(this);
   }
@@ -6920,6 +7733,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketConnecting != null) {
@@ -6989,7 +7804,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -7022,6 +7837,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return webSocketConnected();
   }
@@ -7042,7 +7859,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -7069,6 +7886,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return webSocketConnected?.call();
   }
@@ -7089,7 +7908,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -7116,6 +7935,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketConnected != null) {
@@ -7180,6 +8001,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return webSocketConnected(this);
   }
@@ -7231,6 +8054,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return webSocketConnected?.call(this);
   }
@@ -7282,6 +8107,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketConnected != null) {
@@ -7352,7 +8179,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -7385,6 +8212,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return webSocketDisconnected();
   }
@@ -7405,7 +8234,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -7432,6 +8261,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return webSocketDisconnected?.call();
   }
@@ -7452,7 +8283,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -7479,6 +8310,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketDisconnected != null) {
@@ -7543,6 +8376,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return webSocketDisconnected(this);
   }
@@ -7594,6 +8429,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return webSocketDisconnected?.call(this);
   }
@@ -7645,6 +8482,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketDisconnected != null) {
@@ -7743,7 +8582,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -7776,6 +8615,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return webSocketConnectionFailed(error);
   }
@@ -7796,7 +8637,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -7823,6 +8664,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return webSocketConnectionFailed?.call(error);
   }
@@ -7843,7 +8686,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -7870,6 +8713,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketConnectionFailed != null) {
@@ -7934,6 +8779,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return webSocketConnectionFailed(this);
   }
@@ -7985,6 +8832,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return webSocketConnectionFailed?.call(this);
   }
@@ -8036,6 +8885,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketConnectionFailed != null) {
@@ -8115,7 +8966,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -8148,6 +8999,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return webSocketConnectionTimeout();
   }
@@ -8168,7 +9021,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -8195,6 +9048,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return webSocketConnectionTimeout?.call();
   }
@@ -8215,7 +9070,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -8242,6 +9097,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketConnectionTimeout != null) {
@@ -8306,6 +9163,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return webSocketConnectionTimeout(this);
   }
@@ -8357,6 +9216,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return webSocketConnectionTimeout?.call(this);
   }
@@ -8408,6 +9269,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketConnectionTimeout != null) {
@@ -8507,7 +9370,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -8540,6 +9403,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return webSocketRetrying(attempt);
   }
@@ -8560,7 +9425,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -8587,6 +9452,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return webSocketRetrying?.call(attempt);
   }
@@ -8607,7 +9474,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -8634,6 +9501,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketRetrying != null) {
@@ -8698,6 +9567,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return webSocketRetrying(this);
   }
@@ -8749,6 +9620,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return webSocketRetrying?.call(this);
   }
@@ -8800,6 +9673,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketRetrying != null) {
@@ -8913,7 +9788,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -8946,6 +9821,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return webSocketMessageReceived(message);
   }
@@ -8966,7 +9843,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -8993,6 +9870,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return webSocketMessageReceived?.call(message);
   }
@@ -9013,7 +9892,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -9040,6 +9919,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketMessageReceived != null) {
@@ -9104,6 +9985,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return webSocketMessageReceived(this);
   }
@@ -9155,6 +10038,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return webSocketMessageReceived?.call(this);
   }
@@ -9206,6 +10091,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketMessageReceived != null) {
@@ -9322,7 +10209,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -9355,6 +10242,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return webSocketMessageSent(message);
   }
@@ -9375,7 +10264,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -9402,6 +10291,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return webSocketMessageSent?.call(message);
   }
@@ -9422,7 +10313,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -9449,6 +10340,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketMessageSent != null) {
@@ -9513,6 +10406,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return webSocketMessageSent(this);
   }
@@ -9564,6 +10459,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return webSocketMessageSent?.call(this);
   }
@@ -9615,6 +10512,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketMessageSent != null) {
@@ -9723,7 +10622,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -9756,6 +10655,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return webSocketSendError(error);
   }
@@ -9776,7 +10677,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -9803,6 +10704,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return webSocketSendError?.call(error);
   }
@@ -9823,7 +10726,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -9850,6 +10753,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketSendError != null) {
@@ -9914,6 +10819,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return webSocketSendError(this);
   }
@@ -9965,6 +10872,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return webSocketSendError?.call(this);
   }
@@ -10016,6 +10925,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (webSocketSendError != null) {
@@ -10095,7 +11006,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -10128,6 +11039,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return autoConnectionTriggered();
   }
@@ -10148,7 +11061,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -10175,6 +11088,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return autoConnectionTriggered?.call();
   }
@@ -10195,7 +11110,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -10222,6 +11137,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (autoConnectionTriggered != null) {
@@ -10286,6 +11203,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return autoConnectionTriggered(this);
   }
@@ -10337,6 +11256,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return autoConnectionTriggered?.call(this);
   }
@@ -10388,6 +11309,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (autoConnectionTriggered != null) {
@@ -10488,7 +11411,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -10521,6 +11444,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return autoConnectionToggled(enabled);
   }
@@ -10541,7 +11466,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -10568,6 +11493,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return autoConnectionToggled?.call(enabled);
   }
@@ -10588,7 +11515,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -10615,6 +11542,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (autoConnectionToggled != null) {
@@ -10679,6 +11608,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return autoConnectionToggled(this);
   }
@@ -10730,6 +11661,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return autoConnectionToggled?.call(this);
   }
@@ -10781,6 +11714,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (autoConnectionToggled != null) {
@@ -10859,7 +11794,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -10892,6 +11827,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return streamingStarted();
   }
@@ -10912,7 +11849,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -10939,6 +11876,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return streamingStarted?.call();
   }
@@ -10959,7 +11898,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -10986,6 +11925,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (streamingStarted != null) {
@@ -11050,6 +11991,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return streamingStarted(this);
   }
@@ -11101,6 +12044,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return streamingStarted?.call(this);
   }
@@ -11152,6 +12097,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (streamingStarted != null) {
@@ -11221,7 +12168,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -11254,6 +12201,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return streamingStopped();
   }
@@ -11274,7 +12223,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -11301,6 +12250,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return streamingStopped?.call();
   }
@@ -11321,7 +12272,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -11348,6 +12299,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (streamingStopped != null) {
@@ -11412,6 +12365,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return streamingStopped(this);
   }
@@ -11463,6 +12418,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return streamingStopped?.call(this);
   }
@@ -11514,6 +12471,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (streamingStopped != null) {
@@ -11614,7 +12573,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -11647,6 +12606,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return streamingStatusChanged(status);
   }
@@ -11667,7 +12628,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -11694,6 +12655,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return streamingStatusChanged?.call(status);
   }
@@ -11714,7 +12677,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -11741,6 +12704,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (streamingStatusChanged != null) {
@@ -11805,6 +12770,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return streamingStatusChanged(this);
   }
@@ -11856,6 +12823,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return streamingStatusChanged?.call(this);
   }
@@ -11907,6 +12876,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (streamingStatusChanged != null) {
@@ -11985,7 +12956,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -12018,6 +12989,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return frameProcessed();
   }
@@ -12038,7 +13011,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -12065,6 +13038,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return frameProcessed?.call();
   }
@@ -12085,7 +13060,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -12112,6 +13087,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (frameProcessed != null) {
@@ -12176,6 +13153,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return frameProcessed(this);
   }
@@ -12227,6 +13206,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return frameProcessed?.call(this);
   }
@@ -12278,6 +13259,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (frameProcessed != null) {
@@ -12374,7 +13357,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -12407,6 +13390,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return errorOccurred(message);
   }
@@ -12427,7 +13412,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -12454,6 +13439,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return errorOccurred?.call(message);
   }
@@ -12474,7 +13461,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -12501,6 +13488,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (errorOccurred != null) {
@@ -12565,6 +13554,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return errorOccurred(this);
   }
@@ -12616,6 +13607,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return errorOccurred?.call(this);
   }
@@ -12667,6 +13660,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (errorOccurred != null) {
@@ -12771,7 +13766,7 @@ class _$CameraErrorImpl implements CameraError {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -12804,6 +13799,8 @@ class _$CameraErrorImpl implements CameraError {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return cameraError(error);
   }
@@ -12824,7 +13821,7 @@ class _$CameraErrorImpl implements CameraError {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -12851,6 +13848,8 @@ class _$CameraErrorImpl implements CameraError {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return cameraError?.call(error);
   }
@@ -12871,7 +13870,7 @@ class _$CameraErrorImpl implements CameraError {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -12898,6 +13897,8 @@ class _$CameraErrorImpl implements CameraError {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraError != null) {
@@ -12962,6 +13963,8 @@ class _$CameraErrorImpl implements CameraError {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return cameraError(this);
   }
@@ -13013,6 +14016,8 @@ class _$CameraErrorImpl implements CameraError {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return cameraError?.call(this);
   }
@@ -13064,6 +14069,8 @@ class _$CameraErrorImpl implements CameraError {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (cameraError != null) {
@@ -13141,7 +14148,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -13174,6 +14181,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return errorCleared();
   }
@@ -13194,7 +14203,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -13221,6 +14230,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return errorCleared?.call();
   }
@@ -13241,7 +14252,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -13268,6 +14279,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (errorCleared != null) {
@@ -13332,6 +14345,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return errorCleared(this);
   }
@@ -13383,6 +14398,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return errorCleared?.call(this);
   }
@@ -13434,6 +14451,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (errorCleared != null) {
@@ -13533,7 +14552,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -13566,6 +14585,8 @@ class _$ToastRequestedImpl implements ToastRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return toastRequested(message);
   }
@@ -13586,7 +14607,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -13613,6 +14634,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return toastRequested?.call(message);
   }
@@ -13633,7 +14656,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -13660,6 +14683,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (toastRequested != null) {
@@ -13724,6 +14749,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return toastRequested(this);
   }
@@ -13775,6 +14802,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return toastRequested?.call(this);
   }
@@ -13826,6 +14855,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (toastRequested != null) {
@@ -13903,7 +14934,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -13936,6 +14967,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return debugModeToggled();
   }
@@ -13956,7 +14989,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -13983,6 +15016,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return debugModeToggled?.call();
   }
@@ -14003,7 +15038,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -14030,6 +15065,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (debugModeToggled != null) {
@@ -14094,6 +15131,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return debugModeToggled(this);
   }
@@ -14145,6 +15184,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return debugModeToggled?.call(this);
   }
@@ -14196,6 +15237,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (debugModeToggled != null) {
@@ -14265,7 +15308,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -14298,6 +15341,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return statisticsReset();
   }
@@ -14318,7 +15363,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -14345,6 +15390,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return statisticsReset?.call();
   }
@@ -14365,7 +15412,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -14392,6 +15439,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (statisticsReset != null) {
@@ -14456,6 +15505,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return statisticsReset(this);
   }
@@ -14507,6 +15558,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return statisticsReset?.call(this);
   }
@@ -14558,6 +15611,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (statisticsReset != null) {
@@ -14682,7 +15737,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     required TResult Function(CameraStatus status) cameraStatusChanged,
     required TResult Function() cameraPreviewStarted,
     required TResult Function() cameraPreviewStopped,
-    required TResult Function() connectionRequested,
+    required TResult Function(bool isAutoConnect) connectionRequested,
     required TResult Function(ConnectionStatus status) connectionStatusChanged,
     required TResult Function() disconnectionRequested,
     required TResult Function() webSocketConnectionRequested,
@@ -14715,6 +15770,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
     return recognitionResultReceived(success, message, employeeName);
   }
@@ -14735,7 +15792,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(CameraStatus status)? cameraStatusChanged,
     TResult? Function()? cameraPreviewStarted,
     TResult? Function()? cameraPreviewStopped,
-    TResult? Function()? connectionRequested,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
     TResult? Function(ConnectionStatus status)? connectionStatusChanged,
     TResult? Function()? disconnectionRequested,
     TResult? Function()? webSocketConnectionRequested,
@@ -14762,6 +15819,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
   }) {
     return recognitionResultReceived?.call(success, message, employeeName);
   }
@@ -14782,7 +15841,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(CameraStatus status)? cameraStatusChanged,
     TResult Function()? cameraPreviewStarted,
     TResult Function()? cameraPreviewStopped,
-    TResult Function()? connectionRequested,
+    TResult Function(bool isAutoConnect)? connectionRequested,
     TResult Function(ConnectionStatus status)? connectionStatusChanged,
     TResult Function()? disconnectionRequested,
     TResult Function()? webSocketConnectionRequested,
@@ -14809,6 +15868,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
     required TResult orElse(),
   }) {
     if (recognitionResultReceived != null) {
@@ -14873,6 +15934,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
   }) {
     return recognitionResultReceived(this);
   }
@@ -14924,6 +15987,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
   }) {
     return recognitionResultReceived?.call(this);
   }
@@ -14975,6 +16040,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
   }) {
     if (recognitionResultReceived != null) {
@@ -15003,368 +16070,410 @@ abstract class RecognitionResultReceived implements CheckInEvent {
 }
 
 /// @nodoc
-mixin _$CheckInState {
-  /// Current camera status
-  CameraStatus get cameraStatus => throw _privateConstructorUsedError;
-
-  /// Current permission status
-  PermissionStatus get permissionStatus => throw _privateConstructorUsedError;
-
-  /// Current WebSocket connection status
-  ConnectionStatus get connectionStatus => throw _privateConstructorUsedError;
-
-  /// Current frame streaming status
-  StreamingStatus get streamingStatus => throw _privateConstructorUsedError;
-
-  /// Whether the app is in a loading state
-  bool get isLoading => throw _privateConstructorUsedError;
-
-  /// Current error message, if any
-  String? get errorMessage => throw _privateConstructorUsedError;
-
-  /// Camera controller instance
-  CameraController? get cameraController => throw _privateConstructorUsedError;
-
-  /// Current toast notification status
-  ToastStatus get toastStatus => throw _privateConstructorUsedError;
-
-  /// Message to display in toast notification
-  String? get toastMessage => throw _privateConstructorUsedError;
-
-  /// Whether debug mode is enabled
-  bool get isDebugMode => throw _privateConstructorUsedError;
-
-  /// Last recognition result timestamp
-  DateTime? get lastRecognitionTime => throw _privateConstructorUsedError;
-
-  /// Number of frames processed
-  int get framesProcessed =>
-      throw _privateConstructorUsedError; // WebSocket specific state fields for Story 2.1
-  /// Number of connection attempts made
-  int get connectionAttempts => throw _privateConstructorUsedError;
-
-  /// Timestamp of last connection attempt
-  DateTime? get lastConnectionAttempt => throw _privateConstructorUsedError;
-
-  /// WebSocket specific error message
-  String? get connectionError => throw _privateConstructorUsedError;
-
-  /// Whether auto-connection is enabled
-  bool get autoConnectionEnabled => throw _privateConstructorUsedError;
-
-  /// Connection retry timer active
-  bool get isRetryTimerActive => throw _privateConstructorUsedError;
-
-  /// Create a copy of CheckInState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $CheckInStateCopyWith<CheckInState> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class _$$DisconnectRequestedImplCopyWith<$Res> {
+  factory _$$DisconnectRequestedImplCopyWith(
+    _$DisconnectRequestedImpl value,
+    $Res Function(_$DisconnectRequestedImpl) then,
+  ) = __$$DisconnectRequestedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-abstract class $CheckInStateCopyWith<$Res> {
-  factory $CheckInStateCopyWith(
-    CheckInState value,
-    $Res Function(CheckInState) then,
-  ) = _$CheckInStateCopyWithImpl<$Res, CheckInState>;
-  @useResult
-  $Res call({
-    CameraStatus cameraStatus,
-    PermissionStatus permissionStatus,
-    ConnectionStatus connectionStatus,
-    StreamingStatus streamingStatus,
-    bool isLoading,
-    String? errorMessage,
-    CameraController? cameraController,
-    ToastStatus toastStatus,
-    String? toastMessage,
-    bool isDebugMode,
-    DateTime? lastRecognitionTime,
-    int framesProcessed,
-    int connectionAttempts,
-    DateTime? lastConnectionAttempt,
-    String? connectionError,
-    bool autoConnectionEnabled,
-    bool isRetryTimerActive,
-  });
+class __$$DisconnectRequestedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$DisconnectRequestedImpl>
+    implements _$$DisconnectRequestedImplCopyWith<$Res> {
+  __$$DisconnectRequestedImplCopyWithImpl(
+    _$DisconnectRequestedImpl _value,
+    $Res Function(_$DisconnectRequestedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
-    implements $CheckInStateCopyWith<$Res> {
-  _$CheckInStateCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+class _$DisconnectRequestedImpl implements DisconnectRequested {
+  const _$DisconnectRequestedImpl();
 
-  /// Create a copy of CheckInState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? cameraStatus = null,
-    Object? permissionStatus = null,
-    Object? connectionStatus = null,
-    Object? streamingStatus = null,
-    Object? isLoading = null,
-    Object? errorMessage = freezed,
-    Object? cameraController = freezed,
-    Object? toastStatus = null,
-    Object? toastMessage = freezed,
-    Object? isDebugMode = null,
-    Object? lastRecognitionTime = freezed,
-    Object? framesProcessed = null,
-    Object? connectionAttempts = null,
-    Object? lastConnectionAttempt = freezed,
-    Object? connectionError = freezed,
-    Object? autoConnectionEnabled = null,
-    Object? isRetryTimerActive = null,
+  String toString() {
+    return 'CheckInEvent.disconnectRequested()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DisconnectRequestedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function(bool isAutoConnect) connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() webSocketConnectionRequested,
+    required TResult Function() webSocketConnecting,
+    required TResult Function() webSocketConnected,
+    required TResult Function() webSocketDisconnected,
+    required TResult Function(String error) webSocketConnectionFailed,
+    required TResult Function() webSocketConnectionTimeout,
+    required TResult Function(int attempt) webSocketRetrying,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageReceived,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageSent,
+    required TResult Function(String error) webSocketSendError,
+    required TResult Function() autoConnectionTriggered,
+    required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
   }) {
-    return _then(
-      _value.copyWith(
-            cameraStatus:
-                null == cameraStatus
-                    ? _value.cameraStatus
-                    : cameraStatus // ignore: cast_nullable_to_non_nullable
-                        as CameraStatus,
-            permissionStatus:
-                null == permissionStatus
-                    ? _value.permissionStatus
-                    : permissionStatus // ignore: cast_nullable_to_non_nullable
-                        as PermissionStatus,
-            connectionStatus:
-                null == connectionStatus
-                    ? _value.connectionStatus
-                    : connectionStatus // ignore: cast_nullable_to_non_nullable
-                        as ConnectionStatus,
-            streamingStatus:
-                null == streamingStatus
-                    ? _value.streamingStatus
-                    : streamingStatus // ignore: cast_nullable_to_non_nullable
-                        as StreamingStatus,
-            isLoading:
-                null == isLoading
-                    ? _value.isLoading
-                    : isLoading // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            errorMessage:
-                freezed == errorMessage
-                    ? _value.errorMessage
-                    : errorMessage // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            cameraController:
-                freezed == cameraController
-                    ? _value.cameraController
-                    : cameraController // ignore: cast_nullable_to_non_nullable
-                        as CameraController?,
-            toastStatus:
-                null == toastStatus
-                    ? _value.toastStatus
-                    : toastStatus // ignore: cast_nullable_to_non_nullable
-                        as ToastStatus,
-            toastMessage:
-                freezed == toastMessage
-                    ? _value.toastMessage
-                    : toastMessage // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isDebugMode:
-                null == isDebugMode
-                    ? _value.isDebugMode
-                    : isDebugMode // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            lastRecognitionTime:
-                freezed == lastRecognitionTime
-                    ? _value.lastRecognitionTime
-                    : lastRecognitionTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            framesProcessed:
-                null == framesProcessed
-                    ? _value.framesProcessed
-                    : framesProcessed // ignore: cast_nullable_to_non_nullable
-                        as int,
-            connectionAttempts:
-                null == connectionAttempts
-                    ? _value.connectionAttempts
-                    : connectionAttempts // ignore: cast_nullable_to_non_nullable
-                        as int,
-            lastConnectionAttempt:
-                freezed == lastConnectionAttempt
-                    ? _value.lastConnectionAttempt
-                    : lastConnectionAttempt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            connectionError:
-                freezed == connectionError
-                    ? _value.connectionError
-                    : connectionError // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            autoConnectionEnabled:
-                null == autoConnectionEnabled
-                    ? _value.autoConnectionEnabled
-                    : autoConnectionEnabled // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isRetryTimerActive:
-                null == isRetryTimerActive
-                    ? _value.isRetryTimerActive
-                    : isRetryTimerActive // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
+    return disconnectRequested();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? webSocketConnectionRequested,
+    TResult? Function()? webSocketConnecting,
+    TResult? Function()? webSocketConnected,
+    TResult? Function()? webSocketDisconnected,
+    TResult? Function(String error)? webSocketConnectionFailed,
+    TResult? Function()? webSocketConnectionTimeout,
+    TResult? Function(int attempt)? webSocketRetrying,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult? Function(String error)? webSocketSendError,
+    TResult? Function()? autoConnectionTriggered,
+    TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
+  }) {
+    return disconnectRequested?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function(bool isAutoConnect)? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? webSocketConnectionRequested,
+    TResult Function()? webSocketConnecting,
+    TResult Function()? webSocketConnected,
+    TResult Function()? webSocketDisconnected,
+    TResult Function(String error)? webSocketConnectionFailed,
+    TResult Function()? webSocketConnectionTimeout,
+    TResult Function(int attempt)? webSocketRetrying,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult Function(String error)? webSocketSendError,
+    TResult Function()? autoConnectionTriggered,
+    TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (disconnectRequested != null) {
+      return disconnectRequested();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(WebSocketConnectionRequested value)
+    webSocketConnectionRequested,
+    required TResult Function(WebSocketConnecting value) webSocketConnecting,
+    required TResult Function(WebSocketConnected value) webSocketConnected,
+    required TResult Function(WebSocketDisconnected value)
+    webSocketDisconnected,
+    required TResult Function(WebSocketConnectionFailed value)
+    webSocketConnectionFailed,
+    required TResult Function(WebSocketConnectionTimeout value)
+    webSocketConnectionTimeout,
+    required TResult Function(WebSocketRetrying value) webSocketRetrying,
+    required TResult Function(WebSocketMessageReceived value)
+    webSocketMessageReceived,
+    required TResult Function(WebSocketMessageSent value) webSocketMessageSent,
+    required TResult Function(WebSocketSendError value) webSocketSendError,
+    required TResult Function(AutoConnectionTriggered value)
+    autoConnectionTriggered,
+    required TResult Function(AutoConnectionToggled value)
+    autoConnectionToggled,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
+  }) {
+    return disconnectRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult? Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult? Function(WebSocketConnected value)? webSocketConnected,
+    TResult? Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult? Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult? Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult? Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult? Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult? Function(WebSocketSendError value)? webSocketSendError,
+    TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
+  }) {
+    return disconnectRequested?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult Function(WebSocketConnected value)? webSocketConnected,
+    TResult Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult Function(WebSocketSendError value)? webSocketSendError,
+    TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (disconnectRequested != null) {
+      return disconnectRequested(this);
+    }
+    return orElse();
   }
 }
 
-/// @nodoc
-abstract class _$$CheckInStateImplCopyWith<$Res>
-    implements $CheckInStateCopyWith<$Res> {
-  factory _$$CheckInStateImplCopyWith(
-    _$CheckInStateImpl value,
-    $Res Function(_$CheckInStateImpl) then,
-  ) = __$$CheckInStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    CameraStatus cameraStatus,
-    PermissionStatus permissionStatus,
-    ConnectionStatus connectionStatus,
-    StreamingStatus streamingStatus,
-    bool isLoading,
-    String? errorMessage,
-    CameraController? cameraController,
-    ToastStatus toastStatus,
-    String? toastMessage,
-    bool isDebugMode,
-    DateTime? lastRecognitionTime,
-    int framesProcessed,
-    int connectionAttempts,
-    DateTime? lastConnectionAttempt,
-    String? connectionError,
-    bool autoConnectionEnabled,
-    bool isRetryTimerActive,
-  });
+abstract class DisconnectRequested implements CheckInEvent {
+  const factory DisconnectRequested() = _$DisconnectRequestedImpl;
 }
 
 /// @nodoc
-class __$$CheckInStateImplCopyWithImpl<$Res>
-    extends _$CheckInStateCopyWithImpl<$Res, _$CheckInStateImpl>
-    implements _$$CheckInStateImplCopyWith<$Res> {
-  __$$CheckInStateImplCopyWithImpl(
-    _$CheckInStateImpl _value,
-    $Res Function(_$CheckInStateImpl) _then,
+abstract class _$$WebSocketErrorImplCopyWith<$Res> {
+  factory _$$WebSocketErrorImplCopyWith(
+    _$WebSocketErrorImpl value,
+    $Res Function(_$WebSocketErrorImpl) then,
+  ) = __$$WebSocketErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$WebSocketErrorImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$WebSocketErrorImpl>
+    implements _$$WebSocketErrorImplCopyWith<$Res> {
+  __$$WebSocketErrorImplCopyWithImpl(
+    _$WebSocketErrorImpl _value,
+    $Res Function(_$WebSocketErrorImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of CheckInState
+  /// Create a copy of CheckInEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? cameraStatus = null,
-    Object? permissionStatus = null,
-    Object? connectionStatus = null,
-    Object? streamingStatus = null,
-    Object? isLoading = null,
-    Object? errorMessage = freezed,
-    Object? cameraController = freezed,
-    Object? toastStatus = null,
-    Object? toastMessage = freezed,
-    Object? isDebugMode = null,
-    Object? lastRecognitionTime = freezed,
-    Object? framesProcessed = null,
-    Object? connectionAttempts = null,
-    Object? lastConnectionAttempt = freezed,
-    Object? connectionError = freezed,
-    Object? autoConnectionEnabled = null,
-    Object? isRetryTimerActive = null,
-  }) {
+  $Res call({Object? error = null}) {
     return _then(
-      _$CheckInStateImpl(
-        cameraStatus:
-            null == cameraStatus
-                ? _value.cameraStatus
-                : cameraStatus // ignore: cast_nullable_to_non_nullable
-                    as CameraStatus,
-        permissionStatus:
-            null == permissionStatus
-                ? _value.permissionStatus
-                : permissionStatus // ignore: cast_nullable_to_non_nullable
-                    as PermissionStatus,
-        connectionStatus:
-            null == connectionStatus
-                ? _value.connectionStatus
-                : connectionStatus // ignore: cast_nullable_to_non_nullable
-                    as ConnectionStatus,
-        streamingStatus:
-            null == streamingStatus
-                ? _value.streamingStatus
-                : streamingStatus // ignore: cast_nullable_to_non_nullable
-                    as StreamingStatus,
-        isLoading:
-            null == isLoading
-                ? _value.isLoading
-                : isLoading // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        errorMessage:
-            freezed == errorMessage
-                ? _value.errorMessage
-                : errorMessage // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        cameraController:
-            freezed == cameraController
-                ? _value.cameraController
-                : cameraController // ignore: cast_nullable_to_non_nullable
-                    as CameraController?,
-        toastStatus:
-            null == toastStatus
-                ? _value.toastStatus
-                : toastStatus // ignore: cast_nullable_to_non_nullable
-                    as ToastStatus,
-        toastMessage:
-            freezed == toastMessage
-                ? _value.toastMessage
-                : toastMessage // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isDebugMode:
-            null == isDebugMode
-                ? _value.isDebugMode
-                : isDebugMode // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        lastRecognitionTime:
-            freezed == lastRecognitionTime
-                ? _value.lastRecognitionTime
-                : lastRecognitionTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        framesProcessed:
-            null == framesProcessed
-                ? _value.framesProcessed
-                : framesProcessed // ignore: cast_nullable_to_non_nullable
-                    as int,
-        connectionAttempts:
-            null == connectionAttempts
-                ? _value.connectionAttempts
-                : connectionAttempts // ignore: cast_nullable_to_non_nullable
-                    as int,
-        lastConnectionAttempt:
-            freezed == lastConnectionAttempt
-                ? _value.lastConnectionAttempt
-                : lastConnectionAttempt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        connectionError:
-            freezed == connectionError
-                ? _value.connectionError
-                : connectionError // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        autoConnectionEnabled:
-            null == autoConnectionEnabled
-                ? _value.autoConnectionEnabled
-                : autoConnectionEnabled // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isRetryTimerActive:
-            null == isRetryTimerActive
-                ? _value.isRetryTimerActive
-                : isRetryTimerActive // ignore: cast_nullable_to_non_nullable
-                    as bool,
+      _$WebSocketErrorImpl(
+        null == error
+            ? _value.error
+            : error // ignore: cast_nullable_to_non_nullable
+                as String,
       ),
     );
   }
@@ -15372,275 +16481,377 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CheckInStateImpl implements _CheckInState {
-  const _$CheckInStateImpl({
-    this.cameraStatus = CameraStatus.initial,
-    this.permissionStatus = PermissionStatus.initial,
-    this.connectionStatus = ConnectionStatus.disconnected,
-    this.streamingStatus = StreamingStatus.idle,
-    this.isLoading = false,
-    this.errorMessage,
-    this.cameraController,
-    this.toastStatus = ToastStatus.none,
-    this.toastMessage,
-    this.isDebugMode = false,
-    this.lastRecognitionTime,
-    this.framesProcessed = 0,
-    this.connectionAttempts = 0,
-    this.lastConnectionAttempt,
-    this.connectionError,
-    this.autoConnectionEnabled = true,
-    this.isRetryTimerActive = false,
-  });
+class _$WebSocketErrorImpl implements WebSocketError {
+  const _$WebSocketErrorImpl(this.error);
 
-  /// Current camera status
   @override
-  @JsonKey()
-  final CameraStatus cameraStatus;
-
-  /// Current permission status
-  @override
-  @JsonKey()
-  final PermissionStatus permissionStatus;
-
-  /// Current WebSocket connection status
-  @override
-  @JsonKey()
-  final ConnectionStatus connectionStatus;
-
-  /// Current frame streaming status
-  @override
-  @JsonKey()
-  final StreamingStatus streamingStatus;
-
-  /// Whether the app is in a loading state
-  @override
-  @JsonKey()
-  final bool isLoading;
-
-  /// Current error message, if any
-  @override
-  final String? errorMessage;
-
-  /// Camera controller instance
-  @override
-  final CameraController? cameraController;
-
-  /// Current toast notification status
-  @override
-  @JsonKey()
-  final ToastStatus toastStatus;
-
-  /// Message to display in toast notification
-  @override
-  final String? toastMessage;
-
-  /// Whether debug mode is enabled
-  @override
-  @JsonKey()
-  final bool isDebugMode;
-
-  /// Last recognition result timestamp
-  @override
-  final DateTime? lastRecognitionTime;
-
-  /// Number of frames processed
-  @override
-  @JsonKey()
-  final int framesProcessed;
-  // WebSocket specific state fields for Story 2.1
-  /// Number of connection attempts made
-  @override
-  @JsonKey()
-  final int connectionAttempts;
-
-  /// Timestamp of last connection attempt
-  @override
-  final DateTime? lastConnectionAttempt;
-
-  /// WebSocket specific error message
-  @override
-  final String? connectionError;
-
-  /// Whether auto-connection is enabled
-  @override
-  @JsonKey()
-  final bool autoConnectionEnabled;
-
-  /// Connection retry timer active
-  @override
-  @JsonKey()
-  final bool isRetryTimerActive;
+  final String error;
 
   @override
   String toString() {
-    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed, connectionAttempts: $connectionAttempts, lastConnectionAttempt: $lastConnectionAttempt, connectionError: $connectionError, autoConnectionEnabled: $autoConnectionEnabled, isRetryTimerActive: $isRetryTimerActive)';
+    return 'CheckInEvent.webSocketError(error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CheckInStateImpl &&
-            (identical(other.cameraStatus, cameraStatus) ||
-                other.cameraStatus == cameraStatus) &&
-            (identical(other.permissionStatus, permissionStatus) ||
-                other.permissionStatus == permissionStatus) &&
-            (identical(other.connectionStatus, connectionStatus) ||
-                other.connectionStatus == connectionStatus) &&
-            (identical(other.streamingStatus, streamingStatus) ||
-                other.streamingStatus == streamingStatus) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
-            (identical(other.cameraController, cameraController) ||
-                other.cameraController == cameraController) &&
-            (identical(other.toastStatus, toastStatus) ||
-                other.toastStatus == toastStatus) &&
-            (identical(other.toastMessage, toastMessage) ||
-                other.toastMessage == toastMessage) &&
-            (identical(other.isDebugMode, isDebugMode) ||
-                other.isDebugMode == isDebugMode) &&
-            (identical(other.lastRecognitionTime, lastRecognitionTime) ||
-                other.lastRecognitionTime == lastRecognitionTime) &&
-            (identical(other.framesProcessed, framesProcessed) ||
-                other.framesProcessed == framesProcessed) &&
-            (identical(other.connectionAttempts, connectionAttempts) ||
-                other.connectionAttempts == connectionAttempts) &&
-            (identical(other.lastConnectionAttempt, lastConnectionAttempt) ||
-                other.lastConnectionAttempt == lastConnectionAttempt) &&
-            (identical(other.connectionError, connectionError) ||
-                other.connectionError == connectionError) &&
-            (identical(other.autoConnectionEnabled, autoConnectionEnabled) ||
-                other.autoConnectionEnabled == autoConnectionEnabled) &&
-            (identical(other.isRetryTimerActive, isRetryTimerActive) ||
-                other.isRetryTimerActive == isRetryTimerActive));
+            other is _$WebSocketErrorImpl &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    cameraStatus,
-    permissionStatus,
-    connectionStatus,
-    streamingStatus,
-    isLoading,
-    errorMessage,
-    cameraController,
-    toastStatus,
-    toastMessage,
-    isDebugMode,
-    lastRecognitionTime,
-    framesProcessed,
-    connectionAttempts,
-    lastConnectionAttempt,
-    connectionError,
-    autoConnectionEnabled,
-    isRetryTimerActive,
-  );
+  int get hashCode => Object.hash(runtimeType, error);
 
-  /// Create a copy of CheckInState
+  /// Create a copy of CheckInEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CheckInStateImplCopyWith<_$CheckInStateImpl> get copyWith =>
-      __$$CheckInStateImplCopyWithImpl<_$CheckInStateImpl>(this, _$identity);
+  _$$WebSocketErrorImplCopyWith<_$WebSocketErrorImpl> get copyWith =>
+      __$$WebSocketErrorImplCopyWithImpl<_$WebSocketErrorImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function(bool isAutoConnect) connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() webSocketConnectionRequested,
+    required TResult Function() webSocketConnecting,
+    required TResult Function() webSocketConnected,
+    required TResult Function() webSocketDisconnected,
+    required TResult Function(String error) webSocketConnectionFailed,
+    required TResult Function() webSocketConnectionTimeout,
+    required TResult Function(int attempt) webSocketRetrying,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageReceived,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageSent,
+    required TResult Function(String error) webSocketSendError,
+    required TResult Function() autoConnectionTriggered,
+    required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
+  }) {
+    return webSocketError(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? webSocketConnectionRequested,
+    TResult? Function()? webSocketConnecting,
+    TResult? Function()? webSocketConnected,
+    TResult? Function()? webSocketDisconnected,
+    TResult? Function(String error)? webSocketConnectionFailed,
+    TResult? Function()? webSocketConnectionTimeout,
+    TResult? Function(int attempt)? webSocketRetrying,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult? Function(String error)? webSocketSendError,
+    TResult? Function()? autoConnectionTriggered,
+    TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
+  }) {
+    return webSocketError?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function(bool isAutoConnect)? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? webSocketConnectionRequested,
+    TResult Function()? webSocketConnecting,
+    TResult Function()? webSocketConnected,
+    TResult Function()? webSocketDisconnected,
+    TResult Function(String error)? webSocketConnectionFailed,
+    TResult Function()? webSocketConnectionTimeout,
+    TResult Function(int attempt)? webSocketRetrying,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult Function(String error)? webSocketSendError,
+    TResult Function()? autoConnectionTriggered,
+    TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (webSocketError != null) {
+      return webSocketError(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(WebSocketConnectionRequested value)
+    webSocketConnectionRequested,
+    required TResult Function(WebSocketConnecting value) webSocketConnecting,
+    required TResult Function(WebSocketConnected value) webSocketConnected,
+    required TResult Function(WebSocketDisconnected value)
+    webSocketDisconnected,
+    required TResult Function(WebSocketConnectionFailed value)
+    webSocketConnectionFailed,
+    required TResult Function(WebSocketConnectionTimeout value)
+    webSocketConnectionTimeout,
+    required TResult Function(WebSocketRetrying value) webSocketRetrying,
+    required TResult Function(WebSocketMessageReceived value)
+    webSocketMessageReceived,
+    required TResult Function(WebSocketMessageSent value) webSocketMessageSent,
+    required TResult Function(WebSocketSendError value) webSocketSendError,
+    required TResult Function(AutoConnectionTriggered value)
+    autoConnectionTriggered,
+    required TResult Function(AutoConnectionToggled value)
+    autoConnectionToggled,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
+  }) {
+    return webSocketError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult? Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult? Function(WebSocketConnected value)? webSocketConnected,
+    TResult? Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult? Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult? Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult? Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult? Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult? Function(WebSocketSendError value)? webSocketSendError,
+    TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
+  }) {
+    return webSocketError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult Function(WebSocketConnected value)? webSocketConnected,
+    TResult Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult Function(WebSocketSendError value)? webSocketSendError,
+    TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (webSocketError != null) {
+      return webSocketError(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _CheckInState implements CheckInState {
-  const factory _CheckInState({
-    final CameraStatus cameraStatus,
-    final PermissionStatus permissionStatus,
-    final ConnectionStatus connectionStatus,
-    final StreamingStatus streamingStatus,
-    final bool isLoading,
-    final String? errorMessage,
-    final CameraController? cameraController,
-    final ToastStatus toastStatus,
-    final String? toastMessage,
-    final bool isDebugMode,
-    final DateTime? lastRecognitionTime,
-    final int framesProcessed,
-    final int connectionAttempts,
-    final DateTime? lastConnectionAttempt,
-    final String? connectionError,
-    final bool autoConnectionEnabled,
-    final bool isRetryTimerActive,
-  }) = _$CheckInStateImpl;
+abstract class WebSocketError implements CheckInEvent {
+  const factory WebSocketError(final String error) = _$WebSocketErrorImpl;
 
-  /// Current camera status
-  @override
-  CameraStatus get cameraStatus;
+  String get error;
 
-  /// Current permission status
-  @override
-  PermissionStatus get permissionStatus;
-
-  /// Current WebSocket connection status
-  @override
-  ConnectionStatus get connectionStatus;
-
-  /// Current frame streaming status
-  @override
-  StreamingStatus get streamingStatus;
-
-  /// Whether the app is in a loading state
-  @override
-  bool get isLoading;
-
-  /// Current error message, if any
-  @override
-  String? get errorMessage;
-
-  /// Camera controller instance
-  @override
-  CameraController? get cameraController;
-
-  /// Current toast notification status
-  @override
-  ToastStatus get toastStatus;
-
-  /// Message to display in toast notification
-  @override
-  String? get toastMessage;
-
-  /// Whether debug mode is enabled
-  @override
-  bool get isDebugMode;
-
-  /// Last recognition result timestamp
-  @override
-  DateTime? get lastRecognitionTime;
-
-  /// Number of frames processed
-  @override
-  int get framesProcessed; // WebSocket specific state fields for Story 2.1
-  /// Number of connection attempts made
-  @override
-  int get connectionAttempts;
-
-  /// Timestamp of last connection attempt
-  @override
-  DateTime? get lastConnectionAttempt;
-
-  /// WebSocket specific error message
-  @override
-  String? get connectionError;
-
-  /// Whether auto-connection is enabled
-  @override
-  bool get autoConnectionEnabled;
-
-  /// Connection retry timer active
-  @override
-  bool get isRetryTimerActive;
-
-  /// Create a copy of CheckInState
+  /// Create a copy of CheckInEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CheckInStateImplCopyWith<_$CheckInStateImpl> get copyWith =>
+  _$$WebSocketErrorImplCopyWith<_$WebSocketErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
