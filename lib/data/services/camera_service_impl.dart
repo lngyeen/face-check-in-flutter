@@ -18,18 +18,58 @@ class CameraServiceImpl implements CameraService {
   @override
   Stream<CameraImage> get imageStream => _imageStreamController.stream;
 
-  /// Initializes the camera by finding the first available back camera,
+  /// Initializes the camera by finding the first available front camera,
   /// creating a controller with medium resolution, and initializing it.
   @override
   Future<void> initialize() async {
     final cameras = await availableCameras();
-    final backCamera = cameras.firstWhere(
-      (camera) => camera.lensDirection == CameraLensDirection.back,
-      orElse: () => cameras.first,
-    );
+
+    // Debug: Log all available cameras
+    print('🎥 Available cameras:');
+    for (int i = 0; i < cameras.length; i++) {
+      print('  Camera $i: ${cameras[i].lensDirection} - ${cameras[i].name}');
+    }
+
+    CameraDescription selectedCamera;
+
+    // Try to find front camera first
+    final frontCameras =
+        cameras
+            .where(
+              (camera) => camera.lensDirection == CameraLensDirection.front,
+            )
+            .toList();
+
+    if (frontCameras.isNotEmpty) {
+      selectedCamera = frontCameras.first;
+      print(
+        '📱 Selected front camera: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
+      );
+    } else {
+      // If no front camera, try to find back camera
+      final backCameras =
+          cameras
+              .where(
+                (camera) => camera.lensDirection == CameraLensDirection.back,
+              )
+              .toList();
+
+      if (backCameras.isNotEmpty) {
+        selectedCamera = backCameras.first;
+        print(
+          '⚠️ No front camera found, using back camera: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
+        );
+      } else {
+        // Fallback to first available camera
+        selectedCamera = cameras.first;
+        print(
+          '⚠️ No front or back camera found, using first available: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
+        );
+      }
+    }
 
     controller = CameraController(
-      backCamera,
+      selectedCamera,
       ResolutionPreset.medium,
       enableAudio: false,
     );
