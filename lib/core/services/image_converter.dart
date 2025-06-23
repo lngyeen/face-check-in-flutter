@@ -1,10 +1,21 @@
 import 'dart:convert';
 import 'dart:isolate';
 
-import 'package:flutter/foundation.dart';
-
 import 'package:camera/camera.dart';
 import 'package:image/image.dart' as img;
+
+// Forward declaration for ProcessedFrame
+class ProcessedFrame {
+  final String base64Image;
+  final img.Image originalImage;
+  final DateTime timestamp;
+
+  const ProcessedFrame({
+    required this.base64Image,
+    required this.originalImage,
+    required this.timestamp,
+  });
+}
 
 /// A static utility class for image conversion tasks.
 ///
@@ -12,24 +23,43 @@ import 'package:image/image.dart' as img;
 /// into different formats, running intensive operations in a separate isolate
 /// to prevent UI jank.
 abstract class ImageConverter {
-  /// Converts a [CameraImage] to a Base64 encoded string.
+  /// Converts a [CameraImage] to a [ProcessedFrame] with metadata.
   ///
-  /// This is the primary entry point which orchestrates the conversion
-  /// pipeline in a background isolate.
-  static Future<String?> convertCameraImageToBase64(
+  /// This method provides a richer output including the original image,
+  /// base64 string, and timestamp for comprehensive frame processing.
+  static Future<ProcessedFrame?> convertCameraImageToProcessedFrame(
     CameraImage cameraImage,
   ) async {
-    // Use Isolate.run to run the conversion in a separate isolate.
-    return Isolate.run(() => _processImageInIsolate(cameraImage));
+    try {
+      // Use Isolate.run to run the conversion in a separate isolate.
+      final result = await Isolate.run(
+        () => processImageInIsolateWithMetadata(cameraImage),
+      );
+
+      if (result == null) {
+        return null;
+      }
+
+      return ProcessedFrame(
+        base64Image: result['base64'] as String,
+        originalImage: result['image'] as img.Image,
+        timestamp: DateTime.now(),
+      );
+    } catch (e) {
+      return null;
+    }
   }
 
-  /// Orchestrates the full image processing pipeline within an isolate.
-  static String? _processImageInIsolate(CameraImage cameraImage) {
+  /// Orchestrates image processing with metadata for ProcessedFrame creation.
+  static Map<String, dynamic>? processImageInIsolateWithMetadata(
+    CameraImage cameraImage,
+  ) {
     final image = convertCameraImageToImage(cameraImage);
     if (image == null) {
       return null;
     }
-    return encodeImageToBase64(image);
+    final base64 = encodeImageToBase64(image);
+    return {'base64': base64, 'image': image};
   }
 
   /// Converts a [CameraImage] to a library-agnostic [img.Image] object.
@@ -44,16 +74,10 @@ abstract class ImageConverter {
         image = convertYUV420(cameraImage);
       } else if (cameraImage.format.group == ImageFormatGroup.bgra8888) {
         image = convertBGRA8888(cameraImage);
-      } else {
-        return null;
       }
 
-      if (image == null) return null;
-
-      // The image is often captured in landscape, so we rotate it to portrait.
-      return img.copyRotate(image, angle: -90);
+      return image;
     } catch (e) {
-      debugPrint("Error during image conversion to Image object: $e");
       return null;
     }
   }

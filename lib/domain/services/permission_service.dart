@@ -1,7 +1,4 @@
-import 'package:permission_handler/permission_handler.dart';
-
-export 'package:permission_handler/permission_handler.dart'
-    show PermissionStatus;
+import '../entities/permission_status.dart';
 
 abstract class PermissionService {
   Future<PermissionStatus> requestCameraPermission();

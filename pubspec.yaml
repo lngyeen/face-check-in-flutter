@@ -39,9 +39,10 @@ dependencies:
   # BLoC State Management
   flutter_bloc: ^8.0.0
   bloc: ^8.0.0
+  bloc_concurrency: ^0.2.5
 
   # WebSocket Communication
-  web_socket_channel: ^2.4.0
+  web_socket_channel: ^3.0.3
 
   # Camera Integration
   camera: ^0.11.0
@@ -59,6 +60,15 @@ dependencies:
 
   # Image Processing
   image: ^4.2.0
+
+  # Reactive Streams
+  rxdart: ^0.27.7
+
+  # Screen Wake Lock
+  wakelock_plus: ^1.2.8
+
+  # Network Connectivity Monitoring
+  connectivity_plus: ^6.0.5
 
 dev_dependencies:
   flutter_test:

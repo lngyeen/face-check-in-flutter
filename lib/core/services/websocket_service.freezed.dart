@@ -19,7 +19,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WebSocketConfig {
   String get url => throw _privateConstructorUsedError;
   Duration get connectionTimeout => throw _privateConstructorUsedError;
-  int get maxRetryAttempts => throw _privateConstructorUsedError;
+  bool get enableInternalRetry =>
+      throw _privateConstructorUsedError; // Disable internal retry to let ReconnectionManager handle it
   Duration get retryDelay => throw _privateConstructorUsedError;
 
   /// Create a copy of WebSocketConfig
@@ -39,7 +40,7 @@ abstract class $WebSocketConfigCopyWith<$Res> {
   $Res call({
     String url,
     Duration connectionTimeout,
-    int maxRetryAttempts,
+    bool enableInternalRetry,
     Duration retryDelay,
   });
 }
@@ -61,7 +62,7 @@ class _$WebSocketConfigCopyWithImpl<$Res, $Val extends WebSocketConfig>
   $Res call({
     Object? url = null,
     Object? connectionTimeout = null,
-    Object? maxRetryAttempts = null,
+    Object? enableInternalRetry = null,
     Object? retryDelay = null,
   }) {
     return _then(
@@ -76,11 +77,11 @@ class _$WebSocketConfigCopyWithImpl<$Res, $Val extends WebSocketConfig>
                     ? _value.connectionTimeout
                     : connectionTimeout // ignore: cast_nullable_to_non_nullable
                         as Duration,
-            maxRetryAttempts:
-                null == maxRetryAttempts
-                    ? _value.maxRetryAttempts
-                    : maxRetryAttempts // ignore: cast_nullable_to_non_nullable
-                        as int,
+            enableInternalRetry:
+                null == enableInternalRetry
+                    ? _value.enableInternalRetry
+                    : enableInternalRetry // ignore: cast_nullable_to_non_nullable
+                        as bool,
             retryDelay:
                 null == retryDelay
                     ? _value.retryDelay
@@ -104,7 +105,7 @@ abstract class _$$WebSocketConfigImplCopyWith<$Res>
   $Res call({
     String url,
     Duration connectionTimeout,
-    int maxRetryAttempts,
+    bool enableInternalRetry,
     Duration retryDelay,
   });
 }
@@ -125,7 +126,7 @@ class __$$WebSocketConfigImplCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
     Object? connectionTimeout = null,
-    Object? maxRetryAttempts = null,
+    Object? enableInternalRetry = null,
     Object? retryDelay = null,
   }) {
     return _then(
@@ -140,11 +141,11 @@ class __$$WebSocketConfigImplCopyWithImpl<$Res>
                 ? _value.connectionTimeout
                 : connectionTimeout // ignore: cast_nullable_to_non_nullable
                     as Duration,
-        maxRetryAttempts:
-            null == maxRetryAttempts
-                ? _value.maxRetryAttempts
-                : maxRetryAttempts // ignore: cast_nullable_to_non_nullable
-                    as int,
+        enableInternalRetry:
+            null == enableInternalRetry
+                ? _value.enableInternalRetry
+                : enableInternalRetry // ignore: cast_nullable_to_non_nullable
+                    as bool,
         retryDelay:
             null == retryDelay
                 ? _value.retryDelay
@@ -160,8 +161,8 @@ class __$$WebSocketConfigImplCopyWithImpl<$Res>
 class _$WebSocketConfigImpl implements _WebSocketConfig {
   const _$WebSocketConfigImpl({
     required this.url,
-    this.connectionTimeout = const Duration(seconds: 30),
-    this.maxRetryAttempts = 3,
+    this.connectionTimeout = const Duration(seconds: 10),
+    this.enableInternalRetry = false,
     this.retryDelay = const Duration(seconds: 3),
   });
 
@@ -172,14 +173,15 @@ class _$WebSocketConfigImpl implements _WebSocketConfig {
   final Duration connectionTimeout;
   @override
   @JsonKey()
-  final int maxRetryAttempts;
+  final bool enableInternalRetry;
+  // Disable internal retry to let ReconnectionManager handle it
   @override
   @JsonKey()
   final Duration retryDelay;
 
   @override
   String toString() {
-    return 'WebSocketConfig(url: $url, connectionTimeout: $connectionTimeout, maxRetryAttempts: $maxRetryAttempts, retryDelay: $retryDelay)';
+    return 'WebSocketConfig(url: $url, connectionTimeout: $connectionTimeout, enableInternalRetry: $enableInternalRetry, retryDelay: $retryDelay)';
   }
 
   @override
@@ -190,8 +192,8 @@ class _$WebSocketConfigImpl implements _WebSocketConfig {
             (identical(other.url, url) || other.url == url) &&
             (identical(other.connectionTimeout, connectionTimeout) ||
                 other.connectionTimeout == connectionTimeout) &&
-            (identical(other.maxRetryAttempts, maxRetryAttempts) ||
-                other.maxRetryAttempts == maxRetryAttempts) &&
+            (identical(other.enableInternalRetry, enableInternalRetry) ||
+                other.enableInternalRetry == enableInternalRetry) &&
             (identical(other.retryDelay, retryDelay) ||
                 other.retryDelay == retryDelay));
   }
@@ -201,7 +203,7 @@ class _$WebSocketConfigImpl implements _WebSocketConfig {
     runtimeType,
     url,
     connectionTimeout,
-    maxRetryAttempts,
+    enableInternalRetry,
     retryDelay,
   );
 
@@ -221,7 +223,7 @@ abstract class _WebSocketConfig implements WebSocketConfig {
   const factory _WebSocketConfig({
     required final String url,
     final Duration connectionTimeout,
-    final int maxRetryAttempts,
+    final bool enableInternalRetry,
     final Duration retryDelay,
   }) = _$WebSocketConfigImpl;
 
@@ -230,7 +232,7 @@ abstract class _WebSocketConfig implements WebSocketConfig {
   @override
   Duration get connectionTimeout;
   @override
-  int get maxRetryAttempts;
+  bool get enableInternalRetry; // Disable internal retry to let ReconnectionManager handle it
   @override
   Duration get retryDelay;
 

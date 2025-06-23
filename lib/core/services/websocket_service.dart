@@ -4,35 +4,18 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import '../../domain/entities/connection_status.dart';
+
 part 'websocket_service.freezed.dart';
-
-/// Represents the current WebSocket connection status
-enum ConnectionStatus {
-  /// Not connected to backend
-  disconnected,
-
-  /// Attempting to connect
-  connecting,
-
-  /// Successfully connected
-  connected,
-
-  /// Connection failed
-  failed,
-
-  /// Connection timed out
-  timeout,
-
-  /// Retrying to connect
-  retrying,
-}
 
 @freezed
 class WebSocketConfig with _$WebSocketConfig {
   const factory WebSocketConfig({
     required String url,
-    @Default(Duration(seconds: 30)) Duration connectionTimeout,
-    @Default(3) int maxRetryAttempts,
+    @Default(Duration(seconds: 10)) Duration connectionTimeout,
+    @Default(false)
+    bool
+    enableInternalRetry, // Disable internal retry to let ReconnectionManager handle it
     @Default(Duration(seconds: 3)) Duration retryDelay,
   }) = _WebSocketConfig;
 
@@ -52,9 +35,6 @@ class WebSocketService {
 
   WebSocketChannel? channel;
   StreamSubscription? subscription;
-  Timer? _timeoutTimer;
-  Timer? _retryTimer;
-  int _retryAttempts = 0;
 
   late WebSocketConfig _config;
 
@@ -86,19 +66,15 @@ class WebSocketService {
     }
 
     updateStatus(ConnectionStatus.connecting);
-    _retryAttempts = 0;
     _connect();
   }
 
   void _connect() {
-    _timeoutTimer?.cancel();
     channel?.sink.close();
 
     try {
       channel = WebSocketChannel.connect(Uri.parse(_config.url));
       updateStatus(ConnectionStatus.connecting);
-
-      _timeoutTimer = Timer(_config.connectionTimeout, handleTimeout);
 
       subscription = channel!.stream.listen(
         handleMessage,
@@ -109,11 +85,12 @@ class WebSocketService {
 
       channel!.ready
           .then((_) {
-            _timeoutTimer?.cancel();
             updateStatus(ConnectionStatus.connected);
-            _retryAttempts = 0;
           })
-          .catchError(handleError);
+          .catchError((error) {
+            handleError(error);
+            return null;
+          });
     } catch (e) {
       handleError(e);
     }
@@ -126,35 +103,19 @@ class WebSocketService {
   }
 
   void handleError(dynamic error) {
-    _timeoutTimer?.cancel();
     if (_statusController.isClosed) return;
 
-    if (_retryAttempts < _config.maxRetryAttempts) {
-      _retryAttempts++;
-      updateStatus(ConnectionStatus.retrying);
-      _retryTimer?.cancel();
-      _retryTimer = Timer(_config.retryDelay, _connect);
-    } else {
-      updateStatus(ConnectionStatus.failed);
-    }
+    updateStatus(ConnectionStatus.failed);
   }
 
   void handleDone() {
-    _timeoutTimer?.cancel();
     if (_statusController.isClosed ||
         _currentStatus == ConnectionStatus.disconnected) {
       return;
     }
-    // If it was connected, try to reconnect.
     if (_currentStatus == ConnectionStatus.connected) {
       handleError('Connection closed unexpectedly');
     }
-  }
-
-  void handleTimeout() {
-    if (_statusController.isClosed) return;
-    updateStatus(ConnectionStatus.timeout);
-    handleError('Connection Timeout');
   }
 
   void sendMessage(dynamic message) {
@@ -164,8 +125,6 @@ class WebSocketService {
   }
 
   Future<void> disconnect() async {
-    _retryTimer?.cancel();
-    _timeoutTimer?.cancel();
     await subscription?.cancel();
     await channel?.sink.close();
     channel = null;
