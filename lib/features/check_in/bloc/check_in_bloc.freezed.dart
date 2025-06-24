@@ -34,7 +34,16 @@ mixin _$CheckInState {
   DateTime? get lastConnectionAttempt => throw _privateConstructorUsedError;
   String? get connectionError => throw _privateConstructorUsedError;
   bool get autoConnectionEnabled => throw _privateConstructorUsedError;
-  bool get isRetryTimerActive => throw _privateConstructorUsedError;
+  bool get isRetryTimerActive =>
+      throw _privateConstructorUsedError; // Face detection state - Phase 3
+  List<DetectedFace> get detectedFaces => throw _privateConstructorUsedError;
+  FaceDetectionStatus get faceStatus => throw _privateConstructorUsedError;
+  double get faceConfidence => throw _privateConstructorUsedError;
+  DateTime? get lastFaceDetection => throw _privateConstructorUsedError;
+  RecognitionStatistics get recognitionStats =>
+      throw _privateConstructorUsedError; // Frame streaming metrics - Phase 3
+  double get currentFrameRate => throw _privateConstructorUsedError;
+  DateTime? get lastFrameSent => throw _privateConstructorUsedError;
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.
@@ -68,7 +77,16 @@ abstract class $CheckInStateCopyWith<$Res> {
     String? connectionError,
     bool autoConnectionEnabled,
     bool isRetryTimerActive,
+    List<DetectedFace> detectedFaces,
+    FaceDetectionStatus faceStatus,
+    double faceConfidence,
+    DateTime? lastFaceDetection,
+    RecognitionStatistics recognitionStats,
+    double currentFrameRate,
+    DateTime? lastFrameSent,
   });
+
+  $RecognitionStatisticsCopyWith<$Res> get recognitionStats;
 }
 
 /// @nodoc
@@ -103,6 +121,13 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
     Object? connectionError = freezed,
     Object? autoConnectionEnabled = null,
     Object? isRetryTimerActive = null,
+    Object? detectedFaces = null,
+    Object? faceStatus = null,
+    Object? faceConfidence = null,
+    Object? lastFaceDetection = freezed,
+    Object? recognitionStats = null,
+    Object? currentFrameRate = null,
+    Object? lastFrameSent = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -191,9 +216,56 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
                     ? _value.isRetryTimerActive
                     : isRetryTimerActive // ignore: cast_nullable_to_non_nullable
                         as bool,
+            detectedFaces:
+                null == detectedFaces
+                    ? _value.detectedFaces
+                    : detectedFaces // ignore: cast_nullable_to_non_nullable
+                        as List<DetectedFace>,
+            faceStatus:
+                null == faceStatus
+                    ? _value.faceStatus
+                    : faceStatus // ignore: cast_nullable_to_non_nullable
+                        as FaceDetectionStatus,
+            faceConfidence:
+                null == faceConfidence
+                    ? _value.faceConfidence
+                    : faceConfidence // ignore: cast_nullable_to_non_nullable
+                        as double,
+            lastFaceDetection:
+                freezed == lastFaceDetection
+                    ? _value.lastFaceDetection
+                    : lastFaceDetection // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            recognitionStats:
+                null == recognitionStats
+                    ? _value.recognitionStats
+                    : recognitionStats // ignore: cast_nullable_to_non_nullable
+                        as RecognitionStatistics,
+            currentFrameRate:
+                null == currentFrameRate
+                    ? _value.currentFrameRate
+                    : currentFrameRate // ignore: cast_nullable_to_non_nullable
+                        as double,
+            lastFrameSent:
+                freezed == lastFrameSent
+                    ? _value.lastFrameSent
+                    : lastFrameSent // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RecognitionStatisticsCopyWith<$Res> get recognitionStats {
+    return $RecognitionStatisticsCopyWith<$Res>(_value.recognitionStats, (
+      value,
+    ) {
+      return _then(_value.copyWith(recognitionStats: value) as $Val);
+    });
   }
 }
 
@@ -224,7 +296,17 @@ abstract class _$$CheckInStateImplCopyWith<$Res>
     String? connectionError,
     bool autoConnectionEnabled,
     bool isRetryTimerActive,
+    List<DetectedFace> detectedFaces,
+    FaceDetectionStatus faceStatus,
+    double faceConfidence,
+    DateTime? lastFaceDetection,
+    RecognitionStatistics recognitionStats,
+    double currentFrameRate,
+    DateTime? lastFrameSent,
   });
+
+  @override
+  $RecognitionStatisticsCopyWith<$Res> get recognitionStats;
 }
 
 /// @nodoc
@@ -258,6 +340,13 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
     Object? connectionError = freezed,
     Object? autoConnectionEnabled = null,
     Object? isRetryTimerActive = null,
+    Object? detectedFaces = null,
+    Object? faceStatus = null,
+    Object? faceConfidence = null,
+    Object? lastFaceDetection = freezed,
+    Object? recognitionStats = null,
+    Object? currentFrameRate = null,
+    Object? lastFrameSent = freezed,
   }) {
     return _then(
       _$CheckInStateImpl(
@@ -346,6 +435,41 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
                 ? _value.isRetryTimerActive
                 : isRetryTimerActive // ignore: cast_nullable_to_non_nullable
                     as bool,
+        detectedFaces:
+            null == detectedFaces
+                ? _value._detectedFaces
+                : detectedFaces // ignore: cast_nullable_to_non_nullable
+                    as List<DetectedFace>,
+        faceStatus:
+            null == faceStatus
+                ? _value.faceStatus
+                : faceStatus // ignore: cast_nullable_to_non_nullable
+                    as FaceDetectionStatus,
+        faceConfidence:
+            null == faceConfidence
+                ? _value.faceConfidence
+                : faceConfidence // ignore: cast_nullable_to_non_nullable
+                    as double,
+        lastFaceDetection:
+            freezed == lastFaceDetection
+                ? _value.lastFaceDetection
+                : lastFaceDetection // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        recognitionStats:
+            null == recognitionStats
+                ? _value.recognitionStats
+                : recognitionStats // ignore: cast_nullable_to_non_nullable
+                    as RecognitionStatistics,
+        currentFrameRate:
+            null == currentFrameRate
+                ? _value.currentFrameRate
+                : currentFrameRate // ignore: cast_nullable_to_non_nullable
+                    as double,
+        lastFrameSent:
+            freezed == lastFrameSent
+                ? _value.lastFrameSent
+                : lastFrameSent // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
       ),
     );
   }
@@ -372,7 +496,14 @@ class _$CheckInStateImpl implements _CheckInState {
     this.connectionError,
     this.autoConnectionEnabled = true,
     this.isRetryTimerActive = false,
-  });
+    final List<DetectedFace> detectedFaces = const [],
+    this.faceStatus = FaceDetectionStatus.none,
+    this.faceConfidence = 0.0,
+    this.lastFaceDetection,
+    this.recognitionStats = const RecognitionStatistics(),
+    this.currentFrameRate = 0.0,
+    this.lastFrameSent,
+  }) : _detectedFaces = detectedFaces;
 
   @override
   @JsonKey()
@@ -419,10 +550,38 @@ class _$CheckInStateImpl implements _CheckInState {
   @override
   @JsonKey()
   final bool isRetryTimerActive;
+  // Face detection state - Phase 3
+  final List<DetectedFace> _detectedFaces;
+  // Face detection state - Phase 3
+  @override
+  @JsonKey()
+  List<DetectedFace> get detectedFaces {
+    if (_detectedFaces is EqualUnmodifiableListView) return _detectedFaces;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_detectedFaces);
+  }
+
+  @override
+  @JsonKey()
+  final FaceDetectionStatus faceStatus;
+  @override
+  @JsonKey()
+  final double faceConfidence;
+  @override
+  final DateTime? lastFaceDetection;
+  @override
+  @JsonKey()
+  final RecognitionStatistics recognitionStats;
+  // Frame streaming metrics - Phase 3
+  @override
+  @JsonKey()
+  final double currentFrameRate;
+  @override
+  final DateTime? lastFrameSent;
 
   @override
   String toString() {
-    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed, connectionAttempts: $connectionAttempts, lastConnectionAttempt: $lastConnectionAttempt, connectionError: $connectionError, autoConnectionEnabled: $autoConnectionEnabled, isRetryTimerActive: $isRetryTimerActive)';
+    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, connectionStatus: $connectionStatus, streamingStatus: $streamingStatus, isLoading: $isLoading, errorMessage: $errorMessage, cameraController: $cameraController, toastStatus: $toastStatus, toastMessage: $toastMessage, isDebugMode: $isDebugMode, lastRecognitionTime: $lastRecognitionTime, framesProcessed: $framesProcessed, connectionAttempts: $connectionAttempts, lastConnectionAttempt: $lastConnectionAttempt, connectionError: $connectionError, autoConnectionEnabled: $autoConnectionEnabled, isRetryTimerActive: $isRetryTimerActive, detectedFaces: $detectedFaces, faceStatus: $faceStatus, faceConfidence: $faceConfidence, lastFaceDetection: $lastFaceDetection, recognitionStats: $recognitionStats, currentFrameRate: $currentFrameRate, lastFrameSent: $lastFrameSent)';
   }
 
   @override
@@ -463,11 +622,27 @@ class _$CheckInStateImpl implements _CheckInState {
             (identical(other.autoConnectionEnabled, autoConnectionEnabled) ||
                 other.autoConnectionEnabled == autoConnectionEnabled) &&
             (identical(other.isRetryTimerActive, isRetryTimerActive) ||
-                other.isRetryTimerActive == isRetryTimerActive));
+                other.isRetryTimerActive == isRetryTimerActive) &&
+            const DeepCollectionEquality().equals(
+              other._detectedFaces,
+              _detectedFaces,
+            ) &&
+            (identical(other.faceStatus, faceStatus) ||
+                other.faceStatus == faceStatus) &&
+            (identical(other.faceConfidence, faceConfidence) ||
+                other.faceConfidence == faceConfidence) &&
+            (identical(other.lastFaceDetection, lastFaceDetection) ||
+                other.lastFaceDetection == lastFaceDetection) &&
+            (identical(other.recognitionStats, recognitionStats) ||
+                other.recognitionStats == recognitionStats) &&
+            (identical(other.currentFrameRate, currentFrameRate) ||
+                other.currentFrameRate == currentFrameRate) &&
+            (identical(other.lastFrameSent, lastFrameSent) ||
+                other.lastFrameSent == lastFrameSent));
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     cameraStatus,
     permissionStatus,
@@ -486,7 +661,14 @@ class _$CheckInStateImpl implements _CheckInState {
     connectionError,
     autoConnectionEnabled,
     isRetryTimerActive,
-  );
+    const DeepCollectionEquality().hash(_detectedFaces),
+    faceStatus,
+    faceConfidence,
+    lastFaceDetection,
+    recognitionStats,
+    currentFrameRate,
+    lastFrameSent,
+  ]);
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.
@@ -516,6 +698,13 @@ abstract class _CheckInState implements CheckInState {
     final String? connectionError,
     final bool autoConnectionEnabled,
     final bool isRetryTimerActive,
+    final List<DetectedFace> detectedFaces,
+    final FaceDetectionStatus faceStatus,
+    final double faceConfidence,
+    final DateTime? lastFaceDetection,
+    final RecognitionStatistics recognitionStats,
+    final double currentFrameRate,
+    final DateTime? lastFrameSent,
   }) = _$CheckInStateImpl;
 
   @override
@@ -551,7 +740,21 @@ abstract class _CheckInState implements CheckInState {
   @override
   bool get autoConnectionEnabled;
   @override
-  bool get isRetryTimerActive;
+  bool get isRetryTimerActive; // Face detection state - Phase 3
+  @override
+  List<DetectedFace> get detectedFaces;
+  @override
+  FaceDetectionStatus get faceStatus;
+  @override
+  double get faceConfidence;
+  @override
+  DateTime? get lastFaceDetection;
+  @override
+  RecognitionStatistics get recognitionStats; // Frame streaming metrics - Phase 3
+  @override
+  double get currentFrameRate;
+  @override
+  DateTime? get lastFrameSent;
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.
@@ -613,6 +816,8 @@ mixin _$CheckInEvent {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) => throw _privateConstructorUsedError;
@@ -660,6 +865,7 @@ mixin _$CheckInEvent {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) => throw _privateConstructorUsedError;
@@ -707,6 +913,7 @@ mixin _$CheckInEvent {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -770,6 +977,8 @@ mixin _$CheckInEvent {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) => throw _privateConstructorUsedError;
@@ -821,6 +1030,7 @@ mixin _$CheckInEvent {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) => throw _privateConstructorUsedError;
@@ -872,6 +1082,7 @@ mixin _$CheckInEvent {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -991,6 +1202,8 @@ class _$AppStartedImpl implements AppStarted {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -1042,6 +1255,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -1093,6 +1307,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -1163,6 +1378,8 @@ class _$AppStartedImpl implements AppStarted {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -1218,6 +1435,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -1273,6 +1491,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -1379,6 +1598,8 @@ class _$AppDisposedImpl implements AppDisposed {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -1430,6 +1651,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -1481,6 +1703,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -1551,6 +1774,8 @@ class _$AppDisposedImpl implements AppDisposed {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -1606,6 +1831,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -1661,6 +1887,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -1768,6 +1995,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -1819,6 +2048,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -1870,6 +2100,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -1940,6 +2171,8 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -1995,6 +2228,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -2050,6 +2284,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -2157,6 +2392,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -2208,6 +2445,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -2259,6 +2497,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -2329,6 +2568,8 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -2384,6 +2625,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -2439,6 +2681,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -2546,6 +2789,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -2597,6 +2842,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -2648,6 +2894,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -2718,6 +2965,8 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -2773,6 +3022,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -2828,6 +3078,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -2935,6 +3186,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -2986,6 +3239,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -3037,6 +3291,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -3107,6 +3362,8 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -3162,6 +3419,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -3217,6 +3475,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -3323,6 +3582,8 @@ class _$CameraStartedImpl implements CameraStarted {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -3374,6 +3635,7 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -3425,6 +3687,7 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -3495,6 +3758,8 @@ class _$CameraStartedImpl implements CameraStarted {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -3550,6 +3815,7 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -3605,6 +3871,7 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -3711,6 +3978,8 @@ class _$CameraPausedImpl implements CameraPaused {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -3762,6 +4031,7 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -3813,6 +4083,7 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -3883,6 +4154,8 @@ class _$CameraPausedImpl implements CameraPaused {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -3938,6 +4211,7 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -3993,6 +4267,7 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -4099,6 +4374,8 @@ class _$CameraResumedImpl implements CameraResumed {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -4150,6 +4427,7 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -4201,6 +4479,7 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -4271,6 +4550,8 @@ class _$CameraResumedImpl implements CameraResumed {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -4326,6 +4607,7 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -4381,6 +4663,7 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -4487,6 +4770,8 @@ class _$CameraStoppedImpl implements CameraStopped {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -4538,6 +4823,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -4589,6 +4875,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -4659,6 +4946,8 @@ class _$CameraStoppedImpl implements CameraStopped {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -4714,6 +5003,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -4769,6 +5059,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -4905,6 +5196,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -4956,6 +5249,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -5007,6 +5301,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -5077,6 +5372,8 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -5132,6 +5429,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -5187,6 +5485,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -5303,6 +5602,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -5354,6 +5655,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -5405,6 +5707,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -5475,6 +5778,8 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -5530,6 +5835,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -5585,6 +5891,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -5692,6 +5999,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -5743,6 +6052,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -5794,6 +6104,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -5864,6 +6175,8 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -5919,6 +6232,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -5974,6 +6288,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -6113,6 +6428,8 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -6164,6 +6481,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -6215,6 +6533,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -6285,6 +6604,8 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -6340,6 +6661,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -6395,6 +6717,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -6539,6 +6862,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -6590,6 +6915,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -6641,6 +6967,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -6711,6 +7038,8 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -6766,6 +7095,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -6821,6 +7151,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -6937,6 +7268,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -6988,6 +7321,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -7039,6 +7373,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -7109,6 +7444,8 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -7164,6 +7501,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -7219,6 +7557,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -7327,6 +7666,8 @@ class _$WebSocketConnectionRequestedImpl
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -7378,6 +7719,7 @@ class _$WebSocketConnectionRequestedImpl
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -7429,6 +7771,7 @@ class _$WebSocketConnectionRequestedImpl
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -7499,6 +7842,8 @@ class _$WebSocketConnectionRequestedImpl
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -7554,6 +7899,7 @@ class _$WebSocketConnectionRequestedImpl
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -7609,6 +7955,7 @@ class _$WebSocketConnectionRequestedImpl
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -7717,6 +8064,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -7768,6 +8117,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -7819,6 +8169,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -7889,6 +8240,8 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -7944,6 +8297,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -7999,6 +8353,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -8105,6 +8460,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -8156,6 +8513,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -8207,6 +8565,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -8277,6 +8636,8 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -8332,6 +8693,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -8387,6 +8749,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -8494,6 +8857,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -8545,6 +8910,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -8596,6 +8962,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -8666,6 +9033,8 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -8721,6 +9090,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -8776,6 +9146,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -8911,6 +9282,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -8962,6 +9335,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -9013,6 +9387,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -9083,6 +9458,8 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -9138,6 +9515,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -9193,6 +9571,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -9309,6 +9688,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -9360,6 +9741,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -9411,6 +9793,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -9481,6 +9864,8 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -9536,6 +9921,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -9591,6 +9977,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -9727,6 +10114,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -9778,6 +10167,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -9829,6 +10219,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -9899,6 +10290,8 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -9954,6 +10347,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -10009,6 +10403,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -10159,6 +10554,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -10210,6 +10607,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -10261,6 +10659,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -10331,6 +10730,8 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -10386,6 +10787,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -10441,6 +10843,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -10594,6 +10997,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -10645,6 +11050,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -10696,6 +11102,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -10766,6 +11173,8 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -10821,6 +11230,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -10876,6 +11286,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -11021,6 +11432,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -11072,6 +11485,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -11123,6 +11537,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -11193,6 +11608,8 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -11248,6 +11665,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -11303,6 +11721,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -11419,6 +11838,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -11470,6 +11891,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -11521,6 +11943,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -11591,6 +12014,8 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -11646,6 +12071,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -11701,6 +12127,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -11838,6 +12265,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -11889,6 +12318,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -11940,6 +12370,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -12010,6 +12441,8 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -12065,6 +12498,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -12120,6 +12554,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -12236,6 +12671,8 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -12287,6 +12724,7 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -12338,6 +12776,7 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -12408,6 +12847,8 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -12463,6 +12904,7 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -12518,6 +12960,7 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -12625,6 +13068,8 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -12676,6 +13121,7 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -12727,6 +13173,7 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -12797,6 +13244,8 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -12852,6 +13301,7 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -12907,6 +13357,7 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -13013,6 +13464,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -13064,6 +13517,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -13115,6 +13569,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -13185,6 +13640,8 @@ class _$StreamingStartedImpl implements StreamingStarted {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -13240,6 +13697,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -13295,6 +13753,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -13401,6 +13860,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -13452,6 +13913,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -13503,6 +13965,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -13573,6 +14036,8 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -13628,6 +14093,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -13683,6 +14149,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -13820,6 +14287,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -13871,6 +14340,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -13922,6 +14392,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -13992,6 +14463,8 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -14047,6 +14520,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -14102,6 +14576,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -14217,6 +14692,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -14268,6 +14745,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -14319,6 +14797,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -14389,6 +14868,8 @@ class _$FrameProcessedImpl implements FrameProcessed {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -14444,6 +14925,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -14499,6 +14981,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -14632,6 +15115,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -14683,6 +15168,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -14734,6 +15220,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -14804,6 +15291,8 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -14859,6 +15348,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -14914,6 +15404,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -15055,6 +15546,8 @@ class _$CameraErrorImpl implements CameraError {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -15106,6 +15599,7 @@ class _$CameraErrorImpl implements CameraError {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -15157,6 +15651,7 @@ class _$CameraErrorImpl implements CameraError {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -15227,6 +15722,8 @@ class _$CameraErrorImpl implements CameraError {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -15282,6 +15779,7 @@ class _$CameraErrorImpl implements CameraError {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -15337,6 +15835,7 @@ class _$CameraErrorImpl implements CameraError {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -15451,6 +15950,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -15502,6 +16003,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -15553,6 +16055,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -15623,6 +16126,8 @@ class _$ErrorClearedImpl implements ErrorCleared {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -15678,6 +16183,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -15733,6 +16239,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -15869,6 +16376,8 @@ class _$ToastRequestedImpl implements ToastRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -15920,6 +16429,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -15971,6 +16481,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -16041,6 +16552,8 @@ class _$ToastRequestedImpl implements ToastRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -16096,6 +16609,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -16151,6 +16665,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -16265,6 +16780,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -16316,6 +16833,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -16367,6 +16885,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -16437,6 +16956,8 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -16492,6 +17013,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -16547,6 +17069,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -16653,6 +17176,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -16704,6 +17229,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -16755,6 +17281,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -16825,6 +17352,8 @@ class _$StatisticsResetImpl implements StatisticsReset {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -16880,6 +17409,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -16935,6 +17465,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -17096,6 +17627,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -17147,6 +17680,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -17198,6 +17732,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -17268,6 +17803,8 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -17323,6 +17860,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -17378,6 +17916,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -17404,6 +17943,452 @@ abstract class RecognitionResultReceived implements CheckInEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RecognitionResultReceivedImplCopyWith<_$RecognitionResultReceivedImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BackendResponseReceivedImplCopyWith<$Res> {
+  factory _$$BackendResponseReceivedImplCopyWith(
+    _$BackendResponseReceivedImpl value,
+    $Res Function(_$BackendResponseReceivedImpl) then,
+  ) = __$$BackendResponseReceivedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({FaceDetectionResult result});
+
+  $FaceDetectionResultCopyWith<$Res> get result;
+}
+
+/// @nodoc
+class __$$BackendResponseReceivedImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$BackendResponseReceivedImpl>
+    implements _$$BackendResponseReceivedImplCopyWith<$Res> {
+  __$$BackendResponseReceivedImplCopyWithImpl(
+    _$BackendResponseReceivedImpl _value,
+    $Res Function(_$BackendResponseReceivedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? result = null}) {
+    return _then(
+      _$BackendResponseReceivedImpl(
+        null == result
+            ? _value.result
+            : result // ignore: cast_nullable_to_non_nullable
+                as FaceDetectionResult,
+      ),
+    );
+  }
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FaceDetectionResultCopyWith<$Res> get result {
+    return $FaceDetectionResultCopyWith<$Res>(_value.result, (value) {
+      return _then(_value.copyWith(result: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$BackendResponseReceivedImpl implements BackendResponseReceived {
+  const _$BackendResponseReceivedImpl(this.result);
+
+  @override
+  final FaceDetectionResult result;
+
+  @override
+  String toString() {
+    return 'CheckInEvent.backendResponseReceived(result: $result)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BackendResponseReceivedImpl &&
+            (identical(other.result, result) || other.result == result));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, result);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BackendResponseReceivedImplCopyWith<_$BackendResponseReceivedImpl>
+  get copyWith => __$$BackendResponseReceivedImplCopyWithImpl<
+    _$BackendResponseReceivedImpl
+  >(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function(bool isAutoConnect) connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() webSocketConnectionRequested,
+    required TResult Function() webSocketConnecting,
+    required TResult Function() webSocketConnected,
+    required TResult Function() webSocketDisconnected,
+    required TResult Function(String error) webSocketConnectionFailed,
+    required TResult Function() webSocketConnectionTimeout,
+    required TResult Function(int attempt) webSocketRetrying,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageReceived,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageSent,
+    required TResult Function(String error) webSocketSendError,
+    required TResult Function() autoConnectionTriggered,
+    required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
+  }) {
+    return backendResponseReceived(result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? webSocketConnectionRequested,
+    TResult? Function()? webSocketConnecting,
+    TResult? Function()? webSocketConnected,
+    TResult? Function()? webSocketDisconnected,
+    TResult? Function(String error)? webSocketConnectionFailed,
+    TResult? Function()? webSocketConnectionTimeout,
+    TResult? Function(int attempt)? webSocketRetrying,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult? Function(String error)? webSocketSendError,
+    TResult? Function()? autoConnectionTriggered,
+    TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
+  }) {
+    return backendResponseReceived?.call(result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function(bool isAutoConnect)? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? webSocketConnectionRequested,
+    TResult Function()? webSocketConnecting,
+    TResult Function()? webSocketConnected,
+    TResult Function()? webSocketDisconnected,
+    TResult Function(String error)? webSocketConnectionFailed,
+    TResult Function()? webSocketConnectionTimeout,
+    TResult Function(int attempt)? webSocketRetrying,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult Function(String error)? webSocketSendError,
+    TResult Function()? autoConnectionTriggered,
+    TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (backendResponseReceived != null) {
+      return backendResponseReceived(result);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(WebSocketConnectionRequested value)
+    webSocketConnectionRequested,
+    required TResult Function(WebSocketConnecting value) webSocketConnecting,
+    required TResult Function(WebSocketConnected value) webSocketConnected,
+    required TResult Function(WebSocketDisconnected value)
+    webSocketDisconnected,
+    required TResult Function(WebSocketConnectionFailed value)
+    webSocketConnectionFailed,
+    required TResult Function(WebSocketConnectionTimeout value)
+    webSocketConnectionTimeout,
+    required TResult Function(WebSocketRetrying value) webSocketRetrying,
+    required TResult Function(WebSocketMessageReceived value)
+    webSocketMessageReceived,
+    required TResult Function(WebSocketMessageSent value) webSocketMessageSent,
+    required TResult Function(WebSocketSendError value) webSocketSendError,
+    required TResult Function(AutoConnectionTriggered value)
+    autoConnectionTriggered,
+    required TResult Function(AutoConnectionToggled value)
+    autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
+  }) {
+    return backendResponseReceived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult? Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult? Function(WebSocketConnected value)? webSocketConnected,
+    TResult? Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult? Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult? Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult? Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult? Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult? Function(WebSocketSendError value)? webSocketSendError,
+    TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
+  }) {
+    return backendResponseReceived?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult Function(WebSocketConnected value)? webSocketConnected,
+    TResult Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult Function(WebSocketSendError value)? webSocketSendError,
+    TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (backendResponseReceived != null) {
+      return backendResponseReceived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BackendResponseReceived implements CheckInEvent {
+  const factory BackendResponseReceived(final FaceDetectionResult result) =
+      _$BackendResponseReceivedImpl;
+
+  FaceDetectionResult get result;
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BackendResponseReceivedImplCopyWith<_$BackendResponseReceivedImpl>
   get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -17499,6 +18484,8 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -17550,6 +18537,7 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -17601,6 +18589,7 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -17671,6 +18660,8 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -17726,6 +18717,7 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -17781,6 +18773,7 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -17917,6 +18910,8 @@ class _$WebSocketErrorImpl implements WebSocketError {
       String? employeeName,
     )
     recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -17968,6 +18963,7 @@ class _$WebSocketErrorImpl implements WebSocketError {
     TResult? Function()? statisticsReset,
     TResult? Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -18019,6 +19015,7 @@ class _$WebSocketErrorImpl implements WebSocketError {
     TResult Function()? statisticsReset,
     TResult Function(bool success, String message, String? employeeName)?
     recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -18089,6 +19086,8 @@ class _$WebSocketErrorImpl implements WebSocketError {
     required TResult Function(StatisticsReset value) statisticsReset,
     required TResult Function(RecognitionResultReceived value)
     recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -18144,6 +19143,7 @@ class _$WebSocketErrorImpl implements WebSocketError {
     TResult? Function(StatisticsReset value)? statisticsReset,
     TResult? Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -18199,6 +19199,7 @@ class _$WebSocketErrorImpl implements WebSocketError {
     TResult Function(StatisticsReset value)? statisticsReset,
     TResult Function(RecognitionResultReceived value)?
     recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
