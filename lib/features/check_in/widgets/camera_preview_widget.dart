@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'face_bounding_box_overlay.dart';
 
 class CameraPreviewWidget extends StatelessWidget {
   const CameraPreviewWidget({super.key});
@@ -28,12 +29,16 @@ class CameraPreviewWidget extends StatelessWidget {
             if (controller == null || !controller.value.isInitialized) {
               return const Center(child: Text('Camera not available.'));
             }
-            return FittedBox(
-              fit: BoxFit.cover,
-              child: SizedBox(
-                width: controller.value.previewSize?.height ?? 1,
-                height: controller.value.previewSize?.width ?? 1,
-                child: CameraPreview(controller),
+            final previewSize = controller.value.previewSize ?? const Size(1, 1);
+            return FaceBoundingBoxOverlay(
+              previewSize: previewSize,
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: SizedBox(
+                  width: previewSize.height,
+                  height: previewSize.width,
+                  child: CameraPreview(controller),
+                ),
               ),
             );
           case CameraStatus.error:
