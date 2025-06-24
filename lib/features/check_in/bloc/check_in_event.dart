@@ -161,6 +161,11 @@ class CheckInEvent with _$CheckInEvent {
     String? employeeName,
   }) = RecognitionResultReceived;
 
+  /// Backend response received with face detection data
+  const factory CheckInEvent.backendResponseReceived(
+    FaceDetectionResult result,
+  ) = BackendResponseReceived;
+
   const factory CheckInEvent.disconnectRequested() = DisconnectRequested;
   const factory CheckInEvent.webSocketError(String error) = WebSocketError;
 }

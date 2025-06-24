@@ -14,6 +14,7 @@ import 'package:face_check_in_flutter/domain/services/permission_service.dart';
 import 'package:face_check_in_flutter/domain/services/camera_service.dart';
 import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart'
     as frame_streaming;
+import 'package:face_check_in_flutter/features/check_in/models/face_detection_result.dart';
 
 part 'check_in_bloc.freezed.dart';
 part 'check_in_event.dart';
@@ -64,6 +65,15 @@ class CheckInState with _$CheckInState {
     String? connectionError,
     @Default(true) bool autoConnectionEnabled,
     @Default(false) bool isRetryTimerActive,
+    // Face detection state - Phase 3
+    @Default([]) List<DetectedFace> detectedFaces,
+    @Default(FaceDetectionStatus.none) FaceDetectionStatus faceStatus,
+    @Default(0.0) double faceConfidence,
+    DateTime? lastFaceDetection,
+    @Default(RecognitionStatistics()) RecognitionStatistics recognitionStats,
+    // Frame streaming metrics - Phase 3
+    @Default(0.0) double currentFrameRate,
+    DateTime? lastFrameSent,
   }) = _CheckInState;
 }
 
@@ -143,6 +153,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
     // Backend response events
     on<RecognitionResultReceived>(_onRecognitionResultReceived);
+    on<BackendResponseReceived>(_onBackendResponseReceived);
   }
 
   /// Initialize WebSocket service integration for Story 2.1
@@ -678,6 +689,96 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
   }
 
+  Future<void> _onBackendResponseReceived(
+    BackendResponseReceived event,
+    Emitter<CheckInState> emit,
+  ) async {
+    final result = event.result;
+    debugPrint(
+      '🎯 CheckInBloc: Backend response received - ${result.faces.length} faces, status: ${result.status}',
+    );
+
+    // Update recognition statistics
+    final updatedStats = _updateRecognitionStatistics(state.recognitionStats, result);
+
+    // Calculate average confidence from detected faces
+    final averageConfidence = result.faces.isNotEmpty 
+        ? result.faces.map((f) => f.confidence).reduce((a, b) => a + b) / result.faces.length
+        : 0.0;
+
+    // Determine if recognition was successful
+    final hasRecognizedFace = result.faces.any((face) => face.isRecognized);
+    
+    // Create success message
+    String toastMessage;
+    if (hasRecognizedFace) {
+      final recognizedFace = result.faces.firstWhere((face) => face.isRecognized);
+      toastMessage = 'Welcome ${recognizedFace.employeeName ?? 'Employee'}!';
+    } else {
+      switch (result.status) {
+        case FaceDetectionStatus.faceFound:
+          toastMessage = 'Face detected but not recognized';
+          break;
+        case FaceDetectionStatus.multipleFaces:
+          toastMessage = 'Multiple faces detected';
+          break;
+        case FaceDetectionStatus.noFace:
+          toastMessage = 'No face detected';
+          break;
+        case FaceDetectionStatus.error:
+          toastMessage = 'Detection error occurred';
+          break;
+        default:
+          toastMessage = 'Processing...';
+      }
+    }
+
+    emit(
+      state.copyWith(
+        detectedFaces: result.faces,
+        faceStatus: result.status,
+        faceConfidence: averageConfidence,
+        lastFaceDetection: result.timestamp,
+        lastRecognitionTime: hasRecognizedFace ? result.timestamp : state.lastRecognitionTime,
+        recognitionStats: updatedStats,
+        framesProcessed: state.framesProcessed + 1,
+        toastStatus: ToastStatus.showing,
+        toastMessage: toastMessage,
+      ),
+    );
+  }
+
+  /// Update recognition statistics with new result
+  RecognitionStatistics _updateRecognitionStatistics(
+    RecognitionStatistics currentStats,
+    FaceDetectionResult result,
+  ) {
+    final hasRecognizedFace = result.faces.any((face) => face.isRecognized);
+    final totalFaces = result.faces.length;
+    
+    // Calculate new averages
+    final newTotalFrames = currentStats.totalFramesProcessed + 1;
+    final newTotalFaces = currentStats.totalFacesDetected + totalFaces;
+    final newSuccessful = currentStats.successfulRecognitions + (hasRecognizedFace ? 1 : 0);
+    final newFailed = currentStats.failedRecognitions + (hasRecognizedFace ? 0 : 1);
+    
+    // Calculate average confidence
+    final currentTotalConfidence = currentStats.averageConfidence * currentStats.totalFramesProcessed;
+    final frameConfidence = result.faces.isNotEmpty 
+        ? result.faces.map((f) => f.confidence).reduce((a, b) => a + b) / result.faces.length
+        : 0.0;
+    final newAverageConfidence = (currentTotalConfidence + frameConfidence) / newTotalFrames;
+
+    return currentStats.copyWith(
+      totalFramesProcessed: newTotalFrames,
+      totalFacesDetected: newTotalFaces,
+      successfulRecognitions: newSuccessful,
+      failedRecognitions: newFailed,
+      averageConfidence: newAverageConfidence,
+      lastRecognitionTime: hasRecognizedFace ? result.timestamp : currentStats.lastRecognitionTime,
+    );
+  }
+
   // Enhanced WebSocket event handlers for Story 2.1
   Future<void> _onWebSocketConnectionRequested(
     WebSocketConnectionRequested event,
@@ -816,7 +917,13 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     final messageType = event.message['type'] as String?;
 
     switch (messageType) {
+      case 'frameResult':
+        // Parse face detection result from backend - Phase 3
+        await _parseAndProcessFrameResult(event.message);
+        break;
+        
       case 'recognition_result':
+        // Legacy recognition result support
         add(
           CheckInEvent.recognitionResultReceived(
             success: event.message['success'] ?? false,
@@ -833,6 +940,79 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
       default:
         debugPrint('❓ CheckInBloc: Unknown message type: $messageType');
+    }
+  }
+
+  /// Parse and process frame result from backend - Phase 3
+  Future<void> _parseAndProcessFrameResult(Map<String, dynamic> message) async {
+    try {
+      // Extract data payload
+      final data = message['data'] as Map<String, dynamic>?;
+      if (data == null) {
+        debugPrint('❌ CheckInBloc: No data in frameResult message');
+        return;
+      }
+
+      // Parse timestamp
+      final timestampStr = data['timestamp'] as String?;
+      final timestamp = timestampStr != null 
+          ? DateTime.tryParse(timestampStr) ?? DateTime.now()
+          : DateTime.now();
+
+      // Parse faces array
+      final facesJson = data['faces'] as List<dynamic>? ?? [];
+      final faces = facesJson.map((face) {
+        final faceMap = face as Map<String, dynamic>;
+        return DetectedFace(
+          faceId: faceMap['faceId'] as String? ?? '',
+          box: (faceMap['box'] as List<dynamic>?)
+              ?.map((e) => (e as num).toDouble()).toList() ?? [0, 0, 0, 0],
+          confidence: (faceMap['confidence'] as num?)?.toDouble() ?? 0.0,
+          isRecognized: faceMap['isRecognized'] as bool? ?? false,
+          personId: faceMap['personId'] as String?,
+          employeeName: faceMap['employeeName'] as String?,
+        );
+      }).toList();
+
+      // Parse status
+      final statusStr = data['status'] as String? ?? 'none';
+      final status = _parseDetectionStatus(statusStr);
+
+      // Create face detection result
+      final result = FaceDetectionResult(
+        frameId: data['frameId'] as String? ?? '',
+        timestamp: timestamp,
+        faces: faces,
+        status: status,
+      );
+
+      // Add backend response received event
+      add(CheckInEvent.backendResponseReceived(result));
+
+      debugPrint(
+        '✅ CheckInBloc: Parsed frameResult - ${faces.length} faces, status: $status',
+      );
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Error parsing frameResult: $e');
+      add(CheckInEvent.errorOccurred('Failed to parse backend response: $e'));
+    }
+  }
+
+  /// Parse face detection status from string
+  FaceDetectionStatus _parseDetectionStatus(String status) {
+    switch (status.toLowerCase()) {
+      case 'face_found':
+        return FaceDetectionStatus.faceFound;
+      case 'multiple_faces':
+        return FaceDetectionStatus.multipleFaces;
+      case 'no_face':
+        return FaceDetectionStatus.noFace;
+      case 'detecting':
+        return FaceDetectionStatus.detecting;
+      case 'error':
+        return FaceDetectionStatus.error;
+      default:
+        return FaceDetectionStatus.none;
     }
   }
 
