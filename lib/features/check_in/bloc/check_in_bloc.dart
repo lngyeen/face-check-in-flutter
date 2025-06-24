@@ -11,7 +11,8 @@ import 'package:face_check_in_flutter/core/enums/connection_status.dart';
 import 'package:face_check_in_flutter/core/enums/face_detection_status.dart';
 import 'package:face_check_in_flutter/core/enums/streaming_status.dart';
 import 'package:face_check_in_flutter/core/models/face_detection_result.dart';
-import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart';
+import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart' 
+    hide StreamingStatus;
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
@@ -146,7 +147,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         }
       },
       onError: (error) {
-        add(CheckInEvent.webSocketError(error.toString()));
+        add(CheckInEvent.errorOccurred('WebSocket error: ${error.toString()}'));
       },
     );
 

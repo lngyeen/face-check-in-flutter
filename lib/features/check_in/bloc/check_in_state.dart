@@ -172,6 +172,7 @@ extension CameraStatusX on CameraStatus {
       case CameraStatus.permissionDenied:
         return Colors.red;
       case CameraStatus.streaming:
+        return Colors.blue;
       case CameraStatus.paused:
         return Colors.grey;
     }

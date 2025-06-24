@@ -18,6 +18,8 @@ import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart'
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart'
     as streaming;
+import 'package:face_check_in_flutter/core/enums/connection_status.dart';
+import 'package:face_check_in_flutter/core/enums/streaming_status.dart';
 
 // --- Mocks and Fakes ---
 
@@ -25,7 +27,7 @@ class MockPermissionService extends Mock implements ps.PermissionService {}
 
 class MockWebSocketService extends Mock implements WebSocketService {}
 
-class MockCameraService extends Mock implements CameraService {}
+// MockCameraService removed - not needed for CheckInBloc constructor
 
 class MockCameraController extends Mock implements cpi.CameraController {}
 
@@ -219,7 +221,7 @@ void main() {
   late CheckInBloc checkInBloc;
   late MockPermissionService mockPermissionService;
   late MockWebSocketService mockWebSocketService;
-  late MockCameraService mockCameraService;
+  // late MockCameraService mockCameraService; // Removed
   late MockCameraController mockCameraController;
   late MockFrameStreamingService mockFrameStreamingService;
   late FakeCameraPlatform fakeCameraPlatform;
@@ -229,14 +231,14 @@ void main() {
   late StreamController<Map<String, dynamic>> messagesController;
   late StreamController<ConnectionMetrics> metricsController;
   late StreamController<cpi.CameraImage> imageStreamController;
-  late StreamController<streaming.StreamingStatus> statusStreamController;
+  late StreamController<StreamingStatus> statusStreamController;
   late StreamController<streaming.FrameMetrics> frameMetricsController;
 
   setUp(() {
     // Initialize mock services
     mockPermissionService = MockPermissionService();
     mockWebSocketService = MockWebSocketService();
-    mockCameraService = MockCameraService();
+    // mockCameraService = MockCameraService(); // Removed
     mockCameraController = MockCameraController();
     mockFrameStreamingService = MockFrameStreamingService();
 
@@ -246,7 +248,7 @@ void main() {
     metricsController = StreamController<ConnectionMetrics>.broadcast();
     imageStreamController = StreamController<cpi.CameraImage>.broadcast();
     statusStreamController =
-        StreamController<streaming.StreamingStatus>.broadcast();
+        StreamController<StreamingStatus>.broadcast();
     frameMetricsController =
         StreamController<streaming.FrameMetrics>.broadcast();
 
@@ -261,10 +263,10 @@ void main() {
       () => mockWebSocketService.metrics,
     ).thenAnswer((_) => metricsController.stream);
 
-    // Mock the streams for CameraService
-    when(
-      () => mockCameraService.imageStream,
-    ).thenAnswer((_) => imageStreamController.stream);
+    // Mock the streams for CameraService - Removed since not used in CheckInBloc
+    // when(
+    //   () => mockCameraService.imageStream,
+    // ).thenAnswer((_) => imageStreamController.stream);
 
     // Mock the streams for FrameStreamingService
     when(
@@ -284,7 +286,6 @@ void main() {
     checkInBloc = CheckInBloc(
       mockPermissionService,
       mockWebSocketService,
-      mockCameraService,
       mockFrameStreamingService,
     );
   });
@@ -309,8 +310,7 @@ void main() {
       when(
         () => mockPermissionService.requestCameraPermission(),
       ).thenAnswer((_) async => ps.PermissionStatus.granted);
-      when(() => mockCameraService.initialize()).thenAnswer((_) async {});
-      when(() => mockCameraService.controller).thenReturn(mockCameraController);
+      // Camera service mocks removed - not used in CheckInBloc
       when(
         () => mockCameraController.value,
       ).thenReturn(cpi.CameraValue.uninitialized(FakeCameraDescription()));
@@ -323,11 +323,11 @@ void main() {
           const CheckInState(cameraStatus: CameraStatus.permissionRequesting),
           const CheckInState(
             cameraStatus: CameraStatus.permissionRequesting,
-            permissionStatus: ps.PermissionStatus.granted,
+            permissionStatus: PermissionStatus.granted,
           ),
           const CheckInState(
             cameraStatus: CameraStatus.initializing,
-            permissionStatus: ps.PermissionStatus.granted,
+            permissionStatus: PermissionStatus.granted,
             isLoading: true,
           ),
           isA<CheckInState>()
@@ -413,7 +413,7 @@ void main() {
       build: () => checkInBloc,
       act: (bloc) {
         // Simulate streaming status change
-        statusStreamController.add(streaming.StreamingStatus.active);
+        statusStreamController.add(StreamingStatus.active);
       },
       expect:
           () => [const CheckInState(streamingStatus: StreamingStatus.active)],
@@ -495,11 +495,11 @@ void main() {
       build: () => checkInBloc,
       act: (bloc) async {
         // First add frame streaming status change
-        statusStreamController.add(streaming.StreamingStatus.active);
+        statusStreamController.add(StreamingStatus.active);
         await Future.delayed(const Duration(milliseconds: 50));
 
         // Then add idle status
-        statusStreamController.add(streaming.StreamingStatus.idle);
+        statusStreamController.add(StreamingStatus.idle);
       },
       expect:
           () => [
