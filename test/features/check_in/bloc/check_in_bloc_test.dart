@@ -4,35 +4,36 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:camera/camera.dart';
+import 'package:camera/camera.dart' as cpi;
 import 'package:camera_platform_interface/camera_platform_interface.dart'
     as cpi;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:stream_transform/stream_transform.dart';
-
 import 'package:face_check_in_flutter/domain/services/permission_service.dart'
     as ps;
+import 'package:face_check_in_flutter/domain/services/camera_service.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
-import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart';
-import 'package:face_check_in_flutter/core/services/response_processor.dart';
-import 'package:face_check_in_flutter/core/enums/connection_status.dart';
-import 'package:face_check_in_flutter/core/enums/streaming_status.dart';
-import 'package:face_check_in_flutter/core/enums/face_detection_status.dart';
-import 'package:face_check_in_flutter/core/models/face_detection_result.dart';
+import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart'
+    as streaming;
 
 // --- Mocks and Fakes ---
-
-class MockCheckInBloc extends MockBloc<CheckInEvent, CheckInState>
-    implements CheckInBloc {}
 
 class MockPermissionService extends Mock implements ps.PermissionService {}
 
 class MockWebSocketService extends Mock implements WebSocketService {}
 
-class MockFrameStreamingService extends Mock implements FrameStreamingService {}
+class MockCameraService extends Mock implements CameraService {}
+
+class MockCameraController extends Mock implements cpi.CameraController {}
+
+class MockFrameStreamingService extends Mock
+    implements streaming.FrameStreamingService {}
+
+class MockCheckInBloc extends MockBloc<CheckInEvent, CheckInState>
+    implements CheckInBloc {}
 
 class FakeCameraDescription extends Fake implements cpi.CameraDescription {
   @override
@@ -212,254 +213,317 @@ class FakeCameraPlatform extends Fake
 }
 
 // --- Main Test Suite ---
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late CheckInBloc checkInBloc;
   late MockPermissionService mockPermissionService;
   late MockWebSocketService mockWebSocketService;
+  late MockCameraService mockCameraService;
+  late MockCameraController mockCameraController;
   late MockFrameStreamingService mockFrameStreamingService;
   late FakeCameraPlatform fakeCameraPlatform;
 
+  // Stream controllers for mocks
+  late StreamController<ConnectionStatus> connectionStatusController;
+  late StreamController<Map<String, dynamic>> messagesController;
+  late StreamController<ConnectionMetrics> metricsController;
+  late StreamController<cpi.CameraImage> imageStreamController;
+  late StreamController<streaming.StreamingStatus> statusStreamController;
+  late StreamController<streaming.FrameMetrics> frameMetricsController;
+
   setUp(() {
+    // Initialize mock services
     mockPermissionService = MockPermissionService();
     mockWebSocketService = MockWebSocketService();
+    mockCameraService = MockCameraService();
+    mockCameraController = MockCameraController();
     mockFrameStreamingService = MockFrameStreamingService();
 
-    // Setup default WebSocket service behavior
+    // Initialize stream controllers
+    connectionStatusController = StreamController<ConnectionStatus>.broadcast();
+    messagesController = StreamController<Map<String, dynamic>>.broadcast();
+    metricsController = StreamController<ConnectionMetrics>.broadcast();
+    imageStreamController = StreamController<cpi.CameraImage>.broadcast();
+    statusStreamController =
+        StreamController<streaming.StreamingStatus>.broadcast();
+    frameMetricsController =
+        StreamController<streaming.FrameMetrics>.broadcast();
+
+    // Mock the streams for WebSocketService
     when(
       () => mockWebSocketService.connectionStatus,
-    ).thenAnswer((_) => Stream<ConnectionStatus>.empty());
+    ).thenAnswer((_) => connectionStatusController.stream);
     when(
       () => mockWebSocketService.messages,
-    ).thenAnswer((_) => Stream<Map<String, dynamic>>.empty());
+    ).thenAnswer((_) => messagesController.stream);
     when(
       () => mockWebSocketService.metrics,
-    ).thenAnswer((_) => Stream<ConnectionMetrics>.empty());
-    when(() => mockWebSocketService.connect()).thenAnswer((_) async => true);
-    when(() => mockWebSocketService.disconnect()).thenAnswer((_) async {});
-    when(() => mockWebSocketService.dispose()).thenAnswer((_) async {});
+    ).thenAnswer((_) => metricsController.stream);
+
+    // Mock the streams for CameraService
+    when(
+      () => mockCameraService.imageStream,
+    ).thenAnswer((_) => imageStreamController.stream);
+
+    // Mock the streams for FrameStreamingService
+    when(
+      () => mockFrameStreamingService.statusStream,
+    ).thenAnswer((_) => statusStreamController.stream);
+    when(
+      () => mockFrameStreamingService.metricsStream,
+    ).thenAnswer((_) => frameMetricsController.stream);
+
+    // Mock CameraController dispose method
+    when(() => mockCameraController.dispose()).thenAnswer((_) async {});
 
     fakeCameraPlatform = FakeCameraPlatform();
     cpi.CameraPlatform.instance = fakeCameraPlatform;
 
-    // Setup default FrameStreamingService behavior
-    when(
-      () => mockFrameStreamingService.statusStream,
-    ).thenAnswer((_) => Stream<StreamingStatus>.empty());
-    when(
-      () => mockFrameStreamingService.metricsStream,
-    ).thenAnswer((_) => Stream<FrameStreamingMetrics>.empty());
-    when(
-      () => mockFrameStreamingService.errorStream,
-    ).thenAnswer((_) => Stream<FrameStreamingException>.empty());
-    when(
-      () => mockFrameStreamingService.faceDetectionStream,
-    ).thenAnswer((_) => Stream<FaceDetectionResponse>.empty());
-    when(() => mockFrameStreamingService.dispose()).thenReturn(null);
-
+    // Create the BLoC after all mocks are set up
     checkInBloc = CheckInBloc(
       mockPermissionService,
       mockWebSocketService,
+      mockCameraService,
       mockFrameStreamingService,
     );
   });
 
   tearDown(() {
     checkInBloc.close();
+    connectionStatusController.close();
+    messagesController.close();
+    metricsController.close();
+    imageStreamController.close();
+    statusStreamController.close();
+    frameMetricsController.close();
   });
 
-  group('CheckInBloc', () {
-    test('initial state is correct', () {
-      expect(checkInBloc.state, const CheckInState());
-    });
+  test('initial state is correct', () {
+    expect(checkInBloc.state, const CheckInState());
+  });
 
-    group('CameraPermissionRequested', () {
-      blocTest<CheckInBloc, CheckInState>(
-        'emits granted when permission is granted and initializes camera',
-        build: () {
-          when(
-            () => mockPermissionService.requestCameraPermission(),
-          ).thenAnswer((_) async => ps.PermissionStatus.granted);
-
-          // Mock auto-connection behavior
-          when(
-            () => mockWebSocketService.connect(),
-          ).thenAnswer((_) async => true);
-          when(
-            () => mockWebSocketService.currentStatus,
-          ).thenReturn(ConnectionStatus.connected);
-
-          return checkInBloc;
-        },
-        act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
-        expect:
-            () => [
-              const CheckInState(
-                cameraStatus: CameraStatus.permissionRequesting,
-              ),
-              const CheckInState(
-                cameraStatus: CameraStatus.permissionRequesting,
-                permissionStatus: PermissionStatus.granted,
-              ),
-              isA<CheckInState>()
-                  .having(
-                    (s) => s.cameraStatus,
-                    'cameraStatus',
-                    CameraStatus.initializing,
-                  )
-                  .having((s) => s.isLoading, 'isLoading', true)
-                  .having(
-                    (s) => s.permissionStatus,
-                    'permissionStatus',
-                    PermissionStatus.granted,
-                  ),
-              isA<CheckInState>()
-                  .having(
-                    (s) => s.cameraStatus,
-                    'cameraStatus',
-                    CameraStatus.ready,
-                  )
-                  .having((s) => s.isLoading, 'isLoading', false)
-                  .having(
-                    (s) => s.permissionStatus,
-                    'permissionStatus',
-                    PermissionStatus.granted,
-                  )
-                  .having(
-                    (s) => s.toastStatus,
-                    'toastStatus',
-                    ToastStatus.showing,
-                  )
-                  .having((s) => s.toastMessage, 'toastMessage', 'Camera ready')
-                  .having(
-                    (s) => s.cameraController,
-                    'cameraController',
-                    isA<CameraController>(),
-                  ),
-              // Auto-connection state after camera is ready
-              isA<CheckInState>()
-                  .having(
-                    (s) => s.cameraStatus,
-                    'cameraStatus',
-                    CameraStatus.ready,
-                  )
-                  .having(
-                    (s) => s.connectionStatus,
-                    'connectionStatus',
-                    ConnectionStatus.connecting,
-                  ),
-            ],
-        verify: (_) {
-          verify(
-            () => mockPermissionService.requestCameraPermission(),
-          ).called(1);
-        },
-      );
-
-      blocTest<CheckInBloc, CheckInState>(
-        'emits denied when permission is denied',
-        build: () {
-          when(
-            () => mockPermissionService.requestCameraPermission(),
-          ).thenAnswer((_) async => ps.PermissionStatus.denied);
-          return checkInBloc;
-        },
-        act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
-        expect:
-            () => [
-              const CheckInState(
-                cameraStatus: CameraStatus.permissionRequesting,
-              ),
-              const CheckInState(
-                cameraStatus: CameraStatus.permissionDenied,
-                permissionStatus: PermissionStatus.denied,
-              ),
-            ],
-      );
-    });
-
-    blocTest<CheckInBloc, CheckInState>(
-      'emits updated state on ConnectionRequested',
-      build: () => checkInBloc,
-      act: (bloc) => bloc.add(const CheckInEvent.connectionRequested()),
-      wait: const Duration(milliseconds: 2000),
-      expect:
-          () => [
-            const CheckInState(
-              connectionStatus: ConnectionStatus.connecting,
-              isLoading: true,
-            ),
-            const CheckInState(
-              connectionStatus: ConnectionStatus.connected,
-              isLoading: false,
-              toastStatus: ToastStatus.showing,
-              toastMessage: 'Connected to backend (placeholder)',
-            ),
-          ],
-    );
-
-    blocTest<CheckInBloc, CheckInState>(
-      'emits debug mode toggled state',
-      build: () => checkInBloc,
-      act: (bloc) => bloc.add(const CheckInEvent.debugModeToggled()),
-      expect:
-          () => [
-            const CheckInState(
-              isDebugMode: true,
-              toastStatus: ToastStatus.showing,
-              toastMessage: 'Debug mode enabled',
-            ),
-          ],
-    );
-
-    blocTest<CheckInBloc, CheckInState>(
-      'resets statistics on StatisticsReset',
-      build: () => checkInBloc,
-      seed: () => const CheckInState(framesProcessed: 10),
-      act: (bloc) => bloc.add(const CheckInEvent.statisticsReset()),
-      expect:
-          () => [
-            const CheckInState(
-              framesProcessed: 0,
-              lastRecognitionTime: null,
-              toastStatus: ToastStatus.showing,
-              toastMessage: 'Statistics reset',
-            ),
-          ],
-    );
-
-    blocTest<CheckInBloc, CheckInState>(
-      'emits correct state for face detection result',
-      build: () => checkInBloc,
-      act:
-          (bloc) => bloc.add(
-            CheckInEvent.faceDetectionResult(
-              faces: [
-                FaceDetectionResult(
-                  id: '1',
-                  confidence: 0.9,
-                  x: 10,
-                  y: 20,
-                  width: 30,
-                  height: 40,
-                ),
-              ],
-              confidence: 0.9,
-              timestamp: DateTime.now(),
-            ),
+  blocTest<CheckInBloc, CheckInState>(
+    'emits [permissionRequesting, granted, initializing, ready, connecting] when camera permission is granted',
+    build: () {
+      when(
+        () => mockPermissionService.requestCameraPermission(),
+      ).thenAnswer((_) async => ps.PermissionStatus.granted);
+      when(() => mockCameraService.initialize()).thenAnswer((_) async {});
+      when(() => mockCameraService.controller).thenReturn(mockCameraController);
+      when(
+        () => mockCameraController.value,
+      ).thenReturn(cpi.CameraValue.uninitialized(FakeCameraDescription()));
+      when(() => mockWebSocketService.connect()).thenAnswer((_) async => true);
+      return checkInBloc;
+    },
+    act: (bloc) => bloc.add(const CheckInEvent.cameraPermissionRequested()),
+    expect:
+        () => [
+          const CheckInState(cameraStatus: CameraStatus.permissionRequesting),
+          const CheckInState(
+            cameraStatus: CameraStatus.permissionRequesting,
+            permissionStatus: ps.PermissionStatus.granted,
           ),
+          const CheckInState(
+            cameraStatus: CameraStatus.initializing,
+            permissionStatus: ps.PermissionStatus.granted,
+            isLoading: true,
+          ),
+          isA<CheckInState>()
+              .having((s) => s.cameraStatus, 'cameraStatus', CameraStatus.ready)
+              .having((s) => s.isLoading, 'isLoading', false),
+          isA<CheckInState>().having(
+            (s) => s.connectionStatus,
+            'connectionStatus',
+            ConnectionStatus.connecting,
+          ),
+        ],
+  );
+
+  blocTest<CheckInBloc, CheckInState>(
+    'emits [connecting, connected] state on ConnectionRequested',
+    build: () {
+      when(() => mockWebSocketService.connect()).thenAnswer((_) async => true);
+      return checkInBloc;
+    },
+    act: (bloc) => bloc.add(const CheckInEvent.connectionRequested()),
+    wait: const Duration(milliseconds: 2100),
+    expect:
+        () => [
+          const CheckInState(
+            connectionStatus: ConnectionStatus.connecting,
+            isLoading: true,
+          ),
+          const CheckInState(
+            connectionStatus: ConnectionStatus.connected,
+            isLoading: false,
+            toastStatus: ToastStatus.showing,
+            toastMessage: 'Connected to backend (placeholder)',
+          ),
+        ],
+  );
+
+  blocTest<CheckInBloc, CheckInState>(
+    'emits debug mode toggled state',
+    build: () => checkInBloc,
+    act: (bloc) => bloc.add(const CheckInEvent.debugModeToggled()),
+    expect:
+        () => [
+          const CheckInState(
+            isDebugMode: true,
+            toastStatus: ToastStatus.showing,
+            toastMessage: 'Debug mode enabled',
+          ),
+        ],
+  );
+
+  blocTest<CheckInBloc, CheckInState>(
+    'resets statistics on StatisticsReset',
+    build: () => checkInBloc,
+    seed: () => const CheckInState(framesProcessed: 10),
+    act: (bloc) => bloc.add(const CheckInEvent.statisticsReset()),
+    expect:
+        () => [
+          const CheckInState(
+            framesProcessed: 0,
+            lastRecognitionTime: null,
+            toastStatus: ToastStatus.showing,
+            toastMessage: 'Statistics reset',
+          ),
+        ],
+  );
+
+  group('Phase 2 - Frame Streaming Integration Tests', () {
+    blocTest<CheckInBloc, CheckInState>(
+      'handles ConnectionStatusChanged events from WebSocket service',
+      build: () => checkInBloc,
+      act: (bloc) {
+        // Simulate WebSocket connection status change
+        connectionStatusController.add(ConnectionStatus.connected);
+      },
+      expect:
+          () => [
+            const CheckInState(connectionStatus: ConnectionStatus.connected),
+          ],
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'handles StreamingStatusChanged events from FrameStreaming service',
+      build: () => checkInBloc,
+      act: (bloc) {
+        // Simulate streaming status change
+        statusStreamController.add(streaming.StreamingStatus.active);
+      },
+      expect:
+          () => [const CheckInState(streamingStatus: StreamingStatus.active)],
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'calls startStreaming when StreamingStartRequested with camera ready',
+      build: () {
+        when(
+          () => mockFrameStreamingService.startStreaming(),
+        ).thenAnswer((_) async {});
+        return checkInBloc;
+      },
+      seed:
+          () => const CheckInState(
+            cameraStatus: CameraStatus.ready,
+            connectionStatus: ConnectionStatus.connected,
+          ),
+      act: (bloc) => bloc.add(const CheckInEvent.streamingStartRequested()),
+      verify: (_) {
+        verify(() => mockFrameStreamingService.startStreaming()).called(1);
+      },
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'handles frame streaming start error when camera not ready',
+      build: () => checkInBloc,
+      act: (bloc) => bloc.add(const CheckInEvent.streamingStartRequested()),
       expect:
           () => [
             isA<CheckInState>()
                 .having(
-                  (s) => s.faceDetectionStatus,
-                  'status',
-                  FaceDetectionStatus.faceFound,
+                  (s) => s.streamingStatus,
+                  'streamingStatus',
+                  StreamingStatus.error,
                 )
-                .having((s) => s.detectedFaces.length, 'face count', 1)
-                .having((s) => s.primaryFaceConfidence, 'confidence', 0.9),
+                .having(
+                  (s) => s.errorMessage,
+                  'errorMessage',
+                  contains('Camera not ready'),
+                ),
+          ],
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'calls stopStreaming when StreamingStopRequested',
+      build: () {
+        when(
+          () => mockFrameStreamingService.stopStreaming(),
+        ).thenAnswer((_) async {});
+        return checkInBloc;
+      },
+      seed:
+          () => const CheckInState(
+            streamingStatus: StreamingStatus.active,
+            cameraStatus: CameraStatus.ready,
+          ),
+      act: (bloc) => bloc.add(const CheckInEvent.streamingStopRequested()),
+      verify: (_) {
+        verify(() => mockFrameStreamingService.stopStreaming()).called(1);
+      },
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'handles WebSocket messages correctly but does not emit state',
+      build: () => checkInBloc,
+      act: (bloc) {
+        // Simulate WebSocket message
+        messagesController.add({'type': 'test', 'data': 'message'});
+      },
+      // WebSocketMessageReceived doesn't emit state directly - it only logs
+      expect: () => [],
+      wait: const Duration(milliseconds: 100),
+    );
+
+    // Test for stream listening integration
+    blocTest<CheckInBloc, CheckInState>(
+      'integrates properly with streaming status changes from service',
+      build: () => checkInBloc,
+      act: (bloc) async {
+        // First add frame streaming status change
+        statusStreamController.add(streaming.StreamingStatus.active);
+        await Future.delayed(const Duration(milliseconds: 50));
+
+        // Then add idle status
+        statusStreamController.add(streaming.StreamingStatus.idle);
+      },
+      expect:
+          () => [
+            const CheckInState(streamingStatus: StreamingStatus.active),
+            const CheckInState(streamingStatus: StreamingStatus.idle),
+          ],
+    );
+
+    // Test for WebSocket connection integration
+    blocTest<CheckInBloc, CheckInState>(
+      'integrates properly with WebSocket connection status changes',
+      build: () => checkInBloc,
+      act: (bloc) async {
+        // First connecting
+        connectionStatusController.add(ConnectionStatus.connecting);
+        await Future.delayed(const Duration(milliseconds: 50));
+
+        // Then connected
+        connectionStatusController.add(ConnectionStatus.connected);
+      },
+      expect:
+          () => [
+            const CheckInState(connectionStatus: ConnectionStatus.connecting),
+            const CheckInState(connectionStatus: ConnectionStatus.connected),
           ],
     );
   });

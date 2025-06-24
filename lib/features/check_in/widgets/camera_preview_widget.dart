@@ -37,8 +37,6 @@ class CameraPreviewWidget extends StatelessWidget {
             );
           case CameraStatus.error:
             return CameraErrorWidget(error: state.errorMessage);
-          default:
-            return const Center(child: Text('Unknown camera state.'));
         }
       },
     );

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
@@ -114,34 +116,39 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   /// Creates bridge between WebSocket service and BLoC events
   void _initializeWebSocketIntegration() {
     // Listen to WebSocket connection status changes
-    _webSocketService.connectionStatus.listen((status) {
-      switch (status) {
-        case ConnectionStatus.connecting:
-          add(const CheckInEvent.webSocketConnecting());
-          break;
-        case ConnectionStatus.connected:
-          add(const CheckInEvent.webSocketConnected());
-          break;
-        case ConnectionStatus.disconnected:
-          add(const CheckInEvent.webSocketDisconnected());
-          break;
-        case ConnectionStatus.failed:
-          add(
-            CheckInEvent.webSocketConnectionFailed(
-              _webSocketService.lastError ?? 'Unknown connection error',
-            ),
-          );
-          break;
-        case ConnectionStatus.timeout:
-          add(const CheckInEvent.webSocketConnectionTimeout());
-          break;
-        case ConnectionStatus.retrying:
-          add(
-            CheckInEvent.webSocketRetrying(_webSocketService.config.maxRetries),
-          );
-          break;
-      }
-    });
+    _webSocketService.connectionStatus.listen(
+      (status) {
+        switch (status) {
+          case ConnectionStatus.connecting:
+            add(const CheckInEvent.webSocketConnecting());
+            break;
+          case ConnectionStatus.connected:
+            add(const CheckInEvent.webSocketConnected());
+            break;
+          case ConnectionStatus.disconnected:
+            add(const CheckInEvent.webSocketDisconnected());
+            break;
+          case ConnectionStatus.failed:
+            add(
+              CheckInEvent.webSocketConnectionFailed(
+                _webSocketService.lastError ?? 'Unknown connection error',
+              ),
+            );
+            break;
+          case ConnectionStatus.timeout:
+            add(const CheckInEvent.webSocketConnectionTimeout());
+            break;
+          case ConnectionStatus.retrying:
+            add(
+              CheckInEvent.webSocketRetrying(_webSocketService.config.maxRetries),
+            );
+            break;
+        }
+      },
+      onError: (error) {
+        add(CheckInEvent.webSocketError(error.toString()));
+      },
+    );
 
     // Listen to incoming WebSocket messages
     _webSocketService.messages.listen((message) {
@@ -153,6 +160,25 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       debugPrint(
         '📊 CheckInBloc: WebSocket metrics updated - ${metrics.toString()}',
       );
+    });
+  }
+
+  /// Initialize Frame Streaming service integration
+  void _initializeFrameStreamingIntegration() {
+    // Listen to streaming status changes from FrameStreamingService
+    _frameStreamingService.statusStream
+        .listen((status) {
+          add(CheckInEvent.streamingStatusChanged(status));
+        })
+        .onError((error) {
+          debugPrint('❌ FrameStreamingService status error: $error');
+          add(CheckInEvent.errorOccurred('Streaming error: $error'));
+        });
+
+    // Listen to frame metrics for debugging
+    _frameStreamingService.metricsStream.listen((metrics) {
+      debugPrint('📊 Frame metrics: $metrics');
+      // Could trigger frame processed event here if needed
     });
   }
 
@@ -736,45 +762,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
             'Auto-connection ${event.enabled ? 'enabled' : 'disabled'}',
       ),
     );
-  }
-
-  /// Initialize Frame Streaming service integration for Phase 2
-  /// Creates bridge between Frame Streaming service and BLoC events
-  void _initializeFrameStreamingIntegration() {
-    // Listen to frame streaming status changes
-    _frameStreamingService.statusStream.listen((status) {
-      add(CheckInEvent.streamingStatusChanged(status));
-    });
-
-    // Listen to frame streaming metrics
-    _frameStreamingService.metricsStream.listen((metrics) {
-      add(
-        CheckInEvent.streamingMetricsUpdated(
-          frameRate: metrics.currentStreamingFps,
-          framesCaptured: metrics.totalFramesStreamed,
-          framesStreamed: metrics.successfulFrames,
-          framesFailed: metrics.failedFrames,
-          averageLatency: metrics.averageStreamingLatency,
-          totalBytes: metrics.totalBytesStreamed,
-        ),
-      );
-    });
-
-    // Listen to frame streaming errors
-    _frameStreamingService.errorStream.listen((error) {
-      add(CheckInEvent.streamingError(error.message));
-    });
-
-    // Phase 3: Listen to face detection responses
-    _frameStreamingService.faceDetectionStream.listen((response) {
-      add(
-        CheckInEvent.faceDetectionResult(
-          faces: response.faces,
-          confidence: response.overallConfidence,
-          timestamp: response.timestamp ?? DateTime.now(),
-        ),
-      );
-    });
   }
 
   // Phase 2 Frame Streaming event handlers
