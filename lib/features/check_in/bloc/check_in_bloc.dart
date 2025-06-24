@@ -1,29 +1,92 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:permission_handler/permission_handler.dart' as ps;
 
-import 'package:face_check_in_flutter/domain/services/permission_service.dart'
-    as ps;
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
+import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart';
+import 'package:face_check_in_flutter/domain/services/permission_service.dart';
+import 'package:face_check_in_flutter/domain/services/camera_service.dart';
+import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart'
+    as frame_streaming;
 
 part 'check_in_bloc.freezed.dart';
 part 'check_in_event.dart';
-part 'check_in_state.dart';
+
+// --- STATE DEFINITIONS ---
+enum CameraStatus {
+  initial,
+  permissionRequesting,
+  initializing,
+  ready,
+  error,
+  permissionDenied,
+  streaming,
+  paused,
+}
+
+enum ConnectionStatus {
+  disconnected,
+  connecting,
+  connected,
+  failed,
+  retrying,
+  timeout,
+}
+
+// Use StreamingStatus from FrameStreamingService
+enum StreamingStatus { idle, active, error }
+
+enum ToastStatus { none, showing }
+
+@freezed
+class CheckInState with _$CheckInState {
+  const factory CheckInState({
+    @Default(CameraStatus.initial) CameraStatus cameraStatus,
+    @Default(ps.PermissionStatus.denied) ps.PermissionStatus permissionStatus,
+    @Default(ConnectionStatus.disconnected) ConnectionStatus connectionStatus,
+    @Default(StreamingStatus.idle) StreamingStatus streamingStatus,
+    @Default(false) bool isLoading,
+    String? errorMessage,
+    CameraController? cameraController,
+    @Default(ToastStatus.none) ToastStatus toastStatus,
+    String? toastMessage,
+    @Default(false) bool isDebugMode,
+    DateTime? lastRecognitionTime,
+    @Default(0) int framesProcessed,
+    @Default(0) int connectionAttempts,
+    DateTime? lastConnectionAttempt,
+    String? connectionError,
+    @Default(true) bool autoConnectionEnabled,
+    @Default(false) bool isRetryTimerActive,
+  }) = _CheckInState;
+}
 
 /// Main BLoC for managing check-in feature state
 /// Handles camera, WebSocket, streaming, and UI state management
 @injectable
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
-  final ps.PermissionService _permissionService;
+  final PermissionService _permissionService;
   final WebSocketService _webSocketService;
+  final CameraService _cameraService;
+  final FrameStreamingService _frameStreamingService;
 
-  CheckInBloc(this._permissionService, this._webSocketService)
-    : super(const CheckInState()) {
+  CheckInBloc(
+    this._permissionService,
+    this._webSocketService,
+    this._cameraService,
+    this._frameStreamingService,
+  ) : super(const CheckInState()) {
     // Initialize WebSocket service integration
     _initializeWebSocketIntegration();
+
+    // Initialize Frame Streaming service integration
+    _initializeFrameStreamingIntegration();
 
     // App lifecycle events
     on<AppStarted>(_onAppStarted);
@@ -62,6 +125,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<AutoConnectionToggled>(_onAutoConnectionToggled);
 
     // Streaming events
+    on<StreamingStartRequested>(_onStreamingStartRequested);
+    on<StreamingStopRequested>(_onStreamingStopRequested);
     on<StreamingStarted>(_onStreamingStarted);
     on<StreamingStopped>(_onStreamingStopped);
     on<StreamingStatusChanged>(_onStreamingStatusChanged);
@@ -83,35 +148,14 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   /// Initialize WebSocket service integration for Story 2.1
   /// Creates bridge between WebSocket service and BLoC events
   void _initializeWebSocketIntegration() {
-    // Listen to WebSocket connection status changes
-    _webSocketService.connectionStatus.listen((status) {
-      switch (status) {
-        case ConnectionStatus.connecting:
-          add(const CheckInEvent.webSocketConnecting());
-          break;
-        case ConnectionStatus.connected:
-          add(const CheckInEvent.webSocketConnected());
-          break;
-        case ConnectionStatus.disconnected:
-          add(const CheckInEvent.webSocketDisconnected());
-          break;
-        case ConnectionStatus.failed:
-          add(
-            CheckInEvent.webSocketConnectionFailed(
-              _webSocketService.lastError ?? 'Unknown connection error',
-            ),
-          );
-          break;
-        case ConnectionStatus.timeout:
-          add(const CheckInEvent.webSocketConnectionTimeout());
-          break;
-        case ConnectionStatus.retrying:
-          add(
-            CheckInEvent.webSocketRetrying(_webSocketService.config.maxRetries),
-          );
-          break;
-      }
-    });
+    _webSocketService.connectionStatus.listen(
+      (status) {
+        add(CheckInEvent.connectionStatusChanged(status));
+      },
+      onError: (error) {
+        add(CheckInEvent.webSocketError(error.toString()));
+      },
+    );
 
     // Listen to incoming WebSocket messages
     _webSocketService.messages.listen((message) {
@@ -123,6 +167,41 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       debugPrint(
         '📊 CheckInBloc: WebSocket metrics updated - ${metrics.toString()}',
       );
+    });
+  }
+
+  /// Convert FrameStreamingService.StreamingStatus to CheckInBloc.StreamingStatus
+  StreamingStatus _mapStreamingStatus(frame_streaming.StreamingStatus status) {
+    switch (status) {
+      case frame_streaming.StreamingStatus.idle:
+        return StreamingStatus.idle;
+      case frame_streaming.StreamingStatus.starting:
+      case frame_streaming.StreamingStatus.active:
+        return StreamingStatus.active;
+      case frame_streaming.StreamingStatus.paused:
+      case frame_streaming.StreamingStatus.stopping:
+      case frame_streaming.StreamingStatus.error:
+        return StreamingStatus.error;
+    }
+  }
+
+  /// Initialize Frame Streaming service integration
+  void _initializeFrameStreamingIntegration() {
+    // Listen to streaming status changes from FrameStreamingService
+    _frameStreamingService.statusStream
+        .listen((status) {
+          final mappedStatus = _mapStreamingStatus(status);
+          add(CheckInEvent.streamingStatusChanged(mappedStatus));
+        })
+        .onError((error) {
+          debugPrint('❌ FrameStreamingService status error: $error');
+          add(CheckInEvent.errorOccurred('Streaming error: $error'));
+        });
+
+    // Listen to frame metrics for debugging
+    _frameStreamingService.metricsStream.listen((metrics) {
+      debugPrint('📊 Frame metrics: $metrics');
+      // Could trigger frame processed event here if needed
     });
   }
 
@@ -163,6 +242,12 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('🔴 CheckInBloc: App disposing - cleaning up...');
+
+    // Stop streaming if active
+    if (state.streamingStatus == StreamingStatus.active) {
+      await _frameStreamingService.stopStreaming();
+    }
+
     await state.cameraController?.dispose();
     // Clean up resources
     emit(
@@ -185,28 +270,40 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     emit(state.copyWith(cameraStatus: CameraStatus.permissionRequesting));
-    debugPrint('📷 CheckInBloc: Requesting camera permission...');
-    final status = await _permissionService.requestCameraPermission();
-    if (status == ps.PermissionStatus.granted) {
-      debugPrint('✅ CheckInBloc: Camera permission granted.');
-      emit(state.copyWith(permissionStatus: PermissionStatus.granted));
-      add(const CheckInEvent.cameraInitRequested());
-    } else {
-      debugPrint('❌ CheckInBloc: Camera permission denied.');
-      if (status == ps.PermissionStatus.permanentlyDenied) {
-        // Open app settings if permission is permanently denied
-        _permissionService.openAppSettings();
+    final permission = await _permissionService.requestCameraPermission();
+    emit(state.copyWith(permissionStatus: permission));
+
+    if (permission.isGranted) {
+      try {
+        emit(
+          state.copyWith(
+            cameraStatus: CameraStatus.initializing,
+            isLoading: true,
+          ),
+        );
+        await _cameraService.initialize();
+        emit(
+          state.copyWith(
+            cameraStatus: CameraStatus.ready,
+            isLoading: false,
+            cameraController: _cameraService.controller,
+            toastStatus: ToastStatus.showing,
+            toastMessage: 'Camera ready',
+          ),
+        );
+        // Auto-connect after camera is ready
+        add(const CheckInEvent.connectionRequested(isAutoConnect: true));
+      } catch (e) {
+        emit(
+          state.copyWith(
+            cameraStatus: CameraStatus.error,
+            isLoading: false,
+            errorMessage: e.toString(),
+          ),
+        );
       }
-      final newStatus =
-          status == ps.PermissionStatus.permanentlyDenied
-              ? PermissionStatus.permanentlyDenied
-              : PermissionStatus.denied;
-      emit(
-        state.copyWith(
-          permissionStatus: newStatus,
-          cameraStatus: CameraStatus.permissionDenied,
-        ),
-      );
+    } else {
+      emit(state.copyWith(cameraStatus: CameraStatus.permissionDenied));
     }
   }
 
@@ -388,22 +485,70 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) async {
     debugPrint('🌐 CheckInBloc: WebSocket disconnection requested');
 
-    emit(
-      state.copyWith(
-        connectionStatus: ConnectionStatus.disconnected,
-        streamingStatus: StreamingStatus.idle,
-      ),
-    );
+    emit(state.copyWith(connectionStatus: ConnectionStatus.disconnected));
   }
 
-  // Streaming event handlers (placeholders for future integration)
+  // Streaming event handlers
+  Future<void> _onStreamingStartRequested(
+    StreamingStartRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('📡 CheckInBloc: Frame streaming start requested');
+
+    try {
+      // Check prerequisites
+      if (state.cameraStatus != CameraStatus.ready) {
+        throw Exception('Camera not ready for streaming');
+      }
+
+      if (state.connectionStatus != ConnectionStatus.connected) {
+        throw Exception('WebSocket not connected');
+      }
+
+      // Start streaming via service
+      await _frameStreamingService.startStreaming();
+
+      debugPrint('✅ CheckInBloc: Frame streaming start request completed');
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Failed to start streaming: $e');
+      emit(
+        state.copyWith(
+          errorMessage: 'Failed to start streaming: $e',
+          streamingStatus: StreamingStatus.error,
+        ),
+      );
+    }
+  }
+
+  Future<void> _onStreamingStopRequested(
+    StreamingStopRequested event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('📡 CheckInBloc: Frame streaming stop requested');
+
+    try {
+      // Stop streaming via service
+      await _frameStreamingService.stopStreaming();
+
+      debugPrint('✅ CheckInBloc: Frame streaming stop request completed');
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Failed to stop streaming: $e');
+      emit(state.copyWith(errorMessage: 'Failed to stop streaming: $e'));
+    }
+  }
+
   Future<void> _onStreamingStarted(
     StreamingStarted event,
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('📡 CheckInBloc: Frame streaming started');
-
-    emit(state.copyWith(streamingStatus: StreamingStatus.active));
+    emit(
+      state.copyWith(
+        streamingStatus: StreamingStatus.active,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Frame streaming started',
+      ),
+    );
   }
 
   Future<void> _onStreamingStopped(
@@ -411,8 +556,13 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('📡 CheckInBloc: Frame streaming stopped');
-
-    emit(state.copyWith(streamingStatus: StreamingStatus.idle));
+    emit(
+      state.copyWith(
+        streamingStatus: StreamingStatus.idle,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Frame streaming stopped',
+      ),
+    );
   }
 
   Future<void> _onStreamingStatusChanged(
@@ -420,7 +570,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint('📡 CheckInBloc: Streaming status changed to ${event.status}');
-
     emit(state.copyWith(streamingStatus: event.status));
   }
 
@@ -428,12 +577,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     FrameProcessed event,
     Emitter<CheckInState> emit,
   ) async {
-    emit(
-      state.copyWith(
-        framesProcessed: state.framesProcessed + 1,
-        lastRecognitionTime: DateTime.now(),
-      ),
-    );
+    // Update frame processing metrics
+    emit(state.copyWith(framesProcessed: state.framesProcessed + 1));
   }
 
   // UI event handlers
@@ -599,8 +744,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     emit(
       state.copyWith(
         connectionStatus: ConnectionStatus.disconnected,
-        streamingStatus: StreamingStatus.idle,
-        isRetryTimerActive: false,
+        toastStatus: ToastStatus.showing,
+        toastMessage: 'Disconnected from backend',
       ),
     );
   }
@@ -753,5 +898,136 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     state.cameraController?.dispose();
     _webSocketService.dispose();
     return super.close();
+  }
+
+  // Helper method to get color based on camera status for UI
+  Color getCameraStatusColor(CameraStatus status) {
+    switch (status) {
+      case CameraStatus.initial:
+        return Colors.grey;
+      case CameraStatus.permissionRequesting:
+        return Colors.blue;
+      case CameraStatus.initializing:
+        return Colors.orange;
+      case CameraStatus.ready:
+        return Colors.green;
+      case CameraStatus.streaming:
+        return Colors.purple;
+      case CameraStatus.paused:
+        return Colors.amber;
+      case CameraStatus.error:
+      case CameraStatus.permissionDenied:
+        return Colors.red;
+    }
+  }
+
+  // Helper method to get color based on connection status for UI
+  Color getConnectionStatusColor(ConnectionStatus status) {
+    // Implement the logic to return the appropriate color based on the connection status
+    // This is a placeholder and should be implemented based on your specific requirements
+    return Colors.grey; // Placeholder return, actual implementation needed
+  }
+}
+
+/// Extension to provide display text for CameraStatus enum
+extension CameraStatusDisplay on CameraStatus {
+  String get displayText {
+    switch (this) {
+      case CameraStatus.initial:
+        return 'Initial';
+      case CameraStatus.permissionRequesting:
+        return 'Requesting Permission...';
+      case CameraStatus.initializing:
+        return 'Initializing...';
+      case CameraStatus.ready:
+        return 'Ready';
+      case CameraStatus.streaming:
+        return 'Streaming';
+      case CameraStatus.paused:
+        return 'Paused';
+      case CameraStatus.error:
+        return 'Error';
+      case CameraStatus.permissionDenied:
+        return 'Permission Denied';
+    }
+  }
+
+  Color get displayColor {
+    switch (this) {
+      case CameraStatus.initial:
+      case CameraStatus.permissionDenied:
+        return Colors.grey;
+      case CameraStatus.permissionRequesting:
+      case CameraStatus.initializing:
+        return Colors.orange;
+      case CameraStatus.ready:
+        return Colors.green;
+      case CameraStatus.streaming:
+        return Colors.blue;
+      case CameraStatus.paused:
+        return Colors.yellow;
+      case CameraStatus.error:
+        return Colors.red;
+    }
+  }
+}
+
+/// Extension to provide display text for ConnectionStatus enum
+extension ConnectionStatusDisplay on ConnectionStatus {
+  String get displayText {
+    switch (this) {
+      case ConnectionStatus.disconnected:
+        return 'Disconnected';
+      case ConnectionStatus.connecting:
+        return 'Connecting...';
+      case ConnectionStatus.connected:
+        return 'Connected';
+      case ConnectionStatus.failed:
+        return 'Connection Failed';
+      case ConnectionStatus.retrying:
+        return 'Retrying...';
+      case ConnectionStatus.timeout:
+        return 'Connection Timeout';
+    }
+  }
+
+  Color get displayColor {
+    switch (this) {
+      case ConnectionStatus.disconnected:
+        return Colors.grey;
+      case ConnectionStatus.connecting:
+      case ConnectionStatus.retrying:
+        return Colors.orange;
+      case ConnectionStatus.connected:
+        return Colors.green;
+      case ConnectionStatus.failed:
+      case ConnectionStatus.timeout:
+        return Colors.red;
+    }
+  }
+}
+
+/// Extension to provide display text for StreamingStatus enum
+extension StreamingStatusDisplay on StreamingStatus {
+  String get displayText {
+    switch (this) {
+      case StreamingStatus.idle:
+        return 'Idle';
+      case StreamingStatus.active:
+        return 'Active';
+      case StreamingStatus.error:
+        return 'Error';
+    }
+  }
+
+  Color get displayColor {
+    switch (this) {
+      case StreamingStatus.idle:
+        return Colors.grey;
+      case StreamingStatus.active:
+        return Colors.green;
+      case StreamingStatus.error:
+        return Colors.red;
+    }
   }
 }

@@ -23,6 +23,7 @@ class CameraPreviewWidget extends StatelessWidget {
             return const PermissionDeniedWidget();
           case CameraStatus.ready:
           case CameraStatus.streaming:
+          case CameraStatus.paused:
             final controller = state.cameraController;
             if (controller == null || !controller.value.isInitialized) {
               return const Center(child: Text('Camera not available.'));
@@ -37,8 +38,6 @@ class CameraPreviewWidget extends StatelessWidget {
             );
           case CameraStatus.error:
             return CameraErrorWidget(error: state.errorMessage);
-          default:
-            return const Center(child: Text('Unknown camera state.'));
         }
       },
     );
