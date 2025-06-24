@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:face_check_in_flutter/domain/services/camera_service.dart';
 import 'package:injectable/injectable.dart';
 
@@ -25,9 +26,11 @@ class CameraServiceImpl implements CameraService {
     final cameras = await availableCameras();
 
     // Debug: Log all available cameras
-    print('🎥 Available cameras:');
+    debugPrint('🎥 Available cameras:');
     for (int i = 0; i < cameras.length; i++) {
-      print('  Camera $i: ${cameras[i].lensDirection} - ${cameras[i].name}');
+      debugPrint(
+        '  Camera $i: ${cameras[i].lensDirection} - ${cameras[i].name}',
+      );
     }
 
     CameraDescription selectedCamera;
@@ -42,7 +45,7 @@ class CameraServiceImpl implements CameraService {
 
     if (frontCameras.isNotEmpty) {
       selectedCamera = frontCameras.first;
-      print(
+      debugPrint(
         '📱 Selected front camera: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
       );
     } else {
@@ -56,13 +59,13 @@ class CameraServiceImpl implements CameraService {
 
       if (backCameras.isNotEmpty) {
         selectedCamera = backCameras.first;
-        print(
+        debugPrint(
           '⚠️ No front camera found, using back camera: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
         );
       } else {
         // Fallback to first available camera
         selectedCamera = cameras.first;
-        print(
+        debugPrint(
           '⚠️ No front or back camera found, using first available: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
         );
       }

@@ -5,7 +5,6 @@ import 'package:face_check_in_flutter/core/config/websocket_config.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:fake_async/fake_async.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -28,8 +27,6 @@ void main() {
     late MockWebSocketChannel mockWebSocketChannel;
     late MockWebSocketSink mockWebSocketSink;
     late StreamController<dynamic> serverStreamController;
-
-    const testUrl = 'ws://localhost:1234';
 
     setUp(() {
       mockWebSocketChannel = MockWebSocketChannel();

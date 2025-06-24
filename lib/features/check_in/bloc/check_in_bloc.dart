@@ -148,11 +148,14 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   /// Initialize WebSocket service integration for Story 2.1
   /// Creates bridge between WebSocket service and BLoC events
   void _initializeWebSocketIntegration() {
-    _webSocketService.connectionStatus.listen((status) {
-      add(CheckInEvent.connectionStatusChanged(status));
-    })..onError((error) {
-      add(CheckInEvent.webSocketError(error.toString()));
-    });
+    _webSocketService.connectionStatus.listen(
+      (status) {
+        add(CheckInEvent.connectionStatusChanged(status));
+      },
+      onError: (error) {
+        add(CheckInEvent.webSocketError(error.toString()));
+      },
+    );
 
     // Listen to incoming WebSocket messages
     _webSocketService.messages.listen((message) {

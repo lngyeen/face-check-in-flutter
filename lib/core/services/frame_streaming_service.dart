@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:face_check_in_flutter/core/services/frame_capture_service.dart';
@@ -35,9 +36,7 @@ class FrameStreamingService {
   DateTime? _lastFrameSent;
 
   // Configuration
-  static const int _targetFPS = 30;
   static const Duration _frameDuration = Duration(milliseconds: 33); // ~30 FPS
-  static const int _maxPendingFrames = 3; // Drop frames if too many pending
 
   // Stream controllers
   final StreamController<StreamingStatus> _statusController =
@@ -83,17 +82,17 @@ class FrameStreamingService {
   /// Start streaming frames to the backend
   Future<void> startStreaming() async {
     if (_currentStatus == StreamingStatus.active) {
-      print('⚠️ FrameStreamingService: Already streaming');
+      debugPrint('⚠️ FrameStreamingService: Already streaming');
       return;
     }
 
     try {
       _updateStatus(StreamingStatus.starting);
-      print('🚀 FrameStreamingService: Starting frame streaming...');
+      debugPrint('🚀 FrameStreamingService: Starting frame streaming...');
 
       // Ensure WebSocket is connected
       if (!_webSocketService.isConnected) {
-        print('📡 FrameStreamingService: Connecting to WebSocket...');
+        debugPrint('📡 FrameStreamingService: Connecting to WebSocket...');
         final connected = await _webSocketService.connect();
         if (!connected) {
           throw Exception('Failed to connect to WebSocket');
@@ -117,10 +116,12 @@ class FrameStreamingService {
           );
 
       _updateStatus(StreamingStatus.active);
-      print('✅ FrameStreamingService: Frame streaming started successfully');
+      debugPrint(
+        '✅ FrameStreamingService: Frame streaming started successfully',
+      );
     } catch (e) {
       _updateStatus(StreamingStatus.error);
-      print('❌ FrameStreamingService: Failed to start streaming: $e');
+      debugPrint('❌ FrameStreamingService: Failed to start streaming: $e');
       rethrow;
     }
   }
@@ -128,13 +129,13 @@ class FrameStreamingService {
   /// Stop streaming frames
   Future<void> stopStreaming() async {
     if (_currentStatus == StreamingStatus.idle) {
-      print('⚠️ FrameStreamingService: Already stopped');
+      debugPrint('⚠️ FrameStreamingService: Already stopped');
       return;
     }
 
     try {
       _updateStatus(StreamingStatus.stopping);
-      print('🛑 FrameStreamingService: Stopping frame streaming...');
+      debugPrint('🛑 FrameStreamingService: Stopping frame streaming...');
 
       // Cancel frame subscription
       await _frameSubscription?.cancel();
@@ -148,10 +149,10 @@ class FrameStreamingService {
       _streamingTimer = null;
 
       _updateStatus(StreamingStatus.idle);
-      print('✅ FrameStreamingService: Frame streaming stopped');
+      debugPrint('✅ FrameStreamingService: Frame streaming stopped');
     } catch (e) {
       _updateStatus(StreamingStatus.error);
-      print('❌ FrameStreamingService: Error stopping streaming: $e');
+      debugPrint('❌ FrameStreamingService: Error stopping streaming: $e');
       rethrow;
     }
   }
@@ -165,7 +166,7 @@ class FrameStreamingService {
     _updateStatus(StreamingStatus.paused);
     await _frameSubscription?.cancel();
     _frameSubscription = null;
-    print('⏸️ FrameStreamingService: Streaming paused');
+    debugPrint('⏸️ FrameStreamingService: Streaming paused');
   }
 
   /// Resume streaming from paused state
@@ -183,7 +184,7 @@ class FrameStreamingService {
         );
 
     _updateStatus(StreamingStatus.active);
-    print('▶️ FrameStreamingService: Streaming resumed');
+    debugPrint('▶️ FrameStreamingService: Streaming resumed');
   }
 
   /// Process a single camera frame
@@ -213,7 +214,7 @@ class FrameStreamingService {
         timestamp: DateTime.now(),
       );
     } catch (e) {
-      print('❌ FrameStreamingService: Error processing frame: $e');
+      debugPrint('❌ FrameStreamingService: Error processing frame: $e');
       return null;
     }
   }
@@ -239,28 +240,28 @@ class FrameStreamingService {
           _metricsController.add(currentMetrics);
         }
 
-        print(
+        debugPrint(
           '📤 FrameStreamingService: Frame sent - ${processedFrame.frameId}',
         );
       } else {
-        print(
+        debugPrint(
           '❌ FrameStreamingService: Failed to send frame - ${processedFrame.frameId}',
         );
       }
     } catch (e) {
-      print('❌ FrameStreamingService: Error sending frame: $e');
+      debugPrint('❌ FrameStreamingService: Error sending frame: $e');
     }
   }
 
   /// Handle stream errors
   void _handleStreamError(dynamic error) {
-    print('❌ FrameStreamingService: Stream error: $error');
+    debugPrint('❌ FrameStreamingService: Stream error: $error');
     _updateStatus(StreamingStatus.error);
   }
 
   /// Handle stream completion
   void _handleStreamDone() {
-    print('ℹ️ FrameStreamingService: Frame stream completed');
+    debugPrint('ℹ️ FrameStreamingService: Frame stream completed');
     _updateStatus(StreamingStatus.idle);
   }
 
@@ -286,8 +287,13 @@ class FrameStreamingService {
   void _updateStatus(StreamingStatus newStatus) {
     if (_currentStatus != newStatus) {
       _currentStatus = newStatus;
-      _statusController.add(newStatus);
-      print('📊 FrameStreamingService: Status changed to ${newStatus.name}');
+      // Check if controller is still open before adding events
+      if (!_statusController.isClosed) {
+        _statusController.add(newStatus);
+      }
+      debugPrint(
+        '📊 FrameStreamingService: Status changed to ${newStatus.name}',
+      );
     }
   }
 
@@ -302,7 +308,14 @@ class FrameStreamingService {
 
   /// Dispose resources
   void dispose() {
-    stopStreaming();
+    // Stop streaming without updating status to avoid "Bad state" error
+    _frameSubscription?.cancel();
+    _frameSubscription = null;
+    _frameCaptureService.stopCapture();
+    _streamingTimer?.cancel();
+    _streamingTimer = null;
+
+    // Close controllers
     _statusController.close();
     _metricsController.close();
   }

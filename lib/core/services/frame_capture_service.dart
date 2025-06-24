@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:face_check_in_flutter/domain/services/camera_service.dart';
 import 'package:injectable/injectable.dart';
 
@@ -42,7 +43,7 @@ class FrameCaptureService {
       await _cameraService.startImageStream();
     } catch (e) {
       // TODO: Add proper error handling/logging
-      print('Error starting frame capture: $e');
+      debugPrint('Error starting frame capture: $e');
     }
   }
 

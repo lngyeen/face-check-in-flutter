@@ -60,6 +60,9 @@ void main() {
     test(
       'startStreaming should connect WebSocket and start frame capture',
       () async {
+        // Arrange - WebSocket not connected initially
+        when(() => mockWebSocketService.isConnected).thenReturn(false);
+
         // Act
         await frameStreamingService.startStreaming();
 
@@ -105,10 +108,8 @@ void main() {
 
         // Assert
         expect(frameStreamingService.currentStatus, StreamingStatus.paused);
-        // Should not call stopCapture when pausing
-        verify(
-          () => mockFrameCaptureService.stopCapture(),
-        ).called(1); // Only from start
+        // Should not call stopCapture when pausing - capture continues running
+        verifyNever(() => mockFrameCaptureService.stopCapture());
       },
     );
 
@@ -194,9 +195,8 @@ void main() {
 
           // Assert
           expect(frameStreamingService.currentStatus, StreamingStatus.active);
-          verify(
-            () => mockWebSocketService.sendImageFrame,
-          ).called(0); // No frames sent yet
+          // No frames sent yet since no camera images were emitted in this test
+          verifyNever(() => mockWebSocketService.sendImageFrame(any()));
         },
       );
     });
