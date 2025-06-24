@@ -1,3 +1,4 @@
+import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
 import 'package:flutter/material.dart';
 
 import 'package:face_check_in_flutter/domain/entities/connection_status.dart';
@@ -23,21 +24,33 @@ extension FaceDetectionStatusX on FaceDetectionStatus {
   }
 }
 
-extension ConnectionStatusX on ConnectionStatus {
+extension ConnectionStatusX on WebSocketConnectionStatus {
   String get displayText => toString().split('.').last.toUpperCase();
 
   Color get displayColor {
     switch (this) {
-      case ConnectionStatus.connected:
+      case WebSocketConnectionStatus.connected:
         return Colors.green;
-      case ConnectionStatus.failed:
-      case ConnectionStatus.timeout:
-        return Colors.red;
-      case ConnectionStatus.connecting:
-      case ConnectionStatus.retrying:
+      case WebSocketConnectionStatus.failed:
+      case WebSocketConnectionStatus.connecting:
         return Colors.orange;
-      case ConnectionStatus.disconnected:
+      case WebSocketConnectionStatus.disconnected:
         return Colors.grey;
+    }
+  }
+}
+
+extension StreamingStatusX on StreamingStatus {
+  String get displayText => toString().split('.').last.toUpperCase();
+
+  Color get displayColor {
+    switch (this) {
+      case StreamingStatus.active:
+        return Colors.green;
+      case StreamingStatus.idle:
+        return Colors.grey;
+      case StreamingStatus.error:
+        return Colors.red;
     }
   }
 }

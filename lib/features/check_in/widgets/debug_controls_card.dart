@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ConnectionState;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:face_check_in_flutter/domain/entities/connection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
 import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
+import 'package:face_check_in_flutter/features/connection/connection.dart';
 
 import '../bloc/check_in_bloc.dart';
+import '../bloc/check_in_state.dart';
 
 /// Widget that provides debug controls for camera and streaming operations
 class DebugControlsCard extends StatelessWidget {
@@ -15,13 +17,6 @@ class DebugControlsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CheckInBloc, CheckInState>(
-      buildWhen:
-          (previous, current) =>
-              previous.isLoading != current.isLoading ||
-              previous.permissionStatus != current.permissionStatus ||
-              previous.cameraStatus != current.cameraStatus ||
-              previous.connectionStatus != current.connectionStatus ||
-              previous.streamingStatus != current.streamingStatus,
       builder: (context, state) {
         return Card(
           color: Colors.blue[50],
@@ -42,11 +37,9 @@ class DebugControlsCard extends StatelessWidget {
                 if (state.permissionStatus == PermissionStatus.granted) ...[
                   const _FullFlowToggleButton(),
                   const SizedBox(height: 8),
+                  // Always show streaming toggle - let BLoC handle validation
+                  const _StreamingToggleButton(),
                 ],
-                const _WebSocketToggleButton(),
-                const SizedBox(height: 8),
-                // Always show streaming toggle - let BLoC handle validation
-                const _StreamingToggleButton(),
               ],
             ),
           ),
@@ -63,92 +56,23 @@ class _FullFlowToggleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CheckInBloc, CheckInState>(
-      buildWhen:
-          (previous, current) =>
-              previous.isLoading != current.isLoading ||
-              previous.isFullFlowActive != current.isFullFlowActive,
       builder: (context, state) {
         final isActive = state.isFullFlowActive;
-
         return SizedBox(
           width: double.infinity,
           child: ElevatedButton.icon(
-            onPressed:
-                state.isLoading
-                    ? null
-                    : () {
-                      final bloc = context.read<CheckInBloc>();
-                      if (isActive) {
-                        bloc.stopFullFlow();
-                      } else {
-                        bloc.startFullFlow();
-                      }
-                    },
+            onPressed: () {
+              final bloc = context.read<CheckInBloc>();
+              if (isActive) {
+                bloc.stopFullFlow();
+              } else {
+                bloc.startFullFlow();
+              }
+            },
             icon: Icon(isActive ? Icons.stop_circle : Icons.play_circle),
             label: Text(isActive ? 'Stop Full Flow' : 'Start Full Flow'),
             style: ElevatedButton.styleFrom(
               backgroundColor: isActive ? Colors.red : Colors.green,
-              foregroundColor: Colors.white,
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-/// Button for toggling WebSocket connection on/off
-class _WebSocketToggleButton extends StatelessWidget {
-  const _WebSocketToggleButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CheckInBloc, CheckInState>(
-      buildWhen:
-          (previous, current) =>
-              previous.isLoading != current.isLoading ||
-              previous.connectionStatus != current.connectionStatus,
-      builder: (context, state) {
-        final isConnected =
-            state.connectionStatus == ConnectionStatus.connected;
-        final isConnecting =
-            state.connectionStatus == ConnectionStatus.connecting;
-
-        return SizedBox(
-          width: double.infinity,
-          child: ElevatedButton.icon(
-            onPressed:
-                state.isLoading || isConnecting
-                    ? null
-                    : () {
-                      final bloc = context.read<CheckInBloc>();
-                      if (isConnected) {
-                        bloc.add(const CheckInEvent.disconnectWebSocket());
-                      } else {
-                        bloc.add(const CheckInEvent.connectWebSocket());
-                      }
-                    },
-            icon: Icon(
-              isConnecting
-                  ? Icons.sync
-                  : isConnected
-                  ? Icons.stop_circle
-                  : Icons.play_circle,
-            ),
-            label: Text(
-              isConnecting
-                  ? 'Connecting...'
-                  : isConnected
-                  ? 'Disconnect WebSocket'
-                  : 'Connect WebSocket',
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  isConnecting
-                      ? Colors.orange
-                      : isConnected
-                      ? Colors.red
-                      : Colors.green,
               foregroundColor: Colors.white,
             ),
           ),
@@ -164,10 +88,9 @@ class _StreamingToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CheckInBloc, CheckInState>(
+    return BlocBuilder<ConnectionBloc, ConnectionState>(
       buildWhen:
           (previous, current) =>
-              previous.isLoading != current.isLoading ||
               previous.streamingStatus != current.streamingStatus,
       builder: (context, state) {
         final isActive = state.streamingStatus == StreamingStatus.active;
@@ -175,17 +98,14 @@ class _StreamingToggleButton extends StatelessWidget {
         return SizedBox(
           width: double.infinity,
           child: ElevatedButton.icon(
-            onPressed:
-                state.isLoading
-                    ? null
-                    : () {
-                      final bloc = context.read<CheckInBloc>();
-                      if (isActive) {
-                        bloc.add(const CheckInEvent.stopStreaming());
-                      } else {
-                        bloc.add(const CheckInEvent.startStreaming());
-                      }
-                    },
+            onPressed: () {
+              final connectionBloc = context.read<ConnectionBloc>();
+              if (isActive) {
+                connectionBloc.add(const ConnectionEvent.stopStreaming());
+              } else {
+                connectionBloc.add(const ConnectionEvent.startStreaming());
+              }
+            },
             icon: Icon(isActive ? Icons.stop_circle : Icons.play_circle),
             label: Text(isActive ? 'Stop Streaming' : 'Start Streaming'),
             style: ElevatedButton.styleFrom(

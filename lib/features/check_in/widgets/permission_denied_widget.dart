@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_event.dart';
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
 
 class PermissionDeniedWidget extends StatelessWidget {
   const PermissionDeniedWidget({super.key});

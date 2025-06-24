@@ -1,4 +1,10 @@
-part of 'check_in_bloc.dart';
+import 'package:camera/camera.dart';
+import 'package:face_check_in_flutter/features/connection/connection.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
+
+part 'check_in_event.freezed.dart';
 
 @freezed
 class CheckInEvent with _$CheckInEvent {
@@ -24,38 +30,13 @@ class CheckInEvent with _$CheckInEvent {
   /// Request to stop the camera
   const factory CheckInEvent.stopCamera() = StopCamera;
 
-  // WebSocket connection events
-  /// Request to connect to the WebSocket server.
-  const factory CheckInEvent.connectWebSocket() = ConnectWebSocket;
-
-  /// The WebSocket connection status has changed.
-  const factory CheckInEvent.webSocketStatusChanged(ConnectionStatus status) =
-      WebSocketStatusChanged;
-
-  /// Request to disconnect from the WebSocket server.
-  const factory CheckInEvent.disconnectWebSocket() = DisconnectWebSocket;
-
   // WebSocket message events
   /// A message was received from the WebSocket server.
   const factory CheckInEvent.webSocketMessageReceived(dynamic data) =
       WebSocketMessageReceived;
 
-  // Streaming events
-  /// Request to start frame streaming
-  const factory CheckInEvent.startStreaming() = StartStreaming;
-
-  /// Request to stop frame streaming
-  const factory CheckInEvent.stopStreaming() = StopStreaming;
-
-  /// A streaming error has occurred
-  const factory CheckInEvent.streamingFailed(String error) = StreamingFailed;
-
   // Debug events
   const factory CheckInEvent.toggleDebugMode() = ToggleDebugMode;
-
-  // Stream configuration events
-  const factory CheckInEvent.configureStream({required int maxFps}) =
-      ConfigureStream;
 
   // Backend response events
   const factory CheckInEvent.frameResultReceived({
@@ -69,14 +50,14 @@ class CheckInEvent with _$CheckInEvent {
   }) = ResponseErrorReceived;
 
   // Connection management events
-  /// Connection summary received from ConnectionManager
-  const factory CheckInEvent.connectionSummaryReceived({
-    required conn.ConnectionSummary summary,
-  }) = ConnectionSummaryReceived;
-
   /// Manual retry requested by user
   const factory CheckInEvent.requestManualRetry() = RequestManualRetry;
 
+  /// Connection state changed (from ConnectionBloc)
+  const factory CheckInEvent.connectionStateChanged(
+    ConnectionState connectionState,
+  ) = ConnectionStateChanged;
+
   // Internal events
-  const factory CheckInEvent.frameCaptured(CameraImage image) = _FrameCaptured;
+  const factory CheckInEvent.frameCaptured(CameraImage image) = FrameCaptured;
 }

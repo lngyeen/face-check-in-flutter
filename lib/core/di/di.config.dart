@@ -15,9 +15,10 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../../data/services/permission_service_impl.dart' as _i372;
 import '../../domain/services/permission_service.dart' as _i474;
 import '../../features/check_in/bloc/check_in_bloc.dart' as _i435;
-import '../services/connection_manager.dart' as _i773;
+import '../../features/connection/bloc/connection_bloc.dart' as _i348;
+import '../../features/connection/connection.dart' as _i566;
+import '../services/connection/connection_manager.dart' as _i42;
 import '../services/network_connectivity_service.dart' as _i234;
-import '../services/reconnection_manager.dart' as _i320;
 import '../services/stream_service.dart' as _i121;
 import '../services/wakelock_service.dart' as _i669;
 import '../services/websocket_service.dart' as _i555;
@@ -33,7 +34,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i234.NetworkConnectivityService(),
     );
     gh.singleton<_i669.WakelockService>(() => _i669.WakelockService());
-    gh.singleton<_i320.ReconnectionManager>(() => _i320.ReconnectionManager());
     gh.lazySingleton<_i555.WebSocketService>(() => _i555.WebSocketService());
     gh.lazySingleton<_i474.PermissionService>(
       () => _i372.PermissionServiceImpl(),
@@ -41,10 +41,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i121.StreamService>(
       () => _i121.StreamService(gh<_i555.WebSocketService>()),
     );
-    gh.singleton<_i773.ConnectionManager>(
-      () => _i773.ConnectionManager(
+    gh.lazySingleton<_i42.ConnectionManager>(
+      () => _i42.ConnectionManager(
         gh<_i234.NetworkConnectivityService>(),
-        gh<_i320.ReconnectionManager>(),
+        gh<_i555.WebSocketService>(),
+        gh<_i121.StreamService>(),
+      ),
+    );
+    gh.lazySingleton<_i348.ConnectionBloc>(
+      () => _i348.ConnectionBloc(
+        gh<_i234.NetworkConnectivityService>(),
         gh<_i555.WebSocketService>(),
         gh<_i121.StreamService>(),
       ),
@@ -52,7 +58,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i435.CheckInBloc>(
       () => _i435.CheckInBloc(
         gh<_i474.PermissionService>(),
-        gh<_i773.ConnectionManager>(),
+        gh<_i566.ConnectionBloc>(),
+        gh<_i121.StreamService>(),
       ),
     );
     return this;

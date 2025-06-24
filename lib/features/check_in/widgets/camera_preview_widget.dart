@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:face_check_in_flutter/core/widgets/loading_widget.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
 
 import 'camera_error_widget.dart';
 import 'permission_denied_widget.dart';

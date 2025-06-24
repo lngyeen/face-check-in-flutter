@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_status.dart';
 
 import '../bloc/check_in_bloc.dart';
+import '../bloc/check_in_state.dart';
 
 /// Widget that displays debug information including frame capture, statistics, and error details
 class DebugInformationCard extends StatelessWidget {

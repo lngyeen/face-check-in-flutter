@@ -97,7 +97,8 @@ class StreamService {
 
   /// Send processed frame to WebSocket
   void _sendFrameToWebSocket(ProcessedFrame frame) {
-    if (_webSocketService.currentStatus != ConnectionStatus.connected) {
+    if (_webSocketService.currentStatus !=
+        WebSocketConnectionStatus.connected) {
       return;
     }
 

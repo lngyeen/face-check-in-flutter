@@ -5,8 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
+import 'package:face_check_in_flutter/features/connection/connection.dart'
+    as conn;
 
 import '../bloc/check_in_bloc.dart';
+import '../bloc/check_in_event.dart';
+import '../bloc/check_in_state.dart';
 
 import 'checkin_success_toast.dart' show CheckInSuccessDialog;
 
@@ -206,8 +210,9 @@ class _CheckInSuccessListener extends BlocListener<CheckInBloc, CheckInState> {
             final userImage = state.annotatedImage;
 
             // Stop streaming during celebration to save resources and avoid confusion
-            final bloc = context.read<CheckInBloc>();
-            bloc.add(const CheckInEvent.stopStreaming());
+            context.read<conn.ConnectionBloc>().add(
+              const conn.ConnectionEvent.stopStreaming(),
+            );
 
             // Show success dialog with all faces and callback to resume streaming
             CheckInSuccessDialog.show(
@@ -215,9 +220,10 @@ class _CheckInSuccessListener extends BlocListener<CheckInBloc, CheckInState> {
               detectedFaces, // Pass all faces instead of just the first one
               userImage: userImage,
               onDialogClosed: () {
-                // Resume streaming when dialog is closed
-                // BLoC will handle all the safety checks internally
-                bloc.add(const CheckInEvent.startStreaming());
+                // Resume streaming when dialog is closed - use ConnectionBloc
+                context.read<conn.ConnectionBloc>().add(
+                  const conn.ConnectionEvent.startStreaming(),
+                );
               },
             );
           }

@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:face_check_in_flutter/core/di/di.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
+import 'package:face_check_in_flutter/features/connection/connection.dart'
+    as conn;
 
 import '../features/check_in/screens/check_in_screen.dart';
 
@@ -14,8 +16,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<CheckInBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        // Core connection infrastructure - provide first
+        BlocProvider<conn.ConnectionBloc>(
+          create: (context) => getIt<conn.ConnectionBloc>(),
+        ),
+        // CheckInBloc depends on ConnectionBloc - provide second
+        BlocProvider<CheckInBloc>(create: (context) => getIt<CheckInBloc>()),
+      ],
       child: MaterialApp(
         title: 'FaceCheckIn Employee',
         debugShowCheckedModeBanner: false,

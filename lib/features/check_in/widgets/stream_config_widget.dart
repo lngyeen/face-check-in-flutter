@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:face_check_in_flutter/features/connection/connection.dart'
+    as conn;
+
 import '../../../core/di/di.dart';
 import '../../../core/services/stream_service.dart';
-import '../bloc/check_in_bloc.dart';
 
 /// Widget for configuring stream settings
 class StreamConfigWidget extends StatelessWidget {
@@ -85,8 +87,8 @@ class _FpsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        context.read<CheckInBloc>().add(
-          CheckInEvent.configureStream(maxFps: fps),
+        context.read<conn.ConnectionBloc>().add(
+          conn.ConnectionEvent.configureStream(maxFps: fps),
         );
       },
       style: ElevatedButton.styleFrom(

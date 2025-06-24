@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../bloc/check_in_bloc.dart';
+import '../bloc/check_in_event.dart';
 
 /// Widget that provides a toggle button for debug mode in the app bar
 class DebugToggleButton extends StatelessWidget {

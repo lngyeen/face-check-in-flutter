@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
-import 'package:face_check_in_flutter/domain/entities/connection_status.dart';
-import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
-
-import '../../../core/widgets/loading_widget.dart';
 import '../bloc/check_in_bloc.dart';
+import '../bloc/check_in_event.dart' as ci;
+import '../bloc/check_in_state.dart';
 import '../widgets/camera_section.dart';
 import '../widgets/check_in_listeners.dart';
 import '../widgets/debug_controls_card.dart';
@@ -40,7 +37,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
   /// Initializes camera permissions on screen load
   void _initializeCamera() {
     context.read<CheckInBloc>().add(
-      const CheckInEvent.requestCameraPermission(),
+      const ci.CheckInEvent.requestCameraPermission(),
     );
   }
 
@@ -62,64 +59,34 @@ class _CheckInScreenState extends State<CheckInScreen> {
 
   /// Builds the main body content with all sections
   Widget _buildBody() {
-    return BlocListener<CheckInBloc, CheckInState>(
-      listenWhen:
-          (previous, current) =>
-              // Auto-start streaming when both camera and websocket are ready
-              (previous.cameraStatus != current.cameraStatus ||
-                  previous.connectionStatus != current.connectionStatus) &&
-              current.cameraStatus == CameraStatus.operational &&
-              current.connectionStatus == ConnectionStatus.connected &&
-              current.streamingStatus == StreamingStatus.idle,
-      listener: (context, state) {
-        // Automatically start streaming when conditions are met
-        context.read<CheckInBloc>().add(const CheckInEvent.startStreaming());
-      },
-      child: BlocBuilder<CheckInBloc, CheckInState>(
-        buildWhen:
-            (previous, current) => previous.isDebugMode != current.isDebugMode,
-        builder: (context, state) {
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // System Status Section
-                const SystemStatusCard(),
+    return BlocBuilder<CheckInBloc, CheckInState>(
+      buildWhen:
+          (previous, current) => previous.isDebugMode != current.isDebugMode,
+      builder: (context, state) {
+        return SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // System Status Section
+              const SystemStatusCard(),
+              const SizedBox(height: 16),
+
+              // Camera Preview Section
+              const CameraSection(),
+              const SizedBox(height: 16),
+
+              // Debug Sections (only visible in debug mode)
+              if (state.isDebugMode) ...[
+                const DebugControlsCard(),
                 const SizedBox(height: 16),
-
-                // Camera Preview Section
-                const CameraSection(),
+                const DebugInformationCard(),
                 const SizedBox(height: 16),
-
-                // Debug Sections (only visible in debug mode)
-                if (state.isDebugMode) ...[
-                  const DebugControlsCard(),
-                  const SizedBox(height: 16),
-                  const DebugInformationCard(),
-                  const SizedBox(height: 16),
-                ],
-
-                // Loading Indicator
-                BlocBuilder<CheckInBloc, CheckInState>(
-                  buildWhen:
-                      (previous, current) =>
-                          previous.isLoading != current.isLoading,
-                  builder: (context, state) {
-                    if (!state.isLoading) return const SizedBox.shrink();
-                    return const Column(
-                      children: [SizedBox(height: 16), LoadingWidget()],
-                    );
-                  },
-                ),
-
-                // Bottom padding for better scrolling experience
-                const SizedBox(height: 20),
               ],
-            ),
-          );
-        },
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -1,5 +1,5 @@
 /// Represents the current WebSocket connection status
-enum ConnectionStatus {
+enum WebSocketConnectionStatus {
   /// Not connected to backend
   disconnected,
 
@@ -11,10 +11,4 @@ enum ConnectionStatus {
 
   /// Connection failed
   failed,
-
-  /// Connection timed out
-  timeout,
-
-  /// Retrying to connect
-  retrying,
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -38,22 +39,25 @@ class WebSocketService {
 
   late WebSocketConfig _config;
 
-  final _statusController = StreamController<ConnectionStatus>.broadcast();
-  Stream<ConnectionStatus> get connectionStatusStream =>
+  final _statusController =
+      StreamController<WebSocketConnectionStatus>.broadcast();
+  Stream<WebSocketConnectionStatus> get connectionStatusStream =>
       _statusController.stream;
 
   final _messageController = StreamController<dynamic>.broadcast();
   Stream<dynamic> get messageStream => _messageController.stream;
 
-  ConnectionStatus _currentStatus = ConnectionStatus.disconnected;
-  ConnectionStatus get currentStatus => _currentStatus;
+  WebSocketConnectionStatus _currentStatus =
+      WebSocketConnectionStatus.disconnected;
+  WebSocketConnectionStatus get currentStatus => _currentStatus;
+  WebSocketConfig get currentConfig => _config;
 
   void initialize({WebSocketConfig? config}) {
     _config = config ?? WebSocketConfig.development;
-    updateStatus(ConnectionStatus.disconnected);
+    updateStatus(WebSocketConnectionStatus.disconnected);
   }
 
-  void updateStatus(ConnectionStatus status) {
+  void updateStatus(WebSocketConnectionStatus status) {
     if (_statusController.isClosed) return;
     _currentStatus = status;
     _statusController.add(status);
@@ -61,38 +65,95 @@ class WebSocketService {
 
   Future<void> connect() async {
     if (_statusController.isClosed ||
-        (channel != null && _currentStatus == ConnectionStatus.connected)) {
+        _currentStatus == WebSocketConnectionStatus.connected ||
+        _currentStatus == WebSocketConnectionStatus.connecting) {
       return;
     }
 
-    updateStatus(ConnectionStatus.connecting);
-    _connect();
+    updateStatus(WebSocketConnectionStatus.connecting);
+
+    final completer = Completer<void>();
+
+    try {
+      await _connectWithCompleter(completer);
+      await completer.future.timeout(_config.connectionTimeout);
+    } catch (e) {
+      handleError(e);
+      rethrow;
+    }
   }
 
-  void _connect() {
-    channel?.sink.close();
+  /// Perform lightweight server reachability check using HTTP ping
+  Future<bool> pingServer() async {
+    try {
+      // Get WebSocket URL and convert to HTTP for lightweight check
+      final wsUrl = currentConfig.url;
+      final httpUrl = wsUrl
+          .replaceFirst('wss://', 'https://')
+          .replaceFirst('ws://', 'http://');
+
+      // Perform HTTP HEAD request with timeout
+      final response = await http
+          .head(Uri.parse(httpUrl))
+          .timeout(const Duration(seconds: 5));
+
+      // Any response < 500 means server is reachable
+      return response.statusCode < 500;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Properly cleanup existing connection resources
+  Future<void> _cleanupExistingConnection() async {
+    if (subscription != null) {
+      await subscription!.cancel();
+      subscription = null;
+    }
+    if (channel != null) {
+      await channel!.sink.close();
+      channel = null;
+    }
+  }
+
+  Future<void> _connectWithCompleter(Completer<void> completer) async {
+    await _cleanupExistingConnection();
 
     try {
       channel = WebSocketChannel.connect(Uri.parse(_config.url));
-      updateStatus(ConnectionStatus.connecting);
+      updateStatus(WebSocketConnectionStatus.connecting);
 
       subscription = channel!.stream.listen(
         handleMessage,
-        onError: handleError,
+        onError: (error) {
+          handleError(error);
+          if (!completer.isCompleted) {
+            completer.completeError(error);
+          }
+        },
         onDone: handleDone,
         cancelOnError: true,
       );
 
       channel!.ready
           .then((_) {
-            updateStatus(ConnectionStatus.connected);
+            updateStatus(WebSocketConnectionStatus.connected);
+            if (!completer.isCompleted) {
+              completer.complete();
+            }
           })
           .catchError((error) {
             handleError(error);
+            if (!completer.isCompleted) {
+              completer.completeError(error);
+            }
             return null;
           });
     } catch (e) {
       handleError(e);
+      if (!completer.isCompleted) {
+        completer.completeError(e);
+      }
     }
   }
 
@@ -105,31 +166,39 @@ class WebSocketService {
   void handleError(dynamic error) {
     if (_statusController.isClosed) return;
 
-    updateStatus(ConnectionStatus.failed);
+    updateStatus(WebSocketConnectionStatus.failed);
   }
 
   void handleDone() {
-    if (_statusController.isClosed ||
-        _currentStatus == ConnectionStatus.disconnected) {
-      return;
-    }
-    if (_currentStatus == ConnectionStatus.connected) {
-      handleError('Connection closed unexpectedly');
+    if (_statusController.isClosed) return;
+
+    switch (_currentStatus) {
+      case WebSocketConnectionStatus.connected:
+        // Unexpected disconnect from connected state
+        updateStatus(WebSocketConnectionStatus.disconnected);
+        break;
+      case WebSocketConnectionStatus.connecting:
+        // Connection failed during handshake
+        updateStatus(WebSocketConnectionStatus.failed);
+        break;
+      case WebSocketConnectionStatus.disconnected:
+      case WebSocketConnectionStatus.failed:
+        // Expected states, no action needed
+        break;
     }
   }
 
   void sendMessage(dynamic message) {
-    if (channel != null && _currentStatus == ConnectionStatus.connected) {
+    if (channel != null &&
+        _currentStatus == WebSocketConnectionStatus.connected) {
       channel!.sink.add(message);
     }
   }
 
   Future<void> disconnect() async {
-    await subscription?.cancel();
-    await channel?.sink.close();
-    channel = null;
+    await _cleanupExistingConnection();
     if (!_statusController.isClosed) {
-      updateStatus(ConnectionStatus.disconnected);
+      updateStatus(WebSocketConnectionStatus.disconnected);
     }
   }
 
