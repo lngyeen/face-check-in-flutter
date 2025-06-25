@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:face_check_in_flutter/flavors.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
@@ -14,18 +15,7 @@ class WebSocketConfig with _$WebSocketConfig {
   const factory WebSocketConfig({
     required String url,
     @Default(Duration(seconds: 10)) Duration connectionTimeout,
-    @Default(false)
-    bool
-    enableInternalRetry, // Disable internal retry to let ReconnectionManager handle it
-    @Default(Duration(seconds: 3)) Duration retryDelay,
   }) = _WebSocketConfig;
-
-  static final development = WebSocketConfig(
-    url: 'wss://facedetection-ws.owt.vn',
-  );
-  static final production = WebSocketConfig(
-    url: 'wss://your_production_ws_url',
-  );
 }
 
 @lazySingleton
@@ -53,7 +43,7 @@ class WebSocketService {
   WebSocketConfig get currentConfig => _config;
 
   void initialize({WebSocketConfig? config}) {
-    _config = config ?? WebSocketConfig.development;
+    _config = config ?? WebSocketConfig(url: F.baseWebSocketUrl);
     updateStatus(WebSocketConnectionStatus.disconnected);
   }
 

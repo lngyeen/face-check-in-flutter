@@ -137,6 +137,21 @@ class CheckInSuccessDialog extends StatelessWidget {
                   ),
                 ),
               ),
+              Image.memory(
+                // Convert base64 to bytes
+                base64Decode(userImage!),
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey[200],
+                    child: const Icon(
+                      Icons.person,
+                      size: 60,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              ),
               const SizedBox(height: 16),
             ],
 
@@ -154,15 +169,6 @@ class CheckInSuccessDialog extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Auto-close message
-            Text(
-              'This dialog will close automatically in 5 seconds',
-              style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-              textAlign: TextAlign.center,
             ),
           ],
         ),

@@ -27,7 +27,6 @@ mixin _$ConnectionEvent {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -41,7 +40,6 @@ mixin _$ConnectionEvent {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -55,7 +53,6 @@ mixin _$ConnectionEvent {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -73,7 +70,6 @@ mixin _$ConnectionEvent {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -88,7 +84,6 @@ mixin _$ConnectionEvent {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -103,7 +98,6 @@ mixin _$ConnectionEvent {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -217,7 +211,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -235,7 +228,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -253,7 +245,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -278,7 +269,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -297,7 +287,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -316,7 +305,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -425,7 +413,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -443,7 +430,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -461,7 +447,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -486,7 +471,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -505,7 +489,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -524,7 +507,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -603,7 +585,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -621,7 +602,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -639,7 +619,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -664,7 +643,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -683,7 +661,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -702,7 +679,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -771,7 +747,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -789,7 +764,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -807,7 +781,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -832,7 +805,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -851,7 +823,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -870,7 +841,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -939,7 +909,6 @@ class _$FastRetryTimerExpiredImpl implements FastRetryTimerExpired {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -957,7 +926,6 @@ class _$FastRetryTimerExpiredImpl implements FastRetryTimerExpired {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -975,7 +943,6 @@ class _$FastRetryTimerExpiredImpl implements FastRetryTimerExpired {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -1000,7 +967,6 @@ class _$FastRetryTimerExpiredImpl implements FastRetryTimerExpired {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -1019,7 +985,6 @@ class _$FastRetryTimerExpiredImpl implements FastRetryTimerExpired {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -1038,7 +1003,6 @@ class _$FastRetryTimerExpiredImpl implements FastRetryTimerExpired {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -1108,7 +1072,6 @@ class _$BackgroundCheckTimerExpiredImpl implements BackgroundCheckTimerExpired {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -1126,7 +1089,6 @@ class _$BackgroundCheckTimerExpiredImpl implements BackgroundCheckTimerExpired {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -1144,7 +1106,6 @@ class _$BackgroundCheckTimerExpiredImpl implements BackgroundCheckTimerExpired {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -1169,7 +1130,6 @@ class _$BackgroundCheckTimerExpiredImpl implements BackgroundCheckTimerExpired {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -1188,7 +1148,6 @@ class _$BackgroundCheckTimerExpiredImpl implements BackgroundCheckTimerExpired {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -1207,7 +1166,6 @@ class _$BackgroundCheckTimerExpiredImpl implements BackgroundCheckTimerExpired {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -1276,7 +1234,6 @@ class _$InitializeImpl implements Initialize {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -1294,7 +1251,6 @@ class _$InitializeImpl implements Initialize {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -1312,7 +1268,6 @@ class _$InitializeImpl implements Initialize {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -1337,7 +1292,6 @@ class _$InitializeImpl implements Initialize {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -1356,7 +1310,6 @@ class _$InitializeImpl implements Initialize {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -1375,7 +1328,6 @@ class _$InitializeImpl implements Initialize {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -1390,173 +1342,6 @@ class _$InitializeImpl implements Initialize {
 
 abstract class Initialize implements ConnectionEvent {
   const factory Initialize() = _$InitializeImpl;
-}
-
-/// @nodoc
-abstract class _$$DisposeImplCopyWith<$Res> {
-  factory _$$DisposeImplCopyWith(
-    _$DisposeImpl value,
-    $Res Function(_$DisposeImpl) then,
-  ) = __$$DisposeImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$DisposeImplCopyWithImpl<$Res>
-    extends _$ConnectionEventCopyWithImpl<$Res, _$DisposeImpl>
-    implements _$$DisposeImplCopyWith<$Res> {
-  __$$DisposeImplCopyWithImpl(
-    _$DisposeImpl _value,
-    $Res Function(_$DisposeImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of ConnectionEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$DisposeImpl implements Dispose {
-  const _$DisposeImpl();
-
-  @override
-  String toString() {
-    return 'ConnectionEvent.dispose()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DisposeImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(bool isConnected) networkStatusChanged,
-    required TResult Function(WebSocketConnectionStatus status)
-    webSocketStatusChanged,
-    required TResult Function() connectionRequested,
-    required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
-    required TResult Function() initialize,
-    required TResult Function() dispose,
-    required TResult Function() startStreaming,
-    required TResult Function() stopStreaming,
-    required TResult Function(int maxFps) configureStream,
-  }) {
-    return dispose();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isConnected)? networkStatusChanged,
-    TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
-    TResult? Function()? connectionRequested,
-    TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
-    TResult? Function()? initialize,
-    TResult? Function()? dispose,
-    TResult? Function()? startStreaming,
-    TResult? Function()? stopStreaming,
-    TResult? Function(int maxFps)? configureStream,
-  }) {
-    return dispose?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isConnected)? networkStatusChanged,
-    TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
-    TResult Function()? connectionRequested,
-    TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
-    TResult Function()? initialize,
-    TResult Function()? dispose,
-    TResult Function()? startStreaming,
-    TResult Function()? stopStreaming,
-    TResult Function(int maxFps)? configureStream,
-    required TResult orElse(),
-  }) {
-    if (dispose != null) {
-      return dispose();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(NetworkStatusChanged value) networkStatusChanged,
-    required TResult Function(WebSocketStatusChanged value)
-    webSocketStatusChanged,
-    required TResult Function(ConnectionRequested value) connectionRequested,
-    required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
-    required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
-    required TResult Function(StartStreaming value) startStreaming,
-    required TResult Function(StopStreaming value) stopStreaming,
-    required TResult Function(ConfigureStream value) configureStream,
-  }) {
-    return dispose(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(NetworkStatusChanged value)? networkStatusChanged,
-    TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
-    TResult? Function(ConnectionRequested value)? connectionRequested,
-    TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
-    TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
-    TResult? Function(StartStreaming value)? startStreaming,
-    TResult? Function(StopStreaming value)? stopStreaming,
-    TResult? Function(ConfigureStream value)? configureStream,
-  }) {
-    return dispose?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(NetworkStatusChanged value)? networkStatusChanged,
-    TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
-    TResult Function(ConnectionRequested value)? connectionRequested,
-    TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
-    TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
-    TResult Function(StartStreaming value)? startStreaming,
-    TResult Function(StopStreaming value)? stopStreaming,
-    TResult Function(ConfigureStream value)? configureStream,
-    required TResult orElse(),
-  }) {
-    if (dispose != null) {
-      return dispose(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Dispose implements ConnectionEvent {
-  const factory Dispose() = _$DisposeImpl;
 }
 
 /// @nodoc
@@ -1610,7 +1395,6 @@ class _$StartStreamingImpl implements StartStreaming {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -1628,7 +1412,6 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -1646,7 +1429,6 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -1671,7 +1453,6 @@ class _$StartStreamingImpl implements StartStreaming {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -1690,7 +1471,6 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -1709,7 +1489,6 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -1777,7 +1556,6 @@ class _$StopStreamingImpl implements StopStreaming {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -1795,7 +1573,6 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -1813,7 +1590,6 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -1838,7 +1614,6 @@ class _$StopStreamingImpl implements StopStreaming {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -1857,7 +1632,6 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -1876,7 +1650,6 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -1975,7 +1748,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     required TResult Function() fastRetryTimerExpired,
     required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
-    required TResult Function() dispose,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -1993,7 +1765,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult? Function()? fastRetryTimerExpired,
     TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
-    TResult? Function()? dispose,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -2011,7 +1782,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult Function()? fastRetryTimerExpired,
     TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
-    TResult Function()? dispose,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -2036,7 +1806,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     required TResult Function(BackgroundCheckTimerExpired value)
     backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
-    required TResult Function(Dispose value) dispose,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -2055,7 +1824,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult? Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(Dispose value)? dispose,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -2074,7 +1842,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult Function(BackgroundCheckTimerExpired value)?
     backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
-    TResult Function(Dispose value)? dispose,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,

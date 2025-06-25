@@ -19,9 +19,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WebSocketConfig {
   String get url => throw _privateConstructorUsedError;
   Duration get connectionTimeout => throw _privateConstructorUsedError;
-  bool get enableInternalRetry =>
-      throw _privateConstructorUsedError; // Disable internal retry to let ReconnectionManager handle it
-  Duration get retryDelay => throw _privateConstructorUsedError;
 
   /// Create a copy of WebSocketConfig
   /// with the given fields replaced by the non-null parameter values.
@@ -37,12 +34,7 @@ abstract class $WebSocketConfigCopyWith<$Res> {
     $Res Function(WebSocketConfig) then,
   ) = _$WebSocketConfigCopyWithImpl<$Res, WebSocketConfig>;
   @useResult
-  $Res call({
-    String url,
-    Duration connectionTimeout,
-    bool enableInternalRetry,
-    Duration retryDelay,
-  });
+  $Res call({String url, Duration connectionTimeout});
 }
 
 /// @nodoc
@@ -59,12 +51,7 @@ class _$WebSocketConfigCopyWithImpl<$Res, $Val extends WebSocketConfig>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? url = null,
-    Object? connectionTimeout = null,
-    Object? enableInternalRetry = null,
-    Object? retryDelay = null,
-  }) {
+  $Res call({Object? url = null, Object? connectionTimeout = null}) {
     return _then(
       _value.copyWith(
             url:
@@ -76,16 +63,6 @@ class _$WebSocketConfigCopyWithImpl<$Res, $Val extends WebSocketConfig>
                 null == connectionTimeout
                     ? _value.connectionTimeout
                     : connectionTimeout // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-            enableInternalRetry:
-                null == enableInternalRetry
-                    ? _value.enableInternalRetry
-                    : enableInternalRetry // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            retryDelay:
-                null == retryDelay
-                    ? _value.retryDelay
-                    : retryDelay // ignore: cast_nullable_to_non_nullable
                         as Duration,
           )
           as $Val,
@@ -102,12 +79,7 @@ abstract class _$$WebSocketConfigImplCopyWith<$Res>
   ) = __$$WebSocketConfigImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String url,
-    Duration connectionTimeout,
-    bool enableInternalRetry,
-    Duration retryDelay,
-  });
+  $Res call({String url, Duration connectionTimeout});
 }
 
 /// @nodoc
@@ -123,12 +95,7 @@ class __$$WebSocketConfigImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? url = null,
-    Object? connectionTimeout = null,
-    Object? enableInternalRetry = null,
-    Object? retryDelay = null,
-  }) {
+  $Res call({Object? url = null, Object? connectionTimeout = null}) {
     return _then(
       _$WebSocketConfigImpl(
         url:
@@ -141,16 +108,6 @@ class __$$WebSocketConfigImplCopyWithImpl<$Res>
                 ? _value.connectionTimeout
                 : connectionTimeout // ignore: cast_nullable_to_non_nullable
                     as Duration,
-        enableInternalRetry:
-            null == enableInternalRetry
-                ? _value.enableInternalRetry
-                : enableInternalRetry // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        retryDelay:
-            null == retryDelay
-                ? _value.retryDelay
-                : retryDelay // ignore: cast_nullable_to_non_nullable
-                    as Duration,
       ),
     );
   }
@@ -162,8 +119,6 @@ class _$WebSocketConfigImpl implements _WebSocketConfig {
   const _$WebSocketConfigImpl({
     required this.url,
     this.connectionTimeout = const Duration(seconds: 10),
-    this.enableInternalRetry = false,
-    this.retryDelay = const Duration(seconds: 3),
   });
 
   @override
@@ -171,17 +126,10 @@ class _$WebSocketConfigImpl implements _WebSocketConfig {
   @override
   @JsonKey()
   final Duration connectionTimeout;
-  @override
-  @JsonKey()
-  final bool enableInternalRetry;
-  // Disable internal retry to let ReconnectionManager handle it
-  @override
-  @JsonKey()
-  final Duration retryDelay;
 
   @override
   String toString() {
-    return 'WebSocketConfig(url: $url, connectionTimeout: $connectionTimeout, enableInternalRetry: $enableInternalRetry, retryDelay: $retryDelay)';
+    return 'WebSocketConfig(url: $url, connectionTimeout: $connectionTimeout)';
   }
 
   @override
@@ -191,21 +139,11 @@ class _$WebSocketConfigImpl implements _WebSocketConfig {
             other is _$WebSocketConfigImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.connectionTimeout, connectionTimeout) ||
-                other.connectionTimeout == connectionTimeout) &&
-            (identical(other.enableInternalRetry, enableInternalRetry) ||
-                other.enableInternalRetry == enableInternalRetry) &&
-            (identical(other.retryDelay, retryDelay) ||
-                other.retryDelay == retryDelay));
+                other.connectionTimeout == connectionTimeout));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    url,
-    connectionTimeout,
-    enableInternalRetry,
-    retryDelay,
-  );
+  int get hashCode => Object.hash(runtimeType, url, connectionTimeout);
 
   /// Create a copy of WebSocketConfig
   /// with the given fields replaced by the non-null parameter values.
@@ -223,18 +161,12 @@ abstract class _WebSocketConfig implements WebSocketConfig {
   const factory _WebSocketConfig({
     required final String url,
     final Duration connectionTimeout,
-    final bool enableInternalRetry,
-    final Duration retryDelay,
   }) = _$WebSocketConfigImpl;
 
   @override
   String get url;
   @override
   Duration get connectionTimeout;
-  @override
-  bool get enableInternalRetry; // Disable internal retry to let ReconnectionManager handle it
-  @override
-  Duration get retryDelay;
 
   /// Create a copy of WebSocketConfig
   /// with the given fields replaced by the non-null parameter values.

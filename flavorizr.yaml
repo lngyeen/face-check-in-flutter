@@ -1,0 +1,24 @@
+flavors:
+  dev:
+    app:
+      name: "Face Check-In Dev"
+    android:
+      applicationId: "com.owt.face_check_in_flutter.dev"
+    ios:
+      bundleId: "com.owt.faceCheckInFlutter.dev"
+
+  stag:
+    app:
+      name: "Face Check-In Staging"
+    android:
+      applicationId: "com.owt.face_check_in_flutter.stag"
+    ios:
+      bundleId: "com.owt.faceCheckInFlutter.stag"
+
+  prod:
+    app:
+      name: "Face Check-In"
+    android:
+      applicationId: "com.owt.face_check_in_flutter"
+    ios:
+      bundleId: "com.owt.faceCheckInFlutter"

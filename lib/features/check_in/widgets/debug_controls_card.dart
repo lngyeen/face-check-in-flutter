@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
 import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
-import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
 import 'package:face_check_in_flutter/features/connection/connection.dart';
 
 import '../bloc/check_in_bloc.dart';

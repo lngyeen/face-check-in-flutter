@@ -199,18 +199,10 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     final status = await _permissionService.requestCameraPermission();
-    final isPermanentlyDenied = status == PermissionStatus.permanentlyDenied;
-
-    if (isPermanentlyDenied) {
-      _permissionService.openAppSettings();
-    }
 
     emit(
       state.copyWith(
-        permissionStatus:
-            isPermanentlyDenied
-                ? PermissionStatus.permanentlyDenied
-                : PermissionStatus.denied,
+        permissionStatus: status,
         cameraStatus: CameraStatus.permissionDenied,
         currentError: const CheckInError(
           message: 'Camera permission is required to use face check-in feature',

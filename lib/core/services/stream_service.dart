@@ -18,7 +18,7 @@ class StreamService {
   final WebSocketService _webSocketService;
 
   // Configuration
-  int _maxFps = 5; // Default 5 FPS
+  int _maxFps = 2;
   Duration get _throttleDuration => Duration(milliseconds: 1000 ~/ _maxFps);
 
   // RxDart subjects for frame processing

@@ -51,10 +51,7 @@ class CheckInState with _$CheckInState {
       cameraStatus == CameraStatus.operational && connectionState.canStream;
 
   /// Detected faces derived from latest frame data
-  List<FaceDetectionResult> get detectedFaces =>
-      (latestFrameData?.faces ?? [])
-          //.where((face) => face.isRecognized)
-          .toList();
+  List<FaceDetectionResult> get detectedFaces => latestFrameData?.faces ?? [];
 
   /// Latest annotated image from backend for face overlay display
   String? get annotatedImage => latestFrameData?.annotatedImage;

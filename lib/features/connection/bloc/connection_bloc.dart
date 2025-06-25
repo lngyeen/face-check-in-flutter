@@ -16,6 +16,8 @@ import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
 import 'connection_event.dart';
 import 'connection_state.dart';
 
+// TODO: Check points to improve
+
 /// ConnectionBloc - Manages all connection-related state and retry logic
 /// Replaces ConnectionManager + ReconnectionStrategy with clean BLoC pattern
 @lazySingleton

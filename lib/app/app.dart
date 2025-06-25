@@ -1,11 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:face_check_in_flutter/core/di/di.dart';
+import 'package:face_check_in_flutter/core/theme/app_theme.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/features/connection/connection.dart'
     as conn;
+import 'package:face_check_in_flutter/flavors.dart';
 
 import '../features/check_in/screens/check_in_screen.dart';
 
@@ -26,111 +29,15 @@ class App extends StatelessWidget {
         BlocProvider<CheckInBloc>(create: (context) => getIt<CheckInBloc>()),
       ],
       child: MaterialApp(
-        title: 'FaceCheckIn Employee',
+        title: F.title,
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          // Company brand colors - red theme
-          primarySwatch: Colors.red,
-          primaryColor: Colors.red[700],
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.red,
-            brightness: Brightness.light,
-          ),
 
-          // App bar theme
-          appBarTheme: AppBarTheme(
-            backgroundColor: Colors.red[700],
-            foregroundColor: Colors.white,
-            elevation: 2,
-            centerTitle: true,
-            titleTextStyle: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-            ),
-          ),
+        // Use centralized theme configuration
+        theme: AppTheme.lightTheme,
+        themeMode: ThemeMode.light,
 
-          // Button themes
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red[700],
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-          ),
-
-          // Card theme
-          cardTheme: CardTheme(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            margin: const EdgeInsets.all(8),
-          ),
-
-          // Text themes
-          textTheme: const TextTheme(
-            headlineLarge: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
-            headlineMedium: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
-            bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
-            bodyMedium: TextStyle(fontSize: 14, color: Colors.black54),
-          ),
-
-          // Input decoration theme
-          inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.red[700]!, width: 2),
-            ),
-          ),
-
-          // Progress indicator theme
-          progressIndicatorTheme: ProgressIndicatorThemeData(
-            color: Colors.red[700],
-          ),
-
-          // Snackbar theme
-          snackBarTheme: SnackBarThemeData(
-            backgroundColor: Colors.grey[800],
-            contentTextStyle: const TextStyle(color: Colors.white),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            behavior: SnackBarBehavior.floating,
-          ),
-        ),
-
-        // Dark theme (optional)
-        darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.red,
-          primaryColor: Colors.red[400],
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.red,
-            brightness: Brightness.dark,
-          ),
-        ),
-
-        // Theme mode
-        themeMode: ThemeMode.system,
-
-        // Home screen
-        home: const CheckInScreen(),
-
-        // Route configuration (for future expansion)
-        routes: {'/check-in': (context) => const CheckInScreen()},
+        // Home screen with flavor banner in debug mode
+        home: _flavorBanner(child: const CheckInScreen(), show: kDebugMode),
 
         // Error handling
         builder: (context, child) {
@@ -144,4 +51,21 @@ class App extends StatelessWidget {
       ),
     );
   }
+
+  /// Creates a flavor banner for debug mode to easily identify the current flavor
+  Widget _flavorBanner({required Widget child, bool show = true}) =>
+      show
+          ? Banner(
+            location: BannerLocation.topStart,
+            message: F.name,
+            color: AppTheme.getFlavorBannerColor().withAlpha(150),
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 12.0,
+              letterSpacing: 1.0,
+            ),
+            textDirection: TextDirection.ltr,
+            child: child,
+          )
+          : Container(child: child);
 }
