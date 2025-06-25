@@ -46,9 +46,22 @@ class WebSocketConfig {
   // Environment-specific configurations
 
   /// Development environment configuration
-  /// Story 2.1 spec: ws://192.168.1.234:3009
+  /// Updated to use localhost for testing
   static const WebSocketConfig development = WebSocketConfig(
-    url: 'ws://192.168.1.234:3009',
+    url: 'ws://10.0.2.2:3009', // Android emulator localhost
+    timeout: Duration(seconds: 30),
+    maxRetries: 3,
+    retryDelay: Duration(seconds: 3),
+    enableLogging: true,
+    enableHeartbeat: true,
+    enableAutoReconnect: true,
+    enableExponentialBackoff: true,
+  );
+
+  /// Alternative development config for real devices
+  static const WebSocketConfig developmentRealDevice = WebSocketConfig(
+    url:
+        'ws://192.168.1.180:3009', // Computer's local IP for real device testing
     timeout: Duration(seconds: 30),
     maxRetries: 3,
     retryDelay: Duration(seconds: 3),
@@ -85,7 +98,8 @@ class WebSocketConfig {
   /// Get configuration for current environment
   static WebSocketConfig get current {
     if (kDebugMode) {
-      return development;
+      // Use real device config for physical device testing
+      return developmentRealDevice;
     } else if (kReleaseMode) {
       return production;
     } else {
