@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 /// Configuration class for debug features
 class DebugConfig {
   /// Whether debug view is enabled
-  static bool isDebugViewEnabled = kDebugMode;
+  static bool isDebugViewEnabled = false;
 
   /// Whether debug logging is enabled
   static bool isDebugLoggingEnabled = kDebugMode;
@@ -12,16 +12,16 @@ class DebugConfig {
   static const int maxDebugMessages = 100;
 
   /// Whether to show debug view by default
-  static bool showDebugViewByDefault = true;
+  static bool showDebugViewByDefault = false;
 
   /// Whether to enable debug toggle functionality
   static bool isDebugToggleEnabled = kDebugMode;
 
   /// Resets the config to its default values (for testing)
   static void reset() {
-    isDebugViewEnabled = kDebugMode;
+    isDebugViewEnabled = false;
     isDebugLoggingEnabled = kDebugMode;
-    showDebugViewByDefault = true;
+    showDebugViewByDefault = false;
     isDebugToggleEnabled = kDebugMode;
   }
 }

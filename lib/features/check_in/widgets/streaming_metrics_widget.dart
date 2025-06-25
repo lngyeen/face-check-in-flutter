@@ -186,14 +186,8 @@ class StreamingMetricsWidget extends StatelessWidget {
     switch (status) {
       case StreamingStatus.idle:
         return Colors.grey;
-      case StreamingStatus.starting:
-        return Colors.blue;
       case StreamingStatus.active:
         return Colors.green;
-      case StreamingStatus.paused:
-        return Colors.orange;
-      case StreamingStatus.stopping:
-        return Colors.yellow;
       case StreamingStatus.error:
         return Colors.red;
     }
@@ -203,14 +197,8 @@ class StreamingMetricsWidget extends StatelessWidget {
     switch (status) {
       case StreamingStatus.idle:
         return 'Idle';
-      case StreamingStatus.starting:
-        return 'Starting...';
       case StreamingStatus.active:
         return 'Active';
-      case StreamingStatus.paused:
-        return 'Paused';
-      case StreamingStatus.stopping:
-        return 'Stopping...';
       case StreamingStatus.error:
         return 'Error';
     }

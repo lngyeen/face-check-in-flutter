@@ -33,9 +33,7 @@ class CameraServiceImpl implements CameraService {
       );
     }
 
-    CameraDescription selectedCamera;
-
-    // Try to find front camera first
+    // Only use front camera for face check-in
     final frontCameras =
         cameras
             .where(
@@ -43,37 +41,18 @@ class CameraServiceImpl implements CameraService {
             )
             .toList();
 
-    if (frontCameras.isNotEmpty) {
-      selectedCamera = frontCameras.first;
-      debugPrint(
-        '📱 Selected front camera: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
-      );
-    } else {
-      // If no front camera, try to find back camera
-      final backCameras =
-          cameras
-              .where(
-                (camera) => camera.lensDirection == CameraLensDirection.back,
-              )
-              .toList();
-
-      if (backCameras.isNotEmpty) {
-        selectedCamera = backCameras.first;
-        debugPrint(
-          '⚠️ No front camera found, using back camera: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
-        );
-      } else {
-        // Fallback to first available camera
-        selectedCamera = cameras.first;
-        debugPrint(
-          '⚠️ No front or back camera found, using first available: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
-        );
-      }
+    if (frontCameras.isEmpty) {
+      throw Exception('Front camera not available. Face check-in requires front camera.');
     }
+
+    final selectedCamera = frontCameras.first;
+    debugPrint(
+      '📱 Selected front camera: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
+    );
 
     controller = CameraController(
       selectedCamera,
-      ResolutionPreset.medium,
+      ResolutionPreset.high, // Higher resolution for better face detection
       enableAudio: false,
     );
 

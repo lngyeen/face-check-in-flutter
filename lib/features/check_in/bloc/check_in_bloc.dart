@@ -81,10 +81,14 @@ class CheckInState with _$CheckInState {
 /// Handles camera, WebSocket, streaming, and UI state management
 @injectable
 class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
+  // Services
+  final CameraService _cameraService;
   final PermissionService _permissionService;
   final WebSocketService _webSocketService;
-  final CameraService _cameraService;
   final FrameStreamingService _frameStreamingService;
+
+  // Stream subscriptions for cleanup
+  StreamSubscription<dynamic>? _messageSubscription;
 
   CheckInBloc(
     this._permissionService,
@@ -169,9 +173,20 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
 
     // Listen to incoming WebSocket messages
-    _webSocketService.messages.listen((message) {
-      add(CheckInEvent.webSocketMessageReceived(message));
-    });
+    _messageSubscription = _webSocketService.messages.listen(
+      (message) {
+        debugPrint('🔥 CheckInBloc: Raw WebSocket message received in listener: $message');
+        add(CheckInEvent.webSocketMessageReceived(message));
+      }, 
+      onError: (error) {
+        debugPrint('❌ CheckInBloc: WebSocket message stream error: $error');
+      }, 
+      onDone: () {
+        debugPrint('📪 CheckInBloc: WebSocket message stream closed');
+      },
+    );
+
+    debugPrint('🔥 CheckInBloc: WebSocket message listener setup complete');
 
     // Listen to WebSocket metrics for debugging
     _webSocketService.metrics.listen((metrics) {
@@ -467,18 +482,35 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       ),
     );
 
-    // Placeholder for WebSocket connection logic
-    // This will be implemented in Story 2.1
-    await Future.delayed(const Duration(milliseconds: 2000));
-
-    emit(
-      state.copyWith(
-        connectionStatus: ConnectionStatus.connected,
-        isLoading: false,
-        toastStatus: ToastStatus.showing,
-        toastMessage: 'Connected to backend (placeholder)',
-      ),
-    );
+    try {
+      // Use real WebSocket service instead of placeholder
+      final success = await _webSocketService.connect();
+      
+      if (success) {
+        emit(
+          state.copyWith(
+            connectionStatus: ConnectionStatus.connected,
+            isLoading: false,
+            toastStatus: ToastStatus.showing,
+            toastMessage: 'Connected to backend',
+          ),
+        );
+        debugPrint('✅ CheckInBloc: WebSocket connected successfully');
+      } else {
+        throw Exception('Failed to connect to WebSocket');
+      }
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Connection failed: $e');
+      emit(
+        state.copyWith(
+          connectionStatus: ConnectionStatus.failed,
+          isLoading: false,
+          errorMessage: 'Connection failed: $e',
+          toastStatus: ToastStatus.showing,
+          toastMessage: 'Connection failed',
+        ),
+      );
+    }
   }
 
   Future<void> _onConnectionStatusChanged(
@@ -912,17 +944,20 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     debugPrint(
       '📥 CheckInBloc: WebSocket message received: ${event.message['type']}',
     );
+    debugPrint('📥 CheckInBloc: Full message: ${event.message}');
 
     // Handle different message types
     final messageType = event.message['type'] as String?;
 
     switch (messageType) {
       case 'frameResult':
+        debugPrint('📥 CheckInBloc: Processing frameResult message');
         // Parse face detection result from backend - Phase 3
         await _parseAndProcessFrameResult(event.message);
         break;
         
       case 'recognition_result':
+        debugPrint('📥 CheckInBloc: Processing recognition_result message');
         // Legacy recognition result support
         add(
           CheckInEvent.recognitionResultReceived(
@@ -945,6 +980,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
   /// Parse and process frame result from backend - Phase 3
   Future<void> _parseAndProcessFrameResult(Map<String, dynamic> message) async {
+    debugPrint('🔍 CheckInBloc: Starting to parse frameResult...');
+    
     try {
       // Extract data payload
       final data = message['data'] as Map<String, dynamic>?;
@@ -953,14 +990,20 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         return;
       }
 
+      debugPrint('🔍 CheckInBloc: Extracted data: $data');
+
       // Parse timestamp
       final timestampStr = data['timestamp'] as String?;
       final timestamp = timestampStr != null 
           ? DateTime.tryParse(timestampStr) ?? DateTime.now()
           : DateTime.now();
 
+      debugPrint('🔍 CheckInBloc: Parsed timestamp: $timestamp');
+
       // Parse faces array
       final facesJson = data['faces'] as List<dynamic>? ?? [];
+      debugPrint('🔍 CheckInBloc: Raw faces data: $facesJson');
+      
       final faces = facesJson.map((face) {
         final faceMap = face as Map<String, dynamic>;
         return DetectedFace(
@@ -974,9 +1017,13 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         );
       }).toList();
 
+      debugPrint('🔍 CheckInBloc: Parsed faces: ${faces.length} faces');
+
       // Parse status
       final statusStr = data['status'] as String? ?? 'none';
       final status = _parseDetectionStatus(statusStr);
+
+      debugPrint('🔍 CheckInBloc: Parsed status: $status');
 
       // Create face detection result
       final result = FaceDetectionResult(
@@ -985,6 +1032,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         faces: faces,
         status: status,
       );
+
+      debugPrint('🔍 CheckInBloc: Created FaceDetectionResult, adding backendResponseReceived event');
 
       // Add backend response received event
       add(CheckInEvent.backendResponseReceived(result));
@@ -1075,6 +1124,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
   @override
   Future<void> close() {
+    _messageSubscription?.cancel();
     state.cameraController?.dispose();
     _webSocketService.dispose();
     return super.close();

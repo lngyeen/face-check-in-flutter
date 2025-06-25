@@ -320,10 +320,57 @@ class WebSocketService {
 
   /// Send base64 encoded image frame to backend
   bool sendImageFrame(String base64Image) {
-    return sendMessage({
+    final success = sendMessage({
       'type': 'frame',
       'data': base64Image,
       'timestamp': DateTime.now().millisecondsSinceEpoch,
+    });
+
+    // Mock backend response for testing (remove when real backend is ready)
+    if (success) {
+      _generateMockResponse();
+    }
+
+    return success;
+  }
+
+  /// Generate mock face detection response for testing
+  void _generateMockResponse() {
+    debugPrint('🧪 WebSocketService: Generating mock response...');
+    
+    // Simulate backend processing delay
+    Timer(const Duration(milliseconds: 500), () {
+      if (!_isDisposed && _isConnected) {
+        debugPrint('🧪 WebSocketService: Mock timer triggered, generating response');
+        
+        final mockResponse = {
+          'type': 'frameResult',
+          'data': {
+            'frameId': 'frame_${DateTime.now().millisecondsSinceEpoch}',
+            'timestamp': DateTime.now().toIso8601String(),
+            'status': 'face_found', // Options: face_found, no_face, multiple_faces, detecting, error
+            'faces': [
+              {
+                'faceId': 'face_001',
+                'box': [0.3, 0.2, 0.4, 0.6], // [x, y, width, height] normalized
+                'confidence': 0.95,
+                'isRecognized': true,
+                'personId': 'person_123',
+                'employeeName': 'Test User',
+              }
+            ],
+          }
+        };
+
+        debugPrint('🧪 WebSocketService: Mock response created: ${mockResponse['type']}');
+        
+        // Simulate receiving the response
+        final jsonResponse = jsonEncode(mockResponse);
+        debugPrint('🧪 WebSocketService: Calling _handleMessage with mock data');
+        _handleMessage(jsonResponse);
+      } else {
+        debugPrint('🧪 WebSocketService: Mock timer triggered but service disposed or disconnected');
+      }
     });
   }
 
