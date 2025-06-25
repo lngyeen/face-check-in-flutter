@@ -1,0 +1,19 @@
+{
+  "name": "face-check-mock-server",
+  "version": "1.0.0",
+  "description": "Mock WebSocket server for face check-in Flutter app testing",
+  "main": "mock_websocket_server.js",
+  "scripts": {
+    "start": "node mock_websocket_server.js",
+    "dev": "nodemon mock_websocket_server.js"
+  },
+  "dependencies": {
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": ["websocket", "flutter", "face-detection", "mock", "testing"],
+  "author": "Face Check-in Team",
+  "license": "MIT"
+} 
