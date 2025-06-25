@@ -29,16 +29,14 @@ class CameraPreviewWidget extends StatelessWidget {
             if (controller == null || !controller.value.isInitialized) {
               return const Center(child: Text('Camera not available.'));
             }
-            final previewSize = controller.value.previewSize ?? const Size(1, 1);
+            final previewSize =
+                controller.value.previewSize ?? const Size(1, 1);
+
             return FaceBoundingBoxOverlay(
               previewSize: previewSize,
-              child: FittedBox(
-                fit: BoxFit.cover,
-                child: SizedBox(
-                  width: previewSize.height,
-                  height: previewSize.width,
-                  child: CameraPreview(controller),
-                ),
+              child: AspectRatio(
+                aspectRatio: 1.0, // Square
+                child: CameraPreview(controller),
               ),
             );
           case CameraStatus.error:
