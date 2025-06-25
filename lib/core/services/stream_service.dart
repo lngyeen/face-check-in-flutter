@@ -27,6 +27,7 @@ class StreamService {
 
   // Stream state
   bool _isStreaming = false;
+  bool get isStreaming => _isStreaming;
 
   StreamService(this._webSocketService) {
     _initializeFrameProcessing();
@@ -111,10 +112,6 @@ class StreamService {
     _webSocketService.sendMessage(json.encode(payload));
   }
 
-  /// Check if currently streaming
-  bool get isStreaming => _isStreaming;
-
-  /// Dispose resources
   void dispose() {
     _frameSubscription?.cancel();
     _frameSubject.close();

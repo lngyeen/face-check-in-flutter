@@ -24,8 +24,6 @@ mixin _$ConnectionEvent {
     webSocketStatusChanged,
     required TResult Function() connectionRequested,
     required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
@@ -37,8 +35,6 @@ mixin _$ConnectionEvent {
     TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? connectionRequested,
     TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
@@ -50,8 +46,6 @@ mixin _$ConnectionEvent {
     TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? connectionRequested,
     TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
@@ -65,10 +59,6 @@ mixin _$ConnectionEvent {
     webSocketStatusChanged,
     required TResult Function(ConnectionRequested value) connectionRequested,
     required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
@@ -80,9 +70,6 @@ mixin _$ConnectionEvent {
     TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult? Function(ConnectionRequested value)? connectionRequested,
     TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
@@ -94,9 +81,6 @@ mixin _$ConnectionEvent {
     TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult Function(ConnectionRequested value)? connectionRequested,
     TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
@@ -208,8 +192,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     webSocketStatusChanged,
     required TResult Function() connectionRequested,
     required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
@@ -225,8 +207,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? connectionRequested,
     TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
@@ -242,8 +222,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? connectionRequested,
     TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
@@ -264,10 +242,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     webSocketStatusChanged,
     required TResult Function(ConnectionRequested value) connectionRequested,
     required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
@@ -283,9 +257,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult? Function(ConnectionRequested value)? connectionRequested,
     TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
@@ -301,9 +272,6 @@ class _$NetworkStatusChangedImpl implements NetworkStatusChanged {
     TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult Function(ConnectionRequested value)? connectionRequested,
     TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
@@ -410,8 +378,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     webSocketStatusChanged,
     required TResult Function() connectionRequested,
     required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
@@ -427,8 +393,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? connectionRequested,
     TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
@@ -444,8 +408,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? connectionRequested,
     TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
@@ -466,10 +428,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     webSocketStatusChanged,
     required TResult Function(ConnectionRequested value) connectionRequested,
     required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
@@ -485,9 +443,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult? Function(ConnectionRequested value)? connectionRequested,
     TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
@@ -503,9 +458,6 @@ class _$WebSocketStatusChangedImpl implements WebSocketStatusChanged {
     TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult Function(ConnectionRequested value)? connectionRequested,
     TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
@@ -582,8 +534,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     webSocketStatusChanged,
     required TResult Function() connectionRequested,
     required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
@@ -599,8 +549,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? connectionRequested,
     TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
@@ -616,8 +564,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? connectionRequested,
     TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
@@ -638,10 +584,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     webSocketStatusChanged,
     required TResult Function(ConnectionRequested value) connectionRequested,
     required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
@@ -657,9 +599,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult? Function(ConnectionRequested value)? connectionRequested,
     TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
@@ -675,9 +614,6 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult Function(ConnectionRequested value)? connectionRequested,
     TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
@@ -744,8 +680,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     webSocketStatusChanged,
     required TResult Function() connectionRequested,
     required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
@@ -761,8 +695,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? connectionRequested,
     TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
@@ -778,8 +710,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? connectionRequested,
     TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
@@ -800,10 +730,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     webSocketStatusChanged,
     required TResult Function(ConnectionRequested value) connectionRequested,
     required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
@@ -819,9 +745,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult? Function(ConnectionRequested value)? connectionRequested,
     TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
@@ -837,9 +760,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
     TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult Function(ConnectionRequested value)? connectionRequested,
     TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
@@ -855,332 +775,6 @@ class _$ManualRetryRequestedImpl implements ManualRetryRequested {
 
 abstract class ManualRetryRequested implements ConnectionEvent {
   const factory ManualRetryRequested() = _$ManualRetryRequestedImpl;
-}
-
-/// @nodoc
-abstract class _$$FastRetryTimerExpiredImplCopyWith<$Res> {
-  factory _$$FastRetryTimerExpiredImplCopyWith(
-    _$FastRetryTimerExpiredImpl value,
-    $Res Function(_$FastRetryTimerExpiredImpl) then,
-  ) = __$$FastRetryTimerExpiredImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$FastRetryTimerExpiredImplCopyWithImpl<$Res>
-    extends _$ConnectionEventCopyWithImpl<$Res, _$FastRetryTimerExpiredImpl>
-    implements _$$FastRetryTimerExpiredImplCopyWith<$Res> {
-  __$$FastRetryTimerExpiredImplCopyWithImpl(
-    _$FastRetryTimerExpiredImpl _value,
-    $Res Function(_$FastRetryTimerExpiredImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of ConnectionEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$FastRetryTimerExpiredImpl implements FastRetryTimerExpired {
-  const _$FastRetryTimerExpiredImpl();
-
-  @override
-  String toString() {
-    return 'ConnectionEvent.fastRetryTimerExpired()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FastRetryTimerExpiredImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(bool isConnected) networkStatusChanged,
-    required TResult Function(WebSocketConnectionStatus status)
-    webSocketStatusChanged,
-    required TResult Function() connectionRequested,
-    required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
-    required TResult Function() initialize,
-    required TResult Function() startStreaming,
-    required TResult Function() stopStreaming,
-    required TResult Function(int maxFps) configureStream,
-  }) {
-    return fastRetryTimerExpired();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isConnected)? networkStatusChanged,
-    TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
-    TResult? Function()? connectionRequested,
-    TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
-    TResult? Function()? initialize,
-    TResult? Function()? startStreaming,
-    TResult? Function()? stopStreaming,
-    TResult? Function(int maxFps)? configureStream,
-  }) {
-    return fastRetryTimerExpired?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isConnected)? networkStatusChanged,
-    TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
-    TResult Function()? connectionRequested,
-    TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
-    TResult Function()? initialize,
-    TResult Function()? startStreaming,
-    TResult Function()? stopStreaming,
-    TResult Function(int maxFps)? configureStream,
-    required TResult orElse(),
-  }) {
-    if (fastRetryTimerExpired != null) {
-      return fastRetryTimerExpired();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(NetworkStatusChanged value) networkStatusChanged,
-    required TResult Function(WebSocketStatusChanged value)
-    webSocketStatusChanged,
-    required TResult Function(ConnectionRequested value) connectionRequested,
-    required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
-    required TResult Function(Initialize value) initialize,
-    required TResult Function(StartStreaming value) startStreaming,
-    required TResult Function(StopStreaming value) stopStreaming,
-    required TResult Function(ConfigureStream value) configureStream,
-  }) {
-    return fastRetryTimerExpired(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(NetworkStatusChanged value)? networkStatusChanged,
-    TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
-    TResult? Function(ConnectionRequested value)? connectionRequested,
-    TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
-    TResult? Function(Initialize value)? initialize,
-    TResult? Function(StartStreaming value)? startStreaming,
-    TResult? Function(StopStreaming value)? stopStreaming,
-    TResult? Function(ConfigureStream value)? configureStream,
-  }) {
-    return fastRetryTimerExpired?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(NetworkStatusChanged value)? networkStatusChanged,
-    TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
-    TResult Function(ConnectionRequested value)? connectionRequested,
-    TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
-    TResult Function(Initialize value)? initialize,
-    TResult Function(StartStreaming value)? startStreaming,
-    TResult Function(StopStreaming value)? stopStreaming,
-    TResult Function(ConfigureStream value)? configureStream,
-    required TResult orElse(),
-  }) {
-    if (fastRetryTimerExpired != null) {
-      return fastRetryTimerExpired(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FastRetryTimerExpired implements ConnectionEvent {
-  const factory FastRetryTimerExpired() = _$FastRetryTimerExpiredImpl;
-}
-
-/// @nodoc
-abstract class _$$BackgroundCheckTimerExpiredImplCopyWith<$Res> {
-  factory _$$BackgroundCheckTimerExpiredImplCopyWith(
-    _$BackgroundCheckTimerExpiredImpl value,
-    $Res Function(_$BackgroundCheckTimerExpiredImpl) then,
-  ) = __$$BackgroundCheckTimerExpiredImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$BackgroundCheckTimerExpiredImplCopyWithImpl<$Res>
-    extends
-        _$ConnectionEventCopyWithImpl<$Res, _$BackgroundCheckTimerExpiredImpl>
-    implements _$$BackgroundCheckTimerExpiredImplCopyWith<$Res> {
-  __$$BackgroundCheckTimerExpiredImplCopyWithImpl(
-    _$BackgroundCheckTimerExpiredImpl _value,
-    $Res Function(_$BackgroundCheckTimerExpiredImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of ConnectionEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$BackgroundCheckTimerExpiredImpl implements BackgroundCheckTimerExpired {
-  const _$BackgroundCheckTimerExpiredImpl();
-
-  @override
-  String toString() {
-    return 'ConnectionEvent.backgroundCheckTimerExpired()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BackgroundCheckTimerExpiredImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(bool isConnected) networkStatusChanged,
-    required TResult Function(WebSocketConnectionStatus status)
-    webSocketStatusChanged,
-    required TResult Function() connectionRequested,
-    required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
-    required TResult Function() initialize,
-    required TResult Function() startStreaming,
-    required TResult Function() stopStreaming,
-    required TResult Function(int maxFps) configureStream,
-  }) {
-    return backgroundCheckTimerExpired();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isConnected)? networkStatusChanged,
-    TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
-    TResult? Function()? connectionRequested,
-    TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
-    TResult? Function()? initialize,
-    TResult? Function()? startStreaming,
-    TResult? Function()? stopStreaming,
-    TResult? Function(int maxFps)? configureStream,
-  }) {
-    return backgroundCheckTimerExpired?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isConnected)? networkStatusChanged,
-    TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
-    TResult Function()? connectionRequested,
-    TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
-    TResult Function()? initialize,
-    TResult Function()? startStreaming,
-    TResult Function()? stopStreaming,
-    TResult Function(int maxFps)? configureStream,
-    required TResult orElse(),
-  }) {
-    if (backgroundCheckTimerExpired != null) {
-      return backgroundCheckTimerExpired();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(NetworkStatusChanged value) networkStatusChanged,
-    required TResult Function(WebSocketStatusChanged value)
-    webSocketStatusChanged,
-    required TResult Function(ConnectionRequested value) connectionRequested,
-    required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
-    required TResult Function(Initialize value) initialize,
-    required TResult Function(StartStreaming value) startStreaming,
-    required TResult Function(StopStreaming value) stopStreaming,
-    required TResult Function(ConfigureStream value) configureStream,
-  }) {
-    return backgroundCheckTimerExpired(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(NetworkStatusChanged value)? networkStatusChanged,
-    TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
-    TResult? Function(ConnectionRequested value)? connectionRequested,
-    TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
-    TResult? Function(Initialize value)? initialize,
-    TResult? Function(StartStreaming value)? startStreaming,
-    TResult? Function(StopStreaming value)? stopStreaming,
-    TResult? Function(ConfigureStream value)? configureStream,
-  }) {
-    return backgroundCheckTimerExpired?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(NetworkStatusChanged value)? networkStatusChanged,
-    TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
-    TResult Function(ConnectionRequested value)? connectionRequested,
-    TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
-    TResult Function(Initialize value)? initialize,
-    TResult Function(StartStreaming value)? startStreaming,
-    TResult Function(StopStreaming value)? stopStreaming,
-    TResult Function(ConfigureStream value)? configureStream,
-    required TResult orElse(),
-  }) {
-    if (backgroundCheckTimerExpired != null) {
-      return backgroundCheckTimerExpired(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class BackgroundCheckTimerExpired implements ConnectionEvent {
-  const factory BackgroundCheckTimerExpired() =
-      _$BackgroundCheckTimerExpiredImpl;
 }
 
 /// @nodoc
@@ -1231,8 +825,6 @@ class _$InitializeImpl implements Initialize {
     webSocketStatusChanged,
     required TResult Function() connectionRequested,
     required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
@@ -1248,8 +840,6 @@ class _$InitializeImpl implements Initialize {
     TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? connectionRequested,
     TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
@@ -1265,8 +855,6 @@ class _$InitializeImpl implements Initialize {
     TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? connectionRequested,
     TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
@@ -1287,10 +875,6 @@ class _$InitializeImpl implements Initialize {
     webSocketStatusChanged,
     required TResult Function(ConnectionRequested value) connectionRequested,
     required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
@@ -1306,9 +890,6 @@ class _$InitializeImpl implements Initialize {
     TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult? Function(ConnectionRequested value)? connectionRequested,
     TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
@@ -1324,9 +905,6 @@ class _$InitializeImpl implements Initialize {
     TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult Function(ConnectionRequested value)? connectionRequested,
     TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
@@ -1392,8 +970,6 @@ class _$StartStreamingImpl implements StartStreaming {
     webSocketStatusChanged,
     required TResult Function() connectionRequested,
     required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
@@ -1409,8 +985,6 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? connectionRequested,
     TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
@@ -1426,8 +1000,6 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? connectionRequested,
     TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
@@ -1448,10 +1020,6 @@ class _$StartStreamingImpl implements StartStreaming {
     webSocketStatusChanged,
     required TResult Function(ConnectionRequested value) connectionRequested,
     required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
@@ -1467,9 +1035,6 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult? Function(ConnectionRequested value)? connectionRequested,
     TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
@@ -1485,9 +1050,6 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult Function(ConnectionRequested value)? connectionRequested,
     TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
@@ -1553,8 +1115,6 @@ class _$StopStreamingImpl implements StopStreaming {
     webSocketStatusChanged,
     required TResult Function() connectionRequested,
     required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
@@ -1570,8 +1130,6 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? connectionRequested,
     TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
@@ -1587,8 +1145,6 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? connectionRequested,
     TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
@@ -1609,10 +1165,6 @@ class _$StopStreamingImpl implements StopStreaming {
     webSocketStatusChanged,
     required TResult Function(ConnectionRequested value) connectionRequested,
     required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
@@ -1628,9 +1180,6 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult? Function(ConnectionRequested value)? connectionRequested,
     TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
@@ -1646,9 +1195,6 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult Function(ConnectionRequested value)? connectionRequested,
     TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
@@ -1745,8 +1291,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     webSocketStatusChanged,
     required TResult Function() connectionRequested,
     required TResult Function() manualRetryRequested,
-    required TResult Function() fastRetryTimerExpired,
-    required TResult Function() backgroundCheckTimerExpired,
     required TResult Function() initialize,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
@@ -1762,8 +1306,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult? Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult? Function()? connectionRequested,
     TResult? Function()? manualRetryRequested,
-    TResult? Function()? fastRetryTimerExpired,
-    TResult? Function()? backgroundCheckTimerExpired,
     TResult? Function()? initialize,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
@@ -1779,8 +1321,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult Function(WebSocketConnectionStatus status)? webSocketStatusChanged,
     TResult Function()? connectionRequested,
     TResult Function()? manualRetryRequested,
-    TResult Function()? fastRetryTimerExpired,
-    TResult Function()? backgroundCheckTimerExpired,
     TResult Function()? initialize,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
@@ -1801,10 +1341,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     webSocketStatusChanged,
     required TResult Function(ConnectionRequested value) connectionRequested,
     required TResult Function(ManualRetryRequested value) manualRetryRequested,
-    required TResult Function(FastRetryTimerExpired value)
-    fastRetryTimerExpired,
-    required TResult Function(BackgroundCheckTimerExpired value)
-    backgroundCheckTimerExpired,
     required TResult Function(Initialize value) initialize,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
@@ -1820,9 +1356,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult? Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult? Function(ConnectionRequested value)? connectionRequested,
     TResult? Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult? Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult? Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult? Function(Initialize value)? initialize,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
@@ -1838,9 +1371,6 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult Function(WebSocketStatusChanged value)? webSocketStatusChanged,
     TResult Function(ConnectionRequested value)? connectionRequested,
     TResult Function(ManualRetryRequested value)? manualRetryRequested,
-    TResult Function(FastRetryTimerExpired value)? fastRetryTimerExpired,
-    TResult Function(BackgroundCheckTimerExpired value)?
-    backgroundCheckTimerExpired,
     TResult Function(Initialize value)? initialize,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,

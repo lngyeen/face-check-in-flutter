@@ -5,7 +5,7 @@ flavors:
     android:
       applicationId: "com.owt.face_check_in_flutter.dev"
     ios:
-      bundleId: "com.owt.faceCheckInFlutter.dev"
+      bundleId: "com.owt.face_check_in_flutter.dev"
 
   stag:
     app:
@@ -13,7 +13,7 @@ flavors:
     android:
       applicationId: "com.owt.face_check_in_flutter.stag"
     ios:
-      bundleId: "com.owt.faceCheckInFlutter.stag"
+      bundleId: "com.owt.face_check_in_flutter.stag"
 
   prod:
     app:
@@ -21,4 +21,4 @@ flavors:
     android:
       applicationId: "com.owt.face_check_in_flutter"
     ios:
-      bundleId: "com.owt.faceCheckInFlutter"
+      bundleId: "com.owt.face_check_in_flutter"

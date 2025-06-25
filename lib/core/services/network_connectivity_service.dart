@@ -113,6 +113,5 @@ class NetworkConnectivityService {
   void dispose() {
     _connectivitySubscription?.cancel();
     _connectivityStreamController?.close();
-    _isInitialized = false;
   }
 }

@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:face_check_in_flutter/core/di/di.dart';
 import 'package:face_check_in_flutter/core/services/wakelock_service.dart';
 
-import 'app/app.dart';
+import 'app.dart';
 import 'app/simple_bloc_observer.dart';
 import 'flavors.dart';
 

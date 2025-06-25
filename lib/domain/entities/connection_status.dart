@@ -1,6 +1,6 @@
 /// Represents the current WebSocket connection status
 enum WebSocketConnectionStatus {
-  /// Not connected to backend
+  /// Network is available but WebSocket is not connected
   disconnected,
 
   /// Attempting to connect

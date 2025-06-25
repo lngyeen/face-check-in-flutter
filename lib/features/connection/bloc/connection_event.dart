@@ -23,13 +23,6 @@ class ConnectionEvent with _$ConnectionEvent {
   /// User requested manual retry (from background monitoring state)
   const factory ConnectionEvent.manualRetryRequested() = ManualRetryRequested;
 
-  /// Fast retry timer expired - attempt next retry
-  const factory ConnectionEvent.fastRetryTimerExpired() = FastRetryTimerExpired;
-
-  /// Background check timer expired - check server reachability
-  const factory ConnectionEvent.backgroundCheckTimerExpired() =
-      BackgroundCheckTimerExpired;
-
   /// Initialize connection system
   const factory ConnectionEvent.initialize() = Initialize;
 
