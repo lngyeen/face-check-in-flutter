@@ -181,6 +181,69 @@ class _CheckInScreenState extends State<CheckInScreen>
                     ],
                   ),
 
+                  const SizedBox(height: 16),
+
+                  // Streaming Controls
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed:
+                              state.isLoading ||
+                                      state.cameraStatus !=
+                                          CameraStatus.ready ||
+                                      state.connectionStatus !=
+                                          ConnectionStatus.connected
+                                  ? null
+                                  : state.streamingStatus ==
+                                      StreamingStatus.active
+                                  ? () {
+                                    context.read<CheckInBloc>().add(
+                                      const CheckInEvent.streamingStopRequested(),
+                                    );
+                                  }
+                                  : () {
+                                    context.read<CheckInBloc>().add(
+                                      const CheckInEvent.streamingStartRequested(),
+                                    );
+                                  },
+                          icon: Icon(
+                            state.streamingStatus == StreamingStatus.active
+                                ? Icons.stop
+                                : Icons.play_arrow,
+                          ),
+                          label: Text(
+                            state.streamingStatus == StreamingStatus.active
+                                ? 'Stop Streaming'
+                                : 'Start Streaming',
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                state.streamingStatus == StreamingStatus.active
+                                    ? Colors.red[400]
+                                    : Colors.green[400],
+                            foregroundColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed:
+                              state.isLoading
+                                  ? null
+                                  : () {
+                                    context.read<CheckInBloc>().add(
+                                      const CheckInEvent.statisticsReset(),
+                                    );
+                                  },
+                          icon: const Icon(Icons.refresh),
+                          label: const Text('Reset Stats'),
+                        ),
+                      ),
+                    ],
+                  ),
+
                   // Debug Information (if debug mode is enabled)
                   if (state.isDebugMode) ...[
                     const SizedBox(height: 16),
