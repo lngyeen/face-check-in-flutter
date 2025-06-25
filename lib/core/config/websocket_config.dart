@@ -60,8 +60,7 @@ class WebSocketConfig {
 
   /// Alternative development config for real devices
   static const WebSocketConfig developmentRealDevice = WebSocketConfig(
-    url:
-        'ws://192.168.1.180:3009', // Computer's local IP for real device testing
+    url: 'ws://192.168.1.234:3009', // Backend server IP for testing
     timeout: Duration(seconds: 30),
     maxRetries: 3,
     retryDelay: Duration(seconds: 3),
