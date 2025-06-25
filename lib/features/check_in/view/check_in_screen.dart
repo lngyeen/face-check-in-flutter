@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/check_in_bloc.dart';
 import '../widgets/camera_preview_widget.dart';
+import '../widgets/face_detection_status_widget.dart';
 
 /// Main check-in screen
 /// This is a placeholder implementation that will be expanded in future stories
@@ -127,6 +128,11 @@ class _CheckInScreenState extends State<CheckInScreen>
                       ),
                     ),
                   ),
+
+                  const SizedBox(height: 16),
+
+                  // Face Detection Status
+                  const FaceDetectionStatusWidget(),
 
                   const SizedBox(height: 16),
 
