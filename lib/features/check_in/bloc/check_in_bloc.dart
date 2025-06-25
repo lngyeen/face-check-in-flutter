@@ -175,12 +175,14 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Listen to incoming WebSocket messages
     _messageSubscription = _webSocketService.messages.listen(
       (message) {
-        debugPrint('🔥 CheckInBloc: Raw WebSocket message received in listener: $message');
+        debugPrint(
+          '🔥 CheckInBloc: Raw WebSocket message received in listener: $message',
+        );
         add(CheckInEvent.webSocketMessageReceived(message));
-      }, 
+      },
       onError: (error) {
         debugPrint('❌ CheckInBloc: WebSocket message stream error: $error');
-      }, 
+      },
       onDone: () {
         debugPrint('📪 CheckInBloc: WebSocket message stream closed');
       },
@@ -353,17 +355,14 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
 
     try {
-      final cameras = await availableCameras();
-      if (cameras.isEmpty) {
-        throw Exception('No cameras available');
+      // Use CameraService instead of direct camera initialization
+      // This ensures front camera is selected correctly
+      await _cameraService.initialize();
+
+      final controller = _cameraService.controller;
+      if (controller == null) {
+        throw Exception('Camera controller not available after initialization');
       }
-      final controller = CameraController(
-        cameras.first,
-        ResolutionPreset.veryHigh,
-        imageFormatGroup: ImageFormatGroup.bgra8888,
-        enableAudio: false,
-      );
-      await controller.initialize();
 
       try {
         await controller.setFocusMode(FocusMode.auto);
@@ -485,7 +484,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     try {
       // Use real WebSocket service instead of placeholder
       final success = await _webSocketService.connect();
-      
+
       if (success) {
         emit(
           state.copyWith(
@@ -731,20 +730,27 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
 
     // Update recognition statistics
-    final updatedStats = _updateRecognitionStatistics(state.recognitionStats, result);
+    final updatedStats = _updateRecognitionStatistics(
+      state.recognitionStats,
+      result,
+    );
 
     // Calculate average confidence from detected faces
-    final averageConfidence = result.faces.isNotEmpty 
-        ? result.faces.map((f) => f.confidence).reduce((a, b) => a + b) / result.faces.length
-        : 0.0;
+    final averageConfidence =
+        result.faces.isNotEmpty
+            ? result.faces.map((f) => f.confidence).reduce((a, b) => a + b) /
+                result.faces.length
+            : 0.0;
 
     // Determine if recognition was successful
     final hasRecognizedFace = result.faces.any((face) => face.isRecognized);
-    
+
     // Create success message
     String toastMessage;
     if (hasRecognizedFace) {
-      final recognizedFace = result.faces.firstWhere((face) => face.isRecognized);
+      final recognizedFace = result.faces.firstWhere(
+        (face) => face.isRecognized,
+      );
       toastMessage = 'Welcome ${recognizedFace.employeeName ?? 'Employee'}!';
     } else {
       switch (result.status) {
@@ -771,7 +777,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         faceStatus: result.status,
         faceConfidence: averageConfidence,
         lastFaceDetection: result.timestamp,
-        lastRecognitionTime: hasRecognizedFace ? result.timestamp : state.lastRecognitionTime,
+        lastRecognitionTime:
+            hasRecognizedFace ? result.timestamp : state.lastRecognitionTime,
         recognitionStats: updatedStats,
         framesProcessed: state.framesProcessed + 1,
         toastStatus: ToastStatus.showing,
@@ -787,19 +794,25 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) {
     final hasRecognizedFace = result.faces.any((face) => face.isRecognized);
     final totalFaces = result.faces.length;
-    
+
     // Calculate new averages
     final newTotalFrames = currentStats.totalFramesProcessed + 1;
     final newTotalFaces = currentStats.totalFacesDetected + totalFaces;
-    final newSuccessful = currentStats.successfulRecognitions + (hasRecognizedFace ? 1 : 0);
-    final newFailed = currentStats.failedRecognitions + (hasRecognizedFace ? 0 : 1);
-    
+    final newSuccessful =
+        currentStats.successfulRecognitions + (hasRecognizedFace ? 1 : 0);
+    final newFailed =
+        currentStats.failedRecognitions + (hasRecognizedFace ? 0 : 1);
+
     // Calculate average confidence
-    final currentTotalConfidence = currentStats.averageConfidence * currentStats.totalFramesProcessed;
-    final frameConfidence = result.faces.isNotEmpty 
-        ? result.faces.map((f) => f.confidence).reduce((a, b) => a + b) / result.faces.length
-        : 0.0;
-    final newAverageConfidence = (currentTotalConfidence + frameConfidence) / newTotalFrames;
+    final currentTotalConfidence =
+        currentStats.averageConfidence * currentStats.totalFramesProcessed;
+    final frameConfidence =
+        result.faces.isNotEmpty
+            ? result.faces.map((f) => f.confidence).reduce((a, b) => a + b) /
+                result.faces.length
+            : 0.0;
+    final newAverageConfidence =
+        (currentTotalConfidence + frameConfidence) / newTotalFrames;
 
     return currentStats.copyWith(
       totalFramesProcessed: newTotalFrames,
@@ -807,7 +820,10 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       successfulRecognitions: newSuccessful,
       failedRecognitions: newFailed,
       averageConfidence: newAverageConfidence,
-      lastRecognitionTime: hasRecognizedFace ? result.timestamp : currentStats.lastRecognitionTime,
+      lastRecognitionTime:
+          hasRecognizedFace
+              ? result.timestamp
+              : currentStats.lastRecognitionTime,
     );
   }
 
@@ -955,7 +971,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         // Parse face detection result from backend - Phase 3
         await _parseAndProcessFrameResult(event.message);
         break;
-        
+
       case 'recognition_result':
         debugPrint('📥 CheckInBloc: Processing recognition_result message');
         // Legacy recognition result support
@@ -981,7 +997,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   /// Parse and process frame result from backend - Phase 3
   Future<void> _parseAndProcessFrameResult(Map<String, dynamic> message) async {
     debugPrint('🔍 CheckInBloc: Starting to parse frameResult...');
-    
+
     try {
       // Extract data payload
       final data = message['data'] as Map<String, dynamic>?;
@@ -994,28 +1010,33 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
       // Parse timestamp
       final timestampStr = data['timestamp'] as String?;
-      final timestamp = timestampStr != null 
-          ? DateTime.tryParse(timestampStr) ?? DateTime.now()
-          : DateTime.now();
+      final timestamp =
+          timestampStr != null
+              ? DateTime.tryParse(timestampStr) ?? DateTime.now()
+              : DateTime.now();
 
       debugPrint('🔍 CheckInBloc: Parsed timestamp: $timestamp');
 
       // Parse faces array
       final facesJson = data['faces'] as List<dynamic>? ?? [];
       debugPrint('🔍 CheckInBloc: Raw faces data: $facesJson');
-      
-      final faces = facesJson.map((face) {
-        final faceMap = face as Map<String, dynamic>;
-        return DetectedFace(
-          faceId: faceMap['faceId'] as String? ?? '',
-          box: (faceMap['box'] as List<dynamic>?)
-              ?.map((e) => (e as num).toDouble()).toList() ?? [0, 0, 0, 0],
-          confidence: (faceMap['confidence'] as num?)?.toDouble() ?? 0.0,
-          isRecognized: faceMap['isRecognized'] as bool? ?? false,
-          personId: faceMap['personId'] as String?,
-          employeeName: faceMap['employeeName'] as String?,
-        );
-      }).toList();
+
+      final faces =
+          facesJson.map((face) {
+            final faceMap = face as Map<String, dynamic>;
+            return DetectedFace(
+              faceId: faceMap['faceId'] as String? ?? '',
+              box:
+                  (faceMap['box'] as List<dynamic>?)
+                      ?.map((e) => (e as num).toDouble())
+                      .toList() ??
+                  [0, 0, 0, 0],
+              confidence: (faceMap['confidence'] as num?)?.toDouble() ?? 0.0,
+              isRecognized: faceMap['isRecognized'] as bool? ?? false,
+              personId: faceMap['personId'] as String?,
+              employeeName: faceMap['employeeName'] as String?,
+            );
+          }).toList();
 
       debugPrint('🔍 CheckInBloc: Parsed faces: ${faces.length} faces');
 
@@ -1033,7 +1054,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         status: status,
       );
 
-      debugPrint('🔍 CheckInBloc: Created FaceDetectionResult, adding backendResponseReceived event');
+      debugPrint(
+        '🔍 CheckInBloc: Created FaceDetectionResult, adding backendResponseReceived event',
+      );
 
       // Add backend response received event
       add(CheckInEvent.backendResponseReceived(result));
