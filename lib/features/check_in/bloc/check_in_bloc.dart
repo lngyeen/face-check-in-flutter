@@ -187,6 +187,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Face detection notification events
     on<ShowFaceDetectionNotification>(_onShowFaceDetectionNotification);
     on<ClearFaceDetectionNotification>(_onClearFaceDetectionNotification);
+
+    // Reset events
+    on<ResetAfterCheckIn>(_onResetAfterCheckIn);
   }
 
   /// Initialize WebSocket service integration for Story 2.1
@@ -851,6 +854,24 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
           );
           message =
               '🎉 Check-in thành công! Chào ${recognizedFace.employeeName ?? 'bạn'}';
+
+          // Immediately stop streaming on successful check-in
+          debugPrint(
+            '🔄 CheckInBloc: Check-in successful, stopping streaming immediately',
+          );
+          if (state.streamingStatus == StreamingStatus.active) {
+            _frameStreamingService.stopStreaming();
+          }
+
+          // Schedule auto-reset after showing success message
+          debugPrint(
+            '🔄 CheckInBloc: Check-in successful, scheduling auto-reset in 3 seconds',
+          );
+          Timer(const Duration(seconds: 3), () {
+            if (!isClosed) {
+              add(const CheckInEvent.resetAfterCheckIn());
+            }
+          });
         } else {
           notificationType = FaceDetectionNotificationType.faceDetectedSuccess;
           message =
@@ -1285,6 +1306,68 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Implement the logic to return the appropriate color based on the connection status
     // This is a placeholder and should be implemented based on your specific requirements
     return Colors.grey; // Placeholder return, actual implementation needed
+  }
+
+  /// Reset system after successful check-in
+  Future<void> _onResetAfterCheckIn(
+    ResetAfterCheckIn event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🔄 CheckInBloc: Resetting system after successful check-in');
+
+    try {
+      // Show reset notification
+      emit(
+        state.copyWith(
+          toastStatus: ToastStatus.showing,
+          toastMessage: '🔄 Đang reset hệ thống để quét tiếp...',
+        ),
+      );
+
+      // Stop streaming first
+      if (state.streamingStatus == StreamingStatus.active) {
+        debugPrint('🛑 CheckInBloc: Stopping frame streaming...');
+        await _frameStreamingService.stopStreaming();
+      }
+
+      // Reset relevant state
+      emit(
+        state.copyWith(
+          streamingStatus: StreamingStatus.idle,
+          detectedFaces: [],
+          faceStatus: FaceDetectionStatus.none,
+          faceConfidence: 0.0,
+          lastFaceDetection: null,
+          notificationType: FaceDetectionNotificationType.none,
+          notificationMessage: null,
+          shouldShowNotification: false,
+          framesProcessed: 0,
+          lastFrameSent: null,
+          currentFrameRate: 0.0,
+          toastStatus: ToastStatus.showing,
+          toastMessage: '✅ Hệ thống đã reset - Sẵn sàng quét lại',
+        ),
+      );
+
+      debugPrint('✅ CheckInBloc: System reset completed');
+
+      // Auto-restart streaming after a brief pause
+      Timer(const Duration(seconds: 2), () {
+        if (!isClosed && state.connectionStatus == ConnectionStatus.connected) {
+          debugPrint('🔄 CheckInBloc: Auto-restarting streaming after reset');
+          add(const CheckInEvent.streamingStartRequested());
+        }
+      });
+    } catch (error) {
+      debugPrint('❌ CheckInBloc: Error during reset: $error');
+      emit(
+        state.copyWith(
+          errorMessage: 'Reset failed: $error',
+          toastStatus: ToastStatus.showing,
+          toastMessage: '❌ Reset thất bại - Vui lòng thử lại',
+        ),
+      );
+    }
   }
 }
 

@@ -177,6 +177,9 @@ class CheckInEvent with _$CheckInEvent {
   const factory CheckInEvent.clearFaceDetectionNotification() =
       ClearFaceDetectionNotification;
 
+  /// Reset system after successful check-in
+  const factory CheckInEvent.resetAfterCheckIn() = ResetAfterCheckIn;
+
   const factory CheckInEvent.disconnectRequested() = DisconnectRequested;
   const factory CheckInEvent.webSocketError(String error) = WebSocketError;
 }

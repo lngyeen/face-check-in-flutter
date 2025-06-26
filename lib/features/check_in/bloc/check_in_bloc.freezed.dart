@@ -901,6 +901,7 @@ mixin _$CheckInEvent {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) => throw _privateConstructorUsedError;
@@ -952,6 +953,7 @@ mixin _$CheckInEvent {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) => throw _privateConstructorUsedError;
@@ -1003,6 +1005,7 @@ mixin _$CheckInEvent {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -1072,6 +1075,7 @@ mixin _$CheckInEvent {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) => throw _privateConstructorUsedError;
@@ -1128,6 +1132,7 @@ mixin _$CheckInEvent {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) => throw _privateConstructorUsedError;
@@ -1184,6 +1189,7 @@ mixin _$CheckInEvent {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -1311,6 +1317,7 @@ class _$AppStartedImpl implements AppStarted {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -1366,6 +1373,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -1421,6 +1429,7 @@ class _$AppStartedImpl implements AppStarted {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -1497,6 +1506,7 @@ class _$AppStartedImpl implements AppStarted {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -1557,6 +1567,7 @@ class _$AppStartedImpl implements AppStarted {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -1617,6 +1628,7 @@ class _$AppStartedImpl implements AppStarted {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -1731,6 +1743,7 @@ class _$AppDisposedImpl implements AppDisposed {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -1786,6 +1799,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -1841,6 +1855,7 @@ class _$AppDisposedImpl implements AppDisposed {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -1917,6 +1932,7 @@ class _$AppDisposedImpl implements AppDisposed {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -1977,6 +1993,7 @@ class _$AppDisposedImpl implements AppDisposed {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -2037,6 +2054,7 @@ class _$AppDisposedImpl implements AppDisposed {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -2152,6 +2170,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -2207,6 +2226,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -2262,6 +2282,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -2338,6 +2359,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -2398,6 +2420,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -2458,6 +2481,7 @@ class _$CameraPermissionRequestedImpl implements CameraPermissionRequested {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -2573,6 +2597,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -2628,6 +2653,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -2683,6 +2709,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -2759,6 +2786,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -2819,6 +2847,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -2879,6 +2908,7 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -2994,6 +3024,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -3049,6 +3080,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -3104,6 +3136,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -3180,6 +3213,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -3240,6 +3274,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -3300,6 +3335,7 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -3415,6 +3451,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -3470,6 +3507,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -3525,6 +3563,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -3601,6 +3640,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -3661,6 +3701,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -3721,6 +3762,7 @@ class _$CameraInitRequestedImpl implements CameraInitRequested {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -3835,6 +3877,7 @@ class _$CameraStartedImpl implements CameraStarted {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -3890,6 +3933,7 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -3945,6 +3989,7 @@ class _$CameraStartedImpl implements CameraStarted {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -4021,6 +4066,7 @@ class _$CameraStartedImpl implements CameraStarted {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -4081,6 +4127,7 @@ class _$CameraStartedImpl implements CameraStarted {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -4141,6 +4188,7 @@ class _$CameraStartedImpl implements CameraStarted {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -4255,6 +4303,7 @@ class _$CameraPausedImpl implements CameraPaused {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -4310,6 +4359,7 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -4365,6 +4415,7 @@ class _$CameraPausedImpl implements CameraPaused {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -4441,6 +4492,7 @@ class _$CameraPausedImpl implements CameraPaused {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -4501,6 +4553,7 @@ class _$CameraPausedImpl implements CameraPaused {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -4561,6 +4614,7 @@ class _$CameraPausedImpl implements CameraPaused {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -4675,6 +4729,7 @@ class _$CameraResumedImpl implements CameraResumed {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -4730,6 +4785,7 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -4785,6 +4841,7 @@ class _$CameraResumedImpl implements CameraResumed {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -4861,6 +4918,7 @@ class _$CameraResumedImpl implements CameraResumed {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -4921,6 +4979,7 @@ class _$CameraResumedImpl implements CameraResumed {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -4981,6 +5040,7 @@ class _$CameraResumedImpl implements CameraResumed {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -5095,6 +5155,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -5150,6 +5211,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -5205,6 +5267,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -5281,6 +5344,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -5341,6 +5405,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -5401,6 +5466,7 @@ class _$CameraStoppedImpl implements CameraStopped {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -5545,6 +5611,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -5600,6 +5667,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -5655,6 +5723,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -5731,6 +5800,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -5791,6 +5861,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -5851,6 +5922,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -5975,6 +6047,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -6030,6 +6103,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -6085,6 +6159,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -6161,6 +6236,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -6221,6 +6297,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -6281,6 +6358,7 @@ class _$CameraPreviewStartedImpl implements CameraPreviewStarted {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -6396,6 +6474,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -6451,6 +6530,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -6506,6 +6586,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -6582,6 +6663,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -6642,6 +6724,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -6702,6 +6785,7 @@ class _$CameraPreviewStoppedImpl implements CameraPreviewStopped {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -6849,6 +6933,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -6904,6 +6989,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -6959,6 +7045,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -7035,6 +7122,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -7095,6 +7183,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -7155,6 +7244,7 @@ class _$ConnectionRequestedImpl implements ConnectionRequested {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -7307,6 +7397,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -7362,6 +7453,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -7417,6 +7509,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -7493,6 +7586,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -7553,6 +7647,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -7613,6 +7708,7 @@ class _$ConnectionStatusChangedImpl implements ConnectionStatusChanged {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -7737,6 +7833,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -7792,6 +7889,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -7847,6 +7945,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -7923,6 +8022,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -7983,6 +8083,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -8043,6 +8144,7 @@ class _$DisconnectionRequestedImpl implements DisconnectionRequested {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -8159,6 +8261,7 @@ class _$WebSocketConnectionRequestedImpl
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -8214,6 +8317,7 @@ class _$WebSocketConnectionRequestedImpl
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -8269,6 +8373,7 @@ class _$WebSocketConnectionRequestedImpl
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -8345,6 +8450,7 @@ class _$WebSocketConnectionRequestedImpl
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -8405,6 +8511,7 @@ class _$WebSocketConnectionRequestedImpl
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -8465,6 +8572,7 @@ class _$WebSocketConnectionRequestedImpl
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -8581,6 +8689,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -8636,6 +8745,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -8691,6 +8801,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -8767,6 +8878,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -8827,6 +8939,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -8887,6 +9000,7 @@ class _$WebSocketConnectingImpl implements WebSocketConnecting {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -9001,6 +9115,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -9056,6 +9171,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -9111,6 +9227,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -9187,6 +9304,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -9247,6 +9365,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -9307,6 +9426,7 @@ class _$WebSocketConnectedImpl implements WebSocketConnected {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -9422,6 +9542,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -9477,6 +9598,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -9532,6 +9654,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -9608,6 +9731,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -9668,6 +9792,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -9728,6 +9853,7 @@ class _$WebSocketDisconnectedImpl implements WebSocketDisconnected {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -9871,6 +9997,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -9926,6 +10053,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -9981,6 +10109,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -10057,6 +10186,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -10117,6 +10247,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -10177,6 +10308,7 @@ class _$WebSocketConnectionFailedImpl implements WebSocketConnectionFailed {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -10301,6 +10433,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -10356,6 +10489,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -10411,6 +10545,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -10487,6 +10622,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -10547,6 +10683,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -10607,6 +10744,7 @@ class _$WebSocketConnectionTimeoutImpl implements WebSocketConnectionTimeout {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -10751,6 +10889,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -10806,6 +10945,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -10861,6 +11001,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -10937,6 +11078,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -10997,6 +11139,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -11057,6 +11200,7 @@ class _$WebSocketRetryingImpl implements WebSocketRetrying {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -11215,6 +11359,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -11270,6 +11415,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -11325,6 +11471,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -11401,6 +11548,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -11461,6 +11609,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -11521,6 +11670,7 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -11682,6 +11832,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -11737,6 +11888,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -11792,6 +11944,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -11868,6 +12021,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -11928,6 +12082,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -11988,6 +12143,7 @@ class _$WebSocketMessageSentImpl implements WebSocketMessageSent {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -12141,6 +12297,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -12196,6 +12353,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -12251,6 +12409,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -12327,6 +12486,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -12387,6 +12547,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -12447,6 +12608,7 @@ class _$WebSocketSendErrorImpl implements WebSocketSendError {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -12571,6 +12733,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -12626,6 +12789,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -12681,6 +12845,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -12757,6 +12922,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -12817,6 +12983,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -12877,6 +13044,7 @@ class _$AutoConnectionTriggeredImpl implements AutoConnectionTriggered {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -13022,6 +13190,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -13077,6 +13246,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -13132,6 +13302,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -13208,6 +13379,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -13268,6 +13440,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -13328,6 +13501,7 @@ class _$AutoConnectionToggledImpl implements AutoConnectionToggled {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -13452,6 +13626,7 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -13507,6 +13682,7 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -13562,6 +13738,7 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -13638,6 +13815,7 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -13698,6 +13876,7 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -13758,6 +13937,7 @@ class _$StreamingStartRequestedImpl implements StreamingStartRequested {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -13873,6 +14053,7 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -13928,6 +14109,7 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -13983,6 +14165,7 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -14059,6 +14242,7 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -14119,6 +14303,7 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -14179,6 +14364,7 @@ class _$StreamingStopRequestedImpl implements StreamingStopRequested {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -14293,6 +14479,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -14348,6 +14535,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -14403,6 +14591,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -14479,6 +14668,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -14539,6 +14729,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -14599,6 +14790,7 @@ class _$StreamingStartedImpl implements StreamingStarted {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -14713,6 +14905,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -14768,6 +14961,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -14823,6 +15017,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -14899,6 +15094,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -14959,6 +15155,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -15019,6 +15216,7 @@ class _$StreamingStoppedImpl implements StreamingStopped {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -15164,6 +15362,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -15219,6 +15418,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -15274,6 +15474,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -15350,6 +15551,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -15410,6 +15612,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -15470,6 +15673,7 @@ class _$StreamingStatusChangedImpl implements StreamingStatusChanged {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -15593,6 +15797,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -15648,6 +15853,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -15703,6 +15909,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -15779,6 +15986,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -15839,6 +16047,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -15899,6 +16108,7 @@ class _$FrameProcessedImpl implements FrameProcessed {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -16040,6 +16250,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -16095,6 +16306,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -16150,6 +16362,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -16226,6 +16439,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -16286,6 +16500,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -16346,6 +16561,7 @@ class _$ErrorOccurredImpl implements ErrorOccurred {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -16495,6 +16711,7 @@ class _$CameraErrorImpl implements CameraError {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -16550,6 +16767,7 @@ class _$CameraErrorImpl implements CameraError {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -16605,6 +16823,7 @@ class _$CameraErrorImpl implements CameraError {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -16681,6 +16900,7 @@ class _$CameraErrorImpl implements CameraError {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -16741,6 +16961,7 @@ class _$CameraErrorImpl implements CameraError {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -16801,6 +17022,7 @@ class _$CameraErrorImpl implements CameraError {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -16923,6 +17145,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -16978,6 +17201,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -17033,6 +17257,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -17109,6 +17334,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -17169,6 +17395,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -17229,6 +17456,7 @@ class _$ErrorClearedImpl implements ErrorCleared {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -17373,6 +17601,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -17428,6 +17657,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -17483,6 +17713,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -17559,6 +17790,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -17619,6 +17851,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -17679,6 +17912,7 @@ class _$ToastRequestedImpl implements ToastRequested {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -17801,6 +18035,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -17856,6 +18091,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -17911,6 +18147,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -17987,6 +18224,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -18047,6 +18285,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -18107,6 +18346,7 @@ class _$DebugModeToggledImpl implements DebugModeToggled {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -18221,6 +18461,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -18276,6 +18517,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -18331,6 +18573,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -18407,6 +18650,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -18467,6 +18711,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -18527,6 +18772,7 @@ class _$StatisticsResetImpl implements StatisticsReset {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -18696,6 +18942,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -18751,6 +18998,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -18806,6 +19054,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -18882,6 +19131,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -18942,6 +19192,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -19002,6 +19253,7 @@ class _$RecognitionResultReceivedImpl implements RecognitionResultReceived {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -19171,6 +19423,7 @@ class _$BackendResponseReceivedImpl implements BackendResponseReceived {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -19226,6 +19479,7 @@ class _$BackendResponseReceivedImpl implements BackendResponseReceived {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -19281,6 +19535,7 @@ class _$BackendResponseReceivedImpl implements BackendResponseReceived {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -19357,6 +19612,7 @@ class _$BackendResponseReceivedImpl implements BackendResponseReceived {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -19417,6 +19673,7 @@ class _$BackendResponseReceivedImpl implements BackendResponseReceived {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -19477,6 +19734,7 @@ class _$BackendResponseReceivedImpl implements BackendResponseReceived {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -19645,6 +19903,7 @@ class _$ShowFaceDetectionNotificationImpl
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -19700,6 +19959,7 @@ class _$ShowFaceDetectionNotificationImpl
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -19755,6 +20015,7 @@ class _$ShowFaceDetectionNotificationImpl
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -19831,6 +20092,7 @@ class _$ShowFaceDetectionNotificationImpl
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -19891,6 +20153,7 @@ class _$ShowFaceDetectionNotificationImpl
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -19951,6 +20214,7 @@ class _$ShowFaceDetectionNotificationImpl
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -20082,6 +20346,7 @@ class _$ClearFaceDetectionNotificationImpl
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -20137,6 +20402,7 @@ class _$ClearFaceDetectionNotificationImpl
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -20192,6 +20458,7 @@ class _$ClearFaceDetectionNotificationImpl
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -20268,6 +20535,7 @@ class _$ClearFaceDetectionNotificationImpl
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -20328,6 +20596,7 @@ class _$ClearFaceDetectionNotificationImpl
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -20388,6 +20657,7 @@ class _$ClearFaceDetectionNotificationImpl
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -20402,6 +20672,432 @@ class _$ClearFaceDetectionNotificationImpl
 abstract class ClearFaceDetectionNotification implements CheckInEvent {
   const factory ClearFaceDetectionNotification() =
       _$ClearFaceDetectionNotificationImpl;
+}
+
+/// @nodoc
+abstract class _$$ResetAfterCheckInImplCopyWith<$Res> {
+  factory _$$ResetAfterCheckInImplCopyWith(
+    _$ResetAfterCheckInImpl value,
+    $Res Function(_$ResetAfterCheckInImpl) then,
+  ) = __$$ResetAfterCheckInImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResetAfterCheckInImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$ResetAfterCheckInImpl>
+    implements _$$ResetAfterCheckInImplCopyWith<$Res> {
+  __$$ResetAfterCheckInImplCopyWithImpl(
+    _$ResetAfterCheckInImpl _value,
+    $Res Function(_$ResetAfterCheckInImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ResetAfterCheckInImpl implements ResetAfterCheckIn {
+  const _$ResetAfterCheckInImpl();
+
+  @override
+  String toString() {
+    return 'CheckInEvent.resetAfterCheckIn()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ResetAfterCheckInImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appStarted,
+    required TResult Function() appDisposed,
+    required TResult Function() cameraPermissionRequested,
+    required TResult Function() cameraPermissionGranted,
+    required TResult Function() cameraPermissionDenied,
+    required TResult Function() cameraInitRequested,
+    required TResult Function() cameraStarted,
+    required TResult Function() cameraPaused,
+    required TResult Function() cameraResumed,
+    required TResult Function() cameraStopped,
+    required TResult Function(CameraStatus status) cameraStatusChanged,
+    required TResult Function() cameraPreviewStarted,
+    required TResult Function() cameraPreviewStopped,
+    required TResult Function(bool isAutoConnect) connectionRequested,
+    required TResult Function(ConnectionStatus status) connectionStatusChanged,
+    required TResult Function() disconnectionRequested,
+    required TResult Function() webSocketConnectionRequested,
+    required TResult Function() webSocketConnecting,
+    required TResult Function() webSocketConnected,
+    required TResult Function() webSocketDisconnected,
+    required TResult Function(String error) webSocketConnectionFailed,
+    required TResult Function() webSocketConnectionTimeout,
+    required TResult Function(int attempt) webSocketRetrying,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageReceived,
+    required TResult Function(Map<String, dynamic> message)
+    webSocketMessageSent,
+    required TResult Function(String error) webSocketSendError,
+    required TResult Function() autoConnectionTriggered,
+    required TResult Function(bool enabled) autoConnectionToggled,
+    required TResult Function() streamingStartRequested,
+    required TResult Function() streamingStopRequested,
+    required TResult Function() streamingStarted,
+    required TResult Function() streamingStopped,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function() frameProcessed,
+    required TResult Function(String message) errorOccurred,
+    required TResult Function(String error) cameraError,
+    required TResult Function() errorCleared,
+    required TResult Function(String message) toastRequested,
+    required TResult Function() debugModeToggled,
+    required TResult Function() statisticsReset,
+    required TResult Function(
+      bool success,
+      String message,
+      String? employeeName,
+    )
+    recognitionResultReceived,
+    required TResult Function(FaceDetectionResult result)
+    backendResponseReceived,
+    required TResult Function(
+      FaceDetectionNotificationType type,
+      String message,
+    )
+    showFaceDetectionNotification,
+    required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
+    required TResult Function() disconnectRequested,
+    required TResult Function(String error) webSocketError,
+  }) {
+    return resetAfterCheckIn();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appStarted,
+    TResult? Function()? appDisposed,
+    TResult? Function()? cameraPermissionRequested,
+    TResult? Function()? cameraPermissionGranted,
+    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? cameraInitRequested,
+    TResult? Function()? cameraStarted,
+    TResult? Function()? cameraPaused,
+    TResult? Function()? cameraResumed,
+    TResult? Function()? cameraStopped,
+    TResult? Function(CameraStatus status)? cameraStatusChanged,
+    TResult? Function()? cameraPreviewStarted,
+    TResult? Function()? cameraPreviewStopped,
+    TResult? Function(bool isAutoConnect)? connectionRequested,
+    TResult? Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult? Function()? disconnectionRequested,
+    TResult? Function()? webSocketConnectionRequested,
+    TResult? Function()? webSocketConnecting,
+    TResult? Function()? webSocketConnected,
+    TResult? Function()? webSocketDisconnected,
+    TResult? Function(String error)? webSocketConnectionFailed,
+    TResult? Function()? webSocketConnectionTimeout,
+    TResult? Function(int attempt)? webSocketRetrying,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult? Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult? Function(String error)? webSocketSendError,
+    TResult? Function()? autoConnectionTriggered,
+    TResult? Function(bool enabled)? autoConnectionToggled,
+    TResult? Function()? streamingStartRequested,
+    TResult? Function()? streamingStopRequested,
+    TResult? Function()? streamingStarted,
+    TResult? Function()? streamingStopped,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function()? frameProcessed,
+    TResult? Function(String message)? errorOccurred,
+    TResult? Function(String error)? cameraError,
+    TResult? Function()? errorCleared,
+    TResult? Function(String message)? toastRequested,
+    TResult? Function()? debugModeToggled,
+    TResult? Function()? statisticsReset,
+    TResult? Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult? Function(FaceDetectionResult result)? backendResponseReceived,
+    TResult? Function(FaceDetectionNotificationType type, String message)?
+    showFaceDetectionNotification,
+    TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
+    TResult? Function()? disconnectRequested,
+    TResult? Function(String error)? webSocketError,
+  }) {
+    return resetAfterCheckIn?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appStarted,
+    TResult Function()? appDisposed,
+    TResult Function()? cameraPermissionRequested,
+    TResult Function()? cameraPermissionGranted,
+    TResult Function()? cameraPermissionDenied,
+    TResult Function()? cameraInitRequested,
+    TResult Function()? cameraStarted,
+    TResult Function()? cameraPaused,
+    TResult Function()? cameraResumed,
+    TResult Function()? cameraStopped,
+    TResult Function(CameraStatus status)? cameraStatusChanged,
+    TResult Function()? cameraPreviewStarted,
+    TResult Function()? cameraPreviewStopped,
+    TResult Function(bool isAutoConnect)? connectionRequested,
+    TResult Function(ConnectionStatus status)? connectionStatusChanged,
+    TResult Function()? disconnectionRequested,
+    TResult Function()? webSocketConnectionRequested,
+    TResult Function()? webSocketConnecting,
+    TResult Function()? webSocketConnected,
+    TResult Function()? webSocketDisconnected,
+    TResult Function(String error)? webSocketConnectionFailed,
+    TResult Function()? webSocketConnectionTimeout,
+    TResult Function(int attempt)? webSocketRetrying,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageReceived,
+    TResult Function(Map<String, dynamic> message)? webSocketMessageSent,
+    TResult Function(String error)? webSocketSendError,
+    TResult Function()? autoConnectionTriggered,
+    TResult Function(bool enabled)? autoConnectionToggled,
+    TResult Function()? streamingStartRequested,
+    TResult Function()? streamingStopRequested,
+    TResult Function()? streamingStarted,
+    TResult Function()? streamingStopped,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function()? frameProcessed,
+    TResult Function(String message)? errorOccurred,
+    TResult Function(String error)? cameraError,
+    TResult Function()? errorCleared,
+    TResult Function(String message)? toastRequested,
+    TResult Function()? debugModeToggled,
+    TResult Function()? statisticsReset,
+    TResult Function(bool success, String message, String? employeeName)?
+    recognitionResultReceived,
+    TResult Function(FaceDetectionResult result)? backendResponseReceived,
+    TResult Function(FaceDetectionNotificationType type, String message)?
+    showFaceDetectionNotification,
+    TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
+    TResult Function()? disconnectRequested,
+    TResult Function(String error)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (resetAfterCheckIn != null) {
+      return resetAfterCheckIn();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppStarted value) appStarted,
+    required TResult Function(AppDisposed value) appDisposed,
+    required TResult Function(CameraPermissionRequested value)
+    cameraPermissionRequested,
+    required TResult Function(CameraPermissionGranted value)
+    cameraPermissionGranted,
+    required TResult Function(CameraPermissionDenied value)
+    cameraPermissionDenied,
+    required TResult Function(CameraInitRequested value) cameraInitRequested,
+    required TResult Function(CameraStarted value) cameraStarted,
+    required TResult Function(CameraPaused value) cameraPaused,
+    required TResult Function(CameraResumed value) cameraResumed,
+    required TResult Function(CameraStopped value) cameraStopped,
+    required TResult Function(CameraStatusChanged value) cameraStatusChanged,
+    required TResult Function(CameraPreviewStarted value) cameraPreviewStarted,
+    required TResult Function(CameraPreviewStopped value) cameraPreviewStopped,
+    required TResult Function(ConnectionRequested value) connectionRequested,
+    required TResult Function(ConnectionStatusChanged value)
+    connectionStatusChanged,
+    required TResult Function(DisconnectionRequested value)
+    disconnectionRequested,
+    required TResult Function(WebSocketConnectionRequested value)
+    webSocketConnectionRequested,
+    required TResult Function(WebSocketConnecting value) webSocketConnecting,
+    required TResult Function(WebSocketConnected value) webSocketConnected,
+    required TResult Function(WebSocketDisconnected value)
+    webSocketDisconnected,
+    required TResult Function(WebSocketConnectionFailed value)
+    webSocketConnectionFailed,
+    required TResult Function(WebSocketConnectionTimeout value)
+    webSocketConnectionTimeout,
+    required TResult Function(WebSocketRetrying value) webSocketRetrying,
+    required TResult Function(WebSocketMessageReceived value)
+    webSocketMessageReceived,
+    required TResult Function(WebSocketMessageSent value) webSocketMessageSent,
+    required TResult Function(WebSocketSendError value) webSocketSendError,
+    required TResult Function(AutoConnectionTriggered value)
+    autoConnectionTriggered,
+    required TResult Function(AutoConnectionToggled value)
+    autoConnectionToggled,
+    required TResult Function(StreamingStartRequested value)
+    streamingStartRequested,
+    required TResult Function(StreamingStopRequested value)
+    streamingStopRequested,
+    required TResult Function(StreamingStarted value) streamingStarted,
+    required TResult Function(StreamingStopped value) streamingStopped,
+    required TResult Function(StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(FrameProcessed value) frameProcessed,
+    required TResult Function(ErrorOccurred value) errorOccurred,
+    required TResult Function(CameraError value) cameraError,
+    required TResult Function(ErrorCleared value) errorCleared,
+    required TResult Function(ToastRequested value) toastRequested,
+    required TResult Function(DebugModeToggled value) debugModeToggled,
+    required TResult Function(StatisticsReset value) statisticsReset,
+    required TResult Function(RecognitionResultReceived value)
+    recognitionResultReceived,
+    required TResult Function(BackendResponseReceived value)
+    backendResponseReceived,
+    required TResult Function(ShowFaceDetectionNotification value)
+    showFaceDetectionNotification,
+    required TResult Function(ClearFaceDetectionNotification value)
+    clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
+    required TResult Function(DisconnectRequested value) disconnectRequested,
+    required TResult Function(WebSocketError value) webSocketError,
+  }) {
+    return resetAfterCheckIn(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppStarted value)? appStarted,
+    TResult? Function(AppDisposed value)? appDisposed,
+    TResult? Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(CameraInitRequested value)? cameraInitRequested,
+    TResult? Function(CameraStarted value)? cameraStarted,
+    TResult? Function(CameraPaused value)? cameraPaused,
+    TResult? Function(CameraResumed value)? cameraResumed,
+    TResult? Function(CameraStopped value)? cameraStopped,
+    TResult? Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult? Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult? Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult? Function(ConnectionRequested value)? connectionRequested,
+    TResult? Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult? Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult? Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult? Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult? Function(WebSocketConnected value)? webSocketConnected,
+    TResult? Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult? Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult? Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult? Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult? Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult? Function(WebSocketSendError value)? webSocketSendError,
+    TResult? Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult? Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult? Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult? Function(StreamingStopRequested value)? streamingStopRequested,
+    TResult? Function(StreamingStarted value)? streamingStarted,
+    TResult? Function(StreamingStopped value)? streamingStopped,
+    TResult? Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(FrameProcessed value)? frameProcessed,
+    TResult? Function(ErrorOccurred value)? errorOccurred,
+    TResult? Function(CameraError value)? cameraError,
+    TResult? Function(ErrorCleared value)? errorCleared,
+    TResult? Function(ToastRequested value)? toastRequested,
+    TResult? Function(DebugModeToggled value)? debugModeToggled,
+    TResult? Function(StatisticsReset value)? statisticsReset,
+    TResult? Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult? Function(BackendResponseReceived value)? backendResponseReceived,
+    TResult? Function(ShowFaceDetectionNotification value)?
+    showFaceDetectionNotification,
+    TResult? Function(ClearFaceDetectionNotification value)?
+    clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
+    TResult? Function(DisconnectRequested value)? disconnectRequested,
+    TResult? Function(WebSocketError value)? webSocketError,
+  }) {
+    return resetAfterCheckIn?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppStarted value)? appStarted,
+    TResult Function(AppDisposed value)? appDisposed,
+    TResult Function(CameraPermissionRequested value)?
+    cameraPermissionRequested,
+    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
+    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(CameraInitRequested value)? cameraInitRequested,
+    TResult Function(CameraStarted value)? cameraStarted,
+    TResult Function(CameraPaused value)? cameraPaused,
+    TResult Function(CameraResumed value)? cameraResumed,
+    TResult Function(CameraStopped value)? cameraStopped,
+    TResult Function(CameraStatusChanged value)? cameraStatusChanged,
+    TResult Function(CameraPreviewStarted value)? cameraPreviewStarted,
+    TResult Function(CameraPreviewStopped value)? cameraPreviewStopped,
+    TResult Function(ConnectionRequested value)? connectionRequested,
+    TResult Function(ConnectionStatusChanged value)? connectionStatusChanged,
+    TResult Function(DisconnectionRequested value)? disconnectionRequested,
+    TResult Function(WebSocketConnectionRequested value)?
+    webSocketConnectionRequested,
+    TResult Function(WebSocketConnecting value)? webSocketConnecting,
+    TResult Function(WebSocketConnected value)? webSocketConnected,
+    TResult Function(WebSocketDisconnected value)? webSocketDisconnected,
+    TResult Function(WebSocketConnectionFailed value)?
+    webSocketConnectionFailed,
+    TResult Function(WebSocketConnectionTimeout value)?
+    webSocketConnectionTimeout,
+    TResult Function(WebSocketRetrying value)? webSocketRetrying,
+    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
+    TResult Function(WebSocketMessageSent value)? webSocketMessageSent,
+    TResult Function(WebSocketSendError value)? webSocketSendError,
+    TResult Function(AutoConnectionTriggered value)? autoConnectionTriggered,
+    TResult Function(AutoConnectionToggled value)? autoConnectionToggled,
+    TResult Function(StreamingStartRequested value)? streamingStartRequested,
+    TResult Function(StreamingStopRequested value)? streamingStopRequested,
+    TResult Function(StreamingStarted value)? streamingStarted,
+    TResult Function(StreamingStopped value)? streamingStopped,
+    TResult Function(StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(FrameProcessed value)? frameProcessed,
+    TResult Function(ErrorOccurred value)? errorOccurred,
+    TResult Function(CameraError value)? cameraError,
+    TResult Function(ErrorCleared value)? errorCleared,
+    TResult Function(ToastRequested value)? toastRequested,
+    TResult Function(DebugModeToggled value)? debugModeToggled,
+    TResult Function(StatisticsReset value)? statisticsReset,
+    TResult Function(RecognitionResultReceived value)?
+    recognitionResultReceived,
+    TResult Function(BackendResponseReceived value)? backendResponseReceived,
+    TResult Function(ShowFaceDetectionNotification value)?
+    showFaceDetectionNotification,
+    TResult Function(ClearFaceDetectionNotification value)?
+    clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
+    TResult Function(DisconnectRequested value)? disconnectRequested,
+    TResult Function(WebSocketError value)? webSocketError,
+    required TResult orElse(),
+  }) {
+    if (resetAfterCheckIn != null) {
+      return resetAfterCheckIn(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ResetAfterCheckIn implements CheckInEvent {
+  const factory ResetAfterCheckIn() = _$ResetAfterCheckInImpl;
 }
 
 /// @nodoc
@@ -20504,6 +21200,7 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -20559,6 +21256,7 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -20614,6 +21312,7 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -20690,6 +21389,7 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -20750,6 +21450,7 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -20810,6 +21511,7 @@ class _$DisconnectRequestedImpl implements DisconnectRequested {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
@@ -20954,6 +21656,7 @@ class _$WebSocketErrorImpl implements WebSocketError {
     )
     showFaceDetectionNotification,
     required TResult Function() clearFaceDetectionNotification,
+    required TResult Function() resetAfterCheckIn,
     required TResult Function() disconnectRequested,
     required TResult Function(String error) webSocketError,
   }) {
@@ -21009,6 +21712,7 @@ class _$WebSocketErrorImpl implements WebSocketError {
     TResult? Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult? Function()? clearFaceDetectionNotification,
+    TResult? Function()? resetAfterCheckIn,
     TResult? Function()? disconnectRequested,
     TResult? Function(String error)? webSocketError,
   }) {
@@ -21064,6 +21768,7 @@ class _$WebSocketErrorImpl implements WebSocketError {
     TResult Function(FaceDetectionNotificationType type, String message)?
     showFaceDetectionNotification,
     TResult Function()? clearFaceDetectionNotification,
+    TResult Function()? resetAfterCheckIn,
     TResult Function()? disconnectRequested,
     TResult Function(String error)? webSocketError,
     required TResult orElse(),
@@ -21140,6 +21845,7 @@ class _$WebSocketErrorImpl implements WebSocketError {
     showFaceDetectionNotification,
     required TResult Function(ClearFaceDetectionNotification value)
     clearFaceDetectionNotification,
+    required TResult Function(ResetAfterCheckIn value) resetAfterCheckIn,
     required TResult Function(DisconnectRequested value) disconnectRequested,
     required TResult Function(WebSocketError value) webSocketError,
   }) {
@@ -21200,6 +21906,7 @@ class _$WebSocketErrorImpl implements WebSocketError {
     showFaceDetectionNotification,
     TResult? Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult? Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult? Function(DisconnectRequested value)? disconnectRequested,
     TResult? Function(WebSocketError value)? webSocketError,
   }) {
@@ -21260,6 +21967,7 @@ class _$WebSocketErrorImpl implements WebSocketError {
     showFaceDetectionNotification,
     TResult Function(ClearFaceDetectionNotification value)?
     clearFaceDetectionNotification,
+    TResult Function(ResetAfterCheckIn value)? resetAfterCheckIn,
     TResult Function(DisconnectRequested value)? disconnectRequested,
     TResult Function(WebSocketError value)? webSocketError,
     required TResult orElse(),
