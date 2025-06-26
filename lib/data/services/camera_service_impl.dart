@@ -42,7 +42,9 @@ class CameraServiceImpl implements CameraService {
             .toList();
 
     if (frontCameras.isEmpty) {
-      throw Exception('Front camera not available. Face check-in requires front camera.');
+      throw Exception(
+        'Front camera not available. Face check-in requires front camera.',
+      );
     }
 
     final selectedCamera = frontCameras.first;

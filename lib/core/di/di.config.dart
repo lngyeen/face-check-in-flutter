@@ -28,7 +28,7 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i555.WebSocketService>(() => _i555.WebSocketService());
+    gh.singleton<_i555.WebSocketService>(() => _i555.WebSocketService());
     gh.lazySingleton<_i474.PermissionService>(
       () => _i372.PermissionServiceImpl(),
     );

@@ -166,6 +166,17 @@ class CheckInEvent with _$CheckInEvent {
     FaceDetectionResult result,
   ) = BackendResponseReceived;
 
+  // Face detection notification events
+  /// Show face detection notification
+  const factory CheckInEvent.showFaceDetectionNotification({
+    required FaceDetectionNotificationType type,
+    required String message,
+  }) = ShowFaceDetectionNotification;
+
+  /// Clear face detection notification
+  const factory CheckInEvent.clearFaceDetectionNotification() =
+      ClearFaceDetectionNotification;
+
   const factory CheckInEvent.disconnectRequested() = DisconnectRequested;
   const factory CheckInEvent.webSocketError(String error) = WebSocketError;
 }

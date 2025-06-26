@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -73,78 +74,162 @@ class _CheckInScreenState extends State<CheckInScreen>
           ),
         ],
       ),
-      body: BlocListener<CheckInBloc, CheckInState>(
-        listenWhen:
-            (previous, current) =>
-                previous.toastStatus != current.toastStatus &&
-                current.toastStatus == ToastStatus.showing,
-        listener: (context, state) {
-          if (state.toastMessage != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.toastMessage!),
-                duration: const Duration(seconds: 3),
-              ),
-            );
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          // Original toast listener
+          BlocListener<CheckInBloc, CheckInState>(
+            listenWhen:
+                (previous, current) =>
+                    previous.toastStatus != current.toastStatus &&
+                    current.toastStatus == ToastStatus.showing,
+            listener: (context, state) {
+              if (state.toastMessage != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.toastMessage!),
+                    duration: const Duration(seconds: 3),
+                  ),
+                );
+              }
+            },
+          ),
+          // Face detection notification listener
+          BlocListener<CheckInBloc, CheckInState>(
+            listenWhen: (previous, current) {
+              // Listen when notification should be shown AND notification content changed
+              final shouldListen =
+                  current.shouldShowNotification == true &&
+                  current.notificationType !=
+                      FaceDetectionNotificationType.none &&
+                  (previous.notificationMessage !=
+                          current.notificationMessage ||
+                      previous.notificationType != current.notificationType);
+
+              if (shouldListen) {
+                debugPrint(
+                  '🎯 UI: Face detection notification listener triggered',
+                );
+                debugPrint(
+                  '🎯 UI: Previous shouldShowNotification: ${previous.shouldShowNotification}',
+                );
+                debugPrint(
+                  '🎯 UI: Current shouldShowNotification: ${current.shouldShowNotification}',
+                );
+                debugPrint(
+                  '🎯 UI: Current notificationType: ${current.notificationType.name}',
+                );
+                debugPrint(
+                  '🎯 UI: Current message: ${current.notificationMessage}',
+                );
+              } else {
+                debugPrint(
+                  '🎯 UI: Face detection notification listener NOT triggered',
+                );
+                debugPrint(
+                  '🎯 UI: shouldShowNotification changed: ${previous.shouldShowNotification != current.shouldShowNotification}',
+                );
+                debugPrint(
+                  '🎯 UI: current.shouldShowNotification == true: ${current.shouldShowNotification == true}',
+                );
+                debugPrint(
+                  '🎯 UI: notificationType != none: ${current.notificationType != FaceDetectionNotificationType.none}',
+                );
+              }
+
+              return shouldListen;
+            },
+            listener: (context, state) {
+              debugPrint(
+                '🎯 UI: Inside face detection notification listener callback',
+              );
+
+              if (state.notificationMessage != null &&
+                  state.notificationType !=
+                      FaceDetectionNotificationType.none) {
+                debugPrint('🎯 UI: About to show snack bar');
+                debugPrint('🎯 UI: Message: ${state.notificationMessage}');
+                debugPrint('🎯 UI: Type: ${state.notificationType.name}');
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Row(
+                      children: [
+                        Icon(
+                          state.notificationType.icon,
+                          color: state.notificationType.textColor,
+                          size: 24,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            state.notificationMessage!,
+                            style: TextStyle(
+                              color: state.notificationType.textColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    backgroundColor: state.notificationType.backgroundColor,
+                    duration: state.notificationType.duration,
+                    behavior: SnackBarBehavior.floating,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    margin: const EdgeInsets.all(16),
+                    elevation: 6,
+                  ),
+                );
+                debugPrint('🎯 UI: Snack bar shown successfully');
+              } else {
+                debugPrint(
+                  '🎯 UI: Notification message is null or type is none',
+                );
+              }
+            },
+          ),
+        ],
         child: BlocBuilder<CheckInBloc, CheckInState>(
           builder: (context, state) {
-            return Padding(
+            return SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Status Card
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'System Status',
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-                          const SizedBox(height: 16),
-                          _buildStatusRow(
-                            'Camera',
-                            state.cameraStatus.displayText,
-                            state.cameraStatus.displayColor,
-                          ),
-                          const SizedBox(height: 8),
-                          _buildStatusRow(
-                            'Connection',
-                            state.connectionStatus.displayText,
-                            state.connectionStatus.displayColor,
-                          ),
-                          const SizedBox(height: 8),
-                          _buildStatusRow(
-                            'Streaming',
-                            state.streamingStatus.displayText,
-                            state.streamingStatus.displayColor,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 16),
-
                   // Face Detection Status
                   const FaceDetectionStatusWidget(),
 
                   const SizedBox(height: 16),
 
-                  // Camera Preview
-                  const Expanded(
-                    child: Card(
-                      clipBehavior: Clip.antiAlias,
-                      child: CameraPreviewWidget(),
-                    ),
+                  // Camera Preview with 3:4 aspect ratio
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final double maxWidth = constraints.maxWidth;
+                      final double screenHeight =
+                          MediaQuery.of(context).size.height;
+
+                      // Calculate ideal height but limit to max 60% of screen height
+                      final double idealHeight =
+                          maxWidth * (4.0 / 3.0); // 3:4 aspect ratio
+                      final double maxAllowedHeight = screenHeight * 0.6;
+                      final double previewHeight =
+                          idealHeight > maxAllowedHeight
+                              ? maxAllowedHeight
+                              : idealHeight;
+
+                      return SizedBox(
+                        height: previewHeight,
+                        child: const Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: CameraPreviewWidget(),
+                        ),
+                      );
+                    },
                   ),
 
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
 
                   // Action Buttons
                   Row(
@@ -181,7 +266,7 @@ class _CheckInScreenState extends State<CheckInScreen>
                     ],
                   ),
 
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
 
                   // Streaming Controls
                   Row(
@@ -244,6 +329,8 @@ class _CheckInScreenState extends State<CheckInScreen>
                     ],
                   ),
 
+                  const SizedBox(height: 12),
+
                   // Debug Information (if debug mode is enabled)
                   if (state.isDebugMode) ...[
                     const SizedBox(height: 16),
@@ -266,6 +353,15 @@ class _CheckInScreenState extends State<CheckInScreen>
                             ),
                             Text('Loading: ${state.isLoading}'),
                             Text('Error: ${state.errorMessage ?? 'None'}'),
+                            if (state.notificationMessage != null) ...[
+                              const SizedBox(height: 8),
+                              Text(
+                                'Last Notification: ${state.notificationMessage}',
+                              ),
+                              Text(
+                                'Notification Type: ${state.notificationType.name}',
+                              ),
+                            ],
                             const SizedBox(height: 8),
                             ElevatedButton(
                               onPressed: () {
@@ -293,31 +389,6 @@ class _CheckInScreenState extends State<CheckInScreen>
           },
         ),
       ),
-    );
-  }
-
-  Widget _buildStatusRow(String label, String status, Color color) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
-            color: color.withAlpha(30),
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: color.withAlpha(70)),
-          ),
-          child: Text(
-            status,
-            style: TextStyle(
-              color: color,
-              fontWeight: FontWeight.w500,
-              fontSize: 12,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
