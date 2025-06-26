@@ -17,15 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ConnectionState {
-  /// Overall app connection status
+  /// Overall app connection status (inferred from WebSocketService)
   AppConnectionStatus get status => throw _privateConstructorUsedError;
-
-  /// Network connectivity status
-  bool get isNetworkConnected => throw _privateConstructorUsedError;
-
-  /// WebSocket connection status
-  WebSocketConnectionStatus get webSocketStatus =>
-      throw _privateConstructorUsedError;
 
   /// Current frame streaming status for UI
   StreamingStatus get streamingStatus => throw _privateConstructorUsedError;
@@ -49,8 +42,6 @@ abstract class $ConnectionStateCopyWith<$Res> {
   @useResult
   $Res call({
     AppConnectionStatus status,
-    bool isNetworkConnected,
-    WebSocketConnectionStatus webSocketStatus,
     StreamingStatus streamingStatus,
     ConnectionError? lastError,
   });
@@ -72,8 +63,6 @@ class _$ConnectionStateCopyWithImpl<$Res, $Val extends ConnectionState>
   @override
   $Res call({
     Object? status = null,
-    Object? isNetworkConnected = null,
-    Object? webSocketStatus = null,
     Object? streamingStatus = null,
     Object? lastError = freezed,
   }) {
@@ -84,16 +73,6 @@ class _$ConnectionStateCopyWithImpl<$Res, $Val extends ConnectionState>
                     ? _value.status
                     : status // ignore: cast_nullable_to_non_nullable
                         as AppConnectionStatus,
-            isNetworkConnected:
-                null == isNetworkConnected
-                    ? _value.isNetworkConnected
-                    : isNetworkConnected // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            webSocketStatus:
-                null == webSocketStatus
-                    ? _value.webSocketStatus
-                    : webSocketStatus // ignore: cast_nullable_to_non_nullable
-                        as WebSocketConnectionStatus,
             streamingStatus:
                 null == streamingStatus
                     ? _value.streamingStatus
@@ -121,8 +100,6 @@ abstract class _$$ConnectionStateImplCopyWith<$Res>
   @useResult
   $Res call({
     AppConnectionStatus status,
-    bool isNetworkConnected,
-    WebSocketConnectionStatus webSocketStatus,
     StreamingStatus streamingStatus,
     ConnectionError? lastError,
   });
@@ -143,8 +120,6 @@ class __$$ConnectionStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? isNetworkConnected = null,
-    Object? webSocketStatus = null,
     Object? streamingStatus = null,
     Object? lastError = freezed,
   }) {
@@ -155,16 +130,6 @@ class __$$ConnectionStateImplCopyWithImpl<$Res>
                 ? _value.status
                 : status // ignore: cast_nullable_to_non_nullable
                     as AppConnectionStatus,
-        isNetworkConnected:
-            null == isNetworkConnected
-                ? _value.isNetworkConnected
-                : isNetworkConnected // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        webSocketStatus:
-            null == webSocketStatus
-                ? _value.webSocketStatus
-                : webSocketStatus // ignore: cast_nullable_to_non_nullable
-                    as WebSocketConnectionStatus,
         streamingStatus:
             null == streamingStatus
                 ? _value.streamingStatus
@@ -185,26 +150,14 @@ class __$$ConnectionStateImplCopyWithImpl<$Res>
 class _$ConnectionStateImpl extends _ConnectionState {
   const _$ConnectionStateImpl({
     this.status = AppConnectionStatus.initial,
-    this.isNetworkConnected = false,
-    this.webSocketStatus = WebSocketConnectionStatus.disconnected,
     this.streamingStatus = StreamingStatus.idle,
     this.lastError,
   }) : super._();
 
-  /// Overall app connection status
+  /// Overall app connection status (inferred from WebSocketService)
   @override
   @JsonKey()
   final AppConnectionStatus status;
-
-  /// Network connectivity status
-  @override
-  @JsonKey()
-  final bool isNetworkConnected;
-
-  /// WebSocket connection status
-  @override
-  @JsonKey()
-  final WebSocketConnectionStatus webSocketStatus;
 
   /// Current frame streaming status for UI
   @override
@@ -217,7 +170,7 @@ class _$ConnectionStateImpl extends _ConnectionState {
 
   @override
   String toString() {
-    return 'ConnectionState(status: $status, isNetworkConnected: $isNetworkConnected, webSocketStatus: $webSocketStatus, streamingStatus: $streamingStatus, lastError: $lastError)';
+    return 'ConnectionState(status: $status, streamingStatus: $streamingStatus, lastError: $lastError)';
   }
 
   @override
@@ -226,10 +179,6 @@ class _$ConnectionStateImpl extends _ConnectionState {
         (other.runtimeType == runtimeType &&
             other is _$ConnectionStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.isNetworkConnected, isNetworkConnected) ||
-                other.isNetworkConnected == isNetworkConnected) &&
-            (identical(other.webSocketStatus, webSocketStatus) ||
-                other.webSocketStatus == webSocketStatus) &&
             (identical(other.streamingStatus, streamingStatus) ||
                 other.streamingStatus == streamingStatus) &&
             (identical(other.lastError, lastError) ||
@@ -237,14 +186,8 @@ class _$ConnectionStateImpl extends _ConnectionState {
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    status,
-    isNetworkConnected,
-    webSocketStatus,
-    streamingStatus,
-    lastError,
-  );
+  int get hashCode =>
+      Object.hash(runtimeType, status, streamingStatus, lastError);
 
   /// Create a copy of ConnectionState
   /// with the given fields replaced by the non-null parameter values.
@@ -261,24 +204,14 @@ class _$ConnectionStateImpl extends _ConnectionState {
 abstract class _ConnectionState extends ConnectionState {
   const factory _ConnectionState({
     final AppConnectionStatus status,
-    final bool isNetworkConnected,
-    final WebSocketConnectionStatus webSocketStatus,
     final StreamingStatus streamingStatus,
     final ConnectionError? lastError,
   }) = _$ConnectionStateImpl;
   const _ConnectionState._() : super._();
 
-  /// Overall app connection status
+  /// Overall app connection status (inferred from WebSocketService)
   @override
   AppConnectionStatus get status;
-
-  /// Network connectivity status
-  @override
-  bool get isNetworkConnected;
-
-  /// WebSocket connection status
-  @override
-  WebSocketConnectionStatus get webSocketStatus;
 
   /// Current frame streaming status for UI
   @override

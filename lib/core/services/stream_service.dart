@@ -7,7 +7,7 @@ import 'package:rxdart/rxdart.dart';
 
 import 'package:face_check_in_flutter/core/services/image_converter.dart';
 
-import '../../domain/entities/connection_status.dart';
+import '../../domain/entities/websocket_connection_status.dart';
 
 import 'websocket_service.dart';
 

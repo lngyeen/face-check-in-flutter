@@ -70,9 +70,6 @@ class CheckInSuccessDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDesignTokens.radiusLarge),
-      ),
       child: Container(
         padding: const EdgeInsets.all(AppDesignTokens.spaceLarge),
         constraints: const BoxConstraints(maxHeight: 600, maxWidth: 400),

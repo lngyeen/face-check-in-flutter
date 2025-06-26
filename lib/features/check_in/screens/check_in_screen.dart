@@ -8,7 +8,6 @@ import '../bloc/check_in_bloc.dart';
 import '../bloc/check_in_event.dart' as ci;
 import '../bloc/check_in_state.dart';
 import '../widgets/check_in_listeners.dart';
-import '../widgets/debug_controls_card.dart';
 import '../widgets/debug_information_card.dart';
 import '../widgets/debug_toggle_button.dart';
 import '../widgets/system_status_card.dart';
@@ -130,10 +129,6 @@ class _CheckInScreenState extends State<CheckInScreen> {
           children: const [
             // System Status Section
             SystemStatusCard(),
-            SizedBox(height: 16),
-
-            // Debug Controls Section
-            DebugControlsCard(),
             SizedBox(height: 16),
 
             // Debug Information Section

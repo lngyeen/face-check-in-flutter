@@ -10,8 +10,8 @@ enum CameraStatus {
   /// Camera is being initialized (includes permission request)
   initializing,
 
-  /// Camera is operational and ready to capture frames
-  operational,
+  /// Camera is opening
+  opening,
 
   /// Front camera is not available on this device
   frontCameraNotAvailable,

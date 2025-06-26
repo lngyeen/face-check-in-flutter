@@ -1,8 +1,8 @@
 import 'package:camera/camera.dart';
-import 'package:face_check_in_flutter/features/connection/connection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
+import 'package:face_check_in_flutter/features/connection/connection.dart';
 
 part 'check_in_event.freezed.dart';
 
@@ -48,10 +48,6 @@ class CheckInEvent with _$CheckInEvent {
     required String error,
     String? message,
   }) = ResponseErrorReceived;
-
-  // Connection management events
-  /// Manual retry requested by user
-  const factory CheckInEvent.requestManualRetry() = RequestManualRetry;
 
   /// Connection state changed (from ConnectionBloc)
   const factory CheckInEvent.connectionStateChanged(

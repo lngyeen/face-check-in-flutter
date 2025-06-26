@@ -48,7 +48,7 @@ class CheckInState with _$CheckInState {
   const CheckInState._();
 
   bool get isFullFlowActive =>
-      cameraStatus == CameraStatus.operational && connectionState.canStream;
+      cameraStatus == CameraStatus.opening && connectionState.canStream;
 
   /// Detected faces derived from latest frame data
   List<FaceDetectionResult> get detectedFaces => latestFrameData?.faces ?? [];

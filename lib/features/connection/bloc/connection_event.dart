@@ -1,27 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:face_check_in_flutter/domain/entities/connection_status.dart';
+import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
 
 part 'connection_event.freezed.dart';
 
 /// Events for ConnectionBloc - handles all connection-related triggers
 @freezed
 class ConnectionEvent with _$ConnectionEvent {
-  /// Network connectivity changed
-  const factory ConnectionEvent.networkStatusChanged({
-    required bool isConnected,
-  }) = NetworkStatusChanged;
-
-  /// WebSocket connection status changed
-  const factory ConnectionEvent.webSocketStatusChanged({
-    required WebSocketConnectionStatus status,
-  }) = WebSocketStatusChanged;
-
-  /// User requested connection attempt
-  const factory ConnectionEvent.connectionRequested() = ConnectionRequested;
-
-  /// User requested manual retry (from background monitoring state)
-  const factory ConnectionEvent.manualRetryRequested() = ManualRetryRequested;
+  /// App connection status changed (computed from WebSocketService)
+  const factory ConnectionEvent.appConnectionStatusChanged({
+    required AppConnectionStatus status,
+  }) = AppConnectionStatusChanged;
 
   /// Initialize connection system
   const factory ConnectionEvent.initialize() = Initialize;

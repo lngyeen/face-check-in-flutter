@@ -34,7 +34,6 @@ mixin _$CheckInEvent {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -55,7 +54,6 @@ mixin _$CheckInEvent {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) => throw _privateConstructorUsedError;
@@ -75,7 +73,6 @@ mixin _$CheckInEvent {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -97,7 +94,6 @@ mixin _$CheckInEvent {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -114,7 +110,6 @@ mixin _$CheckInEvent {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) => throw _privateConstructorUsedError;
@@ -130,7 +125,6 @@ mixin _$CheckInEvent {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -218,7 +212,6 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -243,7 +236,6 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -267,7 +259,6 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -296,7 +287,6 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -317,7 +307,6 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -337,7 +326,6 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -412,7 +400,6 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -437,7 +424,6 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -461,7 +447,6 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -490,7 +475,6 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -511,7 +495,6 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -531,7 +514,6 @@ class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -606,7 +588,6 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -631,7 +612,6 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -655,7 +635,6 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -684,7 +663,6 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -705,7 +683,6 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -725,7 +702,6 @@ class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -799,7 +775,6 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -824,7 +799,6 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -848,7 +822,6 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -877,7 +850,6 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -898,7 +870,6 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -918,7 +889,6 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -992,7 +962,6 @@ class _$InitializeCameraImpl implements InitializeCamera {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -1017,7 +986,6 @@ class _$InitializeCameraImpl implements InitializeCamera {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -1041,7 +1009,6 @@ class _$InitializeCameraImpl implements InitializeCamera {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -1070,7 +1037,6 @@ class _$InitializeCameraImpl implements InitializeCamera {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -1091,7 +1057,6 @@ class _$InitializeCameraImpl implements InitializeCamera {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -1111,7 +1076,6 @@ class _$InitializeCameraImpl implements InitializeCamera {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -1185,7 +1149,6 @@ class _$StopCameraImpl implements StopCamera {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -1210,7 +1173,6 @@ class _$StopCameraImpl implements StopCamera {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -1234,7 +1196,6 @@ class _$StopCameraImpl implements StopCamera {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -1263,7 +1224,6 @@ class _$StopCameraImpl implements StopCamera {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -1284,7 +1244,6 @@ class _$StopCameraImpl implements StopCamera {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -1304,7 +1263,6 @@ class _$StopCameraImpl implements StopCamera {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -1408,7 +1366,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -1433,7 +1390,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -1457,7 +1413,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -1486,7 +1441,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -1507,7 +1461,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -1527,7 +1480,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -1610,7 +1562,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -1635,7 +1586,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -1659,7 +1609,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -1688,7 +1637,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -1709,7 +1657,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -1729,7 +1676,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -1877,7 +1823,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -1902,7 +1847,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -1926,7 +1870,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -1955,7 +1898,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -1976,7 +1918,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -1996,7 +1937,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -2122,7 +2062,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -2147,7 +2086,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -2171,7 +2109,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -2200,7 +2137,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -2221,7 +2157,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -2241,7 +2176,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -2267,199 +2201,6 @@ abstract class ResponseErrorReceived implements CheckInEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ResponseErrorReceivedImplCopyWith<_$ResponseErrorReceivedImpl>
   get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$RequestManualRetryImplCopyWith<$Res> {
-  factory _$$RequestManualRetryImplCopyWith(
-    _$RequestManualRetryImpl value,
-    $Res Function(_$RequestManualRetryImpl) then,
-  ) = __$$RequestManualRetryImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$RequestManualRetryImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$RequestManualRetryImpl>
-    implements _$$RequestManualRetryImplCopyWith<$Res> {
-  __$$RequestManualRetryImplCopyWithImpl(
-    _$RequestManualRetryImpl _value,
-    $Res Function(_$RequestManualRetryImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$RequestManualRetryImpl implements RequestManualRetry {
-  const _$RequestManualRetryImpl();
-
-  @override
-  String toString() {
-    return 'CheckInEvent.requestManualRetry()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RequestManualRetryImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
-    required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
-    required TResult Function() stopCamera,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
-    required TResult Function() requestManualRetry,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
-  }) {
-    return requestManualRetry();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
-    TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
-    TResult? Function()? stopCamera,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )?
-    frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
-  }) {
-    return requestManualRetry?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
-    TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
-    TResult Function()? stopCamera,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function()? toggleDebugMode,
-    TResult Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )?
-    frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
-    required TResult orElse(),
-  }) {
-    if (requestManualRetry != null) {
-      return requestManualRetry();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
-    required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
-    required TResult Function(StopCamera value) stopCamera,
-    required TResult Function(WebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
-    required TResult Function(ConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
-  }) {
-    return requestManualRetry(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
-    TResult? Function(StopCamera value)? stopCamera,
-    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
-    TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
-  }) {
-    return requestManualRetry?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
-    TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
-    TResult Function(StopCamera value)? stopCamera,
-    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
-    TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
-    required TResult orElse(),
-  }) {
-    if (requestManualRetry != null) {
-      return requestManualRetry(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class RequestManualRetry implements CheckInEvent {
-  const factory RequestManualRetry() = _$RequestManualRetryImpl;
 }
 
 /// @nodoc
@@ -2564,7 +2305,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -2589,7 +2329,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -2613,7 +2352,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -2642,7 +2380,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -2663,7 +2400,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -2683,7 +2419,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
@@ -2793,7 +2528,6 @@ class _$FrameCapturedImpl implements FrameCaptured {
     frameResultReceived,
     required TResult Function(String error, String? message)
     responseErrorReceived,
-    required TResult Function() requestManualRetry,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraImage image) frameCaptured,
@@ -2818,7 +2552,6 @@ class _$FrameCapturedImpl implements FrameCaptured {
     )?
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function()? requestManualRetry,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraImage image)? frameCaptured,
   }) {
@@ -2842,7 +2575,6 @@ class _$FrameCapturedImpl implements FrameCaptured {
     )?
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function()? requestManualRetry,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
@@ -2871,7 +2603,6 @@ class _$FrameCapturedImpl implements FrameCaptured {
     required TResult Function(FrameResultReceived value) frameResultReceived,
     required TResult Function(ResponseErrorReceived value)
     responseErrorReceived,
-    required TResult Function(RequestManualRetry value) requestManualRetry,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(FrameCaptured value) frameCaptured,
@@ -2892,7 +2623,6 @@ class _$FrameCapturedImpl implements FrameCaptured {
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(RequestManualRetry value)? requestManualRetry,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
@@ -2912,7 +2642,6 @@ class _$FrameCapturedImpl implements FrameCaptured {
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(RequestManualRetry value)? requestManualRetry,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),

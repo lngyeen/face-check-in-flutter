@@ -17,7 +17,6 @@ import '../../domain/services/permission_service.dart' as _i474;
 import '../../features/check_in/bloc/check_in_bloc.dart' as _i435;
 import '../../features/connection/bloc/connection_bloc.dart' as _i348;
 import '../../features/connection/connection.dart' as _i566;
-import '../services/connection/connection_manager.dart' as _i42;
 import '../services/network_connectivity_service.dart' as _i234;
 import '../services/stream_service.dart' as _i121;
 import '../services/wakelock_service.dart' as _i669;
@@ -30,10 +29,10 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.singleton<_i234.NetworkConnectivityService>(
+    gh.singleton<_i669.WakelockService>(() => _i669.WakelockService());
+    gh.lazySingleton<_i234.NetworkConnectivityService>(
       () => _i234.NetworkConnectivityService(),
     );
-    gh.singleton<_i669.WakelockService>(() => _i669.WakelockService());
     gh.lazySingleton<_i474.PermissionService>(
       () => _i372.PermissionServiceImpl(),
     );
@@ -43,16 +42,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i121.StreamService>(
       () => _i121.StreamService(gh<_i555.WebSocketService>()),
     );
-    gh.lazySingleton<_i42.ConnectionManager>(
-      () => _i42.ConnectionManager(
-        gh<_i234.NetworkConnectivityService>(),
-        gh<_i555.WebSocketService>(),
-        gh<_i121.StreamService>(),
-      ),
-    );
     gh.lazySingleton<_i348.ConnectionBloc>(
       () => _i348.ConnectionBloc(
-        gh<_i234.NetworkConnectivityService>(),
         gh<_i555.WebSocketService>(),
         gh<_i121.StreamService>(),
       ),

@@ -67,12 +67,10 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<ResponseErrorReceived>(_onResponseErrorReceived);
 
     // Special transformers
-
-    on<FrameCaptured>(_onFrameCaptured, transformer: droppable());
+    on<FrameCaptured>(_onFrameCaptured);
 
     // Connection state handlers
     on<ConnectionStateChanged>(_onConnectionStateChanged);
-    on<RequestManualRetry>(_onRequestManualRetry);
   }
 
   Future<void> _handleLifecycleEvent(
@@ -101,23 +99,21 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) {
     final connectionState = event.connectionState;
-
     emit(state.copyWith(connectionState: connectionState));
-
     _handleCameraControl(connectionState);
   }
 
   void _handleCameraControl(ConnectionState connectionState) {
     // Only manage camera based on connection readiness
     final isConnectionReady = connectionState.isConnectionReady;
-    final isCameraOperational = state.cameraStatus == CameraStatus.operational;
+    final isCameraOpening = state.cameraStatus == CameraStatus.opening;
 
-    if (isConnectionReady && !isCameraOperational) {
+    if (isConnectionReady && !isCameraOpening) {
       // Connection ready but camera not → Start camera if we have permission
       if (state.permissionStatus == PermissionStatus.granted) {
         add(const CheckInEvent.initializeCamera());
       }
-    } else if (isConnectionReady && isCameraOperational) {
+    } else if (isConnectionReady && isCameraOpening) {
       // Both camera and connection ready → Start image stream
       _startCameraImageStream();
     }
@@ -143,13 +139,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     } catch (e) {
       // Handle error silently for now, could emit error state if needed
     }
-  }
-
-  Future<void> _onRequestManualRetry(
-    RequestManualRetry event,
-    Emitter<CheckInState> emit,
-  ) async {
-    _connectionBloc.add(const ConnectionEvent.manualRetryRequested());
   }
 
   @override
@@ -271,7 +260,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
       emit(
         state.copyWith(
-          cameraStatus: CameraStatus.operational,
+          cameraStatus: CameraStatus.opening,
           cameraController: controller,
         ),
       );
@@ -436,10 +425,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
   }
 
-  Future<void> _onFrameCaptured(
-    FrameCaptured event,
-    Emitter<CheckInState> emit,
-  ) async {
+  void _onFrameCaptured(FrameCaptured event, Emitter<CheckInState> emit) {
     if (_connectionBloc.state.canStream) {
       _connectionBloc.addFrame(event.image);
     }

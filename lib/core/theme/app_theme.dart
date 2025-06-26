@@ -315,6 +315,26 @@ class AppTheme {
           return AppColors.textSecondary;
         }),
       ),
+
+      // Dialog theme
+      dialogTheme: DialogTheme(
+        backgroundColor: AppColors.surface,
+        surfaceTintColor: Colors.transparent, // Remove Material 3 tint overlay
+        elevation: AppDesignTokens.elevationHigh,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDesignTokens.radiusLarge),
+        ),
+        titleTextStyle: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textPrimary,
+        ),
+        contentTextStyle: const TextStyle(
+          fontSize: 14,
+          color: AppColors.textSecondary,
+          height: 1.5,
+        ),
+      ),
     );
   }
 

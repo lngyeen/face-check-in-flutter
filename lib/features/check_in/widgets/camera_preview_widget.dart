@@ -31,7 +31,7 @@ class CameraPreviewWidget extends StatelessWidget {
             return const PermissionDeniedWidget();
           case CameraStatus.frontCameraNotAvailable:
             return const FrontCameraNotAvailableWidget();
-          case CameraStatus.operational:
+          case CameraStatus.opening:
             final controller = state.cameraController;
             if (controller == null || !controller.value.isInitialized) {
               return const Center(child: Text('Camera not available.'));
