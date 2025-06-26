@@ -5,7 +5,6 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:rxdart/transformers.dart';
 
 import 'package:face_check_in_flutter/core/services/stream_service.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
@@ -36,17 +35,14 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     this._streamService,
   ) : super(const CheckInState()) {
     _registerEventHandlers();
-    _listenToConnectionBloc();
   }
 
   void _listenToConnectionBloc() {
     // Listen to ConnectionBloc state changes
     _connectionStateSubscription?.cancel();
-    _connectionStateSubscription = _connectionBloc.stream
-        .startWith(_connectionBloc.state)
-        .listen(
-          (connectionState) => add(ConnectionStateChanged(connectionState)),
-        );
+    _connectionStateSubscription = _connectionBloc.stream.listen(
+      (connectionState) => add(ConnectionStateChanged(connectionState)),
+    );
 
     // Listen to WebSocket messages
     _webSocketMessageSubscription?.cancel();
@@ -98,65 +94,52 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     ConnectionStateChanged event,
     Emitter<CheckInState> emit,
   ) {
+    final oldConnectionState = state.connectionState;
     final connectionState = event.connectionState;
-    emit(state.copyWith(connectionState: connectionState));
-    _handleCameraControl(connectionState);
+    emit(
+      state.copyWith(
+        connectionState: connectionState,
+        faceStatus:
+            connectionState.isActiveStreaming
+                ? state.faceStatus
+                : FaceDetectionStatus.none,
+      ),
+    );
+    _handleCameraControl(
+      oldState: oldConnectionState,
+      newState: connectionState,
+    );
   }
 
-  void _handleCameraControl(ConnectionState connectionState) {
-    // Only manage camera based on connection readiness
-    final isConnectionReady = connectionState.isConnectionReady;
-    final isCameraOpening = state.cameraStatus == CameraStatus.opening;
+  void _handleCameraControl({
+    required ConnectionState oldState,
+    required ConnectionState newState,
+  }) {
+    final isConnectionReady = newState.isConnectionReady;
+    final isCameraActive =
+        state.cameraStatus == CameraStatus.opening ||
+        state.cameraStatus == CameraStatus.initializing;
 
-    if (isConnectionReady && !isCameraOpening) {
-      // Connection ready but camera not → Start camera if we have permission
+    if (isConnectionReady && !isCameraActive) {
       if (state.permissionStatus == PermissionStatus.granted) {
         add(const CheckInEvent.initializeCamera());
       }
-    } else if (isConnectionReady && isCameraOpening) {
-      // Both camera and connection ready → Start image stream
-      _startCameraImageStream();
-    }
-
-    // Note: We DON'T stop camera when connection lost
-    // User might want to keep camera preview active
-    // Only stop camera on explicit user action or app lifecycle
-  }
-
-  /// Start camera image stream if conditions are met
-  Future<void> _startCameraImageStream() async {
-    final controller = state.cameraController;
-    if (controller == null ||
-        !controller.value.isInitialized ||
-        controller.value.isStreamingImages) {
       return;
     }
 
-    try {
-      await controller.startImageStream((CameraImage image) {
-        add(CheckInEvent.frameCaptured(image));
-      });
-    } catch (e) {
-      // Handle error silently for now, could emit error state if needed
+    if (isCameraActive && oldState.isConnectionReady && !isConnectionReady) {
+      add(const CheckInEvent.stopCamera());
+      return;
     }
   }
 
   @override
   Future<void> close() async {
-    try {
-      await _streamService.stopStream();
+    _streamService.dispose();
+    await _stopCameraResources(state.cameraController);
+    await _webSocketMessageSubscription?.cancel();
+    await _connectionStateSubscription?.cancel();
 
-      final controller = state.cameraController;
-      if (controller != null && controller.value.isStreamingImages) {
-        await controller.stopImageStream();
-      }
-      await controller?.dispose();
-
-      await _webSocketMessageSubscription?.cancel();
-      await _connectionStateSubscription?.cancel();
-    } catch (e) {
-      // Silent cleanup
-    }
     return super.close();
   }
 
@@ -257,6 +240,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       await controller.initialize();
       await controller.setFocusMode(FocusMode.auto);
       await controller.setExposureMode(ExposureMode.auto);
+      await controller.startImageStream((CameraImage image) {
+        add(CheckInEvent.frameCaptured(image));
+      });
 
       emit(
         state.copyWith(
@@ -267,6 +253,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
       // Initialize ConnectionBloc
       _connectionBloc.add(const ConnectionEvent.initialize());
+      _listenToConnectionBloc();
     } catch (e) {
       emit(
         state.copyWith(
@@ -285,6 +272,18 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     final controller = state.cameraController;
+
+    emit(
+      state.copyWith(
+        cameraController: null,
+        cameraStatus: CameraStatus.initial,
+      ),
+    );
+
+    await _stopCameraResources(controller);
+  }
+
+  Future<void> _stopCameraResources(CameraController? controller) async {
     if (controller != null) {
       try {
         if (controller.value.isStreamingImages) {
@@ -295,15 +294,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         // Silent error handling
       }
     }
-
-    // TODO: Stop connection bloc as well - Maybe need more event from ConnectionBloc
-
-    emit(
-      state.copyWith(
-        cameraController: null,
-        cameraStatus: CameraStatus.initial,
-      ),
-    );
   }
 
   void _onWebSocketMessageReceived(
@@ -426,7 +416,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   }
 
   void _onFrameCaptured(FrameCaptured event, Emitter<CheckInState> emit) {
-    if (_connectionBloc.state.canStream) {
+    if (_connectionBloc.state.isActiveStreaming) {
       _connectionBloc.addFrame(event.image);
     }
   }

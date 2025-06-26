@@ -26,6 +26,6 @@ class ConnectionState with _$ConnectionState {
   bool get isConnectionReady => status == AppConnectionStatus.connected;
 
   /// Whether streaming should be allowed
-  bool get canStream =>
+  bool get isActiveStreaming =>
       isConnectionReady && streamingStatus == StreamingStatus.active;
 }

@@ -32,11 +32,6 @@ class _CheckInScreenState extends State<CheckInScreen> {
   @override
   void initState() {
     super.initState();
-    _initializeCamera();
-  }
-
-  /// Initializes camera permissions on screen load
-  void _initializeCamera() {
     context.read<CheckInBloc>().add(const ci.CheckInEvent.initializeCamera());
   }
 

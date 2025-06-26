@@ -99,6 +99,7 @@ class WebSocketService {
   }
 
   void _setupNetworkListeners() {
+    _networkSubscription?.cancel();
     _networkSubscription = _networkService.connectivityStream.distinct().listen(
       (isConnected) async {
         if (isConnected) {

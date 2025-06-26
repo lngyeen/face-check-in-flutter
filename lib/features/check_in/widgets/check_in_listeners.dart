@@ -41,14 +41,16 @@ class _CheckInSuccessListener extends BlocListener<CheckInBloc, CheckInState> {
                 state.detectedFaces.where((face) => face.isRecognized).toList();
             if (recognizedFaces.isEmpty) {
               // If no recognized faces, show a toast for unrecognized face
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Unrecognized face detected. Please try again.',
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'Unrecognized face detected. Please try again.',
+                    ),
+                    duration: const Duration(seconds: 3),
                   ),
-                  duration: const Duration(seconds: 3),
-                ),
-              );
+                );
               return;
             }
 

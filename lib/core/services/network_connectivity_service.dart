@@ -34,6 +34,7 @@ class NetworkConnectivityService {
   }
 
   void _setupConnectivityListener() {
+    _connectivitySubscription?.cancel();
     _connectivitySubscription = _connectivity.onConnectivityChanged.listen(
       _onConnectivityChanged,
       onError: (error) {

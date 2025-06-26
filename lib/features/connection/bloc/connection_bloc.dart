@@ -63,8 +63,9 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   }
 
   void _setupWebSocketListeners() {
-    // Listen to computed app connection status from WebSocketService
+    _appConnectionSubscription?.cancel();
     _appConnectionSubscription = _webSocketService.appConnectionStatusStream
+        .distinct()
         .listen(
           (status) =>
               add(ConnectionEvent.appConnectionStatusChanged(status: status)),
@@ -168,7 +169,7 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
 
   /// Add frame to streaming service
   void addFrame(dynamic frame) {
-    if (state.canStream) {
+    if (state.isActiveStreaming) {
       _streamService.addFrame(frame);
     }
   }
