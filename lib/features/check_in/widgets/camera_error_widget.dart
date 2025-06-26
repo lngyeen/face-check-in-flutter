@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:face_check_in_flutter/core/theme/app_colors.dart';
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_event.dart';
+
+import 'generic_message_widget.dart';
+
 class CameraErrorWidget extends StatelessWidget {
   const CameraErrorWidget({super.key, this.error});
 
@@ -7,29 +15,19 @@ class CameraErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Camera Error',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              error ?? 'An unknown camera error occurred.',
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
+    return GenericMessageWidget(
+      icon: Icons.camera_alt_outlined,
+      title: 'Camera Error',
+      subtitle:
+          error ??
+          'An unknown camera error occurred. Please try restarting the camera.',
+      retryButtonTitle: 'Retry Camera',
+      onRetry: () {
+        context.read<CheckInBloc>().add(const CheckInEvent.initializeCamera());
+      },
+      iconColor: AppColors.error,
+      buttonColor: AppColors.error,
+      buttonTextColor: AppColors.textOnPrimary,
     );
   }
 }

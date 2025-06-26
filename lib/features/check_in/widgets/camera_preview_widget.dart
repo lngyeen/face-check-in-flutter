@@ -4,11 +4,13 @@ import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:face_check_in_flutter/core/widgets/loading_widget.dart';
+import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
 
 import 'camera_error_widget.dart';
+import 'connection_lost_widget.dart';
 import 'front_camera_not_available_widget.dart';
 import 'permission_denied_widget.dart';
 
@@ -21,8 +23,15 @@ class CameraPreviewWidget extends StatelessWidget {
       buildWhen:
           (previous, current) =>
               previous.cameraStatus != current.cameraStatus ||
-              previous.cameraController != current.cameraController,
+              previous.cameraController != current.cameraController ||
+              previous.connectionState.status != current.connectionState.status,
       builder: (context, state) {
+        // Check if connection is lost first (higher priority than camera preview)
+        if (_shouldShowConnectionLost(state)) {
+          return const ConnectionLostWidget();
+        }
+
+        // Then handle camera status
         switch (state.cameraStatus) {
           case CameraStatus.initial:
           case CameraStatus.initializing:
@@ -50,5 +59,14 @@ class CameraPreviewWidget extends StatelessWidget {
         }
       },
     );
+  }
+
+  /// Determines if connection lost widget should be shown
+  bool _shouldShowConnectionLost(CheckInState state) {
+    final connectionStatus = state.connectionState.status;
+    return connectionStatus == AppConnectionStatus.networkLost ||
+        connectionStatus == AppConnectionStatus.failed ||
+        connectionStatus == AppConnectionStatus.fastRetrying ||
+        connectionStatus == AppConnectionStatus.backgroundRetrying;
   }
 }

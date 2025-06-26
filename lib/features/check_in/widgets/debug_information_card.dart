@@ -12,8 +12,6 @@ import 'package:face_check_in_flutter/domain/entities/face_detection_status.dart
 import '../bloc/check_in_bloc.dart';
 import '../bloc/check_in_state.dart';
 
-/// Widget that displays comprehensive debug information including frame capture,
-/// detailed face statistics, recognition details, and error information
 class DebugInformationCard extends StatelessWidget {
   const DebugInformationCard({super.key});
 
