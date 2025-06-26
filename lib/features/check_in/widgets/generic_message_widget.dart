@@ -42,8 +42,8 @@ class GenericMessageWidget extends StatelessWidget {
           children: [
             Icon(
               icon,
-              size: AppDesignTokens.iconLarge * 2, // 64px
-              color: iconColor ?? theme.iconTheme.color?.withOpacity(0.6),
+              size: AppDesignTokens.iconLarge * 2,
+              color: iconColor ?? theme.iconTheme.color?.withValues(alpha: 0.6),
             ),
             const SizedBox(height: AppDesignTokens.spaceMedium),
             Text(

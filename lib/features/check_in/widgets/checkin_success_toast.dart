@@ -84,17 +84,16 @@ class CheckInSuccessDialog extends StatelessWidget {
             _buildTitle(theme, detectedFaces.length),
             const SizedBox(height: AppDesignTokens.spaceMedium),
 
-            // User image (if available)
-            if (userImage != null) ...[
-              _buildUserImage(userImage!),
-              const SizedBox(height: AppDesignTokens.spaceMedium),
-            ],
-
             // Faces list
             Flexible(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    // User image (if available)
+                    if (userImage != null) ...[
+                      _buildUserImage(userImage!),
+                      const SizedBox(height: AppDesignTokens.spaceMedium),
+                    ],
                     for (int i = 0; i < detectedFaces.length; i++)
                       Padding(
                         padding: const EdgeInsets.only(

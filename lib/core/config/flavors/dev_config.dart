@@ -5,7 +5,7 @@ class DevConfig implements FlavorConfig {
   Future<String> baseHost() => Future.value('https://facedetection-be.owt.vn');
 
   @override
-  String get baseWebSocketUrl => 'wsss://facedetection-ws.owt.vn';
+  String get baseWebSocketUrl => 'wss://facedetection-ws.owt.vn';
 
   @override
   String get title => '[Dev] Face Check-In';

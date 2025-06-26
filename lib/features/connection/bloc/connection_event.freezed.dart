@@ -22,6 +22,7 @@ mixin _$ConnectionEvent {
     required TResult Function(AppConnectionStatus status)
     appConnectionStatusChanged,
     required TResult Function() initialize,
+    required TResult Function() retryConnection,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -30,6 +31,7 @@ mixin _$ConnectionEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult? Function()? initialize,
+    TResult? Function()? retryConnection,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -38,6 +40,7 @@ mixin _$ConnectionEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult Function()? initialize,
+    TResult Function()? retryConnection,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -48,6 +51,7 @@ mixin _$ConnectionEvent {
     required TResult Function(AppConnectionStatusChanged value)
     appConnectionStatusChanged,
     required TResult Function(Initialize value) initialize,
+    required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -57,6 +61,7 @@ mixin _$ConnectionEvent {
     TResult? Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult? Function(Initialize value)? initialize,
+    TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -66,6 +71,7 @@ mixin _$ConnectionEvent {
     TResult Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult Function(Initialize value)? initialize,
+    TResult Function(RetryConnection value)? retryConnection,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -172,6 +178,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
     required TResult Function(AppConnectionStatus status)
     appConnectionStatusChanged,
     required TResult Function() initialize,
+    required TResult Function() retryConnection,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -184,6 +191,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult? Function()? initialize,
+    TResult? Function()? retryConnection,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -196,6 +204,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult Function()? initialize,
+    TResult Function()? retryConnection,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -213,6 +222,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
     required TResult Function(AppConnectionStatusChanged value)
     appConnectionStatusChanged,
     required TResult Function(Initialize value) initialize,
+    required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -226,6 +236,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
     TResult? Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult? Function(Initialize value)? initialize,
+    TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -239,6 +250,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
     TResult Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult Function(Initialize value)? initialize,
+    TResult Function(RetryConnection value)? retryConnection,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -311,6 +323,7 @@ class _$InitializeImpl implements Initialize {
     required TResult Function(AppConnectionStatus status)
     appConnectionStatusChanged,
     required TResult Function() initialize,
+    required TResult Function() retryConnection,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -323,6 +336,7 @@ class _$InitializeImpl implements Initialize {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult? Function()? initialize,
+    TResult? Function()? retryConnection,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -335,6 +349,7 @@ class _$InitializeImpl implements Initialize {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult Function()? initialize,
+    TResult Function()? retryConnection,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -352,6 +367,7 @@ class _$InitializeImpl implements Initialize {
     required TResult Function(AppConnectionStatusChanged value)
     appConnectionStatusChanged,
     required TResult Function(Initialize value) initialize,
+    required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -365,6 +381,7 @@ class _$InitializeImpl implements Initialize {
     TResult? Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult? Function(Initialize value)? initialize,
+    TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -378,6 +395,7 @@ class _$InitializeImpl implements Initialize {
     TResult Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult Function(Initialize value)? initialize,
+    TResult Function(RetryConnection value)? retryConnection,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -392,6 +410,141 @@ class _$InitializeImpl implements Initialize {
 
 abstract class Initialize implements ConnectionEvent {
   const factory Initialize() = _$InitializeImpl;
+}
+
+/// @nodoc
+abstract class _$$RetryConnectionImplCopyWith<$Res> {
+  factory _$$RetryConnectionImplCopyWith(
+    _$RetryConnectionImpl value,
+    $Res Function(_$RetryConnectionImpl) then,
+  ) = __$$RetryConnectionImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RetryConnectionImplCopyWithImpl<$Res>
+    extends _$ConnectionEventCopyWithImpl<$Res, _$RetryConnectionImpl>
+    implements _$$RetryConnectionImplCopyWith<$Res> {
+  __$$RetryConnectionImplCopyWithImpl(
+    _$RetryConnectionImpl _value,
+    $Res Function(_$RetryConnectionImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ConnectionEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$RetryConnectionImpl implements RetryConnection {
+  const _$RetryConnectionImpl();
+
+  @override
+  String toString() {
+    return 'ConnectionEvent.retryConnection()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RetryConnectionImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(AppConnectionStatus status)
+    appConnectionStatusChanged,
+    required TResult Function() initialize,
+    required TResult Function() retryConnection,
+    required TResult Function() startStreaming,
+    required TResult Function() stopStreaming,
+    required TResult Function(int maxFps) configureStream,
+  }) {
+    return retryConnection();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
+    TResult? Function()? initialize,
+    TResult? Function()? retryConnection,
+    TResult? Function()? startStreaming,
+    TResult? Function()? stopStreaming,
+    TResult? Function(int maxFps)? configureStream,
+  }) {
+    return retryConnection?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
+    TResult Function()? initialize,
+    TResult Function()? retryConnection,
+    TResult Function()? startStreaming,
+    TResult Function()? stopStreaming,
+    TResult Function(int maxFps)? configureStream,
+    required TResult orElse(),
+  }) {
+    if (retryConnection != null) {
+      return retryConnection();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppConnectionStatusChanged value)
+    appConnectionStatusChanged,
+    required TResult Function(Initialize value) initialize,
+    required TResult Function(RetryConnection value) retryConnection,
+    required TResult Function(StartStreaming value) startStreaming,
+    required TResult Function(StopStreaming value) stopStreaming,
+    required TResult Function(ConfigureStream value) configureStream,
+  }) {
+    return retryConnection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppConnectionStatusChanged value)?
+    appConnectionStatusChanged,
+    TResult? Function(Initialize value)? initialize,
+    TResult? Function(RetryConnection value)? retryConnection,
+    TResult? Function(StartStreaming value)? startStreaming,
+    TResult? Function(StopStreaming value)? stopStreaming,
+    TResult? Function(ConfigureStream value)? configureStream,
+  }) {
+    return retryConnection?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppConnectionStatusChanged value)?
+    appConnectionStatusChanged,
+    TResult Function(Initialize value)? initialize,
+    TResult Function(RetryConnection value)? retryConnection,
+    TResult Function(StartStreaming value)? startStreaming,
+    TResult Function(StopStreaming value)? stopStreaming,
+    TResult Function(ConfigureStream value)? configureStream,
+    required TResult orElse(),
+  }) {
+    if (retryConnection != null) {
+      return retryConnection(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RetryConnection implements ConnectionEvent {
+  const factory RetryConnection() = _$RetryConnectionImpl;
 }
 
 /// @nodoc
@@ -440,6 +593,7 @@ class _$StartStreamingImpl implements StartStreaming {
     required TResult Function(AppConnectionStatus status)
     appConnectionStatusChanged,
     required TResult Function() initialize,
+    required TResult Function() retryConnection,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -452,6 +606,7 @@ class _$StartStreamingImpl implements StartStreaming {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult? Function()? initialize,
+    TResult? Function()? retryConnection,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -464,6 +619,7 @@ class _$StartStreamingImpl implements StartStreaming {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult Function()? initialize,
+    TResult Function()? retryConnection,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -481,6 +637,7 @@ class _$StartStreamingImpl implements StartStreaming {
     required TResult Function(AppConnectionStatusChanged value)
     appConnectionStatusChanged,
     required TResult Function(Initialize value) initialize,
+    required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -494,6 +651,7 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult? Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult? Function(Initialize value)? initialize,
+    TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -507,6 +665,7 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult Function(Initialize value)? initialize,
+    TResult Function(RetryConnection value)? retryConnection,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -569,6 +728,7 @@ class _$StopStreamingImpl implements StopStreaming {
     required TResult Function(AppConnectionStatus status)
     appConnectionStatusChanged,
     required TResult Function() initialize,
+    required TResult Function() retryConnection,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -581,6 +741,7 @@ class _$StopStreamingImpl implements StopStreaming {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult? Function()? initialize,
+    TResult? Function()? retryConnection,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -593,6 +754,7 @@ class _$StopStreamingImpl implements StopStreaming {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult Function()? initialize,
+    TResult Function()? retryConnection,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -610,6 +772,7 @@ class _$StopStreamingImpl implements StopStreaming {
     required TResult Function(AppConnectionStatusChanged value)
     appConnectionStatusChanged,
     required TResult Function(Initialize value) initialize,
+    required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -623,6 +786,7 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult? Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult? Function(Initialize value)? initialize,
+    TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -636,6 +800,7 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult Function(Initialize value)? initialize,
+    TResult Function(RetryConnection value)? retryConnection,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
@@ -729,6 +894,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     required TResult Function(AppConnectionStatus status)
     appConnectionStatusChanged,
     required TResult Function() initialize,
+    required TResult Function() retryConnection,
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
@@ -741,6 +907,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult? Function()? initialize,
+    TResult? Function()? retryConnection,
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
@@ -753,6 +920,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
     TResult Function()? initialize,
+    TResult Function()? retryConnection,
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
@@ -770,6 +938,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     required TResult Function(AppConnectionStatusChanged value)
     appConnectionStatusChanged,
     required TResult Function(Initialize value) initialize,
+    required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
@@ -783,6 +952,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult? Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult? Function(Initialize value)? initialize,
+    TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
@@ -796,6 +966,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     TResult Function(Initialize value)? initialize,
+    TResult Function(RetryConnection value)? retryConnection,
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,

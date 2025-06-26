@@ -7,13 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:face_check_in_flutter/core/services/stream_service.dart';
+import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/domain/entities/check_in_error.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
 import 'package:face_check_in_flutter/domain/services/permission_service.dart';
-import 'package:face_check_in_flutter/features/connection/connection.dart';
+import 'package:face_check_in_flutter/features/connection/connection.dart'
+    hide Initialize;
 
 import 'check_in_event.dart';
 import 'check_in_state.dart';
@@ -62,9 +64,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<FrameResultReceived>(_onFrameResultReceived);
     on<ResponseErrorReceived>(_onResponseErrorReceived);
 
-    // Special transformers
-    on<FrameCaptured>(_onFrameCaptured);
-
     // Connection state handlers
     on<ConnectionStateChanged>(_onConnectionStateChanged);
   }
@@ -74,27 +73,22 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     switch (event) {
-      case RequestCameraPermission():
-        await _onRequestCameraPermission(event, emit);
-      case CameraPermissionGranted():
-        await _onCameraPermissionGranted(event, emit);
-      case CameraPermissionDenied():
-        await _onCameraPermissionDenied(event, emit);
-      case InitializeCamera():
-        await _onInitializeCamera(event, emit);
+      case Initialize():
+        await _onInitialize(event, emit);
+      case StartCamera():
+        await _onStartCamera(event, emit);
       case StopCamera():
         await _onStopCamera(event, emit);
       default:
-        return; // Non-lifecycle events handled in separate buckets
+        return;
     }
   }
 
   // Connection state handlers
-  void _onConnectionStateChanged(
+  Future<void> _onConnectionStateChanged(
     ConnectionStateChanged event,
     Emitter<CheckInState> emit,
-  ) {
-    final oldConnectionState = state.connectionState;
+  ) async {
     final connectionState = event.connectionState;
     emit(
       state.copyWith(
@@ -105,29 +99,34 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
                 : FaceDetectionStatus.none,
       ),
     );
-    _handleCameraControl(
-      oldState: oldConnectionState,
-      newState: connectionState,
-    );
+    await _handleCameraControl(connectionState);
   }
 
-  void _handleCameraControl({
-    required ConnectionState oldState,
-    required ConnectionState newState,
-  }) {
-    final isConnectionReady = newState.isConnectionReady;
+  Future<void> _handleCameraControl(ConnectionState connectionState) async {
+    final permissionStatus =
+        await _permissionService.getCameraPermissionStatus();
+    final isConnectionReady = connectionState.isConnectionReady;
     final isCameraActive =
         state.cameraStatus == CameraStatus.opening ||
         state.cameraStatus == CameraStatus.initializing;
 
-    if (isConnectionReady && !isCameraActive) {
-      if (state.permissionStatus == PermissionStatus.granted) {
-        add(const CheckInEvent.initializeCamera());
-      }
+    // Auto-start camera when connection becomes ready (and permission granted)
+    if (isConnectionReady &&
+        !isCameraActive &&
+        permissionStatus == PermissionStatus.granted) {
+      add(const CheckInEvent.startCamera());
       return;
     }
 
-    if (isCameraActive && oldState.isConnectionReady && !isConnectionReady) {
+    // Stop camera when going to background retry (dispose completely)
+    if (state.connectionState == AppConnectionStatus.backgroundRetrying &&
+        isCameraActive) {
+      add(const CheckInEvent.stopCamera());
+      return;
+    }
+
+    // Stop camera when connection lost
+    if (isCameraActive && !isConnectionReady) {
       add(const CheckInEvent.stopCamera());
       return;
     }
@@ -143,45 +142,17 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     return super.close();
   }
 
-  // Permission handlers
-  Future<void> _onRequestCameraPermission(
-    RequestCameraPermission event,
+  // Initialization handlers
+  Future<void> _onInitialize(
+    Initialize event,
     Emitter<CheckInState> emit,
   ) async {
+    // Emit initializing state to show loading
     emit(state.copyWith(cameraStatus: CameraStatus.initializing));
-    final status = await _permissionService.requestCameraPermission();
 
-    if (status == PermissionStatus.granted) {
-      add(const CheckInEvent.cameraPermissionGranted());
-    } else {
-      add(const CheckInEvent.cameraPermissionDenied());
-    }
-  }
-
-  Future<void> _onCameraPermissionGranted(
-    CameraPermissionGranted event,
-    Emitter<CheckInState> emit,
-  ) async {
-    emit(state.copyWith(permissionStatus: PermissionStatus.granted));
-    add(const CheckInEvent.initializeCamera());
-  }
-
-  Future<void> _onCameraPermissionDenied(
-    CameraPermissionDenied event,
-    Emitter<CheckInState> emit,
-  ) async {
-    final status = await _permissionService.requestCameraPermission();
-
-    emit(
-      state.copyWith(
-        permissionStatus: status,
-        cameraStatus: CameraStatus.permissionDenied,
-        currentError: const CheckInError(
-          message: 'Camera permission is required to use face check-in feature',
-          type: CheckInErrorType.permission,
-        ),
-      ),
-    );
+    // Initialize ConnectionBloc first
+    _listenToConnectionBloc();
+    _connectionBloc.add(const ConnectionEvent.initialize());
   }
 
   Future<void> _onOpenAppSettings(
@@ -192,23 +163,38 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   }
 
   // Camera handlers
-  Future<void> _onInitializeCamera(
-    InitializeCamera event,
+  Future<void> _onStartCamera(
+    StartCamera event,
     Emitter<CheckInState> emit,
   ) async {
-    if (state.permissionStatus != PermissionStatus.granted) {
-      add(const CheckInEvent.requestCameraPermission());
+    final permissionStatus =
+        await _permissionService.getCameraPermissionStatus();
+
+    if (permissionStatus == PermissionStatus.granted) {
+      await _initCameraController(emit);
       return;
     }
 
-    emit(state.copyWith(cameraStatus: CameraStatus.initializing));
+    final status = await _permissionService.requestCameraPermission();
+    if (status == PermissionStatus.granted) {
+      await _initCameraController(emit);
+    } else {
+      emit(
+        state.copyWith(
+          cameraStatus: CameraStatus.permissionDenied,
+          currentError: const CheckInError(
+            message:
+                'Camera permission is required to use face check-in feature',
+            type: CheckInErrorType.permission,
+          ),
+        ),
+      );
+    }
+  }
 
+  Future<void> _initCameraController(Emitter<CheckInState> emit) async {
     try {
       final cameras = await availableCameras();
-      if (cameras.isEmpty) {
-        throw Exception('No cameras available');
-      }
-
       final frontCameras =
           cameras
               .where(
@@ -241,7 +227,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       await controller.setFocusMode(FocusMode.auto);
       await controller.setExposureMode(ExposureMode.auto);
       await controller.startImageStream((CameraImage image) {
-        add(CheckInEvent.frameCaptured(image));
+        if (_connectionBloc.state.isActiveStreaming) {
+          _connectionBloc.addFrame(image);
+        }
       });
 
       emit(
@@ -415,15 +403,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
   }
 
-  void _onFrameCaptured(FrameCaptured event, Emitter<CheckInState> emit) {
-    if (_connectionBloc.state.isActiveStreaming) {
-      _connectionBloc.addFrame(event.image);
-    }
-  }
-
   /// Start full flow - camera and auto-streaming
   void startFullFlow() {
-    add(const CheckInEvent.initializeCamera());
+    add(const CheckInEvent.startCamera());
   }
 
   /// Stop full flow - streaming and camera

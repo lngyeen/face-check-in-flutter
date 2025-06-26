@@ -23,7 +23,7 @@ class CameraErrorWidget extends StatelessWidget {
           'An unknown camera error occurred. Please try restarting the camera.',
       retryButtonTitle: 'Retry Camera',
       onRetry: () {
-        context.read<CheckInBloc>().add(const CheckInEvent.initializeCamera());
+        context.read<CheckInBloc>().add(const CheckInEvent.startCamera());
       },
       iconColor: AppColors.error,
       buttonColor: AppColors.error,

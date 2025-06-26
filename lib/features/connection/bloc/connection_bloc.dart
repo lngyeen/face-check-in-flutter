@@ -34,6 +34,7 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   void _registerEventHandlers() {
     // Lifecycle events - must be sequential
     on<Initialize>(_onInitialize, transformer: sequential());
+    on<RetryConnection>(_onRetryConnection, transformer: sequential());
 
     // App connection status events - computed from WebSocketService
     on<AppConnectionStatusChanged>(
@@ -52,20 +53,25 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     Initialize event,
     Emitter<ConnectionState> emit,
   ) async {
-    // Initialize WebSocketService (it handles NetworkService internally)
+    _setupWebSocketListeners();
+
     await _webSocketService.initialize(url: F.baseWebSocketUrl);
 
-    // Start connection if not already connected
     _webSocketService.connect();
+  }
 
-    // Setup listeners to WebSocketService streams
-    _setupWebSocketListeners();
+  /// Handle manual retry connection request
+  Future<void> _onRetryConnection(
+    RetryConnection event,
+    Emitter<ConnectionState> emit,
+  ) async {
+    // Force reconnect by calling WebSocket service connect
+    await _webSocketService.connect();
   }
 
   void _setupWebSocketListeners() {
     _appConnectionSubscription?.cancel();
     _appConnectionSubscription = _webSocketService.appConnectionStatusStream
-        .distinct()
         .listen(
           (status) =>
               add(ConnectionEvent.appConnectionStatusChanged(status: status)),
@@ -85,11 +91,11 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
         add(const ConnectionEvent.startStreaming());
       case AppConnectionStatus.networkLost:
       case AppConnectionStatus.failed:
-      case AppConnectionStatus.connecting:
       case AppConnectionStatus.fastRetrying:
       case AppConnectionStatus.backgroundRetrying:
         add(const ConnectionEvent.stopStreaming());
 
+      case AppConnectionStatus.connecting:
       case AppConnectionStatus.initial:
         break;
     }

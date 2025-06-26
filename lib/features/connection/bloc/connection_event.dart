@@ -12,17 +12,14 @@ class ConnectionEvent with _$ConnectionEvent {
     required AppConnectionStatus status,
   }) = AppConnectionStatusChanged;
 
-  /// Initialize connection system
   const factory ConnectionEvent.initialize() = Initialize;
 
-  // Streaming control events
-  /// Request to start frame streaming
+  const factory ConnectionEvent.retryConnection() = RetryConnection;
+
   const factory ConnectionEvent.startStreaming() = StartStreaming;
 
-  /// Request to stop frame streaming
   const factory ConnectionEvent.stopStreaming() = StopStreaming;
 
-  /// Streaming configuration
   const factory ConnectionEvent.configureStream({required int maxFps}) =
       ConfigureStream;
 }

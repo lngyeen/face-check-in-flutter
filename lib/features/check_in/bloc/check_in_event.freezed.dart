@@ -19,11 +19,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CheckInEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
+    required TResult Function() initialize,
     required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
+    required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
@@ -36,15 +34,12 @@ mixin _$CheckInEvent {
     responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? initialize,
     TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
+    TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
@@ -55,15 +50,12 @@ mixin _$CheckInEvent {
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
+    TResult Function()? initialize,
     TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
+    TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
@@ -74,19 +66,13 @@ mixin _$CheckInEvent {
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
+    required TResult Function(Initialize value) initialize,
     required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
+    required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
@@ -96,37 +82,30 @@ mixin _$CheckInEvent {
     responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(Initialize value)? initialize,
     TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
+    TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(Initialize value)? initialize,
     TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
+    TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -154,20 +133,20 @@ class _$CheckInEventCopyWithImpl<$Res, $Val extends CheckInEvent>
 }
 
 /// @nodoc
-abstract class _$$RequestCameraPermissionImplCopyWith<$Res> {
-  factory _$$RequestCameraPermissionImplCopyWith(
-    _$RequestCameraPermissionImpl value,
-    $Res Function(_$RequestCameraPermissionImpl) then,
-  ) = __$$RequestCameraPermissionImplCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+    _$InitializeImpl value,
+    $Res Function(_$InitializeImpl) then,
+  ) = __$$InitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RequestCameraPermissionImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$RequestCameraPermissionImpl>
-    implements _$$RequestCameraPermissionImplCopyWith<$Res> {
-  __$$RequestCameraPermissionImplCopyWithImpl(
-    _$RequestCameraPermissionImpl _value,
-    $Res Function(_$RequestCameraPermissionImpl) _then,
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+    _$InitializeImpl _value,
+    $Res Function(_$InitializeImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of CheckInEvent
@@ -176,19 +155,18 @@ class __$$RequestCameraPermissionImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RequestCameraPermissionImpl implements RequestCameraPermission {
-  const _$RequestCameraPermissionImpl();
+class _$InitializeImpl implements Initialize {
+  const _$InitializeImpl();
 
   @override
   String toString() {
-    return 'CheckInEvent.requestCameraPermission()';
+    return 'CheckInEvent.initialize()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$RequestCameraPermissionImpl);
+        (other.runtimeType == runtimeType && other is _$InitializeImpl);
   }
 
   @override
@@ -197,11 +175,9 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
+    required TResult Function() initialize,
     required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
+    required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
@@ -214,19 +190,16 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
     responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
   }) {
-    return requestCameraPermission();
+    return initialize();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? initialize,
     TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
+    TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
@@ -237,19 +210,16 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
   }) {
-    return requestCameraPermission?.call();
+    return initialize?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
+    TResult Function()? initialize,
     TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
+    TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
@@ -260,11 +230,10 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
   }) {
-    if (requestCameraPermission != null) {
-      return requestCameraPermission();
+    if (initialize != null) {
+      return initialize();
     }
     return orElse();
   }
@@ -272,14 +241,9 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
+    required TResult Function(Initialize value) initialize,
     required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
+    required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
@@ -289,432 +253,49 @@ class _$RequestCameraPermissionImpl implements RequestCameraPermission {
     responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
   }) {
-    return requestCameraPermission(this);
+    return initialize(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(Initialize value)? initialize,
     TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
+    TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
-    return requestCameraPermission?.call(this);
+    return initialize?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(Initialize value)? initialize,
     TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
+    TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
   }) {
-    if (requestCameraPermission != null) {
-      return requestCameraPermission(this);
+    if (initialize != null) {
+      return initialize(this);
     }
     return orElse();
   }
 }
 
-abstract class RequestCameraPermission implements CheckInEvent {
-  const factory RequestCameraPermission() = _$RequestCameraPermissionImpl;
-}
-
-/// @nodoc
-abstract class _$$CameraPermissionGrantedImplCopyWith<$Res> {
-  factory _$$CameraPermissionGrantedImplCopyWith(
-    _$CameraPermissionGrantedImpl value,
-    $Res Function(_$CameraPermissionGrantedImpl) then,
-  ) = __$$CameraPermissionGrantedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CameraPermissionGrantedImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$CameraPermissionGrantedImpl>
-    implements _$$CameraPermissionGrantedImplCopyWith<$Res> {
-  __$$CameraPermissionGrantedImplCopyWithImpl(
-    _$CameraPermissionGrantedImpl _value,
-    $Res Function(_$CameraPermissionGrantedImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$CameraPermissionGrantedImpl implements CameraPermissionGranted {
-  const _$CameraPermissionGrantedImpl();
-
-  @override
-  String toString() {
-    return 'CheckInEvent.cameraPermissionGranted()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CameraPermissionGrantedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
-    required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
-    required TResult Function() stopCamera,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
-  }) {
-    return cameraPermissionGranted();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
-    TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
-    TResult? Function()? stopCamera,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )?
-    frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
-  }) {
-    return cameraPermissionGranted?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
-    TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
-    TResult Function()? stopCamera,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function()? toggleDebugMode,
-    TResult Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )?
-    frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
-    required TResult orElse(),
-  }) {
-    if (cameraPermissionGranted != null) {
-      return cameraPermissionGranted();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
-    required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
-    required TResult Function(StopCamera value) stopCamera,
-    required TResult Function(WebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
-    required TResult Function(ConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
-  }) {
-    return cameraPermissionGranted(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
-    TResult? Function(StopCamera value)? stopCamera,
-    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
-  }) {
-    return cameraPermissionGranted?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
-    TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
-    TResult Function(StopCamera value)? stopCamera,
-    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
-    required TResult orElse(),
-  }) {
-    if (cameraPermissionGranted != null) {
-      return cameraPermissionGranted(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CameraPermissionGranted implements CheckInEvent {
-  const factory CameraPermissionGranted() = _$CameraPermissionGrantedImpl;
-}
-
-/// @nodoc
-abstract class _$$CameraPermissionDeniedImplCopyWith<$Res> {
-  factory _$$CameraPermissionDeniedImplCopyWith(
-    _$CameraPermissionDeniedImpl value,
-    $Res Function(_$CameraPermissionDeniedImpl) then,
-  ) = __$$CameraPermissionDeniedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CameraPermissionDeniedImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$CameraPermissionDeniedImpl>
-    implements _$$CameraPermissionDeniedImplCopyWith<$Res> {
-  __$$CameraPermissionDeniedImplCopyWithImpl(
-    _$CameraPermissionDeniedImpl _value,
-    $Res Function(_$CameraPermissionDeniedImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$CameraPermissionDeniedImpl implements CameraPermissionDenied {
-  const _$CameraPermissionDeniedImpl();
-
-  @override
-  String toString() {
-    return 'CheckInEvent.cameraPermissionDenied()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CameraPermissionDeniedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
-    required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
-    required TResult Function() stopCamera,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
-  }) {
-    return cameraPermissionDenied();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
-    TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
-    TResult? Function()? stopCamera,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )?
-    frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
-  }) {
-    return cameraPermissionDenied?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
-    TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
-    TResult Function()? stopCamera,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function()? toggleDebugMode,
-    TResult Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )?
-    frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
-    required TResult orElse(),
-  }) {
-    if (cameraPermissionDenied != null) {
-      return cameraPermissionDenied();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
-    required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
-    required TResult Function(StopCamera value) stopCamera,
-    required TResult Function(WebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
-    required TResult Function(ConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
-  }) {
-    return cameraPermissionDenied(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
-    TResult? Function(StopCamera value)? stopCamera,
-    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
-  }) {
-    return cameraPermissionDenied?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
-    TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
-    TResult Function(StopCamera value)? stopCamera,
-    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
-    required TResult orElse(),
-  }) {
-    if (cameraPermissionDenied != null) {
-      return cameraPermissionDenied(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CameraPermissionDenied implements CheckInEvent {
-  const factory CameraPermissionDenied() = _$CameraPermissionDeniedImpl;
+abstract class Initialize implements CheckInEvent {
+  const factory Initialize() = _$InitializeImpl;
 }
 
 /// @nodoc
@@ -760,11 +341,9 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
+    required TResult Function() initialize,
     required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
+    required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
@@ -777,7 +356,6 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
     responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
   }) {
     return openAppSettings();
   }
@@ -785,11 +363,9 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? initialize,
     TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
+    TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
@@ -800,7 +376,6 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
   }) {
     return openAppSettings?.call();
   }
@@ -808,11 +383,9 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
+    TResult Function()? initialize,
     TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
+    TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
@@ -823,7 +396,6 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
   }) {
     if (openAppSettings != null) {
@@ -835,14 +407,9 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
+    required TResult Function(Initialize value) initialize,
     required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
+    required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
@@ -852,7 +419,6 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
     responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
   }) {
     return openAppSettings(this);
   }
@@ -860,18 +426,15 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(Initialize value)? initialize,
     TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
+    TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
     return openAppSettings?.call(this);
   }
@@ -879,18 +442,15 @@ class _$OpenAppSettingsImpl implements OpenAppSettings {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(Initialize value)? initialize,
     TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
+    TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
   }) {
     if (openAppSettings != null) {
@@ -905,20 +465,20 @@ abstract class OpenAppSettings implements CheckInEvent {
 }
 
 /// @nodoc
-abstract class _$$InitializeCameraImplCopyWith<$Res> {
-  factory _$$InitializeCameraImplCopyWith(
-    _$InitializeCameraImpl value,
-    $Res Function(_$InitializeCameraImpl) then,
-  ) = __$$InitializeCameraImplCopyWithImpl<$Res>;
+abstract class _$$StartCameraImplCopyWith<$Res> {
+  factory _$$StartCameraImplCopyWith(
+    _$StartCameraImpl value,
+    $Res Function(_$StartCameraImpl) then,
+  ) = __$$StartCameraImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitializeCameraImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$InitializeCameraImpl>
-    implements _$$InitializeCameraImplCopyWith<$Res> {
-  __$$InitializeCameraImplCopyWithImpl(
-    _$InitializeCameraImpl _value,
-    $Res Function(_$InitializeCameraImpl) _then,
+class __$$StartCameraImplCopyWithImpl<$Res>
+    extends _$CheckInEventCopyWithImpl<$Res, _$StartCameraImpl>
+    implements _$$StartCameraImplCopyWith<$Res> {
+  __$$StartCameraImplCopyWithImpl(
+    _$StartCameraImpl _value,
+    $Res Function(_$StartCameraImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of CheckInEvent
@@ -927,18 +487,18 @@ class __$$InitializeCameraImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitializeCameraImpl implements InitializeCamera {
-  const _$InitializeCameraImpl();
+class _$StartCameraImpl implements StartCamera {
+  const _$StartCameraImpl();
 
   @override
   String toString() {
-    return 'CheckInEvent.initializeCamera()';
+    return 'CheckInEvent.startCamera()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitializeCameraImpl);
+        (other.runtimeType == runtimeType && other is _$StartCameraImpl);
   }
 
   @override
@@ -947,11 +507,9 @@ class _$InitializeCameraImpl implements InitializeCamera {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
+    required TResult Function() initialize,
     required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
+    required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
@@ -964,19 +522,16 @@ class _$InitializeCameraImpl implements InitializeCamera {
     responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
   }) {
-    return initializeCamera();
+    return startCamera();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? initialize,
     TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
+    TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
@@ -987,19 +542,16 @@ class _$InitializeCameraImpl implements InitializeCamera {
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
   }) {
-    return initializeCamera?.call();
+    return startCamera?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
+    TResult Function()? initialize,
     TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
+    TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
@@ -1010,11 +562,10 @@ class _$InitializeCameraImpl implements InitializeCamera {
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
   }) {
-    if (initializeCamera != null) {
-      return initializeCamera();
+    if (startCamera != null) {
+      return startCamera();
     }
     return orElse();
   }
@@ -1022,14 +573,9 @@ class _$InitializeCameraImpl implements InitializeCamera {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
+    required TResult Function(Initialize value) initialize,
     required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
+    required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
@@ -1039,56 +585,49 @@ class _$InitializeCameraImpl implements InitializeCamera {
     responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
   }) {
-    return initializeCamera(this);
+    return startCamera(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(Initialize value)? initialize,
     TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
+    TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
-    return initializeCamera?.call(this);
+    return startCamera?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(Initialize value)? initialize,
     TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
+    TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
   }) {
-    if (initializeCamera != null) {
-      return initializeCamera(this);
+    if (startCamera != null) {
+      return startCamera(this);
     }
     return orElse();
   }
 }
 
-abstract class InitializeCamera implements CheckInEvent {
-  const factory InitializeCamera() = _$InitializeCameraImpl;
+abstract class StartCamera implements CheckInEvent {
+  const factory StartCamera() = _$StartCameraImpl;
 }
 
 /// @nodoc
@@ -1134,11 +673,9 @@ class _$StopCameraImpl implements StopCamera {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
+    required TResult Function() initialize,
     required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
+    required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
@@ -1151,7 +688,6 @@ class _$StopCameraImpl implements StopCamera {
     responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
   }) {
     return stopCamera();
   }
@@ -1159,11 +695,9 @@ class _$StopCameraImpl implements StopCamera {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? initialize,
     TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
+    TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
@@ -1174,7 +708,6 @@ class _$StopCameraImpl implements StopCamera {
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
   }) {
     return stopCamera?.call();
   }
@@ -1182,11 +715,9 @@ class _$StopCameraImpl implements StopCamera {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
+    TResult Function()? initialize,
     TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
+    TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
@@ -1197,7 +728,6 @@ class _$StopCameraImpl implements StopCamera {
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
   }) {
     if (stopCamera != null) {
@@ -1209,14 +739,9 @@ class _$StopCameraImpl implements StopCamera {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
+    required TResult Function(Initialize value) initialize,
     required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
+    required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
@@ -1226,7 +751,6 @@ class _$StopCameraImpl implements StopCamera {
     responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
   }) {
     return stopCamera(this);
   }
@@ -1234,18 +758,15 @@ class _$StopCameraImpl implements StopCamera {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(Initialize value)? initialize,
     TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
+    TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
     return stopCamera?.call(this);
   }
@@ -1253,18 +774,15 @@ class _$StopCameraImpl implements StopCamera {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(Initialize value)? initialize,
     TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
+    TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
   }) {
     if (stopCamera != null) {
@@ -1351,11 +869,9 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
+    required TResult Function() initialize,
     required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
+    required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
@@ -1368,7 +884,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
   }) {
     return webSocketMessageReceived(data);
   }
@@ -1376,11 +891,9 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? initialize,
     TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
+    TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
@@ -1391,7 +904,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
   }) {
     return webSocketMessageReceived?.call(data);
   }
@@ -1399,11 +911,9 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
+    TResult Function()? initialize,
     TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
+    TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
@@ -1414,7 +924,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
   }) {
     if (webSocketMessageReceived != null) {
@@ -1426,14 +935,9 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
+    required TResult Function(Initialize value) initialize,
     required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
+    required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
@@ -1443,7 +947,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
   }) {
     return webSocketMessageReceived(this);
   }
@@ -1451,18 +954,15 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(Initialize value)? initialize,
     TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
+    TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
     return webSocketMessageReceived?.call(this);
   }
@@ -1470,18 +970,15 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(Initialize value)? initialize,
     TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
+    TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
   }) {
     if (webSocketMessageReceived != null) {
@@ -1547,11 +1044,9 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
+    required TResult Function() initialize,
     required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
+    required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
@@ -1564,7 +1059,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
   }) {
     return toggleDebugMode();
   }
@@ -1572,11 +1066,9 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? initialize,
     TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
+    TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
@@ -1587,7 +1079,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
   }) {
     return toggleDebugMode?.call();
   }
@@ -1595,11 +1086,9 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
+    TResult Function()? initialize,
     TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
+    TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
@@ -1610,7 +1099,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
   }) {
     if (toggleDebugMode != null) {
@@ -1622,14 +1110,9 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
+    required TResult Function(Initialize value) initialize,
     required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
+    required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
@@ -1639,7 +1122,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
   }) {
     return toggleDebugMode(this);
   }
@@ -1647,18 +1129,15 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(Initialize value)? initialize,
     TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
+    TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
     return toggleDebugMode?.call(this);
   }
@@ -1666,18 +1145,15 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(Initialize value)? initialize,
     TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
+    TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
   }) {
     if (toggleDebugMode != null) {
@@ -1808,11 +1284,9 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
+    required TResult Function() initialize,
     required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
+    required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
@@ -1825,7 +1299,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
     responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
   }) {
     return frameResultReceived(faces, response);
   }
@@ -1833,11 +1306,9 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? initialize,
     TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
+    TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
@@ -1848,7 +1319,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
   }) {
     return frameResultReceived?.call(faces, response);
   }
@@ -1856,11 +1326,9 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
+    TResult Function()? initialize,
     TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
+    TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
@@ -1871,7 +1339,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
   }) {
     if (frameResultReceived != null) {
@@ -1883,14 +1350,9 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
+    required TResult Function(Initialize value) initialize,
     required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
+    required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
@@ -1900,7 +1362,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
     responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
   }) {
     return frameResultReceived(this);
   }
@@ -1908,18 +1369,15 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(Initialize value)? initialize,
     TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
+    TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
     return frameResultReceived?.call(this);
   }
@@ -1927,18 +1385,15 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(Initialize value)? initialize,
     TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
+    TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
   }) {
     if (frameResultReceived != null) {
@@ -2047,11 +1502,9 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
+    required TResult Function() initialize,
     required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
+    required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
@@ -2064,7 +1517,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
     responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
   }) {
     return responseErrorReceived(error, message);
   }
@@ -2072,11 +1524,9 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? initialize,
     TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
+    TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
@@ -2087,7 +1537,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
   }) {
     return responseErrorReceived?.call(error, message);
   }
@@ -2095,11 +1544,9 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
+    TResult Function()? initialize,
     TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
+    TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
@@ -2110,7 +1557,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
   }) {
     if (responseErrorReceived != null) {
@@ -2122,14 +1568,9 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
+    required TResult Function(Initialize value) initialize,
     required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
+    required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
@@ -2139,7 +1580,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
     responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
   }) {
     return responseErrorReceived(this);
   }
@@ -2147,18 +1587,15 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(Initialize value)? initialize,
     TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
+    TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
     return responseErrorReceived?.call(this);
   }
@@ -2166,18 +1603,15 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(Initialize value)? initialize,
     TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
+    TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
   }) {
     if (responseErrorReceived != null) {
@@ -2290,11 +1724,9 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
+    required TResult Function() initialize,
     required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
+    required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
@@ -2307,7 +1739,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
   }) {
     return connectionStateChanged(connectionState);
   }
@@ -2315,11 +1746,9 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
+    TResult? Function()? initialize,
     TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
+    TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
@@ -2330,7 +1759,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     frameResultReceived,
     TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
   }) {
     return connectionStateChanged?.call(connectionState);
   }
@@ -2338,11 +1766,9 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
+    TResult Function()? initialize,
     TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
+    TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
@@ -2353,7 +1779,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     frameResultReceived,
     TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
     required TResult orElse(),
   }) {
     if (connectionStateChanged != null) {
@@ -2365,14 +1790,9 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
+    required TResult Function(Initialize value) initialize,
     required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
+    required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
@@ -2382,7 +1802,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
   }) {
     return connectionStateChanged(this);
   }
@@ -2390,18 +1809,15 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult? Function(Initialize value)? initialize,
     TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
+    TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
     TResult? Function(FrameResultReceived value)? frameResultReceived,
     TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
   }) {
     return connectionStateChanged?.call(this);
   }
@@ -2409,18 +1825,15 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
+    TResult Function(Initialize value)? initialize,
     TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
+    TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
     TResult Function(FrameResultReceived value)? frameResultReceived,
     TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
     required TResult orElse(),
   }) {
     if (connectionStateChanged != null) {
@@ -2441,226 +1854,4 @@ abstract class ConnectionStateChanged implements CheckInEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ConnectionStateChangedImplCopyWith<_$ConnectionStateChangedImpl>
   get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$FrameCapturedImplCopyWith<$Res> {
-  factory _$$FrameCapturedImplCopyWith(
-    _$FrameCapturedImpl value,
-    $Res Function(_$FrameCapturedImpl) then,
-  ) = __$$FrameCapturedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CameraImage image});
-}
-
-/// @nodoc
-class __$$FrameCapturedImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$FrameCapturedImpl>
-    implements _$$FrameCapturedImplCopyWith<$Res> {
-  __$$FrameCapturedImplCopyWithImpl(
-    _$FrameCapturedImpl _value,
-    $Res Function(_$FrameCapturedImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? image = null}) {
-    return _then(
-      _$FrameCapturedImpl(
-        null == image
-            ? _value.image
-            : image // ignore: cast_nullable_to_non_nullable
-                as CameraImage,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$FrameCapturedImpl implements FrameCaptured {
-  const _$FrameCapturedImpl(this.image);
-
-  @override
-  final CameraImage image;
-
-  @override
-  String toString() {
-    return 'CheckInEvent.frameCaptured(image: $image)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FrameCapturedImpl &&
-            (identical(other.image, image) || other.image == image));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, image);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FrameCapturedImplCopyWith<_$FrameCapturedImpl> get copyWith =>
-      __$$FrameCapturedImplCopyWithImpl<_$FrameCapturedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() requestCameraPermission,
-    required TResult Function() cameraPermissionGranted,
-    required TResult Function() cameraPermissionDenied,
-    required TResult Function() openAppSettings,
-    required TResult Function() initializeCamera,
-    required TResult Function() stopCamera,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraImage image) frameCaptured,
-  }) {
-    return frameCaptured(image);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? requestCameraPermission,
-    TResult? Function()? cameraPermissionGranted,
-    TResult? Function()? cameraPermissionDenied,
-    TResult? Function()? openAppSettings,
-    TResult? Function()? initializeCamera,
-    TResult? Function()? stopCamera,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )?
-    frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraImage image)? frameCaptured,
-  }) {
-    return frameCaptured?.call(image);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? requestCameraPermission,
-    TResult Function()? cameraPermissionGranted,
-    TResult Function()? cameraPermissionDenied,
-    TResult Function()? openAppSettings,
-    TResult Function()? initializeCamera,
-    TResult Function()? stopCamera,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function()? toggleDebugMode,
-    TResult Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )?
-    frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraImage image)? frameCaptured,
-    required TResult orElse(),
-  }) {
-    if (frameCaptured != null) {
-      return frameCaptured(image);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(RequestCameraPermission value)
-    requestCameraPermission,
-    required TResult Function(CameraPermissionGranted value)
-    cameraPermissionGranted,
-    required TResult Function(CameraPermissionDenied value)
-    cameraPermissionDenied,
-    required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(InitializeCamera value) initializeCamera,
-    required TResult Function(StopCamera value) stopCamera,
-    required TResult Function(WebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
-    required TResult Function(ConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(FrameCaptured value) frameCaptured,
-  }) {
-    return frameCaptured(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult? Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult? Function(CameraPermissionDenied value)? cameraPermissionDenied,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(InitializeCamera value)? initializeCamera,
-    TResult? Function(StopCamera value)? stopCamera,
-    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(FrameCaptured value)? frameCaptured,
-  }) {
-    return frameCaptured?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(RequestCameraPermission value)? requestCameraPermission,
-    TResult Function(CameraPermissionGranted value)? cameraPermissionGranted,
-    TResult Function(CameraPermissionDenied value)? cameraPermissionDenied,
-    TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(InitializeCamera value)? initializeCamera,
-    TResult Function(StopCamera value)? stopCamera,
-    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(FrameCaptured value)? frameCaptured,
-    required TResult orElse(),
-  }) {
-    if (frameCaptured != null) {
-      return frameCaptured(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FrameCaptured implements CheckInEvent {
-  const factory FrameCaptured(final CameraImage image) = _$FrameCapturedImpl;
-
-  CameraImage get image;
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FrameCapturedImplCopyWith<_$FrameCapturedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }

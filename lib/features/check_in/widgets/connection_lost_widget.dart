@@ -1,3 +1,4 @@
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_event.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:face_check_in_flutter/core/theme/app_colors.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
+import 'package:face_check_in_flutter/features/connection/connection.dart';
 
 import 'generic_message_widget.dart';
 
@@ -25,7 +27,19 @@ class ConnectionLostWidget extends StatelessWidget {
           icon: _getIconForStatus(connectionStatus),
           title: _getTitleForStatus(connectionStatus),
           subtitle: _getSubtitleForStatus(connectionStatus),
+          retryButtonTitle:
+              _shouldShowRetryButton(connectionStatus) ? 'Retry Now' : null,
+          onRetry:
+              _shouldShowRetryButton(connectionStatus)
+                  ? () {
+                    context.read<CheckInBloc>().add(
+                      const CheckInEvent.initialize(),
+                    );
+                  }
+                  : null,
           iconColor: _getIconColorForStatus(connectionStatus),
+          buttonColor: AppColors.warning,
+          buttonTextColor: AppColors.textOnPrimary,
         );
       },
     );
@@ -86,5 +100,12 @@ class ConnectionLostWidget extends StatelessWidget {
       default:
         return AppColors.textSecondary;
     }
+  }
+
+  /// Show retry button for certain connection statuses
+  bool _shouldShowRetryButton(AppConnectionStatus status) {
+    return status == AppConnectionStatus.backgroundRetrying ||
+        status == AppConnectionStatus.failed ||
+        status == AppConnectionStatus.networkLost;
   }
 }

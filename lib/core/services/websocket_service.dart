@@ -41,7 +41,9 @@ class WebSocketService {
   // Timer management for retry logic
   Timer? _retryTimer;
   Timer? _backgroundTimer;
-  RetryState _retryState = const RetryState.idle();
+  final _retryStateSubject = BehaviorSubject<RetryState>.seeded(
+    const RetryState.idle(),
+  );
 
   // Retry configuration
   static const _maxFastRetries = 5;
@@ -60,24 +62,27 @@ class WebSocketService {
   final _messageSubject = PublishSubject<dynamic>();
   Stream<dynamic> get messageStream => _messageSubject.stream;
 
+  // Retry state stream and getter
+  Stream<RetryState> get retryStateStream => _retryStateSubject.stream;
+  RetryState get currentRetryState => _retryStateSubject.value;
+
   // Add network availability stream
   Stream<bool> get isNetworkAvailable => _networkService.connectivityStream;
 
   // Add computed stream for AppConnectionStatus
   Stream<AppConnectionStatus> get appConnectionStatusStream {
-    return Rx.combineLatest2<
+    return Rx.combineLatest3<
       bool,
       WebSocketConnectionStatus,
+      RetryState,
       AppConnectionStatus
     >(
       isNetworkAvailable,
       connectionStatusStream,
-      (isNetworkConnected, wsStatus) => _computeAppConnectionStatus(
-        isNetworkConnected,
-        wsStatus,
-        _retryState,
-      ),
-    ).distinct(); // Only emit when status actually changes
+      retryStateStream,
+      (isNetworkConnected, wsStatus, retryState) =>
+          _computeAppConnectionStatus(isNetworkConnected, wsStatus, retryState),
+    ).distinct();
   }
 
   // Current computed app connection status
@@ -85,7 +90,7 @@ class WebSocketService {
       _computeAppConnectionStatus(
         _networkService.isConnected,
         currentStatus,
-        _retryState,
+        currentRetryState,
       );
 
   WebSocketConnectionStatus get currentStatus => _statusSubject.value;
@@ -93,9 +98,8 @@ class WebSocketService {
   Future<void> initialize({required String url}) async {
     _url = url;
 
-    await _networkService.initialize();
-
     _setupNetworkListeners();
+    await _networkService.initialize();
   }
 
   void _setupNetworkListeners() {
@@ -121,6 +125,11 @@ class WebSocketService {
   void updateStatus(WebSocketConnectionStatus status) {
     if (_statusSubject.isClosed) return;
     _statusSubject.add(status);
+  }
+
+  void _updateRetryState(RetryState newState) {
+    if (_retryStateSubject.isClosed) return;
+    _retryStateSubject.add(newState);
   }
 
   Future<void> connect() async {
@@ -227,9 +236,11 @@ class WebSocketService {
     const attempt = 1;
     final delay = _calculateBackoffDelay(attempt);
 
-    _retryState = RetryState.fastRetrying(
-      currentAttempt: attempt,
-      maxAttempts: _maxFastRetries,
+    _updateRetryState(
+      RetryState.fastRetrying(
+        currentAttempt: attempt,
+        maxAttempts: _maxFastRetries,
+      ),
     );
 
     _scheduleRetry(delay);
@@ -239,9 +250,11 @@ class WebSocketService {
     final nextAttempt = currentAttempt + 1;
     final delay = _calculateBackoffDelay(nextAttempt);
 
-    _retryState = RetryState.fastRetrying(
-      currentAttempt: nextAttempt,
-      maxAttempts: _maxFastRetries,
+    _updateRetryState(
+      RetryState.fastRetrying(
+        currentAttempt: nextAttempt,
+        maxAttempts: _maxFastRetries,
+      ),
     );
 
     _scheduleRetry(delay);
@@ -274,13 +287,11 @@ class WebSocketService {
   void handleError(dynamic error) {
     updateStatus(WebSocketConnectionStatus.failed);
 
-    // Prevent multiple retry schedules - only process if not already scheduled
     if (_retryTimer != null) {
-      print('Retry already scheduled, ignoring additional error: $error');
       return;
     }
 
-    _retryState.when(
+    currentRetryState.when(
       idle: () => _startFastRetryPhase(),
       fastRetrying: (attempt, maxAttempts) {
         if (attempt < maxAttempts) {
@@ -294,13 +305,13 @@ class WebSocketService {
   }
 
   void _switchToBackgroundMonitoring() {
-    _retryState = RetryState.backgroundMonitoring();
+    _updateRetryState(const RetryState.backgroundMonitoring());
 
     _scheduleBackgroundCheck();
   }
 
   void _resetRetryState() {
-    _retryState = const RetryState.idle();
+    _updateRetryState(const RetryState.idle());
     _cancelAllTimers();
   }
 
@@ -342,6 +353,7 @@ class WebSocketService {
     _networkSubscription?.cancel();
     _statusSubject.close();
     _messageSubject.close();
+    _retryStateSubject.close();
   }
 
   /// Compute AppConnectionStatus from network + websocket + retry state

@@ -1,11 +1,10 @@
 import 'package:camera/camera.dart';
-import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:face_check_in_flutter/domain/entities/check_in_error.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_status.dart';
-import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
 import 'package:face_check_in_flutter/features/connection/connection.dart'
     as conn;
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
@@ -19,9 +18,6 @@ class CheckInState with _$CheckInState {
   const factory CheckInState({
     /// Current camera status
     @Default(CameraStatus.initial) CameraStatus cameraStatus,
-
-    /// Current permission status
-    @Default(PermissionStatus.initial) PermissionStatus permissionStatus,
 
     /// Current error, if any
     CheckInError? currentError,

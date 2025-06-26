@@ -20,9 +20,6 @@ mixin _$CheckInState {
   /// Current camera status
   CameraStatus get cameraStatus => throw _privateConstructorUsedError;
 
-  /// Current permission status
-  PermissionStatus get permissionStatus => throw _privateConstructorUsedError;
-
   /// Current error, if any
   CheckInError? get currentError => throw _privateConstructorUsedError;
 
@@ -61,7 +58,6 @@ abstract class $CheckInStateCopyWith<$Res> {
   @useResult
   $Res call({
     CameraStatus cameraStatus,
-    PermissionStatus permissionStatus,
     CheckInError? currentError,
     CameraController? cameraController,
     bool isDebugMode,
@@ -93,7 +89,6 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
   @override
   $Res call({
     Object? cameraStatus = null,
-    Object? permissionStatus = null,
     Object? currentError = freezed,
     Object? cameraController = freezed,
     Object? isDebugMode = null,
@@ -109,11 +104,6 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
                     ? _value.cameraStatus
                     : cameraStatus // ignore: cast_nullable_to_non_nullable
                         as CameraStatus,
-            permissionStatus:
-                null == permissionStatus
-                    ? _value.permissionStatus
-                    : permissionStatus // ignore: cast_nullable_to_non_nullable
-                        as PermissionStatus,
             currentError:
                 freezed == currentError
                     ? _value.currentError
@@ -218,7 +208,6 @@ abstract class _$$CheckInStateImplCopyWith<$Res>
   @useResult
   $Res call({
     CameraStatus cameraStatus,
-    PermissionStatus permissionStatus,
     CheckInError? currentError,
     CameraController? cameraController,
     bool isDebugMode,
@@ -253,7 +242,6 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? cameraStatus = null,
-    Object? permissionStatus = null,
     Object? currentError = freezed,
     Object? cameraController = freezed,
     Object? isDebugMode = null,
@@ -269,11 +257,6 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
                 ? _value.cameraStatus
                 : cameraStatus // ignore: cast_nullable_to_non_nullable
                     as CameraStatus,
-        permissionStatus:
-            null == permissionStatus
-                ? _value.permissionStatus
-                : permissionStatus // ignore: cast_nullable_to_non_nullable
-                    as PermissionStatus,
         currentError:
             freezed == currentError
                 ? _value.currentError
@@ -319,7 +302,6 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
 class _$CheckInStateImpl extends _CheckInState {
   const _$CheckInStateImpl({
     this.cameraStatus = CameraStatus.initial,
-    this.permissionStatus = PermissionStatus.initial,
     this.currentError,
     this.cameraController,
     this.isDebugMode = false,
@@ -333,11 +315,6 @@ class _$CheckInStateImpl extends _CheckInState {
   @override
   @JsonKey()
   final CameraStatus cameraStatus;
-
-  /// Current permission status
-  @override
-  @JsonKey()
-  final PermissionStatus permissionStatus;
 
   /// Current error, if any
   @override
@@ -372,7 +349,7 @@ class _$CheckInStateImpl extends _CheckInState {
 
   @override
   String toString() {
-    return 'CheckInState(cameraStatus: $cameraStatus, permissionStatus: $permissionStatus, currentError: $currentError, cameraController: $cameraController, isDebugMode: $isDebugMode, faceStatus: $faceStatus, responseError: $responseError, connectionState: $connectionState, latestFrameData: $latestFrameData)';
+    return 'CheckInState(cameraStatus: $cameraStatus, currentError: $currentError, cameraController: $cameraController, isDebugMode: $isDebugMode, faceStatus: $faceStatus, responseError: $responseError, connectionState: $connectionState, latestFrameData: $latestFrameData)';
   }
 
   @override
@@ -382,8 +359,6 @@ class _$CheckInStateImpl extends _CheckInState {
             other is _$CheckInStateImpl &&
             (identical(other.cameraStatus, cameraStatus) ||
                 other.cameraStatus == cameraStatus) &&
-            (identical(other.permissionStatus, permissionStatus) ||
-                other.permissionStatus == permissionStatus) &&
             (identical(other.currentError, currentError) ||
                 other.currentError == currentError) &&
             (identical(other.cameraController, cameraController) ||
@@ -404,7 +379,6 @@ class _$CheckInStateImpl extends _CheckInState {
   int get hashCode => Object.hash(
     runtimeType,
     cameraStatus,
-    permissionStatus,
     currentError,
     cameraController,
     isDebugMode,
@@ -426,7 +400,6 @@ class _$CheckInStateImpl extends _CheckInState {
 abstract class _CheckInState extends CheckInState {
   const factory _CheckInState({
     final CameraStatus cameraStatus,
-    final PermissionStatus permissionStatus,
     final CheckInError? currentError,
     final CameraController? cameraController,
     final bool isDebugMode,
@@ -440,10 +413,6 @@ abstract class _CheckInState extends CheckInState {
   /// Current camera status
   @override
   CameraStatus get cameraStatus;
-
-  /// Current permission status
-  @override
-  PermissionStatus get permissionStatus;
 
   /// Current error, if any
   @override

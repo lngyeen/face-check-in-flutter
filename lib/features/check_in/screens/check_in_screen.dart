@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/camera_preview_widget.dart';
 
 import '../bloc/check_in_bloc.dart';
-import '../bloc/check_in_event.dart' as ci;
+import '../bloc/check_in_event.dart';
 import '../bloc/check_in_state.dart';
 import '../widgets/check_in_listeners.dart';
 import '../widgets/debug_information_card.dart';
@@ -32,7 +32,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<CheckInBloc>().add(const ci.CheckInEvent.initializeCamera());
+    context.read<CheckInBloc>().add(const CheckInEvent.initialize());
   }
 
   @override
