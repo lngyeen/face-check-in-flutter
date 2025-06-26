@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:face_check_in_flutter/core/services/permission_service.dart';
 import 'package:face_check_in_flutter/core/services/stream_service.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
@@ -13,7 +14,6 @@ import 'package:face_check_in_flutter/domain/entities/check_in_error.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
-import 'package:face_check_in_flutter/domain/services/permission_service.dart';
 import 'package:face_check_in_flutter/features/connection/connection.dart'
     hide Initialize;
 
@@ -59,7 +59,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
     // Concurrent events - default behavior
     on<ToggleDebugMode>(_onToggleDebugMode);
-    on<OpenAppSettings>(_onOpenAppSettings);
     on<WebSocketMessageReceived>(_onWebSocketMessageReceived);
     on<FrameResultReceived>(_onFrameResultReceived);
     on<ResponseErrorReceived>(_onResponseErrorReceived);
@@ -74,7 +73,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) async {
     switch (event) {
       case Initialize():
-        await _onInitialize(event, emit);
+        _onInitialize(event, emit);
       case StartCamera():
         await _onStartCamera(event, emit);
       case StopCamera():
@@ -143,10 +142,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   }
 
   // Initialization handlers
-  Future<void> _onInitialize(
-    Initialize event,
-    Emitter<CheckInState> emit,
-  ) async {
+  void _onInitialize(Initialize event, Emitter<CheckInState> emit) {
     // Emit initializing state to show loading
     emit(state.copyWith(cameraStatus: CameraStatus.initializing));
 
@@ -155,18 +151,13 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     _connectionBloc.add(const ConnectionEvent.initialize());
   }
 
-  Future<void> _onOpenAppSettings(
-    OpenAppSettings event,
-    Emitter<CheckInState> emit,
-  ) async {
-    await _permissionService.openAppSettings();
-  }
-
   // Camera handlers
   Future<void> _onStartCamera(
     StartCamera event,
     Emitter<CheckInState> emit,
   ) async {
+    emit(state.copyWith(cameraStatus: CameraStatus.initializing));
+
     final permissionStatus =
         await _permissionService.getCameraPermissionStatus();
 

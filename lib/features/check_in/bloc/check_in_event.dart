@@ -9,8 +9,6 @@ part 'check_in_event.freezed.dart';
 class CheckInEvent with _$CheckInEvent {
   const factory CheckInEvent.initialize() = Initialize;
 
-  const factory CheckInEvent.openAppSettings() = OpenAppSettings;
-
   const factory CheckInEvent.startCamera() = StartCamera;
 
   const factory CheckInEvent.stopCamera() = StopCamera;

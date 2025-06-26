@@ -81,25 +81,6 @@ class _CheckInScreenState extends State<CheckInScreen> {
                   child: const DebugToggleButton(),
                 ),
               ),
-              if (state.isDebugMode) ...[
-                const SizedBox(height: 8),
-                Material(
-                  elevation: 6,
-                  borderRadius: BorderRadius.circular(28),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      borderRadius: BorderRadius.circular(28),
-                    ),
-                    child: IconButton(
-                      onPressed:
-                          () => Navigator.of(context).pushNamed('/preview'),
-                      icon: const Icon(Icons.preview),
-                      tooltip: 'Preview Success Dialog',
-                    ),
-                  ),
-                ),
-              ],
             ],
           ),
         ),

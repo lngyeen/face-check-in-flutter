@@ -20,7 +20,6 @@ mixin _$CheckInEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() openAppSettings,
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
@@ -38,7 +37,6 @@ mixin _$CheckInEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? openAppSettings,
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
@@ -54,7 +52,6 @@ mixin _$CheckInEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? openAppSettings,
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
@@ -71,7 +68,6 @@ mixin _$CheckInEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialize value) initialize,
-    required TResult Function(OpenAppSettings value) openAppSettings,
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
@@ -86,7 +82,6 @@ mixin _$CheckInEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -98,7 +93,6 @@ mixin _$CheckInEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialize value)? initialize,
-    TResult Function(OpenAppSettings value)? openAppSettings,
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -176,7 +170,6 @@ class _$InitializeImpl implements Initialize {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() openAppSettings,
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
@@ -198,7 +191,6 @@ class _$InitializeImpl implements Initialize {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? openAppSettings,
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
@@ -218,7 +210,6 @@ class _$InitializeImpl implements Initialize {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? openAppSettings,
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
@@ -242,7 +233,6 @@ class _$InitializeImpl implements Initialize {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialize value) initialize,
-    required TResult Function(OpenAppSettings value) openAppSettings,
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
@@ -261,7 +251,6 @@ class _$InitializeImpl implements Initialize {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -277,7 +266,6 @@ class _$InitializeImpl implements Initialize {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialize value)? initialize,
-    TResult Function(OpenAppSettings value)? openAppSettings,
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -296,172 +284,6 @@ class _$InitializeImpl implements Initialize {
 
 abstract class Initialize implements CheckInEvent {
   const factory Initialize() = _$InitializeImpl;
-}
-
-/// @nodoc
-abstract class _$$OpenAppSettingsImplCopyWith<$Res> {
-  factory _$$OpenAppSettingsImplCopyWith(
-    _$OpenAppSettingsImpl value,
-    $Res Function(_$OpenAppSettingsImpl) then,
-  ) = __$$OpenAppSettingsImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$OpenAppSettingsImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$OpenAppSettingsImpl>
-    implements _$$OpenAppSettingsImplCopyWith<$Res> {
-  __$$OpenAppSettingsImplCopyWithImpl(
-    _$OpenAppSettingsImpl _value,
-    $Res Function(_$OpenAppSettingsImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$OpenAppSettingsImpl implements OpenAppSettings {
-  const _$OpenAppSettingsImpl();
-
-  @override
-  String toString() {
-    return 'CheckInEvent.openAppSettings()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OpenAppSettingsImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function() openAppSettings,
-    required TResult Function() startCamera,
-    required TResult Function() stopCamera,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-  }) {
-    return openAppSettings();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function()? openAppSettings,
-    TResult? Function()? startCamera,
-    TResult? Function()? stopCamera,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )?
-    frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-  }) {
-    return openAppSettings?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function()? openAppSettings,
-    TResult Function()? startCamera,
-    TResult Function()? stopCamera,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function()? toggleDebugMode,
-    TResult Function(
-      List<Map<String, dynamic>>? faces,
-      FaceDetectionResponse? response,
-    )?
-    frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    required TResult orElse(),
-  }) {
-    if (openAppSettings != null) {
-      return openAppSettings();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
-    required TResult Function(OpenAppSettings value) openAppSettings,
-    required TResult Function(StartCamera value) startCamera,
-    required TResult Function(StopCamera value) stopCamera,
-    required TResult Function(WebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
-    required TResult Function(ConnectionStateChanged value)
-    connectionStateChanged,
-  }) {
-    return openAppSettings(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
-    TResult? Function(StartCamera value)? startCamera,
-    TResult? Function(StopCamera value)? stopCamera,
-    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-  }) {
-    return openAppSettings?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialize value)? initialize,
-    TResult Function(OpenAppSettings value)? openAppSettings,
-    TResult Function(StartCamera value)? startCamera,
-    TResult Function(StopCamera value)? stopCamera,
-    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    required TResult orElse(),
-  }) {
-    if (openAppSettings != null) {
-      return openAppSettings(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class OpenAppSettings implements CheckInEvent {
-  const factory OpenAppSettings() = _$OpenAppSettingsImpl;
 }
 
 /// @nodoc
@@ -508,7 +330,6 @@ class _$StartCameraImpl implements StartCamera {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() openAppSettings,
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
@@ -530,7 +351,6 @@ class _$StartCameraImpl implements StartCamera {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? openAppSettings,
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
@@ -550,7 +370,6 @@ class _$StartCameraImpl implements StartCamera {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? openAppSettings,
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
@@ -574,7 +393,6 @@ class _$StartCameraImpl implements StartCamera {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialize value) initialize,
-    required TResult Function(OpenAppSettings value) openAppSettings,
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
@@ -593,7 +411,6 @@ class _$StartCameraImpl implements StartCamera {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -609,7 +426,6 @@ class _$StartCameraImpl implements StartCamera {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialize value)? initialize,
-    TResult Function(OpenAppSettings value)? openAppSettings,
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -674,7 +490,6 @@ class _$StopCameraImpl implements StopCamera {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() openAppSettings,
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
@@ -696,7 +511,6 @@ class _$StopCameraImpl implements StopCamera {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? openAppSettings,
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
@@ -716,7 +530,6 @@ class _$StopCameraImpl implements StopCamera {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? openAppSettings,
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
@@ -740,7 +553,6 @@ class _$StopCameraImpl implements StopCamera {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialize value) initialize,
-    required TResult Function(OpenAppSettings value) openAppSettings,
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
@@ -759,7 +571,6 @@ class _$StopCameraImpl implements StopCamera {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -775,7 +586,6 @@ class _$StopCameraImpl implements StopCamera {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialize value)? initialize,
-    TResult Function(OpenAppSettings value)? openAppSettings,
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -870,7 +680,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() openAppSettings,
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
@@ -892,7 +701,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? openAppSettings,
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
@@ -912,7 +720,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? openAppSettings,
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
@@ -936,7 +743,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialize value) initialize,
-    required TResult Function(OpenAppSettings value) openAppSettings,
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
@@ -955,7 +761,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -971,7 +776,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialize value)? initialize,
-    TResult Function(OpenAppSettings value)? openAppSettings,
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -1045,7 +849,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() openAppSettings,
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
@@ -1067,7 +870,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? openAppSettings,
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
@@ -1087,7 +889,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? openAppSettings,
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
@@ -1111,7 +912,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialize value) initialize,
-    required TResult Function(OpenAppSettings value) openAppSettings,
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
@@ -1130,7 +930,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -1146,7 +945,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialize value)? initialize,
-    TResult Function(OpenAppSettings value)? openAppSettings,
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -1285,7 +1083,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() openAppSettings,
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
@@ -1307,7 +1104,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? openAppSettings,
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
@@ -1327,7 +1123,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? openAppSettings,
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
@@ -1351,7 +1146,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialize value) initialize,
-    required TResult Function(OpenAppSettings value) openAppSettings,
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
@@ -1370,7 +1164,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -1386,7 +1179,6 @@ class _$FrameResultReceivedImpl implements FrameResultReceived {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialize value)? initialize,
-    TResult Function(OpenAppSettings value)? openAppSettings,
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -1503,7 +1295,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() openAppSettings,
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
@@ -1525,7 +1316,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? openAppSettings,
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
@@ -1545,7 +1335,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? openAppSettings,
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
@@ -1569,7 +1358,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialize value) initialize,
-    required TResult Function(OpenAppSettings value) openAppSettings,
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
@@ -1588,7 +1376,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -1604,7 +1391,6 @@ class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialize value)? initialize,
-    TResult Function(OpenAppSettings value)? openAppSettings,
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -1725,7 +1511,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function() openAppSettings,
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
@@ -1747,7 +1532,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function()? openAppSettings,
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
@@ -1767,7 +1551,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function()? openAppSettings,
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
@@ -1791,7 +1574,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialize value) initialize,
-    required TResult Function(OpenAppSettings value) openAppSettings,
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
     required TResult Function(WebSocketMessageReceived value)
@@ -1810,7 +1592,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialize value)? initialize,
-    TResult? Function(OpenAppSettings value)? openAppSettings,
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
@@ -1826,7 +1607,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialize value)? initialize,
-    TResult Function(OpenAppSettings value)? openAppSettings,
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,

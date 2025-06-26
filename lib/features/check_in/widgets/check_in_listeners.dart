@@ -46,7 +46,7 @@ class _CheckInSuccessListener extends BlocListener<CheckInBloc, CheckInState> {
                 ..showSnackBar(
                   SnackBar(
                     content: Text(
-                      'Unrecognized face detected. Please try again.',
+                      'Face detected but not recognized. Ensure good lighting and face the camera directly.',
                     ),
                     duration: const Duration(seconds: 3),
                   ),

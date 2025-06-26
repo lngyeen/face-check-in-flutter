@@ -11,10 +11,34 @@ import '../../domain/entities/websocket_connection_status.dart';
 
 import 'websocket_service.dart';
 
-/// Stream service for controlling image frame streaming to WebSocket
+/// Abstract interface for stream service
+abstract class StreamService {
+  /// Whether streaming is currently active
+  bool get isStreaming;
+
+  /// Current maximum frames per second setting
+  int get maxFps;
+
+  /// Configure maximum frames per second
+  void setMaxFps(int maxFps);
+
+  /// Start streaming frames
+  Future<void> startStream();
+
+  /// Stop streaming frames
+  Future<void> stopStream();
+
+  /// Add frame to processing queue
+  void addFrame(CameraImage frame);
+
+  /// Dispose resources
+  void dispose();
+}
+
+/// Stream service implementation for controlling image frame streaming to WebSocket
 /// Uses RxDart for frame rate limiting and debouncing
-@lazySingleton
-class StreamService {
+@LazySingleton(as: StreamService)
+class StreamServiceImpl implements StreamService {
   final WebSocketService _webSocketService;
 
   // Configuration
@@ -29,7 +53,7 @@ class StreamService {
   bool _isStreaming = false;
   bool get isStreaming => _isStreaming;
 
-  StreamService(this._webSocketService) {
+  StreamServiceImpl(this._webSocketService) {
     _initializeFrameProcessing();
   }
 

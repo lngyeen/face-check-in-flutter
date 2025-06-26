@@ -40,9 +40,6 @@ class App extends StatelessWidget {
         // Home screen with flavor banner in debug mode
         home: _flavorBanner(child: const CheckInScreen(), show: kDebugMode),
 
-        // Routes for navigation
-        routes: {'/preview': (context) => const CheckInSuccessPreviewScreen()},
-
         // Error handling
         builder: (context, child) {
           return MediaQuery(
