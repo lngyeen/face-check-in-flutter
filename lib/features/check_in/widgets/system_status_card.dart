@@ -49,7 +49,7 @@ class SystemStatusCard extends StatelessWidget {
             BlocBuilder<ConnectionBloc, ConnectionState>(
               builder: (context, state) {
                 return _StatusRow(
-                  title: 'WebSocket Connection',
+                  title: 'WebSocket',
                   status: state.webSocketStatus.displayText,
                   color: state.webSocketStatus.displayColor,
                 );

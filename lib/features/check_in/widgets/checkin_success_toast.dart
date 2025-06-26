@@ -3,7 +3,25 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import 'package:face_check_in_flutter/core/theme/app_colors.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
+
+/// Data model for title display configuration
+class _TitleData {
+  const _TitleData({required this.title, required this.color, this.subtitle});
+
+  final String title;
+  final String? subtitle;
+  final Color color;
+}
+
+/// Data model for icon display configuration
+class _IconData {
+  const _IconData({required this.icon, required this.color});
+
+  final IconData icon;
+  final Color color;
+}
 
 /// Dialog widget that displays check-in success information for multiple faces
 class CheckInSuccessDialog extends StatelessWidget {
@@ -50,109 +68,29 @@ class CheckInSuccessDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final recognizedFaces =
-        detectedFaces.where((face) => face.isRecognized).toList();
-    final unrecognizedCount = detectedFaces.length - recognizedFaces.length;
-
+    final theme = Theme.of(context);
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppDesignTokens.radiusLarge),
+      ),
       child: Container(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(AppDesignTokens.spaceLarge),
         constraints: const BoxConstraints(maxHeight: 600, maxWidth: 400),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Success icon
-            Container(
-              width: 80,
-              height: 80,
-              decoration: const BoxDecoration(
-                color: Colors.green,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.check, color: Colors.white, size: 50),
-            ),
-            const SizedBox(height: 20),
+            // Dynamic status icon
+            _buildStatusIcon(detectedFaces),
+            const SizedBox(height: AppDesignTokens.spaceLarge),
 
             // Title with face count
-            Text(
-              detectedFaces.length == 1
-                  ? 'Face Detected!'
-                  : 'Multiple Faces Detected!',
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-
-            // Summary info
-            if (detectedFaces.length > 1) ...[
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.blue.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
-                ),
-                child: Text(
-                  '${detectedFaces.length} faces total${recognizedFaces.isNotEmpty ? ' • ${recognizedFaces.length} recognized' : ''}${unrecognizedCount > 0 ? ' • $unrecognizedCount unrecognized' : ''}',
-                  style: const TextStyle(fontSize: 12, color: Colors.blue),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              const SizedBox(height: 16),
-            ],
+            _buildTitle(theme, detectedFaces.length),
+            const SizedBox(height: AppDesignTokens.spaceMedium),
 
             // User image (if available)
             if (userImage != null) ...[
-              Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(60),
-                  border: Border.all(color: Colors.grey[300]!, width: 3),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(57),
-                  child: Image.memory(
-                    // Convert base64 to bytes
-                    base64Decode(userImage!),
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[200],
-                        child: const Icon(
-                          Icons.person,
-                          size: 60,
-                          color: Colors.grey,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              Image.memory(
-                // Convert base64 to bytes
-                base64Decode(userImage!),
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.grey[200],
-                    child: const Icon(
-                      Icons.person,
-                      size: 60,
-                      color: Colors.grey,
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 16),
+              _buildUserImage(userImage!),
+              const SizedBox(height: AppDesignTokens.spaceMedium),
             ],
 
             // Faces list
@@ -161,16 +99,195 @@ class CheckInSuccessDialog extends StatelessWidget {
                 child: Column(
                   children: [
                     for (int i = 0; i < detectedFaces.length; i++)
-                      _FaceInfoCard(
-                        face: detectedFaces[i],
-                        index: i + 1,
-                        showIndex: detectedFaces.length > 1,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: AppDesignTokens.spaceSmall,
+                        ),
+                        child: _FaceInfoCard(
+                          face: detectedFaces[i],
+                          index: i + 1,
+                          showIndex: detectedFaces.length > 1,
+                        ),
                       ),
                   ],
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatusIcon(List<FaceDetectionResult> faces) {
+    final recognizedCount = faces.where((face) => face.isRecognized).length;
+    final unrecognizedCount = faces.length - recognizedCount;
+
+    // Determine icon and color based on recognition status
+    final iconData = _getStatusIconData(
+      faces.length,
+      recognizedCount,
+      unrecognizedCount,
+    );
+
+    return Container(
+      width: 80,
+      height: 80,
+      decoration: BoxDecoration(color: iconData.color, shape: BoxShape.circle),
+      child: Icon(iconData.icon, color: AppColors.textOnPrimary, size: 50),
+    );
+  }
+
+  /// Get icon data based on face detection results
+  _IconData _getStatusIconData(
+    int totalFaces,
+    int recognizedCount,
+    int unrecognizedCount,
+  ) {
+    if (totalFaces == 1) {
+      if (recognizedCount == 1) {
+        return _IconData(icon: Icons.verified_user, color: AppColors.success);
+      } else {
+        return _IconData(icon: Icons.help_outline, color: AppColors.warning);
+      }
+    } else {
+      // Multiple faces
+      if (unrecognizedCount == 0) {
+        return _IconData(icon: Icons.group, color: AppColors.success);
+      } else if (recognizedCount == 0) {
+        return _IconData(icon: Icons.group_add, color: AppColors.warning);
+      } else {
+        return _IconData(icon: Icons.people, color: AppColors.secondary);
+      }
+    }
+  }
+
+  Widget _buildTitle(ThemeData theme, int faceCount) {
+    final recognizedFaces =
+        detectedFaces.where((face) => face.isRecognized).toList();
+    final unrecognizedCount = faceCount - recognizedFaces.length;
+
+    // Determine title based on recognition status
+    final titleData = _getTitleData(
+      faceCount,
+      recognizedFaces.length,
+      unrecognizedCount,
+    );
+
+    return Column(
+      children: [
+        // Main title (clean text-only)
+        Text(
+          titleData.title,
+          style: theme.textTheme.headlineMedium?.copyWith(
+            color: titleData.color,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+
+        // Subtitle with additional context
+        if (titleData.subtitle != null) ...[
+          const SizedBox(height: AppDesignTokens.spaceXSmall),
+          Text(
+            titleData.subtitle!,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: titleData.color.withValues(alpha: 0.8),
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ],
+    );
+  }
+
+  /// Get title data based on face detection results
+  _TitleData _getTitleData(
+    int totalFaces,
+    int recognizedCount,
+    int unrecognizedCount,
+  ) {
+    if (totalFaces == 1) {
+      if (recognizedCount == 1) {
+        return _TitleData(
+          title: 'Face Recognized!',
+          subtitle: 'Welcome back',
+          color: AppColors.success,
+        );
+      } else {
+        return _TitleData(
+          title: 'Face Detected',
+          subtitle: 'Unknown person',
+          color: AppColors.warning,
+        );
+      }
+    } else {
+      // Multiple faces
+      if (unrecognizedCount == 0) {
+        return _TitleData(
+          title: 'All Faces Recognized!',
+          subtitle: '$recognizedCount people identified',
+          color: AppColors.success,
+        );
+      } else if (recognizedCount == 0) {
+        return _TitleData(
+          title: 'Multiple Faces Detected',
+          subtitle: 'No recognized individuals',
+          color: AppColors.warning,
+        );
+      } else {
+        return _TitleData(
+          title: 'Mixed Recognition',
+          subtitle: '$recognizedCount known, $unrecognizedCount unknown',
+          color: AppColors.secondary,
+        );
+      }
+    }
+  }
+
+  Widget _buildUserImage(String userImage) {
+    return Container(
+      constraints: const BoxConstraints(
+        maxHeight: 200, // Reasonable max height for dialog
+        maxWidth: double.infinity,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppDesignTokens.radiusLarge),
+        border: Border.all(color: AppColors.border, width: 2),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppDesignTokens.radiusLarge),
+        child: Image.memory(
+          base64Decode(userImage),
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return Container(
+              height: 120,
+              color: AppColors.surfaceVariant,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.broken_image,
+                      size: AppDesignTokens.iconLarge,
+                      color: AppColors.textSecondary,
+                    ),
+                    const SizedBox(height: AppDesignTokens.spaceSmall),
+                    Text(
+                      'Image Error',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -191,134 +308,166 @@ class _FaceInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isRecognized = face.isRecognized;
+    final statusColor = isRecognized ? AppColors.success : AppColors.warning;
+
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(AppDesignTokens.spaceMedium),
       decoration: BoxDecoration(
-        border: Border.all(
-          color:
-              face.isRecognized
-                  ? Colors.green.withValues(alpha: 0.3)
-                  : Colors.orange.withValues(alpha: 0.3),
-        ),
-        borderRadius: BorderRadius.circular(12),
-        color:
-            face.isRecognized
-                ? Colors.green.withValues(alpha: 0.05)
-                : Colors.orange.withValues(alpha: 0.05),
+        border: Border.all(color: statusColor.withValues(alpha: 0.3)),
+        borderRadius: BorderRadius.circular(AppDesignTokens.radiusLarge),
+        color: statusColor.withValues(alpha: 0.05),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header with face index and recognition status
-          Row(
-            children: [
-              if (showIndex) ...[
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    color: face.isRecognized ? Colors.green : Colors.orange,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      '$index',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-              ],
-              Expanded(
-                child: Text(
-                  face.isRecognized ? 'Recognized Face' : 'Unrecognized Face',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color:
-                        face.isRecognized
-                            ? Colors.green[700]
-                            : Colors.orange[700],
-                  ),
-                ),
-              ),
-              // Recognition status icon
-              Icon(
-                face.isRecognized ? Icons.verified_user : Icons.help_outline,
-                size: 20,
-                color: face.isRecognized ? Colors.green : Colors.orange,
-              ),
-            ],
-          ),
+          _buildHeader(theme, statusColor),
+          const SizedBox(height: AppDesignTokens.spaceSmall),
 
-          const SizedBox(height: 12),
-
-          // Face ID (if available)
-          if (face.faceId != null) ...[
-            Row(
-              children: [
-                const Icon(Icons.badge, size: 16, color: Colors.blue),
-                const SizedBox(width: 6),
-                Text(
-                  'ID: ${face.faceId}',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-          ],
+          // Face ID (always displayed)
+          _buildFaceIdSection(theme),
+          const SizedBox(height: AppDesignTokens.spaceSmall),
 
           // Additional info chips
-          Wrap(
-            spacing: 8,
-            runSpacing: 6,
-            children: [
-              // Confidence
-              _InfoChip(
-                icon: Icons.verified,
-                label: '${(face.confidence * 100).toStringAsFixed(1)}%',
-                color: _getConfidenceColor(face.confidence),
-              ),
-              // Gender
-              if (face.gender != null)
-                _InfoChip(
-                  icon: Icons.person,
-                  label: face.gender!,
-                  color: Colors.purple,
-                ),
-              // Age
-              if (face.age != null)
-                _InfoChip(
-                  icon: Icons.cake,
-                  label: '${face.age} years',
-                  color: Colors.teal,
-                ),
-              // Mask
-              if (face.mask)
-                _InfoChip(
-                  icon: Icons.masks,
-                  label: 'Mask detected',
-                  color: Colors.indigo,
-                ),
-            ],
-          ),
+          _buildInfoChips(),
         ],
       ),
     );
   }
 
+  Widget _buildHeader(ThemeData theme, Color statusColor) {
+    return Row(
+      children: [
+        if (showIndex) ...[
+          Container(
+            width: AppDesignTokens.iconMedium,
+            height: AppDesignTokens.iconMedium,
+            decoration: BoxDecoration(
+              color: statusColor,
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Text(
+                '$index',
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: AppColors.textOnPrimary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: AppDesignTokens.spaceSmall),
+        ],
+        Expanded(
+          child: Text(
+            face.isRecognized ? 'Recognized Face' : 'Unrecognized Face',
+            style: theme.textTheme.titleSmall?.copyWith(
+              color: statusColor,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        // Recognition status icon
+        Icon(
+          face.isRecognized ? Icons.verified_user : Icons.help_outline,
+          size: AppDesignTokens.iconSmall + 4,
+          color: statusColor,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFaceIdSection(ThemeData theme) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDesignTokens.spaceSmall + 4,
+        vertical: AppDesignTokens.spaceSmall,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.secondary.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(AppDesignTokens.radiusMedium),
+        border: Border.all(color: AppColors.secondary.withValues(alpha: 0.3)),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.badge,
+            size: AppDesignTokens.iconSmall + 2,
+            color: AppColors.secondary,
+          ),
+          const SizedBox(width: AppDesignTokens.spaceSmall),
+          Text(
+            'Face ID: ',
+            style: theme.textTheme.labelMedium?.copyWith(
+              color: AppColors.secondary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              face.faceId ?? 'Not Available',
+              style: theme.textTheme.labelMedium?.copyWith(
+                color:
+                    face.faceId != null
+                        ? AppColors.textPrimary
+                        : AppColors.textSecondary,
+                fontFamily: 'Courier', // Monospace font for ID
+              ),
+            ),
+          ),
+          if (face.faceId != null)
+            Icon(
+              Icons.verified,
+              size: AppDesignTokens.iconSmall,
+              color: AppColors.secondary,
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoChips() {
+    return Wrap(
+      spacing: AppDesignTokens.spaceSmall,
+      runSpacing: AppDesignTokens.spaceXSmall + 2,
+      children: [
+        // Confidence
+        _InfoChip(
+          icon: Icons.verified,
+          label: '${(face.confidence * 100).toStringAsFixed(1)}%',
+          color: _getConfidenceColor(face.confidence),
+        ),
+        // Gender
+        if (face.gender != null)
+          _InfoChip(
+            icon: Icons.person,
+            label: face.gender!,
+            color: AppColors.secondary,
+          ),
+        // Age
+        if (face.age != null)
+          _InfoChip(
+            icon: Icons.cake,
+            label: '${face.age} years',
+            color: AppColors.info,
+          ),
+        // Mask
+        if (face.mask)
+          _InfoChip(
+            icon: Icons.masks,
+            label: 'Mask detected',
+            color: AppColors.warning,
+          ),
+      ],
+    );
+  }
+
   Color _getConfidenceColor(double confidence) {
-    if (confidence >= 0.8) return Colors.green;
-    if (confidence >= 0.6) return Colors.orange;
-    return Colors.red;
+    if (confidence >= 0.8) return AppColors.success;
+    if (confidence >= 0.6) return AppColors.warning;
+    return AppColors.error;
   }
 }
 
@@ -332,24 +481,27 @@ class _InfoChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final chipColor = color ?? Colors.grey;
+    final theme = Theme.of(context);
+    final chipColor = color ?? AppColors.textSecondary;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDesignTokens.spaceSmall,
+        vertical: AppDesignTokens.spaceXSmall,
+      ),
       decoration: BoxDecoration(
         color: chipColor.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppDesignTokens.radiusLarge),
         border: Border.all(color: chipColor.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: chipColor),
-          const SizedBox(width: 4),
+          Icon(icon, size: AppDesignTokens.iconSmall, color: chipColor),
+          const SizedBox(width: AppDesignTokens.spaceXSmall),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 11,
+            style: theme.textTheme.labelSmall?.copyWith(
               color: chipColor,
               fontWeight: FontWeight.w500,
             ),

@@ -11,6 +11,7 @@ import 'package:face_check_in_flutter/features/connection/connection.dart'
 import 'package:face_check_in_flutter/flavors.dart';
 
 import '../features/check_in/screens/check_in_screen.dart';
+import '../features/check_in/widgets/checkin_success_preview_screen.dart';
 
 /// Main application widget
 /// Configures BLoC providers, theme, and routing for the face check-in app
@@ -38,6 +39,9 @@ class App extends StatelessWidget {
 
         // Home screen with flavor banner in debug mode
         home: _flavorBanner(child: const CheckInScreen(), show: kDebugMode),
+
+        // Routes for navigation
+        routes: {'/preview': (context) => const CheckInSuccessPreviewScreen()},
 
         // Error handling
         builder: (context, child) {
