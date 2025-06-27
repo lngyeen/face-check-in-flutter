@@ -1,5 +1,6 @@
 #include "yuv_converter.h"
 #include <cstdlib>
+#include <new>       // Required for std::nothrow
 #include <stdexcept>
 
 // Helper function to clamp values between 0 and 255
