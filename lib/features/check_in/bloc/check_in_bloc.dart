@@ -3,10 +3,6 @@ import 'dart:convert' as json;
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:camera/camera.dart';
-import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
-import 'package:face_check_in_flutter/features/connection/bloc/connection_event.dart'
-    hide Initialize;
-import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -17,6 +13,9 @@ import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/domain/entities/check_in_error.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_event.dart'
+    hide Initialize;
 
 import 'check_in_event.dart';
 import 'check_in_state.dart';
@@ -85,10 +84,10 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   }
 
   // Connection state handlers
-  Future<void> _onConnectionStateChanged(
+  void _onConnectionStateChanged(
     ConnectionStateChanged event,
     Emitter<CheckInState> emit,
-  ) async {
+  ) {
     final connectionState = event.connectionState;
     emit(
       state.copyWith(
@@ -97,21 +96,14 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
             connectionState.isActiveStreaming ? state.latestFrameData : null,
       ),
     );
-    await _handleCameraControl(connectionState);
-  }
 
-  Future<void> _handleCameraControl(ConnectionState connectionState) async {
-    final permissionStatus =
-        await _permissionService.getCameraPermissionStatus();
     final isConnectionReady = connectionState.isConnectionReady;
     final isCameraActive =
         state.cameraStatus == CameraStatus.opening ||
         state.cameraStatus == CameraStatus.initializing;
 
-    // Auto-start camera when connection becomes ready (and permission granted)
-    if (isConnectionReady &&
-        !isCameraActive &&
-        permissionStatus == PermissionStatus.granted) {
+    // Auto-start camera when connection becomes ready
+    if (isConnectionReady && !isCameraActive) {
       add(const CheckInEvent.startCamera());
       return;
     }

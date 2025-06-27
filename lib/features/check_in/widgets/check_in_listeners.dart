@@ -1,5 +1,3 @@
-import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
-import 'package:face_check_in_flutter/features/connection/bloc/connection_event.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +6,8 @@ import 'package:face_check_in_flutter/domain/entities/face_detection_response.da
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/checkin_success_toast.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_event.dart';
 
 /// Widget that handles BlocListeners for toast messages and error notifications
 class CheckInListeners extends StatefulWidget {
@@ -20,24 +20,6 @@ class CheckInListeners extends StatefulWidget {
 }
 
 class _CheckInListenersState extends State<CheckInListeners> {
-  @override
-  Widget build(BuildContext context) {
-    return _CheckInSuccessListener(child: widget.child);
-  }
-}
-
-/// Comprehensive listener for check-in events with proper edge case handling
-class _CheckInSuccessListener extends StatefulWidget {
-  const _CheckInSuccessListener({required this.child});
-
-  final Widget child;
-
-  @override
-  State<_CheckInSuccessListener> createState() =>
-      _CheckInSuccessListenerState();
-}
-
-class _CheckInSuccessListenerState extends State<_CheckInSuccessListener> {
   String? _lastProcessedFaceId;
   DateTime? _lastRecognizedShown;
   DateTime? _lastUnrecognizedShown;
@@ -58,67 +40,78 @@ class _CheckInSuccessListenerState extends State<_CheckInSuccessListener> {
     );
   }
 
-  /// Determine if listener should be triggered based on comprehensive edge case handling
+  /// Determines if the listener should trigger based on face detection results.
+  /// Acts as a dispatcher to specific handlers based on detection scenarios.
   bool _shouldListen(CheckInState previous, CheckInState current) {
-    final currFaces = current.detectedFaces;
-
-    // Reset state on connection changes to handle reconnection scenarios
+    // Reset state on connection changes for robust recovery.
     if (previous.connectionState.status != current.connectionState.status) {
       _resetState();
       return false;
     }
 
-    if (currFaces.isEmpty) return false;
-
-    final now = DateTime.now();
-
-    // Handle multiple faces with debounce
-    if (currFaces.length > 1) {
-      final shouldShow =
-          _lastMultipleFacesShown == null ||
-          now.difference(_lastMultipleFacesShown!) > _multipleFacesDebounce;
-
-      if (shouldShow) {
-        _lastMultipleFacesShown = now;
-        _resetSingleFaceState();
-        return true;
-      }
+    final faces = current.detectedFaces;
+    if (faces.isEmpty) {
       return false;
     }
 
-    // Handle single face
-    final face = currFaces.first;
+    final now = DateTime.now();
 
-    if (face.isRecognized && face.faceId != null) {
-      // Recognized face - prevent rapid switching spam
-      final isNewFace = _lastProcessedFaceId != face.faceId;
-      final shouldShow =
-          isNewFace &&
-          (_lastRecognizedShown == null ||
-              now.difference(_lastRecognizedShown!) > _recognizedDebounce);
-
-      if (shouldShow) {
-        _lastProcessedFaceId = face.faceId;
-        _lastRecognizedShown = now;
-        return true;
-      }
-    } else {
-      // Unrecognized face - time-based debounce since faceId is null
-      final shouldShow =
-          _lastUnrecognizedShown == null ||
-          now.difference(_lastUnrecognizedShown!) > _unrecognizedDebounce;
-
-      if (shouldShow) {
-        _lastProcessedFaceId = null;
-        _lastUnrecognizedShown = now;
-        return true;
-      }
+    if (faces.length > 1) {
+      return _handleMultipleFaces(now);
     }
 
+    final face = faces.first;
+    if (face.isRecognized && face.faceId != null) {
+      return _handleRecognizedFace(now, face);
+    }
+
+    return _handleUnrecognizedFace(now);
+  }
+
+  /// Debounces notifications for multiple detected faces.
+  bool _handleMultipleFaces(DateTime now) {
+    final shouldShow =
+        _lastMultipleFacesShown == null ||
+        now.difference(_lastMultipleFacesShown!) > _multipleFacesDebounce;
+
+    if (shouldShow) {
+      _lastMultipleFacesShown = now;
+      _resetSingleFaceState();
+      return true;
+    }
     return false;
   }
 
-  /// Handle the listener callback
+  /// Debounces notifications for a single recognized face.
+  bool _handleRecognizedFace(DateTime now, FaceDetectionResult face) {
+    final isNewFace = _lastProcessedFaceId != face.faceId;
+    final debounceTimePassed =
+        _lastRecognizedShown == null ||
+        now.difference(_lastRecognizedShown!) > _recognizedDebounce;
+
+    if (isNewFace && debounceTimePassed) {
+      _lastProcessedFaceId = face.faceId;
+      _lastRecognizedShown = now;
+      return true;
+    }
+    return false;
+  }
+
+  /// Debounces notifications for a single unrecognized face.
+  bool _handleUnrecognizedFace(DateTime now) {
+    final shouldShow =
+        _lastUnrecognizedShown == null ||
+        now.difference(_lastUnrecognizedShown!) > _unrecognizedDebounce;
+
+    if (shouldShow) {
+      _lastProcessedFaceId = null;
+      _lastUnrecognizedShown = now;
+      return true;
+    }
+    return false;
+  }
+
+  /// Routes the state to the appropriate UI feedback method.
   void _handleListener(BuildContext context, CheckInState state) {
     final faces = state.detectedFaces;
 
@@ -139,7 +132,7 @@ class _CheckInSuccessListenerState extends State<_CheckInSuccessListener> {
     _lastMultipleFacesShown = null;
   }
 
-  /// Reset single face state when switching to multiple faces
+  /// Resets single-face tracking state, typically when multiple faces are detected.
   void _resetSingleFaceState() {
     _lastProcessedFaceId = null;
     _lastRecognizedShown = null;
