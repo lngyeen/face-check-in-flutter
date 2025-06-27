@@ -10,9 +10,8 @@ Pod::Spec.new do |s|
   s.author           = { 'Your Name' => 'your.email@example.com' }
   s.source           = { :git => '', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '12.0'
-  s.source_files = '../../src/native/*.{h,cpp}'
-  s.public_header_files = '../../src/native/*.h'
+  s.ios.deployment_target = '11.0'
+  s.source_files = '../src/native/*.{h,cpp}'
   
   # Build as a static framework
   s.static_framework = true
