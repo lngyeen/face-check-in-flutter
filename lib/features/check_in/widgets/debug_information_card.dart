@@ -629,84 +629,115 @@ class _ResponseErrorInfo extends StatelessWidget {
       buildWhen:
           (previous, current) => previous.currentError != current.currentError,
       builder: (context, state) {
-        if (state.currentError?.type != CheckInErrorType.backend) {
-          return const SizedBox.shrink();
-        }
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Error Information',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
-              ),
-            ),
-            const SizedBox(height: AppDesignTokens.spaceSmall),
-            Container(
-              padding: const EdgeInsets.all(AppDesignTokens.spaceMedium),
-              decoration: BoxDecoration(
-                color: AppColors.error.withValues(alpha: 0.05),
-                borderRadius: BorderRadius.circular(
-                  AppDesignTokens.radiusMedium,
-                ),
-                border: Border.all(
-                  color: AppColors.error.withValues(alpha: 0.3),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.error_outline,
-                        color: AppColors.error,
-                        size: AppDesignTokens.iconSmall + 2,
+        return state.currentError?.maybeMap(
+              backend: (backendError) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Error Information',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textPrimary,
                       ),
-                      const SizedBox(width: AppDesignTokens.spaceSmall),
-                      Expanded(
-                        child: Text(
-                          state.currentError!.message,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.titleSmall?.copyWith(
-                            color: AppColors.error,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    ),
+                    const SizedBox(height: AppDesignTokens.spaceSmall),
+                    Container(
+                      padding: const EdgeInsets.all(
+                        AppDesignTokens.spaceMedium,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.error.withValues(alpha: 0.05),
+                        borderRadius: BorderRadius.circular(
+                          AppDesignTokens.radiusMedium,
+                        ),
+                        border: Border.all(
+                          color: AppColors.error.withValues(alpha: 0.3),
                         ),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: AppDesignTokens.spaceSmall),
-                  Container(
-                    padding: const EdgeInsets.all(AppDesignTokens.spaceSmall),
-                    decoration: BoxDecoration(
-                      color: AppColors.error.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(
-                        AppDesignTokens.radiusSmall,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.error_outline,
+                                color: AppColors.error,
+                                size: AppDesignTokens.iconSmall + 2,
+                              ),
+                              const SizedBox(width: AppDesignTokens.spaceSmall),
+                              Expanded(
+                                child: Text(
+                                  backendError.message,
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.titleSmall?.copyWith(
+                                    color: AppColors.error,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: AppDesignTokens.spaceSmall),
+                          Container(
+                            padding: const EdgeInsets.all(
+                              AppDesignTokens.spaceSmall,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.error.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(
+                                AppDesignTokens.radiusSmall,
+                              ),
+                            ),
+                            child: Text(
+                              'Error Type: backend',
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodySmall?.copyWith(
+                                color: AppColors.error,
+                                fontFamily: 'Courier',
+                              ),
+                            ),
+                          ),
+                          if (backendError.details != null) ...[
+                            const SizedBox(height: AppDesignTokens.spaceXSmall),
+                            Container(
+                              padding: const EdgeInsets.all(
+                                AppDesignTokens.spaceSmall,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.error.withValues(alpha: 0.1),
+                                borderRadius: BorderRadius.circular(
+                                  AppDesignTokens.radiusSmall,
+                                ),
+                              ),
+                              child: Text(
+                                backendError.details!,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.bodySmall?.copyWith(
+                                  color: AppColors.error,
+                                  fontFamily: 'Courier',
+                                ),
+                              ),
+                            ),
+                          ],
+                          const SizedBox(height: AppDesignTokens.spaceSmall),
+                          _InfoChip(
+                            icon: Icons.bug_report,
+                            label: 'Check logs for details',
+                            color: AppColors.error,
+                          ),
+                        ],
                       ),
                     ),
-                    child: Text(
-                      'Error Type: ${state.currentError!.type.name}',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.error,
-                        fontFamily: 'Courier',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: AppDesignTokens.spaceSmall),
-                  _InfoChip(
-                    icon: Icons.bug_report,
-                    label: 'Check logs for details',
-                    color: AppColors.error,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        );
+                  ],
+                );
+              },
+              orElse: () => const SizedBox.shrink(),
+            ) ??
+            const SizedBox.shrink();
       },
     );
   }

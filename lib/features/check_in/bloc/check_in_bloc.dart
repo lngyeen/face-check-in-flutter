@@ -180,10 +180,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
       emit(
         state.copyWith(
           cameraStatus: CameraStatus.permissionDenied,
-          currentError: const CheckInError(
+          currentError: const CheckInError.permission(
             message:
                 'Camera permission is required to use face check-in feature',
-            type: CheckInErrorType.permission,
           ),
         ),
       );
@@ -204,10 +203,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
         emit(
           state.copyWith(
             cameraStatus: CameraStatus.frontCameraNotAvailable,
-            currentError: const CheckInError(
+            currentError: const CheckInError.camera(
               message:
                   'Front camera is required for face check-in feature. This device does not have a front camera.',
-              type: CheckInErrorType.camera,
             ),
           ),
         );
@@ -240,9 +238,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
       emit(
         state.copyWith(
           cameraStatus: CameraStatus.error,
-          currentError: CheckInError(
+          currentError: CheckInError.camera(
             message: 'Failed to initialize camera: $e',
-            type: CheckInErrorType.camera,
           ),
         ),
       );
@@ -304,9 +301,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
           } catch (e) {
             emit(
               state.copyWith(
-                currentError: CheckInError(
+                currentError: CheckInError.backend(
                   message: 'Failed to parse frame result: $e',
-                  type: CheckInErrorType.backend,
                 ),
                 latestFrameData: null,
               ),
@@ -316,12 +312,11 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
         case WebSocketResponseTypes.error:
           emit(
             state.copyWith(
-              currentError: CheckInError(
+              currentError: CheckInError.backend(
                 message:
                     data[WebSocketResponseKeys.message] as String? ??
                     (data[WebSocketResponseKeys.error] as String? ??
                         'Unknown Backend Error'),
-                type: CheckInErrorType.backend,
               ),
               latestFrameData: null,
             ),
@@ -333,9 +328,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
     } catch (e) {
       emit(
         state.copyWith(
-          currentError: CheckInError(
+          currentError: CheckInError.backend(
             message: 'Failed to parse WebSocket data. Error: $e',
-            type: CheckInErrorType.backend,
           ),
           latestFrameData: null,
         ),

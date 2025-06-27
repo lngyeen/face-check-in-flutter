@@ -18,8 +18,44 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CheckInError {
   String get message => throw _privateConstructorUsedError;
-  String? get details => throw _privateConstructorUsedError;
-  CheckInErrorType get type => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) camera,
+    required TResult Function(String message) permission,
+    required TResult Function(String message, String? details) backend,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? camera,
+    TResult? Function(String message)? permission,
+    TResult? Function(String message, String? details)? backend,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? camera,
+    TResult Function(String message)? permission,
+    TResult Function(String message, String? details)? backend,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CameraError value) camera,
+    required TResult Function(_PermissionError value) permission,
+    required TResult Function(_BackendError value) backend,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CameraError value)? camera,
+    TResult? Function(_PermissionError value)? permission,
+    TResult? Function(_BackendError value)? backend,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CameraError value)? camera,
+    TResult Function(_PermissionError value)? permission,
+    TResult Function(_BackendError value)? backend,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
 
   /// Create a copy of CheckInError
   /// with the given fields replaced by the non-null parameter values.
@@ -35,7 +71,7 @@ abstract class $CheckInErrorCopyWith<$Res> {
     $Res Function(CheckInError) then,
   ) = _$CheckInErrorCopyWithImpl<$Res, CheckInError>;
   @useResult
-  $Res call({String message, String? details, CheckInErrorType type});
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -52,11 +88,7 @@ class _$CheckInErrorCopyWithImpl<$Res, $Val extends CheckInError>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-    Object? details = freezed,
-    Object? type = null,
-  }) {
+  $Res call({Object? message = null}) {
     return _then(
       _value.copyWith(
             message:
@@ -64,16 +96,6 @@ class _$CheckInErrorCopyWithImpl<$Res, $Val extends CheckInError>
                     ? _value.message
                     : message // ignore: cast_nullable_to_non_nullable
                         as String,
-            details:
-                freezed == details
-                    ? _value.details
-                    : details // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as CheckInErrorType,
           )
           as $Val,
     );
@@ -81,37 +103,344 @@ class _$CheckInErrorCopyWithImpl<$Res, $Val extends CheckInError>
 }
 
 /// @nodoc
-abstract class _$$CheckInErrorImplCopyWith<$Res>
+abstract class _$$CameraErrorImplCopyWith<$Res>
     implements $CheckInErrorCopyWith<$Res> {
-  factory _$$CheckInErrorImplCopyWith(
-    _$CheckInErrorImpl value,
-    $Res Function(_$CheckInErrorImpl) then,
-  ) = __$$CheckInErrorImplCopyWithImpl<$Res>;
+  factory _$$CameraErrorImplCopyWith(
+    _$CameraErrorImpl value,
+    $Res Function(_$CameraErrorImpl) then,
+  ) = __$$CameraErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message, String? details, CheckInErrorType type});
+  $Res call({String message});
 }
 
 /// @nodoc
-class __$$CheckInErrorImplCopyWithImpl<$Res>
-    extends _$CheckInErrorCopyWithImpl<$Res, _$CheckInErrorImpl>
-    implements _$$CheckInErrorImplCopyWith<$Res> {
-  __$$CheckInErrorImplCopyWithImpl(
-    _$CheckInErrorImpl _value,
-    $Res Function(_$CheckInErrorImpl) _then,
+class __$$CameraErrorImplCopyWithImpl<$Res>
+    extends _$CheckInErrorCopyWithImpl<$Res, _$CameraErrorImpl>
+    implements _$$CameraErrorImplCopyWith<$Res> {
+  __$$CameraErrorImplCopyWithImpl(
+    _$CameraErrorImpl _value,
+    $Res Function(_$CameraErrorImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of CheckInError
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-    Object? details = freezed,
-    Object? type = null,
-  }) {
+  $Res call({Object? message = null}) {
     return _then(
-      _$CheckInErrorImpl(
+      _$CameraErrorImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$CameraErrorImpl implements _CameraError {
+  const _$CameraErrorImpl({required this.message});
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'CheckInError.camera(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CameraErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of CheckInError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CameraErrorImplCopyWith<_$CameraErrorImpl> get copyWith =>
+      __$$CameraErrorImplCopyWithImpl<_$CameraErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) camera,
+    required TResult Function(String message) permission,
+    required TResult Function(String message, String? details) backend,
+  }) {
+    return camera(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? camera,
+    TResult? Function(String message)? permission,
+    TResult? Function(String message, String? details)? backend,
+  }) {
+    return camera?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? camera,
+    TResult Function(String message)? permission,
+    TResult Function(String message, String? details)? backend,
+    required TResult orElse(),
+  }) {
+    if (camera != null) {
+      return camera(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CameraError value) camera,
+    required TResult Function(_PermissionError value) permission,
+    required TResult Function(_BackendError value) backend,
+  }) {
+    return camera(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CameraError value)? camera,
+    TResult? Function(_PermissionError value)? permission,
+    TResult? Function(_BackendError value)? backend,
+  }) {
+    return camera?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CameraError value)? camera,
+    TResult Function(_PermissionError value)? permission,
+    TResult Function(_BackendError value)? backend,
+    required TResult orElse(),
+  }) {
+    if (camera != null) {
+      return camera(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CameraError implements CheckInError {
+  const factory _CameraError({required final String message}) =
+      _$CameraErrorImpl;
+
+  @override
+  String get message;
+
+  /// Create a copy of CheckInError
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CameraErrorImplCopyWith<_$CameraErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PermissionErrorImplCopyWith<$Res>
+    implements $CheckInErrorCopyWith<$Res> {
+  factory _$$PermissionErrorImplCopyWith(
+    _$PermissionErrorImpl value,
+    $Res Function(_$PermissionErrorImpl) then,
+  ) = __$$PermissionErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$PermissionErrorImplCopyWithImpl<$Res>
+    extends _$CheckInErrorCopyWithImpl<$Res, _$PermissionErrorImpl>
+    implements _$$PermissionErrorImplCopyWith<$Res> {
+  __$$PermissionErrorImplCopyWithImpl(
+    _$PermissionErrorImpl _value,
+    $Res Function(_$PermissionErrorImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInError
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? message = null}) {
+    return _then(
+      _$PermissionErrorImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$PermissionErrorImpl implements _PermissionError {
+  const _$PermissionErrorImpl({required this.message});
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'CheckInError.permission(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PermissionErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of CheckInError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PermissionErrorImplCopyWith<_$PermissionErrorImpl> get copyWith =>
+      __$$PermissionErrorImplCopyWithImpl<_$PermissionErrorImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) camera,
+    required TResult Function(String message) permission,
+    required TResult Function(String message, String? details) backend,
+  }) {
+    return permission(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? camera,
+    TResult? Function(String message)? permission,
+    TResult? Function(String message, String? details)? backend,
+  }) {
+    return permission?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? camera,
+    TResult Function(String message)? permission,
+    TResult Function(String message, String? details)? backend,
+    required TResult orElse(),
+  }) {
+    if (permission != null) {
+      return permission(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CameraError value) camera,
+    required TResult Function(_PermissionError value) permission,
+    required TResult Function(_BackendError value) backend,
+  }) {
+    return permission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CameraError value)? camera,
+    TResult? Function(_PermissionError value)? permission,
+    TResult? Function(_BackendError value)? backend,
+  }) {
+    return permission?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CameraError value)? camera,
+    TResult Function(_PermissionError value)? permission,
+    TResult Function(_BackendError value)? backend,
+    required TResult orElse(),
+  }) {
+    if (permission != null) {
+      return permission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PermissionError implements CheckInError {
+  const factory _PermissionError({required final String message}) =
+      _$PermissionErrorImpl;
+
+  @override
+  String get message;
+
+  /// Create a copy of CheckInError
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PermissionErrorImplCopyWith<_$PermissionErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BackendErrorImplCopyWith<$Res>
+    implements $CheckInErrorCopyWith<$Res> {
+  factory _$$BackendErrorImplCopyWith(
+    _$BackendErrorImpl value,
+    $Res Function(_$BackendErrorImpl) then,
+  ) = __$$BackendErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message, String? details});
+}
+
+/// @nodoc
+class __$$BackendErrorImplCopyWithImpl<$Res>
+    extends _$CheckInErrorCopyWithImpl<$Res, _$BackendErrorImpl>
+    implements _$$BackendErrorImplCopyWith<$Res> {
+  __$$BackendErrorImplCopyWithImpl(
+    _$BackendErrorImpl _value,
+    $Res Function(_$BackendErrorImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of CheckInError
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? message = null, Object? details = freezed}) {
+    return _then(
+      _$BackendErrorImpl(
         message:
             null == message
                 ? _value.message
@@ -122,11 +451,6 @@ class __$$CheckInErrorImplCopyWithImpl<$Res>
                 ? _value.details
                 : details // ignore: cast_nullable_to_non_nullable
                     as String?,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as CheckInErrorType,
       ),
     );
   }
@@ -134,65 +458,122 @@ class __$$CheckInErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CheckInErrorImpl implements _CheckInError {
-  const _$CheckInErrorImpl({
-    required this.message,
-    this.details,
-    required this.type,
-  });
+class _$BackendErrorImpl implements _BackendError {
+  const _$BackendErrorImpl({required this.message, this.details});
 
   @override
   final String message;
   @override
   final String? details;
-  @override
-  final CheckInErrorType type;
 
   @override
   String toString() {
-    return 'CheckInError(message: $message, details: $details, type: $type)';
+    return 'CheckInError.backend(message: $message, details: $details)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CheckInErrorImpl &&
+            other is _$BackendErrorImpl &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.details, details) || other.details == details) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.details, details) || other.details == details));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message, details, type);
+  int get hashCode => Object.hash(runtimeType, message, details);
 
   /// Create a copy of CheckInError
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CheckInErrorImplCopyWith<_$CheckInErrorImpl> get copyWith =>
-      __$$CheckInErrorImplCopyWithImpl<_$CheckInErrorImpl>(this, _$identity);
+  _$$BackendErrorImplCopyWith<_$BackendErrorImpl> get copyWith =>
+      __$$BackendErrorImplCopyWithImpl<_$BackendErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) camera,
+    required TResult Function(String message) permission,
+    required TResult Function(String message, String? details) backend,
+  }) {
+    return backend(message, details);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? camera,
+    TResult? Function(String message)? permission,
+    TResult? Function(String message, String? details)? backend,
+  }) {
+    return backend?.call(message, details);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? camera,
+    TResult Function(String message)? permission,
+    TResult Function(String message, String? details)? backend,
+    required TResult orElse(),
+  }) {
+    if (backend != null) {
+      return backend(message, details);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CameraError value) camera,
+    required TResult Function(_PermissionError value) permission,
+    required TResult Function(_BackendError value) backend,
+  }) {
+    return backend(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CameraError value)? camera,
+    TResult? Function(_PermissionError value)? permission,
+    TResult? Function(_BackendError value)? backend,
+  }) {
+    return backend?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CameraError value)? camera,
+    TResult Function(_PermissionError value)? permission,
+    TResult Function(_BackendError value)? backend,
+    required TResult orElse(),
+  }) {
+    if (backend != null) {
+      return backend(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _CheckInError implements CheckInError {
-  const factory _CheckInError({
+abstract class _BackendError implements CheckInError {
+  const factory _BackendError({
     required final String message,
     final String? details,
-    required final CheckInErrorType type,
-  }) = _$CheckInErrorImpl;
+  }) = _$BackendErrorImpl;
 
   @override
   String get message;
-  @override
   String? get details;
-  @override
-  CheckInErrorType get type;
 
   /// Create a copy of CheckInError
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CheckInErrorImplCopyWith<_$CheckInErrorImpl> get copyWith =>
+  _$$BackendErrorImplCopyWith<_$BackendErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
