@@ -1,5 +1,6 @@
 #include "yuv_converter.h"
 #include <cstdlib>
+#include <stdexcept>
 
 // Helper function to clamp values between 0 and 255
 inline int clamp(int value)
@@ -22,48 +23,42 @@ inline uint32_t yuv_to_rgb_pixel(int y, int u, int v)
     return (255 << 24) | (clamp(r) << 16) | (clamp(g) << 8) | clamp(b);
 }
 
-FFI_EXPORT uint32_t *convert_yuv_to_rgb(
-    uint8_t *y_plane,
-    uint8_t *u_plane,
-    uint8_t *v_plane,
+YUV_CONVERTER_API uint8_t* convert_yuv_to_rgb(
+    uint8_t* y_plane,
+    uint8_t* u_plane,
+    uint8_t* v_plane,
+    int width,
+    int height,
     int y_stride,
     int uv_stride,
-    int uv_pixel_stride,
-    int width,
-    int height)
+    int uv_pixel_stride
+)
 {
     // Allocate memory for the output RGB buffer.
     // The format will be ARGB, 4 bytes per pixel.
-    uint32_t *rgb_buffer = (uint32_t *)malloc(width * height * sizeof(uint32_t));
-    if (rgb_buffer == nullptr)
-    {
+    uint32_t* rgb_buffer = new (std::nothrow) uint32_t[width * height];
+    if (rgb_buffer == nullptr) {
         return nullptr;
     }
 
-    for (int y = 0; y < height; ++y)
-    {
-        for (int x = 0; x < width; ++x)
-        {
-            int y_index = y * y_stride + x;
-            int uv_index_offset = (y / 2) * uv_stride + (x / 2) * uv_pixel_stride;
+    for (int y_coord = 0; y_coord < height; ++y_coord) {
+        for (int x_coord = 0; x_coord < width; ++x_coord) {
+            int y_index = y_coord * y_stride + x_coord;
+            int uv_index_offset = (y_coord / 2) * uv_stride + (x_coord / 2) * uv_pixel_stride;
 
             int y_val = y_plane[y_index];
             int u_val = u_plane[uv_index_offset];
-            // For NV12 format (2 planes), V is immediately after U in the same plane.
-            // For I420 format (3 planes), V is in a separate plane.
-            int v_val = (v_plane == nullptr) ? u_plane[uv_index_offset + 1] : v_plane[uv_index_offset];
+            int v_val = v_plane[uv_index_offset];
 
-            rgb_buffer[y * width + x] = yuv_to_rgb_pixel(y_val, u_val, v_val);
+            rgb_buffer[y_coord * width + x_coord] = yuv_to_rgb_pixel(y_val, u_val, v_val);
         }
     }
 
-    return rgb_buffer;
+    return reinterpret_cast<uint8_t*>(rgb_buffer);
 }
 
-FFI_EXPORT void free_image_memory(uint32_t *image_buffer)
-{
-    if (image_buffer != nullptr)
-    {
-        free(image_buffer);
+YUV_CONVERTER_API void free_image_memory(uint8_t* image_data) {
+    if (image_data != nullptr) {
+        delete[] reinterpret_cast<uint32_t*>(image_data);
     }
 }
