@@ -48,8 +48,8 @@ YUV_CONVERTER_API uint8_t* convert_yuv_to_rgb(
             int uv_index_offset = (y_coord / 2) * uv_stride + (x_coord / 2) * uv_pixel_stride;
 
             int y_val = y_plane[y_index];
-            int u_val = u_plane[uv_index_offset];
-            int v_val = v_plane[uv_index_offset];
+            int v_val = u_plane[uv_index_offset];
+            int u_val = u_plane[uv_index_offset + 1];
 
             rgb_buffer[y_coord * width + x_coord] = yuv_to_rgb_pixel(y_val, u_val, v_val);
         }
