@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:isolate';
 
 import 'package:camera/camera.dart';
@@ -27,13 +28,15 @@ abstract class ImageConverter {
   ///
   /// This method provides a richer output including the original image,
   /// base64 string, and timestamp for comprehensive frame processing.
+  /// It also handles image rotation based on sensor orientation.
   static Future<ProcessedFrame?> convertCameraImageToProcessedFrame(
-    CameraImage cameraImage,
-  ) async {
+    CameraImage cameraImage, [
+    int sensorOrientation = 0,
+  ]) async {
     try {
       // Use Isolate.run to run the conversion in a separate isolate.
       final result = await Isolate.run(
-        () => processImageInIsolateWithMetadata(cameraImage),
+        () => processImageInIsolateWithMetadata(cameraImage, sensorOrientation),
       );
 
       if (result == null) {
@@ -45,16 +48,25 @@ abstract class ImageConverter {
         originalImage: result['image'] as img.Image,
         timestamp: DateTime.now(),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
+      log(
+        'Error in convertCameraImageToProcessedFrame: $e',
+        stackTrace: stackTrace,
+      );
       return null;
     }
   }
 
   /// Orchestrates image processing with metadata for ProcessedFrame creation.
+  /// This runs in an isolate.
   static Map<String, dynamic>? processImageInIsolateWithMetadata(
     CameraImage cameraImage,
+    int sensorOrientation,
   ) {
-    final image = convertCameraImageToImage(cameraImage);
+    final image = convertCameraImageToImage(
+      cameraImage,
+      sensorOrientation: sensorOrientation,
+    );
     if (image == null) {
       return null;
     }
@@ -66,7 +78,10 @@ abstract class ImageConverter {
   /// This function handles platform-specific image formats (YUV, BGRA) and
   /// corrects the image rotation.
   /// Made public for testability.
-  static img.Image? convertCameraImageToImage(CameraImage cameraImage) {
+  static img.Image? convertCameraImageToImage(
+    CameraImage cameraImage, {
+    int sensorOrientation = 0,
+  }) {
     try {
       img.Image? image;
 
@@ -74,10 +89,19 @@ abstract class ImageConverter {
         image = convertYUV420(cameraImage);
       } else if (cameraImage.format.group == ImageFormatGroup.bgra8888) {
         image = convertBGRA8888(cameraImage);
+      } else {
+        log('Unsupported image format: ${cameraImage.format.group}');
+        return null;
       }
 
-      return image;
-    } catch (e) {
+      if (image == null) {
+        return null;
+      }
+
+      // Apply rotation to correct the image orientation
+      return _rotateImage(image, sensorOrientation);
+    } catch (e, stackTrace) {
+      log('Error converting CameraImage to Image: $e', stackTrace: stackTrace);
       return null;
     }
   }
@@ -94,18 +118,42 @@ abstract class ImageConverter {
   static img.Image? convertYUV420(CameraImage image) {
     if (image.planes.length == 3) {
       // Handles planar YUV420 (I420) - common on Android
-      return convertFrom3Planes(image);
+      return _convertFrom3Planes(image);
     } else if (image.planes.length == 2) {
       // Handles bi-planar YUV420 (NV12) - common on iOS
-      return convertFrom2Planes(image);
+      return _convertFrom2Planes(image);
     } else {
       // Unsupported YUV plane count.
+      log('Unsupported YUV plane count: ${image.planes.length}');
       return null;
     }
   }
 
+  /// Rotates an [img.Image] based on the camera's sensor orientation.
+  static img.Image _rotateImage(img.Image image, int sensorOrientation) {
+    switch (sensorOrientation) {
+      case 90:
+        return img.copyRotate(image, angle: 90);
+      case 180:
+        return img.copyRotate(image, angle: 180);
+      case 270:
+        return img.copyRotate(image, angle: -90);
+      case 0:
+      default:
+        return image;
+    }
+  }
+
+  /// Converts a single YUV pixel to RGB values.
+  static List<int> _yuvToRgb(int y, int u, int v) {
+    final r = (y + 1.402 * (v - 128)).round();
+    final g = (y - 0.344136 * (u - 128) - 0.714136 * (v - 128)).round();
+    final b = (y + 1.772 * (u - 128)).round();
+    return [r.clamp(0, 255), g.clamp(0, 255), b.clamp(0, 255)];
+  }
+
   /// Converts an image from 3-plane YUV (Y, U, V) to RGB.
-  static img.Image convertFrom3Planes(CameraImage image) {
+  static img.Image _convertFrom3Planes(CameraImage image) {
     final int width = image.width;
     final int height = image.height;
     final convertedImage = img.Image(width: width, height: height);
@@ -128,26 +176,15 @@ abstract class ImageConverter {
         final uValue = uPlane[uvIndex];
         final vValue = vPlane[uvIndex];
 
-        final r = (yValue + 1.402 * (vValue - 128)).round();
-        final g =
-            (yValue - 0.344136 * (uValue - 128) - 0.714136 * (vValue - 128))
-                .round();
-        final b = (yValue + 1.772 * (uValue - 128)).round();
-
-        convertedImage.setPixelRgb(
-          x,
-          y,
-          r.clamp(0, 255),
-          g.clamp(0, 255),
-          b.clamp(0, 255),
-        );
+        final rgb = _yuvToRgb(yValue, uValue, vValue);
+        convertedImage.setPixelRgb(x, y, rgb[0], rgb[1], rgb[2]);
       }
     }
     return convertedImage;
   }
 
   /// Converts an image from 2-plane YUV (NV12) to RGB.
-  static img.Image convertFrom2Planes(CameraImage image) {
+  static img.Image _convertFrom2Planes(CameraImage image) {
     final int width = image.width;
     final int height = image.height;
     final newImage = img.Image(width: width, height: height);
@@ -172,19 +209,8 @@ abstract class ImageConverter {
         final uValue = uvPlane[uvIndex];
         final vValue = uvPlane[uvIndex + 1];
 
-        final r = (yValue + 1.402 * (vValue - 128)).round();
-        final g =
-            (yValue - 0.344136 * (uValue - 128) - 0.714136 * (vValue - 128))
-                .round();
-        final b = (yValue + 1.772 * (uValue - 128)).round();
-
-        newImage.setPixelRgb(
-          x,
-          y,
-          r.clamp(0, 255),
-          g.clamp(0, 255),
-          b.clamp(0, 255),
-        );
+        final rgb = _yuvToRgb(yValue, uValue, vValue);
+        newImage.setPixelRgb(x, y, rgb[0], rgb[1], rgb[2]);
       }
     }
     return newImage;
