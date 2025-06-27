@@ -20,7 +20,7 @@ class DebugConfig {
   /// Whether to use mock WebSocket responses instead of real server
   /// Set to false to connect to real OWT server
   static bool useMockWebSocketResponses =
-      true; // Temporarily enabled for testing
+      false; // Disabled for real server testing
 
   /// Resets the config to its default values (for testing)
   static void reset() {

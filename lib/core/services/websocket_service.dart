@@ -183,6 +183,58 @@ class WebSocketService {
     }
   }
 
+  /// Test if server responds to ping messages
+  Future<bool> testServerResponse() async {
+    if (!_isConnected) {
+      debugPrint('❌ WebSocketService: Cannot test server - not connected');
+      return false;
+    }
+
+    debugPrint('🧪 WebSocketService: Testing server response with ping...');
+
+    final pingId = DateTime.now().millisecondsSinceEpoch;
+    bool responseReceived = false;
+
+    // Listen for any response for 10 seconds
+    late StreamSubscription testSubscription;
+    final completer = Completer<bool>();
+
+    testSubscription = _messageController.stream.listen((message) {
+      debugPrint(
+        '🧪 WebSocketService: Response received during ping test: $message',
+      );
+      responseReceived = true;
+      testSubscription.cancel();
+      if (!completer.isCompleted) completer.complete(true);
+    });
+
+    // Send ping
+    final pingSuccess = sendMessage({
+      'type': 'ping',
+      'id': pingId,
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
+    });
+
+    if (!pingSuccess) {
+      testSubscription.cancel();
+      if (!completer.isCompleted) completer.complete(false);
+      return false;
+    }
+
+    // Wait for response or timeout
+    Timer(const Duration(seconds: 10), () {
+      testSubscription.cancel();
+      if (!responseReceived && !completer.isCompleted) {
+        debugPrint(
+          '⏰ WebSocketService: Server ping test timeout - no response',
+        );
+        completer.complete(false);
+      }
+    });
+
+    return completer.future;
+  }
+
   /// Enhanced connect method with full Story 2.1 support
   Future<bool> connect({String? customUrl}) async {
     if (_isConnected) {
@@ -234,9 +286,22 @@ class WebSocketService {
 
       // Listen for incoming messages
       _channel!.stream.listen(
-        _handleMessage,
-        onError: _handleError,
-        onDone: _handleDisconnection,
+        (message) {
+          debugPrint(
+            '🔥 WebSocketService: RAW MESSAGE RECEIVED: ${message.toString().substring(0, message.toString().length > 200 ? 200 : message.toString().length)}...',
+          );
+          _handleMessage(message);
+        },
+        onError: (error) {
+          debugPrint('🔥 WebSocketService: STREAM ERROR: $error');
+          _handleError(error);
+        },
+        onDone: () {
+          debugPrint(
+            '🔥 WebSocketService: STREAM DONE (connection closed by server)',
+          );
+          _handleDisconnection();
+        },
       );
 
       if (_config.enableLogging) {
@@ -398,10 +463,11 @@ class WebSocketService {
 
   /// Send base64 encoded image frame to backend
   bool sendImageFrame(String base64Image) {
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
     final success = sendMessage({
       'type': 'frame',
       'data': base64Image,
-      'timestamp': DateTime.now().millisecondsSinceEpoch,
+      'timestamp': timestamp,
     });
 
     // Debug: Check mock configuration
@@ -409,6 +475,22 @@ class WebSocketService {
       '🔥 WebSocketService: useMockWebSocketResponses = ${DebugConfig.useMockWebSocketResponses}',
     );
     debugPrint('🔥 WebSocketService: sendMessage success = $success');
+
+    if (success) {
+      debugPrint(
+        '📡 WebSocketService: Frame sent at $timestamp - waiting for response...',
+      );
+
+      // Set timeout for response detection (15 seconds)
+      Timer(const Duration(seconds: 15), () {
+        debugPrint(
+          '⏰ WebSocketService: No response received within 15s for frame $timestamp',
+        );
+        debugPrint(
+          '🔍 WebSocketService: Server may not be responding to frame messages',
+        );
+      });
+    }
 
     // Generate mock response only if enabled in debug config
     if (success && DebugConfig.useMockWebSocketResponses) {
