@@ -40,13 +40,11 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   }
 
   void _listenToConnectionBloc() {
-    // Listen to ConnectionBloc state changes
     _connectionStateSubscription?.cancel();
     _connectionStateSubscription = _connectionBloc.stream.listen(
       (connectionState) => add(ConnectionStateChanged(connectionState)),
     );
 
-    // Listen to WebSocket messages
     _webSocketMessageSubscription?.cancel();
     _webSocketMessageSubscription = _connectionBloc.messageStream.listen(
       (data) => add(WebSocketMessageReceived(data)),
@@ -54,16 +52,12 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   }
 
   void _registerEventHandlers() {
-    // Lifecycle events - sequential processing to prevent race conditions
     on<CheckInEvent>(_handleLifecycleEvent, transformer: sequential());
 
-    // Concurrent events - default behavior
     on<ToggleDebugMode>(_onToggleDebugMode);
     on<WebSocketMessageReceived>(_onWebSocketMessageReceived);
     on<FrameResultReceived>(_onFrameResultReceived);
     on<ResponseErrorReceived>(_onResponseErrorReceived);
-
-    // Connection state handlers
     on<ConnectionStateChanged>(_onConnectionStateChanged);
   }
 
@@ -102,13 +96,11 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         state.cameraStatus == CameraStatus.opening ||
         state.cameraStatus == CameraStatus.initializing;
 
-    // Auto-start camera when connection becomes ready
     if (isConnectionReady && !isCameraActive) {
       add(const CheckInEvent.startCamera());
       return;
     }
 
-    // Stop camera when going to background retry (dispose completely)
     if (state.connectionState.status ==
             AppConnectionStatus.backgroundRetrying &&
         isCameraActive) {
@@ -116,7 +108,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       return;
     }
 
-    // Stop camera when connection lost
     if (isCameraActive && !isConnectionReady) {
       add(const CheckInEvent.stopCamera());
       return;
@@ -135,7 +126,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
   // Initialization handlers
   void _onInitialize(Initialize event, Emitter<CheckInState> emit) {
-    // Initialize ConnectionBloc first
     _listenToConnectionBloc();
     _connectionBloc.add(const ConnectionEvent.initialize());
   }
@@ -218,10 +208,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
           cameraController: controller,
         ),
       );
-
-      // Initialize ConnectionBloc
-      _connectionBloc.add(const ConnectionEvent.initialize());
-      _listenToConnectionBloc();
     } catch (e) {
       emit(
         state.copyWith(
@@ -307,7 +293,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
       final response = FaceDetectionResponse.fromJson(data);
       add(FrameResultReceived(response: response));
     } catch (e) {
-      // If parsing fails, treat as backend error instead of complex fallbacks
       add(
         ResponseErrorReceived(
           error: 'ResponseParsingError',
