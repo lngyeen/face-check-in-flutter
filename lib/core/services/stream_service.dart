@@ -13,25 +13,18 @@ import 'websocket_service.dart';
 
 /// Abstract interface for stream service
 abstract class StreamService {
-  /// Whether streaming is currently active
   bool get isStreaming;
 
-  /// Current maximum frames per second setting
   int get maxFps;
 
-  /// Configure maximum frames per second
   void setMaxFps(int maxFps);
 
-  /// Start streaming frames
   Future<void> startStream();
 
-  /// Stop streaming frames
   Future<void> stopStream();
 
-  /// Add frame to processing queue
   void addFrame(CameraImage frame);
 
-  /// Dispose resources
   void dispose();
 }
 
@@ -52,7 +45,6 @@ class StreamServiceImpl implements StreamService {
   // Stream state
   bool _isStreaming = false;
 
-  /// Whether streaming is currently active
   @override
   bool get isStreaming => _isStreaming;
 
@@ -60,7 +52,6 @@ class StreamServiceImpl implements StreamService {
     _initializeFrameProcessing();
   }
 
-  /// Initialize frame processing pipeline with throttling
   void _initializeFrameProcessing() {
     _frameSubscription = _frameSubject
         .throttleTime(_throttleDuration)
@@ -69,7 +60,6 @@ class StreamServiceImpl implements StreamService {
         .listen(_sendFrameToWebSocket);
   }
 
-  /// Configure maximum frames per second
   @override
   void setMaxFps(int maxFps) {
     if (maxFps < 1 || maxFps > 30) {
@@ -80,38 +70,32 @@ class StreamServiceImpl implements StreamService {
     _restartFrameProcessing();
   }
 
-  /// Get current max FPS setting
   @override
   int get maxFps => _maxFps;
 
-  /// Restart frame processing with new configuration
   void _restartFrameProcessing() {
     _frameSubscription?.cancel();
     _initializeFrameProcessing();
   }
 
-  /// Start streaming frames
   @override
   Future<void> startStream() async {
     if (_isStreaming) return;
     _isStreaming = true;
   }
 
-  /// Stop streaming frames
   @override
   Future<void> stopStream() async {
     if (!_isStreaming) return;
     _isStreaming = false;
   }
 
-  /// Add frame to processing queue
   @override
   void addFrame(CameraImage frame) {
     if (!_isStreaming) return;
     _frameSubject.add(frame);
   }
 
-  /// Process camera image and convert to format suitable for WebSocket
   Future<ProcessedFrame> _processFrame(CameraImage cameraImage) async {
     try {
       // Use the new method that returns ProcessedFrame directly
@@ -128,7 +112,6 @@ class StreamServiceImpl implements StreamService {
     }
   }
 
-  /// Send processed frame to WebSocket
   void _sendFrameToWebSocket(ProcessedFrame frame) {
     if (_webSocketService.currentStatus !=
         WebSocketConnectionStatus.connected) {

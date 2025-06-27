@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'face_detection_response.freezed.dart';
 part 'face_detection_response.g.dart';
 
-/// WebSocket response wrapper for frame results
 @freezed
 class FaceDetectionResponse with _$FaceDetectionResponse {
   const factory FaceDetectionResponse({
@@ -15,7 +14,6 @@ class FaceDetectionResponse with _$FaceDetectionResponse {
       _$FaceDetectionResponseFromJson(json);
 }
 
-/// Core data payload containing face detection results and metadata
 @freezed
 class FaceDetectionData with _$FaceDetectionData {
   const factory FaceDetectionData({
@@ -32,10 +30,9 @@ class FaceDetectionData with _$FaceDetectionData {
       _$FaceDetectionDataFromJson(json);
 }
 
-/// Individual face detection result
 @freezed
 class FaceDetectionResult with _$FaceDetectionResult {
-  const FaceDetectionResult._(); // Private constructor for custom getters
+  const FaceDetectionResult._();
 
   const factory FaceDetectionResult({
     String? faceId,
@@ -50,7 +47,6 @@ class FaceDetectionResult with _$FaceDetectionResult {
   factory FaceDetectionResult.fromJson(Map<String, dynamic> json) =>
       _$FaceDetectionResultFromJson(json);
 
-  /// Get bounding box as a convenient Rect-like object
   BoundingBox get boundingBox {
     if (bbox.length == 4) {
       return BoundingBox(
@@ -61,12 +57,10 @@ class FaceDetectionResult with _$FaceDetectionResult {
       );
     }
 
-    // Fallback to legacy fields
     return BoundingBox(x: 0.0, y: 0.0, width: 0.0, height: 0.0);
   }
 }
 
-/// Image size information
 @freezed
 class ImageSize with _$ImageSize {
   const factory ImageSize({required int width, required int height}) =
@@ -76,7 +70,6 @@ class ImageSize with _$ImageSize {
       _$ImageSizeFromJson(json);
 }
 
-/// Convenient bounding box representation
 @freezed
 class BoundingBox with _$BoundingBox {
   const factory BoundingBox({

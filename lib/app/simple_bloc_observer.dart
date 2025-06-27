@@ -1,7 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Simple BLoC observer for debugging and logging state transitions
-/// Provides comprehensive logging for development and debugging purposes
 class SimpleBlocObserver extends BlocObserver {
   @override
   void onCreate(BlocBase bloc) {
