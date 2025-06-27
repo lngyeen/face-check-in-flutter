@@ -5,6 +5,8 @@ import 'dart:isolate';
 import 'package:camera/camera.dart';
 import 'package:image/image.dart' as img;
 
+import 'ffi/yuv_converter_ffi.dart';
+
 // Forward declaration for ProcessedFrame
 class ProcessedFrame {
   final String base64Image;
@@ -24,6 +26,10 @@ class ProcessedFrame {
 /// into different formats, running intensive operations in a separate isolate
 /// to prevent UI jank.
 abstract class ImageConverter {
+  // Lazily initialize the FFI converter to avoid issues on platforms
+  // where it's not available or during tests.
+  static final _yuvConverter = YuvConverterFfi();
+
   /// Converts a [CameraImage] to a [ProcessedFrame] with metadata.
   ///
   /// This method provides a richer output including the original image,
@@ -116,15 +122,10 @@ abstract class ImageConverter {
   /// A secondary dispatcher for YUV420 format. It checks the number of planes
   /// to decide which specific conversion algorithm to use.
   static img.Image? convertYUV420(CameraImage image) {
-    if (image.planes.length == 3) {
-      // Handles planar YUV420 (I420) - common on Android
-      return _convertFrom3Planes(image);
-    } else if (image.planes.length == 2) {
-      // Handles bi-planar YUV420 (NV12) - common on iOS
-      return _convertFrom2Planes(image);
-    } else {
-      // Unsupported YUV plane count.
-      log('Unsupported YUV plane count: ${image.planes.length}');
+    try {
+      return _yuvConverter.convertYuvToRgb(image);
+    } catch (e, stackTrace) {
+      log('Failed to convert YUV to RGB using FFI: $e', stackTrace: stackTrace);
       return null;
     }
   }
@@ -142,78 +143,6 @@ abstract class ImageConverter {
       default:
         return image;
     }
-  }
-
-  /// Converts a single YUV pixel to RGB values.
-  static List<int> _yuvToRgb(int y, int u, int v) {
-    final r = (y + 1.402 * (v - 128)).round();
-    final g = (y - 0.344136 * (u - 128) - 0.714136 * (v - 128)).round();
-    final b = (y + 1.772 * (u - 128)).round();
-    return [r.clamp(0, 255), g.clamp(0, 255), b.clamp(0, 255)];
-  }
-
-  /// Converts an image from 3-plane YUV (Y, U, V) to RGB.
-  static img.Image _convertFrom3Planes(CameraImage image) {
-    final int width = image.width;
-    final int height = image.height;
-    final convertedImage = img.Image(width: width, height: height);
-
-    final yPlane = image.planes[0].bytes;
-    final uPlane = image.planes[1].bytes;
-    final vPlane = image.planes[2].bytes;
-
-    final yRowStride = image.planes[0].bytesPerRow;
-    final uvRowStride = image.planes[1].bytesPerRow;
-    final uvPixelStride = image.planes[1].bytesPerPixel ?? 1;
-
-    for (int y = 0; y < height; y++) {
-      for (int x = 0; x < width; x++) {
-        final int uvIndex =
-            uvPixelStride * (x / 2).floor() + uvRowStride * (y / 2).floor();
-        final int index = y * yRowStride + x;
-
-        final yValue = yPlane[index];
-        final uValue = uPlane[uvIndex];
-        final vValue = vPlane[uvIndex];
-
-        final rgb = _yuvToRgb(yValue, uValue, vValue);
-        convertedImage.setPixelRgb(x, y, rgb[0], rgb[1], rgb[2]);
-      }
-    }
-    return convertedImage;
-  }
-
-  /// Converts an image from 2-plane YUV (NV12) to RGB.
-  static img.Image _convertFrom2Planes(CameraImage image) {
-    final int width = image.width;
-    final int height = image.height;
-    final newImage = img.Image(width: width, height: height);
-
-    final yPlane = image.planes[0].bytes;
-    final uvPlane = image.planes[1].bytes;
-
-    final yRowStride = image.planes[0].bytesPerRow;
-    final uvRowStride = image.planes[1].bytesPerRow;
-    final uvPixelStride =
-        image.planes[1].bytesPerPixel ?? 2; // Should be 2 for NV12
-
-    for (int y = 0; y < height; y++) {
-      for (int x = 0; x < width; x++) {
-        final yIndex = y * yRowStride + x;
-        final yValue = yPlane[yIndex];
-
-        final uvx = (x / 2).floor();
-        final uvy = (y / 2).floor();
-        final uvIndex = uvy * uvRowStride + uvx * uvPixelStride;
-
-        final uValue = uvPlane[uvIndex];
-        final vValue = uvPlane[uvIndex + 1];
-
-        final rgb = _yuvToRgb(yValue, uValue, vValue);
-        newImage.setPixelRgb(x, y, rgb[0], rgb[1], rgb[2]);
-      }
-    }
-    return newImage;
   }
 
   /// Converts a BGRA8888 image to a standard RGB image.

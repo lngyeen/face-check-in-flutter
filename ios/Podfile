@@ -1,5 +1,8 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '12.0'
+platform :ios, '12.0'
+
+# CocoaPods' default archs, adjusted for Flutter
+$flutter_ios_archs = ['arm64']
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -35,8 +38,18 @@ flutter_ios_podfile_setup
 
 target 'Runner' do
   use_frameworks!
+  use_modular_headers!
+
+  pod 'YUVConverter', :path => '.'
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+  # This is a workaround to include C++ files in the build.
+  # A better approach is to add them manually in Xcode.
+  script_phase :name => 'Compile C++ Source', :script => <<-'SCRIPT'
+    /usr/bin/clang -x c++ -std=c++11 -c "$SRCROOT/../src/native/yuv_converter.cpp" -o "$SRCROOT/../src/native/yuv_converter.o"
+  SCRIPT
+  
   target 'RunnerTests' do
     inherit! :search_paths
   end
