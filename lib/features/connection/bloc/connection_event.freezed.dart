@@ -26,6 +26,7 @@ mixin _$ConnectionEvent {
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
+    required TResult Function() disconnect,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -35,6 +36,7 @@ mixin _$ConnectionEvent {
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
+    TResult? Function()? disconnect,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -44,6 +46,7 @@ mixin _$ConnectionEvent {
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
+    TResult Function()? disconnect,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +58,7 @@ mixin _$ConnectionEvent {
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
+    required TResult Function(Disconnect value) disconnect,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -65,6 +69,7 @@ mixin _$ConnectionEvent {
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
+    TResult? Function(Disconnect value)? disconnect,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -75,6 +80,7 @@ mixin _$ConnectionEvent {
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
+    TResult Function(Disconnect value)? disconnect,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -182,6 +188,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
+    required TResult Function() disconnect,
   }) {
     return appConnectionStatusChanged(status);
   }
@@ -195,6 +202,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
+    TResult? Function()? disconnect,
   }) {
     return appConnectionStatusChanged?.call(status);
   }
@@ -208,6 +216,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
+    TResult Function()? disconnect,
     required TResult orElse(),
   }) {
     if (appConnectionStatusChanged != null) {
@@ -226,6 +235,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
+    required TResult Function(Disconnect value) disconnect,
   }) {
     return appConnectionStatusChanged(this);
   }
@@ -240,6 +250,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
+    TResult? Function(Disconnect value)? disconnect,
   }) {
     return appConnectionStatusChanged?.call(this);
   }
@@ -254,6 +265,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
+    TResult Function(Disconnect value)? disconnect,
     required TResult orElse(),
   }) {
     if (appConnectionStatusChanged != null) {
@@ -327,6 +339,7 @@ class _$InitializeImpl implements Initialize {
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
+    required TResult Function() disconnect,
   }) {
     return initialize();
   }
@@ -340,6 +353,7 @@ class _$InitializeImpl implements Initialize {
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
+    TResult? Function()? disconnect,
   }) {
     return initialize?.call();
   }
@@ -353,6 +367,7 @@ class _$InitializeImpl implements Initialize {
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
+    TResult Function()? disconnect,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -371,6 +386,7 @@ class _$InitializeImpl implements Initialize {
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
+    required TResult Function(Disconnect value) disconnect,
   }) {
     return initialize(this);
   }
@@ -385,6 +401,7 @@ class _$InitializeImpl implements Initialize {
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
+    TResult? Function(Disconnect value)? disconnect,
   }) {
     return initialize?.call(this);
   }
@@ -399,6 +416,7 @@ class _$InitializeImpl implements Initialize {
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
+    TResult Function(Disconnect value)? disconnect,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -462,6 +480,7 @@ class _$RetryConnectionImpl implements RetryConnection {
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
+    required TResult Function() disconnect,
   }) {
     return retryConnection();
   }
@@ -475,6 +494,7 @@ class _$RetryConnectionImpl implements RetryConnection {
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
+    TResult? Function()? disconnect,
   }) {
     return retryConnection?.call();
   }
@@ -488,6 +508,7 @@ class _$RetryConnectionImpl implements RetryConnection {
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
+    TResult Function()? disconnect,
     required TResult orElse(),
   }) {
     if (retryConnection != null) {
@@ -506,6 +527,7 @@ class _$RetryConnectionImpl implements RetryConnection {
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
+    required TResult Function(Disconnect value) disconnect,
   }) {
     return retryConnection(this);
   }
@@ -520,6 +542,7 @@ class _$RetryConnectionImpl implements RetryConnection {
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
+    TResult? Function(Disconnect value)? disconnect,
   }) {
     return retryConnection?.call(this);
   }
@@ -534,6 +557,7 @@ class _$RetryConnectionImpl implements RetryConnection {
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
+    TResult Function(Disconnect value)? disconnect,
     required TResult orElse(),
   }) {
     if (retryConnection != null) {
@@ -597,6 +621,7 @@ class _$StartStreamingImpl implements StartStreaming {
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
+    required TResult Function() disconnect,
   }) {
     return startStreaming();
   }
@@ -610,6 +635,7 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
+    TResult? Function()? disconnect,
   }) {
     return startStreaming?.call();
   }
@@ -623,6 +649,7 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
+    TResult Function()? disconnect,
     required TResult orElse(),
   }) {
     if (startStreaming != null) {
@@ -641,6 +668,7 @@ class _$StartStreamingImpl implements StartStreaming {
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
+    required TResult Function(Disconnect value) disconnect,
   }) {
     return startStreaming(this);
   }
@@ -655,6 +683,7 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
+    TResult? Function(Disconnect value)? disconnect,
   }) {
     return startStreaming?.call(this);
   }
@@ -669,6 +698,7 @@ class _$StartStreamingImpl implements StartStreaming {
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
+    TResult Function(Disconnect value)? disconnect,
     required TResult orElse(),
   }) {
     if (startStreaming != null) {
@@ -732,6 +762,7 @@ class _$StopStreamingImpl implements StopStreaming {
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
+    required TResult Function() disconnect,
   }) {
     return stopStreaming();
   }
@@ -745,6 +776,7 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
+    TResult? Function()? disconnect,
   }) {
     return stopStreaming?.call();
   }
@@ -758,6 +790,7 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
+    TResult Function()? disconnect,
     required TResult orElse(),
   }) {
     if (stopStreaming != null) {
@@ -776,6 +809,7 @@ class _$StopStreamingImpl implements StopStreaming {
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
+    required TResult Function(Disconnect value) disconnect,
   }) {
     return stopStreaming(this);
   }
@@ -790,6 +824,7 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
+    TResult? Function(Disconnect value)? disconnect,
   }) {
     return stopStreaming?.call(this);
   }
@@ -804,6 +839,7 @@ class _$StopStreamingImpl implements StopStreaming {
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
+    TResult Function(Disconnect value)? disconnect,
     required TResult orElse(),
   }) {
     if (stopStreaming != null) {
@@ -898,6 +934,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     required TResult Function() startStreaming,
     required TResult Function() stopStreaming,
     required TResult Function(int maxFps) configureStream,
+    required TResult Function() disconnect,
   }) {
     return configureStream(maxFps);
   }
@@ -911,6 +948,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult? Function()? startStreaming,
     TResult? Function()? stopStreaming,
     TResult? Function(int maxFps)? configureStream,
+    TResult? Function()? disconnect,
   }) {
     return configureStream?.call(maxFps);
   }
@@ -924,6 +962,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult Function()? startStreaming,
     TResult Function()? stopStreaming,
     TResult Function(int maxFps)? configureStream,
+    TResult Function()? disconnect,
     required TResult orElse(),
   }) {
     if (configureStream != null) {
@@ -942,6 +981,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     required TResult Function(StartStreaming value) startStreaming,
     required TResult Function(StopStreaming value) stopStreaming,
     required TResult Function(ConfigureStream value) configureStream,
+    required TResult Function(Disconnect value) disconnect,
   }) {
     return configureStream(this);
   }
@@ -956,6 +996,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult? Function(StartStreaming value)? startStreaming,
     TResult? Function(StopStreaming value)? stopStreaming,
     TResult? Function(ConfigureStream value)? configureStream,
+    TResult? Function(Disconnect value)? disconnect,
   }) {
     return configureStream?.call(this);
   }
@@ -970,6 +1011,7 @@ class _$ConfigureStreamImpl implements ConfigureStream {
     TResult Function(StartStreaming value)? startStreaming,
     TResult Function(StopStreaming value)? stopStreaming,
     TResult Function(ConfigureStream value)? configureStream,
+    TResult Function(Disconnect value)? disconnect,
     required TResult orElse(),
   }) {
     if (configureStream != null) {
@@ -990,4 +1032,145 @@ abstract class ConfigureStream implements ConnectionEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ConfigureStreamImplCopyWith<_$ConfigureStreamImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DisconnectImplCopyWith<$Res> {
+  factory _$$DisconnectImplCopyWith(
+    _$DisconnectImpl value,
+    $Res Function(_$DisconnectImpl) then,
+  ) = __$$DisconnectImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DisconnectImplCopyWithImpl<$Res>
+    extends _$ConnectionEventCopyWithImpl<$Res, _$DisconnectImpl>
+    implements _$$DisconnectImplCopyWith<$Res> {
+  __$$DisconnectImplCopyWithImpl(
+    _$DisconnectImpl _value,
+    $Res Function(_$DisconnectImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ConnectionEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DisconnectImpl implements Disconnect {
+  const _$DisconnectImpl();
+
+  @override
+  String toString() {
+    return 'ConnectionEvent.disconnect()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DisconnectImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(AppConnectionStatus status)
+    appConnectionStatusChanged,
+    required TResult Function() initialize,
+    required TResult Function() retryConnection,
+    required TResult Function() startStreaming,
+    required TResult Function() stopStreaming,
+    required TResult Function(int maxFps) configureStream,
+    required TResult Function() disconnect,
+  }) {
+    return disconnect();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
+    TResult? Function()? initialize,
+    TResult? Function()? retryConnection,
+    TResult? Function()? startStreaming,
+    TResult? Function()? stopStreaming,
+    TResult? Function(int maxFps)? configureStream,
+    TResult? Function()? disconnect,
+  }) {
+    return disconnect?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
+    TResult Function()? initialize,
+    TResult Function()? retryConnection,
+    TResult Function()? startStreaming,
+    TResult Function()? stopStreaming,
+    TResult Function(int maxFps)? configureStream,
+    TResult Function()? disconnect,
+    required TResult orElse(),
+  }) {
+    if (disconnect != null) {
+      return disconnect();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AppConnectionStatusChanged value)
+    appConnectionStatusChanged,
+    required TResult Function(Initialize value) initialize,
+    required TResult Function(RetryConnection value) retryConnection,
+    required TResult Function(StartStreaming value) startStreaming,
+    required TResult Function(StopStreaming value) stopStreaming,
+    required TResult Function(ConfigureStream value) configureStream,
+    required TResult Function(Disconnect value) disconnect,
+  }) {
+    return disconnect(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AppConnectionStatusChanged value)?
+    appConnectionStatusChanged,
+    TResult? Function(Initialize value)? initialize,
+    TResult? Function(RetryConnection value)? retryConnection,
+    TResult? Function(StartStreaming value)? startStreaming,
+    TResult? Function(StopStreaming value)? stopStreaming,
+    TResult? Function(ConfigureStream value)? configureStream,
+    TResult? Function(Disconnect value)? disconnect,
+  }) {
+    return disconnect?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AppConnectionStatusChanged value)?
+    appConnectionStatusChanged,
+    TResult Function(Initialize value)? initialize,
+    TResult Function(RetryConnection value)? retryConnection,
+    TResult Function(StartStreaming value)? startStreaming,
+    TResult Function(StopStreaming value)? stopStreaming,
+    TResult Function(ConfigureStream value)? configureStream,
+    TResult Function(Disconnect value)? disconnect,
+    required TResult orElse(),
+  }) {
+    if (disconnect != null) {
+      return disconnect(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Disconnect implements ConnectionEvent {
+  const factory Disconnect() = _$DisconnectImpl;
 }

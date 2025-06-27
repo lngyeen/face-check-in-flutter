@@ -159,13 +159,13 @@ class WebSocketService {
     await _cleanupExistingConnection();
 
     try {
-      updateStatus(WebSocketConnectionStatus.connecting);
+      _updateStatus(WebSocketConnectionStatus.connecting);
       final channel = WebSocketChannel.connect(Uri.parse(_url));
 
       _subscription = channel.stream.listen(
-        handleMessage,
-        onError: handleError,
-        onDone: handleDone,
+        _handleMessage,
+        onError: _handleError,
+        onDone: _handleDone,
         cancelOnError: true,
       );
 
@@ -184,9 +184,9 @@ class WebSocketService {
 
       // Connection successful
       _resetRetryState();
-      updateStatus(WebSocketConnectionStatus.connected);
+      _updateStatus(WebSocketConnectionStatus.connected);
     } catch (e) {
-      handleError(e);
+      _handleError(e);
     }
   }
 
@@ -194,15 +194,20 @@ class WebSocketService {
   Future<void> disconnect() async {
     await _cleanupExistingConnection();
     if (!_statusSubject.isClosed) {
-      updateStatus(WebSocketConnectionStatus.disconnected);
+      _updateStatus(WebSocketConnectionStatus.disconnected);
     }
   }
 
   /// Send message through WebSocket
   void sendMessage(dynamic message) {
-    if (_channel != null &&
+    final channel = _channel;
+    if (channel != null &&
         currentStatus == WebSocketConnectionStatus.connected) {
-      _channel!.sink.add(message);
+      try {
+        channel.sink.add(message);
+      } catch (e) {
+        // Silent error handling
+      }
     }
   }
 
@@ -258,7 +263,7 @@ class WebSocketService {
           }
         } else {
           _resetRetryState();
-          updateStatus(WebSocketConnectionStatus.disconnected);
+          _updateStatus(WebSocketConnectionStatus.disconnected);
           await _cleanupExistingConnection();
         }
       },
@@ -266,13 +271,15 @@ class WebSocketService {
   }
 
   /// Update WebSocket connection status
-  void updateStatus(WebSocketConnectionStatus status) {
+  void _updateStatus(WebSocketConnectionStatus status) {
     if (_statusSubject.isClosed) return;
     _statusSubject.add(status);
   }
 
   /// Properly cleanup existing connection resources
   Future<void> _cleanupExistingConnection() async {
+    _cancelAllTimers();
+
     await _subscription?.cancel();
     _subscription = null;
 
@@ -281,20 +288,24 @@ class WebSocketService {
   }
 
   /// Handle incoming WebSocket messages
-  void handleMessage(dynamic message) {
+  void _handleMessage(dynamic message) {
     if (!_messageSubject.isClosed) {
       _messageSubject.add(message);
     }
   }
 
   /// Handle WebSocket connection errors
-  void handleError(dynamic error) {
-    updateStatus(WebSocketConnectionStatus.failed);
+  void _handleError(dynamic error) {
+    _updateStatus(WebSocketConnectionStatus.failed);
 
     if (_retryTimer != null) {
       return;
     }
 
+    _startRetryProcess();
+  }
+
+  void _startRetryProcess() {
     currentRetryState.when(
       idle: () => _startFastRetryPhase(),
       fastRetrying: (attempt, maxAttempts) {
@@ -309,17 +320,18 @@ class WebSocketService {
   }
 
   /// Handle WebSocket connection closure
-  void handleDone() {
+  void _handleDone() {
     if (_statusSubject.isClosed) return;
 
     switch (currentStatus) {
       case WebSocketConnectionStatus.connected:
         // Unexpected disconnect from connected state
-        updateStatus(WebSocketConnectionStatus.disconnected);
+        _updateStatus(WebSocketConnectionStatus.disconnected);
+        _startRetryProcess();
         break;
       case WebSocketConnectionStatus.connecting:
         // Connection failed during handshake
-        updateStatus(WebSocketConnectionStatus.failed);
+        _updateStatus(WebSocketConnectionStatus.failed);
         break;
       case WebSocketConnectionStatus.disconnected:
       case WebSocketConnectionStatus.failed:

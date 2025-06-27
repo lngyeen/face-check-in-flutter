@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert' as json;
 
+import 'package:flutter/widgets.dart';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +26,8 @@ import 'check_in_state.dart';
 /// Main BLoC for managing check-in feature state
 /// Handles camera, WebSocket, streaming, and UI state management
 @injectable
-class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
+class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
+    with WidgetsBindingObserver {
   final PermissionService _permissionService;
   final ConnectionBloc _connectionBloc;
   final StreamService _streamService;
@@ -38,6 +41,25 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     this._streamService,
   ) : super(const CheckInState()) {
     _registerEventHandlers();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        add(const CheckInEvent.initialize());
+        break;
+      case AppLifecycleState.hidden:
+        add(const CheckInEvent.stopCamera());
+        _connectionBloc.add(const ConnectionEvent.disconnect());
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+        break;
+    }
   }
 
   void _listenToConnectionBloc() {
@@ -56,8 +78,14 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     on<CheckInEvent>(_handleLifecycleEvent, transformer: sequential());
 
     on<ToggleDebugMode>(_onToggleDebugMode);
-    on<WebSocketMessageReceived>(_onWebSocketMessageReceived);
-    on<ConnectionStateChanged>(_onConnectionStateChanged);
+    on<WebSocketMessageReceived>(
+      _onWebSocketMessageReceived,
+      transformer: droppable(),
+    );
+    on<ConnectionStateChanged>(
+      _onConnectionStateChanged,
+      transformer: restartable(),
+    );
   }
 
   Future<void> _handleLifecycleEvent(
@@ -119,6 +147,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     await _stopCameraResources(state.cameraController);
     await _webSocketMessageSubscription?.cancel();
     await _connectionStateSubscription?.cancel();
+    WidgetsBinding.instance.removeObserver(this);
 
     return super.close();
   }

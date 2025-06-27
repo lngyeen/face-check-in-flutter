@@ -41,6 +41,7 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     on<StartStreaming>(_onStartStreaming, transformer: droppable());
     on<StopStreaming>(_onStopStreaming, transformer: droppable());
     on<ConfigureStream>(_onConfigureStream, transformer: droppable());
+    on<Disconnect>(_onDisconnect, transformer: sequential());
   }
 
   Future<void> _onInitialize(
@@ -48,10 +49,8 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     Emitter<ConnectionState> emit,
   ) async {
     _setupWebSocketListeners();
-
     await _webSocketService.initialize(url: F.baseWebSocketUrl);
-
-    _webSocketService.connect();
+    await _webSocketService.connect();
   }
 
   Future<void> _onRetryConnection(
@@ -59,6 +58,13 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     Emitter<ConnectionState> emit,
   ) async {
     await _webSocketService.connect();
+  }
+
+  Future<void> _onDisconnect(
+    Disconnect event,
+    Emitter<ConnectionState> emit,
+  ) async {
+    await _webSocketService.disconnect();
   }
 
   void _setupWebSocketListeners() {
@@ -81,6 +87,7 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
       case AppConnectionStatus.connected:
         add(const ConnectionEvent.startStreaming());
         break;
+      case AppConnectionStatus.initial:
       case AppConnectionStatus.networkLost:
       case AppConnectionStatus.failed:
       case AppConnectionStatus.fastRetrying:
@@ -88,7 +95,6 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
         add(const ConnectionEvent.stopStreaming());
         break;
       case AppConnectionStatus.connecting:
-      case AppConnectionStatus.initial:
         break;
     }
   }

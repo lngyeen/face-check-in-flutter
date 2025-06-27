@@ -20,4 +20,6 @@ class ConnectionEvent with _$ConnectionEvent {
 
   const factory ConnectionEvent.configureStream({required int maxFps}) =
       ConfigureStream;
+
+  const factory ConnectionEvent.disconnect() = Disconnect;
 }
