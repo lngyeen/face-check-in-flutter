@@ -17,10 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ConnectionState {
-  /// Overall app connection status (inferred from WebSocketService)
   AppConnectionStatus get status => throw _privateConstructorUsedError;
-
-  /// Current frame streaming status for UI
   StreamingStatus get streamingStatus => throw _privateConstructorUsedError;
 
   /// Create a copy of ConnectionState
@@ -124,12 +121,9 @@ class _$ConnectionStateImpl extends _ConnectionState {
     this.streamingStatus = StreamingStatus.idle,
   }) : super._();
 
-  /// Overall app connection status (inferred from WebSocketService)
   @override
   @JsonKey()
   final AppConnectionStatus status;
-
-  /// Current frame streaming status for UI
   @override
   @JsonKey()
   final StreamingStatus streamingStatus;
@@ -171,11 +165,8 @@ abstract class _ConnectionState extends ConnectionState {
   }) = _$ConnectionStateImpl;
   const _ConnectionState._() : super._();
 
-  /// Overall app connection status (inferred from WebSocketService)
   @override
   AppConnectionStatus get status;
-
-  /// Current frame streaming status for UI
   @override
   StreamingStatus get streamingStatus;
 
