@@ -20,7 +20,6 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   final WebSocketService _webSocketService;
   final StreamService _streamService;
 
-  // Service subscriptions
   StreamSubscription? _appConnectionSubscription;
 
   ConnectionBloc(this._webSocketService, this._streamService)
@@ -31,23 +30,19 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   }
 
   void _registerEventHandlers() {
-    // Lifecycle events - must be sequential
     on<Initialize>(_onInitialize, transformer: sequential());
     on<RetryConnection>(_onRetryConnection, transformer: sequential());
 
-    // App connection status events - computed from WebSocketService
     on<AppConnectionStatusChanged>(
       _onAppConnectionStatusChanged,
       transformer: restartable(),
     );
 
-    // Streaming control events - drop duplicates to prevent conflicts
     on<StartStreaming>(_onStartStreaming, transformer: droppable());
     on<StopStreaming>(_onStopStreaming, transformer: droppable());
     on<ConfigureStream>(_onConfigureStream, transformer: droppable());
   }
 
-  /// Initialize connection system - much simpler now
   Future<void> _onInitialize(
     Initialize event,
     Emitter<ConnectionState> emit,
@@ -59,12 +54,10 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     _webSocketService.connect();
   }
 
-  /// Handle manual retry connection request
   Future<void> _onRetryConnection(
     RetryConnection event,
     Emitter<ConnectionState> emit,
   ) async {
-    // Force reconnect by calling WebSocket service connect
     await _webSocketService.connect();
   }
 
@@ -77,7 +70,6 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
         );
   }
 
-  /// Handle computed app connection status changes - main logic
   Future<void> _onAppConnectionStatusChanged(
     AppConnectionStatusChanged event,
     Emitter<ConnectionState> emit,
@@ -88,30 +80,23 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     switch (newStatus) {
       case AppConnectionStatus.connected:
         add(const ConnectionEvent.startStreaming());
+        break;
       case AppConnectionStatus.networkLost:
       case AppConnectionStatus.failed:
       case AppConnectionStatus.fastRetrying:
       case AppConnectionStatus.backgroundRetrying:
         add(const ConnectionEvent.stopStreaming());
-
+        break;
       case AppConnectionStatus.connecting:
       case AppConnectionStatus.initial:
         break;
     }
   }
 
-  // STREAMING EVENT HANDLERS
-
-  /// Handle start streaming request
   Future<void> _onStartStreaming(
     StartStreaming event,
     Emitter<ConnectionState> emit,
   ) async {
-    // ✅ Check if already streaming - prevent duplicate start
-    if (state.streamingStatus == StreamingStatus.active) {
-      return; // Already streaming, ignore duplicate request
-    }
-
     if (!state.isConnectionReady) {
       emit(state.copyWith(streamingStatus: StreamingStatus.error));
       return;
@@ -127,15 +112,10 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     }
   }
 
-  /// Handle stop streaming request
   Future<void> _onStopStreaming(
     StopStreaming event,
     Emitter<ConnectionState> emit,
   ) async {
-    if (state.streamingStatus != StreamingStatus.active) {
-      return; // Already streaming, ignore duplicate request
-    }
-
     try {
       if (_streamService.isStreaming) {
         await _streamService.stopStream();
@@ -146,7 +126,6 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     }
   }
 
-  /// Handle stream configuration
   void _onConfigureStream(
     ConfigureStream event,
     Emitter<ConnectionState> emit,
@@ -154,14 +133,12 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     _streamService.setMaxFps(event.maxFps);
   }
 
-  /// Add frame to streaming service
   void addFrame(dynamic frame) {
     if (state.isActiveStreaming) {
       _streamService.addFrame(frame);
     }
   }
 
-  /// Expose WebSocket message stream for consumers
   Stream<dynamic> get messageStream => _webSocketService.messageStream;
 
   @override
