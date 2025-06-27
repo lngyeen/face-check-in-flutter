@@ -11,13 +11,40 @@ import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart
 import 'package:face_check_in_flutter/domain/entities/retry_state.dart';
 import 'package:face_check_in_flutter/domain/entities/websocket_connection_status.dart';
 
+abstract class WebSocketService {
+  Stream<WebSocketConnectionStatus> get connectionStatusStream;
+  Stream<dynamic> get messageStream;
+  Stream<RetryState> get retryStateStream;
+  Stream<bool> get isNetworkAvailable;
+  Stream<AppConnectionStatus> get appConnectionStatusStream;
+
+  WebSocketConnectionStatus get currentStatus;
+  RetryState get currentRetryState;
+  AppConnectionStatus get currentAppConnectionStatus;
+  Duration get connectionTimeout;
+  Duration get pingTimeout;
+
+  Future<void> initialize({
+    required String url,
+    Duration connectionTimeout = const Duration(seconds: 10),
+    Duration pingTimeout = const Duration(seconds: 3),
+  });
+
+  Future<void> connect();
+  Future<void> disconnect();
+  void sendMessage(dynamic message);
+  void setConnectionTimeout(Duration timeout);
+  void setPingTimeout(Duration timeout);
+  void dispose();
+}
+
 /// WebSocket service for managing real-time connections with automatic retry logic
 /// Provides connection status monitoring, message handling, and network-aware reconnection
-@lazySingleton
-class WebSocketService {
+@LazySingleton(as: WebSocketService)
+class WebSocketServiceImpl implements WebSocketService {
   final NetworkConnectivityService _networkService;
 
-  WebSocketService(this._networkService);
+  WebSocketServiceImpl(this._networkService);
 
   /// Maximum number of fast retry attempts before switching to background monitoring
   static const _maxFastRetries = 4;
@@ -31,57 +58,37 @@ class WebSocketService {
   /// Interval for background connectivity checks
   static const _backgroundInterval = Duration(seconds: 30);
 
-  /// WebSocket URL
   late String _url;
-
-  /// Connection timeout configuration
   Duration _connectionTimeout = const Duration(seconds: 10);
-
-  /// Ping timeout configuration
   Duration _pingTimeout = const Duration(seconds: 3);
-
-  /// WebSocket channel instance
   WebSocketChannel? _channel;
-
-  /// Network connectivity subscription
   StreamSubscription? _networkSubscription;
-
-  /// WebSocket stream subscription
   StreamSubscription? _subscription;
-
-  /// Timer for retry attempts
   Timer? _retryTimer;
-
-  /// Timer for background connectivity checks
   Timer? _backgroundTimer;
 
-  /// WebSocket connection status subject
   final _statusSubject = BehaviorSubject<WebSocketConnectionStatus>.seeded(
     WebSocketConnectionStatus.disconnected,
   );
 
-  /// Message stream subject
   final _messageSubject = PublishSubject<dynamic>();
 
-  /// Retry state subject
   final _retryStateSubject = BehaviorSubject<RetryState>.seeded(
     const RetryState.idle(),
   );
 
-  /// Stream of WebSocket connection status changes
+  @override
   Stream<WebSocketConnectionStatus> get connectionStatusStream =>
       _statusSubject.stream;
-
-  /// Stream of incoming WebSocket messages
+  @override
   Stream<dynamic> get messageStream => _messageSubject.stream;
-
-  /// Stream of retry state changes
+  @override
   Stream<RetryState> get retryStateStream => _retryStateSubject.stream;
-
-  /// Stream of network availability changes
+  @override
   Stream<bool> get isNetworkAvailable => _networkService.connectivityStream;
 
   /// Computed stream combining network, WebSocket status, and retry state
+  @override
   Stream<AppConnectionStatus> get appConnectionStatusStream {
     return Rx.combineLatest3<
       bool,
@@ -97,27 +104,24 @@ class WebSocketService {
     ).distinct();
   }
 
-  /// Current WebSocket connection status
+  @override
   WebSocketConnectionStatus get currentStatus => _statusSubject.value;
-
-  /// Current retry state
+  @override
   RetryState get currentRetryState => _retryStateSubject.value;
-
-  /// Current computed app connection status
+  @override
   AppConnectionStatus get currentAppConnectionStatus =>
       _computeAppConnectionStatus(
         _networkService.isConnected,
         currentStatus,
         currentRetryState,
       );
-
-  /// Current connection timeout setting
+  @override
   Duration get connectionTimeout => _connectionTimeout;
-
-  /// Current ping timeout setting
+  @override
   Duration get pingTimeout => _pingTimeout;
 
   /// Initialize WebSocket service with URL and timeout configurations
+  @override
   Future<void> initialize({
     required String url,
     Duration connectionTimeout = const Duration(seconds: 10),
@@ -132,6 +136,7 @@ class WebSocketService {
   }
 
   /// Establish WebSocket connection
+  @override
   Future<void> connect() async {
     if (_statusSubject.isClosed ||
         currentStatus == WebSocketConnectionStatus.connected ||
@@ -173,6 +178,7 @@ class WebSocketService {
   }
 
   /// Disconnect WebSocket connection
+  @override
   Future<void> disconnect() async {
     await _cleanupExistingConnection();
     if (!_statusSubject.isClosed) {
@@ -181,6 +187,7 @@ class WebSocketService {
   }
 
   /// Send message through WebSocket
+  @override
   void sendMessage(dynamic message) {
     final channel = _channel;
     if (channel != null &&
@@ -195,7 +202,7 @@ class WebSocketService {
 
   /// Perform lightweight WebSocket connectivity check
   /// Creates a temporary WebSocket connection to test server reachability
-  Future<bool> pingServer() async {
+  Future<bool> _pingServer() async {
     try {
       // Create temporary WebSocket connection with short timeout
       final testChannel = WebSocketChannel.connect(Uri.parse(_url));
@@ -214,16 +221,19 @@ class WebSocketService {
   }
 
   /// Update connection timeout setting
+  @override
   void setConnectionTimeout(Duration timeout) {
     _connectionTimeout = timeout;
   }
 
   /// Update ping timeout setting
+  @override
   void setPingTimeout(Duration timeout) {
     _pingTimeout = timeout;
   }
 
   /// Dispose service and cleanup resources
+  @override
   void dispose() {
     disconnect();
     _networkSubscription?.cancel();
@@ -413,7 +423,7 @@ class WebSocketService {
 
   /// Perform background connectivity check
   Future<void> _backgroundCheck() async {
-    final isServerReachable = await pingServer();
+    final isServerReachable = await _pingServer();
     if (isServerReachable) {
       _startFastRetryPhase();
     } else {

@@ -35,7 +35,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i234.NetworkConnectivityServiceImpl(),
     );
     gh.lazySingleton<_i555.WebSocketService>(
-      () => _i555.WebSocketService(gh<_i234.NetworkConnectivityService>()),
+      () => _i555.WebSocketServiceImpl(gh<_i234.NetworkConnectivityService>()),
     );
     gh.lazySingleton<_i121.StreamService>(
       () => _i121.StreamServiceImpl(gh<_i555.WebSocketService>()),

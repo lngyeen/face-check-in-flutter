@@ -11,7 +11,7 @@ abstract class WakelockService {
   Future<void> toggle();
 }
 
-@Singleton(as: WakelockService)
+@LazySingleton(as: WakelockService)
 class WakelockServiceImpl implements WakelockService {
   bool _isEnabled = false;
 
