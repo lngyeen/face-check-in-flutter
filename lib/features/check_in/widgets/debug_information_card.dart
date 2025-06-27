@@ -347,11 +347,8 @@ class _DetailedFaceCard extends StatelessWidget {
         children: [
           _buildHeader(theme, statusColor),
           const SizedBox(height: AppDesignTokens.spaceSmall),
-          _buildFaceIdSection(theme),
-          const SizedBox(height: AppDesignTokens.spaceSmall),
-          _buildBoundingBoxInfo(theme),
-          const SizedBox(height: AppDesignTokens.spaceSmall),
-          _buildInfoChips(),
+          const Divider(),
+          _buildLogData(theme),
         ],
       ),
     );
@@ -398,181 +395,27 @@ class _DetailedFaceCard extends StatelessWidget {
     );
   }
 
-  Widget _buildFaceIdSection(ThemeData theme) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppDesignTokens.spaceSmall + 4,
-        vertical: AppDesignTokens.spaceSmall,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.secondary.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(AppDesignTokens.radiusMedium),
-        border: Border.all(color: AppColors.secondary.withValues(alpha: 0.3)),
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.badge,
-            size: AppDesignTokens.iconSmall + 2,
-            color: AppColors.secondary,
-          ),
-          const SizedBox(width: AppDesignTokens.spaceSmall),
-          Text(
-            'Face ID: ',
-            style: theme.textTheme.labelMedium?.copyWith(
-              color: AppColors.secondary,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              face.faceId ?? 'Not Available',
-              style: theme.textTheme.labelMedium?.copyWith(
-                color:
-                    face.faceId != null
-                        ? AppColors.textPrimary
-                        : AppColors.textSecondary,
-                fontFamily: 'Courier',
-              ),
-            ),
-          ),
-          if (face.faceId != null)
-            Icon(
-              Icons.verified,
-              size: AppDesignTokens.iconSmall,
-              color: AppColors.secondary,
-            ),
-        ],
-      ),
-    );
-  }
+  Widget _buildLogData(ThemeData theme) {
+    final List<String> logItems = [
+      'faceId: ${face.faceId ?? 'N/A'}',
+      'isRecognized: ${face.isRecognized}',
+      'confidence: ${face.confidence.toStringAsFixed(2)}',
+      'gender: ${face.gender ?? 'N/A'}',
+      'age: ${face.age?.toString() ?? 'N/A'}',
+      'mask: ${face.mask}',
+      if (face.bbox.length == 4)
+        'bbox: (${face.bbox[0].toInt()}, ${face.bbox[1].toInt()}) ${face.bbox[2].toInt()}x${face.bbox[3].toInt()}',
+    ];
 
-  Widget _buildBoundingBoxInfo(ThemeData theme) {
-    if (face.bbox.length < 4) return const SizedBox.shrink();
-
-    final x = face.bbox[0].toInt();
-    final y = face.bbox[1].toInt();
-    final width = face.bbox[2].toInt();
-    final height = face.bbox[3].toInt();
-
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppDesignTokens.spaceSmall + 4,
-        vertical: AppDesignTokens.spaceSmall,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.info.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(AppDesignTokens.radiusMedium),
-        border: Border.all(color: AppColors.info.withValues(alpha: 0.3)),
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.crop_free,
-            size: AppDesignTokens.iconSmall + 2,
-            color: AppColors.info,
-          ),
-          const SizedBox(width: AppDesignTokens.spaceSmall),
-          Text(
-            'Bbox: ',
-            style: theme.textTheme.labelMedium?.copyWith(
-              color: AppColors.info,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              '($x, $y) $width×$height',
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: AppColors.textPrimary,
-                fontFamily: 'Courier',
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInfoChips() {
-    return Wrap(
-      spacing: AppDesignTokens.spaceSmall,
-      runSpacing: AppDesignTokens.spaceXSmall + 2,
-      children: [
-        // Confidence
-        _InfoChip(
-          icon: Icons.verified,
-          label: '${(face.confidence * 100).toStringAsFixed(1)}%',
-          color: _getConfidenceColor(face.confidence),
+    return Padding(
+      padding: const EdgeInsets.only(top: AppDesignTokens.spaceSmall),
+      child: Text(
+        logItems.map((item) => '• $item').join('\n'),
+        style: theme.textTheme.bodySmall?.copyWith(
+          fontFamily: 'Courier',
+          color: AppColors.textSecondary,
+          height: 1.5,
         ),
-        // Gender
-        if (face.gender != null)
-          _InfoChip(
-            icon: Icons.person,
-            label: face.gender!,
-            color: AppColors.secondary,
-          ),
-        // Age
-        if (face.age != null)
-          _InfoChip(
-            icon: Icons.cake,
-            label: '${face.age} years',
-            color: AppColors.info,
-          ),
-        // Mask
-        if (face.mask)
-          _InfoChip(
-            icon: Icons.masks,
-            label: 'Mask detected',
-            color: AppColors.warning,
-          ),
-      ],
-    );
-  }
-
-  Color _getConfidenceColor(double confidence) {
-    if (confidence >= 0.8) return AppColors.success;
-    if (confidence >= 0.6) return AppColors.warning;
-    return AppColors.error;
-  }
-}
-
-/// Helper widget for displaying information chips
-class _InfoChip extends StatelessWidget {
-  const _InfoChip({required this.icon, required this.label, this.color});
-
-  final IconData icon;
-  final String label;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final chipColor = color ?? AppColors.textSecondary;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppDesignTokens.spaceSmall,
-        vertical: AppDesignTokens.spaceXSmall,
-      ),
-      decoration: BoxDecoration(
-        color: chipColor.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(AppDesignTokens.radiusLarge),
-        border: Border.all(color: chipColor.withValues(alpha: 0.3)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: AppDesignTokens.iconSmall, color: chipColor),
-          const SizedBox(width: AppDesignTokens.spaceXSmall),
-          Text(
-            label,
-            style: theme.textTheme.labelSmall?.copyWith(
-              color: chipColor,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -865,6 +708,47 @@ class _ResponseErrorInfo extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+/// Helper widget for displaying information chips
+class _InfoChip extends StatelessWidget {
+  const _InfoChip({required this.icon, required this.label, this.color});
+
+  final IconData icon;
+  final String label;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final chipColor = color ?? AppColors.textSecondary;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDesignTokens.spaceSmall,
+        vertical: AppDesignTokens.spaceXSmall,
+      ),
+      decoration: BoxDecoration(
+        color: chipColor.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(AppDesignTokens.radiusLarge),
+        border: Border.all(color: chipColor.withValues(alpha: 0.3)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: AppDesignTokens.iconSmall, color: chipColor),
+          const SizedBox(width: AppDesignTokens.spaceXSmall),
+          Text(
+            label,
+            style: theme.textTheme.labelSmall?.copyWith(
+              color: chipColor,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
