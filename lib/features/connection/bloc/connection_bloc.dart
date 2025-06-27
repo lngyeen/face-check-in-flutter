@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:face_check_in_flutter/core/services/stream_service.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
-import 'package:face_check_in_flutter/domain/entities/connection_error.dart';
 import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
 import 'package:face_check_in_flutter/flavors.dart';
 
@@ -124,16 +123,7 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
       }
       emit(state.copyWith(streamingStatus: StreamingStatus.active));
     } catch (e) {
-      emit(
-        state.copyWith(
-          streamingStatus: StreamingStatus.error,
-          lastError: StreamingError(
-            'Failed to start streaming: $e',
-            'start_streaming',
-            lastStatus: state.streamingStatus,
-          ),
-        ),
-      );
+      emit(state.copyWith(streamingStatus: StreamingStatus.error));
     }
   }
 
@@ -152,16 +142,7 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
       }
       emit(state.copyWith(streamingStatus: StreamingStatus.idle));
     } catch (e) {
-      emit(
-        state.copyWith(
-          streamingStatus: StreamingStatus.error,
-          lastError: StreamingError(
-            'Failed to stop streaming: $e',
-            'stop_streaming',
-            lastStatus: state.streamingStatus,
-          ),
-        ),
-      );
+      emit(state.copyWith(streamingStatus: StreamingStatus.error));
     }
   }
 

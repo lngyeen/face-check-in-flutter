@@ -3,10 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:face_check_in_flutter/domain/entities/check_in_error.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
-import 'package:face_check_in_flutter/domain/entities/face_detection_status.dart';
 import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
-import 'package:face_check_in_flutter/features/connection/connection.dart'
-    as conn;
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 
 part 'check_in_state.freezed.dart';
@@ -19,32 +16,23 @@ class CheckInState with _$CheckInState {
     /// Current camera status
     @Default(CameraStatus.initial) CameraStatus cameraStatus,
 
-    /// Current error, if any
-    CheckInError? currentError,
-
     /// Camera controller instance
     CameraController? cameraController,
-
-    /// Whether debug mode is enabled
-    @Default(false) bool isDebugMode,
-
-    /// Face detection status and confidence
-    @Default(FaceDetectionStatus.none) FaceDetectionStatus faceStatus,
-
-    /// Backend error information
-    BackendError? responseError,
 
     /// Connection state
     @Default(ConnectionState()) ConnectionState connectionState,
 
     /// Latest frame data for full response access - contains faces, annotatedImage, timestamp, etc.
     FaceDetectionData? latestFrameData,
+
+    /// Current error (combines camera, permission, and backend errors)
+    CheckInError? currentError,
+
+    /// Whether debug mode is enabled
+    @Default(false) bool isDebugMode,
   }) = _CheckInState;
 
   const CheckInState._();
-
-  bool get isFullFlowActive =>
-      cameraStatus == CameraStatus.opening && connectionState.isActiveStreaming;
 
   /// Detected faces derived from latest frame data
   List<FaceDetectionResult> get detectedFaces => latestFrameData?.faces ?? [];

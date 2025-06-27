@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
-import 'package:face_check_in_flutter/domain/entities/connection_error.dart';
 import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
 
 part 'connection_state.freezed.dart';
@@ -15,9 +14,6 @@ class ConnectionState with _$ConnectionState {
 
     /// Current frame streaming status for UI
     @Default(StreamingStatus.idle) StreamingStatus streamingStatus,
-
-    /// Last connection error (if any)
-    ConnectionError? lastError,
   }) = _ConnectionState;
 
   const ConnectionState._();

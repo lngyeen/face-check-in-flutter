@@ -20,27 +20,20 @@ mixin _$CheckInState {
   /// Current camera status
   CameraStatus get cameraStatus => throw _privateConstructorUsedError;
 
-  /// Current error, if any
-  CheckInError? get currentError => throw _privateConstructorUsedError;
-
   /// Camera controller instance
   CameraController? get cameraController => throw _privateConstructorUsedError;
 
-  /// Whether debug mode is enabled
-  bool get isDebugMode => throw _privateConstructorUsedError;
-
-  /// Face detection status and confidence
-  FaceDetectionStatus get faceStatus => throw _privateConstructorUsedError;
-
-  /// Backend error information
-  BackendError? get responseError => throw _privateConstructorUsedError;
-
   /// Connection state
-  conn.ConnectionState get connectionState =>
-      throw _privateConstructorUsedError;
+  ConnectionState get connectionState => throw _privateConstructorUsedError;
 
   /// Latest frame data for full response access - contains faces, annotatedImage, timestamp, etc.
   FaceDetectionData? get latestFrameData => throw _privateConstructorUsedError;
+
+  /// Current error (combines camera, permission, and backend errors)
+  CheckInError? get currentError => throw _privateConstructorUsedError;
+
+  /// Whether debug mode is enabled
+  bool get isDebugMode => throw _privateConstructorUsedError;
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.
@@ -58,19 +51,16 @@ abstract class $CheckInStateCopyWith<$Res> {
   @useResult
   $Res call({
     CameraStatus cameraStatus,
-    CheckInError? currentError,
     CameraController? cameraController,
-    bool isDebugMode,
-    FaceDetectionStatus faceStatus,
-    BackendError? responseError,
-    conn.ConnectionState connectionState,
+    ConnectionState connectionState,
     FaceDetectionData? latestFrameData,
+    CheckInError? currentError,
+    bool isDebugMode,
   });
 
-  $CheckInErrorCopyWith<$Res>? get currentError;
-  $BackendErrorCopyWith<$Res>? get responseError;
   $ConnectionStateCopyWith<$Res> get connectionState;
   $FaceDetectionDataCopyWith<$Res>? get latestFrameData;
+  $CheckInErrorCopyWith<$Res>? get currentError;
 }
 
 /// @nodoc
@@ -89,13 +79,11 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
   @override
   $Res call({
     Object? cameraStatus = null,
-    Object? currentError = freezed,
     Object? cameraController = freezed,
-    Object? isDebugMode = null,
-    Object? faceStatus = null,
-    Object? responseError = freezed,
     Object? connectionState = null,
     Object? latestFrameData = freezed,
+    Object? currentError = freezed,
+    Object? isDebugMode = null,
   }) {
     return _then(
       _value.copyWith(
@@ -104,72 +92,34 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
                     ? _value.cameraStatus
                     : cameraStatus // ignore: cast_nullable_to_non_nullable
                         as CameraStatus,
-            currentError:
-                freezed == currentError
-                    ? _value.currentError
-                    : currentError // ignore: cast_nullable_to_non_nullable
-                        as CheckInError?,
             cameraController:
                 freezed == cameraController
                     ? _value.cameraController
                     : cameraController // ignore: cast_nullable_to_non_nullable
                         as CameraController?,
-            isDebugMode:
-                null == isDebugMode
-                    ? _value.isDebugMode
-                    : isDebugMode // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            faceStatus:
-                null == faceStatus
-                    ? _value.faceStatus
-                    : faceStatus // ignore: cast_nullable_to_non_nullable
-                        as FaceDetectionStatus,
-            responseError:
-                freezed == responseError
-                    ? _value.responseError
-                    : responseError // ignore: cast_nullable_to_non_nullable
-                        as BackendError?,
             connectionState:
                 null == connectionState
                     ? _value.connectionState
                     : connectionState // ignore: cast_nullable_to_non_nullable
-                        as conn.ConnectionState,
+                        as ConnectionState,
             latestFrameData:
                 freezed == latestFrameData
                     ? _value.latestFrameData
                     : latestFrameData // ignore: cast_nullable_to_non_nullable
                         as FaceDetectionData?,
+            currentError:
+                freezed == currentError
+                    ? _value.currentError
+                    : currentError // ignore: cast_nullable_to_non_nullable
+                        as CheckInError?,
+            isDebugMode:
+                null == isDebugMode
+                    ? _value.isDebugMode
+                    : isDebugMode // ignore: cast_nullable_to_non_nullable
+                        as bool,
           )
           as $Val,
     );
-  }
-
-  /// Create a copy of CheckInState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CheckInErrorCopyWith<$Res>? get currentError {
-    if (_value.currentError == null) {
-      return null;
-    }
-
-    return $CheckInErrorCopyWith<$Res>(_value.currentError!, (value) {
-      return _then(_value.copyWith(currentError: value) as $Val);
-    });
-  }
-
-  /// Create a copy of CheckInState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $BackendErrorCopyWith<$Res>? get responseError {
-    if (_value.responseError == null) {
-      return null;
-    }
-
-    return $BackendErrorCopyWith<$Res>(_value.responseError!, (value) {
-      return _then(_value.copyWith(responseError: value) as $Val);
-    });
   }
 
   /// Create a copy of CheckInState
@@ -195,6 +145,20 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
       return _then(_value.copyWith(latestFrameData: value) as $Val);
     });
   }
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CheckInErrorCopyWith<$Res>? get currentError {
+    if (_value.currentError == null) {
+      return null;
+    }
+
+    return $CheckInErrorCopyWith<$Res>(_value.currentError!, (value) {
+      return _then(_value.copyWith(currentError: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -208,23 +172,19 @@ abstract class _$$CheckInStateImplCopyWith<$Res>
   @useResult
   $Res call({
     CameraStatus cameraStatus,
-    CheckInError? currentError,
     CameraController? cameraController,
-    bool isDebugMode,
-    FaceDetectionStatus faceStatus,
-    BackendError? responseError,
-    conn.ConnectionState connectionState,
+    ConnectionState connectionState,
     FaceDetectionData? latestFrameData,
+    CheckInError? currentError,
+    bool isDebugMode,
   });
 
-  @override
-  $CheckInErrorCopyWith<$Res>? get currentError;
-  @override
-  $BackendErrorCopyWith<$Res>? get responseError;
   @override
   $ConnectionStateCopyWith<$Res> get connectionState;
   @override
   $FaceDetectionDataCopyWith<$Res>? get latestFrameData;
+  @override
+  $CheckInErrorCopyWith<$Res>? get currentError;
 }
 
 /// @nodoc
@@ -242,13 +202,11 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? cameraStatus = null,
-    Object? currentError = freezed,
     Object? cameraController = freezed,
-    Object? isDebugMode = null,
-    Object? faceStatus = null,
-    Object? responseError = freezed,
     Object? connectionState = null,
     Object? latestFrameData = freezed,
+    Object? currentError = freezed,
+    Object? isDebugMode = null,
   }) {
     return _then(
       _$CheckInStateImpl(
@@ -257,41 +215,31 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
                 ? _value.cameraStatus
                 : cameraStatus // ignore: cast_nullable_to_non_nullable
                     as CameraStatus,
-        currentError:
-            freezed == currentError
-                ? _value.currentError
-                : currentError // ignore: cast_nullable_to_non_nullable
-                    as CheckInError?,
         cameraController:
             freezed == cameraController
                 ? _value.cameraController
                 : cameraController // ignore: cast_nullable_to_non_nullable
                     as CameraController?,
-        isDebugMode:
-            null == isDebugMode
-                ? _value.isDebugMode
-                : isDebugMode // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        faceStatus:
-            null == faceStatus
-                ? _value.faceStatus
-                : faceStatus // ignore: cast_nullable_to_non_nullable
-                    as FaceDetectionStatus,
-        responseError:
-            freezed == responseError
-                ? _value.responseError
-                : responseError // ignore: cast_nullable_to_non_nullable
-                    as BackendError?,
         connectionState:
             null == connectionState
                 ? _value.connectionState
                 : connectionState // ignore: cast_nullable_to_non_nullable
-                    as conn.ConnectionState,
+                    as ConnectionState,
         latestFrameData:
             freezed == latestFrameData
                 ? _value.latestFrameData
                 : latestFrameData // ignore: cast_nullable_to_non_nullable
                     as FaceDetectionData?,
+        currentError:
+            freezed == currentError
+                ? _value.currentError
+                : currentError // ignore: cast_nullable_to_non_nullable
+                    as CheckInError?,
+        isDebugMode:
+            null == isDebugMode
+                ? _value.isDebugMode
+                : isDebugMode // ignore: cast_nullable_to_non_nullable
+                    as bool,
       ),
     );
   }
@@ -302,13 +250,11 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
 class _$CheckInStateImpl extends _CheckInState {
   const _$CheckInStateImpl({
     this.cameraStatus = CameraStatus.initial,
-    this.currentError,
     this.cameraController,
-    this.isDebugMode = false,
-    this.faceStatus = FaceDetectionStatus.none,
-    this.responseError,
     this.connectionState = const ConnectionState(),
     this.latestFrameData,
+    this.currentError,
+    this.isDebugMode = false,
   }) : super._();
 
   /// Current camera status
@@ -316,40 +262,31 @@ class _$CheckInStateImpl extends _CheckInState {
   @JsonKey()
   final CameraStatus cameraStatus;
 
-  /// Current error, if any
-  @override
-  final CheckInError? currentError;
-
   /// Camera controller instance
   @override
   final CameraController? cameraController;
+
+  /// Connection state
+  @override
+  @JsonKey()
+  final ConnectionState connectionState;
+
+  /// Latest frame data for full response access - contains faces, annotatedImage, timestamp, etc.
+  @override
+  final FaceDetectionData? latestFrameData;
+
+  /// Current error (combines camera, permission, and backend errors)
+  @override
+  final CheckInError? currentError;
 
   /// Whether debug mode is enabled
   @override
   @JsonKey()
   final bool isDebugMode;
 
-  /// Face detection status and confidence
-  @override
-  @JsonKey()
-  final FaceDetectionStatus faceStatus;
-
-  /// Backend error information
-  @override
-  final BackendError? responseError;
-
-  /// Connection state
-  @override
-  @JsonKey()
-  final conn.ConnectionState connectionState;
-
-  /// Latest frame data for full response access - contains faces, annotatedImage, timestamp, etc.
-  @override
-  final FaceDetectionData? latestFrameData;
-
   @override
   String toString() {
-    return 'CheckInState(cameraStatus: $cameraStatus, currentError: $currentError, cameraController: $cameraController, isDebugMode: $isDebugMode, faceStatus: $faceStatus, responseError: $responseError, connectionState: $connectionState, latestFrameData: $latestFrameData)';
+    return 'CheckInState(cameraStatus: $cameraStatus, cameraController: $cameraController, connectionState: $connectionState, latestFrameData: $latestFrameData, currentError: $currentError, isDebugMode: $isDebugMode)';
   }
 
   @override
@@ -359,33 +296,27 @@ class _$CheckInStateImpl extends _CheckInState {
             other is _$CheckInStateImpl &&
             (identical(other.cameraStatus, cameraStatus) ||
                 other.cameraStatus == cameraStatus) &&
-            (identical(other.currentError, currentError) ||
-                other.currentError == currentError) &&
             (identical(other.cameraController, cameraController) ||
                 other.cameraController == cameraController) &&
-            (identical(other.isDebugMode, isDebugMode) ||
-                other.isDebugMode == isDebugMode) &&
-            (identical(other.faceStatus, faceStatus) ||
-                other.faceStatus == faceStatus) &&
-            (identical(other.responseError, responseError) ||
-                other.responseError == responseError) &&
             (identical(other.connectionState, connectionState) ||
                 other.connectionState == connectionState) &&
             (identical(other.latestFrameData, latestFrameData) ||
-                other.latestFrameData == latestFrameData));
+                other.latestFrameData == latestFrameData) &&
+            (identical(other.currentError, currentError) ||
+                other.currentError == currentError) &&
+            (identical(other.isDebugMode, isDebugMode) ||
+                other.isDebugMode == isDebugMode));
   }
 
   @override
   int get hashCode => Object.hash(
     runtimeType,
     cameraStatus,
-    currentError,
     cameraController,
-    isDebugMode,
-    faceStatus,
-    responseError,
     connectionState,
     latestFrameData,
+    currentError,
+    isDebugMode,
   );
 
   /// Create a copy of CheckInState
@@ -400,13 +331,11 @@ class _$CheckInStateImpl extends _CheckInState {
 abstract class _CheckInState extends CheckInState {
   const factory _CheckInState({
     final CameraStatus cameraStatus,
-    final CheckInError? currentError,
     final CameraController? cameraController,
-    final bool isDebugMode,
-    final FaceDetectionStatus faceStatus,
-    final BackendError? responseError,
-    final conn.ConnectionState connectionState,
+    final ConnectionState connectionState,
     final FaceDetectionData? latestFrameData,
+    final CheckInError? currentError,
+    final bool isDebugMode,
   }) = _$CheckInStateImpl;
   const _CheckInState._() : super._();
 
@@ -414,33 +343,25 @@ abstract class _CheckInState extends CheckInState {
   @override
   CameraStatus get cameraStatus;
 
-  /// Current error, if any
-  @override
-  CheckInError? get currentError;
-
   /// Camera controller instance
   @override
   CameraController? get cameraController;
 
-  /// Whether debug mode is enabled
-  @override
-  bool get isDebugMode;
-
-  /// Face detection status and confidence
-  @override
-  FaceDetectionStatus get faceStatus;
-
-  /// Backend error information
-  @override
-  BackendError? get responseError;
-
   /// Connection state
   @override
-  conn.ConnectionState get connectionState;
+  ConnectionState get connectionState;
 
   /// Latest frame data for full response access - contains faces, annotatedImage, timestamp, etc.
   @override
   FaceDetectionData? get latestFrameData;
+
+  /// Current error (combines camera, permission, and backend errors)
+  @override
+  CheckInError? get currentError;
+
+  /// Whether debug mode is enabled
+  @override
+  bool get isDebugMode;
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.

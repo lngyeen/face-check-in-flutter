@@ -23,9 +23,6 @@ mixin _$ConnectionState {
   /// Current frame streaming status for UI
   StreamingStatus get streamingStatus => throw _privateConstructorUsedError;
 
-  /// Last connection error (if any)
-  ConnectionError? get lastError => throw _privateConstructorUsedError;
-
   /// Create a copy of ConnectionState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -40,11 +37,7 @@ abstract class $ConnectionStateCopyWith<$Res> {
     $Res Function(ConnectionState) then,
   ) = _$ConnectionStateCopyWithImpl<$Res, ConnectionState>;
   @useResult
-  $Res call({
-    AppConnectionStatus status,
-    StreamingStatus streamingStatus,
-    ConnectionError? lastError,
-  });
+  $Res call({AppConnectionStatus status, StreamingStatus streamingStatus});
 }
 
 /// @nodoc
@@ -61,11 +54,7 @@ class _$ConnectionStateCopyWithImpl<$Res, $Val extends ConnectionState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? status = null,
-    Object? streamingStatus = null,
-    Object? lastError = freezed,
-  }) {
+  $Res call({Object? status = null, Object? streamingStatus = null}) {
     return _then(
       _value.copyWith(
             status:
@@ -78,11 +67,6 @@ class _$ConnectionStateCopyWithImpl<$Res, $Val extends ConnectionState>
                     ? _value.streamingStatus
                     : streamingStatus // ignore: cast_nullable_to_non_nullable
                         as StreamingStatus,
-            lastError:
-                freezed == lastError
-                    ? _value.lastError
-                    : lastError // ignore: cast_nullable_to_non_nullable
-                        as ConnectionError?,
           )
           as $Val,
     );
@@ -98,11 +82,7 @@ abstract class _$$ConnectionStateImplCopyWith<$Res>
   ) = __$$ConnectionStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    AppConnectionStatus status,
-    StreamingStatus streamingStatus,
-    ConnectionError? lastError,
-  });
+  $Res call({AppConnectionStatus status, StreamingStatus streamingStatus});
 }
 
 /// @nodoc
@@ -118,11 +98,7 @@ class __$$ConnectionStateImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? status = null,
-    Object? streamingStatus = null,
-    Object? lastError = freezed,
-  }) {
+  $Res call({Object? status = null, Object? streamingStatus = null}) {
     return _then(
       _$ConnectionStateImpl(
         status:
@@ -135,11 +111,6 @@ class __$$ConnectionStateImplCopyWithImpl<$Res>
                 ? _value.streamingStatus
                 : streamingStatus // ignore: cast_nullable_to_non_nullable
                     as StreamingStatus,
-        lastError:
-            freezed == lastError
-                ? _value.lastError
-                : lastError // ignore: cast_nullable_to_non_nullable
-                    as ConnectionError?,
       ),
     );
   }
@@ -151,7 +122,6 @@ class _$ConnectionStateImpl extends _ConnectionState {
   const _$ConnectionStateImpl({
     this.status = AppConnectionStatus.initial,
     this.streamingStatus = StreamingStatus.idle,
-    this.lastError,
   }) : super._();
 
   /// Overall app connection status (inferred from WebSocketService)
@@ -164,13 +134,9 @@ class _$ConnectionStateImpl extends _ConnectionState {
   @JsonKey()
   final StreamingStatus streamingStatus;
 
-  /// Last connection error (if any)
-  @override
-  final ConnectionError? lastError;
-
   @override
   String toString() {
-    return 'ConnectionState(status: $status, streamingStatus: $streamingStatus, lastError: $lastError)';
+    return 'ConnectionState(status: $status, streamingStatus: $streamingStatus)';
   }
 
   @override
@@ -180,14 +146,11 @@ class _$ConnectionStateImpl extends _ConnectionState {
             other is _$ConnectionStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.streamingStatus, streamingStatus) ||
-                other.streamingStatus == streamingStatus) &&
-            (identical(other.lastError, lastError) ||
-                other.lastError == lastError));
+                other.streamingStatus == streamingStatus));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, streamingStatus, lastError);
+  int get hashCode => Object.hash(runtimeType, status, streamingStatus);
 
   /// Create a copy of ConnectionState
   /// with the given fields replaced by the non-null parameter values.
@@ -205,7 +168,6 @@ abstract class _ConnectionState extends ConnectionState {
   const factory _ConnectionState({
     final AppConnectionStatus status,
     final StreamingStatus streamingStatus,
-    final ConnectionError? lastError,
   }) = _$ConnectionStateImpl;
   const _ConnectionState._() : super._();
 
@@ -216,10 +178,6 @@ abstract class _ConnectionState extends ConnectionState {
   /// Current frame streaming status for UI
   @override
   StreamingStatus get streamingStatus;
-
-  /// Last connection error (if any)
-  @override
-  ConnectionError? get lastError;
 
   /// Create a copy of ConnectionState
   /// with the given fields replaced by the non-null parameter values.

@@ -1,7 +1,7 @@
+import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
-import 'package:face_check_in_flutter/features/connection/connection.dart';
 
 part 'check_in_event.freezed.dart';
 
@@ -19,8 +19,7 @@ class CheckInEvent with _$CheckInEvent {
   const factory CheckInEvent.toggleDebugMode() = ToggleDebugMode;
 
   const factory CheckInEvent.frameResultReceived({
-    List<Map<String, dynamic>>? faces,
-    FaceDetectionResponse? response,
+    required FaceDetectionResponse response,
   }) = FrameResultReceived;
 
   const factory CheckInEvent.responseErrorReceived({

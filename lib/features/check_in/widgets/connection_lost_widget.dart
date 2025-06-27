@@ -1,13 +1,12 @@
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_event.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ConnectionState;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:face_check_in_flutter/core/theme/app_colors.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
-import 'package:face_check_in_flutter/features/connection/connection.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_event.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
 
 import 'generic_message_widget.dart';
 
@@ -16,12 +15,10 @@ class ConnectionLostWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CheckInBloc, CheckInState>(
-      buildWhen:
-          (previous, current) =>
-              previous.connectionState.status != current.connectionState.status,
+    return BlocBuilder<ConnectionBloc, ConnectionState>(
+      buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        final connectionStatus = state.connectionState.status;
+        final connectionStatus = state.status;
 
         return GenericMessageWidget(
           icon: _getIconForStatus(connectionStatus),
@@ -32,8 +29,8 @@ class ConnectionLostWidget extends StatelessWidget {
           onRetry:
               _shouldShowRetryButton(connectionStatus)
                   ? () {
-                    context.read<CheckInBloc>().add(
-                      const CheckInEvent.initialize(),
+                    context.read<ConnectionBloc>().add(
+                      const ConnectionEvent.initialize(),
                     );
                   }
                   : null,

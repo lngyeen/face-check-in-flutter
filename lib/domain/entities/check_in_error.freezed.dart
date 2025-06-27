@@ -16,159 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$BackendError {
-  String get error => throw _privateConstructorUsedError;
-  String? get message => throw _privateConstructorUsedError;
-
-  /// Create a copy of BackendError
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $BackendErrorCopyWith<BackendError> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $BackendErrorCopyWith<$Res> {
-  factory $BackendErrorCopyWith(
-    BackendError value,
-    $Res Function(BackendError) then,
-  ) = _$BackendErrorCopyWithImpl<$Res, BackendError>;
-  @useResult
-  $Res call({String error, String? message});
-}
-
-/// @nodoc
-class _$BackendErrorCopyWithImpl<$Res, $Val extends BackendError>
-    implements $BackendErrorCopyWith<$Res> {
-  _$BackendErrorCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of BackendError
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? error = null, Object? message = freezed}) {
-    return _then(
-      _value.copyWith(
-            error:
-                null == error
-                    ? _value.error
-                    : error // ignore: cast_nullable_to_non_nullable
-                        as String,
-            message:
-                freezed == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
-  }
-}
-
-/// @nodoc
-abstract class _$$BackendErrorImplCopyWith<$Res>
-    implements $BackendErrorCopyWith<$Res> {
-  factory _$$BackendErrorImplCopyWith(
-    _$BackendErrorImpl value,
-    $Res Function(_$BackendErrorImpl) then,
-  ) = __$$BackendErrorImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String error, String? message});
-}
-
-/// @nodoc
-class __$$BackendErrorImplCopyWithImpl<$Res>
-    extends _$BackendErrorCopyWithImpl<$Res, _$BackendErrorImpl>
-    implements _$$BackendErrorImplCopyWith<$Res> {
-  __$$BackendErrorImplCopyWithImpl(
-    _$BackendErrorImpl _value,
-    $Res Function(_$BackendErrorImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of BackendError
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? error = null, Object? message = freezed}) {
-    return _then(
-      _$BackendErrorImpl(
-        error:
-            null == error
-                ? _value.error
-                : error // ignore: cast_nullable_to_non_nullable
-                    as String,
-        message:
-            freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$BackendErrorImpl implements _BackendError {
-  const _$BackendErrorImpl({required this.error, this.message});
-
-  @override
-  final String error;
-  @override
-  final String? message;
-
-  @override
-  String toString() {
-    return 'BackendError(error: $error, message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BackendErrorImpl &&
-            (identical(other.error, error) || other.error == error) &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, error, message);
-
-  /// Create a copy of BackendError
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BackendErrorImplCopyWith<_$BackendErrorImpl> get copyWith =>
-      __$$BackendErrorImplCopyWithImpl<_$BackendErrorImpl>(this, _$identity);
-}
-
-abstract class _BackendError implements BackendError {
-  const factory _BackendError({
-    required final String error,
-    final String? message,
-  }) = _$BackendErrorImpl;
-
-  @override
-  String get error;
-  @override
-  String? get message;
-
-  /// Create a copy of BackendError
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BackendErrorImplCopyWith<_$BackendErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$CheckInError {
   String get message => throw _privateConstructorUsedError;
   String? get details => throw _privateConstructorUsedError;
@@ -291,7 +138,7 @@ class _$CheckInErrorImpl implements _CheckInError {
   const _$CheckInErrorImpl({
     required this.message,
     this.details,
-    this.type = CheckInErrorType.general,
+    required this.type,
   });
 
   @override
@@ -299,7 +146,6 @@ class _$CheckInErrorImpl implements _CheckInError {
   @override
   final String? details;
   @override
-  @JsonKey()
   final CheckInErrorType type;
 
   @override
@@ -333,7 +179,7 @@ abstract class _CheckInError implements CheckInError {
   const factory _CheckInError({
     required final String message,
     final String? details,
-    final CheckInErrorType type,
+    required final CheckInErrorType type,
   }) = _$CheckInErrorImpl;
 
   @override

@@ -6,11 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:face_check_in_flutter/core/theme/app_colors.dart';
+import 'package:face_check_in_flutter/domain/entities/check_in_error.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
-import 'package:face_check_in_flutter/domain/entities/face_detection_status.dart';
 
 import '../bloc/check_in_bloc.dart';
 import '../bloc/check_in_state.dart';
+
+/// Enum to represent derived face detection status from detected faces
+enum _DerivedFaceStatus { noFace, faceFound, faceUnrecognized, multipleFaces }
 
 class DebugInformationCard extends StatelessWidget {
   const DebugInformationCard({super.key});
@@ -37,8 +40,24 @@ class DebugInformationCard extends StatelessWidget {
     );
   }
 
+  /// Derive face detection status from detected faces
+  _DerivedFaceStatus _deriveFaceStatus(List<FaceDetectionResult> faces) {
+    if (faces.isEmpty) {
+      return _DerivedFaceStatus.noFace;
+    } else if (faces.length > 1) {
+      return _DerivedFaceStatus.multipleFaces;
+    } else {
+      // Single face
+      final face = faces.first;
+      return face.isRecognized
+          ? _DerivedFaceStatus.faceFound
+          : _DerivedFaceStatus.faceUnrecognized;
+    }
+  }
+
   Widget _buildHeader(BuildContext context, CheckInState state) {
-    final statusColor = _getStatusColor(state.faceStatus);
+    final derivedStatus = _deriveFaceStatus(state.detectedFaces);
+    final statusColor = _getStatusColor(derivedStatus);
 
     return Row(
       children: [
@@ -49,7 +68,7 @@ class DebugInformationCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppDesignTokens.radiusMedium),
           ),
           child: Icon(
-            _getStatusIcon(state.faceStatus),
+            _getStatusIcon(derivedStatus),
             color: statusColor,
             size: AppDesignTokens.iconMedium,
           ),
@@ -67,7 +86,7 @@ class DebugInformationCard extends StatelessWidget {
                 ),
               ),
               Text(
-                _getStatusDisplayName(state.faceStatus),
+                _getStatusDisplayName(derivedStatus),
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: statusColor,
                   fontWeight: FontWeight.w600,
@@ -85,6 +104,7 @@ class DebugInformationCard extends StatelessWidget {
     final recognizedFaces =
         state.detectedFaces.where((face) => face.isRecognized).length;
     final unrecognizedFaces = totalFaces - recognizedFaces;
+    final derivedStatus = _deriveFaceStatus(state.detectedFaces);
 
     return Container(
       padding: const EdgeInsets.all(AppDesignTokens.spaceMedium),
@@ -128,8 +148,8 @@ class DebugInformationCard extends StatelessWidget {
                 ),
               _StatChip(
                 icon: Icons.analytics,
-                label: 'Status: ${state.faceStatus.name}',
-                color: _getStatusColor(state.faceStatus),
+                label: 'Status: ${_getStatusDisplayName(derivedStatus)}',
+                color: _getStatusColor(derivedStatus),
               ),
             ],
           ),
@@ -215,54 +235,42 @@ class DebugInformationCard extends StatelessWidget {
     );
   }
 
-  Color _getStatusColor(FaceDetectionStatus status) {
+  Color _getStatusColor(_DerivedFaceStatus status) {
     switch (status) {
-      case FaceDetectionStatus.faceFound:
+      case _DerivedFaceStatus.faceFound:
         return AppColors.success;
-      case FaceDetectionStatus.faceUnrecognized:
+      case _DerivedFaceStatus.faceUnrecognized:
         return AppColors.warning;
-      case FaceDetectionStatus.multipleFaces:
+      case _DerivedFaceStatus.multipleFaces:
         return AppColors.info;
-      case FaceDetectionStatus.noFace:
-        return AppColors.textSecondary;
-      case FaceDetectionStatus.error:
-        return AppColors.error;
-      case FaceDetectionStatus.none:
+      case _DerivedFaceStatus.noFace:
         return AppColors.textSecondary;
     }
   }
 
-  IconData _getStatusIcon(FaceDetectionStatus status) {
+  IconData _getStatusIcon(_DerivedFaceStatus status) {
     switch (status) {
-      case FaceDetectionStatus.faceFound:
+      case _DerivedFaceStatus.faceFound:
         return Icons.verified_user;
-      case FaceDetectionStatus.faceUnrecognized:
+      case _DerivedFaceStatus.faceUnrecognized:
         return Icons.help_outline;
-      case FaceDetectionStatus.multipleFaces:
+      case _DerivedFaceStatus.multipleFaces:
         return Icons.people;
-      case FaceDetectionStatus.noFace:
+      case _DerivedFaceStatus.noFace:
         return Icons.face_retouching_off;
-      case FaceDetectionStatus.error:
-        return Icons.error_outline;
-      case FaceDetectionStatus.none:
-        return Icons.face;
     }
   }
 
-  String _getStatusDisplayName(FaceDetectionStatus status) {
+  String _getStatusDisplayName(_DerivedFaceStatus status) {
     switch (status) {
-      case FaceDetectionStatus.faceFound:
+      case _DerivedFaceStatus.faceFound:
         return 'Face Recognized';
-      case FaceDetectionStatus.faceUnrecognized:
+      case _DerivedFaceStatus.faceUnrecognized:
         return 'Face Detected (Unrecognized)';
-      case FaceDetectionStatus.multipleFaces:
+      case _DerivedFaceStatus.multipleFaces:
         return 'Multiple Faces Detected';
-      case FaceDetectionStatus.noFace:
+      case _DerivedFaceStatus.noFace:
         return 'No Face Detected';
-      case FaceDetectionStatus.error:
-        return 'Processing Error';
-      case FaceDetectionStatus.none:
-        return 'Idle';
     }
   }
 }
@@ -776,10 +784,11 @@ class _ResponseErrorInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CheckInBloc, CheckInState>(
       buildWhen:
-          (previous, current) =>
-              previous.responseError != current.responseError,
+          (previous, current) => previous.currentError != current.currentError,
       builder: (context, state) {
-        if (state.responseError == null) return const SizedBox.shrink();
+        if (state.currentError?.type != CheckInErrorType.backend) {
+          return const SizedBox.shrink();
+        }
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -816,7 +825,7 @@ class _ResponseErrorInfo extends StatelessWidget {
                       const SizedBox(width: AppDesignTokens.spaceSmall),
                       Expanded(
                         child: Text(
-                          state.responseError!.error,
+                          state.currentError!.message,
                           style: Theme.of(
                             context,
                           ).textTheme.titleSmall?.copyWith(
@@ -827,25 +836,23 @@ class _ResponseErrorInfo extends StatelessWidget {
                       ),
                     ],
                   ),
-                  if (state.responseError!.message != null) ...[
-                    const SizedBox(height: AppDesignTokens.spaceSmall),
-                    Container(
-                      padding: const EdgeInsets.all(AppDesignTokens.spaceSmall),
-                      decoration: BoxDecoration(
-                        color: AppColors.error.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(
-                          AppDesignTokens.radiusSmall,
-                        ),
-                      ),
-                      child: Text(
-                        state.responseError!.message!,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.error,
-                          fontFamily: 'Courier',
-                        ),
+                  const SizedBox(height: AppDesignTokens.spaceSmall),
+                  Container(
+                    padding: const EdgeInsets.all(AppDesignTokens.spaceSmall),
+                    decoration: BoxDecoration(
+                      color: AppColors.error.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(
+                        AppDesignTokens.radiusSmall,
                       ),
                     ),
-                  ],
+                    child: Text(
+                      'Error Type: ${state.currentError!.type.name}',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.error,
+                        fontFamily: 'Courier',
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: AppDesignTokens.spaceSmall),
                   _InfoChip(
                     icon: Icons.bug_report,

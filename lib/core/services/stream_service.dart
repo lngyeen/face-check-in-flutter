@@ -51,6 +51,9 @@ class StreamServiceImpl implements StreamService {
 
   // Stream state
   bool _isStreaming = false;
+
+  /// Whether streaming is currently active
+  @override
   bool get isStreaming => _isStreaming;
 
   StreamServiceImpl(this._webSocketService) {
@@ -67,6 +70,7 @@ class StreamServiceImpl implements StreamService {
   }
 
   /// Configure maximum frames per second
+  @override
   void setMaxFps(int maxFps) {
     if (maxFps < 1 || maxFps > 30) {
       throw ArgumentError('maxFps must be between 1 and 30');
@@ -77,6 +81,7 @@ class StreamServiceImpl implements StreamService {
   }
 
   /// Get current max FPS setting
+  @override
   int get maxFps => _maxFps;
 
   /// Restart frame processing with new configuration
@@ -86,18 +91,21 @@ class StreamServiceImpl implements StreamService {
   }
 
   /// Start streaming frames
+  @override
   Future<void> startStream() async {
     if (_isStreaming) return;
     _isStreaming = true;
   }
 
   /// Stop streaming frames
+  @override
   Future<void> stopStream() async {
     if (!_isStreaming) return;
     _isStreaming = false;
   }
 
   /// Add frame to processing queue
+  @override
   void addFrame(CameraImage frame) {
     if (!_isStreaming) return;
     _frameSubject.add(frame);
@@ -136,6 +144,7 @@ class StreamServiceImpl implements StreamService {
     _webSocketService.sendMessage(json.encode(payload));
   }
 
+  @override
   void dispose() {
     _frameSubscription?.cancel();
     _frameSubject.close();

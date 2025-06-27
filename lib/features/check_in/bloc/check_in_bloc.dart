@@ -3,6 +3,10 @@ import 'dart:convert' as json;
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:camera/camera.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_event.dart'
+    hide Initialize;
+import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,10 +16,7 @@ import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/domain/entities/check_in_error.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
-import 'package:face_check_in_flutter/domain/entities/face_detection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
-import 'package:face_check_in_flutter/features/connection/connection.dart'
-    hide Initialize;
 
 import 'check_in_event.dart';
 import 'check_in_state.dart';
@@ -92,10 +93,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     emit(
       state.copyWith(
         connectionState: connectionState,
-        faceStatus:
-            connectionState.isActiveStreaming
-                ? state.faceStatus
-                : FaceDetectionStatus.none,
+        latestFrameData:
+            connectionState.isActiveStreaming ? state.latestFrameData : null,
       ),
     );
     await _handleCameraControl(connectionState);
@@ -118,7 +117,8 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     }
 
     // Stop camera when going to background retry (dispose completely)
-    if (state.connectionState == AppConnectionStatus.backgroundRetrying &&
+    if (state.connectionState.status ==
+            AppConnectionStatus.backgroundRetrying &&
         isCameraActive) {
       add(const CheckInEvent.stopCamera());
       return;
@@ -143,9 +143,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
   // Initialization handlers
   void _onInitialize(Initialize event, Emitter<CheckInState> emit) {
-    // Emit initializing state to show loading
-    emit(state.copyWith(cameraStatus: CameraStatus.initializing));
-
     // Initialize ConnectionBloc first
     _listenToConnectionBloc();
     _connectionBloc.add(const ConnectionEvent.initialize());
@@ -314,28 +311,17 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   }
 
   void _handleFrameResult(Map<String, dynamic> data) {
-    final frameDataMap = data['data'] as Map<String, dynamic>?;
-    if (frameDataMap == null) return;
-
     try {
       final response = FaceDetectionResponse.fromJson(data);
       add(FrameResultReceived(response: response));
     } catch (e) {
-      try {
-        final frameData = FaceDetectionData.fromJson(frameDataMap);
-        final response = FaceDetectionResponse(
-          type: 'frameResult',
-          data: frameData,
-        );
-        add(FrameResultReceived(response: response));
-      } catch (e2) {
-        final facesData =
-            (frameDataMap['faces'] as List<dynamic>?)
-                ?.map((e) => e as Map<String, dynamic>)
-                .toList() ??
-            [];
-        add(FrameResultReceived(faces: facesData));
-      }
+      // If parsing fails, treat as backend error instead of complex fallbacks
+      add(
+        ResponseErrorReceived(
+          error: 'ResponseParsingError',
+          message: 'Failed to parse frame result: $e',
+        ),
+      );
     }
   }
 
@@ -348,38 +334,13 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     FrameResultReceived event,
     Emitter<CheckInState> emit,
   ) {
-    List<FaceDetectionResult> faces = [];
-    FaceDetectionData? frameData;
-
-    final response = event.response;
-    if (response != null) {
-      faces = response.data.faces;
-      frameData = response.data;
-    } else if (event.faces != null) {
-      faces =
-          event.faces!
-              .map((faceData) => FaceDetectionResult.fromJson(faceData))
-              .toList();
-    }
-
-    final newStatus = _determineFaceStatus(faces);
+    final frameData = event.response.data;
     emit(
       state.copyWith(
-        faceStatus: newStatus,
-        responseError: null,
         latestFrameData: frameData,
+        currentError: null, // Clear any previous errors on successful frame
       ),
     );
-  }
-
-  FaceDetectionStatus _determineFaceStatus(List<FaceDetectionResult> faces) {
-    if (faces.isEmpty) return FaceDetectionStatus.noFace;
-    if (faces.length > 1) return FaceDetectionStatus.multipleFaces;
-
-    final hasRecognizedFace = faces.any((face) => face.isRecognized);
-    return hasRecognizedFace
-        ? FaceDetectionStatus.faceFound
-        : FaceDetectionStatus.faceUnrecognized;
   }
 
   void _onResponseErrorReceived(
@@ -388,8 +349,11 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   ) {
     emit(
       state.copyWith(
-        faceStatus: FaceDetectionStatus.error,
-        responseError: BackendError(error: event.error, message: event.message),
+        currentError: CheckInError(
+          message: event.message ?? event.error,
+          type: CheckInErrorType.backend,
+        ),
+        latestFrameData: null, // Clear frame data to show error status
       ),
     );
   }

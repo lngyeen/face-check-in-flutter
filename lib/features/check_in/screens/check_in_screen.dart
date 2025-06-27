@@ -2,25 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_event.dart';
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/camera_preview_widget.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/check_in_listeners.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/debug_information_card.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/debug_toggle_button.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/system_status_card.dart';
 
-import '../bloc/check_in_bloc.dart';
-import '../bloc/check_in_event.dart';
-import '../bloc/check_in_state.dart';
-import '../widgets/check_in_listeners.dart';
-import '../widgets/debug_information_card.dart';
-import '../widgets/debug_toggle_button.dart';
-import '../widgets/system_status_card.dart';
-
-/// Main check-in screen that displays camera preview and face detection interface
-///
-/// This screen provides:
-/// - Full-screen camera preview with face detection
-/// - Floating debug toggle button in top-right corner
-/// - System status monitoring (camera, connection, streaming, face detection)
-/// - Scrollable debug controls and information when debug mode is enabled
-/// - Loading indicators and error handling
-/// - Proper lifecycle management for resource cleanup
 class CheckInScreen extends StatefulWidget {
   const CheckInScreen({super.key});
 
