@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:face_check_in_flutter/core/constants/network_constants.dart';
 import 'package:face_check_in_flutter/core/services/permission_service.dart';
 import 'package:face_check_in_flutter/core/services/stream_service.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
@@ -56,8 +57,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
     on<ToggleDebugMode>(_onToggleDebugMode);
     on<WebSocketMessageReceived>(_onWebSocketMessageReceived);
-    on<FrameResultReceived>(_onFrameResultReceived);
-    on<ResponseErrorReceived>(_onResponseErrorReceived);
     on<ConnectionStateChanged>(_onConnectionStateChanged);
   }
 
@@ -264,39 +263,52 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         throw Exception('Invalid data type: ${event.data.runtimeType}');
       }
 
-      final type = data['type'] as String?;
+      final type = data[WebSocketResponseKeys.type] as String?;
       switch (type) {
-        case 'frameResult':
-          _handleFrameResult(data);
-        case 'error':
-          add(
-            ResponseErrorReceived(
-              error: data['error'] as String? ?? 'Unknown Backend Error',
-              message: data['message'] as String?,
+        case WebSocketResponseTypes.frameResult:
+          try {
+            final response = FaceDetectionResponse.fromJson(data);
+            final frameData = response.data;
+            emit(
+              state.copyWith(latestFrameData: frameData, currentError: null),
+            );
+          } catch (e) {
+            emit(
+              state.copyWith(
+                currentError: CheckInError(
+                  message: 'Failed to parse frame result: $e',
+                  type: CheckInErrorType.backend,
+                ),
+                latestFrameData: null,
+              ),
+            );
+          }
+          break;
+        case WebSocketResponseTypes.error:
+          emit(
+            state.copyWith(
+              currentError: CheckInError(
+                message:
+                    data[WebSocketResponseKeys.message] as String? ??
+                    (data[WebSocketResponseKeys.error] as String? ??
+                        'Unknown Backend Error'),
+                type: CheckInErrorType.backend,
+              ),
+              latestFrameData: null,
             ),
           );
+          break;
         default:
           break;
       }
     } catch (e) {
-      add(
-        ResponseErrorReceived(
-          error: 'MessageParsingError',
-          message: 'Failed to parse WebSocket data. Error: $e',
-        ),
-      );
-    }
-  }
-
-  void _handleFrameResult(Map<String, dynamic> data) {
-    try {
-      final response = FaceDetectionResponse.fromJson(data);
-      add(FrameResultReceived(response: response));
-    } catch (e) {
-      add(
-        ResponseErrorReceived(
-          error: 'ResponseParsingError',
-          message: 'Failed to parse frame result: $e',
+      emit(
+        state.copyWith(
+          currentError: CheckInError(
+            message: 'Failed to parse WebSocket data. Error: $e',
+            type: CheckInErrorType.backend,
+          ),
+          latestFrameData: null,
         ),
       );
     }
@@ -305,34 +317,6 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
   // UI and response handlers
   void _onToggleDebugMode(ToggleDebugMode event, Emitter<CheckInState> emit) {
     emit(state.copyWith(isDebugMode: !state.isDebugMode));
-  }
-
-  void _onFrameResultReceived(
-    FrameResultReceived event,
-    Emitter<CheckInState> emit,
-  ) {
-    final frameData = event.response.data;
-    emit(
-      state.copyWith(
-        latestFrameData: frameData,
-        currentError: null, // Clear any previous errors on successful frame
-      ),
-    );
-  }
-
-  void _onResponseErrorReceived(
-    ResponseErrorReceived event,
-    Emitter<CheckInState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        currentError: CheckInError(
-          message: event.message ?? event.error,
-          type: CheckInErrorType.backend,
-        ),
-        latestFrameData: null, // Clear frame data to show error status
-      ),
-    );
   }
 
   /// Start full flow - camera and auto-streaming

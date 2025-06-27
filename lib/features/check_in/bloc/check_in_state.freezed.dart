@@ -17,22 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CheckInState {
-  /// Current camera status
   CameraStatus get cameraStatus => throw _privateConstructorUsedError;
-
-  /// Camera controller instance
   CameraController? get cameraController => throw _privateConstructorUsedError;
-
-  /// Connection state
   ConnectionState get connectionState => throw _privateConstructorUsedError;
-
-  /// Latest frame data for full response access - contains faces, annotatedImage, timestamp, etc.
   FaceDetectionData? get latestFrameData => throw _privateConstructorUsedError;
-
-  /// Current error (combines camera, permission, and backend errors)
   CheckInError? get currentError => throw _privateConstructorUsedError;
-
-  /// Whether debug mode is enabled
   bool get isDebugMode => throw _privateConstructorUsedError;
 
   /// Create a copy of CheckInState
@@ -257,29 +246,18 @@ class _$CheckInStateImpl extends _CheckInState {
     this.isDebugMode = false,
   }) : super._();
 
-  /// Current camera status
   @override
   @JsonKey()
   final CameraStatus cameraStatus;
-
-  /// Camera controller instance
   @override
   final CameraController? cameraController;
-
-  /// Connection state
   @override
   @JsonKey()
   final ConnectionState connectionState;
-
-  /// Latest frame data for full response access - contains faces, annotatedImage, timestamp, etc.
   @override
   final FaceDetectionData? latestFrameData;
-
-  /// Current error (combines camera, permission, and backend errors)
   @override
   final CheckInError? currentError;
-
-  /// Whether debug mode is enabled
   @override
   @JsonKey()
   final bool isDebugMode;
@@ -339,27 +317,16 @@ abstract class _CheckInState extends CheckInState {
   }) = _$CheckInStateImpl;
   const _CheckInState._() : super._();
 
-  /// Current camera status
   @override
   CameraStatus get cameraStatus;
-
-  /// Camera controller instance
   @override
   CameraController? get cameraController;
-
-  /// Connection state
   @override
   ConnectionState get connectionState;
-
-  /// Latest frame data for full response access - contains faces, annotatedImage, timestamp, etc.
   @override
   FaceDetectionData? get latestFrameData;
-
-  /// Current error (combines camera, permission, and backend errors)
   @override
   CheckInError? get currentError;
-
-  /// Whether debug mode is enabled
   @override
   bool get isDebugMode;
 

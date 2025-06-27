@@ -24,10 +24,6 @@ mixin _$CheckInEvent {
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
-    required TResult Function(FaceDetectionResponse response)
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
   }) => throw _privateConstructorUsedError;
@@ -38,8 +34,6 @@ mixin _$CheckInEvent {
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
-    TResult? Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,8 +43,6 @@ mixin _$CheckInEvent {
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
-    TResult Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -62,9 +54,6 @@ mixin _$CheckInEvent {
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
     required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
   }) => throw _privateConstructorUsedError;
@@ -75,8 +64,6 @@ mixin _$CheckInEvent {
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -86,8 +73,6 @@ mixin _$CheckInEvent {
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -163,10 +148,6 @@ class _$InitializeImpl implements Initialize {
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
-    required TResult Function(FaceDetectionResponse response)
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
   }) {
@@ -181,8 +162,6 @@ class _$InitializeImpl implements Initialize {
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
-    TResult? Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
   }) {
     return initialize?.call();
@@ -196,8 +175,6 @@ class _$InitializeImpl implements Initialize {
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
-    TResult Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -216,9 +193,6 @@ class _$InitializeImpl implements Initialize {
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
     required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
   }) {
@@ -233,8 +207,6 @@ class _$InitializeImpl implements Initialize {
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
   }) {
     return initialize?.call(this);
@@ -248,8 +220,6 @@ class _$InitializeImpl implements Initialize {
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -312,10 +282,6 @@ class _$StartCameraImpl implements StartCamera {
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
-    required TResult Function(FaceDetectionResponse response)
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
   }) {
@@ -330,8 +296,6 @@ class _$StartCameraImpl implements StartCamera {
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
-    TResult? Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
   }) {
     return startCamera?.call();
@@ -345,8 +309,6 @@ class _$StartCameraImpl implements StartCamera {
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
-    TResult Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -365,9 +327,6 @@ class _$StartCameraImpl implements StartCamera {
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
     required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
   }) {
@@ -382,8 +341,6 @@ class _$StartCameraImpl implements StartCamera {
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
   }) {
     return startCamera?.call(this);
@@ -397,8 +354,6 @@ class _$StartCameraImpl implements StartCamera {
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -461,10 +416,6 @@ class _$StopCameraImpl implements StopCamera {
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
-    required TResult Function(FaceDetectionResponse response)
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
   }) {
@@ -479,8 +430,6 @@ class _$StopCameraImpl implements StopCamera {
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
-    TResult? Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
   }) {
     return stopCamera?.call();
@@ -494,8 +443,6 @@ class _$StopCameraImpl implements StopCamera {
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
-    TResult Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -514,9 +461,6 @@ class _$StopCameraImpl implements StopCamera {
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
     required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
   }) {
@@ -531,8 +475,6 @@ class _$StopCameraImpl implements StopCamera {
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
   }) {
     return stopCamera?.call(this);
@@ -546,8 +488,6 @@ class _$StopCameraImpl implements StopCamera {
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -640,10 +580,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
-    required TResult Function(FaceDetectionResponse response)
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
   }) {
@@ -658,8 +594,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
-    TResult? Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
   }) {
     return webSocketMessageReceived?.call(data);
@@ -673,8 +607,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
-    TResult Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -693,9 +625,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
     required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
   }) {
@@ -710,8 +639,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
   }) {
     return webSocketMessageReceived?.call(this);
@@ -725,8 +652,6 @@ class _$WebSocketMessageReceivedImpl implements WebSocketMessageReceived {
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -798,10 +723,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
-    required TResult Function(FaceDetectionResponse response)
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
   }) {
@@ -816,8 +737,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
-    TResult? Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
   }) {
     return toggleDebugMode?.call();
@@ -831,8 +750,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
-    TResult Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -851,9 +768,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
     required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
   }) {
@@ -868,8 +782,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
   }) {
     return toggleDebugMode?.call(this);
@@ -883,8 +795,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -897,410 +807,6 @@ class _$ToggleDebugModeImpl implements ToggleDebugMode {
 
 abstract class ToggleDebugMode implements CheckInEvent {
   const factory ToggleDebugMode() = _$ToggleDebugModeImpl;
-}
-
-/// @nodoc
-abstract class _$$FrameResultReceivedImplCopyWith<$Res> {
-  factory _$$FrameResultReceivedImplCopyWith(
-    _$FrameResultReceivedImpl value,
-    $Res Function(_$FrameResultReceivedImpl) then,
-  ) = __$$FrameResultReceivedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({FaceDetectionResponse response});
-
-  $FaceDetectionResponseCopyWith<$Res> get response;
-}
-
-/// @nodoc
-class __$$FrameResultReceivedImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$FrameResultReceivedImpl>
-    implements _$$FrameResultReceivedImplCopyWith<$Res> {
-  __$$FrameResultReceivedImplCopyWithImpl(
-    _$FrameResultReceivedImpl _value,
-    $Res Function(_$FrameResultReceivedImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? response = null}) {
-    return _then(
-      _$FrameResultReceivedImpl(
-        response:
-            null == response
-                ? _value.response
-                : response // ignore: cast_nullable_to_non_nullable
-                    as FaceDetectionResponse,
-      ),
-    );
-  }
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $FaceDetectionResponseCopyWith<$Res> get response {
-    return $FaceDetectionResponseCopyWith<$Res>(_value.response, (value) {
-      return _then(_value.copyWith(response: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$FrameResultReceivedImpl implements FrameResultReceived {
-  const _$FrameResultReceivedImpl({required this.response});
-
-  @override
-  final FaceDetectionResponse response;
-
-  @override
-  String toString() {
-    return 'CheckInEvent.frameResultReceived(response: $response)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FrameResultReceivedImpl &&
-            (identical(other.response, response) ||
-                other.response == response));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, response);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FrameResultReceivedImplCopyWith<_$FrameResultReceivedImpl> get copyWith =>
-      __$$FrameResultReceivedImplCopyWithImpl<_$FrameResultReceivedImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function() startCamera,
-    required TResult Function() stopCamera,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(FaceDetectionResponse response)
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-  }) {
-    return frameResultReceived(response);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function()? startCamera,
-    TResult? Function()? stopCamera,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-  }) {
-    return frameResultReceived?.call(response);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function()? startCamera,
-    TResult Function()? stopCamera,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function()? toggleDebugMode,
-    TResult Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    required TResult orElse(),
-  }) {
-    if (frameResultReceived != null) {
-      return frameResultReceived(response);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
-    required TResult Function(StartCamera value) startCamera,
-    required TResult Function(StopCamera value) stopCamera,
-    required TResult Function(WebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
-    required TResult Function(ConnectionStateChanged value)
-    connectionStateChanged,
-  }) {
-    return frameResultReceived(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
-    TResult? Function(StartCamera value)? startCamera,
-    TResult? Function(StopCamera value)? stopCamera,
-    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-  }) {
-    return frameResultReceived?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialize value)? initialize,
-    TResult Function(StartCamera value)? startCamera,
-    TResult Function(StopCamera value)? stopCamera,
-    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    required TResult orElse(),
-  }) {
-    if (frameResultReceived != null) {
-      return frameResultReceived(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FrameResultReceived implements CheckInEvent {
-  const factory FrameResultReceived({
-    required final FaceDetectionResponse response,
-  }) = _$FrameResultReceivedImpl;
-
-  FaceDetectionResponse get response;
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FrameResultReceivedImplCopyWith<_$FrameResultReceivedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ResponseErrorReceivedImplCopyWith<$Res> {
-  factory _$$ResponseErrorReceivedImplCopyWith(
-    _$ResponseErrorReceivedImpl value,
-    $Res Function(_$ResponseErrorReceivedImpl) then,
-  ) = __$$ResponseErrorReceivedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String error, String? message});
-}
-
-/// @nodoc
-class __$$ResponseErrorReceivedImplCopyWithImpl<$Res>
-    extends _$CheckInEventCopyWithImpl<$Res, _$ResponseErrorReceivedImpl>
-    implements _$$ResponseErrorReceivedImplCopyWith<$Res> {
-  __$$ResponseErrorReceivedImplCopyWithImpl(
-    _$ResponseErrorReceivedImpl _value,
-    $Res Function(_$ResponseErrorReceivedImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? error = null, Object? message = freezed}) {
-    return _then(
-      _$ResponseErrorReceivedImpl(
-        error:
-            null == error
-                ? _value.error
-                : error // ignore: cast_nullable_to_non_nullable
-                    as String,
-        message:
-            freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$ResponseErrorReceivedImpl implements ResponseErrorReceived {
-  const _$ResponseErrorReceivedImpl({required this.error, this.message});
-
-  @override
-  final String error;
-  @override
-  final String? message;
-
-  @override
-  String toString() {
-    return 'CheckInEvent.responseErrorReceived(error: $error, message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ResponseErrorReceivedImpl &&
-            (identical(other.error, error) || other.error == error) &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, error, message);
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ResponseErrorReceivedImplCopyWith<_$ResponseErrorReceivedImpl>
-  get copyWith =>
-      __$$ResponseErrorReceivedImplCopyWithImpl<_$ResponseErrorReceivedImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function() startCamera,
-    required TResult Function() stopCamera,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(FaceDetectionResponse response)
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-  }) {
-    return responseErrorReceived(error, message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function()? startCamera,
-    TResult? Function()? stopCamera,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-  }) {
-    return responseErrorReceived?.call(error, message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function()? startCamera,
-    TResult Function()? stopCamera,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function()? toggleDebugMode,
-    TResult Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    required TResult orElse(),
-  }) {
-    if (responseErrorReceived != null) {
-      return responseErrorReceived(error, message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
-    required TResult Function(StartCamera value) startCamera,
-    required TResult Function(StopCamera value) stopCamera,
-    required TResult Function(WebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
-    required TResult Function(ConnectionStateChanged value)
-    connectionStateChanged,
-  }) {
-    return responseErrorReceived(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
-    TResult? Function(StartCamera value)? startCamera,
-    TResult? Function(StopCamera value)? stopCamera,
-    TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
-  }) {
-    return responseErrorReceived?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialize value)? initialize,
-    TResult Function(StartCamera value)? startCamera,
-    TResult Function(StopCamera value)? stopCamera,
-    TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
-    TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
-    TResult Function(ConnectionStateChanged value)? connectionStateChanged,
-    required TResult orElse(),
-  }) {
-    if (responseErrorReceived != null) {
-      return responseErrorReceived(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ResponseErrorReceived implements CheckInEvent {
-  const factory ResponseErrorReceived({
-    required final String error,
-    final String? message,
-  }) = _$ResponseErrorReceivedImpl;
-
-  String get error;
-  String? get message;
-
-  /// Create a copy of CheckInEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ResponseErrorReceivedImplCopyWith<_$ResponseErrorReceivedImpl>
-  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1395,10 +901,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     required TResult Function() stopCamera,
     required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function() toggleDebugMode,
-    required TResult Function(FaceDetectionResponse response)
-    frameResultReceived,
-    required TResult Function(String error, String? message)
-    responseErrorReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
   }) {
@@ -1413,8 +915,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     TResult? Function()? stopCamera,
     TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function()? toggleDebugMode,
-    TResult? Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult? Function(String error, String? message)? responseErrorReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
   }) {
     return connectionStateChanged?.call(connectionState);
@@ -1428,8 +928,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     TResult Function()? stopCamera,
     TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function()? toggleDebugMode,
-    TResult Function(FaceDetectionResponse response)? frameResultReceived,
-    TResult Function(String error, String? message)? responseErrorReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     required TResult orElse(),
   }) {
@@ -1448,9 +946,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     required TResult Function(WebSocketMessageReceived value)
     webSocketMessageReceived,
     required TResult Function(ToggleDebugMode value) toggleDebugMode,
-    required TResult Function(FrameResultReceived value) frameResultReceived,
-    required TResult Function(ResponseErrorReceived value)
-    responseErrorReceived,
     required TResult Function(ConnectionStateChanged value)
     connectionStateChanged,
   }) {
@@ -1465,8 +960,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult? Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(FrameResultReceived value)? frameResultReceived,
-    TResult? Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult? Function(ConnectionStateChanged value)? connectionStateChanged,
   }) {
     return connectionStateChanged?.call(this);
@@ -1480,8 +973,6 @@ class _$ConnectionStateChangedImpl implements ConnectionStateChanged {
     TResult Function(StopCamera value)? stopCamera,
     TResult Function(WebSocketMessageReceived value)? webSocketMessageReceived,
     TResult Function(ToggleDebugMode value)? toggleDebugMode,
-    TResult Function(FrameResultReceived value)? frameResultReceived,
-    TResult Function(ResponseErrorReceived value)? responseErrorReceived,
     TResult Function(ConnectionStateChanged value)? connectionStateChanged,
     required TResult orElse(),
   }) {
