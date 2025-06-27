@@ -283,7 +283,6 @@
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				A5405098C99471A7A5DAD075 /* [CP] Embed Pods Frameworks */,
 				75D309722116E15A2E700B77 /* [CP] Copy Pods Resources */,
-				9CCB2C5A7DF1CB2C547707A5 /* [CP-User] Compile C++ Source */,
 			);
 			buildRules = (
 			);
@@ -459,16 +458,6 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
 		};
-		9CCB2C5A7DF1CB2C547707A5 /* [CP-User] Compile C++ Source */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			name = "[CP-User] Compile C++ Source";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "    /usr/bin/clang -x c++ -std=c++11 -c \"$SRCROOT/../src/native/yuv_converter.cpp\" -o \"$SRCROOT/../src/native/yuv_converter.o\"\n";
-		};
 		A5405098C99471A7A5DAD075 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -542,6 +531,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 493KGFEVC3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = "Profile-prod";
 		};
@@ -613,6 +604,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.owt.face_check_in_flutter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -625,6 +618,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 493KGFEVC3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = "Release-dev";
 		};
@@ -901,6 +896,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 493KGFEVC3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = "Debug-prod";
 		};
@@ -985,6 +982,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 493KGFEVC3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = "Release-prod";
 		};
@@ -1136,6 +1135,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 493KGFEVC3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = "Release-stag";
 		};
@@ -1266,6 +1267,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.owt.face_check_in_flutter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1289,6 +1292,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.owt.face_check_in_flutter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1448,6 +1453,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 493KGFEVC3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = "Profile-dev";
 		};
@@ -1457,6 +1464,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 493KGFEVC3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = "Debug-dev";
 		};
@@ -1538,6 +1547,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 493KGFEVC3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = "Profile-stag";
 		};
@@ -1547,6 +1558,8 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 493KGFEVC3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = "Debug-stag";
 		};

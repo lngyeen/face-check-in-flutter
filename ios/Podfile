@@ -44,12 +44,6 @@ target 'Runner' do
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 
-  # This is a workaround to include C++ files in the build.
-  # A better approach is to add them manually in Xcode.
-  script_phase :name => 'Compile C++ Source', :script => <<-'SCRIPT'
-    /usr/bin/clang -x c++ -std=c++11 -c "$SRCROOT/../src/native/yuv_converter.cpp" -o "$SRCROOT/../src/native/yuv_converter.o"
-  SCRIPT
-  
   target 'RunnerTests' do
     inherit! :search_paths
   end

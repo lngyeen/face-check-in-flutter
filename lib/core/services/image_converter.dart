@@ -41,9 +41,11 @@ abstract class ImageConverter {
   ]) async {
     try {
       // Use Isolate.run to run the conversion in a separate isolate.
-      final result = await Isolate.run(
-        () => processImageInIsolateWithMetadata(cameraImage, sensorOrientation),
-      );
+      final result =
+      // await Isolate.run(
+      //() =>
+      processImageInIsolateWithMetadata(cameraImage, sensorOrientation);
+      //);
 
       if (result == null) {
         return null;

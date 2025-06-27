@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   # Set the compiler options
   s.xcconfig = {
     'CLANG_CXX_LANGUAGE_STANDARD' => 'c++11',
-    'CLANG_CXX_LIBRARY' => 'libc++'
+    'CLANG_CXX_LIBRARY' => 'libc++',
+    'STRIP_STYLE' => 'non-global'
   }
 end 
