@@ -103,7 +103,7 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     StartStreaming event,
     Emitter<ConnectionState> emit,
   ) async {
-    if (!state.isConnectionReady) {
+    if (!state.hasConnection) {
       emit(state.copyWith(streamingStatus: StreamingStatus.error));
       return;
     }

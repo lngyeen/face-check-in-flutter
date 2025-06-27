@@ -30,7 +30,7 @@ class ConnectionLostWidget extends StatelessWidget {
               _shouldShowRetryButton(connectionStatus)
                   ? () {
                     context.read<ConnectionBloc>().add(
-                      const ConnectionEvent.initialize(),
+                      const ConnectionEvent.retryConnection(),
                     );
                   }
                   : null,

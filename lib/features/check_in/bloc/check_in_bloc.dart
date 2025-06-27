@@ -118,12 +118,12 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
       ),
     );
 
-    final isConnectionReady = connectionState.isConnectionReady;
+    final hasConnection = connectionState.hasConnection;
     final isCameraActive =
         state.cameraStatus == CameraStatus.opening ||
         state.cameraStatus == CameraStatus.initializing;
 
-    if (isConnectionReady && !isCameraActive) {
+    if (hasConnection && !isCameraActive) {
       add(const CheckInEvent.startCamera());
       return;
     }
@@ -135,7 +135,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
       return;
     }
 
-    if (isCameraActive && !isConnectionReady) {
+    if (isCameraActive && !hasConnection) {
       add(const CheckInEvent.stopCamera());
       return;
     }

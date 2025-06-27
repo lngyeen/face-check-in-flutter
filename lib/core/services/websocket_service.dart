@@ -161,6 +161,7 @@ class WebSocketService {
     try {
       _updateStatus(WebSocketConnectionStatus.connecting);
       final channel = WebSocketChannel.connect(Uri.parse(_url));
+      _channel = channel;
 
       _subscription = channel.stream.listen(
         _handleMessage,
@@ -168,8 +169,6 @@ class WebSocketService {
         onDone: _handleDone,
         cancelOnError: true,
       );
-
-      _channel = channel;
 
       // Wait for connection to be ready with timeout
       await channel.ready.timeout(

@@ -14,8 +14,8 @@ class ConnectionState with _$ConnectionState {
 
   const ConnectionState._();
 
-  bool get isConnectionReady => status == AppConnectionStatus.connected;
+  bool get hasConnection => status == AppConnectionStatus.connected;
 
   bool get isActiveStreaming =>
-      isConnectionReady && streamingStatus == StreamingStatus.active;
+      hasConnection && streamingStatus == StreamingStatus.active;
 }
