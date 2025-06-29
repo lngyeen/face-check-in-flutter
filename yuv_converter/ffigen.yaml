@@ -1,0 +1,27 @@
+# Run with `dart run ffigen --config ffigen.yaml`.
+name: YuvConverterBindings
+description: |
+  Bindings for `src/yuv_converter.h`.
+
+  Regenerate bindings with `dart run ffigen --config ffigen.yaml`.
+output: 'lib/yuv_converter_bindings_generated.dart'
+headers:
+  entry-points:
+    - 'src/yuv_converter.h'
+  include-directives:
+    - 'src/yuv_converter.h'
+preamble: |
+  // ignore_for_file: always_specify_types
+  // ignore_for_file: camel_case_types
+  // ignore_for_file: non_constant_identifier_names
+comments:
+  style: any
+  length: full
+functions:
+  include:
+    - convert_yuv_to_rgb_planar
+    - convert_yuv_to_rgb_biplanar
+    - free_image_memory
+structs:
+  include:
+    - RgbImage

@@ -23,7 +23,7 @@ abstract class StreamService {
 
   Future<void> stopStream();
 
-  void addFrame(CameraImage frame);
+  void addFrame(CameraImage frame, int sensorOrientation);
 
   void dispose();
 }
@@ -39,7 +39,7 @@ class StreamServiceImpl implements StreamService {
   Duration get _throttleDuration => Duration(milliseconds: 1000 ~/ _maxFps);
 
   // RxDart subjects for frame processing
-  final _frameSubject = PublishSubject<CameraImage>();
+  final _frameSubject = PublishSubject<(CameraImage, int)>();
   StreamSubscription? _frameSubscription;
 
   // Stream state
@@ -91,13 +91,16 @@ class StreamServiceImpl implements StreamService {
   }
 
   @override
-  void addFrame(CameraImage frame) {
+  void addFrame(CameraImage frame, int sensorOrientation) {
     if (!_isStreaming) return;
-    _frameSubject.add(frame);
+    _frameSubject.add((frame, sensorOrientation));
   }
 
-  Future<ProcessedFrame> _processFrame(CameraImage cameraImage) async {
+  Future<(ProcessedFrame, int)> _processFrame(
+    (CameraImage, int) frameData,
+  ) async {
     try {
+      final (cameraImage, sensorOrientation) = frameData;
       // Use the new method that returns ProcessedFrame directly
       final processedFrame =
           await ImageConverter.convertCameraImageToProcessedFrame(cameraImage);
@@ -106,22 +109,24 @@ class StreamServiceImpl implements StreamService {
         throw Exception('Failed to convert camera image');
       }
 
-      return processedFrame;
+      return (processedFrame, sensorOrientation);
     } catch (e) {
       throw Exception('Frame processing failed: $e');
     }
   }
 
-  void _sendFrameToWebSocket(ProcessedFrame frame) {
+  void _sendFrameToWebSocket((ProcessedFrame, int) frameData) {
     if (_webSocketService.currentStatus !=
         WebSocketConnectionStatus.connected) {
       return;
     }
 
+    final (frame, sensorOrientation) = frameData;
     final payload = {
       'type': 'processFrame',
       'image': frame.base64Image,
       'timestamp': frame.timestamp.millisecondsSinceEpoch,
+      'sensor_orientation': sensorOrientation,
     };
 
     _webSocketService.sendMessage(json.encode(payload));

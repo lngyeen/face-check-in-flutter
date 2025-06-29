@@ -139,9 +139,9 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     _streamService.setMaxFps(event.maxFps);
   }
 
-  void addFrame(dynamic frame) {
+  void addFrame(dynamic frame, int sensorOrientation) {
     if (state.isActiveStreaming) {
-      _streamService.addFrame(frame);
+      _streamService.addFrame(frame, sensorOrientation);
     }
   }
 

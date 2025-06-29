@@ -224,7 +224,10 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
       await controller.setExposureMode(ExposureMode.auto);
       await controller.startImageStream((CameraImage image) {
         if (_connectionBloc.state.isActiveStreaming) {
-          _connectionBloc.addFrame(image);
+          _connectionBloc.addFrame(
+            image,
+            controller.description.sensorOrientation,
+          );
         }
       });
 

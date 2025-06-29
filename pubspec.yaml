@@ -31,6 +31,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  yuv_converter:
+    path: ./yuv_converter
+  bloc: ^8.1.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -38,7 +41,6 @@ dependencies:
 
   # BLoC State Management
   flutter_bloc: ^8.0.0
-  bloc: ^8.0.0
   bloc_concurrency: ^0.2.5
 
   # WebSocket Communication
