@@ -214,7 +214,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
 
       final controller = CameraController(
         frontCameras.first,
-        ResolutionPreset.high,
+        ResolutionPreset.medium,
         enableAudio: false,
         imageFormatGroup: ImageFormatGroup.yuv420,
       );

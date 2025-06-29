@@ -27,23 +27,21 @@ class ProcessedFrame {
 abstract class ImageConverter {
   // Use the singleton instance of the YuvConverter.
 
-  /// Converts a [CameraImage] to a [ProcessedFrame] with metadata.
+  /// Converts a [CameraImage] to a [ProcessedFrame] synchronously.
   ///
-  /// This method handles platform-specific image formats, corrects for sensor
-  /// orientation, and produces a ProcessedFrame containing a base64 string
-  /// and the final [img.Image] object.
-  static Future<ProcessedFrame?> convertCameraImageToProcessedFrame(
+  /// This is a blocking call and should ONLY be called from a background isolate.
+  static ProcessedFrame? convertCameraImageToProcessedFrameSync(
     CameraImage cameraImage, [
     int sensorOrientation = 0,
-  ]) async {
+  ]) {
     try {
       img.Image? image;
 
       if (cameraImage.format.group == ImageFormatGroup.yuv420) {
-        // Asynchronously convert YUV to RGB using the helper isolate in the package.
-        image = await _convertYUV420(cameraImage);
+        // Synchronously convert YUV to RGB. This is a blocking call.
+        image = _convertYUV420Sync(cameraImage);
       } else if (cameraImage.format.group == ImageFormatGroup.bgra8888) {
-        // Directly convert BGRA on the main thread (less intensive).
+        // Directly convert BGRA (less intensive).
         image = _convertBGRA8888(cameraImage);
       } else {
         log('Unsupported image format: ${cameraImage.format.group}');
@@ -55,7 +53,8 @@ abstract class ImageConverter {
         return null;
       }
 
-      // Rotation and encoding are less intensive and can run on the main thread.
+      // Rotation and encoding are less intensive and can run on the main thread,
+      // but are kept here for simplicity since we're already on a worker.
       final rotatedImage = _rotateImage(image, sensorOrientation);
       final base64String = _encodeImageToBase64(rotatedImage);
 
@@ -66,7 +65,7 @@ abstract class ImageConverter {
       );
     } catch (e, stackTrace) {
       log(
-        'Error in convertCameraImageToProcessedFrame: $e',
+        'Error in convertCameraImageToProcessedFrameSync: $e',
         stackTrace: stackTrace,
       );
       return null;
@@ -80,14 +79,11 @@ abstract class ImageConverter {
     return base64Encode(jpegBytes);
   }
 
-  /// A secondary dispatcher for YUV420 format. It uses the FFI-based
-  /// converter to transform YUV planes into an RGB image.
-  static Future<img.Image?> _convertYUV420(CameraImage image) async {
+  /// Synchronous version of [_convertYUV420].
+  static img.Image? _convertYUV420Sync(CameraImage image) {
     try {
-      // Call the async method which uses an isolate under the hood.
-      final Uint8List? rgbBytes = await yuv_converter.convertYuvToRgbAsync(
-        image,
-      );
+      // Call the sync method which blocks the current thread.
+      final Uint8List? rgbBytes = yuv_converter.convertYuvToRgb(image);
 
       if (rgbBytes == null) {
         log('YUV to RGB conversion returned null.');
@@ -95,7 +91,6 @@ abstract class ImageConverter {
       }
 
       // Create an img.Image from the raw RGB bytes returned by the FFI call.
-      // The C code produces 3-byte RGB, so we use ChannelOrder.rgb.
       return img.Image.fromBytes(
         width: image.width,
         height: image.height,
@@ -103,7 +98,10 @@ abstract class ImageConverter {
         order: img.ChannelOrder.rgb,
       );
     } catch (e, stackTrace) {
-      log('Failed to convert YUV to RGB using FFI: $e', stackTrace: stackTrace);
+      log(
+        'Failed to convert YUV to RGB using FFI (sync): $e',
+        stackTrace: stackTrace,
+      );
       return null;
     }
   }
