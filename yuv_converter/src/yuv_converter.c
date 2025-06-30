@@ -32,6 +32,7 @@ typedef struct {
     uint8_t* rgb_data;
     int start_row;
     int end_row;
+    int format;
 } ThreadArgsBiplanar;
 
 // Worker function for planar (I420) conversion
@@ -163,9 +164,16 @@ void* convert_biplanar_worker(void* args) {
             // Load Y and de-interleaved UV
             uint8x8_t y_top_u8 = vld1_u8(y_ptr_top);
             uint8x8_t y_bottom_u8 = vld1_u8(y_ptr_bottom);
-            uint8x8x2_t uv_u8 = vld2_u8(uv_ptr); // Loads {U0,V0,U1,V1...} into two vectors {U0,U1...} and {V0,V1...}
-            uint8x8_t u_u8 = uv_u8.val[0];
-            uint8x8_t v_u8 = uv_u8.val[1];
+            uint8x8x2_t uv_u8_deinterleaved = vld2_u8(uv_ptr);
+
+            uint8x8_t u_u8, v_u8;
+            if (thread_args->format == NV21) { // VUVU format
+                u_u8 = uv_u8_deinterleaved.val[1];
+                v_u8 = uv_u8_deinterleaved.val[0];
+            } else { // NV12, UVUV format
+                u_u8 = uv_u8_deinterleaved.val[0];
+                v_u8 = uv_u8_deinterleaved.val[1];
+            }
             
             // Convert to signed 16-bit
             int16x8_t y_top_s16 = vreinterpretq_s16_u16(vmovl_u8(y_top_u8));
@@ -366,7 +374,8 @@ FFI_PLUGIN_EXPORT RgbImage* convert_yuv_to_rgb_biplanar(
     int uv_stride,
     int uv_pixel_stride,
     int width,
-    int height
+    int height,
+    int format
 ) {
 #if defined(__ARM_NEON) || defined(__ARM_NEON__)
     static int neon_log_printed = 0;
@@ -404,6 +413,7 @@ FFI_PLUGIN_EXPORT RgbImage* convert_yuv_to_rgb_biplanar(
         thread_args[i].rgb_data = rgb_data;
         thread_args[i].start_row = i * rows_per_thread;
         thread_args[i].end_row = (i + 1) * rows_per_thread;
+        thread_args[i].format = format;
 
         if (thread_args[i].end_row > height) {
             thread_args[i].end_row = height;
@@ -455,8 +465,15 @@ FFI_PLUGIN_EXPORT RgbImage* convert_yuv_to_rgb_biplanar(
             int uv_index = (y_coord / 2) * uv_stride + (x_coord / 2) * uv_pixel_stride;
             
             uint8_t y = y_plane[y_index];
-            uint8_t u = uv_plane[uv_index];
-            uint8_t v = uv_plane[uv_index + 1];
+            uint8_t u, v;
+
+            if (format == NV21) { // VUVU...
+                v = uv_plane[uv_index];
+                u = uv_plane[uv_index + 1];
+            } else { // NV12, UVUV...
+                u = uv_plane[uv_index];
+                v = uv_plane[uv_index + 1];
+            }
 
             int rgb_index = (y_coord * width + x_coord) * 3;
             yuv_to_rgb(y, u, v, &rgb_data[rgb_index], &rgb_data[rgb_index + 1], &rgb_data[rgb_index + 2]);

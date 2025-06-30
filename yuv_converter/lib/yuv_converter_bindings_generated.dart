@@ -78,6 +78,7 @@ class YuvConverterBindings {
     int uv_pixel_stride,
     int width,
     int height,
+    int format,
   ) {
     return _convert_yuv_to_rgb_biplanar(
       y_plane,
@@ -87,6 +88,7 @@ class YuvConverterBindings {
       uv_pixel_stride,
       width,
       height,
+      format,
     );
   }
 
@@ -99,11 +101,12 @@ class YuvConverterBindings {
               ffi.Int,
               ffi.Int,
               ffi.Int,
+              ffi.Int,
               ffi.Int)>>('convert_yuv_to_rgb_biplanar');
   late final _convert_yuv_to_rgb_biplanar =
       _convert_yuv_to_rgb_biplanarPtr.asFunction<
           ffi.Pointer<RgbImage> Function(ffi.Pointer<ffi.Uint8>,
-              ffi.Pointer<ffi.Uint8>, int, int, int, int, int)>();
+              ffi.Pointer<ffi.Uint8>, int, int, int, int, int, int)>();
 
   void free_image_memory(
     ffi.Pointer<RgbImage> image,
@@ -129,4 +132,22 @@ final class RgbImage extends ffi.Struct {
 
   @ffi.Int()
   external int height;
+}
+
+/// Enum to specify the bi-planar YUV format.
+enum BiplanarFormat {
+  /// U plane is first, V plane is second (UVUV...)
+  NV12(0),
+
+  /// V plane is first, U plane is second (VUVU...)
+  NV21(1);
+
+  final int value;
+  const BiplanarFormat(this.value);
+
+  static BiplanarFormat fromValue(int value) => switch (value) {
+        0 => NV12,
+        1 => NV21,
+        _ => throw ArgumentError('Unknown value for BiplanarFormat: $value'),
+      };
 }

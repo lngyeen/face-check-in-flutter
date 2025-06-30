@@ -22,6 +22,12 @@ typedef struct {
     int height;
 } RgbImage;
 
+// Enum to specify the bi-planar YUV format.
+typedef enum {
+    NV12, // U plane is first, V plane is second (UVUV...)
+    NV21  // V plane is first, U plane is second (VUVU...)
+} BiplanarFormat;
+
 // For 3-plane YUV (I420 format)
 FFI_PLUGIN_EXPORT RgbImage* convert_yuv_to_rgb_planar(
     uint8_t* y_plane,
@@ -41,7 +47,8 @@ FFI_PLUGIN_EXPORT RgbImage* convert_yuv_to_rgb_biplanar(
     int uv_stride,
     int uv_pixel_stride,
     int width,
-    int height
+    int height,
+    int format
 );
 
 FFI_PLUGIN_EXPORT void free_image_memory(RgbImage* image);

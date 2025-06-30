@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
-import 'package:face_check_in_flutter/domain/entities/websocket_connection_status.dart';
 
 part 'connection_state.freezed.dart';
 
