@@ -19,7 +19,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ConnectionEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
+    required TResult Function() connect,
     required TResult Function() retryConnection,
     required TResult Function() disconnect,
     required TResult Function(AppConnectionStatus status)
@@ -27,14 +27,14 @@ mixin _$ConnectionEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
+    TResult? Function()? connect,
     TResult? Function()? retryConnection,
     TResult? Function()? disconnect,
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
+    TResult Function()? connect,
     TResult Function()? retryConnection,
     TResult Function()? disconnect,
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
@@ -42,7 +42,7 @@ mixin _$ConnectionEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
+    required TResult Function(Connect value) connect,
     required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(Disconnect value) disconnect,
     required TResult Function(AppConnectionStatusChanged value)
@@ -50,7 +50,7 @@ mixin _$ConnectionEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
+    TResult? Function(Connect value)? connect,
     TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(Disconnect value)? disconnect,
     TResult? Function(AppConnectionStatusChanged value)?
@@ -58,7 +58,7 @@ mixin _$ConnectionEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialize value)? initialize,
+    TResult Function(Connect value)? connect,
     TResult Function(RetryConnection value)? retryConnection,
     TResult Function(Disconnect value)? disconnect,
     TResult Function(AppConnectionStatusChanged value)?
@@ -90,20 +90,20 @@ class _$ConnectionEventCopyWithImpl<$Res, $Val extends ConnectionEvent>
 }
 
 /// @nodoc
-abstract class _$$InitializeImplCopyWith<$Res> {
-  factory _$$InitializeImplCopyWith(
-    _$InitializeImpl value,
-    $Res Function(_$InitializeImpl) then,
-  ) = __$$InitializeImplCopyWithImpl<$Res>;
+abstract class _$$ConnectImplCopyWith<$Res> {
+  factory _$$ConnectImplCopyWith(
+    _$ConnectImpl value,
+    $Res Function(_$ConnectImpl) then,
+  ) = __$$ConnectImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitializeImplCopyWithImpl<$Res>
-    extends _$ConnectionEventCopyWithImpl<$Res, _$InitializeImpl>
-    implements _$$InitializeImplCopyWith<$Res> {
-  __$$InitializeImplCopyWithImpl(
-    _$InitializeImpl _value,
-    $Res Function(_$InitializeImpl) _then,
+class __$$ConnectImplCopyWithImpl<$Res>
+    extends _$ConnectionEventCopyWithImpl<$Res, _$ConnectImpl>
+    implements _$$ConnectImplCopyWith<$Res> {
+  __$$ConnectImplCopyWithImpl(
+    _$ConnectImpl _value,
+    $Res Function(_$ConnectImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of ConnectionEvent
@@ -112,18 +112,18 @@ class __$$InitializeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitializeImpl implements Initialize {
-  const _$InitializeImpl();
+class _$ConnectImpl implements Connect {
+  const _$ConnectImpl();
 
   @override
   String toString() {
-    return 'ConnectionEvent.initialize()';
+    return 'ConnectionEvent.connect()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitializeImpl);
+        (other.runtimeType == runtimeType && other is _$ConnectImpl);
   }
 
   @override
@@ -132,37 +132,37 @@ class _$InitializeImpl implements Initialize {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
+    required TResult Function() connect,
     required TResult Function() retryConnection,
     required TResult Function() disconnect,
     required TResult Function(AppConnectionStatus status)
     appConnectionStatusChanged,
   }) {
-    return initialize();
+    return connect();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
+    TResult? Function()? connect,
     TResult? Function()? retryConnection,
     TResult? Function()? disconnect,
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
   }) {
-    return initialize?.call();
+    return connect?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
+    TResult Function()? connect,
     TResult Function()? retryConnection,
     TResult Function()? disconnect,
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
     required TResult orElse(),
   }) {
-    if (initialize != null) {
-      return initialize();
+    if (connect != null) {
+      return connect();
     }
     return orElse();
   }
@@ -170,46 +170,46 @@ class _$InitializeImpl implements Initialize {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
+    required TResult Function(Connect value) connect,
     required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(Disconnect value) disconnect,
     required TResult Function(AppConnectionStatusChanged value)
     appConnectionStatusChanged,
   }) {
-    return initialize(this);
+    return connect(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
+    TResult? Function(Connect value)? connect,
     TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(Disconnect value)? disconnect,
     TResult? Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
   }) {
-    return initialize?.call(this);
+    return connect?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialize value)? initialize,
+    TResult Function(Connect value)? connect,
     TResult Function(RetryConnection value)? retryConnection,
     TResult Function(Disconnect value)? disconnect,
     TResult Function(AppConnectionStatusChanged value)?
     appConnectionStatusChanged,
     required TResult orElse(),
   }) {
-    if (initialize != null) {
-      return initialize(this);
+    if (connect != null) {
+      return connect(this);
     }
     return orElse();
   }
 }
 
-abstract class Initialize implements ConnectionEvent {
-  const factory Initialize() = _$InitializeImpl;
+abstract class Connect implements ConnectionEvent {
+  const factory Connect() = _$ConnectImpl;
 }
 
 /// @nodoc
@@ -255,7 +255,7 @@ class _$RetryConnectionImpl implements RetryConnection {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
+    required TResult Function() connect,
     required TResult Function() retryConnection,
     required TResult Function() disconnect,
     required TResult Function(AppConnectionStatus status)
@@ -267,7 +267,7 @@ class _$RetryConnectionImpl implements RetryConnection {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
+    TResult? Function()? connect,
     TResult? Function()? retryConnection,
     TResult? Function()? disconnect,
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
@@ -278,7 +278,7 @@ class _$RetryConnectionImpl implements RetryConnection {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
+    TResult Function()? connect,
     TResult Function()? retryConnection,
     TResult Function()? disconnect,
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
@@ -293,7 +293,7 @@ class _$RetryConnectionImpl implements RetryConnection {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
+    required TResult Function(Connect value) connect,
     required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(Disconnect value) disconnect,
     required TResult Function(AppConnectionStatusChanged value)
@@ -305,7 +305,7 @@ class _$RetryConnectionImpl implements RetryConnection {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
+    TResult? Function(Connect value)? connect,
     TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(Disconnect value)? disconnect,
     TResult? Function(AppConnectionStatusChanged value)?
@@ -317,7 +317,7 @@ class _$RetryConnectionImpl implements RetryConnection {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialize value)? initialize,
+    TResult Function(Connect value)? connect,
     TResult Function(RetryConnection value)? retryConnection,
     TResult Function(Disconnect value)? disconnect,
     TResult Function(AppConnectionStatusChanged value)?
@@ -378,7 +378,7 @@ class _$DisconnectImpl implements Disconnect {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
+    required TResult Function() connect,
     required TResult Function() retryConnection,
     required TResult Function() disconnect,
     required TResult Function(AppConnectionStatus status)
@@ -390,7 +390,7 @@ class _$DisconnectImpl implements Disconnect {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
+    TResult? Function()? connect,
     TResult? Function()? retryConnection,
     TResult? Function()? disconnect,
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
@@ -401,7 +401,7 @@ class _$DisconnectImpl implements Disconnect {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
+    TResult Function()? connect,
     TResult Function()? retryConnection,
     TResult Function()? disconnect,
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
@@ -416,7 +416,7 @@ class _$DisconnectImpl implements Disconnect {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
+    required TResult Function(Connect value) connect,
     required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(Disconnect value) disconnect,
     required TResult Function(AppConnectionStatusChanged value)
@@ -428,7 +428,7 @@ class _$DisconnectImpl implements Disconnect {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
+    TResult? Function(Connect value)? connect,
     TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(Disconnect value)? disconnect,
     TResult? Function(AppConnectionStatusChanged value)?
@@ -440,7 +440,7 @@ class _$DisconnectImpl implements Disconnect {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialize value)? initialize,
+    TResult Function(Connect value)? connect,
     TResult Function(RetryConnection value)? retryConnection,
     TResult Function(Disconnect value)? disconnect,
     TResult Function(AppConnectionStatusChanged value)?
@@ -532,7 +532,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
+    required TResult Function() connect,
     required TResult Function() retryConnection,
     required TResult Function() disconnect,
     required TResult Function(AppConnectionStatus status)
@@ -544,7 +544,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
+    TResult? Function()? connect,
     TResult? Function()? retryConnection,
     TResult? Function()? disconnect,
     TResult? Function(AppConnectionStatus status)? appConnectionStatusChanged,
@@ -555,7 +555,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
+    TResult Function()? connect,
     TResult Function()? retryConnection,
     TResult Function()? disconnect,
     TResult Function(AppConnectionStatus status)? appConnectionStatusChanged,
@@ -570,7 +570,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
+    required TResult Function(Connect value) connect,
     required TResult Function(RetryConnection value) retryConnection,
     required TResult Function(Disconnect value) disconnect,
     required TResult Function(AppConnectionStatusChanged value)
@@ -582,7 +582,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
+    TResult? Function(Connect value)? connect,
     TResult? Function(RetryConnection value)? retryConnection,
     TResult? Function(Disconnect value)? disconnect,
     TResult? Function(AppConnectionStatusChanged value)?
@@ -594,7 +594,7 @@ class _$AppConnectionStatusChangedImpl implements AppConnectionStatusChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialize value)? initialize,
+    TResult Function(Connect value)? connect,
     TResult Function(RetryConnection value)? retryConnection,
     TResult Function(Disconnect value)? disconnect,
     TResult Function(AppConnectionStatusChanged value)?

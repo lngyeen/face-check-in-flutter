@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/flavors.dart';
+import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
 
 import 'connection_event.dart';
 import 'connection_state.dart';
@@ -17,16 +18,15 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   final WebSocketService _webSocketService;
 
   StreamSubscription? _appConnectionSubscription;
+  bool _isInitialized = false;
 
   ConnectionBloc(this._webSocketService)
-    : super(
-        ConnectionState(status: _webSocketService.currentAppConnectionStatus),
-      ) {
+    : super(const ConnectionState(status: AppConnectionStatus.initial)) {
     _registerEventHandlers();
   }
 
   void _registerEventHandlers() {
-    on<Initialize>(_onInitialize, transformer: sequential());
+    on<Connect>(_onConnect, transformer: sequential());
     on<RetryConnection>(_onRetryConnection, transformer: sequential());
 
     on<AppConnectionStatusChanged>(
@@ -37,12 +37,12 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     on<Disconnect>(_onDisconnect, transformer: sequential());
   }
 
-  Future<void> _onInitialize(
-    Initialize event,
-    Emitter<ConnectionState> emit,
-  ) async {
-    _setupWebSocketListeners();
-    await _webSocketService.initialize(url: F.baseWebSocketUrl);
+  Future<void> _onConnect(Connect event, Emitter<ConnectionState> emit) async {
+    if (!_isInitialized) {
+      _setupWebSocketListeners();
+      await _webSocketService.initialize(url: F.baseWebSocketUrl);
+      _isInitialized = true;
+    }
     await _webSocketService.connect();
   }
 

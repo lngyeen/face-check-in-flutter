@@ -8,6 +8,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 import 'package:face_check_in_flutter/core/services/network_connectivity_service.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
+import 'package:face_check_in_flutter/domain/entities/network_status.dart';
 import 'package:face_check_in_flutter/domain/entities/retry_state.dart';
 import 'package:face_check_in_flutter/domain/entities/websocket_connection_status.dart';
 
@@ -15,7 +16,7 @@ abstract class WebSocketService {
   Stream<WebSocketConnectionStatus> get connectionStatusStream;
   Stream<dynamic> get messageStream;
   Stream<RetryState> get retryStateStream;
-  Stream<bool> get isNetworkAvailable;
+  Stream<NetworkStatus> get networkStatusStream;
   Stream<AppConnectionStatus> get appConnectionStatusStream;
 
   WebSocketConnectionStatus get currentStatus;
@@ -26,8 +27,8 @@ abstract class WebSocketService {
 
   Future<void> initialize({
     required String url,
-    Duration connectionTimeout = const Duration(seconds: 10),
-    Duration pingTimeout = const Duration(seconds: 3),
+    Duration connectionTimeout = const Duration(seconds: 3),
+    Duration pingTimeout = const Duration(seconds: 1),
   });
 
   Future<void> connect();
@@ -59,8 +60,8 @@ class WebSocketServiceImpl implements WebSocketService {
   static const _backgroundInterval = Duration(seconds: 30);
 
   late String _url;
-  Duration _connectionTimeout = const Duration(seconds: 10);
-  Duration _pingTimeout = const Duration(seconds: 3);
+  Duration _connectionTimeout = const Duration(seconds: 3);
+  Duration _pingTimeout = const Duration(seconds: 1);
   WebSocketChannel? _channel;
   StreamSubscription? _networkSubscription;
   StreamSubscription? _subscription;
@@ -85,22 +86,23 @@ class WebSocketServiceImpl implements WebSocketService {
   @override
   Stream<RetryState> get retryStateStream => _retryStateSubject.stream;
   @override
-  Stream<bool> get isNetworkAvailable => _networkService.connectivityStream;
+  Stream<NetworkStatus> get networkStatusStream =>
+      _networkService.connectivityStream;
 
   /// Computed stream combining network, WebSocket status, and retry state
   @override
   Stream<AppConnectionStatus> get appConnectionStatusStream {
     return Rx.combineLatest3<
-      bool,
+      NetworkStatus,
       WebSocketConnectionStatus,
       RetryState,
       AppConnectionStatus
     >(
-      isNetworkAvailable,
+      networkStatusStream,
       connectionStatusStream,
       retryStateStream,
-      (isNetworkConnected, wsStatus, retryState) =>
-          _computeAppConnectionStatus(isNetworkConnected, wsStatus, retryState),
+      (networkStatus, wsStatus, retryState) =>
+          _computeAppConnectionStatus(networkStatus, wsStatus, retryState),
     ).distinct();
   }
 
@@ -111,7 +113,7 @@ class WebSocketServiceImpl implements WebSocketService {
   @override
   AppConnectionStatus get currentAppConnectionStatus =>
       _computeAppConnectionStatus(
-        _networkService.isConnected,
+        _networkService.currentStatus,
         currentStatus,
         currentRetryState,
       );
@@ -124,8 +126,8 @@ class WebSocketServiceImpl implements WebSocketService {
   @override
   Future<void> initialize({
     required String url,
-    Duration connectionTimeout = const Duration(seconds: 10),
-    Duration pingTimeout = const Duration(seconds: 3),
+    Duration connectionTimeout = const Duration(seconds: 3),
+    Duration pingTimeout = const Duration(seconds: 1),
   }) async {
     _url = url;
     _connectionTimeout = connectionTimeout;
@@ -144,12 +146,18 @@ class WebSocketServiceImpl implements WebSocketService {
       return;
     }
 
+    // Do not attempt to connect if the network is definitively disconnected.
+    if (_networkService.currentStatus == NetworkStatus.disconnected) {
+      _updateStatus(WebSocketConnectionStatus.failed);
+      _startRetryProcess();
+      return;
+    }
+
     await _cleanupExistingConnection();
 
     try {
       _updateStatus(WebSocketConnectionStatus.connecting);
       final channel = WebSocketChannel.connect(Uri.parse(_url));
-      _channel = channel;
 
       _subscription = channel.stream.listen(
         _handleMessage,
@@ -172,6 +180,7 @@ class WebSocketServiceImpl implements WebSocketService {
       // Connection successful
       _resetRetryState();
       _updateStatus(WebSocketConnectionStatus.connected);
+      _channel = channel;
     } catch (e) {
       _handleError(e);
     }
@@ -180,6 +189,7 @@ class WebSocketServiceImpl implements WebSocketService {
   /// Disconnect WebSocket connection
   @override
   Future<void> disconnect() async {
+    _resetRetryState();
     await _cleanupExistingConnection();
     if (!_statusSubject.isClosed) {
       _updateStatus(WebSocketConnectionStatus.disconnected);
@@ -204,18 +214,11 @@ class WebSocketServiceImpl implements WebSocketService {
   /// Creates a temporary WebSocket connection to test server reachability
   Future<bool> _pingServer() async {
     try {
-      // Create temporary WebSocket connection with short timeout
       final testChannel = WebSocketChannel.connect(Uri.parse(_url));
-
-      // Wait for connection ready with timeout
       await testChannel.ready.timeout(_pingTimeout);
-
-      // Clean up test connection immediately
       await testChannel.sink.close();
-
       return true;
     } catch (e) {
-      // Fallback to TCP socket check if WebSocket ping fails
       return await _tcpPingServer();
     }
   }
@@ -245,21 +248,27 @@ class WebSocketServiceImpl implements WebSocketService {
   /// Setup network connectivity listeners for automatic reconnection
   void _setupNetworkListeners() {
     _networkSubscription?.cancel();
-    _networkSubscription = _networkService.connectivityStream.distinct().listen(
-      (isConnected) async {
-        if (isConnected) {
+    _networkSubscription = _networkService.connectivityStream.distinct().listen((
+      networkStatus,
+    ) async {
+      switch (networkStatus) {
+        case NetworkStatus.connected:
+          // If we were previously disconnected, try reconnecting now.
           if (currentStatus == WebSocketConnectionStatus.disconnected ||
               currentStatus == WebSocketConnectionStatus.failed) {
             _resetRetryState();
             await connect();
           }
-        } else {
-          _resetRetryState();
-          _updateStatus(WebSocketConnectionStatus.disconnected);
-          await _cleanupExistingConnection();
-        }
-      },
-    );
+          break;
+        case NetworkStatus.disconnected:
+          // When network is lost, await the disconnect to ensure all cleanup is complete.
+          await disconnect();
+          break;
+        case NetworkStatus.initial:
+          // Do nothing, wait for a definitive status.
+          break;
+      }
+    });
   }
 
   /// Update WebSocket connection status
@@ -282,7 +291,7 @@ class WebSocketServiceImpl implements WebSocketService {
       try {
         await channelToClose.sink.close().timeout(const Duration(seconds: 1));
       } catch (e) {
-        // Silent error handling
+        // Safe to ignore.
       }
     }
   }
@@ -465,38 +474,37 @@ class WebSocketServiceImpl implements WebSocketService {
 
   /// Compute AppConnectionStatus from network + websocket + retry state
   AppConnectionStatus _computeAppConnectionStatus(
-    bool isNetworkConnected,
+    NetworkStatus networkStatus,
     WebSocketConnectionStatus wsStatus,
     RetryState retryState,
   ) {
-    // No network = network lost
-    if (!isNetworkConnected) {
-      return AppConnectionStatus.networkLost;
-    }
-
-    // Network available, check WebSocket status
-    switch (wsStatus) {
-      case WebSocketConnectionStatus.connected:
-        return AppConnectionStatus.connected;
-
-      case WebSocketConnectionStatus.connecting:
-        return AppConnectionStatus.connecting;
-
-      case WebSocketConnectionStatus.disconnected:
-        // Check if we're in initial state or retrying
-        return retryState.when(
-          idle: () => AppConnectionStatus.initial,
-          fastRetrying: (_, __) => AppConnectionStatus.fastRetrying,
-          backgroundMonitoring: () => AppConnectionStatus.backgroundRetrying,
-        );
-
-      case WebSocketConnectionStatus.failed:
-        // Check retry state to determine if fast retrying or background
-        return retryState.when(
-          idle: () => AppConnectionStatus.failed,
-          fastRetrying: (_, __) => AppConnectionStatus.fastRetrying,
-          backgroundMonitoring: () => AppConnectionStatus.backgroundRetrying,
-        );
+    switch (networkStatus) {
+      case NetworkStatus.initial:
+        return AppConnectionStatus.initial;
+      case NetworkStatus.disconnected:
+        return AppConnectionStatus.networkLost;
+      case NetworkStatus.connected:
+        // Network is fine, so the status depends on the WebSocket state.
+        switch (wsStatus) {
+          case WebSocketConnectionStatus.connected:
+            return AppConnectionStatus.connected;
+          case WebSocketConnectionStatus.connecting:
+            return AppConnectionStatus.connecting;
+          case WebSocketConnectionStatus.disconnected:
+            return retryState.when(
+              idle: () => AppConnectionStatus.initial,
+              fastRetrying: (_, __) => AppConnectionStatus.fastRetrying,
+              backgroundMonitoring:
+                  () => AppConnectionStatus.backgroundRetrying,
+            );
+          case WebSocketConnectionStatus.failed:
+            return retryState.when(
+              idle: () => AppConnectionStatus.failed,
+              fastRetrying: (_, __) => AppConnectionStatus.fastRetrying,
+              backgroundMonitoring:
+                  () => AppConnectionStatus.backgroundRetrying,
+            );
+        }
     }
   }
 }

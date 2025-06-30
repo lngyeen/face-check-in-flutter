@@ -6,7 +6,7 @@ part 'connection_event.freezed.dart';
 
 @freezed
 class ConnectionEvent with _$ConnectionEvent {
-  const factory ConnectionEvent.initialize() = Initialize;
+  const factory ConnectionEvent.connect() = Connect;
   const factory ConnectionEvent.retryConnection() = RetryConnection;
   const factory ConnectionEvent.disconnect() = Disconnect;
 

@@ -249,7 +249,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
   // Initialization handlers
   void _onInitialize(Initialize event, Emitter<CheckInState> emit) {
     _listenToConnectionBloc();
-    _connectionBloc.add(const conn_event.ConnectionEvent.initialize());
+    _connectionBloc.add(const conn_event.ConnectionEvent.connect());
   }
 
   // Camera handlers

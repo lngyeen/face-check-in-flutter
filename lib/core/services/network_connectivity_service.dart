@@ -5,19 +5,21 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'package:face_check_in_flutter/domain/entities/network_status.dart';
+
 /// Abstract interface for network connectivity service
 abstract class NetworkConnectivityService {
-  /// Stream of connectivity changes (true = connected, false = disconnected)
-  Stream<bool> get connectivityStream;
+  /// Stream of connectivity changes
+  Stream<NetworkStatus> get connectivityStream;
 
   /// Current connectivity status
-  bool get isConnected;
+  NetworkStatus get currentStatus;
 
   /// Initialize the connectivity service
   Future<void> initialize();
 
-  /// Manual connectivity check (useful for user-triggered retries)
-  Future<bool> checkConnectivity();
+  /// Manual connectivity check
+  Future<NetworkStatus> checkConnectivity();
 
   /// Dispose resources
   void dispose();
@@ -28,89 +30,77 @@ abstract class NetworkConnectivityService {
 @LazySingleton(as: NetworkConnectivityService)
 class NetworkConnectivityServiceImpl implements NetworkConnectivityService {
   final Connectivity _connectivity = Connectivity();
-  final BehaviorSubject<bool> _connectivitySubject =
-      BehaviorSubject<bool>.seeded(false);
+  final BehaviorSubject<NetworkStatus> _connectivitySubject =
+      BehaviorSubject<NetworkStatus>.seeded(NetworkStatus.initial);
 
-  /// Stream of connectivity changes (true = connected, false = disconnected)
   @override
-  Stream<bool> get connectivityStream => _connectivitySubject.stream;
+  Stream<NetworkStatus> get connectivityStream => _connectivitySubject.stream;
 
-  /// Current connectivity status
   @override
-  bool get isConnected => _connectivitySubject.value;
+  NetworkStatus get currentStatus => _connectivitySubject.value;
 
   StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
 
-  /// Initialize the connectivity service and start monitoring
   @override
   Future<void> initialize() async {
-    final initialConnectivity = await _checkConnectivity();
-    _connectivitySubject.add(initialConnectivity);
+    // Perform an initial check and update the stream.
+    // The listener will handle subsequent changes.
+    await checkConnectivity();
     _setupConnectivityListener();
   }
 
-  /// Manual connectivity check (useful for user-triggered retries)
-  /// Returns true if internet connection is available
   @override
-  Future<bool> checkConnectivity() async {
-    final isConnected = await _checkConnectivity();
-    _connectivitySubject.add(isConnected);
-    return isConnected;
+  Future<NetworkStatus> checkConnectivity() async {
+    final status = await _performConnectivityCheck();
+    if (status != currentStatus) {
+      _connectivitySubject.add(status);
+    }
+    return status;
   }
 
-  /// Setup connectivity listener for automatic monitoring
   void _setupConnectivityListener() {
     _connectivitySubscription?.cancel();
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(
-      _onConnectivityChanged,
-      onError: (error) {
-        _connectivitySubject.add(false);
-      },
-    );
+    _connectivitySubscription = _connectivity.onConnectivityChanged.listen((
+      _,
+    ) async {
+      // Debounce to avoid rapid changes, then perform a full check.
+      await Future.delayed(const Duration(milliseconds: 500));
+      await checkConnectivity();
+    }, onError: (_) => _connectivitySubject.add(NetworkStatus.disconnected));
   }
 
-  /// Check connectivity status and validate internet access
-  Future<bool> _checkConnectivity() async {
+  Future<NetworkStatus> _performConnectivityCheck() async {
     try {
       final connectivityResults = await _connectivity.checkConnectivity();
-
       if (connectivityResults.contains(ConnectivityResult.none)) {
-        return false;
+        return NetworkStatus.disconnected;
       }
 
-      return await _validateInternetConnection();
+      // If there's a connection, validate it has internet access.
+      final hasInternet = await _validateInternetConnection();
+      return hasInternet ? NetworkStatus.connected : NetworkStatus.disconnected;
+    } catch (e) {
+      return NetworkStatus.disconnected;
+    }
+  }
+
+  Future<bool> _validateInternetConnection() async {
+    try {
+      // Use a list of reliable hosts for DNS lookup.
+      final hosts = ['google.com', 'cloudflare.com', '1.1.1.1'];
+      final lookups = hosts.map((host) => InternetAddress.lookup(host));
+
+      // Wait for any of the lookups to succeed.
+      final result = await Future.any(
+        lookups,
+      ).timeout(const Duration(seconds: 3));
+
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
     } catch (e) {
       return false;
     }
   }
 
-  /// Validate internet connection by attempting DNS lookups
-  Future<bool> _validateInternetConnection() async {
-    try {
-      final result = await InternetAddress.lookup(
-        'google.com',
-      ).timeout(const Duration(seconds: 3));
-      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
-    } catch (e) {
-      try {
-        final result = await InternetAddress.lookup(
-          'cloudflare.com',
-        ).timeout(const Duration(seconds: 3));
-        return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
-      } catch (e) {
-        return false;
-      }
-    }
-  }
-
-  /// Handle connectivity changes with debouncing
-  Future<void> _onConnectivityChanged(List<ConnectivityResult> results) async {
-    await Future.delayed(const Duration(milliseconds: 100));
-    final isConnected = await _checkConnectivity();
-    _connectivitySubject.add(isConnected);
-  }
-
-  /// Dispose resources and cancel subscriptions
   @override
   void dispose() {
     _connectivitySubscription?.cancel();
