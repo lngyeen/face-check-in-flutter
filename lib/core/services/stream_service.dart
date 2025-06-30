@@ -9,70 +9,10 @@ import 'package:rxdart/rxdart.dart';
 import 'package:face_check_in_flutter/core/services/image_converter.dart';
 import 'package:face_check_in_flutter/core/services/permission_service.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
-import 'package:face_check_in_flutter/core/services/worker_pool.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
 import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
 import 'package:face_check_in_flutter/domain/entities/websocket_connection_status.dart';
-
-/// Data sent from the main isolate to a worker isolate.
-class _ProcessRequest {
-  final CameraImage image;
-  final int sensorOrientation;
-
-  _ProcessRequest(this.image, this.sensorOrientation);
-}
-
-/// Data sent from a worker isolate back to the main isolate.
-class _ProcessResponse {
-  final ProcessedFrame? frame;
-  final int workerId; // To know which worker is now free.
-
-  _ProcessResponse(this.frame, this.workerId);
-}
-
-/// Data payload sent to a worker to dispatch a job.
-class _WorkerDispatchPayload {
-  final _ProcessRequest request;
-  final int workerId;
-
-  _WorkerDispatchPayload(this.request, this.workerId);
-}
-
-/// The entry point for each worker isolate.
-void _workerEntryPoint(SendPort mainSendPort) {
-  final workerReceivePort = ReceivePort();
-  mainSendPort.send(workerReceivePort.sendPort);
-
-  workerReceivePort.listen((dynamic message) {
-    if (message is _WorkerDispatchPayload) {
-      final request = message.request;
-      final workerId = message.workerId;
-
-      // This is where all the heavy lifting happens, inside the worker isolate.
-      // Call the new SYNCHRONOUS converter.
-      final ProcessedFrame? processedFrame =
-          ImageConverter.convertCameraImageToProcessedFrameSync(
-            request.image,
-            request.sensorOrientation,
-          );
-
-      mainSendPort.send(_ProcessResponse(processedFrame, workerId));
-    }
-  });
-}
-
-/// Extension method to provide domain-specific functionality to the generic pool.
-extension WorkerPoolImageDispatch on WorkerPool {
-  void dispatchImageJob(CameraImage frame, int sensorOrientation) {
-    if (!hasIdleWorker) return;
-
-    final worker = dispatchJob();
-    final request = _ProcessRequest(frame, sensorOrientation);
-    final payload = _WorkerDispatchPayload(request, worker.id);
-    worker.sendPort.send(payload);
-  }
-}
 
 /// Abstract interface for stream service
 abstract class StreamService {
@@ -114,9 +54,6 @@ class StreamServiceImpl implements StreamService {
   final _frameSubject = PublishSubject<(CameraImage, int)>();
   StreamSubscription? _frameSubscription;
 
-  // Isolate Pool Management
-  final _workerPool = WorkerPool(2);
-
   // Stream state
   bool _isCameraActive = false;
   final _streamingStatusSubject = BehaviorSubject<StreamingStatus>.seeded(
@@ -145,46 +82,29 @@ class StreamServiceImpl implements StreamService {
   Stream<CameraStatus> get cameraStatusStream => _cameraStatusSubject.stream;
 
   StreamServiceImpl(this._webSocketService, this._permissionService) {
-    _initializeIsolates();
     _initializeFrameProcessing();
   }
 
   /// Initializes the stream processing pipeline with RxDart.
+  /// This version processes images on the main isolate.
   void _initializeFrameProcessing() {
     _frameSubscription?.cancel();
     _frameSubscription = _frameSubject
         .throttleTime(_throttleDuration)
-        .where(
-          (_) =>
-              _streamingStatusSubject.value == StreamingStatus.active &&
-              _workerPool.isReady &&
-              _workerPool.hasIdleWorker,
-        )
-        .listen((frameData) {
+        .where((_) => _streamingStatusSubject.value == StreamingStatus.active)
+        .asyncMap((frameData) {
           final (frame, sensorOrientation) = frameData;
-          _dispatchFrame(frame, sensorOrientation);
+          // Directly call the converter.
+          return Isolate.run(
+            () => ImageConverter.convertCameraImageToProcessedFrameSync(
+              frame,
+              // sensorOrientation,
+            ),
+          );
+        })
+        .listen((ProcessedFrame? processedFrame) {
+          _sendFrameToWebSocket(processedFrame);
         });
-  }
-
-  /// Initializes the isolate pool.
-  Future<void> _initializeIsolates() async {
-    final mainReceivePort = ReceivePort();
-
-    mainReceivePort.listen((dynamic message) {
-      if (message is SendPort) {
-        // A new worker has sent its SendPort.
-        _workerPool.addWorker(Isolate(message), message);
-      } else if (message is _ProcessResponse) {
-        // A worker has finished its job.
-        _sendFrameToWebSocket(message.frame);
-        // Mark the worker as idle again.
-        _workerPool.completeJob(message.workerId);
-      }
-    });
-
-    for (int i = 0; i < _workerPool.size; i++) {
-      await Isolate.spawn(_workerEntryPoint, mainReceivePort.sendPort);
-    }
   }
 
   @override
@@ -316,10 +236,6 @@ class StreamServiceImpl implements StreamService {
     }
   }
 
-  void _dispatchFrame(CameraImage frame, int sensorOrientation) {
-    _workerPool.dispatchImageJob(frame, sensorOrientation);
-  }
-
   void _sendFrameToWebSocket(ProcessedFrame? frame) {
     if (frame == null ||
         _webSocketService.currentStatus !=
@@ -337,7 +253,6 @@ class StreamServiceImpl implements StreamService {
     stopCamera();
     _frameSubscription?.cancel();
     _frameSubject.close();
-    _workerPool.dispose();
     _cameraStatusSubject.close();
     _cameraControllerSubject.close();
     _streamingStatusSubject.close();
