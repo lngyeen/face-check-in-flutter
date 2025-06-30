@@ -1,19 +1,16 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 
 /// Simplified success dialog for check-in completion
 class CheckInSuccessDialog extends StatelessWidget {
-  final String employeeName;
+  final String faceId;
   final DateTime checkInTime;
-  final String faceImageBase64;
   final double confidence;
   final VoidCallback? onClose;
 
   const CheckInSuccessDialog({
     super.key,
-    required this.employeeName,
+    required this.faceId,
     required this.checkInTime,
-    required this.faceImageBase64,
     required this.confidence,
     this.onClose,
   });
@@ -22,11 +19,11 @@ class CheckInSuccessDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // Format time
+    // Format time as hh:mm - DD/MM
     final timeStr =
-        '${checkInTime.hour.toString().padLeft(2, '0')}:${checkInTime.minute.toString().padLeft(2, '0')}:${checkInTime.second.toString().padLeft(2, '0')}';
+        '${checkInTime.hour.toString().padLeft(2, '0')}:${checkInTime.minute.toString().padLeft(2, '0')}';
     final dateStr =
-        '${checkInTime.day.toString().padLeft(2, '0')}/${checkInTime.month.toString().padLeft(2, '0')}/${checkInTime.year}';
+        '${checkInTime.day.toString().padLeft(2, '0')}/${checkInTime.month.toString().padLeft(2, '0')}';
 
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -43,25 +40,11 @@ class CheckInSuccessDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Success Header
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.green.shade500,
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: const Icon(
-                Icons.check_circle,
-                color: Colors.white,
-                size: 48,
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Success Title
+            // Success Title (removed icon, adjusted text size)
             Text(
               '✅ Check-in Thành Công!',
-              style: theme.textTheme.headlineSmall?.copyWith(
+              style: TextStyle(
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.green.shade700,
               ),
@@ -69,29 +52,7 @@ class CheckInSuccessDialog extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Face Image
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(60),
-                border: Border.all(color: Colors.green.shade300, width: 3),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(57),
-                child: _buildFaceImage(),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Simplified Information
+            // Information Card (removed face image)
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -108,16 +69,16 @@ class CheckInSuccessDialog extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  // Employee Name
+                  // Face ID (changed from employee name)
                   _buildInfoItem(
-                    icon: Icons.person,
+                    icon: Icons.face,
                     label: 'Tên nhân viên',
-                    value: employeeName,
+                    value: faceId,
                     iconColor: Colors.blue.shade600,
                   ),
                   const SizedBox(height: 16),
 
-                  // Check-in Time
+                  // Check-in Time (updated format)
                   _buildInfoItem(
                     icon: Icons.access_time,
                     label: 'Thời gian check-in',
@@ -138,11 +99,16 @@ class CheckInSuccessDialog extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Close Button
+            // Close Button (fixed functionality)
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: onClose ?? () => Navigator.of(context).pop(),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  if (onClose != null) {
+                    onClose!();
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green.shade500,
                   foregroundColor: Colors.white,
@@ -161,33 +127,6 @@ class CheckInSuccessDialog extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildFaceImage() {
-    try {
-      final imageBytes = base64Decode(faceImageBase64);
-      return Image.memory(
-        imageBytes,
-        width: 120,
-        height: 120,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => _buildFallbackAvatar(),
-      );
-    } catch (e) {
-      return _buildFallbackAvatar();
-    }
-  }
-
-  Widget _buildFallbackAvatar() {
-    return Container(
-      width: 120,
-      height: 120,
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(57),
-      ),
-      child: Icon(Icons.person, size: 60, color: Colors.grey.shade400),
     );
   }
 
