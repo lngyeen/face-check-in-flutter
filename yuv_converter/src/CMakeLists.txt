@@ -19,6 +19,4 @@ target_compile_definitions(yuv_converter PUBLIC DART_SHARED_LIB)
 if (ANDROID)
   # Support Android 15 16k page size
   target_link_options(yuv_converter PRIVATE "-Wl,-z,max-page-size=16384")
-  # Link against the pthreads library for multi-threading
-  target_link_libraries(yuv_converter pthreads)
 endif()
