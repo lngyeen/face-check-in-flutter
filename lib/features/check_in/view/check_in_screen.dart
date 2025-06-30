@@ -440,6 +440,9 @@ class _CheckInScreenState extends State<CheckInScreen>
     BuildContext context,
     DetectedFace recognizedFace,
   ) {
+    // Notify BLoC that dialog is being shown (triggers pause)
+    context.read<CheckInBloc>().add(const CheckInEvent.successDialogShown());
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -449,6 +452,11 @@ class _CheckInScreenState extends State<CheckInScreen>
           checkInTime: DateTime.now(),
           confidence: recognizedFace.confidence,
           onClose: () {
+            // Notify BLoC that dialog is being dismissed (triggers resume)
+            context.read<CheckInBloc>().add(
+              const CheckInEvent.successDialogDismissed(),
+            );
+
             // Reset the system after dialog closes
             context.read<CheckInBloc>().add(
               const CheckInEvent.resetAfterCheckIn(),
@@ -456,7 +464,14 @@ class _CheckInScreenState extends State<CheckInScreen>
           },
         );
       },
-    );
+    ).then((_) {
+      // Fallback: ensure dialog dismissed event is triggered even if dialog closed unexpectedly
+      if (context.mounted) {
+        context.read<CheckInBloc>().add(
+          const CheckInEvent.successDialogDismissed(),
+        );
+      }
+    });
   }
 
   /// Test method to show success dialog with sample data
@@ -471,6 +486,7 @@ class _CheckInScreenState extends State<CheckInScreen>
       personId: 'TEST001',
     );
 
+    // Show dialog with pause/resume performance optimization
     _showCheckInSuccessDialog(context, testFace);
   }
 }

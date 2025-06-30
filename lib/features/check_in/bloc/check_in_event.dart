@@ -180,8 +180,18 @@ class CheckInEvent with _$CheckInEvent {
   /// Reset system after successful check-in
   const factory CheckInEvent.resetAfterCheckIn() = ResetAfterCheckIn;
 
+  /// System reset is now complete
+  const factory CheckInEvent.resetSystem() = ResetSystem;
+
   const factory CheckInEvent.disconnectRequested() = DisconnectRequested;
   const factory CheckInEvent.webSocketError(String error) = WebSocketError;
+
+  // Dialog management events for performance optimization
+  /// Success dialog is being shown - pause detection
+  const factory CheckInEvent.successDialogShown() = SuccessDialogShown;
+
+  /// Success dialog has been dismissed - resume detection
+  const factory CheckInEvent.successDialogDismissed() = SuccessDialogDismissed;
 
   // Dialog events for face recognition results
   /// Show success dialog for face recognition

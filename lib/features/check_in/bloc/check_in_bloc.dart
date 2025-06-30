@@ -91,6 +91,8 @@ class CheckInState with _$CheckInState {
     FaceDetectionNotificationType notificationType,
     String? notificationMessage,
     @Default(false) bool shouldShowNotification,
+    // Dialog status for performance optimization
+    @Default(false) bool isSuccessDialogShowing,
   }) = _CheckInState;
 }
 
@@ -190,6 +192,11 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
     // Reset events
     on<ResetAfterCheckIn>(_onResetAfterCheckIn);
+    on<ResetSystem>(_onResetSystem);
+
+    // Dialog management events for performance optimization
+    on<SuccessDialogShown>(_onSuccessDialogShown);
+    on<SuccessDialogDismissed>(_onSuccessDialogDismissed);
   }
 
   /// Initialize WebSocket service integration for Story 2.1
@@ -869,13 +876,11 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
             '🎉 CheckInBloc: Success condition met for ${recognizedFace.employeeName}',
           );
 
-          // Immediately stop streaming on successful check-in
+          // Pause detection for dialog display (performance optimization)
           debugPrint(
-            '🔄 CheckInBloc: Check-in successful, stopping streaming immediately',
+            '⏸️ CheckInBloc: Triggering dialog pause for success dialog',
           );
-          if (state.streamingStatus == StreamingStatus.active) {
-            _frameStreamingService.stopStreaming();
-          }
+          add(const CheckInEvent.successDialogShown());
 
           // Schedule auto-reset after showing success message
           debugPrint(
@@ -1381,6 +1386,50 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
           toastMessage: '❌ Reset thất bại - Vui lòng thử lại',
         ),
       );
+    }
+  }
+
+  /// System reset event handler
+  Future<void> _onResetSystem(
+    ResetSystem event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🔄 CheckInBloc: System reset requested');
+
+    // Reset the system completely
+    add(const CheckInEvent.resetAfterCheckIn());
+  }
+
+  /// Success dialog shown - pause detection for performance
+  Future<void> _onSuccessDialogShown(
+    SuccessDialogShown event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('⏸️ CheckInBloc: Success dialog shown - pausing detection');
+
+    emit(state.copyWith(isSuccessDialogShowing: true));
+
+    // Pause streaming to save resources while dialog is showing
+    if (state.streamingStatus == StreamingStatus.active) {
+      debugPrint('⏸️ CheckInBloc: Pausing frame streaming for dialog');
+      await _frameStreamingService.pauseStreaming();
+    }
+  }
+
+  /// Success dialog dismissed - resume detection
+  Future<void> _onSuccessDialogDismissed(
+    SuccessDialogDismissed event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('▶️ CheckInBloc: Success dialog dismissed - resuming detection');
+
+    emit(state.copyWith(isSuccessDialogShowing: false));
+
+    // Resume streaming if it was paused
+    if (_frameStreamingService.currentStatus ==
+        frame_streaming.StreamingStatus.paused) {
+      debugPrint('▶️ CheckInBloc: Resuming frame streaming after dialog');
+      await _frameStreamingService.resumeStreaming();
     }
   }
 }
