@@ -35,10 +35,10 @@ class FrameStreamingService {
   DateTime? _streamingStartTime;
   DateTime? _lastFrameSent;
 
-  // Configuration - increased frame rate for faster detection
+  // Configuration - reduced frame rate for better performance
   static const Duration _frameDuration = Duration(
-    milliseconds: 66,
-  ); // ~15 FPS for faster detection
+    milliseconds: 333,
+  ); // 3 FPS for optimal performance and minimal resource usage
 
   // Stream controllers
   final StreamController<StreamingStatus> _statusController =
