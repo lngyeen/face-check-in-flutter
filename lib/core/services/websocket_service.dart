@@ -251,7 +251,7 @@ class WebSocketServiceImpl implements WebSocketService {
           if (currentStatus == WebSocketConnectionStatus.disconnected ||
               currentStatus == WebSocketConnectionStatus.failed) {
             _resetRetryState();
-            connect();
+            await connect();
           }
         } else {
           _resetRetryState();
@@ -275,8 +275,16 @@ class WebSocketServiceImpl implements WebSocketService {
     await _subscription?.cancel();
     _subscription = null;
 
-    await _channel?.sink.close();
+    final channelToClose = _channel;
     _channel = null;
+
+    if (channelToClose != null) {
+      try {
+        await channelToClose.sink.close().timeout(const Duration(seconds: 1));
+      } catch (e) {
+        // Silent error handling
+      }
+    }
   }
 
   /// Handle incoming WebSocket messages
