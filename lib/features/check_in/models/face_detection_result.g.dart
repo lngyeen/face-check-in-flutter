@@ -40,7 +40,7 @@ _$DetectedFaceImpl _$$DetectedFaceImplFromJson(Map<String, dynamic> json) =>
     _$DetectedFaceImpl(
       faceId: json['faceId'] as String,
       box:
-          (json['box'] as List<dynamic>)
+          (json['bbox'] as List<dynamic>)
               .map((e) => (e as num).toDouble())
               .toList(),
       confidence: (json['confidence'] as num).toDouble(),
@@ -52,7 +52,7 @@ _$DetectedFaceImpl _$$DetectedFaceImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$DetectedFaceImplToJson(_$DetectedFaceImpl instance) =>
     <String, dynamic>{
       'faceId': instance.faceId,
-      'box': instance.box,
+      'bbox': instance.box,
       'confidence': instance.confidence,
       'isRecognized': instance.isRecognized,
       'personId': instance.personId,

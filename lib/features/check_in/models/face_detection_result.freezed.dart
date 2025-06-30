@@ -269,8 +269,8 @@ DetectedFace _$DetectedFaceFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DetectedFace {
   String get faceId => throw _privateConstructorUsedError;
-  List<double> get box =>
-      throw _privateConstructorUsedError; // [x, y, width, height]
+  @JsonKey(name: 'bbox')
+  List<double> get box => throw _privateConstructorUsedError; // [x, y, width, height]
   double get confidence => throw _privateConstructorUsedError;
   bool get isRecognized => throw _privateConstructorUsedError;
   String? get personId => throw _privateConstructorUsedError;
@@ -295,7 +295,7 @@ abstract class $DetectedFaceCopyWith<$Res> {
   @useResult
   $Res call({
     String faceId,
-    List<double> box,
+    @JsonKey(name: 'bbox') List<double> box,
     double confidence,
     bool isRecognized,
     String? personId,
@@ -374,7 +374,7 @@ abstract class _$$DetectedFaceImplCopyWith<$Res>
   @useResult
   $Res call({
     String faceId,
-    List<double> box,
+    @JsonKey(name: 'bbox') List<double> box,
     double confidence,
     bool isRecognized,
     String? personId,
@@ -445,7 +445,7 @@ class __$$DetectedFaceImplCopyWithImpl<$Res>
 class _$DetectedFaceImpl implements _DetectedFace {
   const _$DetectedFaceImpl({
     required this.faceId,
-    required final List<double> box,
+    @JsonKey(name: 'bbox') required final List<double> box,
     required this.confidence,
     required this.isRecognized,
     this.personId,
@@ -459,6 +459,7 @@ class _$DetectedFaceImpl implements _DetectedFace {
   final String faceId;
   final List<double> _box;
   @override
+  @JsonKey(name: 'bbox')
   List<double> get box {
     if (_box is EqualUnmodifiableListView) return _box;
     // ignore: implicit_dynamic_type
@@ -526,7 +527,7 @@ class _$DetectedFaceImpl implements _DetectedFace {
 abstract class _DetectedFace implements DetectedFace {
   const factory _DetectedFace({
     required final String faceId,
-    required final List<double> box,
+    @JsonKey(name: 'bbox') required final List<double> box,
     required final double confidence,
     required final bool isRecognized,
     final String? personId,
@@ -539,6 +540,7 @@ abstract class _DetectedFace implements DetectedFace {
   @override
   String get faceId;
   @override
+  @JsonKey(name: 'bbox')
   List<double> get box; // [x, y, width, height]
   @override
   double get confidence;

@@ -4,7 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/check_in_bloc.dart';
+import '../models/face_detection_result.dart';
 import '../widgets/camera_preview_widget.dart';
+import '../widgets/check_in_success_dialog.dart';
 import '../widgets/face_detection_status_widget.dart';
 
 /// Main check-in screen
@@ -190,6 +192,27 @@ class _CheckInScreenState extends State<CheckInScreen>
               }
             },
           ),
+          // Check-in success listener
+          BlocListener<CheckInBloc, CheckInState>(
+            listenWhen: (previous, current) {
+              // Listen for check-in success
+              return current.notificationType ==
+                      FaceDetectionNotificationType.checkInSuccess &&
+                  previous.notificationType != current.notificationType;
+            },
+            listener: (context, state) {
+              // Show success dialog when check-in is successful
+              if (state.detectedFaces.isNotEmpty) {
+                final recognizedFace = state.detectedFaces.firstWhere(
+                  (face) => face.isRecognized,
+                  orElse: () => state.detectedFaces.first,
+                );
+
+                // Show success dialog
+                _showCheckInSuccessDialog(context, recognizedFace);
+              }
+            },
+          ),
         ],
         child: BlocBuilder<CheckInBloc, CheckInState>(
           builder: (context, state) {
@@ -362,14 +385,34 @@ class _CheckInScreenState extends State<CheckInScreen>
                                 'Notification Type: ${state.notificationType.name}',
                               ),
                             ],
-                            const SizedBox(height: 8),
-                            ElevatedButton(
-                              onPressed: () {
-                                context.read<CheckInBloc>().add(
-                                  const CheckInEvent.statisticsReset(),
-                                );
-                              },
-                              child: const Text('Reset Statistics'),
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      context.read<CheckInBloc>().add(
+                                        const CheckInEvent.statisticsReset(),
+                                      );
+                                    },
+                                    child: const Text('Reset Statistics'),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      // Test success dialog
+                                      _showTestSuccessDialog(context);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.green,
+                                      foregroundColor: Colors.white,
+                                    ),
+                                    child: const Text('Test Dialog'),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -390,5 +433,50 @@ class _CheckInScreenState extends State<CheckInScreen>
         ),
       ),
     );
+  }
+
+  /// Show simplified check-in success dialog
+  void _showCheckInSuccessDialog(
+    BuildContext context,
+    DetectedFace recognizedFace,
+  ) {
+    // Sample face image for testing (small avatar)
+    const sampleFaceImage =
+        '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAyADIDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//2Q==';
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return CheckInSuccessDialog(
+          employeeName: recognizedFace.employeeName ?? 'Nhân viên',
+          checkInTime: DateTime.now(),
+          faceImageBase64: sampleFaceImage,
+          confidence: recognizedFace.confidence,
+          onClose: () {
+            Navigator.of(context).pop();
+            // Reset the system after dialog closes
+            context.read<CheckInBloc>().add(
+              const CheckInEvent.resetAfterCheckIn(),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  /// Test method to show success dialog with sample data
+  void _showTestSuccessDialog(BuildContext context) {
+    // Create a fake detected face for testing
+    final testFace = DetectedFace(
+      faceId: 'test_face_001',
+      box: [100.0, 100.0, 200.0, 200.0],
+      confidence: 0.85, // 85% confidence for testing
+      isRecognized: true,
+      employeeName: 'Nguyễn Văn Test',
+      personId: 'TEST001',
+    );
+
+    _showCheckInSuccessDialog(context, testFace);
   }
 }

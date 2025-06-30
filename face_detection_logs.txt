@@ -1,0 +1,27 @@
+🎯 CONFIDENCE THRESHOLD UPDATED - $(date)
+
+✅ CHANGES MADE:
+1. Lowered confidence threshold from 80% to 60%
+2. Face search pending now triggers at confidence > 0.6 (60%)
+3. Removed unnecessary else condition for 70% threshold
+4. Added debug logging for confidence values
+
+🎯 NEW BEHAVIOR:
+- confidence > 60%: Shows ⏳ Đang tìm kiếm trong hệ thống...
+- Sets pending state for 3 seconds to prevent spam
+- More accessible threshold for triggering face search
+- Better user experience with lower confidence requirement
+
+📱 EXPECTED IMPACT:
+- Users will see search message more frequently
+- Easier to test pending functionality  
+- More responsive face detection feedback
+- Better UX for various lighting conditions
+
+🔧 TECHNICAL DETAILS:
+- Old threshold: face.confidence > 0.8 (80%)
+- New threshold: face.confidence > 0.6 (60%)
+- Pending state duration: 3 seconds unchanged
+- Debug logging: Added confidence value to logs
+
+Last updated: $(date)

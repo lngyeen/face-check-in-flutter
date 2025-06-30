@@ -182,4 +182,22 @@ class CheckInEvent with _$CheckInEvent {
 
   const factory CheckInEvent.disconnectRequested() = DisconnectRequested;
   const factory CheckInEvent.webSocketError(String error) = WebSocketError;
+
+  // Dialog events for face recognition results
+  /// Show success dialog for face recognition
+  const factory CheckInEvent.showSuccessDialog({
+    required String title,
+    required String message,
+    String? employeeName,
+  }) = ShowSuccessDialog;
+
+  /// Show failure dialog for face recognition
+  const factory CheckInEvent.showFailureDialog({
+    required String title,
+    required String message,
+    String? errorCode,
+  }) = ShowFailureDialog;
+
+  /// Close dialog (user action or auto-dismiss)
+  const factory CheckInEvent.closeDialog() = CloseDialog;
 }

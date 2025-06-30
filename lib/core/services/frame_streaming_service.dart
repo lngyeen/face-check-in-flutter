@@ -35,8 +35,10 @@ class FrameStreamingService {
   DateTime? _streamingStartTime;
   DateTime? _lastFrameSent;
 
-  // Configuration
-  static const Duration _frameDuration = Duration(milliseconds: 33); // ~30 FPS
+  // Configuration - increased frame rate for faster detection
+  static const Duration _frameDuration = Duration(
+    milliseconds: 66,
+  ); // ~15 FPS for faster detection
 
   // Stream controllers
   final StreamController<StreamingStatus> _statusController =
@@ -202,10 +204,21 @@ class FrameStreamingService {
         return null;
       }
 
-      // Convert frame to Base64
+      // Convert frame to Base64 with error handling
       final base64Frame = await ImageConverter.convertCameraImageToBase64(
         frame,
       );
+
+      // Validate base64 output
+      if (base64Frame.startsWith('Exception') ||
+          base64Frame.startsWith('Error') ||
+          base64Frame.startsWith('RangeError') ||
+          base64Frame.length < 100) {
+        debugPrint(
+          '❌ FrameStreamingService: Invalid base64 conversion: ${base64Frame.substring(0, 50)}...',
+        );
+        return null; // Skip this frame
+      }
 
       return ProcessedFrame(
         frameId:
@@ -235,14 +248,20 @@ class FrameStreamingService {
         _framesSent++;
         _lastFrameSent = processedFrame.timestamp;
 
-        // Emit metrics periodically
-        if (_framesSent % 10 == 0) {
+        // Emit metrics periodically with more debug info
+        if (_framesSent % 5 == 0) {
           _metricsController.add(currentMetrics);
+          debugPrint(
+            '📊 FrameStreamingService: Metrics - ${currentMetrics.toString()}',
+          );
         }
 
-        debugPrint(
-          '📤 FrameStreamingService: Frame sent - ${processedFrame.frameId}',
-        );
+        // More frequent debug logging for better monitoring
+        if (_framesSent % 3 == 0) {
+          debugPrint(
+            '📤 FrameStreamingService: Frame #${_framesSent} sent - ${processedFrame.frameId}, size: ${processedFrame.base64Data.length} chars',
+          );
+        }
       } else {
         debugPrint(
           '❌ FrameStreamingService: Failed to send frame - ${processedFrame.frameId}',

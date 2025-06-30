@@ -591,6 +591,15 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         throw Exception('WebSocket not connected');
       }
 
+      // Test server connectivity first
+      debugPrint('🧪 CheckInBloc: Testing server connectivity...');
+      final testSent = _webSocketService.sendTestMessage();
+      if (testSent) {
+        debugPrint('✅ CheckInBloc: Server test message sent successfully');
+      } else {
+        debugPrint('❌ CheckInBloc: Failed to send server test message');
+      }
+
       // Start streaming via service
       await _frameStreamingService.startStreaming();
 
@@ -855,6 +864,11 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
           message =
               '🎉 Check-in thành công! Chào ${recognizedFace.employeeName ?? 'bạn'}';
 
+          // Success dialog is handled by UI listener based on notification type
+          debugPrint(
+            '🎉 CheckInBloc: Success condition met for ${recognizedFace.employeeName}',
+          );
+
           // Immediately stop streaming on successful check-in
           debugPrint(
             '🔄 CheckInBloc: Check-in successful, stopping streaming immediately',
@@ -865,9 +879,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
 
           // Schedule auto-reset after showing success message
           debugPrint(
-            '🔄 CheckInBloc: Check-in successful, scheduling auto-reset in 3 seconds',
+            '🔄 CheckInBloc: Check-in successful, scheduling auto-reset in 5 seconds',
           );
-          Timer(const Duration(seconds: 3), () {
+          Timer(const Duration(seconds: 5), () {
             if (!isClosed) {
               add(const CheckInEvent.resetAfterCheckIn());
             }

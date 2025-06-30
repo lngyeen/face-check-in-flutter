@@ -61,11 +61,11 @@ class WebSocketConfig {
   /// Alternative development config for real devices
   static const WebSocketConfig developmentRealDevice = WebSocketConfig(
     url: 'wss://facedetection-ws.owt.vn', // OWT Production WebSocket server
-    timeout: Duration(seconds: 30),
-    maxRetries: 3,
-    retryDelay: Duration(seconds: 3),
+    timeout: Duration(seconds: 60), // Increased timeout for debugging
+    maxRetries: 5, // More retries for debugging
+    retryDelay: Duration(seconds: 2), // Shorter delay for faster debugging
     enableLogging: true,
-    enableHeartbeat: true,
+    enableHeartbeat: false, // Disable heartbeat for initial connection testing
     enableAutoReconnect: true,
     enableExponentialBackoff: true,
   );
@@ -84,12 +84,12 @@ class WebSocketConfig {
 
   /// Production environment configuration
   static const WebSocketConfig production = WebSocketConfig(
-    url: 'wss://api.facecheck.com:3009',
-    timeout: Duration(seconds: 30),
+    url: 'wss://facedetection-ws.owt.vn', // Fixed: Use correct OWT server
+    timeout: Duration(seconds: 60), // Increased timeout for stability
     maxRetries: 5, // More retries in production
-    retryDelay: Duration(seconds: 5), // Longer delay in production
-    enableLogging: false, // Disable debug logging in production
-    enableHeartbeat: true,
+    retryDelay: Duration(seconds: 2), // Shorter delay for faster reconnection
+    enableLogging: true, // Enable logging for production debugging
+    enableHeartbeat: false, // Disable heartbeat initially
     enableAutoReconnect: true,
     enableExponentialBackoff: true,
   );
