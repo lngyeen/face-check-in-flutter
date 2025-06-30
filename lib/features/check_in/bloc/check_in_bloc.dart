@@ -49,6 +49,7 @@ enum ToastStatus { none, showing }
 enum FaceDetectionNotificationType {
   none,
   faceDetectedSuccess,
+  faceDetectedUnrecognized, // New: Face detected but not recognized (isRecognized: false)
   multipleFacesWarning,
   noFaceDetected,
   checkInSuccess,
@@ -864,6 +865,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
           result.faces.where((face) => face.confidence > 0.8).toList();
       if (highConfidenceFaces.isNotEmpty) {
         if (highConfidenceFaces.any((face) => face.isRecognized)) {
+          // Case: Face recognized successfully
           notificationType = FaceDetectionNotificationType.checkInSuccess;
           final recognizedFace = highConfidenceFaces.firstWhere(
             (face) => face.isRecognized,
@@ -892,6 +894,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
             }
           });
         } else {
+          // Case: Face detected but not recognized (isRecognized: false)
           notificationType = FaceDetectionNotificationType.faceDetectedSuccess;
           message =
               '✅ Khuôn mặt rõ ràng (${(highConfidenceFaces.first.confidence * 100).toStringAsFixed(1)}%) - Đang nhận diện...';
@@ -900,6 +903,25 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
           '🎯 CheckInBloc: Updated notification for high confidence faces: ${notificationType.name}',
         );
         debugPrint('🎯 CheckInBloc: Updated message: $message');
+      } else {
+        // Check for any detected faces regardless of confidence for isRecognized: false message
+        final unrecognizedFaces =
+            result.faces.where((face) => !face.isRecognized).toList();
+        if (unrecognizedFaces.isNotEmpty) {
+          notificationType =
+              FaceDetectionNotificationType.faceDetectedUnrecognized;
+          final avgConfidence =
+              unrecognizedFaces
+                  .map((f) => f.confidence)
+                  .reduce((a, b) => a + b) /
+              unrecognizedFaces.length;
+          message =
+              '🔍 Đã phát hiện khuôn mặt (${(avgConfidence * 100).toStringAsFixed(1)}%) - Khuôn mặt chưa được đăng ký trong hệ thống';
+
+          debugPrint(
+            '🎯 CheckInBloc: Face detected but not recognized - confidence: ${(avgConfidence * 100).toStringAsFixed(1)}%',
+          );
+        }
       }
     }
 
@@ -1546,6 +1568,8 @@ extension FaceDetectionNotificationDisplay on FaceDetectionNotificationType {
       case FaceDetectionNotificationType.faceDetectedSuccess:
       case FaceDetectionNotificationType.checkInSuccess:
         return Colors.green;
+      case FaceDetectionNotificationType.faceDetectedUnrecognized:
+        return Colors.amber; // Yellow/amber for unrecognized faces
       case FaceDetectionNotificationType.multipleFacesWarning:
         return Colors.orange;
       case FaceDetectionNotificationType.noFaceDetected:
@@ -1562,6 +1586,7 @@ extension FaceDetectionNotificationDisplay on FaceDetectionNotificationType {
       case FaceDetectionNotificationType.none:
         return Colors.black87;
       case FaceDetectionNotificationType.faceDetectedSuccess:
+      case FaceDetectionNotificationType.faceDetectedUnrecognized:
       case FaceDetectionNotificationType.checkInSuccess:
       case FaceDetectionNotificationType.multipleFacesWarning:
       case FaceDetectionNotificationType.noFaceDetected:
@@ -1578,6 +1603,8 @@ extension FaceDetectionNotificationDisplay on FaceDetectionNotificationType {
         return Icons.info;
       case FaceDetectionNotificationType.faceDetectedSuccess:
         return Icons.face;
+      case FaceDetectionNotificationType.faceDetectedUnrecognized:
+        return Icons.face_retouching_off; // Icon for unrecognized face
       case FaceDetectionNotificationType.checkInSuccess:
         return Icons.check_circle;
       case FaceDetectionNotificationType.multipleFacesWarning:
@@ -1600,6 +1627,10 @@ extension FaceDetectionNotificationDisplay on FaceDetectionNotificationType {
       case FaceDetectionNotificationType.faceDetectedSuccess:
       case FaceDetectionNotificationType.noFaceDetected:
         return const Duration(seconds: 2);
+      case FaceDetectionNotificationType.faceDetectedUnrecognized:
+        return const Duration(
+          seconds: 3,
+        ); // Longer duration for unrecognized faces
       case FaceDetectionNotificationType.multipleFacesWarning:
       case FaceDetectionNotificationType.processingError:
         return const Duration(seconds: 3);
