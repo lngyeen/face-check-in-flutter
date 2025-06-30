@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:web_socket_channel/io.dart';
 
 import '../config/websocket_config.dart';
+import '../config/debug_config.dart';
 import '../../features/check_in/bloc/check_in_bloc.dart';
 
 // Add a type definition for the connector function for clarity and ease of use.
@@ -14,7 +17,7 @@ typedef WebSocketConnector = WebSocketChannel Function(Uri uri);
 /// Enhanced WebSocket service for Story 2.1
 /// Handles connection, reconnection, and message exchange with face recognition backend
 /// Supports timeout, retrying, and configuration management
-@injectable
+@singleton
 class WebSocketService {
   WebSocketChannel? _channel;
   WebSocketConfig _config = WebSocketConfig.current;
@@ -40,7 +43,31 @@ class WebSocketService {
 
   // Expose a way to override the connector for testing purposes.
   @visibleForTesting
-  WebSocketConnector connector = WebSocketChannel.connect;
+  WebSocketConnector connector = _createWebSocketChannel;
+
+  /// Create WebSocket channel with SSL certificate handling
+  static WebSocketChannel _createWebSocketChannel(Uri uri) {
+    if (kDebugMode && uri.scheme == 'wss') {
+      // In debug mode, allow self-signed certificates for testing
+      debugPrint(
+        '🔒 WebSocketService: Creating WSS connection with relaxed SSL for debug',
+      );
+      return IOWebSocketChannel.connect(
+        uri,
+        customClient:
+            HttpClient()..badCertificateCallback = (cert, host, port) => true,
+      );
+    }
+    return WebSocketChannel.connect(uri);
+  }
+
+  /// Constructor with debug logging
+  WebSocketService() {
+    debugPrint(
+      '🔥 WebSocketService: Constructor called - instance: ${hashCode}',
+    );
+    debugPrint('🔥 WebSocketService: Stream controllers initialized');
+  }
 
   /// Stream of enhanced connection status changes
   Stream<ConnectionStatus> get connectionStatus =>
@@ -105,6 +132,159 @@ class WebSocketService {
     }
   }
 
+  /// Test real WebSocket server connection (for debugging)
+  Future<void> testRealServerConnection() async {
+    if (_config.enableLogging) {
+      debugPrint(
+        '🌐 WebSocketService: Testing real server connection to ${_config.url}',
+      );
+    }
+
+    try {
+      final testChannel = WebSocketChannel.connect(Uri.parse(_config.url));
+      await testChannel.ready.timeout(_config.timeout);
+
+      if (_config.enableLogging) {
+        debugPrint('✅ WebSocketService: Real server connection successful');
+      }
+
+      // Send test frame
+      final testFrame = {
+        'type': 'frame',
+        'data': 'test_image_data',
+        'timestamp': DateTime.now().millisecondsSinceEpoch,
+      };
+
+      testChannel.sink.add(jsonEncode(testFrame));
+
+      // Listen for response for 10 seconds
+      final responseCompleter = Completer<void>();
+      late StreamSubscription subscription;
+
+      subscription = testChannel.stream.listen(
+        (message) {
+          if (_config.enableLogging) {
+            debugPrint('📥 WebSocketService: Real server response: $message');
+          }
+          subscription.cancel();
+          if (!responseCompleter.isCompleted) {
+            responseCompleter.complete();
+          }
+        },
+        onError: (error) {
+          if (_config.enableLogging) {
+            debugPrint('❌ WebSocketService: Real server error: $error');
+          }
+          subscription.cancel();
+          if (!responseCompleter.isCompleted) {
+            responseCompleter.completeError(error);
+          }
+        },
+      );
+
+      // Wait for response with timeout
+      await responseCompleter.future.timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          subscription.cancel();
+          if (_config.enableLogging) {
+            debugPrint('⏰ WebSocketService: Real server response timeout');
+          }
+        },
+      );
+
+      await testChannel.sink.close();
+    } catch (e) {
+      if (_config.enableLogging) {
+        debugPrint('❌ WebSocketService: Real server test failed: $e');
+      }
+    }
+  }
+
+  /// Test if server responds to ping messages
+  Future<bool> testServerResponse() async {
+    if (!_isConnected) {
+      debugPrint('❌ WebSocketService: Cannot test server - not connected');
+      return false;
+    }
+
+    debugPrint('🧪 WebSocketService: Testing server response with ping...');
+
+    final pingId = DateTime.now().millisecondsSinceEpoch;
+    bool responseReceived = false;
+
+    // Listen for any response for 10 seconds
+    late StreamSubscription testSubscription;
+    final completer = Completer<bool>();
+
+    testSubscription = _messageController.stream.listen((message) {
+      debugPrint(
+        '🧪 WebSocketService: Response received during ping test: $message',
+      );
+      responseReceived = true;
+      testSubscription.cancel();
+      if (!completer.isCompleted) completer.complete(true);
+    });
+
+    // Send ping
+    final pingSuccess = sendMessage({
+      'type': 'ping',
+      'id': pingId,
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
+    });
+
+    if (!pingSuccess) {
+      testSubscription.cancel();
+      if (!completer.isCompleted) completer.complete(false);
+      return false;
+    }
+
+    // Wait for response or timeout
+    Timer(const Duration(seconds: 10), () {
+      testSubscription.cancel();
+      if (!responseReceived && !completer.isCompleted) {
+        debugPrint(
+          '⏰ WebSocketService: Server ping test timeout - no response',
+        );
+        completer.complete(false);
+      }
+    });
+
+    return completer.future;
+  }
+
+  /// Test server with different message formats
+  void runServerTests() {
+    debugPrint('🧪 WebSocketService: Starting server format tests...');
+    testServerFormats();
+  }
+
+  /// Test server responsiveness with simple message formats
+  void testServerFormats() {
+    if (!_isConnected || _channel == null) {
+      debugPrint('❌ WebSocketService: Cannot test - not connected');
+      return;
+    }
+
+    // Test different message formats
+    final testMessages = [
+      'hello',
+      '{"message": "test"}',
+      '{"type": "test"}',
+      '{"type": "ping"}',
+      '{"action": "face_detection", "data": "test"}',
+    ];
+
+    for (int i = 0; i < testMessages.length; i++) {
+      Future.delayed(Duration(seconds: i * 2), () {
+        if (_isConnected && _channel != null) {
+          _channel!.sink.add(testMessages[i]);
+          debugPrint('🧪 TEST MESSAGE ${i + 1}: ${testMessages[i]}');
+        }
+      });
+    }
+  }
+
   /// Enhanced connect method with full Story 2.1 support
   Future<bool> connect({String? customUrl}) async {
     if (_isConnected) {
@@ -132,14 +312,28 @@ class WebSocketService {
     }
 
     try {
+      debugPrint('🔍 WebSocketService: Parsing URL: $urlToConnect');
+      final uri = Uri.parse(urlToConnect);
+      debugPrint(
+        '🔍 WebSocketService: Parsed URI - scheme: ${uri.scheme}, host: ${uri.host}, port: ${uri.port}',
+      );
+
       // Setup timeout timer
       _timeoutTimer = Timer(_config.timeout, () {
         if (!_isConnected) {
+          debugPrint(
+            '⏰ WebSocketService: Connection timeout after ${_config.timeout.inSeconds}s',
+          );
           _handleTimeout();
         }
       });
 
-      _channel = connector(Uri.parse(urlToConnect));
+      debugPrint('🔍 WebSocketService: Creating WebSocket channel...');
+      _channel = connector(uri);
+      debugPrint(
+        '🔍 WebSocketService: Channel created, waiting for ready state...',
+      );
+
       await _channel!.ready.timeout(_config.timeout);
 
       // Connection successful
@@ -156,9 +350,36 @@ class WebSocketService {
 
       // Listen for incoming messages
       _channel!.stream.listen(
-        _handleMessage,
-        onError: _handleError,
-        onDone: _handleDisconnection,
+        (message) {
+          final messageStr = message.toString();
+          debugPrint(
+            '🔥 WebSocketService: RAW MESSAGE RECEIVED (${messageStr.length} chars): ${messageStr.substring(0, messageStr.length > 300 ? 300 : messageStr.length)}...',
+          );
+
+          // Try to detect message type
+          try {
+            final parsed = jsonDecode(messageStr);
+            debugPrint(
+              '🔍 WebSocketService: Message type detected: ${parsed['type'] ?? parsed['action'] ?? 'unknown'}',
+            );
+          } catch (e) {
+            debugPrint(
+              '🔍 WebSocketService: Non-JSON message or parsing error: $e',
+            );
+          }
+
+          _handleMessage(message);
+        },
+        onError: (error) {
+          debugPrint('🔥 WebSocketService: STREAM ERROR: $error');
+          _handleError(error);
+        },
+        onDone: () {
+          debugPrint(
+            '🔥 WebSocketService: STREAM DONE (connection closed by server)',
+          );
+          _handleDisconnection();
+        },
       );
 
       if (_config.enableLogging) {
@@ -292,7 +513,8 @@ class WebSocketService {
   }
 
   /// Enhanced message sending with error handling
-  bool sendMessage(Map<String, dynamic> message) {
+  /// Supports both Map<String, dynamic> and String messages
+  bool sendMessage(dynamic message) {
     if (!_isConnected || _channel == null) {
       if (_config.enableLogging) {
         debugPrint('❌ WebSocketService: Cannot send message - not connected');
@@ -301,13 +523,24 @@ class WebSocketService {
     }
 
     try {
-      final jsonMessage = jsonEncode(message);
-      _channel!.sink.add(jsonMessage);
+      late String messageToSend;
+      late String messageType;
+
+      if (message is Map<String, dynamic>) {
+        messageToSend = jsonEncode(message);
+        messageType = message['type']?.toString() ?? 'unknown';
+      } else if (message is String) {
+        messageToSend = message;
+        messageType = 'raw_string';
+      } else {
+        messageToSend = message.toString();
+        messageType = 'converted_string';
+      }
+
+      _channel!.sink.add(messageToSend);
 
       if (_config.enableLogging) {
-        debugPrint(
-          '📤 WebSocketService: Message sent: ${message['type'] ?? 'unknown'}',
-        );
+        debugPrint('📤 WebSocketService: Message sent: $messageType');
       }
       return true;
     } catch (e) {
@@ -320,56 +553,239 @@ class WebSocketService {
 
   /// Send base64 encoded image frame to backend
   bool sendImageFrame(String base64Image) {
-    final success = sendMessage({
-      'type': 'frame',
-      'data': base64Image,
-      'timestamp': DateTime.now().millisecondsSinceEpoch,
-    });
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
 
-    // Mock backend response for testing (remove when real backend is ready)
-    if (success) {
-      _generateMockResponse();
+    if (!_isConnected || _channel == null) {
+      debugPrint('❌ WebSocketService: Cannot send frame - not connected');
+      return false;
     }
 
-    return success;
+    try {
+      // Enhanced Debug: Check base64 content safely
+      try {
+        final sample =
+            base64Image.length > 50
+                ? base64Image.substring(0, 50)
+                : base64Image;
+        debugPrint(
+          '🔍 WebSocketService: Base64 length: ${base64Image.length} chars',
+        );
+        debugPrint('🔍 WebSocketService: Base64 sample: ${sample}...');
+
+        // Validate base64 format and estimate image size
+        if (base64Image.isEmpty) {
+          debugPrint('❌ WebSocketService: Base64 image is empty');
+          return false;
+        }
+
+        // Estimate image size (base64 is ~4/3 times larger than original)
+        final estimatedImageBytes = (base64Image.length * 3) ~/ 4;
+        debugPrint(
+          '📏 WebSocketService: Estimated image size: ${estimatedImageBytes} bytes (${(estimatedImageBytes / 1024).toStringAsFixed(1)} KB)',
+        );
+
+        // Basic JPEG/PNG base64 validation
+        if (base64Image.startsWith('/9j/')) {
+          debugPrint('✅ WebSocketService: Valid JPEG base64 detected');
+        } else if (base64Image.startsWith('iVBOR')) {
+          debugPrint('✅ WebSocketService: Valid PNG base64 detected');
+        } else {
+          debugPrint('⚠️ WebSocketService: Unknown image format detected');
+          debugPrint(
+            '🔍 WebSocketService: First 20 chars: ${base64Image.substring(0, base64Image.length > 20 ? 20 : base64Image.length)}',
+          );
+        }
+
+        // Check if base64 is well-formed
+        if (base64Image.length % 4 == 0) {
+          debugPrint('✅ WebSocketService: Base64 padding is correct');
+        } else {
+          debugPrint('⚠️ WebSocketService: Base64 padding may be incorrect');
+        }
+      } catch (e) {
+        debugPrint('⚠️ WebSocketService: Base64 validation error: $e');
+      }
+
+      // Use EXACT format from API documentation
+      final frameMessage = {
+        'type': 'processFrame',
+        'image': base64Image,
+        'timestamp': timestamp,
+        'cameraId': 'mobile_camera_1',
+      };
+
+      bool success = sendMessage(frameMessage);
+
+      if (success) {
+        debugPrint('📤 WebSocketService: Message sent: processFrame');
+        debugPrint(
+          '🔍 WebSocketService: Full message keys: ${frameMessage.keys.toList()}',
+        );
+        debugPrint(
+          '📡 WebSocketService: Frame sent at $timestamp - waiting for response...',
+        );
+        debugPrint(
+          '🔥 WebSocketService: Expected server response format: {"type":"frameResult","data":{"faces":[...]}}',
+        );
+      } else {
+        debugPrint('❌ WebSocketService: Failed to send frame message');
+      }
+
+      return success;
+    } catch (e) {
+      debugPrint('❌ WebSocketService: Error sending frame: $e');
+      return false;
+    }
   }
 
   /// Generate mock face detection response for testing
   void _generateMockResponse() {
     debugPrint('🧪 WebSocketService: Generating mock response...');
-    
+
     // Simulate backend processing delay
     Timer(const Duration(milliseconds: 500), () {
       if (!_isDisposed && _isConnected) {
-        debugPrint('🧪 WebSocketService: Mock timer triggered, generating response');
-        
-        final mockResponse = {
-          'type': 'frameResult',
-          'data': {
-            'frameId': 'frame_${DateTime.now().millisecondsSinceEpoch}',
-            'timestamp': DateTime.now().toIso8601String(),
-            'status': 'face_found', // Options: face_found, no_face, multiple_faces, detecting, error
-            'faces': [
-              {
-                'faceId': 'face_001',
-                'box': [0.3, 0.2, 0.4, 0.6], // [x, y, width, height] normalized
-                'confidence': 0.95,
-                'isRecognized': true,
-                'personId': 'person_123',
-                'employeeName': 'Test User',
-              }
-            ],
-          }
-        };
+        debugPrint(
+          '🧪 WebSocketService: Mock timer triggered, generating response',
+        );
 
-        debugPrint('🧪 WebSocketService: Mock response created: ${mockResponse['type']}');
-        
+        // Generate different scenarios randomly
+        final scenarios = [
+          // Scenario 1: Face found with high confidence (API doc format)
+          {
+            'type': 'frameResult',
+            'data': {
+              'faces': [
+                {
+                  'faceId': 'person_001',
+                  'isRecognized': true,
+                  'confidence': 0.92,
+                  'gender': 'male',
+                  'age': 28,
+                  'mask': false,
+                  'bbox': [150, 120, 250, 220],
+                },
+              ],
+              'faceImagePath':
+                  'https://storage.example.com/faces/camera1-2024-03-20T10:30:00.jpg',
+              'cameraId': 'camera_001',
+              'timestamp': '2024-03-20T10:30:00.000Z',
+              'processingTime': 250,
+              'isCheckinSent': true,
+            },
+          },
+          // Scenario 2: No face detected (API doc format)
+          {
+            'type': 'frameResult',
+            'data': {
+              'faces': [],
+              'faceImagePath': '',
+              'cameraId': '1',
+              'timestamp': '2025-06-12T09:00:00.000Z',
+              'processingTime': 1000,
+              'isCheckinSent': false,
+            },
+          },
+          // Scenario 3: Face found but not recognized
+          {
+            'type': 'frameResult',
+            'data': {
+              'frameId': 'frame_${DateTime.now().millisecondsSinceEpoch}',
+              'timestamp': DateTime.now().toIso8601String(),
+              'status': 'face_found',
+              'faces': [
+                {
+                  'faceId': 'face_002',
+                  'box': [0.25, 0.15, 0.5, 0.7],
+                  'confidence': 0.85,
+                  'isRecognized': false,
+                  'personId': null,
+                  'employeeName': null,
+                },
+              ],
+              'processingTime': 52,
+              'originalSize': 115000,
+              'processedSize': 17000,
+            },
+          },
+          // Scenario 4: Multiple faces
+          {
+            'type': 'frameResult',
+            'data': {
+              'frameId': 'frame_${DateTime.now().millisecondsSinceEpoch}',
+              'timestamp': DateTime.now().toIso8601String(),
+              'status': 'multiple_faces',
+              'faces': [
+                {
+                  'faceId': 'face_003',
+                  'box': [0.2, 0.1, 0.3, 0.5],
+                  'confidence': 0.88,
+                  'isRecognized': false,
+                  'personId': null,
+                  'employeeName': null,
+                },
+                {
+                  'faceId': 'face_004',
+                  'box': [0.6, 0.2, 0.3, 0.5],
+                  'confidence': 0.82,
+                  'isRecognized': false,
+                  'personId': null,
+                  'employeeName': null,
+                },
+              ],
+              'processingTime': 67,
+              'originalSize': 115000,
+              'processedSize': 17000,
+            },
+          },
+          // Scenario 5: Detecting (processing)
+          {
+            'type': 'frameResult',
+            'data': {
+              'frameId': 'frame_${DateTime.now().millisecondsSinceEpoch}',
+              'timestamp': DateTime.now().toIso8601String(),
+              'status': 'detecting',
+              'faces': [],
+              'processingTime': 25,
+              'originalSize': 115000,
+              'processedSize': 17000,
+            },
+          },
+        ];
+
+        // Randomly select a scenario (weighted towards face_found and no_face)
+        final random = DateTime.now().millisecond % 100;
+        final Map<String, dynamic> mockResponse;
+
+        if (random < 40) {
+          mockResponse = scenarios[0]; // 40% face found with recognition
+        } else if (random < 70) {
+          mockResponse = scenarios[1]; // 30% no face
+        } else if (random < 85) {
+          mockResponse = scenarios[2]; // 15% face found without recognition
+        } else if (random < 95) {
+          mockResponse = scenarios[4]; // 10% detecting
+        } else {
+          mockResponse = scenarios[3]; // 5% multiple faces
+        }
+
+        debugPrint(
+          '🧪 WebSocketService: Mock response created: ${mockResponse['type']} - status: ${mockResponse['data']['status']}',
+        );
+
         // Simulate receiving the response
         final jsonResponse = jsonEncode(mockResponse);
-        debugPrint('🧪 WebSocketService: Calling _handleMessage with mock data');
+        debugPrint(
+          '🧪 WebSocketService: Calling _handleMessage with mock data',
+        );
+        debugPrint(
+          '🧪 WebSocketService: Mock response JSON: ${jsonResponse.substring(0, jsonResponse.length > 200 ? 200 : jsonResponse.length)}...',
+        );
         _handleMessage(jsonResponse);
       } else {
-        debugPrint('🧪 WebSocketService: Mock timer triggered but service disposed or disconnected');
+        debugPrint(
+          '🧪 WebSocketService: Mock timer triggered but service disposed or disconnected',
+        );
       }
     });
   }
@@ -405,6 +821,10 @@ class WebSocketService {
   void _handleMessage(dynamic message) {
     if (_isDisposed) return;
 
+    debugPrint(
+      '🔥 WebSocketService: _handleMessage called with: ${message.toString().substring(0, message.toString().length > 100 ? 100 : message.toString().length)}...',
+    );
+
     try {
       final Map<String, dynamic> parsedMessage = jsonDecode(message.toString());
 
@@ -414,7 +834,16 @@ class WebSocketService {
         );
       }
 
+      debugPrint(
+        '🔥 WebSocketService: About to emit message to stream controller',
+      );
+      debugPrint(
+        '🔥 WebSocketService: Message controller has listeners: ${_messageController.hasListener}',
+      );
+
       _messageController.add(parsedMessage);
+
+      debugPrint('🔥 WebSocketService: Message emitted to stream successfully');
     } catch (e) {
       if (_config.enableLogging) {
         debugPrint('❌ WebSocketService: Failed to parse message: $e');
@@ -467,6 +896,68 @@ class WebSocketService {
     _connectionStatusController.close();
     _messageController.close();
     _metricsController.close();
+  }
+
+  /// Send a test frame and wait for response (for debugging)
+  Future<void> sendTestFrame() async {
+    if (!_isConnected) {
+      if (_config.enableLogging) {
+        debugPrint(
+          '❌ WebSocketService: Cannot send test frame - not connected',
+        );
+      }
+      return;
+    }
+
+    if (_config.enableLogging) {
+      debugPrint('🧪 WebSocketService: Sending test frame to server...');
+    }
+
+    final testFrame = {
+      'type': 'frame',
+      'data':
+          'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', // 1x1 pixel PNG
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
+    };
+
+    final success = sendMessage(testFrame);
+
+    if (_config.enableLogging) {
+      if (success) {
+        debugPrint('✅ WebSocketService: Test frame sent successfully');
+        debugPrint('⏳ WebSocketService: Waiting for server response...');
+      } else {
+        debugPrint('❌ WebSocketService: Failed to send test frame');
+      }
+    }
+  }
+
+  /// Send test message to verify server connectivity
+  bool sendTestMessage() {
+    if (!_isConnected || _channel == null) {
+      debugPrint('❌ WebSocketService: Cannot send test - not connected');
+      return false;
+    }
+
+    try {
+      // Create a simple test message
+      final testMessage = {
+        'type': 'ping',
+        'data': {
+          'timestamp': DateTime.now().millisecondsSinceEpoch,
+          'clientId': 'flutter-test-client',
+        },
+      };
+
+      final jsonMessage = json.encode(testMessage);
+      _channel!.sink.add(jsonMessage);
+
+      debugPrint('🧪 WebSocketService: Test message sent');
+      return true;
+    } catch (e) {
+      debugPrint('❌ WebSocketService: Failed to send test message: $e');
+      return false;
+    }
   }
 }
 

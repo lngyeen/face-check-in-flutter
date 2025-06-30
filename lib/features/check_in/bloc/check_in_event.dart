@@ -166,6 +166,48 @@ class CheckInEvent with _$CheckInEvent {
     FaceDetectionResult result,
   ) = BackendResponseReceived;
 
+  // Face detection notification events
+  /// Show face detection notification
+  const factory CheckInEvent.showFaceDetectionNotification({
+    required FaceDetectionNotificationType type,
+    required String message,
+  }) = ShowFaceDetectionNotification;
+
+  /// Clear face detection notification
+  const factory CheckInEvent.clearFaceDetectionNotification() =
+      ClearFaceDetectionNotification;
+
+  /// Reset system after successful check-in
+  const factory CheckInEvent.resetAfterCheckIn() = ResetAfterCheckIn;
+
+  /// System reset is now complete
+  const factory CheckInEvent.resetSystem() = ResetSystem;
+
   const factory CheckInEvent.disconnectRequested() = DisconnectRequested;
   const factory CheckInEvent.webSocketError(String error) = WebSocketError;
+
+  // Dialog management events for performance optimization
+  /// Success dialog is being shown - pause detection
+  const factory CheckInEvent.successDialogShown() = SuccessDialogShown;
+
+  /// Success dialog has been dismissed - resume detection
+  const factory CheckInEvent.successDialogDismissed() = SuccessDialogDismissed;
+
+  // Dialog events for face recognition results
+  /// Show success dialog for face recognition
+  const factory CheckInEvent.showSuccessDialog({
+    required String title,
+    required String message,
+    String? employeeName,
+  }) = ShowSuccessDialog;
+
+  /// Show failure dialog for face recognition
+  const factory CheckInEvent.showFailureDialog({
+    required String title,
+    required String message,
+    String? errorCode,
+  }) = ShowFailureDialog;
+
+  /// Close dialog (user action or auto-dismiss)
+  const factory CheckInEvent.closeDialog() = CloseDialog;
 }

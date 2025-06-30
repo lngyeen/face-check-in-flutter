@@ -22,7 +22,7 @@ class FaceDetectionResult with _$FaceDetectionResult {
 class DetectedFace with _$DetectedFace {
   const factory DetectedFace({
     required String faceId,
-    required List<double> box, // [x, y, width, height]
+    @JsonKey(name: 'bbox') required List<double> box, // [x, y, width, height]
     required double confidence,
     required bool isRecognized,
     String? personId,
@@ -65,4 +65,4 @@ class RecognitionStatistics with _$RecognitionStatistics {
 
   factory RecognitionStatistics.fromJson(Map<String, dynamic> json) =>
       _$RecognitionStatisticsFromJson(json);
-} 
+}

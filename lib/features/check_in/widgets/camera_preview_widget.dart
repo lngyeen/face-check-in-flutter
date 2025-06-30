@@ -32,11 +32,41 @@ class CameraPreviewWidget extends StatelessWidget {
             final previewSize =
                 controller.value.previewSize ?? const Size(1, 1);
 
-            return FaceBoundingBoxOverlay(
-              previewSize: previewSize,
-              child: AspectRatio(
-                aspectRatio: 1.0, // Square
-                child: CameraPreview(controller),
+            // Calculate proper aspect ratio for 3:4 portrait format
+            double targetAspectRatio = 3.0 / 4.0; // 0.75 for 3:4 portrait
+
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha(25),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: FaceBoundingBoxOverlay(
+                previewSize: previewSize,
+                child: Center(
+                  child: AspectRatio(
+                    aspectRatio: targetAspectRatio,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: OverflowBox(
+                        alignment: Alignment.center,
+                        child: FittedBox(
+                          fit: BoxFit.cover,
+                          child: SizedBox(
+                            width: previewSize.height,
+                            height: previewSize.width,
+                            child: CameraPreview(controller),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             );
           case CameraStatus.error:

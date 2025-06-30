@@ -33,7 +33,7 @@ class CameraServiceImpl implements CameraService {
       );
     }
 
-    // Only use front camera for face check-in
+    // Try both front and back cameras for face detection testing
     final frontCameras =
         cameras
             .where(
@@ -41,22 +41,44 @@ class CameraServiceImpl implements CameraService {
             )
             .toList();
 
-    if (frontCameras.isEmpty) {
-      throw Exception('Front camera not available. Face check-in requires front camera.');
+    final backCameras =
+        cameras
+            .where((camera) => camera.lensDirection == CameraLensDirection.back)
+            .toList();
+
+    CameraDescription selectedCamera;
+
+    // Try front camera first, fallback to back camera for testing
+    if (frontCameras.isNotEmpty) {
+      selectedCamera = frontCameras.first;
+      debugPrint('📱 Using front camera for face detection');
+    } else if (backCameras.isNotEmpty) {
+      selectedCamera = backCameras.first;
+      debugPrint('📱 Using back camera for face detection testing');
+    } else {
+      throw Exception('No cameras available');
     }
 
-    final selectedCamera = frontCameras.first;
     debugPrint(
-      '📱 Selected front camera: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
+      '📱 Selected camera: ${selectedCamera.lensDirection} - ${selectedCamera.name}',
     );
 
     controller = CameraController(
       selectedCamera,
       ResolutionPreset.high, // Higher resolution for better face detection
       enableAudio: false,
+      imageFormatGroup:
+          ImageFormatGroup.yuv420, // Explicit format for face detection
     );
 
     await controller?.initialize();
+
+    // Log camera info for debugging
+    final value = controller?.value;
+    if (value != null) {
+      debugPrint('📱 Camera initialized: ${value.previewSize}');
+      debugPrint('📱 Camera orientation: ${value.deviceOrientation}');
+    }
   }
 
   /// Starts the image stream from the camera controller.

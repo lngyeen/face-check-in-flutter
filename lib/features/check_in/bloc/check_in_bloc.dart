@@ -45,6 +45,19 @@ enum StreamingStatus { idle, active, error }
 
 enum ToastStatus { none, showing }
 
+// Face detection snack bar types
+enum FaceDetectionNotificationType {
+  none,
+  faceDetectedSuccess,
+  faceDetectedUnrecognized, // New: Face detected but not recognized (isRecognized: false)
+  multipleFacesWarning,
+  noFaceDetected,
+  checkInSuccess,
+  checkInFailed,
+  connectionError,
+  processingError,
+}
+
 @freezed
 class CheckInState with _$CheckInState {
   const factory CheckInState({
@@ -74,6 +87,13 @@ class CheckInState with _$CheckInState {
     // Frame streaming metrics - Phase 3
     @Default(0.0) double currentFrameRate,
     DateTime? lastFrameSent,
+    // Face detection notifications
+    @Default(FaceDetectionNotificationType.none)
+    FaceDetectionNotificationType notificationType,
+    String? notificationMessage,
+    @Default(false) bool shouldShowNotification,
+    // Dialog status for performance optimization
+    @Default(false) bool isSuccessDialogShowing,
   }) = _CheckInState;
 }
 
@@ -96,6 +116,14 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     this._cameraService,
     this._frameStreamingService,
   ) : super(const CheckInState()) {
+    debugPrint('🔥 CheckInBloc: Constructor called');
+    debugPrint(
+      '🔥 CheckInBloc: WebSocket service instance: ${_webSocketService.hashCode}',
+    );
+    debugPrint(
+      '🔥 CheckInBloc: WebSocket service is connected: ${_webSocketService.isConnected}',
+    );
+
     // Initialize WebSocket service integration
     _initializeWebSocketIntegration();
 
@@ -158,21 +186,38 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Backend response events
     on<RecognitionResultReceived>(_onRecognitionResultReceived);
     on<BackendResponseReceived>(_onBackendResponseReceived);
+
+    // Face detection notification events
+    on<ShowFaceDetectionNotification>(_onShowFaceDetectionNotification);
+    on<ClearFaceDetectionNotification>(_onClearFaceDetectionNotification);
+
+    // Reset events
+    on<ResetAfterCheckIn>(_onResetAfterCheckIn);
+    on<ResetSystem>(_onResetSystem);
+
+    // Dialog management events for performance optimization
+    on<SuccessDialogShown>(_onSuccessDialogShown);
+    on<SuccessDialogDismissed>(_onSuccessDialogDismissed);
   }
 
   /// Initialize WebSocket service integration for Story 2.1
   /// Creates bridge between WebSocket service and BLoC events
   void _initializeWebSocketIntegration() {
+    debugPrint('🔥 CheckInBloc: Initializing WebSocket integration...');
+
     _webSocketService.connectionStatus.listen(
       (status) {
+        debugPrint('🔥 CheckInBloc: Connection status changed to: $status');
         add(CheckInEvent.connectionStatusChanged(status));
       },
       onError: (error) {
+        debugPrint('❌ CheckInBloc: Connection status error: $error');
         add(CheckInEvent.webSocketError(error.toString()));
       },
     );
 
     // Listen to incoming WebSocket messages
+    debugPrint('🔥 CheckInBloc: Setting up message subscription...');
     _messageSubscription = _webSocketService.messages.listen(
       (message) {
         debugPrint(
@@ -189,6 +234,9 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
 
     debugPrint('🔥 CheckInBloc: WebSocket message listener setup complete');
+    debugPrint(
+      '🔥 CheckInBloc: Message subscription active: ${_messageSubscription != null}',
+    );
 
     // Listen to WebSocket metrics for debugging
     _webSocketService.metrics.listen((metrics) {
@@ -196,6 +244,10 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         '📊 CheckInBloc: WebSocket metrics updated - ${metrics.toString()}',
       );
     });
+
+    debugPrint(
+      '🔥 CheckInBloc: WebSocket integration initialization completed',
+    );
   }
 
   /// Convert FrameStreamingService.StreamingStatus to CheckInBloc.StreamingStatus
@@ -547,6 +599,15 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
         throw Exception('WebSocket not connected');
       }
 
+      // Test server connectivity first
+      debugPrint('🧪 CheckInBloc: Testing server connectivity...');
+      final testSent = _webSocketService.sendTestMessage();
+      if (testSent) {
+        debugPrint('✅ CheckInBloc: Server test message sent successfully');
+      } else {
+        debugPrint('❌ CheckInBloc: Failed to send server test message');
+      }
+
       // Start streaming via service
       await _frameStreamingService.startStreaming();
 
@@ -724,106 +785,158 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     BackendResponseReceived event,
     Emitter<CheckInState> emit,
   ) async {
-    final result = event.result;
     debugPrint(
-      '🎯 CheckInBloc: Backend response received - ${result.faces.length} faces, status: ${result.status}',
+      '🎯 CheckInBloc: Backend response received - ${event.result.faces.length} faces, status: ${event.result.status}',
     );
+    debugPrint('   Event: $event');
 
-    // Update recognition statistics
-    final updatedStats = _updateRecognitionStatistics(
-      state.recognitionStats,
-      result,
-    );
+    final result = event.result;
 
-    // Calculate average confidence from detected faces
-    final averageConfidence =
-        result.faces.isNotEmpty
-            ? result.faces.map((f) => f.confidence).reduce((a, b) => a + b) /
-                result.faces.length
-            : 0.0;
-
-    // Determine if recognition was successful
-    final hasRecognizedFace = result.faces.any((face) => face.isRecognized);
-
-    // Create success message
-    String toastMessage;
-    if (hasRecognizedFace) {
-      final recognizedFace = result.faces.firstWhere(
-        (face) => face.isRecognized,
-      );
-      toastMessage = 'Welcome ${recognizedFace.employeeName ?? 'Employee'}!';
-    } else {
-      switch (result.status) {
-        case FaceDetectionStatus.faceFound:
-          toastMessage = 'Face detected but not recognized';
-          break;
-        case FaceDetectionStatus.multipleFaces:
-          toastMessage = 'Multiple faces detected';
-          break;
-        case FaceDetectionStatus.noFace:
-          toastMessage = 'No face detected';
-          break;
-        case FaceDetectionStatus.error:
-          toastMessage = 'Detection error occurred';
-          break;
-        default:
-          toastMessage = 'Processing...';
-      }
-    }
-
+    // Update state with detection results
     emit(
       state.copyWith(
         detectedFaces: result.faces,
         faceStatus: result.status,
-        faceConfidence: averageConfidence,
         lastFaceDetection: result.timestamp,
-        lastRecognitionTime:
-            hasRecognizedFace ? result.timestamp : state.lastRecognitionTime,
-        recognitionStats: updatedStats,
-        framesProcessed: state.framesProcessed + 1,
-        toastStatus: ToastStatus.showing,
-        toastMessage: toastMessage,
+        recognitionStats: state.recognitionStats.copyWith(
+          totalFramesProcessed: state.recognitionStats.totalFramesProcessed + 1,
+          totalFacesDetected:
+              state.recognitionStats.totalFacesDetected + result.faces.length,
+          lastRecognitionTime: result.timestamp,
+        ),
       ),
     );
+
+    // Generate appropriate notification based on face detection result
+    _processFaceDetectionResult(result);
   }
 
-  /// Update recognition statistics with new result
-  RecognitionStatistics _updateRecognitionStatistics(
-    RecognitionStatistics currentStats,
-    FaceDetectionResult result,
-  ) {
-    final hasRecognizedFace = result.faces.any((face) => face.isRecognized);
-    final totalFaces = result.faces.length;
+  // Process face detection result and show appropriate notification
+  void _processFaceDetectionResult(FaceDetectionResult result) {
+    debugPrint(
+      '🎯 CheckInBloc: _processFaceDetectionResult called with ${result.faces.length} faces, status: ${result.status}',
+    );
 
-    // Calculate new averages
-    final newTotalFrames = currentStats.totalFramesProcessed + 1;
-    final newTotalFaces = currentStats.totalFacesDetected + totalFaces;
-    final newSuccessful =
-        currentStats.successfulRecognitions + (hasRecognizedFace ? 1 : 0);
-    final newFailed =
-        currentStats.failedRecognitions + (hasRecognizedFace ? 0 : 1);
+    String message;
+    FaceDetectionNotificationType notificationType;
 
-    // Calculate average confidence
-    final currentTotalConfidence =
-        currentStats.averageConfidence * currentStats.totalFramesProcessed;
-    final frameConfidence =
-        result.faces.isNotEmpty
-            ? result.faces.map((f) => f.confidence).reduce((a, b) => a + b) /
-                result.faces.length
-            : 0.0;
-    final newAverageConfidence =
-        (currentTotalConfidence + frameConfidence) / newTotalFrames;
+    switch (result.status) {
+      case FaceDetectionStatus.none:
+        if (result.faces.isEmpty) {
+          notificationType = FaceDetectionNotificationType.noFaceDetected;
+          message =
+              '👤 Không phát hiện khuôn mặt - Hãy di chuyển vào khung hình';
+        } else {
+          notificationType = FaceDetectionNotificationType.faceDetectedSuccess;
+          message = '✅ Phát hiện khuôn mặt thành công!';
+        }
+        break;
+      case FaceDetectionStatus.faceFound:
+        notificationType = FaceDetectionNotificationType.faceDetectedSuccess;
+        message = '✅ Đã phát hiện khuôn mặt - Đang xử lý...';
+        break;
+      case FaceDetectionStatus.multipleFaces:
+        notificationType = FaceDetectionNotificationType.multipleFacesWarning;
+        message =
+            '⚠️ Phát hiện nhiều khuôn mặt - Chỉ một người trong khung hình';
+        break;
+      case FaceDetectionStatus.detecting:
+        notificationType = FaceDetectionNotificationType.faceDetectedSuccess;
+        message = '🔍 Đang phát hiện khuôn mặt...';
+        break;
+      case FaceDetectionStatus.error:
+        notificationType = FaceDetectionNotificationType.processingError;
+        message = '❌ Lỗi xử lý hình ảnh - Vui lòng thử lại';
+        break;
+      case FaceDetectionStatus.noFace:
+        notificationType = FaceDetectionNotificationType.noFaceDetected;
+        message = '👤 Không tìm thấy khuôn mặt - Hãy di chuyển gần camera hơn';
+        break;
+    }
 
-    return currentStats.copyWith(
-      totalFramesProcessed: newTotalFrames,
-      totalFacesDetected: newTotalFaces,
-      successfulRecognitions: newSuccessful,
-      failedRecognitions: newFailed,
-      averageConfidence: newAverageConfidence,
-      lastRecognitionTime:
-          hasRecognizedFace
-              ? result.timestamp
-              : currentStats.lastRecognitionTime,
+    debugPrint(
+      '🎯 CheckInBloc: Determined notification type: ${notificationType.name}',
+    );
+    debugPrint('🎯 CheckInBloc: Determined message: $message');
+
+    // Check if any face has high confidence for potential check-in
+    if (result.faces.isNotEmpty) {
+      final highConfidenceFaces =
+          result.faces.where((face) => face.confidence > 0.8).toList();
+      if (highConfidenceFaces.isNotEmpty) {
+        if (highConfidenceFaces.any((face) => face.isRecognized)) {
+          // Case: Face recognized successfully
+          notificationType = FaceDetectionNotificationType.checkInSuccess;
+          final recognizedFace = highConfidenceFaces.firstWhere(
+            (face) => face.isRecognized,
+          );
+          message =
+              '🎉 Check-in thành công! Chào ${recognizedFace.employeeName ?? 'bạn'}';
+
+          // Success dialog is handled by UI listener based on notification type
+          debugPrint(
+            '🎉 CheckInBloc: Success condition met for ${recognizedFace.employeeName}',
+          );
+
+          // Pause detection for dialog display (performance optimization)
+          debugPrint(
+            '⏸️ CheckInBloc: Triggering dialog pause for success dialog',
+          );
+          add(const CheckInEvent.successDialogShown());
+
+          // Schedule auto-reset after showing success message
+          debugPrint(
+            '🔄 CheckInBloc: Check-in successful, scheduling auto-reset in 5 seconds',
+          );
+          Timer(const Duration(seconds: 5), () {
+            if (!isClosed) {
+              add(const CheckInEvent.resetAfterCheckIn());
+            }
+          });
+        } else {
+          // Case: Face detected but not recognized (isRecognized: false)
+          notificationType = FaceDetectionNotificationType.faceDetectedSuccess;
+          message =
+              '✅ Khuôn mặt rõ ràng (${(highConfidenceFaces.first.confidence * 100).toStringAsFixed(1)}%) - Đang nhận diện...';
+        }
+        debugPrint(
+          '🎯 CheckInBloc: Updated notification for high confidence faces: ${notificationType.name}',
+        );
+        debugPrint('🎯 CheckInBloc: Updated message: $message');
+      } else {
+        // Check for any detected faces regardless of confidence for isRecognized: false message
+        final unrecognizedFaces =
+            result.faces.where((face) => !face.isRecognized).toList();
+        if (unrecognizedFaces.isNotEmpty) {
+          notificationType =
+              FaceDetectionNotificationType.faceDetectedUnrecognized;
+          final avgConfidence =
+              unrecognizedFaces
+                  .map((f) => f.confidence)
+                  .reduce((a, b) => a + b) /
+              unrecognizedFaces.length;
+          message =
+              '🔍 Đã phát hiện khuôn mặt (${(avgConfidence * 100).toStringAsFixed(1)}%) - Khuôn mặt chưa được đăng ký trong hệ thống';
+
+          debugPrint(
+            '🎯 CheckInBloc: Face detected but not recognized - confidence: ${(avgConfidence * 100).toStringAsFixed(1)}%',
+          );
+        }
+      }
+    }
+
+    // Show notification
+    debugPrint(
+      '🎯 CheckInBloc: About to add showFaceDetectionNotification event',
+    );
+    add(
+      CheckInEvent.showFaceDetectionNotification(
+        type: notificationType,
+        message: message,
+      ),
+    );
+    debugPrint(
+      '🎯 CheckInBloc: showFaceDetectionNotification event added successfully',
     );
   }
 
@@ -1145,6 +1258,61 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     );
   }
 
+  // Face detection notification handlers
+  Future<void> _onShowFaceDetectionNotification(
+    ShowFaceDetectionNotification event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint(
+      '📢 CheckInBloc: Showing notification - ${event.type.name}: ${event.message}',
+    );
+    debugPrint(
+      '📢 CheckInBloc: Current state shouldShowNotification: ${state.shouldShowNotification}',
+    );
+
+    emit(
+      state.copyWith(
+        notificationType: event.type,
+        notificationMessage: event.message,
+        shouldShowNotification: true,
+      ),
+    );
+
+    debugPrint(
+      '📢 CheckInBloc: State updated - shouldShowNotification: true, type: ${event.type.name}',
+    );
+
+    // Auto-clear notification after 3 seconds using Timer
+    Timer(const Duration(seconds: 3), () {
+      if (!isClosed) {
+        debugPrint(
+          '📢 CheckInBloc: Auto-clearing notification after 3 seconds',
+        );
+        add(const CheckInEvent.clearFaceDetectionNotification());
+      }
+    });
+  }
+
+  Future<void> _onClearFaceDetectionNotification(
+    ClearFaceDetectionNotification event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🔕 CheckInBloc: Clearing notification');
+    debugPrint(
+      '🔕 CheckInBloc: Previous state - shouldShowNotification: ${state.shouldShowNotification}',
+    );
+
+    emit(
+      state.copyWith(
+        notificationType: FaceDetectionNotificationType.none,
+        notificationMessage: null,
+        shouldShowNotification: false,
+      ),
+    );
+
+    debugPrint('🔕 CheckInBloc: State updated - shouldShowNotification: false');
+  }
+
   @override
   Future<void> close() {
     _messageSubscription?.cancel();
@@ -1179,6 +1347,112 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     // Implement the logic to return the appropriate color based on the connection status
     // This is a placeholder and should be implemented based on your specific requirements
     return Colors.grey; // Placeholder return, actual implementation needed
+  }
+
+  /// Reset system after successful check-in
+  Future<void> _onResetAfterCheckIn(
+    ResetAfterCheckIn event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🔄 CheckInBloc: Resetting system after successful check-in');
+
+    try {
+      // Show reset notification
+      emit(
+        state.copyWith(
+          toastStatus: ToastStatus.showing,
+          toastMessage: '🔄 Đang reset hệ thống để quét tiếp...',
+        ),
+      );
+
+      // Stop streaming first
+      if (state.streamingStatus == StreamingStatus.active) {
+        debugPrint('🛑 CheckInBloc: Stopping frame streaming...');
+        await _frameStreamingService.stopStreaming();
+      }
+
+      // Reset relevant state
+      emit(
+        state.copyWith(
+          streamingStatus: StreamingStatus.idle,
+          detectedFaces: [],
+          faceStatus: FaceDetectionStatus.none,
+          faceConfidence: 0.0,
+          lastFaceDetection: null,
+          notificationType: FaceDetectionNotificationType.none,
+          notificationMessage: null,
+          shouldShowNotification: false,
+          framesProcessed: 0,
+          lastFrameSent: null,
+          currentFrameRate: 0.0,
+          toastStatus: ToastStatus.showing,
+          toastMessage: '✅ Hệ thống đã reset - Sẵn sàng quét lại',
+        ),
+      );
+
+      debugPrint('✅ CheckInBloc: System reset completed');
+
+      // Auto-restart streaming after a brief pause
+      Timer(const Duration(seconds: 2), () {
+        if (!isClosed && state.connectionStatus == ConnectionStatus.connected) {
+          debugPrint('🔄 CheckInBloc: Auto-restarting streaming after reset');
+          add(const CheckInEvent.streamingStartRequested());
+        }
+      });
+    } catch (error) {
+      debugPrint('❌ CheckInBloc: Error during reset: $error');
+      emit(
+        state.copyWith(
+          errorMessage: 'Reset failed: $error',
+          toastStatus: ToastStatus.showing,
+          toastMessage: '❌ Reset thất bại - Vui lòng thử lại',
+        ),
+      );
+    }
+  }
+
+  /// System reset event handler
+  Future<void> _onResetSystem(
+    ResetSystem event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('🔄 CheckInBloc: System reset requested');
+
+    // Reset the system completely
+    add(const CheckInEvent.resetAfterCheckIn());
+  }
+
+  /// Success dialog shown - pause detection for performance
+  Future<void> _onSuccessDialogShown(
+    SuccessDialogShown event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('⏸️ CheckInBloc: Success dialog shown - pausing detection');
+
+    emit(state.copyWith(isSuccessDialogShowing: true));
+
+    // Pause streaming to save resources while dialog is showing
+    if (state.streamingStatus == StreamingStatus.active) {
+      debugPrint('⏸️ CheckInBloc: Pausing frame streaming for dialog');
+      await _frameStreamingService.pauseStreaming();
+    }
+  }
+
+  /// Success dialog dismissed - resume detection
+  Future<void> _onSuccessDialogDismissed(
+    SuccessDialogDismissed event,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('▶️ CheckInBloc: Success dialog dismissed - resuming detection');
+
+    emit(state.copyWith(isSuccessDialogShowing: false));
+
+    // Resume streaming if it was paused
+    if (_frameStreamingService.currentStatus ==
+        frame_streaming.StreamingStatus.paused) {
+      debugPrint('▶️ CheckInBloc: Resuming frame streaming after dialog');
+      await _frameStreamingService.resumeStreaming();
+    }
   }
 }
 
@@ -1281,6 +1555,89 @@ extension StreamingStatusDisplay on StreamingStatus {
         return Colors.green;
       case StreamingStatus.error:
         return Colors.red;
+    }
+  }
+}
+
+/// Extension to provide display properties for FaceDetectionNotificationType
+extension FaceDetectionNotificationDisplay on FaceDetectionNotificationType {
+  Color get backgroundColor {
+    switch (this) {
+      case FaceDetectionNotificationType.none:
+        return Colors.grey;
+      case FaceDetectionNotificationType.faceDetectedSuccess:
+      case FaceDetectionNotificationType.checkInSuccess:
+        return Colors.green;
+      case FaceDetectionNotificationType.faceDetectedUnrecognized:
+        return Colors.amber; // Yellow/amber for unrecognized faces
+      case FaceDetectionNotificationType.multipleFacesWarning:
+        return Colors.orange;
+      case FaceDetectionNotificationType.noFaceDetected:
+        return Colors.blue;
+      case FaceDetectionNotificationType.checkInFailed:
+      case FaceDetectionNotificationType.connectionError:
+      case FaceDetectionNotificationType.processingError:
+        return Colors.red;
+    }
+  }
+
+  Color get textColor {
+    switch (this) {
+      case FaceDetectionNotificationType.none:
+        return Colors.black87;
+      case FaceDetectionNotificationType.faceDetectedSuccess:
+      case FaceDetectionNotificationType.faceDetectedUnrecognized:
+      case FaceDetectionNotificationType.checkInSuccess:
+      case FaceDetectionNotificationType.multipleFacesWarning:
+      case FaceDetectionNotificationType.noFaceDetected:
+      case FaceDetectionNotificationType.checkInFailed:
+      case FaceDetectionNotificationType.connectionError:
+      case FaceDetectionNotificationType.processingError:
+        return Colors.white;
+    }
+  }
+
+  IconData get icon {
+    switch (this) {
+      case FaceDetectionNotificationType.none:
+        return Icons.info;
+      case FaceDetectionNotificationType.faceDetectedSuccess:
+        return Icons.face;
+      case FaceDetectionNotificationType.faceDetectedUnrecognized:
+        return Icons.face_retouching_off; // Icon for unrecognized face
+      case FaceDetectionNotificationType.checkInSuccess:
+        return Icons.check_circle;
+      case FaceDetectionNotificationType.multipleFacesWarning:
+        return Icons.warning;
+      case FaceDetectionNotificationType.noFaceDetected:
+        return Icons.person_search;
+      case FaceDetectionNotificationType.checkInFailed:
+        return Icons.error;
+      case FaceDetectionNotificationType.connectionError:
+        return Icons.wifi_off;
+      case FaceDetectionNotificationType.processingError:
+        return Icons.error_outline;
+    }
+  }
+
+  Duration get duration {
+    switch (this) {
+      case FaceDetectionNotificationType.none:
+        return const Duration(seconds: 1);
+      case FaceDetectionNotificationType.faceDetectedSuccess:
+      case FaceDetectionNotificationType.noFaceDetected:
+        return const Duration(seconds: 2);
+      case FaceDetectionNotificationType.faceDetectedUnrecognized:
+        return const Duration(
+          seconds: 3,
+        ); // Longer duration for unrecognized faces
+      case FaceDetectionNotificationType.multipleFacesWarning:
+      case FaceDetectionNotificationType.processingError:
+        return const Duration(seconds: 3);
+      case FaceDetectionNotificationType.checkInSuccess:
+      case FaceDetectionNotificationType.checkInFailed:
+      case FaceDetectionNotificationType.connectionError:
+        return const Duration(seconds: 4);
     }
   }
 }
