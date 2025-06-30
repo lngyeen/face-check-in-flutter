@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
@@ -31,9 +32,10 @@ abstract class ImageConverter {
   ///
   /// This is a blocking call and should ONLY be called from a background isolate.
   static ProcessedFrame? convertCameraImageToProcessedFrameSync(
-    CameraImage cameraImage, [
+    CameraImage cameraImage, {
     int sensorOrientation = 0,
-  ]) {
+    CameraLensDirection lensDirection = CameraLensDirection.back,
+  }) {
     try {
       img.Image? image;
 
@@ -55,12 +57,16 @@ abstract class ImageConverter {
 
       // Rotation and encoding are less intensive and can run on the main thread,
       // but are kept here for simplicity since we're already on a worker.
-      final rotatedImage = _rotateImage(image, sensorOrientation);
-      final base64String = _encodeImageToBase64(rotatedImage);
+      final processedImage = _processImageOrientation(
+        image,
+        sensorOrientation,
+        lensDirection,
+      );
+      final base64String = _encodeImageToBase64(processedImage);
 
       return ProcessedFrame(
         base64Image: base64String,
-        originalImage: rotatedImage,
+        originalImage: processedImage,
         timestamp: DateTime.now(),
       );
     } catch (e, stackTrace) {
@@ -106,19 +112,50 @@ abstract class ImageConverter {
     }
   }
 
-  /// Rotates an [img.Image] based on the camera's sensor orientation.
-  static img.Image _rotateImage(img.Image image, int sensorOrientation) {
-    switch (sensorOrientation) {
-      case 90:
-        return img.copyRotate(image, angle: 90);
-      case 180:
-        return img.copyRotate(image, angle: 180);
-      case 270:
-        return img.copyRotate(image, angle: -90);
-      case 0:
-      default:
-        return image;
+  /// Rotates and flips an image based on camera properties and platform.
+  static img.Image _processImageOrientation(
+    img.Image image,
+    int sensorOrientation,
+    CameraLensDirection lensDirection,
+  ) {
+    // For iOS, the camera plugin generally provides correctly oriented images.
+    // We can return the image directly without any processing.
+    if (Platform.isIOS) {
+      return image;
     }
+
+    // For Android, we must handle rotation and mirroring manually.
+    if (Platform.isAndroid) {
+      img.Image rotatedImage;
+
+      // First, rotate the image based on sensor orientation.
+      switch (sensorOrientation) {
+        case 90:
+          rotatedImage = img.copyRotate(image, angle: 90);
+          break;
+        case 180:
+          rotatedImage = img.copyRotate(image, angle: 180);
+          break;
+        case 270:
+          rotatedImage = img.copyRotate(image, angle: -90);
+          break;
+        case 0:
+        default:
+          rotatedImage = image;
+          break;
+      }
+
+      // Then, for the front camera, flip the image horizontally to create a
+      // mirror effect, which is the expected behavior for selfies.
+      if (lensDirection == CameraLensDirection.front) {
+        return img.flipHorizontal(rotatedImage);
+      }
+
+      return rotatedImage;
+    }
+
+    // Fallback for any other platform, return the image as is.
+    return image;
   }
 
   /// Converts a BGRA8888 image to a standard RGB image.

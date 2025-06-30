@@ -10,6 +10,7 @@ import 'package:face_check_in_flutter/core/services/image_converter.dart';
 import 'package:face_check_in_flutter/core/services/permission_service.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
+import 'package:face_check_in_flutter/domain/entities/frame_data.dart';
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
 import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
 import 'package:face_check_in_flutter/domain/entities/websocket_connection_status.dart';
@@ -17,25 +18,15 @@ import 'package:face_check_in_flutter/domain/entities/websocket_connection_statu
 /// Abstract interface for stream service
 abstract class StreamService {
   StreamingStatus get currentStreamingStatus;
-
   int get maxFps;
-
   Stream<CameraController?> get cameraControllerStream;
-
   Stream<CameraStatus> get cameraStatusStream;
-
   Stream<StreamingStatus> get streamingStatusStream;
-
   void setMaxFps(int maxFps);
-
   Future<void> startCamera();
-
   Future<void> stopCamera();
-
   Future<void> stopImageStream();
-
   Future<void> startImageStream();
-
   void dispose();
 }
 
@@ -51,7 +42,7 @@ class StreamServiceImpl implements StreamService {
   Duration get _throttleDuration => Duration(milliseconds: 1000 ~/ _maxFps);
 
   // RxDart stream management
-  final _frameSubject = PublishSubject<(CameraImage, int)>();
+  final _frameSubject = PublishSubject<FrameData>();
   StreamSubscription? _frameSubscription;
 
   // Stream state
@@ -69,15 +60,12 @@ class StreamServiceImpl implements StreamService {
 
   @override
   StreamingStatus get currentStreamingStatus => _streamingStatusSubject.value;
-
   @override
   Stream<StreamingStatus> get streamingStatusStream =>
       _streamingStatusSubject.stream;
-
   @override
   Stream<CameraController?> get cameraControllerStream =>
       _cameraControllerSubject.stream;
-
   @override
   Stream<CameraStatus> get cameraStatusStream => _cameraStatusSubject.stream;
 
@@ -86,19 +74,17 @@ class StreamServiceImpl implements StreamService {
   }
 
   /// Initializes the stream processing pipeline with RxDart.
-  /// This version processes images on the main isolate.
   void _initializeFrameProcessing() {
     _frameSubscription?.cancel();
     _frameSubscription = _frameSubject
         .throttleTime(_throttleDuration)
         .where((_) => _streamingStatusSubject.value == StreamingStatus.active)
         .asyncMap((frameData) {
-          final (frame, sensorOrientation) = frameData;
-          // Directly call the converter.
           return Isolate.run(
             () => ImageConverter.convertCameraImageToProcessedFrameSync(
-              frame,
-              // sensorOrientation,
+              frameData.image,
+              sensorOrientation: frameData.sensorOrientation,
+              lensDirection: frameData.lensDirection,
             ),
           );
         })
@@ -113,7 +99,6 @@ class StreamServiceImpl implements StreamService {
       throw ArgumentError('maxFps must be between 1 and 30');
     }
     _maxFps = maxFps;
-    // Re-initialize the stream with the new throttle duration.
     _initializeFrameProcessing();
   }
 
@@ -125,10 +110,8 @@ class StreamServiceImpl implements StreamService {
     if (_isCameraActive) return;
     try {
       _cameraStatusSubject.add(CameraStatus.initializing);
-
       final permissionStatus =
           await _permissionService.getCameraPermissionStatus();
-
       if (permissionStatus != PermissionStatus.granted) {
         final newStatus = await _permissionService.requestCameraPermission();
         if (newStatus != PermissionStatus.granted) {
@@ -136,34 +119,26 @@ class StreamServiceImpl implements StreamService {
           return;
         }
       }
-
       final cameras = await availableCameras();
       final frontCameras =
           cameras
-              .where(
-                (camera) => camera.lensDirection == CameraLensDirection.front,
-              )
+              .where((c) => c.lensDirection == CameraLensDirection.front)
               .toList();
-
       if (frontCameras.isEmpty) {
         _cameraStatusSubject.add(CameraStatus.frontCameraNotAvailable);
         return;
       }
-
       final cameraController = CameraController(
         frontCameras.first,
         ResolutionPreset.medium,
         enableAudio: false,
         imageFormatGroup: ImageFormatGroup.yuv420,
       );
-
       await cameraController.initialize();
       await cameraController.setFocusMode(FocusMode.auto);
       await cameraController.setExposureMode(ExposureMode.auto);
-
       _isCameraActive = true;
       _cameraController = cameraController;
-
       _cameraControllerSubject.add(cameraController);
       _cameraStatusSubject.add(CameraStatus.opening);
     } catch (e) {
@@ -176,9 +151,7 @@ class StreamServiceImpl implements StreamService {
   Future<void> stopCamera() async {
     if (!_isCameraActive) return;
     _isCameraActive = false;
-
     await stopImageStream();
-
     try {
       if (_cameraController != null) {
         await _cameraController?.dispose();
@@ -186,7 +159,6 @@ class StreamServiceImpl implements StreamService {
     } catch (e) {
       // Silent error
     }
-
     _cameraController = null;
     _cameraControllerSubject.add(null);
     _cameraStatusSubject.add(CameraStatus.initial);
@@ -195,12 +167,10 @@ class StreamServiceImpl implements StreamService {
   @override
   Future<void> stopImageStream() async {
     final cameraController = _cameraController;
-
     if (currentStreamingStatus != StreamingStatus.active ||
         cameraController == null) {
       return;
     }
-
     try {
       if (cameraController.value.isStreamingImages) {
         await _cameraController!.stopImageStream();
@@ -214,20 +184,21 @@ class StreamServiceImpl implements StreamService {
   @override
   Future<void> startImageStream() async {
     final cameraController = _cameraController;
-
     if (currentStreamingStatus == StreamingStatus.active ||
         cameraController == null ||
         !_isCameraActive) {
       return;
     }
-
     try {
       await cameraController.startImageStream((CameraImage image) {
         if (currentStreamingStatus != StreamingStatus.active) return;
-        _frameSubject.add((
-          image,
-          cameraController.description.sensorOrientation,
-        ));
+        _frameSubject.add(
+          FrameData(
+            image: image,
+            sensorOrientation: cameraController.description.sensorOrientation,
+            lensDirection: cameraController.description.lensDirection,
+          ),
+        );
       });
       _streamingStatusSubject.add(StreamingStatus.active);
     } catch (e) {
@@ -242,9 +213,7 @@ class StreamServiceImpl implements StreamService {
             WebSocketConnectionStatus.connected) {
       return;
     }
-
     final payload = {'type': 'processFrame', 'image': frame.base64Image};
-
     _webSocketService.sendMessage(json.encode(payload));
   }
 
