@@ -22,7 +22,9 @@ class _CheckInScreenState extends State<CheckInScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<CheckInBloc>().add(const CheckInEvent.initialize());
+    context.read<CheckInBloc>().add(
+      const SeparatedSequentialCheckInEvent.initialize(),
+    );
   }
 
   @override

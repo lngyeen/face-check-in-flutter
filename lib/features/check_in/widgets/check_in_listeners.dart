@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
+import 'package:face_check_in_flutter/features/check_in/bloc/check_in_event.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/checkin_success_toast.dart';
-import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
-import 'package:face_check_in_flutter/features/connection/bloc/connection_event.dart';
 
 /// Widget that handles BlocListeners for toast messages and error notifications
 class CheckInListeners extends StatefulWidget {
@@ -193,8 +192,9 @@ class _CheckInListenersState extends State<CheckInListeners> {
     // Get annotated image if available for user display
     final userImage = state.annotatedImage;
 
-    // Stop streaming during celebration to save resources and avoid confusion
-    context.read<ConnectionBloc>().add(const ConnectionEvent.stopStreaming());
+    context.read<CheckInBloc>().add(
+      const BucketRestartableCheckInEvent.stopImageStream(),
+    );
 
     // Show success dialog with all faces and callback to resume streaming
     CheckInSuccessDialog.show(
@@ -202,9 +202,8 @@ class _CheckInListenersState extends State<CheckInListeners> {
       recognizedFaces,
       userImage: userImage,
       onDialogClosed: () {
-        // Resume streaming when dialog is closed - use ConnectionBloc
-        context.read<ConnectionBloc>().add(
-          const ConnectionEvent.startStreaming(),
+        context.read<CheckInBloc>().add(
+          const BucketRestartableCheckInEvent.startImageStream(),
         );
       },
     );

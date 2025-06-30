@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ConnectionState {
   AppConnectionStatus get status => throw _privateConstructorUsedError;
-  StreamingStatus get streamingStatus => throw _privateConstructorUsedError;
 
   /// Create a copy of ConnectionState
   /// with the given fields replaced by the non-null parameter values.
@@ -34,7 +33,7 @@ abstract class $ConnectionStateCopyWith<$Res> {
     $Res Function(ConnectionState) then,
   ) = _$ConnectionStateCopyWithImpl<$Res, ConnectionState>;
   @useResult
-  $Res call({AppConnectionStatus status, StreamingStatus streamingStatus});
+  $Res call({AppConnectionStatus status});
 }
 
 /// @nodoc
@@ -51,7 +50,7 @@ class _$ConnectionStateCopyWithImpl<$Res, $Val extends ConnectionState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? status = null, Object? streamingStatus = null}) {
+  $Res call({Object? status = null}) {
     return _then(
       _value.copyWith(
             status:
@@ -59,11 +58,6 @@ class _$ConnectionStateCopyWithImpl<$Res, $Val extends ConnectionState>
                     ? _value.status
                     : status // ignore: cast_nullable_to_non_nullable
                         as AppConnectionStatus,
-            streamingStatus:
-                null == streamingStatus
-                    ? _value.streamingStatus
-                    : streamingStatus // ignore: cast_nullable_to_non_nullable
-                        as StreamingStatus,
           )
           as $Val,
     );
@@ -79,7 +73,7 @@ abstract class _$$ConnectionStateImplCopyWith<$Res>
   ) = __$$ConnectionStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppConnectionStatus status, StreamingStatus streamingStatus});
+  $Res call({AppConnectionStatus status});
 }
 
 /// @nodoc
@@ -95,7 +89,7 @@ class __$$ConnectionStateImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? status = null, Object? streamingStatus = null}) {
+  $Res call({Object? status = null}) {
     return _then(
       _$ConnectionStateImpl(
         status:
@@ -103,11 +97,6 @@ class __$$ConnectionStateImplCopyWithImpl<$Res>
                 ? _value.status
                 : status // ignore: cast_nullable_to_non_nullable
                     as AppConnectionStatus,
-        streamingStatus:
-            null == streamingStatus
-                ? _value.streamingStatus
-                : streamingStatus // ignore: cast_nullable_to_non_nullable
-                    as StreamingStatus,
       ),
     );
   }
@@ -116,21 +105,14 @@ class __$$ConnectionStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ConnectionStateImpl extends _ConnectionState {
-  const _$ConnectionStateImpl({
-    this.status = AppConnectionStatus.initial,
-    this.streamingStatus = StreamingStatus.idle,
-  }) : super._();
+  const _$ConnectionStateImpl({required this.status}) : super._();
 
   @override
-  @JsonKey()
   final AppConnectionStatus status;
-  @override
-  @JsonKey()
-  final StreamingStatus streamingStatus;
 
   @override
   String toString() {
-    return 'ConnectionState(status: $status, streamingStatus: $streamingStatus)';
+    return 'ConnectionState(status: $status)';
   }
 
   @override
@@ -138,13 +120,11 @@ class _$ConnectionStateImpl extends _ConnectionState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConnectionStateImpl &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.streamingStatus, streamingStatus) ||
-                other.streamingStatus == streamingStatus));
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, streamingStatus);
+  int get hashCode => Object.hash(runtimeType, status);
 
   /// Create a copy of ConnectionState
   /// with the given fields replaced by the non-null parameter values.
@@ -159,16 +139,12 @@ class _$ConnectionStateImpl extends _ConnectionState {
 }
 
 abstract class _ConnectionState extends ConnectionState {
-  const factory _ConnectionState({
-    final AppConnectionStatus status,
-    final StreamingStatus streamingStatus,
-  }) = _$ConnectionStateImpl;
+  const factory _ConnectionState({required final AppConnectionStatus status}) =
+      _$ConnectionStateImpl;
   const _ConnectionState._() : super._();
 
   @override
   AppConnectionStatus get status;
-  @override
-  StreamingStatus get streamingStatus;
 
   /// Create a copy of ConnectionState
   /// with the given fields replaced by the non-null parameter values.

@@ -14,7 +14,7 @@ class DebugToggleButton extends StatelessWidget {
     return IconButton(
       onPressed:
           () => context.read<CheckInBloc>().add(
-            const CheckInEvent.toggleDebugMode(),
+            const DroppableCheckInEvent.toggleDebugMode(),
           ),
       icon: const Icon(Icons.bug_report),
       tooltip: 'Toggle Debug Mode',

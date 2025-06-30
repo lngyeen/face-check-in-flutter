@@ -49,7 +49,10 @@ class SystemStatusCard extends StatelessWidget {
           },
         ),
         const SizedBox(height: 8),
-        BlocBuilder<ConnectionBloc, ConnectionState>(
+        BlocBuilder<CheckInBloc, CheckInState>(
+          buildWhen:
+              (previous, current) =>
+                  previous.streamingStatus != current.streamingStatus,
           builder: (context, state) {
             return _StatusRow(
               title: 'Streaming',

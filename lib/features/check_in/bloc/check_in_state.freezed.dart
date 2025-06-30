@@ -17,12 +17,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CheckInState {
-  CameraStatus get cameraStatus => throw _privateConstructorUsedError;
   CameraController? get cameraController => throw _privateConstructorUsedError;
+  CameraStatus get cameraStatus => throw _privateConstructorUsedError;
   ConnectionState get connectionState => throw _privateConstructorUsedError;
   FaceDetectionData? get latestFrameData => throw _privateConstructorUsedError;
   CheckInError? get currentError => throw _privateConstructorUsedError;
   bool get isDebugMode => throw _privateConstructorUsedError;
+  StreamingStatus get streamingStatus => throw _privateConstructorUsedError;
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.
@@ -39,12 +40,13 @@ abstract class $CheckInStateCopyWith<$Res> {
   ) = _$CheckInStateCopyWithImpl<$Res, CheckInState>;
   @useResult
   $Res call({
-    CameraStatus cameraStatus,
     CameraController? cameraController,
+    CameraStatus cameraStatus,
     ConnectionState connectionState,
     FaceDetectionData? latestFrameData,
     CheckInError? currentError,
     bool isDebugMode,
+    StreamingStatus streamingStatus,
   });
 
   $ConnectionStateCopyWith<$Res> get connectionState;
@@ -67,25 +69,26 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cameraStatus = null,
     Object? cameraController = freezed,
+    Object? cameraStatus = null,
     Object? connectionState = null,
     Object? latestFrameData = freezed,
     Object? currentError = freezed,
     Object? isDebugMode = null,
+    Object? streamingStatus = null,
   }) {
     return _then(
       _value.copyWith(
-            cameraStatus:
-                null == cameraStatus
-                    ? _value.cameraStatus
-                    : cameraStatus // ignore: cast_nullable_to_non_nullable
-                        as CameraStatus,
             cameraController:
                 freezed == cameraController
                     ? _value.cameraController
                     : cameraController // ignore: cast_nullable_to_non_nullable
                         as CameraController?,
+            cameraStatus:
+                null == cameraStatus
+                    ? _value.cameraStatus
+                    : cameraStatus // ignore: cast_nullable_to_non_nullable
+                        as CameraStatus,
             connectionState:
                 null == connectionState
                     ? _value.connectionState
@@ -106,6 +109,11 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
                     ? _value.isDebugMode
                     : isDebugMode // ignore: cast_nullable_to_non_nullable
                         as bool,
+            streamingStatus:
+                null == streamingStatus
+                    ? _value.streamingStatus
+                    : streamingStatus // ignore: cast_nullable_to_non_nullable
+                        as StreamingStatus,
           )
           as $Val,
     );
@@ -160,12 +168,13 @@ abstract class _$$CheckInStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    CameraStatus cameraStatus,
     CameraController? cameraController,
+    CameraStatus cameraStatus,
     ConnectionState connectionState,
     FaceDetectionData? latestFrameData,
     CheckInError? currentError,
     bool isDebugMode,
+    StreamingStatus streamingStatus,
   });
 
   @override
@@ -190,25 +199,26 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cameraStatus = null,
     Object? cameraController = freezed,
+    Object? cameraStatus = null,
     Object? connectionState = null,
     Object? latestFrameData = freezed,
     Object? currentError = freezed,
     Object? isDebugMode = null,
+    Object? streamingStatus = null,
   }) {
     return _then(
       _$CheckInStateImpl(
-        cameraStatus:
-            null == cameraStatus
-                ? _value.cameraStatus
-                : cameraStatus // ignore: cast_nullable_to_non_nullable
-                    as CameraStatus,
         cameraController:
             freezed == cameraController
                 ? _value.cameraController
                 : cameraController // ignore: cast_nullable_to_non_nullable
                     as CameraController?,
+        cameraStatus:
+            null == cameraStatus
+                ? _value.cameraStatus
+                : cameraStatus // ignore: cast_nullable_to_non_nullable
+                    as CameraStatus,
         connectionState:
             null == connectionState
                 ? _value.connectionState
@@ -229,6 +239,11 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
                 ? _value.isDebugMode
                 : isDebugMode // ignore: cast_nullable_to_non_nullable
                     as bool,
+        streamingStatus:
+            null == streamingStatus
+                ? _value.streamingStatus
+                : streamingStatus // ignore: cast_nullable_to_non_nullable
+                    as StreamingStatus,
       ),
     );
   }
@@ -238,19 +253,22 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
 
 class _$CheckInStateImpl extends _CheckInState {
   const _$CheckInStateImpl({
-    this.cameraStatus = CameraStatus.initial,
     this.cameraController,
-    this.connectionState = const ConnectionState(),
+    this.cameraStatus = CameraStatus.initial,
+    this.connectionState = const ConnectionState(
+      status: AppConnectionStatus.initial,
+    ),
     this.latestFrameData,
     this.currentError,
     this.isDebugMode = false,
+    this.streamingStatus = StreamingStatus.idle,
   }) : super._();
 
   @override
+  final CameraController? cameraController;
+  @override
   @JsonKey()
   final CameraStatus cameraStatus;
-  @override
-  final CameraController? cameraController;
   @override
   @JsonKey()
   final ConnectionState connectionState;
@@ -261,10 +279,13 @@ class _$CheckInStateImpl extends _CheckInState {
   @override
   @JsonKey()
   final bool isDebugMode;
+  @override
+  @JsonKey()
+  final StreamingStatus streamingStatus;
 
   @override
   String toString() {
-    return 'CheckInState(cameraStatus: $cameraStatus, cameraController: $cameraController, connectionState: $connectionState, latestFrameData: $latestFrameData, currentError: $currentError, isDebugMode: $isDebugMode)';
+    return 'CheckInState(cameraController: $cameraController, cameraStatus: $cameraStatus, connectionState: $connectionState, latestFrameData: $latestFrameData, currentError: $currentError, isDebugMode: $isDebugMode, streamingStatus: $streamingStatus)';
   }
 
   @override
@@ -272,10 +293,10 @@ class _$CheckInStateImpl extends _CheckInState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CheckInStateImpl &&
-            (identical(other.cameraStatus, cameraStatus) ||
-                other.cameraStatus == cameraStatus) &&
             (identical(other.cameraController, cameraController) ||
                 other.cameraController == cameraController) &&
+            (identical(other.cameraStatus, cameraStatus) ||
+                other.cameraStatus == cameraStatus) &&
             (identical(other.connectionState, connectionState) ||
                 other.connectionState == connectionState) &&
             (identical(other.latestFrameData, latestFrameData) ||
@@ -283,18 +304,21 @@ class _$CheckInStateImpl extends _CheckInState {
             (identical(other.currentError, currentError) ||
                 other.currentError == currentError) &&
             (identical(other.isDebugMode, isDebugMode) ||
-                other.isDebugMode == isDebugMode));
+                other.isDebugMode == isDebugMode) &&
+            (identical(other.streamingStatus, streamingStatus) ||
+                other.streamingStatus == streamingStatus));
   }
 
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    cameraStatus,
     cameraController,
+    cameraStatus,
     connectionState,
     latestFrameData,
     currentError,
     isDebugMode,
+    streamingStatus,
   );
 
   /// Create a copy of CheckInState
@@ -308,19 +332,20 @@ class _$CheckInStateImpl extends _CheckInState {
 
 abstract class _CheckInState extends CheckInState {
   const factory _CheckInState({
-    final CameraStatus cameraStatus,
     final CameraController? cameraController,
+    final CameraStatus cameraStatus,
     final ConnectionState connectionState,
     final FaceDetectionData? latestFrameData,
     final CheckInError? currentError,
     final bool isDebugMode,
+    final StreamingStatus streamingStatus,
   }) = _$CheckInStateImpl;
   const _CheckInState._() : super._();
 
   @override
-  CameraStatus get cameraStatus;
-  @override
   CameraController? get cameraController;
+  @override
+  CameraStatus get cameraStatus;
   @override
   ConnectionState get connectionState;
   @override
@@ -329,6 +354,8 @@ abstract class _CheckInState extends CheckInState {
   CheckInError? get currentError;
   @override
   bool get isDebugMode;
+  @override
+  StreamingStatus get streamingStatus;
 
   /// Create a copy of CheckInState
   /// with the given fields replaced by the non-null parameter values.

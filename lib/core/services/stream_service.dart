@@ -7,8 +7,12 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:face_check_in_flutter/core/services/image_converter.dart';
+import 'package:face_check_in_flutter/core/services/permission_service.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/core/services/worker_pool.dart';
+import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
+import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
+import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
 import 'package:face_check_in_flutter/domain/entities/websocket_connection_status.dart';
 
 /// Data sent from the main isolate to a worker isolate.
@@ -72,17 +76,25 @@ extension WorkerPoolImageDispatch on WorkerPool {
 
 /// Abstract interface for stream service
 abstract class StreamService {
-  bool get isStreaming;
+  StreamingStatus get currentStreamingStatus;
 
   int get maxFps;
 
+  Stream<CameraController?> get cameraControllerStream;
+
+  Stream<CameraStatus> get cameraStatusStream;
+
+  Stream<StreamingStatus> get streamingStatusStream;
+
   void setMaxFps(int maxFps);
 
-  Future<void> startStream();
+  Future<void> startCamera();
 
-  Future<void> stopStream();
+  Future<void> stopCamera();
 
-  void addFrame(CameraImage frame, int sensorOrientation);
+  Future<void> stopImageStream();
+
+  Future<void> startImageStream();
 
   void dispose();
 }
@@ -92,6 +104,7 @@ abstract class StreamService {
 @LazySingleton(as: StreamService)
 class StreamServiceImpl implements StreamService {
   final WebSocketService _webSocketService;
+  final PermissionService _permissionService;
 
   // Configuration
   int _maxFps = 2;
@@ -105,12 +118,33 @@ class StreamServiceImpl implements StreamService {
   final _workerPool = WorkerPool(2);
 
   // Stream state
-  bool _isStreaming = false;
+  bool _isCameraActive = false;
+  final _streamingStatusSubject = BehaviorSubject<StreamingStatus>.seeded(
+    StreamingStatus.idle,
+  );
+
+  // Camera Management
+  CameraController? _cameraController;
+  final _cameraStatusSubject = BehaviorSubject<CameraStatus>.seeded(
+    CameraStatus.initial,
+  );
+  final _cameraControllerSubject = BehaviorSubject<CameraController?>();
 
   @override
-  bool get isStreaming => _isStreaming;
+  StreamingStatus get currentStreamingStatus => _streamingStatusSubject.value;
 
-  StreamServiceImpl(this._webSocketService) {
+  @override
+  Stream<StreamingStatus> get streamingStatusStream =>
+      _streamingStatusSubject.stream;
+
+  @override
+  Stream<CameraController?> get cameraControllerStream =>
+      _cameraControllerSubject.stream;
+
+  @override
+  Stream<CameraStatus> get cameraStatusStream => _cameraStatusSubject.stream;
+
+  StreamServiceImpl(this._webSocketService, this._permissionService) {
     _initializeIsolates();
     _initializeFrameProcessing();
   }
@@ -122,7 +156,9 @@ class StreamServiceImpl implements StreamService {
         .throttleTime(_throttleDuration)
         .where(
           (_) =>
-              _isStreaming && _workerPool.isReady && _workerPool.hasIdleWorker,
+              _streamingStatusSubject.value == StreamingStatus.active &&
+              _workerPool.isReady &&
+              _workerPool.hasIdleWorker,
         )
         .listen((frameData) {
           final (frame, sensorOrientation) = frameData;
@@ -165,24 +201,119 @@ class StreamServiceImpl implements StreamService {
   int get maxFps => _maxFps;
 
   @override
-  Future<void> startStream() async {
-    if (_isStreaming) return;
-    _isStreaming = true;
+  Future<void> startCamera() async {
+    if (_isCameraActive) return;
+    try {
+      _cameraStatusSubject.add(CameraStatus.initializing);
+
+      final permissionStatus =
+          await _permissionService.getCameraPermissionStatus();
+
+      if (permissionStatus != PermissionStatus.granted) {
+        final newStatus = await _permissionService.requestCameraPermission();
+        if (newStatus != PermissionStatus.granted) {
+          _cameraStatusSubject.add(CameraStatus.permissionDenied);
+          return;
+        }
+      }
+
+      final cameras = await availableCameras();
+      final frontCameras =
+          cameras
+              .where(
+                (camera) => camera.lensDirection == CameraLensDirection.front,
+              )
+              .toList();
+
+      if (frontCameras.isEmpty) {
+        _cameraStatusSubject.add(CameraStatus.frontCameraNotAvailable);
+        return;
+      }
+
+      final cameraController = CameraController(
+        frontCameras.first,
+        ResolutionPreset.medium,
+        enableAudio: false,
+        imageFormatGroup: ImageFormatGroup.yuv420,
+      );
+
+      await cameraController.initialize();
+      await cameraController.setFocusMode(FocusMode.auto);
+      await cameraController.setExposureMode(ExposureMode.auto);
+
+      _isCameraActive = true;
+      _cameraController = cameraController;
+
+      _cameraControllerSubject.add(cameraController);
+      _cameraStatusSubject.add(CameraStatus.opening);
+    } catch (e) {
+      _cameraStatusSubject.add(CameraStatus.error);
+      await stopCamera();
+    }
   }
 
   @override
-  Future<void> stopStream() async {
-    if (!_isStreaming) return;
-    _isStreaming = false;
+  Future<void> stopCamera() async {
+    if (!_isCameraActive) return;
+    _isCameraActive = false;
+
+    await stopImageStream();
+
+    try {
+      if (_cameraController != null) {
+        await _cameraController?.dispose();
+      }
+    } catch (e) {
+      // Silent error
+    }
+
+    _cameraController = null;
+    _cameraControllerSubject.add(null);
+    _cameraStatusSubject.add(CameraStatus.initial);
   }
 
   @override
-  void addFrame(CameraImage frame, int sensorOrientation) {
-    if (!_isStreaming) {
+  Future<void> stopImageStream() async {
+    final cameraController = _cameraController;
+
+    if (currentStreamingStatus != StreamingStatus.active ||
+        cameraController == null) {
       return;
     }
-    // Add the frame to the stream. RxDart will handle throttling.
-    _frameSubject.add((frame, sensorOrientation));
+
+    try {
+      if (cameraController.value.isStreamingImages) {
+        await _cameraController!.stopImageStream();
+      }
+    } catch (e) {
+      // Silent error
+    }
+    _streamingStatusSubject.add(StreamingStatus.idle);
+  }
+
+  @override
+  Future<void> startImageStream() async {
+    final cameraController = _cameraController;
+
+    if (currentStreamingStatus == StreamingStatus.active ||
+        cameraController == null ||
+        !_isCameraActive) {
+      return;
+    }
+
+    try {
+      await cameraController.startImageStream((CameraImage image) {
+        if (currentStreamingStatus != StreamingStatus.active) return;
+        _frameSubject.add((
+          image,
+          cameraController.description.sensorOrientation,
+        ));
+      });
+      _streamingStatusSubject.add(StreamingStatus.active);
+    } catch (e) {
+      _cameraStatusSubject.add(CameraStatus.error);
+      _streamingStatusSubject.add(StreamingStatus.error);
+    }
   }
 
   void _dispatchFrame(CameraImage frame, int sensorOrientation) {
@@ -203,8 +334,12 @@ class StreamServiceImpl implements StreamService {
 
   @override
   void dispose() {
+    stopCamera();
     _frameSubscription?.cancel();
     _frameSubject.close();
     _workerPool.dispose();
+    _cameraStatusSubject.close();
+    _cameraControllerSubject.close();
+    _streamingStatusSubject.close();
   }
 }

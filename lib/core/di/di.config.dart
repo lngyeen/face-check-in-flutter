@@ -30,25 +30,24 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i165.PermissionService>(
       () => _i165.PermissionServiceImpl(),
     );
-    gh.singleton<_i669.WakelockService>(() => _i669.WakelockServiceImpl());
+    gh.lazySingleton<_i669.WakelockService>(() => _i669.WakelockServiceImpl());
     gh.lazySingleton<_i234.NetworkConnectivityService>(
       () => _i234.NetworkConnectivityServiceImpl(),
     );
     gh.lazySingleton<_i555.WebSocketService>(
       () => _i555.WebSocketServiceImpl(gh<_i234.NetworkConnectivityService>()),
     );
-    gh.lazySingleton<_i121.StreamService>(
-      () => _i121.StreamServiceImpl(gh<_i555.WebSocketService>()),
-    );
     gh.lazySingleton<_i348.ConnectionBloc>(
-      () => _i348.ConnectionBloc(
+      () => _i348.ConnectionBloc(gh<_i555.WebSocketService>()),
+    );
+    gh.lazySingleton<_i121.StreamService>(
+      () => _i121.StreamServiceImpl(
         gh<_i555.WebSocketService>(),
-        gh<_i121.StreamService>(),
+        gh<_i165.PermissionService>(),
       ),
     );
     gh.factory<_i435.CheckInBloc>(
       () => _i435.CheckInBloc(
-        gh<_i165.PermissionService>(),
         gh<_i348.ConnectionBloc>(),
         gh<_i121.StreamService>(),
       ),
