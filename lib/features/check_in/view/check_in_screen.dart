@@ -8,6 +8,7 @@ import '../models/face_detection_result.dart';
 import '../widgets/camera_preview_widget.dart';
 import '../widgets/check_in_success_dialog.dart';
 import '../widgets/face_detection_status_widget.dart';
+import '../../../core/services/toast_service.dart';
 
 /// Main check-in screen
 /// This is a placeholder implementation that will be expanded in future stories
@@ -51,6 +52,13 @@ class _CheckInScreenState extends State<CheckInScreen>
     }
   }
 
+  /// Extract user name from toast message like "Welcome, John Doe!"
+  String? _extractUserNameFromMessage(String message) {
+    final welcomeRegex = RegExp(r'Welcome,?\s+([^!]+)!?');
+    final match = welcomeRegex.firstMatch(message);
+    return match?.group(1)?.trim();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +86,7 @@ class _CheckInScreenState extends State<CheckInScreen>
       ),
       body: MultiBlocListener(
         listeners: [
-          // Original toast listener
+          // Toast notification listener (Story 2.3 Task 2)
           BlocListener<CheckInBloc, CheckInState>(
             listenWhen:
                 (previous, current) =>
@@ -86,16 +94,27 @@ class _CheckInScreenState extends State<CheckInScreen>
                     current.toastStatus == ToastStatus.showing,
             listener: (context, state) {
               if (state.toastMessage != null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.toastMessage!),
-                    duration: const Duration(seconds: 3),
-                  ),
-                );
+                debugPrint('🍞 UI: Showing toast - ${state.toastMessage}');
+
+                // Determine toast type based on message content
+                if (state.toastMessage!.toLowerCase().contains('welcome') ||
+                    state.toastMessage!.toLowerCase().contains('success')) {
+                  // Extract user name from welcome message or use default
+                  final userName =
+                      _extractUserNameFromMessage(state.toastMessage!) ??
+                      'User';
+                  ToastService.instance.showSuccess(context, userName);
+                } else {
+                  // Show failure toast for error messages
+                  ToastService.instance.showFailure(
+                    context,
+                    customMessage: state.toastMessage,
+                  );
+                }
               }
             },
           ),
-          // Face detection notification listener
+          // Face detection notification listener (Story 2.3 Task 2 - Toast Integration)
           BlocListener<CheckInBloc, CheckInState>(
             listenWhen: (previous, current) {
               // Listen when notification should be shown AND notification content changed
@@ -109,32 +128,13 @@ class _CheckInScreenState extends State<CheckInScreen>
 
               if (shouldListen) {
                 debugPrint(
-                  '🎯 UI: Face detection notification listener triggered',
-                );
-                debugPrint(
-                  '🎯 UI: Previous shouldShowNotification: ${previous.shouldShowNotification}',
-                );
-                debugPrint(
-                  '🎯 UI: Current shouldShowNotification: ${current.shouldShowNotification}',
+                  '🎯 UI: Face detection notification listener triggered for toast',
                 );
                 debugPrint(
                   '🎯 UI: Current notificationType: ${current.notificationType.name}',
                 );
                 debugPrint(
                   '🎯 UI: Current message: ${current.notificationMessage}',
-                );
-              } else {
-                debugPrint(
-                  '🎯 UI: Face detection notification listener NOT triggered',
-                );
-                debugPrint(
-                  '🎯 UI: shouldShowNotification changed: ${previous.shouldShowNotification != current.shouldShowNotification}',
-                );
-                debugPrint(
-                  '🎯 UI: current.shouldShowNotification == true: ${current.shouldShowNotification == true}',
-                );
-                debugPrint(
-                  '🎯 UI: notificationType != none: ${current.notificationType != FaceDetectionNotificationType.none}',
                 );
               }
 
@@ -148,46 +148,69 @@ class _CheckInScreenState extends State<CheckInScreen>
               if (state.notificationMessage != null &&
                   state.notificationType !=
                       FaceDetectionNotificationType.none) {
-                debugPrint('🎯 UI: About to show snack bar');
-                debugPrint('🎯 UI: Message: ${state.notificationMessage}');
-                debugPrint('🎯 UI: Type: ${state.notificationType.name}');
+                debugPrint('🍞 UI: About to show toast notification');
+                debugPrint('🍞 UI: Message: ${state.notificationMessage}');
+                debugPrint('🍞 UI: Type: ${state.notificationType.name}');
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Row(
-                      children: [
-                        Icon(
-                          state.notificationType.icon,
-                          color: state.notificationType.textColor,
-                          size: 24,
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            state.notificationMessage!,
-                            style: TextStyle(
-                              color: state.notificationType.textColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    backgroundColor: state.notificationType.backgroundColor,
-                    duration: state.notificationType.duration,
-                    behavior: SnackBarBehavior.floating,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    margin: const EdgeInsets.all(16),
-                    elevation: 6,
-                  ),
-                );
-                debugPrint('🎯 UI: Snack bar shown successfully');
+                // Determine appropriate toast based on notification type
+                switch (state.notificationType) {
+                  case FaceDetectionNotificationType.checkInSuccess:
+                    // Extract user name for success toast
+                    final userName =
+                        _extractUserNameFromMessage(
+                          state.notificationMessage!,
+                        ) ??
+                        'User';
+                    ToastService.instance.showSuccess(context, userName);
+                    break;
+                  case FaceDetectionNotificationType.noFaceDetected:
+                    ToastService.instance.showFaceDetectionFailure(
+                      context,
+                      'no_face',
+                    );
+                    break;
+                  case FaceDetectionNotificationType.multipleFacesWarning:
+                    ToastService.instance.showFaceDetectionFailure(
+                      context,
+                      'multiple_faces',
+                    );
+                    break;
+                  case FaceDetectionNotificationType.faceDetectedUnrecognized:
+                    ToastService.instance.showFaceDetectionFailure(
+                      context,
+                      'low_confidence',
+                    );
+                    break;
+                  case FaceDetectionNotificationType.faceDetectedSuccess:
+                    // Success face detection
+                    final userName =
+                        _extractUserNameFromMessage(
+                          state.notificationMessage!,
+                        ) ??
+                        'User';
+                    ToastService.instance.showSuccess(context, userName);
+                    break;
+                  case FaceDetectionNotificationType.checkInFailed:
+                  case FaceDetectionNotificationType.connectionError:
+                    ToastService.instance.showFaceDetectionFailure(
+                      context,
+                      'processing_error',
+                    );
+                    break;
+                  case FaceDetectionNotificationType.processingError:
+                    ToastService.instance.showFaceDetectionFailure(
+                      context,
+                      'processing_error',
+                    );
+                    break;
+                  case FaceDetectionNotificationType.none:
+                    // Do nothing
+                    break;
+                }
+                debugPrint('🍞 UI: Toast notification shown successfully');
               } else {
                 debugPrint(
-                  '🎯 UI: Notification message is null or type is none',
+                  '🍞 UI: Notification message is null or type is none',
                 );
               }
             },
