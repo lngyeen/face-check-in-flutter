@@ -214,6 +214,7 @@ void main() {
     test('configuration can be updated', () {
       final newConfig = WebSocketConfig(
         url: 'ws://new-url:8080',
+        apiKey: 'test-api-key',
         timeout: Duration(seconds: 60),
         maxRetries: 5,
       );
@@ -221,6 +222,11 @@ void main() {
       webSocketService.updateConfig(newConfig);
 
       expect(webSocketService.config.url, 'ws://new-url:8080');
+      expect(webSocketService.config.apiKey, 'test-api-key');
+      expect(
+        webSocketService.config.fullUrl,
+        'ws://new-url:8080?apiKey=test-api-key',
+      );
       expect(webSocketService.config.timeout, Duration(seconds: 60));
       expect(webSocketService.config.maxRetries, 5);
     });
@@ -228,7 +234,7 @@ void main() {
     test('metrics stream provides connection information', () {
       fakeAsync((async) {
         final expectedUrl =
-            webSocketService.config.url; // Use the actual config URL
+            webSocketService.config.fullUrl; // Use the actual config fullUrl
         expect(
           webSocketService.metrics,
           emits(
