@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:face_check_in_flutter/core/widgets/loading_widget.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/camera_initializing_widget.dart';
 
 import 'camera_error_widget.dart';
 import 'connection_lost_widget.dart';
@@ -35,7 +35,7 @@ class CameraPreviewWidget extends StatelessWidget {
         switch (state.cameraStatus) {
           case CameraStatus.initial:
           case CameraStatus.initializing:
-            return const LoadingWidget();
+            return const CameraInitializingWidget();
           case CameraStatus.permissionDenied:
             return const PermissionDeniedWidget();
           case CameraStatus.frontCameraNotAvailable:
@@ -43,7 +43,8 @@ class CameraPreviewWidget extends StatelessWidget {
           case CameraStatus.opening:
             final controller = state.cameraController;
             if (controller == null || !controller.value.isInitialized) {
-              return const Center(child: Text('Camera not available.'));
+              // Show initializing widget while controller is being set up
+              return const CameraInitializingWidget();
             }
 
             return FittedBox(

@@ -1,10 +1,11 @@
+import 'dart:async';
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:face_check_in_flutter/core/theme/app_colors.dart';
-import 'package:face_check_in_flutter/flavors.dart';
 
-/// Centralized theme configuration for the Face Check-In app
-/// Provides consistent styling across the entire application using design tokens
 class AppTheme {
   AppTheme._(); // Private constructor to prevent instantiation
 
@@ -40,7 +41,7 @@ class AppTheme {
         elevation: AppDesignTokens.elevationLow,
         centerTitle: true,
         titleTextStyle: const TextStyle(
-          fontSize: 20,
+          fontSize: 26,
           fontWeight: FontWeight.w600,
           color: AppColors.textOnPrimary,
         ),
@@ -108,19 +109,19 @@ class AppTheme {
       textTheme: const TextTheme(
         // Headlines
         headlineLarge: TextStyle(
-          fontSize: 32,
+          fontSize: 38,
           fontWeight: FontWeight.bold,
           color: AppColors.textPrimary,
           height: 1.2,
         ),
         headlineMedium: TextStyle(
-          fontSize: 24,
+          fontSize: 30,
           fontWeight: FontWeight.w600,
           color: AppColors.textPrimary,
           height: 1.3,
         ),
         headlineSmall: TextStyle(
-          fontSize: 20,
+          fontSize: 26,
           fontWeight: FontWeight.w600,
           color: AppColors.textPrimary,
           height: 1.3,
@@ -128,19 +129,19 @@ class AppTheme {
 
         // Titles
         titleLarge: TextStyle(
-          fontSize: 18,
+          fontSize: 24,
           fontWeight: FontWeight.w600,
           color: AppColors.textPrimary,
           height: 1.4,
         ),
         titleMedium: TextStyle(
-          fontSize: 16,
+          fontSize: 22,
           fontWeight: FontWeight.w500,
           color: AppColors.textPrimary,
           height: 1.4,
         ),
         titleSmall: TextStyle(
-          fontSize: 14,
+          fontSize: 20,
           fontWeight: FontWeight.w500,
           color: AppColors.textPrimary,
           height: 1.4,
@@ -148,36 +149,36 @@ class AppTheme {
 
         // Body text
         bodyLarge: TextStyle(
-          fontSize: 16,
+          fontSize: 22,
           color: AppColors.textPrimary,
           height: 1.5,
         ),
         bodyMedium: TextStyle(
-          fontSize: 14,
+          fontSize: 20,
           color: AppColors.textSecondary,
           height: 1.5,
         ),
         bodySmall: TextStyle(
-          fontSize: 12,
+          fontSize: 18,
           color: AppColors.textSecondary,
           height: 1.4,
         ),
 
         // Labels
         labelLarge: TextStyle(
-          fontSize: 14,
+          fontSize: 20,
           fontWeight: FontWeight.w500,
           color: AppColors.textPrimary,
           height: 1.4,
         ),
         labelMedium: TextStyle(
-          fontSize: 12,
+          fontSize: 18,
           fontWeight: FontWeight.w500,
           color: AppColors.textPrimary,
           height: 1.3,
         ),
         labelSmall: TextStyle(
-          fontSize: 10,
+          fontSize: 16,
           fontWeight: FontWeight.w500,
           color: AppColors.textSecondary,
           height: 1.3,
@@ -232,7 +233,7 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppDesignTokens.radiusMedium),
         ),
-        behavior: SnackBarBehavior.floating,
+        behavior: SnackBarBehavior.fixed,
         elevation: AppDesignTokens.elevationHigh,
       ),
 
@@ -325,12 +326,12 @@ class AppTheme {
           borderRadius: BorderRadius.circular(AppDesignTokens.radiusLarge),
         ),
         titleTextStyle: const TextStyle(
-          fontSize: 20,
+          fontSize: 26,
           fontWeight: FontWeight.w600,
           color: AppColors.textPrimary,
         ),
         contentTextStyle: const TextStyle(
-          fontSize: 14,
+          fontSize: 20,
           color: AppColors.textSecondary,
           height: 1.5,
         ),

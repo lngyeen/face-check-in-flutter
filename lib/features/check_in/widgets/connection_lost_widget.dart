@@ -1,14 +1,11 @@
-import 'package:flutter/material.dart' hide ConnectionState;
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:face_check_in_flutter/core/theme/app_colors.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
 import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
 import 'package:face_check_in_flutter/features/connection/bloc/connection_event.dart';
 import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
-
-import 'generic_message_widget.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/generic_info_widget.dart';
+import 'package:flutter/material.dart' hide ConnectionState;
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConnectionLostWidget extends StatelessWidget {
   const ConnectionLostWidget({super.key});
@@ -18,25 +15,22 @@ class ConnectionLostWidget extends StatelessWidget {
     return BlocBuilder<ConnectionBloc, ConnectionState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        final connectionStatus = state.status;
+        final status = state.status;
+        final showButton = _shouldShowRetryButton(status);
 
-        return GenericMessageWidget(
-          icon: _getIconForStatus(connectionStatus),
-          title: _getTitleForStatus(connectionStatus),
-          subtitle: _getSubtitleForStatus(connectionStatus),
-          retryButtonTitle:
-              _shouldShowRetryButton(connectionStatus) ? 'Retry Now' : null,
-          onRetry:
-              _shouldShowRetryButton(connectionStatus)
-                  ? () {
-                    context.read<ConnectionBloc>().add(
-                      const ConnectionEvent.retryConnection(),
-                    );
-                  }
+        return GenericInfoWidget(
+          icon: _getIconForStatus(status),
+          title: _getTitleForStatus(status),
+          message: _getSubtitleForStatus(status),
+          iconColor: _getIconColorForStatus(status),
+          buttonText: showButton ? 'Retry Now' : null,
+          buttonIcon: showButton ? Icons.refresh_rounded : null,
+          onButtonPressed:
+              showButton
+                  ? () => context.read<ConnectionBloc>().add(
+                    const ConnectionEvent.retryConnection(),
+                  )
                   : null,
-          iconColor: _getIconColorForStatus(connectionStatus),
-          buttonColor: AppColors.warning,
-          buttonTextColor: AppColors.textOnPrimary,
         );
       },
     );
@@ -45,14 +39,14 @@ class ConnectionLostWidget extends StatelessWidget {
   IconData _getIconForStatus(AppConnectionStatus status) {
     switch (status) {
       case AppConnectionStatus.networkLost:
-        return Icons.wifi_off;
+        return Icons.wifi_off_rounded;
       case AppConnectionStatus.failed:
-        return Icons.error_outline;
+        return Icons.error_outline_rounded;
       case AppConnectionStatus.fastRetrying:
       case AppConnectionStatus.backgroundRetrying:
-        return Icons.sync_problem;
+        return Icons.sync_problem_rounded;
       default:
-        return Icons.cloud_off;
+        return Icons.cloud_off_rounded;
     }
   }
 
@@ -73,27 +67,26 @@ class ConnectionLostWidget extends StatelessWidget {
   String _getSubtitleForStatus(AppConnectionStatus status) {
     switch (status) {
       case AppConnectionStatus.networkLost:
-        return 'Unable to connect to server. Please check your network connection and try again.';
+        return 'Unable to connect to the server. Please check your network connection and try again.';
       case AppConnectionStatus.failed:
-        return 'Unable to connect to server. Please try again later.';
+        return 'Failed to establish a connection with the server. Please try again later.';
       case AppConnectionStatus.fastRetrying:
-        return 'Attempting to reconnect. Please wait a moment...';
+        return 'Attempting to reconnect. This should only take a moment.';
       case AppConnectionStatus.backgroundRetrying:
-        return 'Trying to reconnect in the background. You can try connecting manually.';
+        return 'Trying to reconnect in the background. You can also try connecting manually.';
       default:
-        return 'Connection to server has been lost. Please try reconnecting.';
+        return 'The connection to the server has been lost. Please try reconnecting.';
     }
   }
 
   Color _getIconColorForStatus(AppConnectionStatus status) {
     switch (status) {
       case AppConnectionStatus.networkLost:
-        return AppColorsExtensions.disconnected;
       case AppConnectionStatus.failed:
         return AppColors.error;
       case AppConnectionStatus.fastRetrying:
       case AppConnectionStatus.backgroundRetrying:
-        return AppColorsExtensions.connecting;
+        return AppColors.warning;
       default:
         return AppColors.textSecondary;
     }

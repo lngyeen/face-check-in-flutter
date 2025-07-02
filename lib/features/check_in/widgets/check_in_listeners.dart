@@ -1,12 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:face_check_in_flutter/core/utils/ui_helper.dart';
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_event.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
-import 'package:face_check_in_flutter/features/check_in/widgets/checkin_success_toast.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/success_info_dialog.dart';
 
 /// Widget that handles BlocListeners for toast messages and error notifications
 class CheckInListeners extends StatefulWidget {
@@ -158,29 +161,23 @@ class _CheckInListenersState extends State<CheckInListeners> {
           'Multiple faces detected ($recognizedCount known, $unrecognizedCount unknown). Please ensure only one person is visible.';
     }
 
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(message),
-          duration: const Duration(seconds: 4),
-          backgroundColor: Colors.orange,
-        ),
-      );
+    UIHelper.showAppSnackBar(
+      context: context,
+      title: 'Multiple Faces Detected',
+      message: message,
+      type: SnackBarType.info,
+    );
   }
 
   /// Show message for unrecognized face
   void _showUnrecognizedFaceMessage(BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            'Face detected but not recognized. Ensure good lighting and face the camera directly.',
-          ),
-          duration: const Duration(seconds: 3),
-        ),
-      );
+    UIHelper.showAppSnackBar(
+      context: context,
+      title: 'Face Not Recognized',
+      message:
+          'Face detected but not recognized. Ensure good lighting and face the camera directly.',
+      type: SnackBarType.warning,
+    );
   }
 
   /// Show success dialog for recognized face(s)
@@ -196,11 +193,16 @@ class _CheckInListenersState extends State<CheckInListeners> {
       const BucketRestartableCheckInEvent.stopImageStream(),
     );
 
-    // Show success dialog with all faces and callback to resume streaming
-    CheckInSuccessDialog.show(
+    // Show success dialog with new styled dialog
+    final face = recognizedFaces.first;
+    SuccessInfoDialog.show(
       context,
-      recognizedFaces,
-      userImage: userImage,
+      faceId: face.faceId ?? 'Unknown',
+      memoryImage:
+          userImage != null
+              ? base64Decode(userImage)
+              : null, // Pass image as Base64 string
+      confidence: face.confidence,
       onDialogClosed: () {
         context.read<CheckInBloc>().add(
           const BucketRestartableCheckInEvent.startImageStream(),
