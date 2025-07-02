@@ -764,21 +764,46 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint(
-      '🎯 CheckInBloc: Recognition result received - Success: ${event.success}',
+      '📥 CheckInBloc: Processing recognition result - Success: ${event.success}',
     );
 
-    final message =
-        event.success
-            ? 'Welcome ${event.employeeName ?? 'Employee'}!'
-            : event.message;
+    try {
+      if (event.success) {
+        // Legacy success handling
+        emit(
+          state.copyWith(
+            lastRecognitionTime: DateTime.now(),
+            toastStatus: ToastStatus.showing,
+            toastMessage:
+                event.employeeName != null
+                    ? 'Welcome, ${event.employeeName}!'
+                    : 'Recognition successful!',
+            notificationType: FaceDetectionNotificationType.checkInSuccess,
+            notificationMessage: event.message,
+            shouldShowNotification: true,
+          ),
+        );
+      } else {
+        // Legacy failure handling
+        emit(
+          state.copyWith(
+            lastRecognitionTime: DateTime.now(),
+            toastStatus: ToastStatus.showing,
+            toastMessage: 'Recognition failed. Please try again.',
+            notificationType: FaceDetectionNotificationType.checkInFailed,
+            notificationMessage: event.message,
+            shouldShowNotification: true,
+          ),
+        );
+      }
 
-    emit(
-      state.copyWith(
-        lastRecognitionTime: DateTime.now(),
-        toastStatus: ToastStatus.showing,
-        toastMessage: message,
-      ),
-    );
+      debugPrint('✅ CheckInBloc: Recognition result processed successfully');
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Error processing recognition result: $e');
+      add(
+        CheckInEvent.errorOccurred('Failed to process recognition result: $e'),
+      );
+    }
   }
 
   Future<void> _onBackendResponseReceived(
@@ -786,29 +811,153 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState> {
     Emitter<CheckInState> emit,
   ) async {
     debugPrint(
-      '🎯 CheckInBloc: Backend response received - ${event.result.faces.length} faces, status: ${event.result.status}',
+      '📥 CheckInBloc: Processing backend response - ${event.result.faces.length} faces detected',
     );
-    debugPrint('   Event: $event');
 
-    final result = event.result;
+    try {
+      final result = event.result;
 
-    // Update state with detection results
+      // Update face detection state
+      emit(
+        state.copyWith(
+          detectedFaces: result.faces,
+          faceStatus: result.status,
+          lastFaceDetection: result.timestamp,
+          faceConfidence:
+              result.faces.isNotEmpty ? result.faces.first.confidence : 0.0,
+        ),
+      );
+
+      // Update recognition statistics
+      final newStats = _updateRecognitionStatistics(result);
+      emit(state.copyWith(recognitionStats: newStats));
+
+      // Process success/failure logic based on faces array
+      if (result.faces.isNotEmpty) {
+        // Success case - faces detected
+        await _handleSuccessResponse(result, emit);
+      } else {
+        // Failure case - no faces detected
+        await _handleFailureResponse(result, emit);
+      }
+
+      // Generate appropriate notification (legacy support)
+      _processFaceDetectionResult(result);
+
+      debugPrint('✅ CheckInBloc: Backend response processed successfully');
+    } catch (e) {
+      debugPrint('❌ CheckInBloc: Error processing backend response: $e');
+      add(CheckInEvent.errorOccurred('Failed to process backend response: $e'));
+    }
+  }
+
+  /// Handle successful face detection response
+  Future<void> _handleSuccessResponse(
+    FaceDetectionResult result,
+    Emitter<CheckInState> emit,
+  ) async {
+    final firstFace = result.faces.first;
+
+    // Extract user information from response
+    final userName = firstFace.employeeName ?? firstFace.faceId ?? 'User';
+    final confidence = firstFace.confidence;
+
+    debugPrint(
+      '✅ CheckInBloc: Success response - User: $userName, Confidence: ${(confidence * 100).toStringAsFixed(1)}%',
+    );
+
+    if (firstFace.isRecognized) {
+      // Recognized face - show success notification
+      emit(
+        state.copyWith(
+          toastStatus: ToastStatus.showing,
+          toastMessage: 'Welcome, $userName!',
+          notificationType: FaceDetectionNotificationType.checkInSuccess,
+          notificationMessage:
+              'Check-in successful with ${(confidence * 100).toStringAsFixed(1)}% confidence',
+          shouldShowNotification: true,
+        ),
+      );
+    } else {
+      // Unrecognized face detected - show warning notification
+      emit(
+        state.copyWith(
+          toastStatus: ToastStatus.showing,
+          toastMessage: 'Face detected but not recognized',
+          notificationType:
+              FaceDetectionNotificationType.faceDetectedUnrecognized,
+          notificationMessage: 'Please ensure you are registered in the system',
+          shouldShowNotification: true,
+        ),
+      );
+    }
+
+    // Handle multiple faces scenario
+    if (result.faces.length > 1) {
+      emit(
+        state.copyWith(
+          notificationType: FaceDetectionNotificationType.multipleFacesWarning,
+          notificationMessage:
+              '${result.faces.length} faces detected. Please ensure only one person in frame.',
+          shouldShowNotification: true,
+        ),
+      );
+    }
+  }
+
+  /// Handle failed face detection response
+  Future<void> _handleFailureResponse(
+    FaceDetectionResult result,
+    Emitter<CheckInState> emit,
+  ) async {
+    debugPrint('❌ CheckInBloc: Failure response - No faces detected');
+
     emit(
       state.copyWith(
-        detectedFaces: result.faces,
-        faceStatus: result.status,
-        lastFaceDetection: result.timestamp,
-        recognitionStats: state.recognitionStats.copyWith(
-          totalFramesProcessed: state.recognitionStats.totalFramesProcessed + 1,
-          totalFacesDetected:
-              state.recognitionStats.totalFacesDetected + result.faces.length,
-          lastRecognitionTime: result.timestamp,
-        ),
+        toastStatus: ToastStatus.showing,
+        toastMessage:
+            'No face detected. Please position yourself in front of the camera.',
+        notificationType: FaceDetectionNotificationType.noFaceDetected,
+        notificationMessage:
+            'Position yourself in the camera frame and try again',
+        shouldShowNotification: true,
       ),
     );
+  }
 
-    // Generate appropriate notification based on face detection result
-    _processFaceDetectionResult(result);
+  /// Update recognition statistics with new result
+  RecognitionStatistics _updateRecognitionStatistics(
+    FaceDetectionResult result,
+  ) {
+    final currentStats = state.recognitionStats;
+    final recognizedFaces =
+        result.faces.where((face) => face.isRecognized).length;
+    final totalFaces = result.faces.length;
+
+    final newTotalFrames = currentStats.totalFramesProcessed + 1;
+    final newTotalFaces = currentStats.totalFacesDetected + totalFaces;
+    final newSuccessful = currentStats.successfulRecognitions + recognizedFaces;
+    final newFailed =
+        currentStats.failedRecognitions + (totalFaces - recognizedFaces);
+
+    // Calculate average confidence
+    final allConfidences = result.faces.map((face) => face.confidence).toList();
+    final currentAvgConfidence = currentStats.averageConfidence;
+    final newAvgConfidence =
+        allConfidences.isNotEmpty
+            ? (currentAvgConfidence * currentStats.totalFacesDetected +
+                    allConfidences.reduce((a, b) => a + b)) /
+                newTotalFaces
+            : currentAvgConfidence;
+
+    return currentStats.copyWith(
+      totalFramesProcessed: newTotalFrames,
+      totalFacesDetected: newTotalFaces,
+      successfulRecognitions: newSuccessful,
+      failedRecognitions: newFailed,
+      averageConfidence: newAvgConfidence,
+      lastRecognitionTime: result.timestamp,
+    );
   }
 
   // Process face detection result and show appropriate notification

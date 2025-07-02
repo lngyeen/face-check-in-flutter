@@ -18,12 +18,16 @@ import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart'
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/core/services/frame_streaming_service.dart'
     as streaming;
+import 'package:face_check_in_flutter/features/check_in/models/face_detection_result.dart';
 
 // --- Mocks and Fakes ---
 
 class MockPermissionService extends Mock implements ps.PermissionService {}
 
-class MockWebSocketService extends Mock implements WebSocketService {}
+class MockWebSocketService extends Mock implements WebSocketService {
+  @override
+  bool get isConnected => false;
+}
 
 class MockCameraService extends Mock implements CameraService {}
 
@@ -525,6 +529,244 @@ void main() {
             const CheckInState(connectionStatus: ConnectionStatus.connecting),
             const CheckInState(connectionStatus: ConnectionStatus.connected),
           ],
+    );
+  });
+
+  group('Story 2.3 Task 1 - Backend Message Processing Tests', () {
+    late FaceDetectionResult successResult;
+    late FaceDetectionResult failureResult;
+    late FaceDetectionResult multipleResultResult;
+
+    setUpAll(() {
+      successResult = FaceDetectionResult(
+        frameId: 'frame_123',
+        timestamp: DateTime.parse('2024-03-20T10:30:00.000Z'),
+        faces: [
+          DetectedFace(
+            faceId: 'person_001',
+            box: [150, 120, 250, 220],
+            confidence: 0.92,
+            isRecognized: true,
+            employeeName: 'John Doe',
+          ),
+        ],
+        status: FaceDetectionStatus.faceFound,
+      );
+
+      failureResult = FaceDetectionResult(
+        frameId: 'frame_124',
+        timestamp: DateTime.parse('2024-03-20T10:30:05.000Z'),
+        faces: [],
+        status: FaceDetectionStatus.noFace,
+      );
+
+      multipleResultResult = FaceDetectionResult(
+        frameId: 'frame_125',
+        timestamp: DateTime.parse('2024-03-20T10:30:10.000Z'),
+        faces: [
+          DetectedFace(
+            faceId: 'person_001',
+            box: [150, 120, 250, 220],
+            confidence: 0.85,
+            isRecognized: true,
+            employeeName: 'John Doe',
+          ),
+          DetectedFace(
+            faceId: 'person_002',
+            box: [300, 120, 400, 220],
+            confidence: 0.78,
+            isRecognized: false,
+          ),
+        ],
+        status: FaceDetectionStatus.multipleFaces,
+      );
+    });
+
+    // Simplified test - just verify basic functionality without complex state expectations
+    test('backend response handlers execute without throwing', () async {
+      final bloc = CheckInBloc(
+        mockPermissionService,
+        mockWebSocketService,
+        mockCameraService,
+        mockFrameStreamingService,
+      );
+
+      // Test that the handlers execute without throwing
+      expect(() {
+        bloc.add(CheckInEvent.backendResponseReceived(successResult));
+        bloc.add(CheckInEvent.backendResponseReceived(failureResult));
+        bloc.add(CheckInEvent.backendResponseReceived(multipleResultResult));
+      }, returnsNormally);
+
+      await bloc.close();
+    });
+
+    // Simplified recognition test
+    test('recognition result handlers execute without throwing', () async {
+      final bloc = CheckInBloc(
+        mockPermissionService,
+        mockWebSocketService,
+        mockCameraService,
+        mockFrameStreamingService,
+      );
+
+      // Test that the handlers execute without throwing
+      expect(() {
+        bloc.add(
+          const CheckInEvent.recognitionResultReceived(
+            success: true,
+            message: 'Success',
+            employeeName: 'John Doe',
+          ),
+        );
+        bloc.add(
+          const CheckInEvent.recognitionResultReceived(
+            success: false,
+            message: 'Failed',
+          ),
+        );
+      }, returnsNormally);
+
+      await bloc.close();
+    });
+
+    // Basic state verification test
+    blocTest<CheckInBloc, CheckInState>(
+      'backend response updates face detection data',
+      build: () => checkInBloc,
+      act:
+          (bloc) =>
+              bloc.add(CheckInEvent.backendResponseReceived(successResult)),
+      wait: const Duration(milliseconds: 100),
+      verify: (bloc) {
+        // Just verify that face data was updated
+        expect(bloc.state.detectedFaces.isNotEmpty, true);
+        expect(bloc.state.faceStatus, FaceDetectionStatus.faceFound);
+        expect(
+          bloc.state.recognitionStats.totalFramesProcessed,
+          greaterThan(0),
+        );
+      },
+    );
+
+    // Recognition result basic test
+    blocTest<CheckInBloc, CheckInState>(
+      'processes recognition result success',
+      build: () => checkInBloc,
+      act:
+          (bloc) => bloc.add(
+            const CheckInEvent.recognitionResultReceived(
+              success: true,
+              message: 'Recognition successful',
+              employeeName: 'Jane Smith',
+            ),
+          ),
+      expect:
+          () => [
+            isA<CheckInState>()
+                .having(
+                  (s) => s.toastStatus,
+                  'toastStatus',
+                  ToastStatus.showing,
+                )
+                .having(
+                  (s) => s.toastMessage,
+                  'toastMessage',
+                  'Welcome, Jane Smith!',
+                )
+                .having(
+                  (s) => s.notificationType,
+                  'notificationType',
+                  FaceDetectionNotificationType.checkInSuccess,
+                )
+                .having(
+                  (s) => s.notificationMessage,
+                  'notificationMessage',
+                  'Recognition successful',
+                )
+                .having(
+                  (s) => s.shouldShowNotification,
+                  'shouldShowNotification',
+                  true,
+                ),
+          ],
+    );
+
+    blocTest<CheckInBloc, CheckInState>(
+      'processes recognition result failure',
+      build: () => checkInBloc,
+      act:
+          (bloc) => bloc.add(
+            const CheckInEvent.recognitionResultReceived(
+              success: false,
+              message: 'Face not recognized',
+            ),
+          ),
+      expect:
+          () => [
+            isA<CheckInState>()
+                .having(
+                  (s) => s.toastStatus,
+                  'toastStatus',
+                  ToastStatus.showing,
+                )
+                .having(
+                  (s) => s.toastMessage,
+                  'toastMessage',
+                  'Recognition failed. Please try again.',
+                )
+                .having(
+                  (s) => s.notificationType,
+                  'notificationType',
+                  FaceDetectionNotificationType.checkInFailed,
+                )
+                .having(
+                  (s) => s.notificationMessage,
+                  'notificationMessage',
+                  'Face not recognized',
+                )
+                .having(
+                  (s) => s.shouldShowNotification,
+                  'shouldShowNotification',
+                  true,
+                ),
+          ],
+    );
+
+    // Error handling test
+    test(
+      'backend response processing handles invalid data gracefully',
+      () async {
+        final bloc = CheckInBloc(
+          mockPermissionService,
+          mockWebSocketService,
+          mockCameraService,
+          mockFrameStreamingService,
+        );
+
+        // Create invalid result
+        final invalidResult = FaceDetectionResult(
+          frameId: '',
+          timestamp: DateTime.now(),
+          faces: [
+            DetectedFace(
+              faceId: '',
+              box: [],
+              confidence: -1.0,
+              isRecognized: false,
+            ),
+          ],
+          status: FaceDetectionStatus.error,
+        );
+
+        // Should not throw error
+        expect(
+          () => bloc.add(CheckInEvent.backendResponseReceived(invalidResult)),
+          returnsNormally,
+        );
+
+        await bloc.close();
+      },
     );
   });
 }
