@@ -1,4 +1,3 @@
-import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -6,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:face_check_in_flutter/core/di/di.dart';
 import 'package:face_check_in_flutter/core/theme/app_theme.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
-import 'package:face_check_in_flutter/features/check_in/screens/check_in_screen.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/mockup_case_list_screen.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
 import 'package:face_check_in_flutter/flavors.dart';
 
 /// Main application widget
@@ -23,8 +22,7 @@ class App extends StatelessWidget {
         BlocProvider<ConnectionBloc>(
           create: (context) => getIt<ConnectionBloc>(),
         ),
-        // CheckInBloc depends on ConnectionBloc - provide second
-        BlocProvider<CheckInBloc>(create: (context) => getIt<CheckInBloc>()),
+        // CheckInBloc is now provided locally in CheckInScreen
       ],
       child: MaterialApp(
         title: F.title,
@@ -35,7 +33,10 @@ class App extends StatelessWidget {
         themeMode: ThemeMode.light,
 
         // Home screen with flavor banner in debug mode
-        home: _flavorBanner(child: const CheckInScreen(), show: kDebugMode),
+        home: _flavorBanner(
+          child: const MockupCaseListScreen(),
+          show: kDebugMode,
+        ),
 
         // Error handling
         builder: (context, child) {

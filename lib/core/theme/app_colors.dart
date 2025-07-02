@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._(); // Private constructor to prevent instantiation
 
-  // ========== CORE PALETTE (8 Colors Max) ==========
+  // ========== CORE PALETTE (Refined) ==========
 
-  /// 1. Primary Red - Main brand color
-  static const Color primary = Color(0xFFD32F2F); // Red 700
+  /// 1. Primary Red - Main brand color from OWT logo
+  static const Color primary = Color(0xFFE4002B);
 
-  /// 2. Secondary Blue - Accent color
-  static const Color secondary = Color(0xFF1976D2); // Blue 700
+  /// 2. Secondary Teal - A sophisticated accent for info states
+  static const Color secondary = Color(0xFF00796B); // Teal 700
 
   /// 3. Success Green - For positive states
   static const Color success = Color(0xFF4CAF50); // Green 500
 
-  /// 4. Warning Orange - For warning states
-  static const Color warning = Color(0xFFFF9800); // Orange 500
+  /// 4. Warning Amber - A softer, more harmonious warning color
+  static const Color warning = Color(0xFFFFA000); // Amber 700
 
   /// 5. White - Pure white for surfaces
   static const Color white = Color(0xFFFFFFFF);
@@ -47,7 +47,7 @@ class AppColors {
 
   // Status colors (reuse primary colors)
   static const Color error = primary; // Use primary red for errors
-  static const Color info = secondary; // Use secondary blue for info
+  static const Color info = secondary; // Use secondary teal for info
 
   // Border colors
   static const Color border = greyMedium;
@@ -88,18 +88,18 @@ class AppMaterialColors {
   AppMaterialColors._();
 
   static const MaterialColor primarySwatch = MaterialColor(
-    0xFFD32F2F, // Red 700
+    0xFFE4002B, // OWT Red
     <int, Color>{
-      50: Color(0xFFFFEBEE),
-      100: Color(0xFFFFCDD2),
-      200: Color(0xFFEF9A9A),
-      300: Color(0xFFE57373),
-      400: Color(0xFFEF5350),
-      500: Color(0xFFF44336),
-      600: Color(0xFFE53935),
-      700: Color(0xFFD32F2F),
-      800: Color(0xFFC62828),
-      900: Color(0xFFB71C1C),
+      50: Color(0xFFFDE4E8),
+      100: Color(0xFFF9BCC7),
+      200: Color(0xFFF490A2),
+      300: Color(0xFFF0637C),
+      400: Color(0xFFEC405F),
+      500: Color(0xFFE81D43),
+      600: Color(0xFFE6193D),
+      700: Color(0xFFE4002B), // The primary color
+      800: Color(0xFFE10025),
+      900: Color(0xFFDD001A),
     },
   );
 }

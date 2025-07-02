@@ -1,211 +1,148 @@
-import 'package:flutter/material.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_event.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
+import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart'
+    as old;
 import 'package:face_check_in_flutter/features/check_in/widgets/checkin_success_toast.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:check_in_refactor/check_in_refactor.dart';
 
 /// Widget that handles BlocListeners for toast messages and error notifications
-class CheckInListeners extends StatefulWidget {
+class CheckInListeners extends StatelessWidget {
   const CheckInListeners({super.key, required this.child});
 
   final Widget child;
 
   @override
-  State<CheckInListeners> createState() => _CheckInListenersState();
-}
-
-class _CheckInListenersState extends State<CheckInListeners> {
-  String? _lastProcessedFaceId;
-  DateTime? _lastRecognizedShown;
-  DateTime? _lastUnrecognizedShown;
-  DateTime? _lastMultipleFacesShown;
-
-  static const _recognizedDebounce = Duration(
-    seconds: 2,
-  ); // Shorter for better UX
-  static const _unrecognizedDebounce = Duration(seconds: 3);
-  static const _multipleFacesDebounce = Duration(seconds: 4);
-
-  @override
   Widget build(BuildContext context) {
-    return BlocListener<CheckInBloc, CheckInState>(
-      listenWhen: _shouldListen,
-      listener: _handleListener,
-      child: widget.child,
+    return MultiBlocListener(
+      listeners: [
+        // Camera error handling
+        BlocListener<CameraBloc, CameraState>(
+          listenWhen:
+              (prev, curr) =>
+                  prev.errorMessage != curr.errorMessage && curr.hasError,
+          listener: _handleCameraError,
+        ),
+
+        // Face detection results - now handled by NotificationInteractor,
+        // but we might still want to trigger dialogs from here.
+        BlocListener<FaceDetectionBloc, FaceDetectionState>(
+          listenWhen:
+              (prev, curr) =>
+                  prev.detectedFaces != curr.detectedFaces &&
+                  curr.hasRecognizedFaces &&
+                  curr.detectedFaces.length == 1,
+          listener: (context, state) {
+            _showSuccessDialog(context, state);
+          },
+        ),
+
+        // Screen notifications driven by NotificationInteractor
+        BlocListener<CheckInScreenBloc, CheckInScreenState>(
+          listenWhen:
+              (prev, curr) =>
+                  prev.pendingNotification != curr.pendingNotification &&
+                  curr.pendingNotification != null,
+          listener: _handleNotification,
+        ),
+      ],
+      child: child,
     );
   }
 
-  /// Determines if the listener should trigger based on face detection results.
-  /// Acts as a dispatcher to specific handlers based on detection scenarios.
-  bool _shouldListen(CheckInState previous, CheckInState current) {
-    // Reset state on connection changes for robust recovery.
-    if (previous.connectionState.status != current.connectionState.status) {
-      _resetState();
-      return false;
-    }
-
-    final faces = current.detectedFaces;
-    if (faces.isEmpty) {
-      return false;
-    }
-
-    final now = DateTime.now();
-
-    if (faces.length > 1) {
-      return _handleMultipleFaces(now);
-    }
-
-    final face = faces.first;
-    if (face.isRecognized && face.faceId != null) {
-      return _handleRecognizedFace(now, face);
-    }
-
-    return _handleUnrecognizedFace(now);
-  }
-
-  /// Debounces notifications for multiple detected faces.
-  bool _handleMultipleFaces(DateTime now) {
-    final shouldShow =
-        _lastMultipleFacesShown == null ||
-        now.difference(_lastMultipleFacesShown!) > _multipleFacesDebounce;
-
-    if (shouldShow) {
-      _lastMultipleFacesShown = now;
-      _resetSingleFaceState();
-      return true;
-    }
-    return false;
-  }
-
-  /// Debounces notifications for a single recognized face.
-  bool _handleRecognizedFace(DateTime now, FaceDetectionResult face) {
-    final isNewFace = _lastProcessedFaceId != face.faceId;
-    final debounceTimePassed =
-        _lastRecognizedShown == null ||
-        now.difference(_lastRecognizedShown!) > _recognizedDebounce;
-
-    if (isNewFace && debounceTimePassed) {
-      _lastProcessedFaceId = face.faceId;
-      _lastRecognizedShown = now;
-      return true;
-    }
-    return false;
-  }
-
-  /// Debounces notifications for a single unrecognized face.
-  bool _handleUnrecognizedFace(DateTime now) {
-    final shouldShow =
-        _lastUnrecognizedShown == null ||
-        now.difference(_lastUnrecognizedShown!) > _unrecognizedDebounce;
-
-    if (shouldShow) {
-      _lastProcessedFaceId = null;
-      _lastUnrecognizedShown = now;
-      return true;
-    }
-    return false;
-  }
-
-  /// Routes the state to the appropriate UI feedback method.
-  void _handleListener(BuildContext context, CheckInState state) {
-    final faces = state.detectedFaces;
-
-    if (faces.length > 1) {
-      _showMultipleFacesMessage(context, faces);
-    } else if (faces.first.isRecognized) {
-      _showSuccessDialog(context, state, [faces.first]);
-    } else {
-      _showUnrecognizedFaceMessage(context);
-    }
-  }
-
-  /// Reset all state - used on connection changes and app lifecycle events
-  void _resetState() {
-    _lastProcessedFaceId = null;
-    _lastRecognizedShown = null;
-    _lastUnrecognizedShown = null;
-    _lastMultipleFacesShown = null;
-  }
-
-  /// Resets single-face tracking state, typically when multiple faces are detected.
-  void _resetSingleFaceState() {
-    _lastProcessedFaceId = null;
-    _lastRecognizedShown = null;
-    _lastUnrecognizedShown = null;
-  }
-
-  /// Show message for multiple faces with detailed information
-  void _showMultipleFacesMessage(
-    BuildContext context,
-    List<FaceDetectionResult> faces,
-  ) {
-    final recognizedCount = faces.where((face) => face.isRecognized).length;
-    final unrecognizedCount = faces.length - recognizedCount;
-
-    String message;
-    if (recognizedCount == 0) {
-      message =
-          'Multiple faces detected ($unrecognizedCount unknown). Please ensure only one person is visible.';
-    } else if (unrecognizedCount == 0) {
-      message =
-          'Multiple faces detected ($recognizedCount recognized). Please ensure only one person is visible.';
-    } else {
-      message =
-          'Multiple faces detected ($recognizedCount known, $unrecognizedCount unknown). Please ensure only one person is visible.';
-    }
-
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(message),
-          duration: const Duration(seconds: 4),
-          backgroundColor: Colors.orange,
-        ),
-      );
-  }
-
-  /// Show message for unrecognized face
-  void _showUnrecognizedFaceMessage(BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            'Face detected but not recognized. Ensure good lighting and face the camera directly.',
+  void _handleCameraError(BuildContext context, CameraState state) {
+    if (state.errorMessage != null) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(state.errorMessage!),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
+            action: SnackBarAction(
+              label: 'Retry',
+              onPressed:
+                  () =>
+                      context.read<CameraBloc>().add(const CameraEvent.start()),
+            ),
           ),
-          duration: const Duration(seconds: 3),
-        ),
-      );
+        );
+    }
   }
 
-  /// Show success dialog for recognized face(s)
-  void _showSuccessDialog(
-    BuildContext context,
-    CheckInState state,
-    List<FaceDetectionResult> recognizedFaces,
-  ) {
-    // Get annotated image if available for user display
-    final userImage = state.annotatedImage;
+  void _handleNotification(BuildContext context, CheckInScreenState state) {
+    final notification = state.pendingNotification;
+    if (notification != null) {
+      // Simple factory to map notification data to a UI widget (e.g., SnackBar)
+      // This part can be expanded to show different kinds of notifications
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(notification.message),
+            backgroundColor: _getNotificationColor(notification.type),
+            duration: notification.duration ?? const Duration(seconds: 3),
+          ),
+        );
 
-    context.read<CheckInBloc>().add(
-      const BucketRestartableCheckInEvent.stopImageStream(),
+      // Dismiss notification after showing
+      context.read<CheckInScreenBloc>().add(
+        const CheckInScreenEvent.dismissNotification(),
+      );
+    }
+  }
+
+  void _showSuccessDialog(BuildContext context, FaceDetectionState state) {
+    final recognizedFaces = state.recognizedFaces;
+
+    if (recognizedFaces.isEmpty) return;
+
+    // Stop processing during dialog
+    context.read<FaceDetectionBloc>().add(
+      const FaceDetectionEvent.stopProcessing(),
     );
 
-    // Show success dialog with all faces and callback to resume streaming
     CheckInSuccessDialog.show(
       context,
-      recognizedFaces,
-      userImage: userImage,
+      recognizedFaces
+          .map(
+            (e) => old.FaceDetectionResult(
+              isRecognized: e.isRecognized,
+              confidence: e.confidence,
+              faceId: e.faceId,
+              bbox: [
+                (e.boundingBox['x'] ?? 0).toInt(),
+                (e.boundingBox['y'] ?? 0).toInt(),
+                (e.boundingBox['width'] ?? 0).toInt(),
+                (e.boundingBox['height'] ?? 0).toInt(),
+              ],
+            ),
+          )
+          .toList(),
+      userImage: state.annotatedImage,
       onDialogClosed: () {
-        context.read<CheckInBloc>().add(
-          const BucketRestartableCheckInEvent.startImageStream(),
+        // Resume processing when dialog closes
+        context.read<FaceDetectionBloc>().add(
+          const FaceDetectionEvent.startProcessing(),
         );
       },
     );
+  }
+
+  Color _getNotificationColor(NotificationType type) {
+    switch (type) {
+      case NotificationType.faceDetected:
+        return Colors.blue;
+      case NotificationType.faceRecognized:
+        return Colors.green;
+      case NotificationType.checkInSuccess:
+        return Colors.green.shade700;
+      case NotificationType.systemError:
+      case NotificationType.cameraError:
+        return Colors.red;
+      case NotificationType.connectionLost:
+        return Colors.orange;
+      case NotificationType.performanceWarning:
+        return Colors.deepOrange;
+    }
   }
 }

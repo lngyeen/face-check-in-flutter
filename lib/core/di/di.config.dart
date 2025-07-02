@@ -12,11 +12,9 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../features/check_in/bloc/check_in_bloc.dart' as _i435;
 import '../../features/connection/bloc/connection_bloc.dart' as _i348;
 import '../services/network_connectivity_service.dart' as _i234;
 import '../services/permission_service.dart' as _i165;
-import '../services/stream_service.dart' as _i121;
 import '../services/wakelock_service.dart' as _i669;
 import '../services/websocket_service.dart' as _i555;
 
@@ -39,18 +37,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i348.ConnectionBloc>(
       () => _i348.ConnectionBloc(gh<_i555.WebSocketService>()),
-    );
-    gh.lazySingleton<_i121.StreamService>(
-      () => _i121.StreamServiceImpl(
-        gh<_i555.WebSocketService>(),
-        gh<_i165.PermissionService>(),
-      ),
-    );
-    gh.factory<_i435.CheckInBloc>(
-      () => _i435.CheckInBloc(
-        gh<_i348.ConnectionBloc>(),
-        gh<_i121.StreamService>(),
-      ),
     );
     return this;
   }

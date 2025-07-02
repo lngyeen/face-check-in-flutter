@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
-
 import 'package:camera/camera.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:face_check_in_flutter/core/widgets/loading_widget.dart';
-import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
-import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
+import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart'
+    as app_conn;
+import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
+import 'package:flutter/material.dart' hide ConnectionState;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:check_in_refactor/check_in_refactor.dart';
 
 import 'camera_error_widget.dart';
 import 'connection_lost_widget.dart';
@@ -19,54 +18,53 @@ class CameraPreviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CheckInBloc, CheckInState>(
-      buildWhen:
-          (previous, current) =>
-              previous.cameraStatus != current.cameraStatus ||
-              previous.cameraController != current.cameraController ||
-              previous.connectionState.status != current.connectionState.status,
-      builder: (context, state) {
-        // Check if connection is lost first (higher priority than camera preview)
-        if (_shouldShowConnectionLost(state)) {
-          return const ConnectionLostWidget();
-        }
+    final cameraState = context.watch<CameraBloc>().state;
+    final connectionState = context.watch<ConnectionBloc>().state;
 
-        // Then handle camera status
-        switch (state.cameraStatus) {
-          case CameraStatus.initial:
-          case CameraStatus.initializing:
-            return const LoadingWidget();
-          case CameraStatus.permissionDenied:
-            return const PermissionDeniedWidget();
-          case CameraStatus.frontCameraNotAvailable:
-            return const FrontCameraNotAvailableWidget();
-          case CameraStatus.opening:
-            final controller = state.cameraController;
-            if (controller == null || !controller.value.isInitialized) {
-              return const Center(child: Text('Camera not available.'));
-            }
+    if (_shouldShowConnectionLost(connectionState)) {
+      return const ConnectionLostWidget();
+    }
 
-            return FittedBox(
-              fit: BoxFit.cover,
-              child: SizedBox(
-                width: controller.value.previewSize?.height ?? 1,
-                height: controller.value.previewSize?.width ?? 1,
-                child: CameraPreview(controller),
-              ),
-            );
-          case CameraStatus.error:
-            return CameraErrorWidget(error: state.currentError?.message);
-        }
-      },
-    );
+    return _buildCameraContent(context, cameraState);
   }
 
-  /// Determines if connection lost widget should be shown
-  bool _shouldShowConnectionLost(CheckInState state) {
-    final connectionStatus = state.connectionState.status;
-    return connectionStatus == AppConnectionStatus.networkLost ||
-        connectionStatus == AppConnectionStatus.failed ||
-        connectionStatus == AppConnectionStatus.fastRetrying ||
-        connectionStatus == AppConnectionStatus.backgroundRetrying;
+  Widget _buildCameraContent(BuildContext context, CameraState cameraState) {
+    switch (cameraState.status) {
+      case CameraStatus.initial:
+      case CameraStatus.initializing:
+        return const LoadingWidget();
+
+      case CameraStatus.permissionDenied:
+        return const PermissionDeniedWidget();
+
+      case CameraStatus.frontCameraNotAvailable:
+        return const FrontCameraNotAvailableWidget();
+
+      case CameraStatus.ready:
+        final controller = cameraState.controller;
+        if (controller == null || !controller.value.isInitialized) {
+          return const Center(child: Text('Camera not available.'));
+        }
+
+        return FittedBox(
+          fit: BoxFit.cover,
+          child: SizedBox(
+            width: controller.value.previewSize?.height ?? 1,
+            height: controller.value.previewSize?.width ?? 1,
+            child: CameraPreview(controller),
+          ),
+        );
+
+      case CameraStatus.error:
+        return CameraErrorWidget(error: cameraState.errorMessage);
+    }
+  }
+
+  bool _shouldShowConnectionLost(ConnectionState connectionState) {
+    final status = connectionState.status;
+    return status == app_conn.AppConnectionStatus.networkLost ||
+        status == app_conn.AppConnectionStatus.failed ||
+        status == app_conn.AppConnectionStatus.fastRetrying ||
+        status == app_conn.AppConnectionStatus.backgroundRetrying;
   }
 }

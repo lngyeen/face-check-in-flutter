@@ -1,0 +1,60 @@
+name: check_in_refactor
+description: Refactored Check-In architecture with Clean Architecture principles
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Main project dependency for shared services
+  face_check_in_flutter:
+    path: ../../
+  
+  # State Management
+  flutter_bloc: ^8.1.5
+  bloc_concurrency: ^0.2.2
+  
+  # Code Generation
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
+  
+  # Dependency Injection
+  injectable: ^2.4.1
+  get_it: ^7.6.4
+  
+  # Reactive Programming
+  rxdart: ^0.28.0
+  
+  # Camera & Image Processing
+  camera: ^0.11.0
+  image: ^4.1.7
+  
+  # Utilities
+  equatable: ^2.0.5
+  
+  # Added from the code block
+  bloc: ^8.1.4
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  
+  # Code Generation
+  build_runner: ^2.4.7
+  freezed: ^2.4.6
+  json_serializable: ^6.7.1
+  injectable_generator: ^2.4.1
+  
+  # Testing
+  bloc_test: ^9.1.4
+  mocktail: ^1.0.0
+  
+  # Linting
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true 
