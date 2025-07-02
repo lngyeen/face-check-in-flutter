@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -27,6 +28,7 @@ abstract class WebSocketService {
 
   Future<void> initialize({
     required String url,
+    required String apiKey,
     Duration connectionTimeout = const Duration(seconds: 3),
     Duration pingTimeout = const Duration(seconds: 1),
   });
@@ -60,6 +62,7 @@ class WebSocketServiceImpl implements WebSocketService {
   static const _backgroundInterval = Duration(seconds: 30);
 
   late String _url;
+  late String _apiKey;
   Duration _connectionTimeout = const Duration(seconds: 3);
   Duration _pingTimeout = const Duration(seconds: 1);
   WebSocketChannel? _channel;
@@ -126,10 +129,12 @@ class WebSocketServiceImpl implements WebSocketService {
   @override
   Future<void> initialize({
     required String url,
+    required String apiKey,
     Duration connectionTimeout = const Duration(seconds: 3),
     Duration pingTimeout = const Duration(seconds: 1),
   }) async {
     _url = url;
+    _apiKey = apiKey;
     _connectionTimeout = connectionTimeout;
     _pingTimeout = pingTimeout;
 
@@ -157,7 +162,7 @@ class WebSocketServiceImpl implements WebSocketService {
 
     try {
       _updateStatus(WebSocketConnectionStatus.connecting);
-      final channel = WebSocketChannel.connect(Uri.parse(_url));
+      final channel = WebSocketChannel.connect(_webSocketUri);
 
       _subscription = channel.stream.listen(
         _handleMessage,
@@ -210,12 +215,25 @@ class WebSocketServiceImpl implements WebSocketService {
     }
   }
 
+  Uri get _webSocketUri {
+    return Uri.parse('$_url?apiKey=$_apiKey');
+  }
+
   /// Perform lightweight WebSocket connectivity check
   /// Creates a temporary WebSocket connection to test server reachability
   Future<bool> _pingServer() async {
     try {
-      final testChannel = WebSocketChannel.connect(Uri.parse(_url));
-      await testChannel.ready.timeout(_pingTimeout);
+      final testChannel = WebSocketChannel.connect(_webSocketUri);
+
+      await testChannel.ready.timeout(
+        _pingTimeout,
+        onTimeout: () {
+          throw TimeoutException(
+            'WebSocket connection timeout',
+            _connectionTimeout,
+          );
+        },
+      );
       await testChannel.sink.close();
       return true;
     } catch (e) {
@@ -452,7 +470,7 @@ class WebSocketServiceImpl implements WebSocketService {
   /// Tests if the server port is reachable without WebSocket handshake
   Future<bool> _tcpPingServer() async {
     try {
-      final uri = Uri.parse(_url);
+      final uri = _webSocketUri;
       final host = uri.host;
       final port = uri.port != 0 ? uri.port : (uri.scheme == 'wss' ? 443 : 80);
 

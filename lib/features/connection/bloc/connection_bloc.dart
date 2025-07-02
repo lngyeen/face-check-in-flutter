@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
@@ -40,7 +41,10 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   Future<void> _onConnect(Connect event, Emitter<ConnectionState> emit) async {
     if (!_isInitialized) {
       _setupWebSocketListeners();
-      await _webSocketService.initialize(url: F.baseWebSocketUrl);
+      await _webSocketService.initialize(
+        url: F.baseWebSocketUrl,
+        apiKey: dotenv.env['API_KEY']!,
+      );
       _isInitialized = true;
     }
     await _webSocketService.connect();

@@ -129,3 +129,6 @@ app.*.symbols
 
 # Flutter
 .flutter-plugins
+
+#Secrets
+.env/
