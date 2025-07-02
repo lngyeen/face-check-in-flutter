@@ -106,7 +106,7 @@ class WebSocketService {
 
   /// Test WebSocket connection without establishing persistent connection
   Future<bool> testConnection({String? testUrl}) async {
-    final urlToTest = testUrl ?? _config.url;
+    final urlToTest = testUrl ?? _config.fullUrl;
     if (_config.enableLogging) {
       debugPrint('🧪 WebSocketService: Testing connection to $urlToTest');
     }
@@ -136,12 +136,12 @@ class WebSocketService {
   Future<void> testRealServerConnection() async {
     if (_config.enableLogging) {
       debugPrint(
-        '🌐 WebSocketService: Testing real server connection to ${_config.url}',
+        '🌐 WebSocketService: Testing real server connection to ${_config.fullUrl}',
       );
     }
 
     try {
-      final testChannel = WebSocketChannel.connect(Uri.parse(_config.url));
+      final testChannel = WebSocketChannel.connect(Uri.parse(_config.fullUrl));
       await testChannel.ready.timeout(_config.timeout);
 
       if (_config.enableLogging) {
@@ -301,7 +301,7 @@ class WebSocketService {
       return false;
     }
 
-    final urlToConnect = customUrl ?? _config.url;
+    final urlToConnect = customUrl ?? _config.fullUrl;
     _lastConnectionAttempt = DateTime.now();
     _updateStatus(ConnectionStatus.connecting);
 
@@ -806,7 +806,7 @@ class WebSocketService {
       final metrics = ConnectionMetrics(
         isConnected: _isConnected,
         currentStatus: _currentStatus,
-        url: _config.url,
+        url: _config.fullUrl,
         retryCount: _retryCount,
         maxRetries: _config.maxRetries,
         lastConnectionAttempt: _lastConnectionAttempt,

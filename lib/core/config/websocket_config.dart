@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 class WebSocketConfig {
   const WebSocketConfig({
     required this.url,
+    this.apiKey,
     this.timeout = const Duration(seconds: 30),
     this.maxRetries = 3,
     this.retryDelay = const Duration(seconds: 3),
@@ -16,8 +17,11 @@ class WebSocketConfig {
     this.enableExponentialBackoff = true,
   });
 
-  /// WebSocket server URL
+  /// Base WebSocket server URL (without query parameters)
   final String url;
+
+  /// API key for authentication
+  final String? apiKey;
 
   /// Connection timeout duration (Story 2.1 spec: 30 seconds)
   final Duration timeout;
@@ -43,12 +47,29 @@ class WebSocketConfig {
   /// Whether to use exponential backoff for retries
   final bool enableExponentialBackoff;
 
+  /// Default API key for OWT face detection service
+  static const String defaultApiKey = '4lfoJIpYQJkclh3YKs0EhicvFZJWGseb';
+
+  /// Get the complete WebSocket URL with API key
+  String get fullUrl {
+    if (apiKey == null || apiKey!.isEmpty) {
+      return url;
+    }
+
+    final uri = Uri.parse(url);
+    final queryParameters = Map<String, String>.from(uri.queryParameters);
+    queryParameters['apiKey'] = apiKey!;
+
+    return uri.replace(queryParameters: queryParameters).toString();
+  }
+
   // Environment-specific configurations
 
   /// Development environment configuration
   /// Updated to use localhost for testing
   static const WebSocketConfig development = WebSocketConfig(
     url: 'ws://10.0.2.2:3009', // Android emulator localhost
+    apiKey: defaultApiKey,
     timeout: Duration(seconds: 30),
     maxRetries: 3,
     retryDelay: Duration(seconds: 3),
@@ -61,6 +82,7 @@ class WebSocketConfig {
   /// Alternative development config for real devices
   static const WebSocketConfig developmentRealDevice = WebSocketConfig(
     url: 'wss://facedetection-ws.owt.vn', // OWT Production WebSocket server
+    apiKey: defaultApiKey,
     timeout: Duration(seconds: 60), // Increased timeout for debugging
     maxRetries: 5, // More retries for debugging
     retryDelay: Duration(seconds: 2), // Shorter delay for faster debugging
@@ -73,6 +95,7 @@ class WebSocketConfig {
   /// Staging environment configuration
   static const WebSocketConfig staging = WebSocketConfig(
     url: 'ws://staging.facecheck.com:3009',
+    apiKey: defaultApiKey,
     timeout: Duration(seconds: 30),
     maxRetries: 3,
     retryDelay: Duration(seconds: 3),
@@ -85,6 +108,7 @@ class WebSocketConfig {
   /// Production environment configuration
   static const WebSocketConfig production = WebSocketConfig(
     url: 'wss://facedetection-ws.owt.vn', // Fixed: Use correct OWT server
+    apiKey: defaultApiKey,
     timeout: Duration(seconds: 60), // Increased timeout for stability
     maxRetries: 5, // More retries in production
     retryDelay: Duration(seconds: 2), // Shorter delay for faster reconnection
@@ -126,6 +150,7 @@ class WebSocketConfig {
   /// Create a copy with modified parameters
   WebSocketConfig copyWith({
     String? url,
+    String? apiKey,
     Duration? timeout,
     int? maxRetries,
     Duration? retryDelay,
@@ -137,6 +162,7 @@ class WebSocketConfig {
   }) {
     return WebSocketConfig(
       url: url ?? this.url,
+      apiKey: apiKey ?? this.apiKey,
       timeout: timeout ?? this.timeout,
       maxRetries: maxRetries ?? this.maxRetries,
       retryDelay: retryDelay ?? this.retryDelay,
@@ -153,6 +179,8 @@ class WebSocketConfig {
   Map<String, dynamic> toMap() {
     return {
       'url': url,
+      'fullUrl': fullUrl,
+      'apiKey': apiKey,
       'timeout': timeout.inMilliseconds,
       'maxRetries': maxRetries,
       'retryDelay': retryDelay.inMilliseconds,
@@ -166,7 +194,7 @@ class WebSocketConfig {
 
   @override
   String toString() {
-    return 'WebSocketConfig(url: $url, timeout: ${timeout.inSeconds}s, maxRetries: $maxRetries)';
+    return 'WebSocketConfig(url: $fullUrl, timeout: ${timeout.inSeconds}s, maxRetries: $maxRetries)';
   }
 
   @override
@@ -175,6 +203,7 @@ class WebSocketConfig {
 
     return other is WebSocketConfig &&
         other.url == url &&
+        other.apiKey == apiKey &&
         other.timeout == timeout &&
         other.maxRetries == maxRetries &&
         other.retryDelay == retryDelay &&
@@ -189,6 +218,7 @@ class WebSocketConfig {
   int get hashCode {
     return Object.hash(
       url,
+      apiKey,
       timeout,
       maxRetries,
       retryDelay,
