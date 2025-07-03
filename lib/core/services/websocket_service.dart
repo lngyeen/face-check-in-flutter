@@ -28,8 +28,8 @@ abstract class WebSocketService {
   Future<void> initialize({
     required String url,
     required String apiKey,
-    Duration connectionTimeout = const Duration(seconds: 3),
-    Duration pingTimeout = const Duration(seconds: 1),
+    Duration connectionTimeout = const Duration(seconds: 30),
+    Duration pingTimeout = const Duration(seconds: 10),
   });
 
   Future<void> connect();
@@ -62,8 +62,8 @@ class WebSocketServiceImpl implements WebSocketService {
 
   late String _url;
   late String _apiKey;
-  Duration _connectionTimeout = const Duration(seconds: 3);
-  Duration _pingTimeout = const Duration(seconds: 1);
+  Duration _connectionTimeout = const Duration(seconds: 30);
+  Duration _pingTimeout = const Duration(seconds: 10);
   WebSocketChannel? _channel;
   StreamSubscription? _networkSubscription;
   StreamSubscription? _subscription;
@@ -129,8 +129,8 @@ class WebSocketServiceImpl implements WebSocketService {
   Future<void> initialize({
     required String url,
     required String apiKey,
-    Duration connectionTimeout = const Duration(seconds: 3),
-    Duration pingTimeout = const Duration(seconds: 1),
+    Duration connectionTimeout = const Duration(seconds: 30),
+    Duration pingTimeout = const Duration(seconds: 10),
   }) async {
     _url = url;
     _apiKey = apiKey;

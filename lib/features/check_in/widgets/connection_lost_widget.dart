@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart' hide ConnectionState;
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:face_check_in_flutter/core/theme/app_colors.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/generic_info_widget.dart';
 import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
 import 'package:face_check_in_flutter/features/connection/bloc/connection_event.dart';
 import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
-import 'package:face_check_in_flutter/features/check_in/widgets/generic_info_widget.dart';
-import 'package:flutter/material.dart' hide ConnectionState;
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConnectionLostWidget extends StatelessWidget {
   const ConnectionLostWidget({super.key});
@@ -95,7 +97,6 @@ class ConnectionLostWidget extends StatelessWidget {
   /// Show retry button for certain connection statuses
   bool _shouldShowRetryButton(AppConnectionStatus status) {
     return status == AppConnectionStatus.backgroundRetrying ||
-        status == AppConnectionStatus.failed ||
-        status == AppConnectionStatus.networkLost;
+        status == AppConnectionStatus.failed;
   }
 }

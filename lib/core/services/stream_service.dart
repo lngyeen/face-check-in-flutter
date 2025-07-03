@@ -140,7 +140,7 @@ class StreamServiceImpl implements StreamService {
       _isCameraActive = true;
       _cameraController = cameraController;
       _cameraControllerSubject.add(cameraController);
-      _cameraStatusSubject.add(CameraStatus.opening);
+      _cameraStatusSubject.add(CameraStatus.ready);
     } catch (e) {
       _cameraStatusSubject.add(CameraStatus.error);
       await stopCamera();

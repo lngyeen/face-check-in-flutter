@@ -163,7 +163,7 @@ class CheckInBloc extends Bloc<CheckInEvent, CheckInState>
     );
 
     final isCameraActive =
-        state.cameraStatus == CameraStatus.opening ||
+        state.cameraStatus == CameraStatus.ready ||
         state.cameraStatus == CameraStatus.initializing;
 
     switch (connectionState.status) {

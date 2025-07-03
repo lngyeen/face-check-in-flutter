@@ -32,7 +32,7 @@ class SystemStatusCard extends StatelessWidget {
               status:
                   state.cameraStatus.toString().split('.').last.toUpperCase(),
               color:
-                  state.cameraStatus == CameraStatus.opening
+                  state.cameraStatus == CameraStatus.ready
                       ? Colors.green
                       : Colors.grey,
             );

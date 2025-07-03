@@ -6,15 +6,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
-import 'package:face_check_in_flutter/flavors.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
+import 'package:face_check_in_flutter/flavors.dart';
 
 import 'connection_event.dart';
 import 'connection_state.dart';
 
 /// ConnectionBloc - Simplified to use WebSocketService as single source of truth
 /// WebSocketService now handles all connection logic including network monitoring
-@lazySingleton
+@LazySingleton()
 class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   final WebSocketService _webSocketService;
 

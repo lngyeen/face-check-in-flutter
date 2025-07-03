@@ -1,4 +1,3 @@
-import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:face_check_in_flutter/core/di/di.dart';
 import 'package:face_check_in_flutter/core/theme/app_theme.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
-import 'package:face_check_in_flutter/features/check_in/screens/check_in_screen.dart';
+import 'package:face_check_in_flutter/features/check_in/screens/check_in_screen_v2.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
 import 'package:face_check_in_flutter/flavors.dart';
 
 /// Main application widget
@@ -35,7 +35,7 @@ class App extends StatelessWidget {
         themeMode: ThemeMode.light,
 
         // Home screen with flavor banner in debug mode
-        home: _flavorBanner(child: const CheckInScreen(), show: kDebugMode),
+        home: _flavorBanner(child: const CheckInScreenV2(), show: kDebugMode),
 
         // Error handling
         builder: (context, child) {

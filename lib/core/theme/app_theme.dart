@@ -1,10 +1,7 @@
-import 'dart:async';
-import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'package:face_check_in_flutter/core/theme/app_colors.dart';
+import 'package:face_check_in_flutter/flavors.dart';
 
 class AppTheme {
   AppTheme._(); // Private constructor to prevent instantiation

@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
+
 import 'package:face_check_in_flutter/core/theme/app_colors.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/generic_info_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class CameraInitializingWidget extends StatelessWidget {
   const CameraInitializingWidget({super.key});
