@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:face_check_in_flutter/core/services/image_stream_service_v2.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';

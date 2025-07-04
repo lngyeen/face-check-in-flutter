@@ -27,13 +27,24 @@ class YuvConverterBindings {
           lookup)
       : _lookup = lookup;
 
-  /// For 3-plane YUV (I420 format)
+  /// @brief Converts a 3-plane YUV (I420/YUV420p) image to RGB.
+  /// @param y_plane Pointer to the start of the Y plane.
+  /// @param u_plane Pointer to the start of the U plane.
+  /// @param v_plane Pointer to the start of the V plane.
+  /// @param y_stride Stride (bytes per row) of the Y plane.
+  /// @param u_stride Stride of the U plane.
+  /// @param v_stride Stride of the V plane.
+  /// @param width Image width in pixels.
+  /// @param height Image height in pixels.
+  /// @return A pointer to an RgbImage struct containing the converted data, or NULL on failure.
+  /// The caller is responsible for freeing the memory using free_image_memory().
   ffi.Pointer<RgbImage> convert_yuv_to_rgb_planar(
     ffi.Pointer<ffi.Uint8> y_plane,
     ffi.Pointer<ffi.Uint8> u_plane,
     ffi.Pointer<ffi.Uint8> v_plane,
     int y_stride,
-    int uv_stride,
+    int u_stride,
+    int v_stride,
     int width,
     int height,
   ) {
@@ -42,7 +53,8 @@ class YuvConverterBindings {
       u_plane,
       v_plane,
       y_stride,
-      uv_stride,
+      u_stride,
+      v_stride,
       width,
       height,
     );
@@ -57,6 +69,7 @@ class YuvConverterBindings {
               ffi.Int,
               ffi.Int,
               ffi.Int,
+              ffi.Int,
               ffi.Int)>>('convert_yuv_to_rgb_planar');
   late final _convert_yuv_to_rgb_planar =
       _convert_yuv_to_rgb_planarPtr.asFunction<
@@ -67,9 +80,20 @@ class YuvConverterBindings {
               int,
               int,
               int,
+              int,
               int)>();
 
-  /// For 2-plane YUV (NV12 format)
+  /// @brief Converts a 2-plane YUV (NV12/NV21) image to RGB.
+  /// @param y_plane Pointer to the start of the Y plane.
+  /// @param uv_plane Pointer to the start of the interleaved UV plane.
+  /// @param y_stride Stride (bytes per row) of the Y plane.
+  /// @param uv_stride Stride of the UV plane.
+  /// @param uv_pixel_stride Pixel stride of the UV plane (usually 2 for NV12/NV21).
+  /// @param width Image width in pixels.
+  /// @param height Image height in pixels.
+  /// @param format The specific bi-planar format (NV12 or NV21).
+  /// @return A pointer to an RgbImage struct containing the converted data, or NULL on failure.
+  /// The caller is responsible for freeing the memory using free_image_memory().
   ffi.Pointer<RgbImage> convert_yuv_to_rgb_biplanar(
     ffi.Pointer<ffi.Uint8> y_plane,
     ffi.Pointer<ffi.Uint8> uv_plane,
@@ -78,7 +102,7 @@ class YuvConverterBindings {
     int uv_pixel_stride,
     int width,
     int height,
-    int format,
+    BiplanarFormat format,
   ) {
     return _convert_yuv_to_rgb_biplanar(
       y_plane,
@@ -88,7 +112,7 @@ class YuvConverterBindings {
       uv_pixel_stride,
       width,
       height,
-      format,
+      format.value,
     );
   }
 
@@ -102,12 +126,14 @@ class YuvConverterBindings {
               ffi.Int,
               ffi.Int,
               ffi.Int,
-              ffi.Int)>>('convert_yuv_to_rgb_biplanar');
+              ffi.UnsignedInt)>>('convert_yuv_to_rgb_biplanar');
   late final _convert_yuv_to_rgb_biplanar =
       _convert_yuv_to_rgb_biplanarPtr.asFunction<
           ffi.Pointer<RgbImage> Function(ffi.Pointer<ffi.Uint8>,
               ffi.Pointer<ffi.Uint8>, int, int, int, int, int, int)>();
 
+  /// @brief Frees the memory allocated for an RgbImage struct and its data.
+  /// @param image A pointer to the RgbImage to be freed.
   void free_image_memory(
     ffi.Pointer<RgbImage> image,
   ) {
@@ -123,7 +149,7 @@ class YuvConverterBindings {
       _free_image_memoryPtr.asFunction<void Function(ffi.Pointer<RgbImage>)>();
 }
 
-/// Represents an RGB image buffer
+/// @brief Represents an RGB image buffer with its dimensions.
 final class RgbImage extends ffi.Struct {
   external ffi.Pointer<ffi.Uint8> data;
 
@@ -134,12 +160,12 @@ final class RgbImage extends ffi.Struct {
   external int height;
 }
 
-/// Enum to specify the bi-planar YUV format.
+/// @brief Enum to specify the bi-planar YUV format (NV12 or NV21).
 enum BiplanarFormat {
-  /// U plane is first, V plane is second (UVUV...)
+  /// Chroma plane is UVUV...
   NV12(0),
 
-  /// V plane is first, U plane is second (VUVU...)
+  /// Chroma plane is VUVU...
   NV21(1);
 
   final int value;

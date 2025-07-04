@@ -17,6 +17,7 @@ preamble: |
 comments:
   style: any
   length: full
+silence-enum-warning: true
 functions:
   include:
     - convert_yuv_to_rgb_planar

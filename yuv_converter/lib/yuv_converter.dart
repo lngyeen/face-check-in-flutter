@@ -47,7 +47,7 @@ Uint8List? convertYuvToRgb(CameraImage image) {
       image.planes[1].bytesPerPixel ?? 2,
       image.width,
       image.height,
-      BiplanarFormat.NV12.index,
+      BiplanarFormat.NV12,
     );
     calloc.free(uvPlane);
   } else if (Platform.isAndroid) {
@@ -68,7 +68,7 @@ Uint8List? convertYuvToRgb(CameraImage image) {
         image.planes[2].bytesPerPixel ?? 2,
         image.width,
         image.height,
-        BiplanarFormat.NV21.index,
+        BiplanarFormat.NV21,
       );
       calloc.free(uvPlane);
     } else {
@@ -87,6 +87,7 @@ Uint8List? convertYuvToRgb(CameraImage image) {
         vPlane,
         image.planes[0].bytesPerRow,
         image.planes[1].bytesPerRow,
+        image.planes[2].bytesPerRow,
         image.width,
         image.height,
       );
