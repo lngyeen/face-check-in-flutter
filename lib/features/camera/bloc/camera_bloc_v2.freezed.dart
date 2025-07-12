@@ -16,72 +16,67 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$CameraEventV2 {
+mixin _$BucketSequentialCameraEventV2 {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
-    required TResult Function(CameraStatus status) statusChanged,
-    required TResult Function(CameraController? controller) controllerChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
-    TResult? Function(CameraStatus status)? statusChanged,
-    TResult? Function(CameraController? controller)? controllerChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
-    TResult Function(CameraStatus status)? statusChanged,
-    TResult Function(CameraController? controller)? controllerChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
-    required TResult Function(CameraStatusChanged value) statusChanged,
-    required TResult Function(CameraControllerChanged value) controllerChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
-    TResult? Function(CameraStatusChanged value)? statusChanged,
-    TResult? Function(CameraControllerChanged value)? controllerChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
-    TResult Function(CameraStatusChanged value)? statusChanged,
-    TResult Function(CameraControllerChanged value)? controllerChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CameraEventV2CopyWith<$Res> {
-  factory $CameraEventV2CopyWith(
-    CameraEventV2 value,
-    $Res Function(CameraEventV2) then,
-  ) = _$CameraEventV2CopyWithImpl<$Res, CameraEventV2>;
+abstract class $BucketSequentialCameraEventV2CopyWith<$Res> {
+  factory $BucketSequentialCameraEventV2CopyWith(
+    BucketSequentialCameraEventV2 value,
+    $Res Function(BucketSequentialCameraEventV2) then,
+  ) =
+      _$BucketSequentialCameraEventV2CopyWithImpl<
+        $Res,
+        BucketSequentialCameraEventV2
+      >;
 }
 
 /// @nodoc
-class _$CameraEventV2CopyWithImpl<$Res, $Val extends CameraEventV2>
-    implements $CameraEventV2CopyWith<$Res> {
-  _$CameraEventV2CopyWithImpl(this._value, this._then);
+class _$BucketSequentialCameraEventV2CopyWithImpl<
+  $Res,
+  $Val extends BucketSequentialCameraEventV2
+>
+    implements $BucketSequentialCameraEventV2CopyWith<$Res> {
+  _$BucketSequentialCameraEventV2CopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CameraEventV2
+  /// Create a copy of BucketSequentialCameraEventV2
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -95,14 +90,14 @@ abstract class _$$StartCameraImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StartCameraImplCopyWithImpl<$Res>
-    extends _$CameraEventV2CopyWithImpl<$Res, _$StartCameraImpl>
+    extends _$BucketSequentialCameraEventV2CopyWithImpl<$Res, _$StartCameraImpl>
     implements _$$StartCameraImplCopyWith<$Res> {
   __$$StartCameraImplCopyWithImpl(
     _$StartCameraImpl _value,
     $Res Function(_$StartCameraImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of CameraEventV2
+  /// Create a copy of BucketSequentialCameraEventV2
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -113,7 +108,7 @@ class _$StartCameraImpl implements StartCamera {
 
   @override
   String toString() {
-    return 'CameraEventV2.startCamera()';
+    return 'BucketSequentialCameraEventV2.startCamera()';
   }
 
   @override
@@ -130,8 +125,6 @@ class _$StartCameraImpl implements StartCamera {
   TResult when<TResult extends Object?>({
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
-    required TResult Function(CameraStatus status) statusChanged,
-    required TResult Function(CameraController? controller) controllerChanged,
   }) {
     return startCamera();
   }
@@ -141,8 +134,6 @@ class _$StartCameraImpl implements StartCamera {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
-    TResult? Function(CameraStatus status)? statusChanged,
-    TResult? Function(CameraController? controller)? controllerChanged,
   }) {
     return startCamera?.call();
   }
@@ -152,8 +143,6 @@ class _$StartCameraImpl implements StartCamera {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
-    TResult Function(CameraStatus status)? statusChanged,
-    TResult Function(CameraController? controller)? controllerChanged,
     required TResult orElse(),
   }) {
     if (startCamera != null) {
@@ -167,8 +156,6 @@ class _$StartCameraImpl implements StartCamera {
   TResult map<TResult extends Object?>({
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
-    required TResult Function(CameraStatusChanged value) statusChanged,
-    required TResult Function(CameraControllerChanged value) controllerChanged,
   }) {
     return startCamera(this);
   }
@@ -178,8 +165,6 @@ class _$StartCameraImpl implements StartCamera {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
-    TResult? Function(CameraStatusChanged value)? statusChanged,
-    TResult? Function(CameraControllerChanged value)? controllerChanged,
   }) {
     return startCamera?.call(this);
   }
@@ -189,8 +174,6 @@ class _$StartCameraImpl implements StartCamera {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
-    TResult Function(CameraStatusChanged value)? statusChanged,
-    TResult Function(CameraControllerChanged value)? controllerChanged,
     required TResult orElse(),
   }) {
     if (startCamera != null) {
@@ -200,7 +183,7 @@ class _$StartCameraImpl implements StartCamera {
   }
 }
 
-abstract class StartCamera implements CameraEventV2 {
+abstract class StartCamera implements BucketSequentialCameraEventV2 {
   const factory StartCamera() = _$StartCameraImpl;
 }
 
@@ -214,14 +197,14 @@ abstract class _$$StopCameraImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StopCameraImplCopyWithImpl<$Res>
-    extends _$CameraEventV2CopyWithImpl<$Res, _$StopCameraImpl>
+    extends _$BucketSequentialCameraEventV2CopyWithImpl<$Res, _$StopCameraImpl>
     implements _$$StopCameraImplCopyWith<$Res> {
   __$$StopCameraImplCopyWithImpl(
     _$StopCameraImpl _value,
     $Res Function(_$StopCameraImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of CameraEventV2
+  /// Create a copy of BucketSequentialCameraEventV2
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -232,7 +215,7 @@ class _$StopCameraImpl implements StopCamera {
 
   @override
   String toString() {
-    return 'CameraEventV2.stopCamera()';
+    return 'BucketSequentialCameraEventV2.stopCamera()';
   }
 
   @override
@@ -249,8 +232,6 @@ class _$StopCameraImpl implements StopCamera {
   TResult when<TResult extends Object?>({
     required TResult Function() startCamera,
     required TResult Function() stopCamera,
-    required TResult Function(CameraStatus status) statusChanged,
-    required TResult Function(CameraController? controller) controllerChanged,
   }) {
     return stopCamera();
   }
@@ -260,8 +241,6 @@ class _$StopCameraImpl implements StopCamera {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startCamera,
     TResult? Function()? stopCamera,
-    TResult? Function(CameraStatus status)? statusChanged,
-    TResult? Function(CameraController? controller)? controllerChanged,
   }) {
     return stopCamera?.call();
   }
@@ -271,8 +250,6 @@ class _$StopCameraImpl implements StopCamera {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startCamera,
     TResult Function()? stopCamera,
-    TResult Function(CameraStatus status)? statusChanged,
-    TResult Function(CameraController? controller)? controllerChanged,
     required TResult orElse(),
   }) {
     if (stopCamera != null) {
@@ -286,8 +263,6 @@ class _$StopCameraImpl implements StopCamera {
   TResult map<TResult extends Object?>({
     required TResult Function(StartCamera value) startCamera,
     required TResult Function(StopCamera value) stopCamera,
-    required TResult Function(CameraStatusChanged value) statusChanged,
-    required TResult Function(CameraControllerChanged value) controllerChanged,
   }) {
     return stopCamera(this);
   }
@@ -297,8 +272,6 @@ class _$StopCameraImpl implements StopCamera {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartCamera value)? startCamera,
     TResult? Function(StopCamera value)? stopCamera,
-    TResult? Function(CameraStatusChanged value)? statusChanged,
-    TResult? Function(CameraControllerChanged value)? controllerChanged,
   }) {
     return stopCamera?.call(this);
   }
@@ -308,8 +281,6 @@ class _$StopCameraImpl implements StopCamera {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartCamera value)? startCamera,
     TResult Function(StopCamera value)? stopCamera,
-    TResult Function(CameraStatusChanged value)? statusChanged,
-    TResult Function(CameraControllerChanged value)? controllerChanged,
     required TResult orElse(),
   }) {
     if (stopCamera != null) {
@@ -319,8 +290,69 @@ class _$StopCameraImpl implements StopCamera {
   }
 }
 
-abstract class StopCamera implements CameraEventV2 {
+abstract class StopCamera implements BucketSequentialCameraEventV2 {
   const factory StopCamera() = _$StopCameraImpl;
+}
+
+/// @nodoc
+mixin _$ConcurrentCameraEventV2 {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CameraStatus status) statusChanged,
+    required TResult Function(CameraController? controller) controllerChanged,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(CameraStatus status)? statusChanged,
+    TResult? Function(CameraController? controller)? controllerChanged,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CameraStatus status)? statusChanged,
+    TResult Function(CameraController? controller)? controllerChanged,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CameraStatusChanged value) statusChanged,
+    required TResult Function(CameraControllerChanged value) controllerChanged,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CameraStatusChanged value)? statusChanged,
+    TResult? Function(CameraControllerChanged value)? controllerChanged,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CameraStatusChanged value)? statusChanged,
+    TResult Function(CameraControllerChanged value)? controllerChanged,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ConcurrentCameraEventV2CopyWith<$Res> {
+  factory $ConcurrentCameraEventV2CopyWith(
+    ConcurrentCameraEventV2 value,
+    $Res Function(ConcurrentCameraEventV2) then,
+  ) = _$ConcurrentCameraEventV2CopyWithImpl<$Res, ConcurrentCameraEventV2>;
+}
+
+/// @nodoc
+class _$ConcurrentCameraEventV2CopyWithImpl<
+  $Res,
+  $Val extends ConcurrentCameraEventV2
+>
+    implements $ConcurrentCameraEventV2CopyWith<$Res> {
+  _$ConcurrentCameraEventV2CopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ConcurrentCameraEventV2
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -335,14 +367,15 @@ abstract class _$$CameraStatusChangedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$CameraStatusChangedImplCopyWithImpl<$Res>
-    extends _$CameraEventV2CopyWithImpl<$Res, _$CameraStatusChangedImpl>
+    extends
+        _$ConcurrentCameraEventV2CopyWithImpl<$Res, _$CameraStatusChangedImpl>
     implements _$$CameraStatusChangedImplCopyWith<$Res> {
   __$$CameraStatusChangedImplCopyWithImpl(
     _$CameraStatusChangedImpl _value,
     $Res Function(_$CameraStatusChangedImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of CameraEventV2
+  /// Create a copy of ConcurrentCameraEventV2
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -368,7 +401,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
 
   @override
   String toString() {
-    return 'CameraEventV2.statusChanged(status: $status)';
+    return 'ConcurrentCameraEventV2.statusChanged(status: $status)';
   }
 
   @override
@@ -382,7 +415,7 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   @override
   int get hashCode => Object.hash(runtimeType, status);
 
-  /// Create a copy of CameraEventV2
+  /// Create a copy of ConcurrentCameraEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -396,8 +429,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() startCamera,
-    required TResult Function() stopCamera,
     required TResult Function(CameraStatus status) statusChanged,
     required TResult Function(CameraController? controller) controllerChanged,
   }) {
@@ -407,8 +438,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? startCamera,
-    TResult? Function()? stopCamera,
     TResult? Function(CameraStatus status)? statusChanged,
     TResult? Function(CameraController? controller)? controllerChanged,
   }) {
@@ -418,8 +447,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? startCamera,
-    TResult Function()? stopCamera,
     TResult Function(CameraStatus status)? statusChanged,
     TResult Function(CameraController? controller)? controllerChanged,
     required TResult orElse(),
@@ -433,8 +460,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(StartCamera value) startCamera,
-    required TResult Function(StopCamera value) stopCamera,
     required TResult Function(CameraStatusChanged value) statusChanged,
     required TResult Function(CameraControllerChanged value) controllerChanged,
   }) {
@@ -444,8 +469,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StartCamera value)? startCamera,
-    TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(CameraStatusChanged value)? statusChanged,
     TResult? Function(CameraControllerChanged value)? controllerChanged,
   }) {
@@ -455,8 +478,6 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(StartCamera value)? startCamera,
-    TResult Function(StopCamera value)? stopCamera,
     TResult Function(CameraStatusChanged value)? statusChanged,
     TResult Function(CameraControllerChanged value)? controllerChanged,
     required TResult orElse(),
@@ -468,13 +489,13 @@ class _$CameraStatusChangedImpl implements CameraStatusChanged {
   }
 }
 
-abstract class CameraStatusChanged implements CameraEventV2 {
+abstract class CameraStatusChanged implements ConcurrentCameraEventV2 {
   const factory CameraStatusChanged(final CameraStatus status) =
       _$CameraStatusChangedImpl;
 
   CameraStatus get status;
 
-  /// Create a copy of CameraEventV2
+  /// Create a copy of ConcurrentCameraEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CameraStatusChangedImplCopyWith<_$CameraStatusChangedImpl> get copyWith =>
@@ -493,14 +514,18 @@ abstract class _$$CameraControllerChangedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$CameraControllerChangedImplCopyWithImpl<$Res>
-    extends _$CameraEventV2CopyWithImpl<$Res, _$CameraControllerChangedImpl>
+    extends
+        _$ConcurrentCameraEventV2CopyWithImpl<
+          $Res,
+          _$CameraControllerChangedImpl
+        >
     implements _$$CameraControllerChangedImplCopyWith<$Res> {
   __$$CameraControllerChangedImplCopyWithImpl(
     _$CameraControllerChangedImpl _value,
     $Res Function(_$CameraControllerChangedImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of CameraEventV2
+  /// Create a copy of ConcurrentCameraEventV2
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -526,7 +551,7 @@ class _$CameraControllerChangedImpl implements CameraControllerChanged {
 
   @override
   String toString() {
-    return 'CameraEventV2.controllerChanged(controller: $controller)';
+    return 'ConcurrentCameraEventV2.controllerChanged(controller: $controller)';
   }
 
   @override
@@ -541,7 +566,7 @@ class _$CameraControllerChangedImpl implements CameraControllerChanged {
   @override
   int get hashCode => Object.hash(runtimeType, controller);
 
-  /// Create a copy of CameraEventV2
+  /// Create a copy of ConcurrentCameraEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -554,8 +579,6 @@ class _$CameraControllerChangedImpl implements CameraControllerChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() startCamera,
-    required TResult Function() stopCamera,
     required TResult Function(CameraStatus status) statusChanged,
     required TResult Function(CameraController? controller) controllerChanged,
   }) {
@@ -565,8 +588,6 @@ class _$CameraControllerChangedImpl implements CameraControllerChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? startCamera,
-    TResult? Function()? stopCamera,
     TResult? Function(CameraStatus status)? statusChanged,
     TResult? Function(CameraController? controller)? controllerChanged,
   }) {
@@ -576,8 +597,6 @@ class _$CameraControllerChangedImpl implements CameraControllerChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? startCamera,
-    TResult Function()? stopCamera,
     TResult Function(CameraStatus status)? statusChanged,
     TResult Function(CameraController? controller)? controllerChanged,
     required TResult orElse(),
@@ -591,8 +610,6 @@ class _$CameraControllerChangedImpl implements CameraControllerChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(StartCamera value) startCamera,
-    required TResult Function(StopCamera value) stopCamera,
     required TResult Function(CameraStatusChanged value) statusChanged,
     required TResult Function(CameraControllerChanged value) controllerChanged,
   }) {
@@ -602,8 +619,6 @@ class _$CameraControllerChangedImpl implements CameraControllerChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StartCamera value)? startCamera,
-    TResult? Function(StopCamera value)? stopCamera,
     TResult? Function(CameraStatusChanged value)? statusChanged,
     TResult? Function(CameraControllerChanged value)? controllerChanged,
   }) {
@@ -613,8 +628,6 @@ class _$CameraControllerChangedImpl implements CameraControllerChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(StartCamera value)? startCamera,
-    TResult Function(StopCamera value)? stopCamera,
     TResult Function(CameraStatusChanged value)? statusChanged,
     TResult Function(CameraControllerChanged value)? controllerChanged,
     required TResult orElse(),
@@ -626,13 +639,13 @@ class _$CameraControllerChangedImpl implements CameraControllerChanged {
   }
 }
 
-abstract class CameraControllerChanged implements CameraEventV2 {
+abstract class CameraControllerChanged implements ConcurrentCameraEventV2 {
   const factory CameraControllerChanged(final CameraController? controller) =
       _$CameraControllerChangedImpl;
 
   CameraController? get controller;
 
-  /// Create a copy of CameraEventV2
+  /// Create a copy of ConcurrentCameraEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CameraControllerChangedImplCopyWith<_$CameraControllerChangedImpl>

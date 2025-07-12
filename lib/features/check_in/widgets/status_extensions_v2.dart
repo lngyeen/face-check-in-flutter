@@ -48,6 +48,8 @@ extension StreamingStatusX on StreamingStatus {
 
   Color get displayColor {
     switch (this) {
+      case StreamingStatus.initializing:
+        return Colors.blue;
       case StreamingStatus.active:
         return Colors.green;
       case StreamingStatus.idle:

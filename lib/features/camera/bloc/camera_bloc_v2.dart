@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,7 +14,7 @@ part 'camera_bloc_v2.freezed.dart';
 part 'camera_event_v2.dart';
 part 'camera_state_v2.dart';
 
-@LazySingleton()
+@lazySingleton
 class CameraBlocV2 extends Bloc<CameraEventV2, CameraStateV2> {
   final CameraServiceV2 _cameraService;
 
@@ -26,10 +27,17 @@ class CameraBlocV2 extends Bloc<CameraEventV2, CameraStateV2> {
   }
 
   void _registerEventHandlers() {
-    on<CameraEventV2>((event, emit) {
-      event.when(
+    // Camera lifecycle events - processed sequentially to maintain state consistency
+    on<BucketSequentialCameraEventV2>((event, emit) {
+      event.whenOrNull(
         startCamera: () => _onStartCamera(emit),
         stopCamera: () => _onStopCamera(emit),
+      );
+    }, transformer: sequential());
+
+    // Status change events - can be processed concurrently as they're state updates
+    on<ConcurrentCameraEventV2>((event, emit) {
+      event.whenOrNull(
         statusChanged: (status) => _onStatusChanged(status, emit),
         controllerChanged:
             (controller) => _onControllerChanged(controller, emit),
@@ -40,12 +48,13 @@ class CameraBlocV2 extends Bloc<CameraEventV2, CameraStateV2> {
   void _setupServiceListeners() {
     _controllerSubscription?.cancel();
     _controllerSubscription = _cameraService.controllerStream.listen(
-      (controller) => add(CameraEventV2.controllerChanged(controller)),
+      (controller) =>
+          add(ConcurrentCameraEventV2.controllerChanged(controller)),
     );
 
     _statusSubscription?.cancel();
     _statusSubscription = _cameraService.statusStream.listen(
-      (status) => add(CameraEventV2.statusChanged(status)),
+      (status) => add(ConcurrentCameraEventV2.statusChanged(status)),
     );
   }
 

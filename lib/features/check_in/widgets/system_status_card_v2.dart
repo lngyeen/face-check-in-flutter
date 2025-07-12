@@ -31,11 +31,11 @@ class SystemStatusCardV2 extends StatelessWidget {
         ),
         BlocBuilder<StreamingBlocV2, StreamingStateV2>(
           // Rebuilds for both status and processingStatus changes
-          buildWhen: (p, c) => p.status != c.status,
+          buildWhen: (p, c) => p.streamingStatus != c.streamingStatus,
           builder: (context, state) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text('Streaming: ${state.status.name}')],
+              children: [Text('Streaming: ${state.streamingStatus.name}')],
             );
           },
         ),

@@ -14,7 +14,7 @@ import 'connection_state.dart';
 
 /// ConnectionBloc - Simplified to use WebSocketService as single source of truth
 /// WebSocketService now handles all connection logic including network monitoring
-@LazySingleton()
+@lazySingleton
 class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   final WebSocketService _webSocketService;
 

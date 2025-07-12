@@ -19,7 +19,9 @@ class CameraErrorWidgetV2 extends StatelessWidget {
       buttonText: 'Retry',
       buttonIcon: Icons.refresh_rounded,
       onButtonPressed: () {
-        context.read<CameraBlocV2>().add(const CameraEventV2.startCamera());
+        context.read<CameraBlocV2>().add(
+          const BucketSequentialCameraEventV2.startCamera(),
+        );
       },
       iconColor: AppColors.error,
     );

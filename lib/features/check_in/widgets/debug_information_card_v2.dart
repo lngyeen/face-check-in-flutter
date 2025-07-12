@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc_v2.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/annotated_image_preview_v2.dart';
-import 'package:face_check_in_flutter/features/check_in/widgets/stream_config_widget_v2.dart';
 
 class DebugInformationCardV2 extends StatelessWidget {
   const DebugInformationCardV2({super.key});
@@ -27,7 +28,6 @@ class DebugInformationCardV2 extends StatelessWidget {
             if (state.annotatedImage != null)
               AnnotatedImagePreviewV2(annotatedImage: state.annotatedImage!),
             const SizedBox(height: 16),
-            const StreamConfigWidgetV2(),
           ],
         );
       },

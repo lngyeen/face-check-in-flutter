@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '12.0'
+platform :ios, '15.5'  # Required for ML Kit Face Detection
 
 # CocoaPods' default archs, adjusted for Flutter
 $flutter_ios_archs = ['arm64']
@@ -48,6 +48,12 @@ target 'Runner' do
 end
 
 post_install do |installer|
+  # ML Kit Face Detection requirements
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings["EXCLUDED_ARCHS[sdk=*]"] = "armv7"
+    config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.5'
+  end
+
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
     
@@ -61,6 +67,11 @@ post_install do |installer|
         ## dart: PermissionGroup.microphone
         'PERMISSION_MICROPHONE=1',
       ]
+      
+      # ML Kit Face Detection iOS version requirement
+      if Gem::Version.new('15.5') > Gem::Version.new(config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'])
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.5'
+      end
     end
   end
 end

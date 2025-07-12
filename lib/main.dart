@@ -29,7 +29,7 @@ void main() async {
   configureDependencies();
 
   // Configure BLoC observer for debugging and logging
-  Bloc.observer = SimpleBlocObserver();
+  //Bloc.observer = SimpleBlocObserver();
 
   // Enable wake lock to keep screen awake for check-in operations
   final wakelockService = getIt<WakelockService>();

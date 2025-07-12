@@ -3,6 +3,7 @@ import 'dart:convert' as json;
 
 import 'package:flutter/widgets.dart' hide ConnectionState;
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -25,7 +26,7 @@ part 'check_in_state_v2.dart';
 
 /// Main orchestrator BLoC for check-in feature
 /// Coordinates between CameraBlocV2, StreamingBlocV2, and ConnectionBloc
-@injectable
+@lazySingleton
 class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
     with WidgetsBindingObserver {
   final CameraBlocV2 _cameraBloc;
@@ -49,10 +50,10 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
     super.didChangeAppLifecycleState(state);
     switch (state) {
       case AppLifecycleState.resumed:
-        add(const CheckInEventV2.start());
+        add(const BucketSequentialFlowCheckInEventV2.start());
         break;
       case AppLifecycleState.hidden:
-        add(const CheckInEventV2.stop());
+        add(const BucketSequentialFlowCheckInEventV2.stop());
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
@@ -62,23 +63,36 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
   }
 
   void _registerEventHandlers() {
-    on<CheckInEventV2>((event, emit) {
-      event.when(
-        start: () => _onStart(emit),
-        stop: () => _onStop(emit),
-        toggleDebugMode: () => _onToggleDebugMode(emit),
-        setMaxFps: (fps) => _onSetMaxFps(fps, emit),
+    // Lifecycle events - processed sequentially to maintain state consistency
+    on<BucketSequentialFlowCheckInEventV2>((event, emit) {
+      event.whenOrNull(start: () => _onStart(emit), stop: () => _onStop(emit));
+    }, transformer: sequential());
+
+    // Configuration events - can be processed concurrently as they're independent
+    on<ConcurrentCheckInEventV2>((event, emit) {
+      event.whenOrNull(toggleDebugMode: () => _onToggleDebugMode(emit));
+    });
+
+    // WebSocket messages - use restartable to handle high-frequency messages
+    on<SeparatedRestartableCheckInEventV2>((event, emit) {
+      event.whenOrNull(
         webSocketMessageReceived:
             (data) => _onWebSocketMessageReceived(data, emit),
+      );
+    }, transformer: restartable());
+
+    // State change events - processed sequentially to maintain consistency
+    on<BucketSequentialStateCheckInEventV2>((event, emit) {
+      event.whenOrNull(
         connectionStateChanged:
             (connectionState) =>
                 _onConnectionStateChanged(connectionState, emit),
         cameraStateChanged:
             (cameraState) => _onCameraStateChanged(cameraState, emit),
-        streamingStateChanged:
-            (streamingState) => _onStreamingStateChanged(streamingState, emit),
+        // streamingStateChanged:
+        //     (streamingState) => _onStreamingStateChanged(streamingState, emit),
       );
-    });
+    }, transformer: sequential());
   }
 
   void _setupBlocListeners() {
@@ -87,26 +101,34 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
     _connectionBlocSubscription = _connectionBloc.stream.listen((
       connectionState,
     ) {
-      add(CheckInEventV2.connectionStateChanged(connectionState));
+      add(
+        BucketSequentialStateCheckInEventV2.connectionStateChanged(
+          connectionState,
+        ),
+      );
     });
 
     _webSocketMessageSubscription?.cancel();
     _webSocketMessageSubscription = _connectionBloc.messageStream.listen((
       data,
     ) {
-      add(CheckInEventV2.webSocketMessageReceived(data));
+      add(SeparatedRestartableCheckInEventV2.webSocketMessageReceived(data));
     });
 
     // Listen to other blocs for state coordination
     _cameraBlocSubscription?.cancel();
     _cameraBlocSubscription = _cameraBloc.stream.listen((cameraState) {
-      add(CheckInEventV2.cameraStateChanged(cameraState));
+      add(BucketSequentialStateCheckInEventV2.cameraStateChanged(cameraState));
     });
 
-    _streamingBlocSubscription?.cancel();
-    _streamingBlocSubscription = _streamingBloc.stream.listen((streamingState) {
-      add(CheckInEventV2.streamingStateChanged(streamingState));
-    });
+    // _streamingBlocSubscription?.cancel();
+    // _streamingBlocSubscription = _streamingBloc.stream.listen((streamingState) {
+    //   add(
+    //     BucketSequentialStateCheckInEventV2.streamingStateChanged(
+    //       streamingState,
+    //     ),
+    //   );
+    // });
   }
 
   void _onStart(Emitter<CheckInStateV2> emit) {
@@ -116,8 +138,6 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
 
   void _onStop(Emitter<CheckInStateV2> emit) {
     emit(state.copyWith(status: CheckInStatusV2.idle, latestFrameData: null));
-    _streamingBloc.add(const StreamingEventV2.stopStreaming());
-    _cameraBloc.add(const CameraEventV2.stopCamera());
     _connectionBloc.add(const conn_event.ConnectionEvent.disconnect());
   }
 
@@ -125,20 +145,19 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
     emit(state.copyWith(isDebugMode: !state.isDebugMode));
   }
 
-  void _onSetMaxFps(int fps, Emitter<CheckInStateV2> emit) {
-    _streamingBloc.add(StreamingEventV2.setMaxFps(fps));
-  }
-
   void _onCameraStateChanged(
     CameraStateV2 cameraState,
     Emitter<CheckInStateV2> emit,
   ) {
-    // Auto-start streaming when camera is ready
-    if (cameraState.isReady && state.connectionState.hasConnection) {
-      final controller = cameraState.controller;
-      if (controller != null) {
-        _streamingBloc.add(StreamingEventV2.startStreaming(controller));
-      }
+    final controller = cameraState.controller;
+    if (controller != null) {
+      _streamingBloc.add(
+        BucketSequentialStreamingEventV2.startStreaming(controller),
+      );
+    } else {
+      _streamingBloc.add(
+        const BucketSequentialStreamingEventV2.stopStreaming(),
+      );
     }
 
     if (cameraState.error != null) {
@@ -167,28 +186,39 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
     }
   }
 
-  void _onStreamingStateChanged(
-    StreamingStateV2 streamingState,
-    Emitter<CheckInStateV2> emit,
-  ) {
-    if (streamingState.hasError && streamingState.error != null) {
-      final checkInError = streamingState.error!.when(
-        processingFailed:
-            () =>
-                const CheckInError.backend(message: 'Frame processing failed'),
-        webSocketFailed:
-            () => const CheckInError.backend(
-              message: 'WebSocket connection error',
-            ),
-      );
-      emit(
-        state.copyWith(
-          status: CheckInStatusV2.error,
-          currentError: checkInError,
-        ),
-      );
-    }
-  }
+  // void _onStreamingStateChanged(
+  //   StreamingStateV2 streamingState,
+  //   Emitter<CheckInStateV2> emit,
+  // ) {
+  //   if (streamingState.hasError && streamingState.error != null) {
+  //     final checkInError = streamingState.error!.when(
+  //       streamingFailed:
+  //           () => const CheckInError.backend(message: 'Streaming failed'),
+  //       processingFailed:
+  //           () =>
+  //               const CheckInError.backend(message: 'Frame processing failed'),
+  //       webSocketFailed:
+  //           () => const CheckInError.backend(
+  //             message: 'WebSocket connection error',
+  //           ),
+  //     );
+  //     emit(
+  //       state.copyWith(
+  //         status: CheckInStatusV2.error,
+  //         currentError: checkInError,
+  //       ),
+  //     );
+  //   } else {
+  //     // Map hybrid processing state from StreamingBlocV2
+  //     emit(
+  //       state.copyWith(
+  //         processingStatus: streamingState.processingStatus,
+  //         faceDetectionResult: streamingState.faceDetectionResult,
+  //         livenessResult: streamingState.livenessResult,
+  //       ),
+  //     );
+  //   }
+  // }
 
   void _onWebSocketMessageReceived(dynamic data, Emitter<CheckInStateV2> emit) {
     try {
@@ -264,7 +294,7 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
     switch (connectionState.status) {
       case AppConnectionStatus.connected:
         if (!isCameraActive) {
-          _cameraBloc.add(const CameraEventV2.startCamera());
+          _cameraBloc.add(const BucketSequentialCameraEventV2.startCamera());
         }
         break;
       case AppConnectionStatus.initial:
@@ -273,7 +303,7 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
       case AppConnectionStatus.fastRetrying:
       case AppConnectionStatus.backgroundRetrying:
         if (isCameraActive) {
-          add(const CheckInEventV2.stop());
+          _cameraBloc.add(const BucketSequentialCameraEventV2.stopCamera());
         }
         break;
       case AppConnectionStatus.connecting:

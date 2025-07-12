@@ -1,1 +1,1 @@
-enum StreamingStatus { idle, active, error }
+enum StreamingStatus { idle, initializing, active, error }

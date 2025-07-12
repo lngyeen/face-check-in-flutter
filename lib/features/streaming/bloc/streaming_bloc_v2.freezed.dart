@@ -16,72 +16,67 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$StreamingEventV2 {
+mixin _$BucketSequentialStreamingEventV2 {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(CameraController controller) startStreaming,
     required TResult Function() stopStreaming,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(StreamingStatus status) statusChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(CameraController controller)? startStreaming,
     TResult? Function()? stopStreaming,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(StreamingStatus status)? statusChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(CameraController controller)? startStreaming,
     TResult Function()? stopStreaming,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(StreamingStatus status)? statusChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_StartStreaming value) startStreaming,
     required TResult Function(_StopStreaming value) stopStreaming,
-    required TResult Function(_SetMaxFps value) setMaxFps,
-    required TResult Function(_StatusChanged value) statusChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_StartStreaming value)? startStreaming,
     TResult? Function(_StopStreaming value)? stopStreaming,
-    TResult? Function(_SetMaxFps value)? setMaxFps,
-    TResult? Function(_StatusChanged value)? statusChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_StartStreaming value)? startStreaming,
     TResult Function(_StopStreaming value)? stopStreaming,
-    TResult Function(_SetMaxFps value)? setMaxFps,
-    TResult Function(_StatusChanged value)? statusChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $StreamingEventV2CopyWith<$Res> {
-  factory $StreamingEventV2CopyWith(
-    StreamingEventV2 value,
-    $Res Function(StreamingEventV2) then,
-  ) = _$StreamingEventV2CopyWithImpl<$Res, StreamingEventV2>;
+abstract class $BucketSequentialStreamingEventV2CopyWith<$Res> {
+  factory $BucketSequentialStreamingEventV2CopyWith(
+    BucketSequentialStreamingEventV2 value,
+    $Res Function(BucketSequentialStreamingEventV2) then,
+  ) =
+      _$BucketSequentialStreamingEventV2CopyWithImpl<
+        $Res,
+        BucketSequentialStreamingEventV2
+      >;
 }
 
 /// @nodoc
-class _$StreamingEventV2CopyWithImpl<$Res, $Val extends StreamingEventV2>
-    implements $StreamingEventV2CopyWith<$Res> {
-  _$StreamingEventV2CopyWithImpl(this._value, this._then);
+class _$BucketSequentialStreamingEventV2CopyWithImpl<
+  $Res,
+  $Val extends BucketSequentialStreamingEventV2
+>
+    implements $BucketSequentialStreamingEventV2CopyWith<$Res> {
+  _$BucketSequentialStreamingEventV2CopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of StreamingEventV2
+  /// Create a copy of BucketSequentialStreamingEventV2
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -97,14 +92,18 @@ abstract class _$$StartStreamingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StartStreamingImplCopyWithImpl<$Res>
-    extends _$StreamingEventV2CopyWithImpl<$Res, _$StartStreamingImpl>
+    extends
+        _$BucketSequentialStreamingEventV2CopyWithImpl<
+          $Res,
+          _$StartStreamingImpl
+        >
     implements _$$StartStreamingImplCopyWith<$Res> {
   __$$StartStreamingImplCopyWithImpl(
     _$StartStreamingImpl _value,
     $Res Function(_$StartStreamingImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of StreamingEventV2
+  /// Create a copy of BucketSequentialStreamingEventV2
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -130,7 +129,7 @@ class _$StartStreamingImpl implements _StartStreaming {
 
   @override
   String toString() {
-    return 'StreamingEventV2.startStreaming(controller: $controller)';
+    return 'BucketSequentialStreamingEventV2.startStreaming(controller: $controller)';
   }
 
   @override
@@ -145,7 +144,7 @@ class _$StartStreamingImpl implements _StartStreaming {
   @override
   int get hashCode => Object.hash(runtimeType, controller);
 
-  /// Create a copy of StreamingEventV2
+  /// Create a copy of BucketSequentialStreamingEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -161,8 +160,6 @@ class _$StartStreamingImpl implements _StartStreaming {
   TResult when<TResult extends Object?>({
     required TResult Function(CameraController controller) startStreaming,
     required TResult Function() stopStreaming,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(StreamingStatus status) statusChanged,
   }) {
     return startStreaming(controller);
   }
@@ -172,8 +169,6 @@ class _$StartStreamingImpl implements _StartStreaming {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(CameraController controller)? startStreaming,
     TResult? Function()? stopStreaming,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(StreamingStatus status)? statusChanged,
   }) {
     return startStreaming?.call(controller);
   }
@@ -183,8 +178,6 @@ class _$StartStreamingImpl implements _StartStreaming {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(CameraController controller)? startStreaming,
     TResult Function()? stopStreaming,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(StreamingStatus status)? statusChanged,
     required TResult orElse(),
   }) {
     if (startStreaming != null) {
@@ -198,8 +191,6 @@ class _$StartStreamingImpl implements _StartStreaming {
   TResult map<TResult extends Object?>({
     required TResult Function(_StartStreaming value) startStreaming,
     required TResult Function(_StopStreaming value) stopStreaming,
-    required TResult Function(_SetMaxFps value) setMaxFps,
-    required TResult Function(_StatusChanged value) statusChanged,
   }) {
     return startStreaming(this);
   }
@@ -209,8 +200,6 @@ class _$StartStreamingImpl implements _StartStreaming {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_StartStreaming value)? startStreaming,
     TResult? Function(_StopStreaming value)? stopStreaming,
-    TResult? Function(_SetMaxFps value)? setMaxFps,
-    TResult? Function(_StatusChanged value)? statusChanged,
   }) {
     return startStreaming?.call(this);
   }
@@ -220,8 +209,6 @@ class _$StartStreamingImpl implements _StartStreaming {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_StartStreaming value)? startStreaming,
     TResult Function(_StopStreaming value)? stopStreaming,
-    TResult Function(_SetMaxFps value)? setMaxFps,
-    TResult Function(_StatusChanged value)? statusChanged,
     required TResult orElse(),
   }) {
     if (startStreaming != null) {
@@ -231,13 +218,13 @@ class _$StartStreamingImpl implements _StartStreaming {
   }
 }
 
-abstract class _StartStreaming implements StreamingEventV2 {
+abstract class _StartStreaming implements BucketSequentialStreamingEventV2 {
   const factory _StartStreaming(final CameraController controller) =
       _$StartStreamingImpl;
 
   CameraController get controller;
 
-  /// Create a copy of StreamingEventV2
+  /// Create a copy of BucketSequentialStreamingEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StartStreamingImplCopyWith<_$StartStreamingImpl> get copyWith =>
@@ -254,14 +241,18 @@ abstract class _$$StopStreamingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StopStreamingImplCopyWithImpl<$Res>
-    extends _$StreamingEventV2CopyWithImpl<$Res, _$StopStreamingImpl>
+    extends
+        _$BucketSequentialStreamingEventV2CopyWithImpl<
+          $Res,
+          _$StopStreamingImpl
+        >
     implements _$$StopStreamingImplCopyWith<$Res> {
   __$$StopStreamingImplCopyWithImpl(
     _$StopStreamingImpl _value,
     $Res Function(_$StopStreamingImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of StreamingEventV2
+  /// Create a copy of BucketSequentialStreamingEventV2
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -272,7 +263,7 @@ class _$StopStreamingImpl implements _StopStreaming {
 
   @override
   String toString() {
-    return 'StreamingEventV2.stopStreaming()';
+    return 'BucketSequentialStreamingEventV2.stopStreaming()';
   }
 
   @override
@@ -289,8 +280,6 @@ class _$StopStreamingImpl implements _StopStreaming {
   TResult when<TResult extends Object?>({
     required TResult Function(CameraController controller) startStreaming,
     required TResult Function() stopStreaming,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(StreamingStatus status) statusChanged,
   }) {
     return stopStreaming();
   }
@@ -300,8 +289,6 @@ class _$StopStreamingImpl implements _StopStreaming {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(CameraController controller)? startStreaming,
     TResult? Function()? stopStreaming,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(StreamingStatus status)? statusChanged,
   }) {
     return stopStreaming?.call();
   }
@@ -311,8 +298,6 @@ class _$StopStreamingImpl implements _StopStreaming {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(CameraController controller)? startStreaming,
     TResult Function()? stopStreaming,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(StreamingStatus status)? statusChanged,
     required TResult orElse(),
   }) {
     if (stopStreaming != null) {
@@ -326,8 +311,6 @@ class _$StopStreamingImpl implements _StopStreaming {
   TResult map<TResult extends Object?>({
     required TResult Function(_StartStreaming value) startStreaming,
     required TResult Function(_StopStreaming value) stopStreaming,
-    required TResult Function(_SetMaxFps value) setMaxFps,
-    required TResult Function(_StatusChanged value) statusChanged,
   }) {
     return stopStreaming(this);
   }
@@ -337,8 +320,6 @@ class _$StopStreamingImpl implements _StopStreaming {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_StartStreaming value)? startStreaming,
     TResult? Function(_StopStreaming value)? stopStreaming,
-    TResult? Function(_SetMaxFps value)? setMaxFps,
-    TResult? Function(_StatusChanged value)? statusChanged,
   }) {
     return stopStreaming?.call(this);
   }
@@ -348,8 +329,6 @@ class _$StopStreamingImpl implements _StopStreaming {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_StartStreaming value)? startStreaming,
     TResult Function(_StopStreaming value)? stopStreaming,
-    TResult Function(_SetMaxFps value)? setMaxFps,
-    TResult Function(_StatusChanged value)? statusChanged,
     required TResult orElse(),
   }) {
     if (stopStreaming != null) {
@@ -359,190 +338,108 @@ class _$StopStreamingImpl implements _StopStreaming {
   }
 }
 
-abstract class _StopStreaming implements StreamingEventV2 {
+abstract class _StopStreaming implements BucketSequentialStreamingEventV2 {
   const factory _StopStreaming() = _$StopStreamingImpl;
 }
 
 /// @nodoc
-abstract class _$$SetMaxFpsImplCopyWith<$Res> {
-  factory _$$SetMaxFpsImplCopyWith(
-    _$SetMaxFpsImpl value,
-    $Res Function(_$SetMaxFpsImpl) then,
-  ) = __$$SetMaxFpsImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int fps});
-}
-
-/// @nodoc
-class __$$SetMaxFpsImplCopyWithImpl<$Res>
-    extends _$StreamingEventV2CopyWithImpl<$Res, _$SetMaxFpsImpl>
-    implements _$$SetMaxFpsImplCopyWith<$Res> {
-  __$$SetMaxFpsImplCopyWithImpl(
-    _$SetMaxFpsImpl _value,
-    $Res Function(_$SetMaxFpsImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of StreamingEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? fps = null}) {
-    return _then(
-      _$SetMaxFpsImpl(
-        null == fps
-            ? _value.fps
-            : fps // ignore: cast_nullable_to_non_nullable
-                as int,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$SetMaxFpsImpl implements _SetMaxFps {
-  const _$SetMaxFpsImpl(this.fps);
-
-  @override
-  final int fps;
-
-  @override
-  String toString() {
-    return 'StreamingEventV2.setMaxFps(fps: $fps)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SetMaxFpsImpl &&
-            (identical(other.fps, fps) || other.fps == fps));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, fps);
-
-  /// Create a copy of StreamingEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SetMaxFpsImplCopyWith<_$SetMaxFpsImpl> get copyWith =>
-      __$$SetMaxFpsImplCopyWithImpl<_$SetMaxFpsImpl>(this, _$identity);
-
-  @override
+mixin _$BucketSequentialStreamingStatusEventV2 {
+  Enum get status => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CameraController controller) startStreaming,
-    required TResult Function() stopStreaming,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(StreamingStatus status) statusChanged,
-  }) {
-    return setMaxFps(fps);
-  }
-
-  @override
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function(ProcessingStatus status) processingStatusChanged,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CameraController controller)? startStreaming,
-    TResult? Function()? stopStreaming,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(StreamingStatus status)? statusChanged,
-  }) {
-    return setMaxFps?.call(fps);
-  }
-
-  @override
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function(ProcessingStatus status)? processingStatusChanged,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CameraController controller)? startStreaming,
-    TResult Function()? stopStreaming,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(StreamingStatus status)? statusChanged,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function(ProcessingStatus status)? processingStatusChanged,
     required TResult orElse(),
-  }) {
-    if (setMaxFps != null) {
-      return setMaxFps(fps);
-    }
-    return orElse();
-  }
-
-  @override
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_StartStreaming value) startStreaming,
-    required TResult Function(_StopStreaming value) stopStreaming,
-    required TResult Function(_SetMaxFps value) setMaxFps,
-    required TResult Function(_StatusChanged value) statusChanged,
-  }) {
-    return setMaxFps(this);
-  }
-
-  @override
+    required TResult Function(_StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(_ProcessingStatusChanged value)
+    processingStatusChanged,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_StartStreaming value)? startStreaming,
-    TResult? Function(_StopStreaming value)? stopStreaming,
-    TResult? Function(_SetMaxFps value)? setMaxFps,
-    TResult? Function(_StatusChanged value)? statusChanged,
-  }) {
-    return setMaxFps?.call(this);
-  }
-
-  @override
+    TResult? Function(_StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(_ProcessingStatusChanged value)? processingStatusChanged,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_StartStreaming value)? startStreaming,
-    TResult Function(_StopStreaming value)? stopStreaming,
-    TResult Function(_SetMaxFps value)? setMaxFps,
-    TResult Function(_StatusChanged value)? statusChanged,
+    TResult Function(_StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(_ProcessingStatusChanged value)? processingStatusChanged,
     required TResult orElse(),
-  }) {
-    if (setMaxFps != null) {
-      return setMaxFps(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SetMaxFps implements StreamingEventV2 {
-  const factory _SetMaxFps(final int fps) = _$SetMaxFpsImpl;
-
-  int get fps;
-
-  /// Create a copy of StreamingEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SetMaxFpsImplCopyWith<_$SetMaxFpsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$StatusChangedImplCopyWith<$Res> {
-  factory _$$StatusChangedImplCopyWith(
-    _$StatusChangedImpl value,
-    $Res Function(_$StatusChangedImpl) then,
-  ) = __$$StatusChangedImplCopyWithImpl<$Res>;
+abstract class $BucketSequentialStreamingStatusEventV2CopyWith<$Res> {
+  factory $BucketSequentialStreamingStatusEventV2CopyWith(
+    BucketSequentialStreamingStatusEventV2 value,
+    $Res Function(BucketSequentialStreamingStatusEventV2) then,
+  ) =
+      _$BucketSequentialStreamingStatusEventV2CopyWithImpl<
+        $Res,
+        BucketSequentialStreamingStatusEventV2
+      >;
+}
+
+/// @nodoc
+class _$BucketSequentialStreamingStatusEventV2CopyWithImpl<
+  $Res,
+  $Val extends BucketSequentialStreamingStatusEventV2
+>
+    implements $BucketSequentialStreamingStatusEventV2CopyWith<$Res> {
+  _$BucketSequentialStreamingStatusEventV2CopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BucketSequentialStreamingStatusEventV2
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$StreamingStatusChangedImplCopyWith<$Res> {
+  factory _$$StreamingStatusChangedImplCopyWith(
+    _$StreamingStatusChangedImpl value,
+    $Res Function(_$StreamingStatusChangedImpl) then,
+  ) = __$$StreamingStatusChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({StreamingStatus status});
 }
 
 /// @nodoc
-class __$$StatusChangedImplCopyWithImpl<$Res>
-    extends _$StreamingEventV2CopyWithImpl<$Res, _$StatusChangedImpl>
-    implements _$$StatusChangedImplCopyWith<$Res> {
-  __$$StatusChangedImplCopyWithImpl(
-    _$StatusChangedImpl _value,
-    $Res Function(_$StatusChangedImpl) _then,
+class __$$StreamingStatusChangedImplCopyWithImpl<$Res>
+    extends
+        _$BucketSequentialStreamingStatusEventV2CopyWithImpl<
+          $Res,
+          _$StreamingStatusChangedImpl
+        >
+    implements _$$StreamingStatusChangedImplCopyWith<$Res> {
+  __$$StreamingStatusChangedImplCopyWithImpl(
+    _$StreamingStatusChangedImpl _value,
+    $Res Function(_$StreamingStatusChangedImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of StreamingEventV2
+  /// Create a copy of BucketSequentialStreamingStatusEventV2
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({Object? status = null}) {
     return _then(
-      _$StatusChangedImpl(
+      _$StreamingStatusChangedImpl(
         null == status
             ? _value.status
             : status // ignore: cast_nullable_to_non_nullable
@@ -554,69 +451,67 @@ class __$$StatusChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StatusChangedImpl implements _StatusChanged {
-  const _$StatusChangedImpl(this.status);
+class _$StreamingStatusChangedImpl implements _StreamingStatusChanged {
+  const _$StreamingStatusChangedImpl(this.status);
 
   @override
   final StreamingStatus status;
 
   @override
   String toString() {
-    return 'StreamingEventV2.statusChanged(status: $status)';
+    return 'BucketSequentialStreamingStatusEventV2.streamingStatusChanged(status: $status)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StatusChangedImpl &&
+            other is _$StreamingStatusChangedImpl &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, status);
 
-  /// Create a copy of StreamingEventV2
+  /// Create a copy of BucketSequentialStreamingStatusEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$StatusChangedImplCopyWith<_$StatusChangedImpl> get copyWith =>
-      __$$StatusChangedImplCopyWithImpl<_$StatusChangedImpl>(this, _$identity);
+  _$$StreamingStatusChangedImplCopyWith<_$StreamingStatusChangedImpl>
+  get copyWith =>
+      __$$StreamingStatusChangedImplCopyWithImpl<_$StreamingStatusChangedImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CameraController controller) startStreaming,
-    required TResult Function() stopStreaming,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(StreamingStatus status) statusChanged,
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function(ProcessingStatus status) processingStatusChanged,
   }) {
-    return statusChanged(status);
+    return streamingStatusChanged(status);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CameraController controller)? startStreaming,
-    TResult? Function()? stopStreaming,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(StreamingStatus status)? statusChanged,
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function(ProcessingStatus status)? processingStatusChanged,
   }) {
-    return statusChanged?.call(status);
+    return streamingStatusChanged?.call(status);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CameraController controller)? startStreaming,
-    TResult Function()? stopStreaming,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(StreamingStatus status)? statusChanged,
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function(ProcessingStatus status)? processingStatusChanged,
     required TResult orElse(),
   }) {
-    if (statusChanged != null) {
-      return statusChanged(status);
+    if (streamingStatusChanged != null) {
+      return streamingStatusChanged(status);
     }
     return orElse();
   }
@@ -624,59 +519,452 @@ class _$StatusChangedImpl implements _StatusChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_StartStreaming value) startStreaming,
-    required TResult Function(_StopStreaming value) stopStreaming,
-    required TResult Function(_SetMaxFps value) setMaxFps,
-    required TResult Function(_StatusChanged value) statusChanged,
+    required TResult Function(_StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(_ProcessingStatusChanged value)
+    processingStatusChanged,
   }) {
-    return statusChanged(this);
+    return streamingStatusChanged(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_StartStreaming value)? startStreaming,
-    TResult? Function(_StopStreaming value)? stopStreaming,
-    TResult? Function(_SetMaxFps value)? setMaxFps,
-    TResult? Function(_StatusChanged value)? statusChanged,
+    TResult? Function(_StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(_ProcessingStatusChanged value)? processingStatusChanged,
   }) {
-    return statusChanged?.call(this);
+    return streamingStatusChanged?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_StartStreaming value)? startStreaming,
-    TResult Function(_StopStreaming value)? stopStreaming,
-    TResult Function(_SetMaxFps value)? setMaxFps,
-    TResult Function(_StatusChanged value)? statusChanged,
+    TResult Function(_StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(_ProcessingStatusChanged value)? processingStatusChanged,
     required TResult orElse(),
   }) {
-    if (statusChanged != null) {
-      return statusChanged(this);
+    if (streamingStatusChanged != null) {
+      return streamingStatusChanged(this);
     }
     return orElse();
   }
 }
 
-abstract class _StatusChanged implements StreamingEventV2 {
-  const factory _StatusChanged(final StreamingStatus status) =
-      _$StatusChangedImpl;
+abstract class _StreamingStatusChanged
+    implements BucketSequentialStreamingStatusEventV2 {
+  const factory _StreamingStatusChanged(final StreamingStatus status) =
+      _$StreamingStatusChangedImpl;
 
+  @override
   StreamingStatus get status;
 
-  /// Create a copy of StreamingEventV2
+  /// Create a copy of BucketSequentialStreamingStatusEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StatusChangedImplCopyWith<_$StatusChangedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$StreamingStatusChangedImplCopyWith<_$StreamingStatusChangedImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ProcessingStatusChangedImplCopyWith<$Res> {
+  factory _$$ProcessingStatusChangedImplCopyWith(
+    _$ProcessingStatusChangedImpl value,
+    $Res Function(_$ProcessingStatusChangedImpl) then,
+  ) = __$$ProcessingStatusChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ProcessingStatus status});
+}
+
+/// @nodoc
+class __$$ProcessingStatusChangedImplCopyWithImpl<$Res>
+    extends
+        _$BucketSequentialStreamingStatusEventV2CopyWithImpl<
+          $Res,
+          _$ProcessingStatusChangedImpl
+        >
+    implements _$$ProcessingStatusChangedImplCopyWith<$Res> {
+  __$$ProcessingStatusChangedImplCopyWithImpl(
+    _$ProcessingStatusChangedImpl _value,
+    $Res Function(_$ProcessingStatusChangedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of BucketSequentialStreamingStatusEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? status = null}) {
+    return _then(
+      _$ProcessingStatusChangedImpl(
+        null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                as ProcessingStatus,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$ProcessingStatusChangedImpl implements _ProcessingStatusChanged {
+  const _$ProcessingStatusChangedImpl(this.status);
+
+  @override
+  final ProcessingStatus status;
+
+  @override
+  String toString() {
+    return 'BucketSequentialStreamingStatusEventV2.processingStatusChanged(status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProcessingStatusChangedImpl &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, status);
+
+  /// Create a copy of BucketSequentialStreamingStatusEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProcessingStatusChangedImplCopyWith<_$ProcessingStatusChangedImpl>
+  get copyWith => __$$ProcessingStatusChangedImplCopyWithImpl<
+    _$ProcessingStatusChangedImpl
+  >(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(StreamingStatus status) streamingStatusChanged,
+    required TResult Function(ProcessingStatus status) processingStatusChanged,
+  }) {
+    return processingStatusChanged(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(StreamingStatus status)? streamingStatusChanged,
+    TResult? Function(ProcessingStatus status)? processingStatusChanged,
+  }) {
+    return processingStatusChanged?.call(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(StreamingStatus status)? streamingStatusChanged,
+    TResult Function(ProcessingStatus status)? processingStatusChanged,
+    required TResult orElse(),
+  }) {
+    if (processingStatusChanged != null) {
+      return processingStatusChanged(status);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_StreamingStatusChanged value)
+    streamingStatusChanged,
+    required TResult Function(_ProcessingStatusChanged value)
+    processingStatusChanged,
+  }) {
+    return processingStatusChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_StreamingStatusChanged value)? streamingStatusChanged,
+    TResult? Function(_ProcessingStatusChanged value)? processingStatusChanged,
+  }) {
+    return processingStatusChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_StreamingStatusChanged value)? streamingStatusChanged,
+    TResult Function(_ProcessingStatusChanged value)? processingStatusChanged,
+    required TResult orElse(),
+  }) {
+    if (processingStatusChanged != null) {
+      return processingStatusChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ProcessingStatusChanged
+    implements BucketSequentialStreamingStatusEventV2 {
+  const factory _ProcessingStatusChanged(final ProcessingStatus status) =
+      _$ProcessingStatusChangedImpl;
+
+  @override
+  ProcessingStatus get status;
+
+  /// Create a copy of BucketSequentialStreamingStatusEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProcessingStatusChangedImplCopyWith<_$ProcessingStatusChangedImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$SeparatedRestartableStreamingEventV2 {
+  HybridProcessingResult get result => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(HybridProcessingResult result)
+    processingResultReceived,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(HybridProcessingResult result)? processingResultReceived,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(HybridProcessingResult result)? processingResultReceived,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ProcessingResultReceived value)
+    processingResultReceived,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ProcessingResultReceived value)?
+    processingResultReceived,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ProcessingResultReceived value)? processingResultReceived,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+
+  /// Create a copy of SeparatedRestartableStreamingEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $SeparatedRestartableStreamingEventV2CopyWith<
+    SeparatedRestartableStreamingEventV2
+  >
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SeparatedRestartableStreamingEventV2CopyWith<$Res> {
+  factory $SeparatedRestartableStreamingEventV2CopyWith(
+    SeparatedRestartableStreamingEventV2 value,
+    $Res Function(SeparatedRestartableStreamingEventV2) then,
+  ) =
+      _$SeparatedRestartableStreamingEventV2CopyWithImpl<
+        $Res,
+        SeparatedRestartableStreamingEventV2
+      >;
+  @useResult
+  $Res call({HybridProcessingResult result});
+}
+
+/// @nodoc
+class _$SeparatedRestartableStreamingEventV2CopyWithImpl<
+  $Res,
+  $Val extends SeparatedRestartableStreamingEventV2
+>
+    implements $SeparatedRestartableStreamingEventV2CopyWith<$Res> {
+  _$SeparatedRestartableStreamingEventV2CopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SeparatedRestartableStreamingEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? result = null}) {
+    return _then(
+      _value.copyWith(
+            result:
+                null == result
+                    ? _value.result
+                    : result // ignore: cast_nullable_to_non_nullable
+                        as HybridProcessingResult,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$ProcessingResultReceivedImplCopyWith<$Res>
+    implements $SeparatedRestartableStreamingEventV2CopyWith<$Res> {
+  factory _$$ProcessingResultReceivedImplCopyWith(
+    _$ProcessingResultReceivedImpl value,
+    $Res Function(_$ProcessingResultReceivedImpl) then,
+  ) = __$$ProcessingResultReceivedImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({HybridProcessingResult result});
+}
+
+/// @nodoc
+class __$$ProcessingResultReceivedImplCopyWithImpl<$Res>
+    extends
+        _$SeparatedRestartableStreamingEventV2CopyWithImpl<
+          $Res,
+          _$ProcessingResultReceivedImpl
+        >
+    implements _$$ProcessingResultReceivedImplCopyWith<$Res> {
+  __$$ProcessingResultReceivedImplCopyWithImpl(
+    _$ProcessingResultReceivedImpl _value,
+    $Res Function(_$ProcessingResultReceivedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of SeparatedRestartableStreamingEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? result = null}) {
+    return _then(
+      _$ProcessingResultReceivedImpl(
+        null == result
+            ? _value.result
+            : result // ignore: cast_nullable_to_non_nullable
+                as HybridProcessingResult,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$ProcessingResultReceivedImpl implements _ProcessingResultReceived {
+  const _$ProcessingResultReceivedImpl(this.result);
+
+  @override
+  final HybridProcessingResult result;
+
+  @override
+  String toString() {
+    return 'SeparatedRestartableStreamingEventV2.processingResultReceived(result: $result)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProcessingResultReceivedImpl &&
+            (identical(other.result, result) || other.result == result));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, result);
+
+  /// Create a copy of SeparatedRestartableStreamingEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProcessingResultReceivedImplCopyWith<_$ProcessingResultReceivedImpl>
+  get copyWith => __$$ProcessingResultReceivedImplCopyWithImpl<
+    _$ProcessingResultReceivedImpl
+  >(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(HybridProcessingResult result)
+    processingResultReceived,
+  }) {
+    return processingResultReceived(result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(HybridProcessingResult result)? processingResultReceived,
+  }) {
+    return processingResultReceived?.call(result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(HybridProcessingResult result)? processingResultReceived,
+    required TResult orElse(),
+  }) {
+    if (processingResultReceived != null) {
+      return processingResultReceived(result);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ProcessingResultReceived value)
+    processingResultReceived,
+  }) {
+    return processingResultReceived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ProcessingResultReceived value)?
+    processingResultReceived,
+  }) {
+    return processingResultReceived?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ProcessingResultReceived value)? processingResultReceived,
+    required TResult orElse(),
+  }) {
+    if (processingResultReceived != null) {
+      return processingResultReceived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ProcessingResultReceived
+    implements SeparatedRestartableStreamingEventV2 {
+  const factory _ProcessingResultReceived(final HybridProcessingResult result) =
+      _$ProcessingResultReceivedImpl;
+
+  @override
+  HybridProcessingResult get result;
+
+  /// Create a copy of SeparatedRestartableStreamingEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProcessingResultReceivedImplCopyWith<_$ProcessingResultReceivedImpl>
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$StreamingStateV2 {
-  StreamingStatus get status => throw _privateConstructorUsedError;
   int get maxFps => throw _privateConstructorUsedError;
   StreamingError? get error => throw _privateConstructorUsedError;
+  StreamingStatus get streamingStatus => throw _privateConstructorUsedError;
+  ProcessingStatus get processingStatus => throw _privateConstructorUsedError;
+  FaceDetectionResult? get faceDetectionResult =>
+      throw _privateConstructorUsedError;
+  LivenessResult? get livenessResult => throw _privateConstructorUsedError;
 
   /// Create a copy of StreamingStateV2
   /// with the given fields replaced by the non-null parameter values.
@@ -692,7 +980,14 @@ abstract class $StreamingStateV2CopyWith<$Res> {
     $Res Function(StreamingStateV2) then,
   ) = _$StreamingStateV2CopyWithImpl<$Res, StreamingStateV2>;
   @useResult
-  $Res call({StreamingStatus status, int maxFps, StreamingError? error});
+  $Res call({
+    int maxFps,
+    StreamingError? error,
+    StreamingStatus streamingStatus,
+    ProcessingStatus processingStatus,
+    FaceDetectionResult? faceDetectionResult,
+    LivenessResult? livenessResult,
+  });
 
   $StreamingErrorCopyWith<$Res>? get error;
 }
@@ -712,17 +1007,15 @@ class _$StreamingStateV2CopyWithImpl<$Res, $Val extends StreamingStateV2>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
     Object? maxFps = null,
     Object? error = freezed,
+    Object? streamingStatus = null,
+    Object? processingStatus = null,
+    Object? faceDetectionResult = freezed,
+    Object? livenessResult = freezed,
   }) {
     return _then(
       _value.copyWith(
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as StreamingStatus,
             maxFps:
                 null == maxFps
                     ? _value.maxFps
@@ -733,6 +1026,26 @@ class _$StreamingStateV2CopyWithImpl<$Res, $Val extends StreamingStateV2>
                     ? _value.error
                     : error // ignore: cast_nullable_to_non_nullable
                         as StreamingError?,
+            streamingStatus:
+                null == streamingStatus
+                    ? _value.streamingStatus
+                    : streamingStatus // ignore: cast_nullable_to_non_nullable
+                        as StreamingStatus,
+            processingStatus:
+                null == processingStatus
+                    ? _value.processingStatus
+                    : processingStatus // ignore: cast_nullable_to_non_nullable
+                        as ProcessingStatus,
+            faceDetectionResult:
+                freezed == faceDetectionResult
+                    ? _value.faceDetectionResult
+                    : faceDetectionResult // ignore: cast_nullable_to_non_nullable
+                        as FaceDetectionResult?,
+            livenessResult:
+                freezed == livenessResult
+                    ? _value.livenessResult
+                    : livenessResult // ignore: cast_nullable_to_non_nullable
+                        as LivenessResult?,
           )
           as $Val,
     );
@@ -762,7 +1075,14 @@ abstract class _$$StreamingStateV2ImplCopyWith<$Res>
   ) = __$$StreamingStateV2ImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({StreamingStatus status, int maxFps, StreamingError? error});
+  $Res call({
+    int maxFps,
+    StreamingError? error,
+    StreamingStatus streamingStatus,
+    ProcessingStatus processingStatus,
+    FaceDetectionResult? faceDetectionResult,
+    LivenessResult? livenessResult,
+  });
 
   @override
   $StreamingErrorCopyWith<$Res>? get error;
@@ -782,17 +1102,15 @@ class __$$StreamingStateV2ImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
     Object? maxFps = null,
     Object? error = freezed,
+    Object? streamingStatus = null,
+    Object? processingStatus = null,
+    Object? faceDetectionResult = freezed,
+    Object? livenessResult = freezed,
   }) {
     return _then(
       _$StreamingStateV2Impl(
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as StreamingStatus,
         maxFps:
             null == maxFps
                 ? _value.maxFps
@@ -803,6 +1121,26 @@ class __$$StreamingStateV2ImplCopyWithImpl<$Res>
                 ? _value.error
                 : error // ignore: cast_nullable_to_non_nullable
                     as StreamingError?,
+        streamingStatus:
+            null == streamingStatus
+                ? _value.streamingStatus
+                : streamingStatus // ignore: cast_nullable_to_non_nullable
+                    as StreamingStatus,
+        processingStatus:
+            null == processingStatus
+                ? _value.processingStatus
+                : processingStatus // ignore: cast_nullable_to_non_nullable
+                    as ProcessingStatus,
+        faceDetectionResult:
+            freezed == faceDetectionResult
+                ? _value.faceDetectionResult
+                : faceDetectionResult // ignore: cast_nullable_to_non_nullable
+                    as FaceDetectionResult?,
+        livenessResult:
+            freezed == livenessResult
+                ? _value.livenessResult
+                : livenessResult // ignore: cast_nullable_to_non_nullable
+                    as LivenessResult?,
       ),
     );
   }
@@ -812,23 +1150,33 @@ class __$$StreamingStateV2ImplCopyWithImpl<$Res>
 
 class _$StreamingStateV2Impl extends _StreamingStateV2 {
   const _$StreamingStateV2Impl({
-    this.status = StreamingStatus.idle,
     this.maxFps = 2,
     this.error,
+    this.streamingStatus = StreamingStatus.idle,
+    this.processingStatus = ProcessingStatus.waitingForFace,
+    this.faceDetectionResult,
+    this.livenessResult,
   }) : super._();
 
-  @override
-  @JsonKey()
-  final StreamingStatus status;
   @override
   @JsonKey()
   final int maxFps;
   @override
   final StreamingError? error;
+  @override
+  @JsonKey()
+  final StreamingStatus streamingStatus;
+  @override
+  @JsonKey()
+  final ProcessingStatus processingStatus;
+  @override
+  final FaceDetectionResult? faceDetectionResult;
+  @override
+  final LivenessResult? livenessResult;
 
   @override
   String toString() {
-    return 'StreamingStateV2(status: $status, maxFps: $maxFps, error: $error)';
+    return 'StreamingStateV2(maxFps: $maxFps, error: $error, streamingStatus: $streamingStatus, processingStatus: $processingStatus, faceDetectionResult: $faceDetectionResult, livenessResult: $livenessResult)';
   }
 
   @override
@@ -836,13 +1184,28 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StreamingStateV2Impl &&
-            (identical(other.status, status) || other.status == status) &&
             (identical(other.maxFps, maxFps) || other.maxFps == maxFps) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.streamingStatus, streamingStatus) ||
+                other.streamingStatus == streamingStatus) &&
+            (identical(other.processingStatus, processingStatus) ||
+                other.processingStatus == processingStatus) &&
+            (identical(other.faceDetectionResult, faceDetectionResult) ||
+                other.faceDetectionResult == faceDetectionResult) &&
+            (identical(other.livenessResult, livenessResult) ||
+                other.livenessResult == livenessResult));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, maxFps, error);
+  int get hashCode => Object.hash(
+    runtimeType,
+    maxFps,
+    error,
+    streamingStatus,
+    processingStatus,
+    faceDetectionResult,
+    livenessResult,
+  );
 
   /// Create a copy of StreamingStateV2
   /// with the given fields replaced by the non-null parameter values.
@@ -858,18 +1221,27 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
 
 abstract class _StreamingStateV2 extends StreamingStateV2 {
   const factory _StreamingStateV2({
-    final StreamingStatus status,
     final int maxFps,
     final StreamingError? error,
+    final StreamingStatus streamingStatus,
+    final ProcessingStatus processingStatus,
+    final FaceDetectionResult? faceDetectionResult,
+    final LivenessResult? livenessResult,
   }) = _$StreamingStateV2Impl;
   const _StreamingStateV2._() : super._();
 
   @override
-  StreamingStatus get status;
-  @override
   int get maxFps;
   @override
   StreamingError? get error;
+  @override
+  StreamingStatus get streamingStatus;
+  @override
+  ProcessingStatus get processingStatus;
+  @override
+  FaceDetectionResult? get faceDetectionResult;
+  @override
+  LivenessResult? get livenessResult;
 
   /// Create a copy of StreamingStateV2
   /// with the given fields replaced by the non-null parameter values.

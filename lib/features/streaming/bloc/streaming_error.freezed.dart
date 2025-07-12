@@ -19,32 +19,38 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$StreamingError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() streamingFailed,
     required TResult Function() processingFailed,
     required TResult Function() webSocketFailed,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? streamingFailed,
     TResult? Function()? processingFailed,
     TResult? Function()? webSocketFailed,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? streamingFailed,
     TResult Function()? processingFailed,
     TResult Function()? webSocketFailed,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_StreamingFailed value) streamingFailed,
     required TResult Function(_ProcessingFailed value) processingFailed,
     required TResult Function(_WebSocketFailed value) webSocketFailed,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_StreamingFailed value)? streamingFailed,
     TResult? Function(_ProcessingFailed value)? processingFailed,
     TResult? Function(_WebSocketFailed value)? webSocketFailed,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_StreamingFailed value)? streamingFailed,
     TResult Function(_ProcessingFailed value)? processingFailed,
     TResult Function(_WebSocketFailed value)? webSocketFailed,
     required TResult orElse(),
@@ -71,6 +77,119 @@ class _$StreamingErrorCopyWithImpl<$Res, $Val extends StreamingError>
 
   /// Create a copy of StreamingError
   /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$StreamingFailedImplCopyWith<$Res> {
+  factory _$$StreamingFailedImplCopyWith(
+    _$StreamingFailedImpl value,
+    $Res Function(_$StreamingFailedImpl) then,
+  ) = __$$StreamingFailedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$StreamingFailedImplCopyWithImpl<$Res>
+    extends _$StreamingErrorCopyWithImpl<$Res, _$StreamingFailedImpl>
+    implements _$$StreamingFailedImplCopyWith<$Res> {
+  __$$StreamingFailedImplCopyWithImpl(
+    _$StreamingFailedImpl _value,
+    $Res Function(_$StreamingFailedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of StreamingError
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$StreamingFailedImpl implements _StreamingFailed {
+  const _$StreamingFailedImpl();
+
+  @override
+  String toString() {
+    return 'StreamingError.streamingFailed()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$StreamingFailedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() streamingFailed,
+    required TResult Function() processingFailed,
+    required TResult Function() webSocketFailed,
+  }) {
+    return streamingFailed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? streamingFailed,
+    TResult? Function()? processingFailed,
+    TResult? Function()? webSocketFailed,
+  }) {
+    return streamingFailed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? streamingFailed,
+    TResult Function()? processingFailed,
+    TResult Function()? webSocketFailed,
+    required TResult orElse(),
+  }) {
+    if (streamingFailed != null) {
+      return streamingFailed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_StreamingFailed value) streamingFailed,
+    required TResult Function(_ProcessingFailed value) processingFailed,
+    required TResult Function(_WebSocketFailed value) webSocketFailed,
+  }) {
+    return streamingFailed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_StreamingFailed value)? streamingFailed,
+    TResult? Function(_ProcessingFailed value)? processingFailed,
+    TResult? Function(_WebSocketFailed value)? webSocketFailed,
+  }) {
+    return streamingFailed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_StreamingFailed value)? streamingFailed,
+    TResult Function(_ProcessingFailed value)? processingFailed,
+    TResult Function(_WebSocketFailed value)? webSocketFailed,
+    required TResult orElse(),
+  }) {
+    if (streamingFailed != null) {
+      return streamingFailed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StreamingFailed implements StreamingError {
+  const factory _StreamingFailed() = _$StreamingFailedImpl;
 }
 
 /// @nodoc
@@ -116,6 +235,7 @@ class _$ProcessingFailedImpl implements _ProcessingFailed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() streamingFailed,
     required TResult Function() processingFailed,
     required TResult Function() webSocketFailed,
   }) {
@@ -125,6 +245,7 @@ class _$ProcessingFailedImpl implements _ProcessingFailed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? streamingFailed,
     TResult? Function()? processingFailed,
     TResult? Function()? webSocketFailed,
   }) {
@@ -134,6 +255,7 @@ class _$ProcessingFailedImpl implements _ProcessingFailed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? streamingFailed,
     TResult Function()? processingFailed,
     TResult Function()? webSocketFailed,
     required TResult orElse(),
@@ -147,6 +269,7 @@ class _$ProcessingFailedImpl implements _ProcessingFailed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_StreamingFailed value) streamingFailed,
     required TResult Function(_ProcessingFailed value) processingFailed,
     required TResult Function(_WebSocketFailed value) webSocketFailed,
   }) {
@@ -156,6 +279,7 @@ class _$ProcessingFailedImpl implements _ProcessingFailed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_StreamingFailed value)? streamingFailed,
     TResult? Function(_ProcessingFailed value)? processingFailed,
     TResult? Function(_WebSocketFailed value)? webSocketFailed,
   }) {
@@ -165,6 +289,7 @@ class _$ProcessingFailedImpl implements _ProcessingFailed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_StreamingFailed value)? streamingFailed,
     TResult Function(_ProcessingFailed value)? processingFailed,
     TResult Function(_WebSocketFailed value)? webSocketFailed,
     required TResult orElse(),
@@ -223,6 +348,7 @@ class _$WebSocketFailedImpl implements _WebSocketFailed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() streamingFailed,
     required TResult Function() processingFailed,
     required TResult Function() webSocketFailed,
   }) {
@@ -232,6 +358,7 @@ class _$WebSocketFailedImpl implements _WebSocketFailed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? streamingFailed,
     TResult? Function()? processingFailed,
     TResult? Function()? webSocketFailed,
   }) {
@@ -241,6 +368,7 @@ class _$WebSocketFailedImpl implements _WebSocketFailed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? streamingFailed,
     TResult Function()? processingFailed,
     TResult Function()? webSocketFailed,
     required TResult orElse(),
@@ -254,6 +382,7 @@ class _$WebSocketFailedImpl implements _WebSocketFailed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_StreamingFailed value) streamingFailed,
     required TResult Function(_ProcessingFailed value) processingFailed,
     required TResult Function(_WebSocketFailed value) webSocketFailed,
   }) {
@@ -263,6 +392,7 @@ class _$WebSocketFailedImpl implements _WebSocketFailed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_StreamingFailed value)? streamingFailed,
     TResult? Function(_ProcessingFailed value)? processingFailed,
     TResult? Function(_WebSocketFailed value)? webSocketFailed,
   }) {
@@ -272,6 +402,7 @@ class _$WebSocketFailedImpl implements _WebSocketFailed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_StreamingFailed value)? streamingFailed,
     TResult Function(_ProcessingFailed value)? processingFailed,
     TResult Function(_WebSocketFailed value)? webSocketFailed,
     required TResult orElse(),

@@ -15,12 +15,14 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../../features/camera/bloc/camera_bloc_v2.dart' as _i463;
 import '../../features/check_in/bloc/check_in_bloc.dart' as _i435;
 import '../../features/check_in/bloc/check_in_bloc_v2.dart' as _i1051;
-import '../../features/check_in/services/check_in_notification_service.dart'
-    as _i320;
+import '../../features/check_in/services/notification_orchestrator_service.dart'
+    as _i982;
 import '../../features/connection/bloc/connection_bloc.dart' as _i348;
 import '../../features/streaming/bloc/streaming_bloc_v2.dart' as _i782;
 import '../services/camera_service_v2.dart' as _i41;
+import '../services/face_detection_service_v2.dart' as _i874;
 import '../services/image_stream_service_v2.dart' as _i251;
+import '../services/liveness_service_v2.dart' as _i893;
 import '../services/network_connectivity_service.dart' as _i234;
 import '../services/permission_service.dart' as _i165;
 import '../services/stream_service.dart' as _i121;
@@ -37,12 +39,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i165.PermissionService>(
       () => _i165.PermissionServiceImpl(),
     );
+    gh.lazySingleton<_i874.FaceDetectionServiceV2>(
+      () => _i874.FaceDetectionServiceV2Impl(),
+    );
     gh.lazySingleton<_i669.WakelockService>(() => _i669.WakelockServiceImpl());
+    gh.lazySingleton<_i893.LivenessServiceV2>(
+      () => _i893.LivenessServiceV2Impl(),
+    );
     gh.lazySingleton<_i234.NetworkConnectivityService>(
       () => _i234.NetworkConnectivityServiceImpl(),
-    );
-    gh.factory<_i320.CheckInNotificationService>(
-      () => _i320.CheckInNotificationServiceImpl(),
     );
     gh.lazySingleton<_i41.CameraServiceV2>(
       () => _i41.CameraServiceV2Impl(gh<_i165.PermissionService>()),
@@ -57,7 +62,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i348.ConnectionBloc(gh<_i555.WebSocketService>()),
     );
     gh.lazySingleton<_i251.ImageStreamServiceV2>(
-      () => _i251.ImageStreamServiceV2Impl(gh<_i555.WebSocketService>()),
+      () => _i251.ImageStreamServiceV2Impl(
+        gh<_i555.WebSocketService>(),
+        gh<_i893.LivenessServiceV2>(),
+        gh<_i874.FaceDetectionServiceV2>(),
+      ),
     );
     gh.lazySingleton<_i121.StreamService>(
       () => _i121.StreamServiceImpl(
@@ -68,7 +77,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i782.StreamingBlocV2>(
       () => _i782.StreamingBlocV2(gh<_i251.ImageStreamServiceV2>()),
     );
-    gh.factory<_i1051.CheckInBlocV2>(
+    gh.lazySingleton<_i1051.CheckInBlocV2>(
       () => _i1051.CheckInBlocV2(
         gh<_i463.CameraBlocV2>(),
         gh<_i782.StreamingBlocV2>(),
@@ -79,6 +88,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i435.CheckInBloc(
         gh<_i348.ConnectionBloc>(),
         gh<_i121.StreamService>(),
+      ),
+    );
+    gh.lazySingleton<_i982.NotificationOrchestratorService>(
+      () => _i982.NotificationOrchestratorService(
+        gh<_i1051.CheckInBlocV2>(),
+        gh<_i782.StreamingBlocV2>(),
       ),
     );
     return this;

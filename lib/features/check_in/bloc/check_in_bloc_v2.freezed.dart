@@ -16,143 +16,105 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$CheckInEventV2 {
+mixin _$BucketSequentialFlowCheckInEventV2 {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() start,
     required TResult Function() stop,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
-    required TResult Function(StreamingStateV2 streamingState)
-    streamingStateChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? start,
     TResult? Function()? stop,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult? Function(StreamingStateV2 streamingState)? streamingStateChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? start,
     TResult Function()? stop,
-    TResult Function()? toggleDebugMode,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult Function(StreamingStateV2 streamingState)? streamingStateChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckInStart value) start,
-    required TResult Function(CheckInStop value) stop,
-    required TResult Function(CheckInToggleDebugMode value) toggleDebugMode,
-    required TResult Function(CheckInSetMaxFps value) setMaxFps,
-    required TResult Function(CheckInWebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(CheckInConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(_CameraStateChanged value) cameraStateChanged,
-    required TResult Function(_StreamingStateChanged value)
-    streamingStateChanged,
+    required TResult Function(_Start value) start,
+    required TResult Function(_Stop value) stop,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckInStart value)? start,
-    TResult? Function(CheckInStop value)? stop,
-    TResult? Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult? Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult? Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult? Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult? Function(_StreamingStateChanged value)? streamingStateChanged,
+    TResult? Function(_Start value)? start,
+    TResult? Function(_Stop value)? stop,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckInStart value)? start,
-    TResult Function(CheckInStop value)? stop,
-    TResult Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult Function(_StreamingStateChanged value)? streamingStateChanged,
+    TResult Function(_Start value)? start,
+    TResult Function(_Stop value)? stop,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CheckInEventV2CopyWith<$Res> {
-  factory $CheckInEventV2CopyWith(
-    CheckInEventV2 value,
-    $Res Function(CheckInEventV2) then,
-  ) = _$CheckInEventV2CopyWithImpl<$Res, CheckInEventV2>;
+abstract class $BucketSequentialFlowCheckInEventV2CopyWith<$Res> {
+  factory $BucketSequentialFlowCheckInEventV2CopyWith(
+    BucketSequentialFlowCheckInEventV2 value,
+    $Res Function(BucketSequentialFlowCheckInEventV2) then,
+  ) =
+      _$BucketSequentialFlowCheckInEventV2CopyWithImpl<
+        $Res,
+        BucketSequentialFlowCheckInEventV2
+      >;
 }
 
 /// @nodoc
-class _$CheckInEventV2CopyWithImpl<$Res, $Val extends CheckInEventV2>
-    implements $CheckInEventV2CopyWith<$Res> {
-  _$CheckInEventV2CopyWithImpl(this._value, this._then);
+class _$BucketSequentialFlowCheckInEventV2CopyWithImpl<
+  $Res,
+  $Val extends BucketSequentialFlowCheckInEventV2
+>
+    implements $BucketSequentialFlowCheckInEventV2CopyWith<$Res> {
+  _$BucketSequentialFlowCheckInEventV2CopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialFlowCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$CheckInStartImplCopyWith<$Res> {
-  factory _$$CheckInStartImplCopyWith(
-    _$CheckInStartImpl value,
-    $Res Function(_$CheckInStartImpl) then,
-  ) = __$$CheckInStartImplCopyWithImpl<$Res>;
+abstract class _$$StartImplCopyWith<$Res> {
+  factory _$$StartImplCopyWith(
+    _$StartImpl value,
+    $Res Function(_$StartImpl) then,
+  ) = __$$StartImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CheckInStartImplCopyWithImpl<$Res>
-    extends _$CheckInEventV2CopyWithImpl<$Res, _$CheckInStartImpl>
-    implements _$$CheckInStartImplCopyWith<$Res> {
-  __$$CheckInStartImplCopyWithImpl(
-    _$CheckInStartImpl _value,
-    $Res Function(_$CheckInStartImpl) _then,
+class __$$StartImplCopyWithImpl<$Res>
+    extends _$BucketSequentialFlowCheckInEventV2CopyWithImpl<$Res, _$StartImpl>
+    implements _$$StartImplCopyWith<$Res> {
+  __$$StartImplCopyWithImpl(
+    _$StartImpl _value,
+    $Res Function(_$StartImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialFlowCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$CheckInStartImpl implements CheckInStart {
-  const _$CheckInStartImpl();
+class _$StartImpl implements _Start {
+  const _$StartImpl();
 
   @override
   String toString() {
-    return 'CheckInEventV2.start()';
+    return 'BucketSequentialFlowCheckInEventV2.start()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CheckInStartImpl);
+        (other.runtimeType == runtimeType && other is _$StartImpl);
   }
 
   @override
@@ -163,14 +125,6 @@ class _$CheckInStartImpl implements CheckInStart {
   TResult when<TResult extends Object?>({
     required TResult Function() start,
     required TResult Function() stop,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
-    required TResult Function(StreamingStateV2 streamingState)
-    streamingStateChanged,
   }) {
     return start();
   }
@@ -180,12 +134,6 @@ class _$CheckInStartImpl implements CheckInStart {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? start,
     TResult? Function()? stop,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult? Function(StreamingStateV2 streamingState)? streamingStateChanged,
   }) {
     return start?.call();
   }
@@ -195,12 +143,6 @@ class _$CheckInStartImpl implements CheckInStart {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? start,
     TResult Function()? stop,
-    TResult Function()? toggleDebugMode,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult Function(StreamingStateV2 streamingState)? streamingStateChanged,
     required TResult orElse(),
   }) {
     if (start != null) {
@@ -212,17 +154,8 @@ class _$CheckInStartImpl implements CheckInStart {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckInStart value) start,
-    required TResult Function(CheckInStop value) stop,
-    required TResult Function(CheckInToggleDebugMode value) toggleDebugMode,
-    required TResult Function(CheckInSetMaxFps value) setMaxFps,
-    required TResult Function(CheckInWebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(CheckInConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(_CameraStateChanged value) cameraStateChanged,
-    required TResult Function(_StreamingStateChanged value)
-    streamingStateChanged,
+    required TResult Function(_Start value) start,
+    required TResult Function(_Stop value) stop,
   }) {
     return start(this);
   }
@@ -230,16 +163,8 @@ class _$CheckInStartImpl implements CheckInStart {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckInStart value)? start,
-    TResult? Function(CheckInStop value)? stop,
-    TResult? Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult? Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult? Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult? Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult? Function(_StreamingStateChanged value)? streamingStateChanged,
+    TResult? Function(_Start value)? start,
+    TResult? Function(_Stop value)? stop,
   }) {
     return start?.call(this);
   }
@@ -247,16 +172,8 @@ class _$CheckInStartImpl implements CheckInStart {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckInStart value)? start,
-    TResult Function(CheckInStop value)? stop,
-    TResult Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult Function(_StreamingStateChanged value)? streamingStateChanged,
+    TResult Function(_Start value)? start,
+    TResult Function(_Stop value)? stop,
     required TResult orElse(),
   }) {
     if (start != null) {
@@ -266,45 +183,43 @@ class _$CheckInStartImpl implements CheckInStart {
   }
 }
 
-abstract class CheckInStart implements CheckInEventV2 {
-  const factory CheckInStart() = _$CheckInStartImpl;
+abstract class _Start implements BucketSequentialFlowCheckInEventV2 {
+  const factory _Start() = _$StartImpl;
 }
 
 /// @nodoc
-abstract class _$$CheckInStopImplCopyWith<$Res> {
-  factory _$$CheckInStopImplCopyWith(
-    _$CheckInStopImpl value,
-    $Res Function(_$CheckInStopImpl) then,
-  ) = __$$CheckInStopImplCopyWithImpl<$Res>;
+abstract class _$$StopImplCopyWith<$Res> {
+  factory _$$StopImplCopyWith(
+    _$StopImpl value,
+    $Res Function(_$StopImpl) then,
+  ) = __$$StopImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CheckInStopImplCopyWithImpl<$Res>
-    extends _$CheckInEventV2CopyWithImpl<$Res, _$CheckInStopImpl>
-    implements _$$CheckInStopImplCopyWith<$Res> {
-  __$$CheckInStopImplCopyWithImpl(
-    _$CheckInStopImpl _value,
-    $Res Function(_$CheckInStopImpl) _then,
-  ) : super(_value, _then);
+class __$$StopImplCopyWithImpl<$Res>
+    extends _$BucketSequentialFlowCheckInEventV2CopyWithImpl<$Res, _$StopImpl>
+    implements _$$StopImplCopyWith<$Res> {
+  __$$StopImplCopyWithImpl(_$StopImpl _value, $Res Function(_$StopImpl) _then)
+    : super(_value, _then);
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialFlowCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$CheckInStopImpl implements CheckInStop {
-  const _$CheckInStopImpl();
+class _$StopImpl implements _Stop {
+  const _$StopImpl();
 
   @override
   String toString() {
-    return 'CheckInEventV2.stop()';
+    return 'BucketSequentialFlowCheckInEventV2.stop()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CheckInStopImpl);
+        (other.runtimeType == runtimeType && other is _$StopImpl);
   }
 
   @override
@@ -315,14 +230,6 @@ class _$CheckInStopImpl implements CheckInStop {
   TResult when<TResult extends Object?>({
     required TResult Function() start,
     required TResult Function() stop,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
-    required TResult Function(StreamingStateV2 streamingState)
-    streamingStateChanged,
   }) {
     return stop();
   }
@@ -332,12 +239,6 @@ class _$CheckInStopImpl implements CheckInStop {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? start,
     TResult? Function()? stop,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult? Function(StreamingStateV2 streamingState)? streamingStateChanged,
   }) {
     return stop?.call();
   }
@@ -347,12 +248,6 @@ class _$CheckInStopImpl implements CheckInStop {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? start,
     TResult Function()? stop,
-    TResult Function()? toggleDebugMode,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult Function(StreamingStateV2 streamingState)? streamingStateChanged,
     required TResult orElse(),
   }) {
     if (stop != null) {
@@ -364,17 +259,8 @@ class _$CheckInStopImpl implements CheckInStop {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckInStart value) start,
-    required TResult Function(CheckInStop value) stop,
-    required TResult Function(CheckInToggleDebugMode value) toggleDebugMode,
-    required TResult Function(CheckInSetMaxFps value) setMaxFps,
-    required TResult Function(CheckInWebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(CheckInConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(_CameraStateChanged value) cameraStateChanged,
-    required TResult Function(_StreamingStateChanged value)
-    streamingStateChanged,
+    required TResult Function(_Start value) start,
+    required TResult Function(_Stop value) stop,
   }) {
     return stop(this);
   }
@@ -382,16 +268,8 @@ class _$CheckInStopImpl implements CheckInStop {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckInStart value)? start,
-    TResult? Function(CheckInStop value)? stop,
-    TResult? Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult? Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult? Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult? Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult? Function(_StreamingStateChanged value)? streamingStateChanged,
+    TResult? Function(_Start value)? start,
+    TResult? Function(_Stop value)? stop,
   }) {
     return stop?.call(this);
   }
@@ -399,16 +277,8 @@ class _$CheckInStopImpl implements CheckInStop {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckInStart value)? start,
-    TResult Function(CheckInStop value)? stop,
-    TResult Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult Function(_StreamingStateChanged value)? streamingStateChanged,
+    TResult Function(_Start value)? start,
+    TResult Function(_Stop value)? stop,
     required TResult orElse(),
   }) {
     if (stop != null) {
@@ -418,559 +288,83 @@ class _$CheckInStopImpl implements CheckInStop {
   }
 }
 
-abstract class CheckInStop implements CheckInEventV2 {
-  const factory CheckInStop() = _$CheckInStopImpl;
+abstract class _Stop implements BucketSequentialFlowCheckInEventV2 {
+  const factory _Stop() = _$StopImpl;
 }
 
 /// @nodoc
-abstract class _$$CheckInToggleDebugModeImplCopyWith<$Res> {
-  factory _$$CheckInToggleDebugModeImplCopyWith(
-    _$CheckInToggleDebugModeImpl value,
-    $Res Function(_$CheckInToggleDebugModeImpl) then,
-  ) = __$$CheckInToggleDebugModeImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CheckInToggleDebugModeImplCopyWithImpl<$Res>
-    extends _$CheckInEventV2CopyWithImpl<$Res, _$CheckInToggleDebugModeImpl>
-    implements _$$CheckInToggleDebugModeImplCopyWith<$Res> {
-  __$$CheckInToggleDebugModeImplCopyWithImpl(
-    _$CheckInToggleDebugModeImpl _value,
-    $Res Function(_$CheckInToggleDebugModeImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$CheckInToggleDebugModeImpl implements CheckInToggleDebugMode {
-  const _$CheckInToggleDebugModeImpl();
-
-  @override
-  String toString() {
-    return 'CheckInEventV2.toggleDebugMode()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CheckInToggleDebugModeImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
+mixin _$BucketSequentialStateCheckInEventV2 {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() start,
-    required TResult Function() stop,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
-    required TResult Function(StreamingStateV2 streamingState)
-    streamingStateChanged,
-  }) {
-    return toggleDebugMode();
-  }
-
-  @override
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? start,
-    TResult? Function()? stop,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult? Function(StreamingStateV2 streamingState)? streamingStateChanged,
-  }) {
-    return toggleDebugMode?.call();
-  }
-
-  @override
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? start,
-    TResult Function()? stop,
-    TResult Function()? toggleDebugMode,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult Function(StreamingStateV2 streamingState)? streamingStateChanged,
     required TResult orElse(),
-  }) {
-    if (toggleDebugMode != null) {
-      return toggleDebugMode();
-    }
-    return orElse();
-  }
-
-  @override
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckInStart value) start,
-    required TResult Function(CheckInStop value) stop,
-    required TResult Function(CheckInToggleDebugMode value) toggleDebugMode,
-    required TResult Function(CheckInSetMaxFps value) setMaxFps,
-    required TResult Function(CheckInWebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(CheckInConnectionStateChanged value)
+    required TResult Function(_ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(_CameraStateChanged value) cameraStateChanged,
-    required TResult Function(_StreamingStateChanged value)
-    streamingStateChanged,
-  }) {
-    return toggleDebugMode(this);
-  }
-
-  @override
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckInStart value)? start,
-    TResult? Function(CheckInStop value)? stop,
-    TResult? Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult? Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult? Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
+    TResult? Function(_ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult? Function(_StreamingStateChanged value)? streamingStateChanged,
-  }) {
-    return toggleDebugMode?.call(this);
-  }
-
-  @override
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckInStart value)? start,
-    TResult Function(CheckInStop value)? stop,
-    TResult Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
+    TResult Function(_ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult Function(_StreamingStateChanged value)? streamingStateChanged,
     required TResult orElse(),
-  }) {
-    if (toggleDebugMode != null) {
-      return toggleDebugMode(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CheckInToggleDebugMode implements CheckInEventV2 {
-  const factory CheckInToggleDebugMode() = _$CheckInToggleDebugModeImpl;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CheckInSetMaxFpsImplCopyWith<$Res> {
-  factory _$$CheckInSetMaxFpsImplCopyWith(
-    _$CheckInSetMaxFpsImpl value,
-    $Res Function(_$CheckInSetMaxFpsImpl) then,
-  ) = __$$CheckInSetMaxFpsImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int fps});
+abstract class $BucketSequentialStateCheckInEventV2CopyWith<$Res> {
+  factory $BucketSequentialStateCheckInEventV2CopyWith(
+    BucketSequentialStateCheckInEventV2 value,
+    $Res Function(BucketSequentialStateCheckInEventV2) then,
+  ) =
+      _$BucketSequentialStateCheckInEventV2CopyWithImpl<
+        $Res,
+        BucketSequentialStateCheckInEventV2
+      >;
 }
 
 /// @nodoc
-class __$$CheckInSetMaxFpsImplCopyWithImpl<$Res>
-    extends _$CheckInEventV2CopyWithImpl<$Res, _$CheckInSetMaxFpsImpl>
-    implements _$$CheckInSetMaxFpsImplCopyWith<$Res> {
-  __$$CheckInSetMaxFpsImplCopyWithImpl(
-    _$CheckInSetMaxFpsImpl _value,
-    $Res Function(_$CheckInSetMaxFpsImpl) _then,
-  ) : super(_value, _then);
+class _$BucketSequentialStateCheckInEventV2CopyWithImpl<
+  $Res,
+  $Val extends BucketSequentialStateCheckInEventV2
+>
+    implements $BucketSequentialStateCheckInEventV2CopyWith<$Res> {
+  _$BucketSequentialStateCheckInEventV2CopyWithImpl(this._value, this._then);
 
-  /// Create a copy of CheckInEventV2
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? fps = null}) {
-    return _then(
-      _$CheckInSetMaxFpsImpl(
-        null == fps
-            ? _value.fps
-            : fps // ignore: cast_nullable_to_non_nullable
-                as int,
-      ),
-    );
-  }
 }
 
 /// @nodoc
-
-class _$CheckInSetMaxFpsImpl implements CheckInSetMaxFps {
-  const _$CheckInSetMaxFpsImpl(this.fps);
-
-  @override
-  final int fps;
-
-  @override
-  String toString() {
-    return 'CheckInEventV2.setMaxFps(fps: $fps)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CheckInSetMaxFpsImpl &&
-            (identical(other.fps, fps) || other.fps == fps));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, fps);
-
-  /// Create a copy of CheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CheckInSetMaxFpsImplCopyWith<_$CheckInSetMaxFpsImpl> get copyWith =>
-      __$$CheckInSetMaxFpsImplCopyWithImpl<_$CheckInSetMaxFpsImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() start,
-    required TResult Function() stop,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
-    required TResult Function(StreamingStateV2 streamingState)
-    streamingStateChanged,
-  }) {
-    return setMaxFps(fps);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? start,
-    TResult? Function()? stop,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult? Function(StreamingStateV2 streamingState)? streamingStateChanged,
-  }) {
-    return setMaxFps?.call(fps);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? start,
-    TResult Function()? stop,
-    TResult Function()? toggleDebugMode,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult Function(StreamingStateV2 streamingState)? streamingStateChanged,
-    required TResult orElse(),
-  }) {
-    if (setMaxFps != null) {
-      return setMaxFps(fps);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(CheckInStart value) start,
-    required TResult Function(CheckInStop value) stop,
-    required TResult Function(CheckInToggleDebugMode value) toggleDebugMode,
-    required TResult Function(CheckInSetMaxFps value) setMaxFps,
-    required TResult Function(CheckInWebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(CheckInConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(_CameraStateChanged value) cameraStateChanged,
-    required TResult Function(_StreamingStateChanged value)
-    streamingStateChanged,
-  }) {
-    return setMaxFps(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckInStart value)? start,
-    TResult? Function(CheckInStop value)? stop,
-    TResult? Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult? Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult? Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult? Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult? Function(_StreamingStateChanged value)? streamingStateChanged,
-  }) {
-    return setMaxFps?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckInStart value)? start,
-    TResult Function(CheckInStop value)? stop,
-    TResult Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult Function(_StreamingStateChanged value)? streamingStateChanged,
-    required TResult orElse(),
-  }) {
-    if (setMaxFps != null) {
-      return setMaxFps(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CheckInSetMaxFps implements CheckInEventV2 {
-  const factory CheckInSetMaxFps(final int fps) = _$CheckInSetMaxFpsImpl;
-
-  int get fps;
-
-  /// Create a copy of CheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CheckInSetMaxFpsImplCopyWith<_$CheckInSetMaxFpsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$CheckInWebSocketMessageReceivedImplCopyWith<$Res> {
-  factory _$$CheckInWebSocketMessageReceivedImplCopyWith(
-    _$CheckInWebSocketMessageReceivedImpl value,
-    $Res Function(_$CheckInWebSocketMessageReceivedImpl) then,
-  ) = __$$CheckInWebSocketMessageReceivedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({dynamic data});
-}
-
-/// @nodoc
-class __$$CheckInWebSocketMessageReceivedImplCopyWithImpl<$Res>
-    extends
-        _$CheckInEventV2CopyWithImpl<
-          $Res,
-          _$CheckInWebSocketMessageReceivedImpl
-        >
-    implements _$$CheckInWebSocketMessageReceivedImplCopyWith<$Res> {
-  __$$CheckInWebSocketMessageReceivedImplCopyWithImpl(
-    _$CheckInWebSocketMessageReceivedImpl _value,
-    $Res Function(_$CheckInWebSocketMessageReceivedImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of CheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? data = freezed}) {
-    return _then(
-      _$CheckInWebSocketMessageReceivedImpl(
-        freezed == data
-            ? _value.data
-            : data // ignore: cast_nullable_to_non_nullable
-                as dynamic,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$CheckInWebSocketMessageReceivedImpl
-    implements CheckInWebSocketMessageReceived {
-  const _$CheckInWebSocketMessageReceivedImpl(this.data);
-
-  @override
-  final dynamic data;
-
-  @override
-  String toString() {
-    return 'CheckInEventV2.webSocketMessageReceived(data: $data)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CheckInWebSocketMessageReceivedImpl &&
-            const DeepCollectionEquality().equals(other.data, data));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
-
-  /// Create a copy of CheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CheckInWebSocketMessageReceivedImplCopyWith<
-    _$CheckInWebSocketMessageReceivedImpl
-  >
-  get copyWith => __$$CheckInWebSocketMessageReceivedImplCopyWithImpl<
-    _$CheckInWebSocketMessageReceivedImpl
-  >(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() start,
-    required TResult Function() stop,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
-    required TResult Function(StreamingStateV2 streamingState)
-    streamingStateChanged,
-  }) {
-    return webSocketMessageReceived(data);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? start,
-    TResult? Function()? stop,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult? Function(StreamingStateV2 streamingState)? streamingStateChanged,
-  }) {
-    return webSocketMessageReceived?.call(data);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? start,
-    TResult Function()? stop,
-    TResult Function()? toggleDebugMode,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult Function(StreamingStateV2 streamingState)? streamingStateChanged,
-    required TResult orElse(),
-  }) {
-    if (webSocketMessageReceived != null) {
-      return webSocketMessageReceived(data);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(CheckInStart value) start,
-    required TResult Function(CheckInStop value) stop,
-    required TResult Function(CheckInToggleDebugMode value) toggleDebugMode,
-    required TResult Function(CheckInSetMaxFps value) setMaxFps,
-    required TResult Function(CheckInWebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(CheckInConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(_CameraStateChanged value) cameraStateChanged,
-    required TResult Function(_StreamingStateChanged value)
-    streamingStateChanged,
-  }) {
-    return webSocketMessageReceived(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckInStart value)? start,
-    TResult? Function(CheckInStop value)? stop,
-    TResult? Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult? Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult? Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult? Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult? Function(_StreamingStateChanged value)? streamingStateChanged,
-  }) {
-    return webSocketMessageReceived?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckInStart value)? start,
-    TResult Function(CheckInStop value)? stop,
-    TResult Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult Function(_StreamingStateChanged value)? streamingStateChanged,
-    required TResult orElse(),
-  }) {
-    if (webSocketMessageReceived != null) {
-      return webSocketMessageReceived(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CheckInWebSocketMessageReceived implements CheckInEventV2 {
-  const factory CheckInWebSocketMessageReceived(final dynamic data) =
-      _$CheckInWebSocketMessageReceivedImpl;
-
-  dynamic get data;
-
-  /// Create a copy of CheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CheckInWebSocketMessageReceivedImplCopyWith<
-    _$CheckInWebSocketMessageReceivedImpl
-  >
-  get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$CheckInConnectionStateChangedImplCopyWith<$Res> {
-  factory _$$CheckInConnectionStateChangedImplCopyWith(
-    _$CheckInConnectionStateChangedImpl value,
-    $Res Function(_$CheckInConnectionStateChangedImpl) then,
-  ) = __$$CheckInConnectionStateChangedImplCopyWithImpl<$Res>;
+abstract class _$$ConnectionStateChangedImplCopyWith<$Res> {
+  factory _$$ConnectionStateChangedImplCopyWith(
+    _$ConnectionStateChangedImpl value,
+    $Res Function(_$ConnectionStateChangedImpl) then,
+  ) = __$$ConnectionStateChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ConnectionState connectionState});
 
@@ -978,22 +372,25 @@ abstract class _$$CheckInConnectionStateChangedImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$CheckInConnectionStateChangedImplCopyWithImpl<$Res>
+class __$$ConnectionStateChangedImplCopyWithImpl<$Res>
     extends
-        _$CheckInEventV2CopyWithImpl<$Res, _$CheckInConnectionStateChangedImpl>
-    implements _$$CheckInConnectionStateChangedImplCopyWith<$Res> {
-  __$$CheckInConnectionStateChangedImplCopyWithImpl(
-    _$CheckInConnectionStateChangedImpl _value,
-    $Res Function(_$CheckInConnectionStateChangedImpl) _then,
+        _$BucketSequentialStateCheckInEventV2CopyWithImpl<
+          $Res,
+          _$ConnectionStateChangedImpl
+        >
+    implements _$$ConnectionStateChangedImplCopyWith<$Res> {
+  __$$ConnectionStateChangedImplCopyWithImpl(
+    _$ConnectionStateChangedImpl _value,
+    $Res Function(_$ConnectionStateChangedImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({Object? connectionState = null}) {
     return _then(
-      _$CheckInConnectionStateChangedImpl(
+      _$ConnectionStateChangedImpl(
         null == connectionState
             ? _value.connectionState
             : connectionState // ignore: cast_nullable_to_non_nullable
@@ -1002,7 +399,7 @@ class __$$CheckInConnectionStateChangedImplCopyWithImpl<$Res>
     );
   }
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -1015,23 +412,22 @@ class __$$CheckInConnectionStateChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CheckInConnectionStateChangedImpl
-    implements CheckInConnectionStateChanged {
-  const _$CheckInConnectionStateChangedImpl(this.connectionState);
+class _$ConnectionStateChangedImpl implements _ConnectionStateChanged {
+  const _$ConnectionStateChangedImpl(this.connectionState);
 
   @override
   final ConnectionState connectionState;
 
   @override
   String toString() {
-    return 'CheckInEventV2.connectionStateChanged(connectionState: $connectionState)';
+    return 'BucketSequentialStateCheckInEventV2.connectionStateChanged(connectionState: $connectionState)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CheckInConnectionStateChangedImpl &&
+            other is _$ConnectionStateChangedImpl &&
             (identical(other.connectionState, connectionState) ||
                 other.connectionState == connectionState));
   }
@@ -1039,31 +435,24 @@ class _$CheckInConnectionStateChangedImpl
   @override
   int get hashCode => Object.hash(runtimeType, connectionState);
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CheckInConnectionStateChangedImplCopyWith<
-    _$CheckInConnectionStateChangedImpl
-  >
-  get copyWith => __$$CheckInConnectionStateChangedImplCopyWithImpl<
-    _$CheckInConnectionStateChangedImpl
-  >(this, _$identity);
+  _$$ConnectionStateChangedImplCopyWith<_$ConnectionStateChangedImpl>
+  get copyWith =>
+      __$$ConnectionStateChangedImplCopyWithImpl<_$ConnectionStateChangedImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() start,
-    required TResult Function() stop,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
-    required TResult Function(StreamingStateV2 streamingState)
-    streamingStateChanged,
   }) {
     return connectionStateChanged(connectionState);
   }
@@ -1071,14 +460,8 @@ class _$CheckInConnectionStateChangedImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? start,
-    TResult? Function()? stop,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult? Function(StreamingStateV2 streamingState)? streamingStateChanged,
   }) {
     return connectionStateChanged?.call(connectionState);
   }
@@ -1086,14 +469,8 @@ class _$CheckInConnectionStateChangedImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? start,
-    TResult Function()? stop,
-    TResult Function()? toggleDebugMode,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult Function(StreamingStateV2 streamingState)? streamingStateChanged,
     required TResult orElse(),
   }) {
     if (connectionStateChanged != null) {
@@ -1105,17 +482,9 @@ class _$CheckInConnectionStateChangedImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckInStart value) start,
-    required TResult Function(CheckInStop value) stop,
-    required TResult Function(CheckInToggleDebugMode value) toggleDebugMode,
-    required TResult Function(CheckInSetMaxFps value) setMaxFps,
-    required TResult Function(CheckInWebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(CheckInConnectionStateChanged value)
+    required TResult Function(_ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(_CameraStateChanged value) cameraStateChanged,
-    required TResult Function(_StreamingStateChanged value)
-    streamingStateChanged,
   }) {
     return connectionStateChanged(this);
   }
@@ -1123,16 +492,8 @@ class _$CheckInConnectionStateChangedImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckInStart value)? start,
-    TResult? Function(CheckInStop value)? stop,
-    TResult? Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult? Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult? Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
+    TResult? Function(_ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult? Function(_StreamingStateChanged value)? streamingStateChanged,
   }) {
     return connectionStateChanged?.call(this);
   }
@@ -1140,16 +501,8 @@ class _$CheckInConnectionStateChangedImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckInStart value)? start,
-    TResult Function(CheckInStop value)? stop,
-    TResult Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
+    TResult Function(_ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult Function(_StreamingStateChanged value)? streamingStateChanged,
     required TResult orElse(),
   }) {
     if (connectionStateChanged != null) {
@@ -1159,19 +512,17 @@ class _$CheckInConnectionStateChangedImpl
   }
 }
 
-abstract class CheckInConnectionStateChanged implements CheckInEventV2 {
-  const factory CheckInConnectionStateChanged(
-    final ConnectionState connectionState,
-  ) = _$CheckInConnectionStateChangedImpl;
+abstract class _ConnectionStateChanged
+    implements BucketSequentialStateCheckInEventV2 {
+  const factory _ConnectionStateChanged(final ConnectionState connectionState) =
+      _$ConnectionStateChangedImpl;
 
   ConnectionState get connectionState;
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CheckInConnectionStateChangedImplCopyWith<
-    _$CheckInConnectionStateChangedImpl
-  >
+  _$$ConnectionStateChangedImplCopyWith<_$ConnectionStateChangedImpl>
   get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1189,14 +540,18 @@ abstract class _$$CameraStateChangedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$CameraStateChangedImplCopyWithImpl<$Res>
-    extends _$CheckInEventV2CopyWithImpl<$Res, _$CameraStateChangedImpl>
+    extends
+        _$BucketSequentialStateCheckInEventV2CopyWithImpl<
+          $Res,
+          _$CameraStateChangedImpl
+        >
     implements _$$CameraStateChangedImplCopyWith<$Res> {
   __$$CameraStateChangedImplCopyWithImpl(
     _$CameraStateChangedImpl _value,
     $Res Function(_$CameraStateChangedImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1211,7 +566,7 @@ class __$$CameraStateChangedImplCopyWithImpl<$Res>
     );
   }
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -1232,7 +587,7 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
 
   @override
   String toString() {
-    return 'CheckInEventV2.cameraStateChanged(cameraState: $cameraState)';
+    return 'BucketSequentialStateCheckInEventV2.cameraStateChanged(cameraState: $cameraState)';
   }
 
   @override
@@ -1247,7 +602,7 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   int get hashCode => Object.hash(runtimeType, cameraState);
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -1261,16 +616,9 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() start,
-    required TResult Function() stop,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(int fps) setMaxFps,
-    required TResult Function(dynamic data) webSocketMessageReceived,
     required TResult Function(ConnectionState connectionState)
     connectionStateChanged,
     required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
-    required TResult Function(StreamingStateV2 streamingState)
-    streamingStateChanged,
   }) {
     return cameraStateChanged(cameraState);
   }
@@ -1278,14 +626,8 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? start,
-    TResult? Function()? stop,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(int fps)? setMaxFps,
-    TResult? Function(dynamic data)? webSocketMessageReceived,
     TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult? Function(StreamingStateV2 streamingState)? streamingStateChanged,
   }) {
     return cameraStateChanged?.call(cameraState);
   }
@@ -1293,14 +635,8 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? start,
-    TResult Function()? stop,
-    TResult Function()? toggleDebugMode,
-    TResult Function(int fps)? setMaxFps,
-    TResult Function(dynamic data)? webSocketMessageReceived,
     TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult Function(StreamingStateV2 streamingState)? streamingStateChanged,
     required TResult orElse(),
   }) {
     if (cameraStateChanged != null) {
@@ -1312,17 +648,9 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckInStart value) start,
-    required TResult Function(CheckInStop value) stop,
-    required TResult Function(CheckInToggleDebugMode value) toggleDebugMode,
-    required TResult Function(CheckInSetMaxFps value) setMaxFps,
-    required TResult Function(CheckInWebSocketMessageReceived value)
-    webSocketMessageReceived,
-    required TResult Function(CheckInConnectionStateChanged value)
+    required TResult Function(_ConnectionStateChanged value)
     connectionStateChanged,
     required TResult Function(_CameraStateChanged value) cameraStateChanged,
-    required TResult Function(_StreamingStateChanged value)
-    streamingStateChanged,
   }) {
     return cameraStateChanged(this);
   }
@@ -1330,16 +658,8 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckInStart value)? start,
-    TResult? Function(CheckInStop value)? stop,
-    TResult? Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult? Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult? Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
+    TResult? Function(_ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult? Function(_StreamingStateChanged value)? streamingStateChanged,
   }) {
     return cameraStateChanged?.call(this);
   }
@@ -1347,16 +667,8 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckInStart value)? start,
-    TResult Function(CheckInStop value)? stop,
-    TResult Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
+    TResult Function(_ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult Function(_StreamingStateChanged value)? streamingStateChanged,
     required TResult orElse(),
   }) {
     if (cameraStateChanged != null) {
@@ -1366,13 +678,14 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   }
 }
 
-abstract class _CameraStateChanged implements CheckInEventV2 {
+abstract class _CameraStateChanged
+    implements BucketSequentialStateCheckInEventV2 {
   const factory _CameraStateChanged(final CameraStateV2 cameraState) =
       _$CameraStateChangedImpl;
 
   CameraStateV2 get cameraState;
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CameraStateChangedImplCopyWith<_$CameraStateChangedImpl> get copyWith =>
@@ -1380,136 +693,191 @@ abstract class _CameraStateChanged implements CheckInEventV2 {
 }
 
 /// @nodoc
-abstract class _$$StreamingStateChangedImplCopyWith<$Res> {
-  factory _$$StreamingStateChangedImplCopyWith(
-    _$StreamingStateChangedImpl value,
-    $Res Function(_$StreamingStateChangedImpl) then,
-  ) = __$$StreamingStateChangedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({StreamingStateV2 streamingState});
+mixin _$SeparatedRestartableCheckInEventV2 {
+  dynamic get data => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(dynamic data) webSocketMessageReceived,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(dynamic data)? webSocketMessageReceived,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(dynamic data)? webSocketMessageReceived,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_WebSocketMessageReceived value)
+    webSocketMessageReceived,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_WebSocketMessageReceived value)?
+    webSocketMessageReceived,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_WebSocketMessageReceived value)? webSocketMessageReceived,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
 
-  $StreamingStateV2CopyWith<$Res> get streamingState;
+  /// Create a copy of SeparatedRestartableCheckInEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $SeparatedRestartableCheckInEventV2CopyWith<
+    SeparatedRestartableCheckInEventV2
+  >
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-class __$$StreamingStateChangedImplCopyWithImpl<$Res>
-    extends _$CheckInEventV2CopyWithImpl<$Res, _$StreamingStateChangedImpl>
-    implements _$$StreamingStateChangedImplCopyWith<$Res> {
-  __$$StreamingStateChangedImplCopyWithImpl(
-    _$StreamingStateChangedImpl _value,
-    $Res Function(_$StreamingStateChangedImpl) _then,
-  ) : super(_value, _then);
+abstract class $SeparatedRestartableCheckInEventV2CopyWith<$Res> {
+  factory $SeparatedRestartableCheckInEventV2CopyWith(
+    SeparatedRestartableCheckInEventV2 value,
+    $Res Function(SeparatedRestartableCheckInEventV2) then,
+  ) =
+      _$SeparatedRestartableCheckInEventV2CopyWithImpl<
+        $Res,
+        SeparatedRestartableCheckInEventV2
+      >;
+  @useResult
+  $Res call({dynamic data});
+}
 
-  /// Create a copy of CheckInEventV2
+/// @nodoc
+class _$SeparatedRestartableCheckInEventV2CopyWithImpl<
+  $Res,
+  $Val extends SeparatedRestartableCheckInEventV2
+>
+    implements $SeparatedRestartableCheckInEventV2CopyWith<$Res> {
+  _$SeparatedRestartableCheckInEventV2CopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SeparatedRestartableCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? streamingState = null}) {
+  $Res call({Object? data = freezed}) {
     return _then(
-      _$StreamingStateChangedImpl(
-        null == streamingState
-            ? _value.streamingState
-            : streamingState // ignore: cast_nullable_to_non_nullable
-                as StreamingStateV2,
+      _value.copyWith(
+            data:
+                freezed == data
+                    ? _value.data
+                    : data // ignore: cast_nullable_to_non_nullable
+                        as dynamic,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$WebSocketMessageReceivedImplCopyWith<$Res>
+    implements $SeparatedRestartableCheckInEventV2CopyWith<$Res> {
+  factory _$$WebSocketMessageReceivedImplCopyWith(
+    _$WebSocketMessageReceivedImpl value,
+    $Res Function(_$WebSocketMessageReceivedImpl) then,
+  ) = __$$WebSocketMessageReceivedImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({dynamic data});
+}
+
+/// @nodoc
+class __$$WebSocketMessageReceivedImplCopyWithImpl<$Res>
+    extends
+        _$SeparatedRestartableCheckInEventV2CopyWithImpl<
+          $Res,
+          _$WebSocketMessageReceivedImpl
+        >
+    implements _$$WebSocketMessageReceivedImplCopyWith<$Res> {
+  __$$WebSocketMessageReceivedImplCopyWithImpl(
+    _$WebSocketMessageReceivedImpl _value,
+    $Res Function(_$WebSocketMessageReceivedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of SeparatedRestartableCheckInEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? data = freezed}) {
+    return _then(
+      _$WebSocketMessageReceivedImpl(
+        freezed == data
+            ? _value.data
+            : data // ignore: cast_nullable_to_non_nullable
+                as dynamic,
       ),
     );
   }
-
-  /// Create a copy of CheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $StreamingStateV2CopyWith<$Res> get streamingState {
-    return $StreamingStateV2CopyWith<$Res>(_value.streamingState, (value) {
-      return _then(_value.copyWith(streamingState: value));
-    });
-  }
 }
 
 /// @nodoc
 
-class _$StreamingStateChangedImpl implements _StreamingStateChanged {
-  const _$StreamingStateChangedImpl(this.streamingState);
+class _$WebSocketMessageReceivedImpl implements _WebSocketMessageReceived {
+  const _$WebSocketMessageReceivedImpl(this.data);
 
   @override
-  final StreamingStateV2 streamingState;
+  final dynamic data;
 
   @override
   String toString() {
-    return 'CheckInEventV2.streamingStateChanged(streamingState: $streamingState)';
+    return 'SeparatedRestartableCheckInEventV2.webSocketMessageReceived(data: $data)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StreamingStateChangedImpl &&
-            (identical(other.streamingState, streamingState) ||
-                other.streamingState == streamingState));
+            other is _$WebSocketMessageReceivedImpl &&
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, streamingState);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of SeparatedRestartableCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$StreamingStateChangedImplCopyWith<_$StreamingStateChangedImpl>
-  get copyWith =>
-      __$$StreamingStateChangedImplCopyWithImpl<_$StreamingStateChangedImpl>(
-        this,
-        _$identity,
-      );
+  _$$WebSocketMessageReceivedImplCopyWith<_$WebSocketMessageReceivedImpl>
+  get copyWith => __$$WebSocketMessageReceivedImplCopyWithImpl<
+    _$WebSocketMessageReceivedImpl
+  >(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() start,
-    required TResult Function() stop,
-    required TResult Function() toggleDebugMode,
-    required TResult Function(int fps) setMaxFps,
     required TResult Function(dynamic data) webSocketMessageReceived,
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
-    required TResult Function(StreamingStateV2 streamingState)
-    streamingStateChanged,
   }) {
-    return streamingStateChanged(streamingState);
+    return webSocketMessageReceived(data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? start,
-    TResult? Function()? stop,
-    TResult? Function()? toggleDebugMode,
-    TResult? Function(int fps)? setMaxFps,
     TResult? Function(dynamic data)? webSocketMessageReceived,
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult? Function(StreamingStateV2 streamingState)? streamingStateChanged,
   }) {
-    return streamingStateChanged?.call(streamingState);
+    return webSocketMessageReceived?.call(data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? start,
-    TResult Function()? stop,
-    TResult Function()? toggleDebugMode,
-    TResult Function(int fps)? setMaxFps,
     TResult Function(dynamic data)? webSocketMessageReceived,
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
-    TResult Function(StreamingStateV2 streamingState)? streamingStateChanged,
     required TResult orElse(),
   }) {
-    if (streamingStateChanged != null) {
-      return streamingStateChanged(streamingState);
+    if (webSocketMessageReceived != null) {
+      return webSocketMessageReceived(data);
     }
     return orElse();
   }
@@ -1517,71 +885,358 @@ class _$StreamingStateChangedImpl implements _StreamingStateChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CheckInStart value) start,
-    required TResult Function(CheckInStop value) stop,
-    required TResult Function(CheckInToggleDebugMode value) toggleDebugMode,
-    required TResult Function(CheckInSetMaxFps value) setMaxFps,
-    required TResult Function(CheckInWebSocketMessageReceived value)
+    required TResult Function(_WebSocketMessageReceived value)
     webSocketMessageReceived,
-    required TResult Function(CheckInConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(_CameraStateChanged value) cameraStateChanged,
-    required TResult Function(_StreamingStateChanged value)
-    streamingStateChanged,
   }) {
-    return streamingStateChanged(this);
+    return webSocketMessageReceived(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CheckInStart value)? start,
-    TResult? Function(CheckInStop value)? stop,
-    TResult? Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult? Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult? Function(CheckInWebSocketMessageReceived value)?
+    TResult? Function(_WebSocketMessageReceived value)?
     webSocketMessageReceived,
-    TResult? Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult? Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult? Function(_StreamingStateChanged value)? streamingStateChanged,
   }) {
-    return streamingStateChanged?.call(this);
+    return webSocketMessageReceived?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CheckInStart value)? start,
-    TResult Function(CheckInStop value)? stop,
-    TResult Function(CheckInToggleDebugMode value)? toggleDebugMode,
-    TResult Function(CheckInSetMaxFps value)? setMaxFps,
-    TResult Function(CheckInWebSocketMessageReceived value)?
-    webSocketMessageReceived,
-    TResult Function(CheckInConnectionStateChanged value)?
-    connectionStateChanged,
-    TResult Function(_CameraStateChanged value)? cameraStateChanged,
-    TResult Function(_StreamingStateChanged value)? streamingStateChanged,
+    TResult Function(_WebSocketMessageReceived value)? webSocketMessageReceived,
     required TResult orElse(),
   }) {
-    if (streamingStateChanged != null) {
-      return streamingStateChanged(this);
+    if (webSocketMessageReceived != null) {
+      return webSocketMessageReceived(this);
     }
     return orElse();
   }
 }
 
-abstract class _StreamingStateChanged implements CheckInEventV2 {
-  const factory _StreamingStateChanged(final StreamingStateV2 streamingState) =
-      _$StreamingStateChangedImpl;
+abstract class _WebSocketMessageReceived
+    implements SeparatedRestartableCheckInEventV2 {
+  const factory _WebSocketMessageReceived(final dynamic data) =
+      _$WebSocketMessageReceivedImpl;
 
-  StreamingStateV2 get streamingState;
+  @override
+  dynamic get data;
 
-  /// Create a copy of CheckInEventV2
+  /// Create a copy of SeparatedRestartableCheckInEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WebSocketMessageReceivedImplCopyWith<_$WebSocketMessageReceivedImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ConcurrentCheckInEventV2 {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() toggleDebugMode,
+    required TResult Function(int fps) setMaxFps,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? toggleDebugMode,
+    TResult? Function(int fps)? setMaxFps,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? toggleDebugMode,
+    TResult Function(int fps)? setMaxFps,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ToggleDebugMode value) toggleDebugMode,
+    required TResult Function(_SetMaxFps value) setMaxFps,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ToggleDebugMode value)? toggleDebugMode,
+    TResult? Function(_SetMaxFps value)? setMaxFps,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ToggleDebugMode value)? toggleDebugMode,
+    TResult Function(_SetMaxFps value)? setMaxFps,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ConcurrentCheckInEventV2CopyWith<$Res> {
+  factory $ConcurrentCheckInEventV2CopyWith(
+    ConcurrentCheckInEventV2 value,
+    $Res Function(ConcurrentCheckInEventV2) then,
+  ) = _$ConcurrentCheckInEventV2CopyWithImpl<$Res, ConcurrentCheckInEventV2>;
+}
+
+/// @nodoc
+class _$ConcurrentCheckInEventV2CopyWithImpl<
+  $Res,
+  $Val extends ConcurrentCheckInEventV2
+>
+    implements $ConcurrentCheckInEventV2CopyWith<$Res> {
+  _$ConcurrentCheckInEventV2CopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ConcurrentCheckInEventV2
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$ToggleDebugModeImplCopyWith<$Res> {
+  factory _$$ToggleDebugModeImplCopyWith(
+    _$ToggleDebugModeImpl value,
+    $Res Function(_$ToggleDebugModeImpl) then,
+  ) = __$$ToggleDebugModeImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ToggleDebugModeImplCopyWithImpl<$Res>
+    extends _$ConcurrentCheckInEventV2CopyWithImpl<$Res, _$ToggleDebugModeImpl>
+    implements _$$ToggleDebugModeImplCopyWith<$Res> {
+  __$$ToggleDebugModeImplCopyWithImpl(
+    _$ToggleDebugModeImpl _value,
+    $Res Function(_$ToggleDebugModeImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ConcurrentCheckInEventV2
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ToggleDebugModeImpl implements _ToggleDebugMode {
+  const _$ToggleDebugModeImpl();
+
+  @override
+  String toString() {
+    return 'ConcurrentCheckInEventV2.toggleDebugMode()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ToggleDebugModeImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() toggleDebugMode,
+    required TResult Function(int fps) setMaxFps,
+  }) {
+    return toggleDebugMode();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? toggleDebugMode,
+    TResult? Function(int fps)? setMaxFps,
+  }) {
+    return toggleDebugMode?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? toggleDebugMode,
+    TResult Function(int fps)? setMaxFps,
+    required TResult orElse(),
+  }) {
+    if (toggleDebugMode != null) {
+      return toggleDebugMode();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ToggleDebugMode value) toggleDebugMode,
+    required TResult Function(_SetMaxFps value) setMaxFps,
+  }) {
+    return toggleDebugMode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ToggleDebugMode value)? toggleDebugMode,
+    TResult? Function(_SetMaxFps value)? setMaxFps,
+  }) {
+    return toggleDebugMode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ToggleDebugMode value)? toggleDebugMode,
+    TResult Function(_SetMaxFps value)? setMaxFps,
+    required TResult orElse(),
+  }) {
+    if (toggleDebugMode != null) {
+      return toggleDebugMode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleDebugMode implements ConcurrentCheckInEventV2 {
+  const factory _ToggleDebugMode() = _$ToggleDebugModeImpl;
+}
+
+/// @nodoc
+abstract class _$$SetMaxFpsImplCopyWith<$Res> {
+  factory _$$SetMaxFpsImplCopyWith(
+    _$SetMaxFpsImpl value,
+    $Res Function(_$SetMaxFpsImpl) then,
+  ) = __$$SetMaxFpsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int fps});
+}
+
+/// @nodoc
+class __$$SetMaxFpsImplCopyWithImpl<$Res>
+    extends _$ConcurrentCheckInEventV2CopyWithImpl<$Res, _$SetMaxFpsImpl>
+    implements _$$SetMaxFpsImplCopyWith<$Res> {
+  __$$SetMaxFpsImplCopyWithImpl(
+    _$SetMaxFpsImpl _value,
+    $Res Function(_$SetMaxFpsImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ConcurrentCheckInEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? fps = null}) {
+    return _then(
+      _$SetMaxFpsImpl(
+        null == fps
+            ? _value.fps
+            : fps // ignore: cast_nullable_to_non_nullable
+                as int,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$SetMaxFpsImpl implements _SetMaxFps {
+  const _$SetMaxFpsImpl(this.fps);
+
+  @override
+  final int fps;
+
+  @override
+  String toString() {
+    return 'ConcurrentCheckInEventV2.setMaxFps(fps: $fps)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetMaxFpsImpl &&
+            (identical(other.fps, fps) || other.fps == fps));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fps);
+
+  /// Create a copy of ConcurrentCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StreamingStateChangedImplCopyWith<_$StreamingStateChangedImpl>
-  get copyWith => throw _privateConstructorUsedError;
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetMaxFpsImplCopyWith<_$SetMaxFpsImpl> get copyWith =>
+      __$$SetMaxFpsImplCopyWithImpl<_$SetMaxFpsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() toggleDebugMode,
+    required TResult Function(int fps) setMaxFps,
+  }) {
+    return setMaxFps(fps);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? toggleDebugMode,
+    TResult? Function(int fps)? setMaxFps,
+  }) {
+    return setMaxFps?.call(fps);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? toggleDebugMode,
+    TResult Function(int fps)? setMaxFps,
+    required TResult orElse(),
+  }) {
+    if (setMaxFps != null) {
+      return setMaxFps(fps);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ToggleDebugMode value) toggleDebugMode,
+    required TResult Function(_SetMaxFps value) setMaxFps,
+  }) {
+    return setMaxFps(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ToggleDebugMode value)? toggleDebugMode,
+    TResult? Function(_SetMaxFps value)? setMaxFps,
+  }) {
+    return setMaxFps?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ToggleDebugMode value)? toggleDebugMode,
+    TResult Function(_SetMaxFps value)? setMaxFps,
+    required TResult orElse(),
+  }) {
+    if (setMaxFps != null) {
+      return setMaxFps(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetMaxFps implements ConcurrentCheckInEventV2 {
+  const factory _SetMaxFps(final int fps) = _$SetMaxFpsImpl;
+
+  int get fps;
+
+  /// Create a copy of ConcurrentCheckInEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetMaxFpsImplCopyWith<_$SetMaxFpsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

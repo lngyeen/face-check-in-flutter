@@ -19,7 +19,7 @@ class DebugToggleButtonV2 extends StatelessWidget {
           ),
           onPressed: () {
             context.read<CheckInBlocV2>().add(
-              const CheckInEventV2.toggleDebugMode(),
+              const ConcurrentCheckInEventV2.toggleDebugMode(),
             );
           },
         );

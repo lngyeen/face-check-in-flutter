@@ -61,7 +61,10 @@ class ConnectionLostWidget extends StatelessWidget {
       case AppConnectionStatus.fastRetrying:
       case AppConnectionStatus.backgroundRetrying:
         return 'Reconnecting...';
-      default:
+
+      case AppConnectionStatus.initial:
+      case AppConnectionStatus.connecting:
+      case AppConnectionStatus.connected:
         return 'Connection Lost';
     }
   }
