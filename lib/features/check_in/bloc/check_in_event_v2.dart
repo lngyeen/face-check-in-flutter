@@ -13,9 +13,6 @@ class BucketSequentialFlowCheckInEventV2 extends CheckInEventV2
 @freezed
 class BucketSequentialStateCheckInEventV2 extends CheckInEventV2
     with _$BucketSequentialStateCheckInEventV2 {
-  const factory BucketSequentialStateCheckInEventV2.connectionStateChanged(
-    ConnectionState connectionState,
-  ) = _ConnectionStateChanged;
   const factory BucketSequentialStateCheckInEventV2.cameraStateChanged(
     CameraStateV2 cameraState,
   ) = _CameraStateChanged;

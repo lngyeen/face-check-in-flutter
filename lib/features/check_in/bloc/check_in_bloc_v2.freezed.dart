@@ -294,40 +294,41 @@ abstract class _Stop implements BucketSequentialFlowCheckInEventV2 {
 
 /// @nodoc
 mixin _$BucketSequentialStateCheckInEventV2 {
+  CameraStateV2 get cameraState => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
     required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ConnectionStateChanged value)
-    connectionStateChanged,
     required TResult Function(_CameraStateChanged value) cameraStateChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(_CameraStateChanged value)? cameraStateChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(_CameraStateChanged value)? cameraStateChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
+
+  /// Create a copy of BucketSequentialStateCheckInEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BucketSequentialStateCheckInEventV2CopyWith<
+    BucketSequentialStateCheckInEventV2
+  >
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -340,6 +341,10 @@ abstract class $BucketSequentialStateCheckInEventV2CopyWith<$Res> {
         $Res,
         BucketSequentialStateCheckInEventV2
       >;
+  @useResult
+  $Res call({CameraStateV2 cameraState});
+
+  $CameraStateV2CopyWith<$Res> get cameraState;
 }
 
 /// @nodoc
@@ -357,45 +362,18 @@ class _$BucketSequentialStateCheckInEventV2CopyWithImpl<
 
   /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$ConnectionStateChangedImplCopyWith<$Res> {
-  factory _$$ConnectionStateChangedImplCopyWith(
-    _$ConnectionStateChangedImpl value,
-    $Res Function(_$ConnectionStateChangedImpl) then,
-  ) = __$$ConnectionStateChangedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ConnectionState connectionState});
-
-  $ConnectionStateCopyWith<$Res> get connectionState;
-}
-
-/// @nodoc
-class __$$ConnectionStateChangedImplCopyWithImpl<$Res>
-    extends
-        _$BucketSequentialStateCheckInEventV2CopyWithImpl<
-          $Res,
-          _$ConnectionStateChangedImpl
-        >
-    implements _$$ConnectionStateChangedImplCopyWith<$Res> {
-  __$$ConnectionStateChangedImplCopyWithImpl(
-    _$ConnectionStateChangedImpl _value,
-    $Res Function(_$ConnectionStateChangedImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of BucketSequentialStateCheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? connectionState = null}) {
+  $Res call({Object? cameraState = null}) {
     return _then(
-      _$ConnectionStateChangedImpl(
-        null == connectionState
-            ? _value.connectionState
-            : connectionState // ignore: cast_nullable_to_non_nullable
-                as ConnectionState,
-      ),
+      _value.copyWith(
+            cameraState:
+                null == cameraState
+                    ? _value.cameraState
+                    : cameraState // ignore: cast_nullable_to_non_nullable
+                        as CameraStateV2,
+          )
+          as $Val,
     );
   }
 
@@ -403,138 +381,25 @@ class __$$ConnectionStateChangedImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ConnectionStateCopyWith<$Res> get connectionState {
-    return $ConnectionStateCopyWith<$Res>(_value.connectionState, (value) {
-      return _then(_value.copyWith(connectionState: value));
+  $CameraStateV2CopyWith<$Res> get cameraState {
+    return $CameraStateV2CopyWith<$Res>(_value.cameraState, (value) {
+      return _then(_value.copyWith(cameraState: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-
-class _$ConnectionStateChangedImpl implements _ConnectionStateChanged {
-  const _$ConnectionStateChangedImpl(this.connectionState);
-
-  @override
-  final ConnectionState connectionState;
-
-  @override
-  String toString() {
-    return 'BucketSequentialStateCheckInEventV2.connectionStateChanged(connectionState: $connectionState)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ConnectionStateChangedImpl &&
-            (identical(other.connectionState, connectionState) ||
-                other.connectionState == connectionState));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, connectionState);
-
-  /// Create a copy of BucketSequentialStateCheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ConnectionStateChangedImplCopyWith<_$ConnectionStateChangedImpl>
-  get copyWith =>
-      __$$ConnectionStateChangedImplCopyWithImpl<_$ConnectionStateChangedImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
-    required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
-  }) {
-    return connectionStateChanged(connectionState);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
-  }) {
-    return connectionStateChanged?.call(connectionState);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
-    TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
-    required TResult orElse(),
-  }) {
-    if (connectionStateChanged != null) {
-      return connectionStateChanged(connectionState);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ConnectionStateChanged value)
-    connectionStateChanged,
-    required TResult Function(_CameraStateChanged value) cameraStateChanged,
-  }) {
-    return connectionStateChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ConnectionStateChanged value)? connectionStateChanged,
-    TResult? Function(_CameraStateChanged value)? cameraStateChanged,
-  }) {
-    return connectionStateChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ConnectionStateChanged value)? connectionStateChanged,
-    TResult Function(_CameraStateChanged value)? cameraStateChanged,
-    required TResult orElse(),
-  }) {
-    if (connectionStateChanged != null) {
-      return connectionStateChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ConnectionStateChanged
-    implements BucketSequentialStateCheckInEventV2 {
-  const factory _ConnectionStateChanged(final ConnectionState connectionState) =
-      _$ConnectionStateChangedImpl;
-
-  ConnectionState get connectionState;
-
-  /// Create a copy of BucketSequentialStateCheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConnectionStateChangedImplCopyWith<_$ConnectionStateChangedImpl>
-  get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$CameraStateChangedImplCopyWith<$Res> {
+abstract class _$$CameraStateChangedImplCopyWith<$Res>
+    implements $BucketSequentialStateCheckInEventV2CopyWith<$Res> {
   factory _$$CameraStateChangedImplCopyWith(
     _$CameraStateChangedImpl value,
     $Res Function(_$CameraStateChangedImpl) then,
   ) = __$$CameraStateChangedImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({CameraStateV2 cameraState});
 
+  @override
   $CameraStateV2CopyWith<$Res> get cameraState;
 }
 
@@ -564,16 +429,6 @@ class __$$CameraStateChangedImplCopyWithImpl<$Res>
                 as CameraStateV2,
       ),
     );
-  }
-
-  /// Create a copy of BucketSequentialStateCheckInEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CameraStateV2CopyWith<$Res> get cameraState {
-    return $CameraStateV2CopyWith<$Res>(_value.cameraState, (value) {
-      return _then(_value.copyWith(cameraState: value));
-    });
   }
 }
 
@@ -616,8 +471,6 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ConnectionState connectionState)
-    connectionStateChanged,
     required TResult Function(CameraStateV2 cameraState) cameraStateChanged,
   }) {
     return cameraStateChanged(cameraState);
@@ -626,7 +479,6 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ConnectionState connectionState)? connectionStateChanged,
     TResult? Function(CameraStateV2 cameraState)? cameraStateChanged,
   }) {
     return cameraStateChanged?.call(cameraState);
@@ -635,7 +487,6 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ConnectionState connectionState)? connectionStateChanged,
     TResult Function(CameraStateV2 cameraState)? cameraStateChanged,
     required TResult orElse(),
   }) {
@@ -648,8 +499,6 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ConnectionStateChanged value)
-    connectionStateChanged,
     required TResult Function(_CameraStateChanged value) cameraStateChanged,
   }) {
     return cameraStateChanged(this);
@@ -658,7 +507,6 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ConnectionStateChanged value)? connectionStateChanged,
     TResult? Function(_CameraStateChanged value)? cameraStateChanged,
   }) {
     return cameraStateChanged?.call(this);
@@ -667,7 +515,6 @@ class _$CameraStateChangedImpl implements _CameraStateChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ConnectionStateChanged value)? connectionStateChanged,
     TResult Function(_CameraStateChanged value)? cameraStateChanged,
     required TResult orElse(),
   }) {
@@ -683,10 +530,12 @@ abstract class _CameraStateChanged
   const factory _CameraStateChanged(final CameraStateV2 cameraState) =
       _$CameraStateChangedImpl;
 
+  @override
   CameraStateV2 get cameraState;
 
   /// Create a copy of BucketSequentialStateCheckInEventV2
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CameraStateChangedImplCopyWith<_$CameraStateChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1241,9 +1090,7 @@ abstract class _SetMaxFps implements ConcurrentCheckInEventV2 {
 
 /// @nodoc
 mixin _$CheckInStateV2 {
-  CheckInStatusV2 get status => throw _privateConstructorUsedError;
   bool get isDebugMode => throw _privateConstructorUsedError;
-  ConnectionState get connectionState => throw _privateConstructorUsedError;
   FaceDetectionData? get latestFrameData => throw _privateConstructorUsedError;
   CheckInError? get currentError => throw _privateConstructorUsedError;
 
@@ -1262,14 +1109,11 @@ abstract class $CheckInStateV2CopyWith<$Res> {
   ) = _$CheckInStateV2CopyWithImpl<$Res, CheckInStateV2>;
   @useResult
   $Res call({
-    CheckInStatusV2 status,
     bool isDebugMode,
-    ConnectionState connectionState,
     FaceDetectionData? latestFrameData,
     CheckInError? currentError,
   });
 
-  $ConnectionStateCopyWith<$Res> get connectionState;
   $FaceDetectionDataCopyWith<$Res>? get latestFrameData;
   $CheckInErrorCopyWith<$Res>? get currentError;
 }
@@ -1289,29 +1133,17 @@ class _$CheckInStateV2CopyWithImpl<$Res, $Val extends CheckInStateV2>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
     Object? isDebugMode = null,
-    Object? connectionState = null,
     Object? latestFrameData = freezed,
     Object? currentError = freezed,
   }) {
     return _then(
       _value.copyWith(
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as CheckInStatusV2,
             isDebugMode:
                 null == isDebugMode
                     ? _value.isDebugMode
                     : isDebugMode // ignore: cast_nullable_to_non_nullable
                         as bool,
-            connectionState:
-                null == connectionState
-                    ? _value.connectionState
-                    : connectionState // ignore: cast_nullable_to_non_nullable
-                        as ConnectionState,
             latestFrameData:
                 freezed == latestFrameData
                     ? _value.latestFrameData
@@ -1325,16 +1157,6 @@ class _$CheckInStateV2CopyWithImpl<$Res, $Val extends CheckInStateV2>
           )
           as $Val,
     );
-  }
-
-  /// Create a copy of CheckInStateV2
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ConnectionStateCopyWith<$Res> get connectionState {
-    return $ConnectionStateCopyWith<$Res>(_value.connectionState, (value) {
-      return _then(_value.copyWith(connectionState: value) as $Val);
-    });
   }
 
   /// Create a copy of CheckInStateV2
@@ -1376,15 +1198,11 @@ abstract class _$$CheckInStateV2ImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    CheckInStatusV2 status,
     bool isDebugMode,
-    ConnectionState connectionState,
     FaceDetectionData? latestFrameData,
     CheckInError? currentError,
   });
 
-  @override
-  $ConnectionStateCopyWith<$Res> get connectionState;
   @override
   $FaceDetectionDataCopyWith<$Res>? get latestFrameData;
   @override
@@ -1405,29 +1223,17 @@ class __$$CheckInStateV2ImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
     Object? isDebugMode = null,
-    Object? connectionState = null,
     Object? latestFrameData = freezed,
     Object? currentError = freezed,
   }) {
     return _then(
       _$CheckInStateV2Impl(
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as CheckInStatusV2,
         isDebugMode:
             null == isDebugMode
                 ? _value.isDebugMode
                 : isDebugMode // ignore: cast_nullable_to_non_nullable
                     as bool,
-        connectionState:
-            null == connectionState
-                ? _value.connectionState
-                : connectionState // ignore: cast_nullable_to_non_nullable
-                    as ConnectionState,
         latestFrameData:
             freezed == latestFrameData
                 ? _value.latestFrameData
@@ -1447,24 +1253,14 @@ class __$$CheckInStateV2ImplCopyWithImpl<$Res>
 
 class _$CheckInStateV2Impl extends _CheckInStateV2 {
   const _$CheckInStateV2Impl({
-    this.status = CheckInStatusV2.idle,
     this.isDebugMode = false,
-    this.connectionState = const ConnectionState(
-      status: AppConnectionStatus.initial,
-    ),
     this.latestFrameData,
     this.currentError,
   }) : super._();
 
   @override
   @JsonKey()
-  final CheckInStatusV2 status;
-  @override
-  @JsonKey()
   final bool isDebugMode;
-  @override
-  @JsonKey()
-  final ConnectionState connectionState;
   @override
   final FaceDetectionData? latestFrameData;
   @override
@@ -1472,7 +1268,7 @@ class _$CheckInStateV2Impl extends _CheckInStateV2 {
 
   @override
   String toString() {
-    return 'CheckInStateV2(status: $status, isDebugMode: $isDebugMode, connectionState: $connectionState, latestFrameData: $latestFrameData, currentError: $currentError)';
+    return 'CheckInStateV2(isDebugMode: $isDebugMode, latestFrameData: $latestFrameData, currentError: $currentError)';
   }
 
   @override
@@ -1480,11 +1276,8 @@ class _$CheckInStateV2Impl extends _CheckInStateV2 {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CheckInStateV2Impl &&
-            (identical(other.status, status) || other.status == status) &&
             (identical(other.isDebugMode, isDebugMode) ||
                 other.isDebugMode == isDebugMode) &&
-            (identical(other.connectionState, connectionState) ||
-                other.connectionState == connectionState) &&
             (identical(other.latestFrameData, latestFrameData) ||
                 other.latestFrameData == latestFrameData) &&
             (identical(other.currentError, currentError) ||
@@ -1492,14 +1285,8 @@ class _$CheckInStateV2Impl extends _CheckInStateV2 {
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    status,
-    isDebugMode,
-    connectionState,
-    latestFrameData,
-    currentError,
-  );
+  int get hashCode =>
+      Object.hash(runtimeType, isDebugMode, latestFrameData, currentError);
 
   /// Create a copy of CheckInStateV2
   /// with the given fields replaced by the non-null parameter values.
@@ -1515,20 +1302,14 @@ class _$CheckInStateV2Impl extends _CheckInStateV2 {
 
 abstract class _CheckInStateV2 extends CheckInStateV2 {
   const factory _CheckInStateV2({
-    final CheckInStatusV2 status,
     final bool isDebugMode,
-    final ConnectionState connectionState,
     final FaceDetectionData? latestFrameData,
     final CheckInError? currentError,
   }) = _$CheckInStateV2Impl;
   const _CheckInStateV2._() : super._();
 
   @override
-  CheckInStatusV2 get status;
-  @override
   bool get isDebugMode;
-  @override
-  ConnectionState get connectionState;
   @override
   FaceDetectionData? get latestFrameData;
   @override

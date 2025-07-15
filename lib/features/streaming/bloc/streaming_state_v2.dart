@@ -4,11 +4,10 @@ part of 'streaming_bloc_v2.dart';
 @freezed
 class StreamingStateV2 with _$StreamingStateV2 {
   const factory StreamingStateV2({
-    @Default(2) int maxFps,
     StreamingError? error,
     @Default(StreamingStatus.idle) StreamingStatus streamingStatus,
     @Default(ProcessingStatus.waitingForFace) ProcessingStatus processingStatus,
-    FaceDetectionResult? faceDetectionResult,
+    LocalFaceDetectionResult? faceDetectionResult,
     LivenessResult? livenessResult,
   }) = _StreamingStateV2;
 

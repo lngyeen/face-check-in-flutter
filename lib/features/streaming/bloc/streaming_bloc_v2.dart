@@ -6,9 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:face_check_in_flutter/core/services/face_detection_service_v2.dart';
-import 'package:face_check_in_flutter/core/services/image_stream_service_v2.dart';
-import 'package:face_check_in_flutter/core/services/liveness_service_v2.dart';
+import 'package:face_check_in_flutter/core/services/image_stream_service_interface.dart';
+import 'package:face_check_in_flutter/domain/entities/hybrid_processing_result.dart';
+import 'package:face_check_in_flutter/domain/entities/liveness_result.dart';
+import 'package:face_check_in_flutter/domain/entities/local_face_detection_result.dart';
+import 'package:face_check_in_flutter/domain/entities/processing_mode.dart';
 import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
 
 import 'streaming_error.dart';

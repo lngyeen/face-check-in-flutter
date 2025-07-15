@@ -7,18 +7,7 @@ import 'package:camera/camera.dart';
 import 'package:image/image.dart' as img;
 import 'package:yuv_converter/yuv_converter.dart' as yuv_converter;
 
-// Forward declaration for ProcessedFrame
-class ProcessedFrame {
-  final String base64Image;
-  final img.Image originalImage;
-  final DateTime timestamp;
-
-  const ProcessedFrame({
-    required this.base64Image,
-    required this.originalImage,
-    required this.timestamp,
-  });
-}
+import 'package:face_check_in_flutter/domain/entities/processed_frame.dart';
 
 /// A static utility class for image conversion tasks.
 ///

@@ -6,12 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:face_check_in_flutter/domain/entities/app_connection_status.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/features/camera/bloc/camera_bloc_v2.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc_v2.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/camera_error_widget_v2.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/camera_initializing_widget.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/connection_lost_widget.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/front_camera_not_available_widget.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/permission_denied_widget.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
 
 class CameraPreviewWidgetV2 extends StatelessWidget {
   const CameraPreviewWidgetV2({super.key});
@@ -20,7 +20,7 @@ class CameraPreviewWidgetV2 extends StatelessWidget {
   Widget build(BuildContext context) {
     // Listen to the connection status from the main orchestrator
     final connectionStatus = context.select(
-      (CheckInBlocV2 bloc) => bloc.state.connectionState.status,
+      (ConnectionBloc bloc) => bloc.state.status,
     );
 
     if (_shouldShowConnectionLost(connectionStatus)) {

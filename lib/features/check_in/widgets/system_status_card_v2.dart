@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ConnectionState;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:face_check_in_flutter/features/camera/bloc/camera_bloc_v2.dart';
-import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc_v2.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_bloc.dart';
+import 'package:face_check_in_flutter/features/connection/bloc/connection_state.dart';
 import 'package:face_check_in_flutter/features/streaming/bloc/streaming_bloc_v2.dart';
 
 /// Widget that displays the current system status using simple Text widgets.
@@ -16,11 +17,10 @@ class SystemStatusCardV2 extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('System Status'),
-        BlocBuilder<CheckInBlocV2, CheckInStateV2>(
-          buildWhen:
-              (p, c) => p.connectionState.status != c.connectionState.status,
+        BlocBuilder<ConnectionBloc, ConnectionState>(
+          buildWhen: (p, c) => p.status != c.status,
           builder: (context, state) {
-            return Text('WebSocket: ${state.connectionState.status.name}');
+            return Text('WebSocket: ${state.status.name}');
           },
         ),
         BlocBuilder<CameraBlocV2, CameraStateV2>(

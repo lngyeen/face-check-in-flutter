@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:face_check_in_flutter/core/di/di.dart';
 import 'package:face_check_in_flutter/core/theme/app_colors.dart';
 import 'package:face_check_in_flutter/domain/entities/app_notification.dart';
-import 'package:face_check_in_flutter/features/check_in/services/notification_orchestrator_service.dart';
 
 class NotificationTextWidget extends StatelessWidget {
-  const NotificationTextWidget({super.key});
+  const NotificationTextWidget({super.key, required this.statusStream});
 
-  Stream<StatusUpdate> get _statusStream =>
-      getIt<NotificationOrchestratorService>().statusNotificationStream;
+  final Stream<StatusUpdate> statusStream;
 
   Color _getBackgroundColor(StatusType type) {
     switch (type) {
@@ -44,7 +41,7 @@ class NotificationTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<StatusUpdate>(
-      stream: _statusStream,
+      stream: statusStream,
       builder: (context, snapshot) {
         final statusUpdate = snapshot.data;
 

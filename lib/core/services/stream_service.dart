@@ -12,6 +12,7 @@ import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/domain/entities/camera_status.dart';
 import 'package:face_check_in_flutter/domain/entities/frame_data.dart';
 import 'package:face_check_in_flutter/domain/entities/permission_status.dart';
+import 'package:face_check_in_flutter/domain/entities/processed_frame.dart';
 import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
 import 'package:face_check_in_flutter/domain/entities/websocket_connection_status.dart';
 

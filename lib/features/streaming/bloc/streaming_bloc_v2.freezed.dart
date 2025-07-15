@@ -958,11 +958,10 @@ abstract class _ProcessingResultReceived
 
 /// @nodoc
 mixin _$StreamingStateV2 {
-  int get maxFps => throw _privateConstructorUsedError;
   StreamingError? get error => throw _privateConstructorUsedError;
   StreamingStatus get streamingStatus => throw _privateConstructorUsedError;
   ProcessingStatus get processingStatus => throw _privateConstructorUsedError;
-  FaceDetectionResult? get faceDetectionResult =>
+  LocalFaceDetectionResult? get faceDetectionResult =>
       throw _privateConstructorUsedError;
   LivenessResult? get livenessResult => throw _privateConstructorUsedError;
 
@@ -981,15 +980,15 @@ abstract class $StreamingStateV2CopyWith<$Res> {
   ) = _$StreamingStateV2CopyWithImpl<$Res, StreamingStateV2>;
   @useResult
   $Res call({
-    int maxFps,
     StreamingError? error,
     StreamingStatus streamingStatus,
     ProcessingStatus processingStatus,
-    FaceDetectionResult? faceDetectionResult,
+    LocalFaceDetectionResult? faceDetectionResult,
     LivenessResult? livenessResult,
   });
 
   $StreamingErrorCopyWith<$Res>? get error;
+  $LocalFaceDetectionResultCopyWith<$Res>? get faceDetectionResult;
 }
 
 /// @nodoc
@@ -1007,7 +1006,6 @@ class _$StreamingStateV2CopyWithImpl<$Res, $Val extends StreamingStateV2>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? maxFps = null,
     Object? error = freezed,
     Object? streamingStatus = null,
     Object? processingStatus = null,
@@ -1016,11 +1014,6 @@ class _$StreamingStateV2CopyWithImpl<$Res, $Val extends StreamingStateV2>
   }) {
     return _then(
       _value.copyWith(
-            maxFps:
-                null == maxFps
-                    ? _value.maxFps
-                    : maxFps // ignore: cast_nullable_to_non_nullable
-                        as int,
             error:
                 freezed == error
                     ? _value.error
@@ -1040,7 +1033,7 @@ class _$StreamingStateV2CopyWithImpl<$Res, $Val extends StreamingStateV2>
                 freezed == faceDetectionResult
                     ? _value.faceDetectionResult
                     : faceDetectionResult // ignore: cast_nullable_to_non_nullable
-                        as FaceDetectionResult?,
+                        as LocalFaceDetectionResult?,
             livenessResult:
                 freezed == livenessResult
                     ? _value.livenessResult
@@ -1064,6 +1057,23 @@ class _$StreamingStateV2CopyWithImpl<$Res, $Val extends StreamingStateV2>
       return _then(_value.copyWith(error: value) as $Val);
     });
   }
+
+  /// Create a copy of StreamingStateV2
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LocalFaceDetectionResultCopyWith<$Res>? get faceDetectionResult {
+    if (_value.faceDetectionResult == null) {
+      return null;
+    }
+
+    return $LocalFaceDetectionResultCopyWith<$Res>(
+      _value.faceDetectionResult!,
+      (value) {
+        return _then(_value.copyWith(faceDetectionResult: value) as $Val);
+      },
+    );
+  }
 }
 
 /// @nodoc
@@ -1076,16 +1086,17 @@ abstract class _$$StreamingStateV2ImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    int maxFps,
     StreamingError? error,
     StreamingStatus streamingStatus,
     ProcessingStatus processingStatus,
-    FaceDetectionResult? faceDetectionResult,
+    LocalFaceDetectionResult? faceDetectionResult,
     LivenessResult? livenessResult,
   });
 
   @override
   $StreamingErrorCopyWith<$Res>? get error;
+  @override
+  $LocalFaceDetectionResultCopyWith<$Res>? get faceDetectionResult;
 }
 
 /// @nodoc
@@ -1102,7 +1113,6 @@ class __$$StreamingStateV2ImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? maxFps = null,
     Object? error = freezed,
     Object? streamingStatus = null,
     Object? processingStatus = null,
@@ -1111,11 +1121,6 @@ class __$$StreamingStateV2ImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$StreamingStateV2Impl(
-        maxFps:
-            null == maxFps
-                ? _value.maxFps
-                : maxFps // ignore: cast_nullable_to_non_nullable
-                    as int,
         error:
             freezed == error
                 ? _value.error
@@ -1135,7 +1140,7 @@ class __$$StreamingStateV2ImplCopyWithImpl<$Res>
             freezed == faceDetectionResult
                 ? _value.faceDetectionResult
                 : faceDetectionResult // ignore: cast_nullable_to_non_nullable
-                    as FaceDetectionResult?,
+                    as LocalFaceDetectionResult?,
         livenessResult:
             freezed == livenessResult
                 ? _value.livenessResult
@@ -1150,7 +1155,6 @@ class __$$StreamingStateV2ImplCopyWithImpl<$Res>
 
 class _$StreamingStateV2Impl extends _StreamingStateV2 {
   const _$StreamingStateV2Impl({
-    this.maxFps = 2,
     this.error,
     this.streamingStatus = StreamingStatus.idle,
     this.processingStatus = ProcessingStatus.waitingForFace,
@@ -1158,9 +1162,6 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
     this.livenessResult,
   }) : super._();
 
-  @override
-  @JsonKey()
-  final int maxFps;
   @override
   final StreamingError? error;
   @override
@@ -1170,13 +1171,13 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
   @JsonKey()
   final ProcessingStatus processingStatus;
   @override
-  final FaceDetectionResult? faceDetectionResult;
+  final LocalFaceDetectionResult? faceDetectionResult;
   @override
   final LivenessResult? livenessResult;
 
   @override
   String toString() {
-    return 'StreamingStateV2(maxFps: $maxFps, error: $error, streamingStatus: $streamingStatus, processingStatus: $processingStatus, faceDetectionResult: $faceDetectionResult, livenessResult: $livenessResult)';
+    return 'StreamingStateV2(error: $error, streamingStatus: $streamingStatus, processingStatus: $processingStatus, faceDetectionResult: $faceDetectionResult, livenessResult: $livenessResult)';
   }
 
   @override
@@ -1184,7 +1185,6 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StreamingStateV2Impl &&
-            (identical(other.maxFps, maxFps) || other.maxFps == maxFps) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.streamingStatus, streamingStatus) ||
                 other.streamingStatus == streamingStatus) &&
@@ -1199,7 +1199,6 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    maxFps,
     error,
     streamingStatus,
     processingStatus,
@@ -1221,17 +1220,14 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
 
 abstract class _StreamingStateV2 extends StreamingStateV2 {
   const factory _StreamingStateV2({
-    final int maxFps,
     final StreamingError? error,
     final StreamingStatus streamingStatus,
     final ProcessingStatus processingStatus,
-    final FaceDetectionResult? faceDetectionResult,
+    final LocalFaceDetectionResult? faceDetectionResult,
     final LivenessResult? livenessResult,
   }) = _$StreamingStateV2Impl;
   const _StreamingStateV2._() : super._();
 
-  @override
-  int get maxFps;
   @override
   StreamingError? get error;
   @override
@@ -1239,7 +1235,7 @@ abstract class _StreamingStateV2 extends StreamingStateV2 {
   @override
   ProcessingStatus get processingStatus;
   @override
-  FaceDetectionResult? get faceDetectionResult;
+  LocalFaceDetectionResult? get faceDetectionResult;
   @override
   LivenessResult? get livenessResult;
 

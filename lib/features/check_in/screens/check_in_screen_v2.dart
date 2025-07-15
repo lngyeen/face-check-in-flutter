@@ -9,6 +9,7 @@ import 'package:face_check_in_flutter/core/di/di.dart';
 import 'package:face_check_in_flutter/core/theme/app_colors.dart';
 import 'package:face_check_in_flutter/features/camera/bloc/camera_bloc_v2.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc_v2.dart';
+import 'package:face_check_in_flutter/features/check_in/services/notification_orchestrator_service.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/camera_preview_widget_v2.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/debug_information_card_v2.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/debug_toggle_button_v2.dart';
@@ -35,6 +36,8 @@ class CheckInScreenV2 extends StatelessWidget {
         BlocProvider(create: (_) => getIt<StreamingBlocV2>()),
       ],
       child: NotificationHandler(
+        eventNotificationStream:
+            getIt<NotificationOrchestratorService>().eventNotificationStream,
         child: BlocBuilder<CheckInBlocV2, CheckInStateV2>(
           builder: (context, state) {
             return Scaffold(
@@ -51,7 +54,11 @@ class CheckInScreenV2 extends StatelessWidget {
                     top: MediaQuery.of(context).size.height * 0.15,
                     left: 0,
                     right: 0,
-                    child: const NotificationTextWidget(),
+                    child: NotificationTextWidget(
+                      statusStream:
+                          getIt<NotificationOrchestratorService>()
+                              .statusNotificationStream,
+                    ),
                   ),
                 ],
               ),

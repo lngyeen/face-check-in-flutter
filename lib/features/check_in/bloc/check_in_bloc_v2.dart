@@ -84,9 +84,6 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
     // State change events - processed sequentially to maintain consistency
     on<BucketSequentialStateCheckInEventV2>((event, emit) {
       event.whenOrNull(
-        connectionStateChanged:
-            (connectionState) =>
-                _onConnectionStateChanged(connectionState, emit),
         cameraStateChanged:
             (cameraState) => _onCameraStateChanged(cameraState, emit),
         // streamingStateChanged:
@@ -101,11 +98,7 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
     _connectionBlocSubscription = _connectionBloc.stream.listen((
       connectionState,
     ) {
-      add(
-        BucketSequentialStateCheckInEventV2.connectionStateChanged(
-          connectionState,
-        ),
-      );
+      _handleConnectionStateChanged(connectionState);
     });
 
     _webSocketMessageSubscription?.cancel();
@@ -132,12 +125,11 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
   }
 
   void _onStart(Emitter<CheckInStateV2> emit) {
-    emit(state.copyWith(status: CheckInStatusV2.initializing));
     _connectionBloc.add(const conn_event.ConnectionEvent.connect());
   }
 
   void _onStop(Emitter<CheckInStateV2> emit) {
-    emit(state.copyWith(status: CheckInStatusV2.idle, latestFrameData: null));
+    emit(state.copyWith(latestFrameData: null));
     _connectionBloc.add(const conn_event.ConnectionEvent.disconnect());
   }
 
@@ -160,8 +152,9 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
       );
     }
 
-    if (cameraState.error != null) {
-      final checkInError = cameraState.error!.when(
+    final cameraError = cameraState.error;
+    if (cameraError != null) {
+      final checkInError = cameraError.when(
         permissionDenied:
             () => const CheckInError.permission(
               message:
@@ -177,12 +170,7 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
               message: 'Failed to initialize camera',
             ),
       );
-      emit(
-        state.copyWith(
-          status: CheckInStatusV2.error,
-          currentError: checkInError,
-        ),
-      );
+      emit(state.copyWith(currentError: checkInError));
     }
   }
 
@@ -238,11 +226,7 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
             final response = FaceDetectionResponse.fromJson(jsonData);
             final frameData = response.data;
             emit(
-              state.copyWith(
-                latestFrameData: frameData,
-                currentError: null,
-                status: CheckInStatusV2.processing,
-              ),
+              state.copyWith(latestFrameData: frameData, currentError: null),
             );
           } catch (e) {
             emit(
@@ -283,12 +267,7 @@ class CheckInBlocV2 extends Bloc<CheckInEventV2, CheckInStateV2>
     }
   }
 
-  void _onConnectionStateChanged(
-    ConnectionState connectionState,
-    Emitter<CheckInStateV2> emit,
-  ) {
-    emit(state.copyWith(connectionState: connectionState));
-
+  void _handleConnectionStateChanged(ConnectionState connectionState) {
     final isCameraActive = _cameraBloc.state.status.isActive;
 
     switch (connectionState.status) {

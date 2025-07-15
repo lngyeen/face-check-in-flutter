@@ -4,14 +4,7 @@ import 'package:face_check_in_flutter/core/theme/app_colors.dart';
 
 enum SnackBarType { success, warning, error, info }
 
-/// A helper class for showing consistently styled UI components, like SnackBars.
 class UIHelper {
-  /// Shows a consistently styled SnackBar across the app.
-  ///
-  /// [context]: The BuildContext to find the ScaffoldMessenger.
-  /// [title]: The main title of the SnackBar.
-  /// [message]: The detailed message content.
-  /// [type]: The type of SnackBar, which determines its color and icon.
   static void showAppSnackBar({
     required BuildContext context,
     required String title,
