@@ -1,8 +1,19 @@
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 
-import 'package:face_check_in_flutter/domain/entities/liveness_config.dart';
 import 'package:face_check_in_flutter/domain/entities/liveness_result.dart';
+
 import 'liveness_service_v2.dart';
+
+class LivenessBatchProcessorConfig {
+  /// Minimum number of frames/faces required for liveness detection
+  static const int minFramesForLiveness = 8;
+
+  /// Maximum batch size to prevent memory issues
+  static const int maxBatchSize = 16;
+
+  /// Duration to cache liveness results
+  static const Duration resultCacheDuration = Duration(seconds: 2);
+}
 
 class LivenessBatchProcessor {
   final LivenessServiceV2 _livenessService;
@@ -23,7 +34,7 @@ class LivenessBatchProcessor {
     _batchBuffer.add(face);
     _batchStartTime ??= DateTime.now();
 
-    if (_batchBuffer.length > LivenessConfig.MAX_BATCH_SIZE) {
+    if (_batchBuffer.length > LivenessBatchProcessorConfig.maxBatchSize) {
       _batchBuffer.removeAt(0);
     }
   }
@@ -38,7 +49,7 @@ class LivenessBatchProcessor {
     }
 
     final timeSinceResult = DateTime.now().difference(_lastResultTime!);
-    if (timeSinceResult >= LivenessConfig.RESULT_CACHE_DURATION) {
+    if (timeSinceResult >= LivenessBatchProcessorConfig.resultCacheDuration) {
       return false;
     }
 
@@ -50,7 +61,8 @@ class LivenessBatchProcessor {
   }
 
   bool get isBatchReady {
-    return _batchBuffer.length >= LivenessConfig.MIN_FRAMES_FOR_LIVENESS;
+    return _batchBuffer.length >=
+        LivenessBatchProcessorConfig.minFramesForLiveness;
   }
 
   Future<LivenessResult> processBatch() async {

@@ -13,7 +13,6 @@ import 'package:face_check_in_flutter/core/services/image_stream_service_interfa
 import 'package:face_check_in_flutter/core/services/liveness_batch_processor.dart';
 import 'package:face_check_in_flutter/core/services/websocket_service.dart';
 import 'package:face_check_in_flutter/domain/entities/hybrid_processing_result.dart';
-import 'package:face_check_in_flutter/domain/entities/image_stream_config.dart';
 import 'package:face_check_in_flutter/domain/entities/liveness_result.dart';
 import 'package:face_check_in_flutter/domain/entities/local_face_detection_result.dart';
 import 'package:face_check_in_flutter/domain/entities/processed_frame.dart';
@@ -23,6 +22,14 @@ import 'package:face_check_in_flutter/domain/entities/websocket_connection_statu
 
 import 'face_detection_service_v2.dart';
 import 'liveness_service_v2.dart';
+
+/// Configuration constants for image stream processing.
+class ImageStreamConfig {
+  /// Target FPS for different processing phases
+  static const int waitingForFaceFps = 1;
+  static const int livenessCheckingFps = 8;
+  static const int readyForCheckInFps = 1;
+}
 
 @LazySingleton(as: ImageStreamServiceV2)
 class ImageStreamServiceV2Impl implements ImageStreamServiceV2 {
@@ -93,14 +100,21 @@ class ImageStreamServiceV2Impl implements ImageStreamServiceV2 {
   Duration _getThrottleForCurrentStage(ProcessingStatus status) {
     switch (status) {
       case ProcessingStatus.waitingForFace:
-        return ImageStreamConfig.waitingForFaceThrottleDuration;
+        return fpsToDuration(ImageStreamConfig.waitingForFaceFps);
       case ProcessingStatus.livenessChecking:
-        return ImageStreamConfig.livenessCheckingThrottleDuration;
+        return fpsToDuration(ImageStreamConfig.livenessCheckingFps);
       case ProcessingStatus.readyForCheckIn:
-        return ImageStreamConfig.readyForCheckInThrottleDuration;
+        return fpsToDuration(ImageStreamConfig.readyForCheckInFps);
       case ProcessingStatus.error:
-        return ImageStreamConfig.waitingForFaceThrottleDuration;
+        return fpsToDuration(ImageStreamConfig.waitingForFaceFps);
     }
+  }
+
+  static Duration fpsToDuration(int fps) {
+    if (fps <= 0) {
+      throw ArgumentError('FPS must be positive, got: $fps');
+    }
+    return Duration(milliseconds: (1000 / fps).round());
   }
 
   void _updateThrottleDuration() {

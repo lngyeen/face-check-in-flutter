@@ -19,46 +19,37 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppNotification {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message, StatusType type) statusUpdate,
     required TResult Function(String title, String message, SnackBarType type)
-    showSnackBar,
+    snackBar,
     required TResult Function(FaceDetectionResult face, String? annotatedImage)
-    showSuccessDialog,
+    dialog,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message, StatusType type)? statusUpdate,
     TResult? Function(String title, String message, SnackBarType type)?
-    showSnackBar,
-    TResult? Function(FaceDetectionResult face, String? annotatedImage)?
-    showSuccessDialog,
+    snackBar,
+    TResult? Function(FaceDetectionResult face, String? annotatedImage)? dialog,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message, StatusType type)? statusUpdate,
-    TResult Function(String title, String message, SnackBarType type)?
-    showSnackBar,
-    TResult Function(FaceDetectionResult face, String? annotatedImage)?
-    showSuccessDialog,
+    TResult Function(String title, String message, SnackBarType type)? snackBar,
+    TResult Function(FaceDetectionResult face, String? annotatedImage)? dialog,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(StatusUpdate value) statusUpdate,
-    required TResult Function(ShowSnackBar value) showSnackBar,
-    required TResult Function(ShowSuccessDialog value) showSuccessDialog,
+    required TResult Function(ShowSnackBar value) snackBar,
+    required TResult Function(ShowSuccessDialog value) dialog,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StatusUpdate value)? statusUpdate,
-    TResult? Function(ShowSnackBar value)? showSnackBar,
-    TResult? Function(ShowSuccessDialog value)? showSuccessDialog,
+    TResult? Function(ShowSnackBar value)? snackBar,
+    TResult? Function(ShowSuccessDialog value)? dialog,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(StatusUpdate value)? statusUpdate,
-    TResult Function(ShowSnackBar value)? showSnackBar,
-    TResult Function(ShowSuccessDialog value)? showSuccessDialog,
+    TResult Function(ShowSnackBar value)? snackBar,
+    TResult Function(ShowSuccessDialog value)? dialog,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -83,175 +74,6 @@ class _$AppNotificationCopyWithImpl<$Res, $Val extends AppNotification>
 
   /// Create a copy of AppNotification
   /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$StatusUpdateImplCopyWith<$Res> {
-  factory _$$StatusUpdateImplCopyWith(
-    _$StatusUpdateImpl value,
-    $Res Function(_$StatusUpdateImpl) then,
-  ) = __$$StatusUpdateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message, StatusType type});
-}
-
-/// @nodoc
-class __$$StatusUpdateImplCopyWithImpl<$Res>
-    extends _$AppNotificationCopyWithImpl<$Res, _$StatusUpdateImpl>
-    implements _$$StatusUpdateImplCopyWith<$Res> {
-  __$$StatusUpdateImplCopyWithImpl(
-    _$StatusUpdateImpl _value,
-    $Res Function(_$StatusUpdateImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of AppNotification
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? message = null, Object? type = null}) {
-    return _then(
-      _$StatusUpdateImpl(
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as StatusType,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$StatusUpdateImpl extends StatusUpdate {
-  const _$StatusUpdateImpl({required this.message, required this.type})
-    : super._();
-
-  @override
-  final String message;
-  @override
-  final StatusType type;
-
-  @override
-  String toString() {
-    return 'AppNotification.statusUpdate(message: $message, type: $type)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$StatusUpdateImpl &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.type, type) || other.type == type));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message, type);
-
-  /// Create a copy of AppNotification
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$StatusUpdateImplCopyWith<_$StatusUpdateImpl> get copyWith =>
-      __$$StatusUpdateImplCopyWithImpl<_$StatusUpdateImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String message, StatusType type) statusUpdate,
-    required TResult Function(String title, String message, SnackBarType type)
-    showSnackBar,
-    required TResult Function(FaceDetectionResult face, String? annotatedImage)
-    showSuccessDialog,
-  }) {
-    return statusUpdate(message, type);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message, StatusType type)? statusUpdate,
-    TResult? Function(String title, String message, SnackBarType type)?
-    showSnackBar,
-    TResult? Function(FaceDetectionResult face, String? annotatedImage)?
-    showSuccessDialog,
-  }) {
-    return statusUpdate?.call(message, type);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message, StatusType type)? statusUpdate,
-    TResult Function(String title, String message, SnackBarType type)?
-    showSnackBar,
-    TResult Function(FaceDetectionResult face, String? annotatedImage)?
-    showSuccessDialog,
-    required TResult orElse(),
-  }) {
-    if (statusUpdate != null) {
-      return statusUpdate(message, type);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(StatusUpdate value) statusUpdate,
-    required TResult Function(ShowSnackBar value) showSnackBar,
-    required TResult Function(ShowSuccessDialog value) showSuccessDialog,
-  }) {
-    return statusUpdate(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StatusUpdate value)? statusUpdate,
-    TResult? Function(ShowSnackBar value)? showSnackBar,
-    TResult? Function(ShowSuccessDialog value)? showSuccessDialog,
-  }) {
-    return statusUpdate?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(StatusUpdate value)? statusUpdate,
-    TResult Function(ShowSnackBar value)? showSnackBar,
-    TResult Function(ShowSuccessDialog value)? showSuccessDialog,
-    required TResult orElse(),
-  }) {
-    if (statusUpdate != null) {
-      return statusUpdate(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class StatusUpdate extends AppNotification {
-  const factory StatusUpdate({
-    required final String message,
-    required final StatusType type,
-  }) = _$StatusUpdateImpl;
-  const StatusUpdate._() : super._();
-
-  String get message;
-  StatusType get type;
-
-  /// Create a copy of AppNotification
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StatusUpdateImplCopyWith<_$StatusUpdateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -322,7 +144,7 @@ class _$ShowSnackBarImpl extends ShowSnackBar {
 
   @override
   String toString() {
-    return 'AppNotification.showSnackBar(title: $title, message: $message, type: $type)';
+    return 'AppNotification.snackBar(title: $title, message: $message, type: $type)';
   }
 
   @override
@@ -349,39 +171,33 @@ class _$ShowSnackBarImpl extends ShowSnackBar {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message, StatusType type) statusUpdate,
     required TResult Function(String title, String message, SnackBarType type)
-    showSnackBar,
+    snackBar,
     required TResult Function(FaceDetectionResult face, String? annotatedImage)
-    showSuccessDialog,
+    dialog,
   }) {
-    return showSnackBar(title, message, type);
+    return snackBar(title, message, type);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message, StatusType type)? statusUpdate,
     TResult? Function(String title, String message, SnackBarType type)?
-    showSnackBar,
-    TResult? Function(FaceDetectionResult face, String? annotatedImage)?
-    showSuccessDialog,
+    snackBar,
+    TResult? Function(FaceDetectionResult face, String? annotatedImage)? dialog,
   }) {
-    return showSnackBar?.call(title, message, type);
+    return snackBar?.call(title, message, type);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message, StatusType type)? statusUpdate,
-    TResult Function(String title, String message, SnackBarType type)?
-    showSnackBar,
-    TResult Function(FaceDetectionResult face, String? annotatedImage)?
-    showSuccessDialog,
+    TResult Function(String title, String message, SnackBarType type)? snackBar,
+    TResult Function(FaceDetectionResult face, String? annotatedImage)? dialog,
     required TResult orElse(),
   }) {
-    if (showSnackBar != null) {
-      return showSnackBar(title, message, type);
+    if (snackBar != null) {
+      return snackBar(title, message, type);
     }
     return orElse();
   }
@@ -389,33 +205,30 @@ class _$ShowSnackBarImpl extends ShowSnackBar {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(StatusUpdate value) statusUpdate,
-    required TResult Function(ShowSnackBar value) showSnackBar,
-    required TResult Function(ShowSuccessDialog value) showSuccessDialog,
+    required TResult Function(ShowSnackBar value) snackBar,
+    required TResult Function(ShowSuccessDialog value) dialog,
   }) {
-    return showSnackBar(this);
+    return snackBar(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StatusUpdate value)? statusUpdate,
-    TResult? Function(ShowSnackBar value)? showSnackBar,
-    TResult? Function(ShowSuccessDialog value)? showSuccessDialog,
+    TResult? Function(ShowSnackBar value)? snackBar,
+    TResult? Function(ShowSuccessDialog value)? dialog,
   }) {
-    return showSnackBar?.call(this);
+    return snackBar?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(StatusUpdate value)? statusUpdate,
-    TResult Function(ShowSnackBar value)? showSnackBar,
-    TResult Function(ShowSuccessDialog value)? showSuccessDialog,
+    TResult Function(ShowSnackBar value)? snackBar,
+    TResult Function(ShowSuccessDialog value)? dialog,
     required TResult orElse(),
   }) {
-    if (showSnackBar != null) {
-      return showSnackBar(this);
+    if (snackBar != null) {
+      return snackBar(this);
     }
     return orElse();
   }
@@ -506,7 +319,7 @@ class _$ShowSuccessDialogImpl extends ShowSuccessDialog {
 
   @override
   String toString() {
-    return 'AppNotification.showSuccessDialog(face: $face, annotatedImage: $annotatedImage)';
+    return 'AppNotification.dialog(face: $face, annotatedImage: $annotatedImage)';
   }
 
   @override
@@ -536,39 +349,33 @@ class _$ShowSuccessDialogImpl extends ShowSuccessDialog {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String message, StatusType type) statusUpdate,
     required TResult Function(String title, String message, SnackBarType type)
-    showSnackBar,
+    snackBar,
     required TResult Function(FaceDetectionResult face, String? annotatedImage)
-    showSuccessDialog,
+    dialog,
   }) {
-    return showSuccessDialog(face, annotatedImage);
+    return dialog(face, annotatedImage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String message, StatusType type)? statusUpdate,
     TResult? Function(String title, String message, SnackBarType type)?
-    showSnackBar,
-    TResult? Function(FaceDetectionResult face, String? annotatedImage)?
-    showSuccessDialog,
+    snackBar,
+    TResult? Function(FaceDetectionResult face, String? annotatedImage)? dialog,
   }) {
-    return showSuccessDialog?.call(face, annotatedImage);
+    return dialog?.call(face, annotatedImage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String message, StatusType type)? statusUpdate,
-    TResult Function(String title, String message, SnackBarType type)?
-    showSnackBar,
-    TResult Function(FaceDetectionResult face, String? annotatedImage)?
-    showSuccessDialog,
+    TResult Function(String title, String message, SnackBarType type)? snackBar,
+    TResult Function(FaceDetectionResult face, String? annotatedImage)? dialog,
     required TResult orElse(),
   }) {
-    if (showSuccessDialog != null) {
-      return showSuccessDialog(face, annotatedImage);
+    if (dialog != null) {
+      return dialog(face, annotatedImage);
     }
     return orElse();
   }
@@ -576,33 +383,30 @@ class _$ShowSuccessDialogImpl extends ShowSuccessDialog {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(StatusUpdate value) statusUpdate,
-    required TResult Function(ShowSnackBar value) showSnackBar,
-    required TResult Function(ShowSuccessDialog value) showSuccessDialog,
+    required TResult Function(ShowSnackBar value) snackBar,
+    required TResult Function(ShowSuccessDialog value) dialog,
   }) {
-    return showSuccessDialog(this);
+    return dialog(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StatusUpdate value)? statusUpdate,
-    TResult? Function(ShowSnackBar value)? showSnackBar,
-    TResult? Function(ShowSuccessDialog value)? showSuccessDialog,
+    TResult? Function(ShowSnackBar value)? snackBar,
+    TResult? Function(ShowSuccessDialog value)? dialog,
   }) {
-    return showSuccessDialog?.call(this);
+    return dialog?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(StatusUpdate value)? statusUpdate,
-    TResult Function(ShowSnackBar value)? showSnackBar,
-    TResult Function(ShowSuccessDialog value)? showSuccessDialog,
+    TResult Function(ShowSnackBar value)? snackBar,
+    TResult Function(ShowSuccessDialog value)? dialog,
     required TResult orElse(),
   }) {
-    if (showSuccessDialog != null) {
-      return showSuccessDialog(this);
+    if (dialog != null) {
+      return dialog(this);
     }
     return orElse();
   }

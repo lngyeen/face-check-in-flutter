@@ -7,8 +7,19 @@ import 'package:camera/camera.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:face_check_in_flutter/domain/entities/face_detection_config.dart';
 import 'package:face_check_in_flutter/domain/entities/local_face_detection_result.dart';
+
+/// Configuration constants for face detection.
+class FaceDetectionServiceV2Config {
+  /// The minimum width of the bounding box for a face to be considered valid (in pixels).
+  static const double minFaceWidth = 120.0;
+
+  /// The minimum height of the bounding box for a face to be considered valid (in pixels).
+  static const double minFaceHeight = 120.0;
+
+  /// The minimum size of a face relative to the smaller dimension of the image.
+  static const double minFaceSizeRatio = 0.15;
+}
 
 abstract class FaceDetectionServiceV2 {
   Future<LocalFaceDetectionResult> detectFace(
@@ -28,7 +39,7 @@ class FaceDetectionServiceV2Impl implements FaceDetectionServiceV2 {
       enableLandmarks: true,
       enableClassification: true,
       enableTracking: false,
-      minFaceSize: FaceDetectionConfig.MIN_FACE_SIZE_RATIO,
+      minFaceSize: FaceDetectionServiceV2Config.minFaceSizeRatio,
       performanceMode: FaceDetectorMode.accurate,
     );
     _faceDetector = FaceDetector(options: options);
@@ -92,8 +103,9 @@ class _FaceDetectionProcessor {
   }
 
   static bool _isValidFaceSize(Face face) {
-    return face.boundingBox.width >= FaceDetectionConfig.MIN_FACE_WIDTH &&
-        face.boundingBox.height >= FaceDetectionConfig.MIN_FACE_HEIGHT;
+    return face.boundingBox.width >=
+            FaceDetectionServiceV2Config.minFaceWidth &&
+        face.boundingBox.height >= FaceDetectionServiceV2Config.minFaceHeight;
   }
 
   static Future<InputImage> _convertCameraImageToInputImage(

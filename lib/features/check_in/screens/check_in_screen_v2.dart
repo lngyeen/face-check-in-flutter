@@ -50,15 +50,10 @@ class CheckInScreenV2 extends StatelessWidget {
                     right: 0,
                     child: _buildHeader(context),
                   ),
-                  Positioned(
-                    top: MediaQuery.of(context).size.height * 0.15,
-                    left: 0,
-                    right: 0,
-                    child: NotificationTextWidget(
-                      statusStream:
-                          getIt<NotificationOrchestratorService>()
-                              .statusNotificationStream,
-                    ),
+                  NotificationTextWidget(
+                    statusStream:
+                        getIt<NotificationOrchestratorService>()
+                            .statusNotificationStream,
                   ),
                 ],
               ),

@@ -5,28 +5,19 @@ import 'package:face_check_in_flutter/domain/entities/face_detection_response.da
 
 part 'app_notification.freezed.dart';
 
-/// Defines the type of status update for styling purposes (color, icon).
-enum StatusType { info, success, warning, error }
-
-/// A new, unified notification model for all user-facing feedback.
+/// A unified notification model for event-based user feedback.
 /// This sealed class allows us to handle different notification types in a structured way.
 @freezed
 sealed class AppNotification with _$AppNotification {
-  /// Represents a transient status update, suitable for an overlay text widget.
-  const factory AppNotification.statusUpdate({
-    required String message,
-    required StatusType type,
-  }) = StatusUpdate;
-
   /// Represents an event that should trigger a SnackBar for user feedback.
-  const factory AppNotification.showSnackBar({
+  const factory AppNotification.snackBar({
     required String title,
     required String message,
     required SnackBarType type,
   }) = ShowSnackBar;
 
   /// Represents the successful recognition event, triggering a detailed dialog.
-  const factory AppNotification.showSuccessDialog({
+  const factory AppNotification.dialog({
     required FaceDetectionResult face,
     String? annotatedImage,
   }) = ShowSuccessDialog;

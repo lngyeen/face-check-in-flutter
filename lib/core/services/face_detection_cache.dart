@@ -1,7 +1,21 @@
 import 'dart:math' as math;
 
-import 'package:face_check_in_flutter/domain/entities/image_stream_config.dart';
 import 'package:face_check_in_flutter/domain/entities/local_face_detection_result.dart';
+
+/// Configuration constants for face detection.
+class FaceDetectionCacheConfig {
+  /// Cache expiry duration for face detection results.
+  static const Duration cacheExpiry = Duration(seconds: 3);
+
+  /// Number of frames needed for stable face detection.
+  static const int stabilityThreshold = 3;
+
+  /// Number of frames needed to invalidate face detection cache.
+  static const int invalidationThreshold = 2;
+
+  /// Spatial threshold for face comparison (stricter).
+  static const double spatialThreshold = 0.8;
+}
 
 class FaceDetectionCache {
   LocalFaceDetectionResult? _cachedResult;
@@ -9,22 +23,15 @@ class FaceDetectionCache {
   int _consecutiveValidFrames = 0;
   int _consecutiveInvalidFrames = 0;
 
-  static const Duration _cacheExpiry =
-      ImageStreamConfig.faceDetectionCacheExpiry;
-  static const int _stabilityThreshold =
-      ImageStreamConfig.faceDetectionStabilityThreshold;
-  static const int _invalidationThreshold =
-      ImageStreamConfig.faceDetectionInvalidationThreshold;
-  static const double _spatialThreshold =
-      ImageStreamConfig.faceDetectionSpatialThreshold;
-
   bool get isValidAndStable =>
       _cachedResult != null &&
       _cacheTimestamp != null &&
-      DateTime.now().difference(_cacheTimestamp!) < _cacheExpiry &&
-      _consecutiveValidFrames >= _stabilityThreshold;
+      DateTime.now().difference(_cacheTimestamp!) <
+          FaceDetectionCacheConfig.cacheExpiry &&
+      _consecutiveValidFrames >= FaceDetectionCacheConfig.stabilityThreshold;
 
-  bool get isFaceStable => _consecutiveValidFrames >= _stabilityThreshold;
+  bool get isFaceStable =>
+      _consecutiveValidFrames >= FaceDetectionCacheConfig.stabilityThreshold;
 
   bool _isSameFace(LocalFaceDetectionResult newResult) {
     if (_cachedResult == null) {
@@ -63,7 +70,7 @@ class FaceDetectionCache {
 
     final overlapRatio = unionArea > 0 ? overlapArea / unionArea : 0.0;
 
-    return overlapRatio > _spatialThreshold;
+    return overlapRatio > FaceDetectionCacheConfig.spatialThreshold;
   }
 
   bool canUseCachedResult() {
@@ -81,7 +88,8 @@ class FaceDetectionCache {
       _consecutiveInvalidFrames++;
       _consecutiveValidFrames = 0;
 
-      if (_consecutiveInvalidFrames >= _invalidationThreshold) {
+      if (_consecutiveInvalidFrames >=
+          FaceDetectionCacheConfig.invalidationThreshold) {
         invalidate();
       }
 
@@ -111,7 +119,8 @@ class FaceDetectionCache {
       _consecutiveValidFrames = 0;
       _consecutiveInvalidFrames++;
 
-      if (_consecutiveInvalidFrames >= _invalidationThreshold) {
+      if (_consecutiveInvalidFrames >=
+          FaceDetectionCacheConfig.invalidationThreshold) {
         invalidate();
       }
       return;

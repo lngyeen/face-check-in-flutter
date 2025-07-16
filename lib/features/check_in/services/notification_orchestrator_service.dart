@@ -5,7 +5,9 @@ import 'package:rxdart/rxdart.dart';
 
 import 'package:face_check_in_flutter/core/utils/ui_helper.dart';
 import 'package:face_check_in_flutter/domain/entities/app_notification.dart';
+import 'package:face_check_in_flutter/domain/entities/face_detection_response.dart';
 import 'package:face_check_in_flutter/domain/entities/processing_mode.dart';
+import 'package:face_check_in_flutter/domain/entities/status_update.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc_v2.dart';
 import 'package:face_check_in_flutter/features/streaming/bloc/streaming_bloc_v2.dart';
 
@@ -34,23 +36,17 @@ class NotificationOrchestratorService {
   StatusUpdate? _convertStreamStateToStatusUpdate(StreamingStateV2 state) {
     switch (state.processingStatus) {
       case ProcessingStatus.waitingForFace:
-        return AppNotification.statusUpdate(
-              message: 'Waiting for face detection...',
-              type: StatusType.info,
-            )
-            as StatusUpdate;
+        return StatusUpdate(
+          message: 'Waiting for face detection...',
+          type: StatusType.info,
+        );
       case ProcessingStatus.livenessChecking:
-        return AppNotification.statusUpdate(
-              message: 'Processing...',
-              type: StatusType.info,
-            )
-            as StatusUpdate;
+        return StatusUpdate(message: 'Processing...', type: StatusType.info);
       case ProcessingStatus.readyForCheckIn:
-        return AppNotification.statusUpdate(
-              message: 'Ready for check-in!',
-              type: StatusType.success,
-            )
-            as StatusUpdate;
+        return StatusUpdate(
+          message: 'Ready for check-in!',
+          type: StatusType.success,
+        );
       case ProcessingStatus.error:
         return null;
     }
@@ -58,29 +54,59 @@ class NotificationOrchestratorService {
 
   AppNotification? _convertCheckInStateToEvent(CheckInStateV2 checkInState) {
     if (checkInState.currentError != null) {
-      return AppNotification.showSnackBar(
+      return AppNotification.snackBar(
         title: 'System Error',
         message: checkInState.currentError!.message,
         type: SnackBarType.error,
       );
     }
-    if (checkInState.detectedFaces.isNotEmpty) {
-      final face = checkInState.detectedFaces.first;
-      if (face.isRecognized && face.faceId != null) {
-        final annotatedImage = checkInState.annotatedImage;
-        return AppNotification.showSuccessDialog(
-          face: face,
-          annotatedImage: annotatedImage,
-        );
-      } else {
-        return const AppNotification.showSnackBar(
-          title: 'Face Not Recognized',
-          message:
-              'Face detected but not recognized. Ensure good lighting and face the camera directly.',
-          type: SnackBarType.warning,
-        );
-      }
+
+    final faces = checkInState.detectedFaces;
+    if (faces.isEmpty) {
+      return null;
     }
-    return null;
+
+    if (faces.length > 1) {
+      return _createMultipleFacesNotification(faces);
+    }
+
+    final face = faces.first;
+    if (face.isRecognized && face.faceId != null) {
+      final annotatedImage = checkInState.annotatedImage;
+      return AppNotification.dialog(face: face, annotatedImage: annotatedImage);
+    } else {
+      return AppNotification.snackBar(
+        title: 'Face Not Recognized',
+        message:
+            'Face detected but not recognized. Ensure good lighting and face the camera directly.',
+        type: SnackBarType.warning,
+      );
+    }
+  }
+
+  AppNotification _createMultipleFacesNotification(
+    List<FaceDetectionResult> faces,
+  ) {
+    final recognizedCount =
+        faces.where((face) => face.isRecognized == true).length;
+    final unrecognizedCount = faces.length - recognizedCount;
+
+    String message;
+    if (recognizedCount == 0) {
+      message =
+          'Multiple faces detected ($unrecognizedCount unknown). Please ensure only one person is visible.';
+    } else if (unrecognizedCount == 0) {
+      message =
+          'Multiple faces detected ($recognizedCount recognized). Please ensure only one person is visible.';
+    } else {
+      message =
+          'Multiple faces detected ($recognizedCount known, $unrecognizedCount unknown). Please ensure only one person is visible.';
+    }
+
+    return AppNotification.snackBar(
+      title: 'Multiple Faces Detected',
+      message: message,
+      type: SnackBarType.info,
+    );
   }
 }

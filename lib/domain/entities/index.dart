@@ -1,9 +1,7 @@
 // Face Detection
-export 'face_detection_config.dart';
 export 'local_face_detection_result.dart';
 
 // Liveness Detection
-export 'liveness_config.dart';
 export 'liveness_frame.dart';
 export 'liveness_check_result.dart';
 export 'liveness_result.dart';
@@ -12,7 +10,6 @@ export 'liveness_result.dart';
 export 'processed_frame.dart';
 export 'processing_mode.dart';
 export 'hybrid_processing_result.dart';
-export 'image_stream_config.dart';
 
 // Existing entities
 export 'app_notification.dart';

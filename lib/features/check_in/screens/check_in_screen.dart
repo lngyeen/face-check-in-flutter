@@ -5,14 +5,17 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:face_check_in_flutter/core/di/di.dart';
 import 'package:face_check_in_flutter/core/theme/app_colors.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_bloc.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_event.dart';
 import 'package:face_check_in_flutter/features/check_in/bloc/check_in_state.dart';
+import 'package:face_check_in_flutter/features/check_in/services/notification_orchestrator_service.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/camera_preview_widget.dart';
-import 'package:face_check_in_flutter/features/check_in/widgets/check_in_listeners.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/debug_information_card.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/debug_toggle_button.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/notification_handler.dart';
+import 'package:face_check_in_flutter/features/check_in/widgets/notification_text_widget.dart';
 import 'package:face_check_in_flutter/features/check_in/widgets/system_status_card.dart';
 import 'package:face_check_in_flutter/gen/assets.gen.dart';
 
@@ -34,9 +37,11 @@ class _CheckInScreenState extends State<CheckInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CheckInListeners(
-        child: BlocBuilder<CheckInBloc, CheckInState>(
+    return NotificationHandler(
+      eventNotificationStream:
+          getIt<NotificationOrchestratorService>().eventNotificationStream,
+      child: Scaffold(
+        body: BlocBuilder<CheckInBloc, CheckInState>(
           buildWhen: (p, c) => p.isDebugMode != c.isDebugMode,
           builder: (context, state) {
             return Stack(
@@ -47,6 +52,13 @@ class _CheckInScreenState extends State<CheckInScreen> {
 
                 // Header bar
                 Positioned(top: 0, left: 0, right: 0, child: _buildHeader()),
+
+                // Status notification text
+                NotificationTextWidget(
+                  statusStream:
+                      getIt<NotificationOrchestratorService>()
+                          .statusNotificationStream,
+                ),
 
                 // Debug sections at bottom (only visible in debug mode)
                 if (state.isDebugMode)
