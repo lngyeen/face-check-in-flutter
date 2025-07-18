@@ -23,7 +23,8 @@ mixin _$LocalFaceDetectionResult {
     required TResult Function() noFaceDetected,
     required TResult Function(Face face) singleFaceDetected,
     required TResult Function(List<Face> faces) multipleFacesDetected,
-    required TResult Function(Face face) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooLarge,
     required TResult Function(String message) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,7 +33,8 @@ mixin _$LocalFaceDetectionResult {
     TResult? Function()? noFaceDetected,
     TResult? Function(Face face)? singleFaceDetected,
     TResult? Function(List<Face> faces)? multipleFacesDetected,
-    TResult? Function(Face face)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult? Function(String message)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,7 +43,8 @@ mixin _$LocalFaceDetectionResult {
     TResult Function()? noFaceDetected,
     TResult Function(Face face)? singleFaceDetected,
     TResult Function(List<Face> faces)? multipleFacesDetected,
-    TResult Function(Face face)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -53,6 +56,7 @@ mixin _$LocalFaceDetectionResult {
     required TResult Function(_MultipleFacesDetected value)
     multipleFacesDetected,
     required TResult Function(_FaceTooSmall value) faceTooSmall,
+    required TResult Function(_FaceTooLarge value) faceTooLarge,
     required TResult Function(_Error value) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +66,7 @@ mixin _$LocalFaceDetectionResult {
     TResult? Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult? Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult? Function(_FaceTooSmall value)? faceTooSmall,
+    TResult? Function(_FaceTooLarge value)? faceTooLarge,
     TResult? Function(_Error value)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +76,7 @@ mixin _$LocalFaceDetectionResult {
     TResult Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult Function(_FaceTooSmall value)? faceTooSmall,
+    TResult Function(_FaceTooLarge value)? faceTooLarge,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -146,7 +152,8 @@ class _$SkipImpl extends _Skip {
     required TResult Function() noFaceDetected,
     required TResult Function(Face face) singleFaceDetected,
     required TResult Function(List<Face> faces) multipleFacesDetected,
-    required TResult Function(Face face) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooLarge,
     required TResult Function(String message) error,
   }) {
     return skip();
@@ -159,7 +166,8 @@ class _$SkipImpl extends _Skip {
     TResult? Function()? noFaceDetected,
     TResult? Function(Face face)? singleFaceDetected,
     TResult? Function(List<Face> faces)? multipleFacesDetected,
-    TResult? Function(Face face)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult? Function(String message)? error,
   }) {
     return skip?.call();
@@ -172,7 +180,8 @@ class _$SkipImpl extends _Skip {
     TResult Function()? noFaceDetected,
     TResult Function(Face face)? singleFaceDetected,
     TResult Function(List<Face> faces)? multipleFacesDetected,
-    TResult Function(Face face)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -191,6 +200,7 @@ class _$SkipImpl extends _Skip {
     required TResult Function(_MultipleFacesDetected value)
     multipleFacesDetected,
     required TResult Function(_FaceTooSmall value) faceTooSmall,
+    required TResult Function(_FaceTooLarge value) faceTooLarge,
     required TResult Function(_Error value) error,
   }) {
     return skip(this);
@@ -204,6 +214,7 @@ class _$SkipImpl extends _Skip {
     TResult? Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult? Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult? Function(_FaceTooSmall value)? faceTooSmall,
+    TResult? Function(_FaceTooLarge value)? faceTooLarge,
     TResult? Function(_Error value)? error,
   }) {
     return skip?.call(this);
@@ -217,6 +228,7 @@ class _$SkipImpl extends _Skip {
     TResult Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult Function(_FaceTooSmall value)? faceTooSmall,
+    TResult Function(_FaceTooLarge value)? faceTooLarge,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -279,7 +291,8 @@ class _$NoFaceDetectedImpl extends _NoFaceDetected {
     required TResult Function() noFaceDetected,
     required TResult Function(Face face) singleFaceDetected,
     required TResult Function(List<Face> faces) multipleFacesDetected,
-    required TResult Function(Face face) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooLarge,
     required TResult Function(String message) error,
   }) {
     return noFaceDetected();
@@ -292,7 +305,8 @@ class _$NoFaceDetectedImpl extends _NoFaceDetected {
     TResult? Function()? noFaceDetected,
     TResult? Function(Face face)? singleFaceDetected,
     TResult? Function(List<Face> faces)? multipleFacesDetected,
-    TResult? Function(Face face)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult? Function(String message)? error,
   }) {
     return noFaceDetected?.call();
@@ -305,7 +319,8 @@ class _$NoFaceDetectedImpl extends _NoFaceDetected {
     TResult Function()? noFaceDetected,
     TResult Function(Face face)? singleFaceDetected,
     TResult Function(List<Face> faces)? multipleFacesDetected,
-    TResult Function(Face face)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -324,6 +339,7 @@ class _$NoFaceDetectedImpl extends _NoFaceDetected {
     required TResult Function(_MultipleFacesDetected value)
     multipleFacesDetected,
     required TResult Function(_FaceTooSmall value) faceTooSmall,
+    required TResult Function(_FaceTooLarge value) faceTooLarge,
     required TResult Function(_Error value) error,
   }) {
     return noFaceDetected(this);
@@ -337,6 +353,7 @@ class _$NoFaceDetectedImpl extends _NoFaceDetected {
     TResult? Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult? Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult? Function(_FaceTooSmall value)? faceTooSmall,
+    TResult? Function(_FaceTooLarge value)? faceTooLarge,
     TResult? Function(_Error value)? error,
   }) {
     return noFaceDetected?.call(this);
@@ -350,6 +367,7 @@ class _$NoFaceDetectedImpl extends _NoFaceDetected {
     TResult Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult Function(_FaceTooSmall value)? faceTooSmall,
+    TResult Function(_FaceTooLarge value)? faceTooLarge,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -444,7 +462,8 @@ class _$SingleFaceDetectedImpl extends _SingleFaceDetected {
     required TResult Function() noFaceDetected,
     required TResult Function(Face face) singleFaceDetected,
     required TResult Function(List<Face> faces) multipleFacesDetected,
-    required TResult Function(Face face) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooLarge,
     required TResult Function(String message) error,
   }) {
     return singleFaceDetected(face);
@@ -457,7 +476,8 @@ class _$SingleFaceDetectedImpl extends _SingleFaceDetected {
     TResult? Function()? noFaceDetected,
     TResult? Function(Face face)? singleFaceDetected,
     TResult? Function(List<Face> faces)? multipleFacesDetected,
-    TResult? Function(Face face)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult? Function(String message)? error,
   }) {
     return singleFaceDetected?.call(face);
@@ -470,7 +490,8 @@ class _$SingleFaceDetectedImpl extends _SingleFaceDetected {
     TResult Function()? noFaceDetected,
     TResult Function(Face face)? singleFaceDetected,
     TResult Function(List<Face> faces)? multipleFacesDetected,
-    TResult Function(Face face)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -489,6 +510,7 @@ class _$SingleFaceDetectedImpl extends _SingleFaceDetected {
     required TResult Function(_MultipleFacesDetected value)
     multipleFacesDetected,
     required TResult Function(_FaceTooSmall value) faceTooSmall,
+    required TResult Function(_FaceTooLarge value) faceTooLarge,
     required TResult Function(_Error value) error,
   }) {
     return singleFaceDetected(this);
@@ -502,6 +524,7 @@ class _$SingleFaceDetectedImpl extends _SingleFaceDetected {
     TResult? Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult? Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult? Function(_FaceTooSmall value)? faceTooSmall,
+    TResult? Function(_FaceTooLarge value)? faceTooLarge,
     TResult? Function(_Error value)? error,
   }) {
     return singleFaceDetected?.call(this);
@@ -515,6 +538,7 @@ class _$SingleFaceDetectedImpl extends _SingleFaceDetected {
     TResult Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult Function(_FaceTooSmall value)? faceTooSmall,
+    TResult Function(_FaceTooLarge value)? faceTooLarge,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -630,7 +654,8 @@ class _$MultipleFacesDetectedImpl extends _MultipleFacesDetected {
     required TResult Function() noFaceDetected,
     required TResult Function(Face face) singleFaceDetected,
     required TResult Function(List<Face> faces) multipleFacesDetected,
-    required TResult Function(Face face) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooLarge,
     required TResult Function(String message) error,
   }) {
     return multipleFacesDetected(faces);
@@ -643,7 +668,8 @@ class _$MultipleFacesDetectedImpl extends _MultipleFacesDetected {
     TResult? Function()? noFaceDetected,
     TResult? Function(Face face)? singleFaceDetected,
     TResult? Function(List<Face> faces)? multipleFacesDetected,
-    TResult? Function(Face face)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult? Function(String message)? error,
   }) {
     return multipleFacesDetected?.call(faces);
@@ -656,7 +682,8 @@ class _$MultipleFacesDetectedImpl extends _MultipleFacesDetected {
     TResult Function()? noFaceDetected,
     TResult Function(Face face)? singleFaceDetected,
     TResult Function(List<Face> faces)? multipleFacesDetected,
-    TResult Function(Face face)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -675,6 +702,7 @@ class _$MultipleFacesDetectedImpl extends _MultipleFacesDetected {
     required TResult Function(_MultipleFacesDetected value)
     multipleFacesDetected,
     required TResult Function(_FaceTooSmall value) faceTooSmall,
+    required TResult Function(_FaceTooLarge value) faceTooLarge,
     required TResult Function(_Error value) error,
   }) {
     return multipleFacesDetected(this);
@@ -688,6 +716,7 @@ class _$MultipleFacesDetectedImpl extends _MultipleFacesDetected {
     TResult? Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult? Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult? Function(_FaceTooSmall value)? faceTooSmall,
+    TResult? Function(_FaceTooLarge value)? faceTooLarge,
     TResult? Function(_Error value)? error,
   }) {
     return multipleFacesDetected?.call(this);
@@ -701,6 +730,7 @@ class _$MultipleFacesDetectedImpl extends _MultipleFacesDetected {
     TResult Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult Function(_FaceTooSmall value)? faceTooSmall,
+    TResult Function(_FaceTooLarge value)? faceTooLarge,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -732,7 +762,7 @@ abstract class _$$FaceTooSmallImplCopyWith<$Res> {
     $Res Function(_$FaceTooSmallImpl) then,
   ) = __$$FaceTooSmallImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Face face});
+  $Res call({Face face, double faceSizeRatio});
 }
 
 /// @nodoc
@@ -748,7 +778,7 @@ class __$$FaceTooSmallImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? face = null}) {
+  $Res call({Object? face = null, Object? faceSizeRatio = null}) {
     return _then(
       _$FaceTooSmallImpl(
         face:
@@ -756,6 +786,11 @@ class __$$FaceTooSmallImplCopyWithImpl<$Res>
                 ? _value.face
                 : face // ignore: cast_nullable_to_non_nullable
                     as Face,
+        faceSizeRatio:
+            null == faceSizeRatio
+                ? _value.faceSizeRatio
+                : faceSizeRatio // ignore: cast_nullable_to_non_nullable
+                    as double,
       ),
     );
   }
@@ -764,14 +799,17 @@ class __$$FaceTooSmallImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FaceTooSmallImpl extends _FaceTooSmall {
-  const _$FaceTooSmallImpl({required this.face}) : super._();
+  const _$FaceTooSmallImpl({required this.face, required this.faceSizeRatio})
+    : super._();
 
   @override
   final Face face;
+  @override
+  final double faceSizeRatio;
 
   @override
   String toString() {
-    return 'LocalFaceDetectionResult.faceTooSmall(face: $face)';
+    return 'LocalFaceDetectionResult.faceTooSmall(face: $face, faceSizeRatio: $faceSizeRatio)';
   }
 
   @override
@@ -779,11 +817,13 @@ class _$FaceTooSmallImpl extends _FaceTooSmall {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FaceTooSmallImpl &&
-            (identical(other.face, face) || other.face == face));
+            (identical(other.face, face) || other.face == face) &&
+            (identical(other.faceSizeRatio, faceSizeRatio) ||
+                other.faceSizeRatio == faceSizeRatio));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, face);
+  int get hashCode => Object.hash(runtimeType, face, faceSizeRatio);
 
   /// Create a copy of LocalFaceDetectionResult
   /// with the given fields replaced by the non-null parameter values.
@@ -800,10 +840,11 @@ class _$FaceTooSmallImpl extends _FaceTooSmall {
     required TResult Function() noFaceDetected,
     required TResult Function(Face face) singleFaceDetected,
     required TResult Function(List<Face> faces) multipleFacesDetected,
-    required TResult Function(Face face) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooLarge,
     required TResult Function(String message) error,
   }) {
-    return faceTooSmall(face);
+    return faceTooSmall(face, faceSizeRatio);
   }
 
   @override
@@ -813,10 +854,11 @@ class _$FaceTooSmallImpl extends _FaceTooSmall {
     TResult? Function()? noFaceDetected,
     TResult? Function(Face face)? singleFaceDetected,
     TResult? Function(List<Face> faces)? multipleFacesDetected,
-    TResult? Function(Face face)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult? Function(String message)? error,
   }) {
-    return faceTooSmall?.call(face);
+    return faceTooSmall?.call(face, faceSizeRatio);
   }
 
   @override
@@ -826,12 +868,13 @@ class _$FaceTooSmallImpl extends _FaceTooSmall {
     TResult Function()? noFaceDetected,
     TResult Function(Face face)? singleFaceDetected,
     TResult Function(List<Face> faces)? multipleFacesDetected,
-    TResult Function(Face face)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (faceTooSmall != null) {
-      return faceTooSmall(face);
+      return faceTooSmall(face, faceSizeRatio);
     }
     return orElse();
   }
@@ -845,6 +888,7 @@ class _$FaceTooSmallImpl extends _FaceTooSmall {
     required TResult Function(_MultipleFacesDetected value)
     multipleFacesDetected,
     required TResult Function(_FaceTooSmall value) faceTooSmall,
+    required TResult Function(_FaceTooLarge value) faceTooLarge,
     required TResult Function(_Error value) error,
   }) {
     return faceTooSmall(this);
@@ -858,6 +902,7 @@ class _$FaceTooSmallImpl extends _FaceTooSmall {
     TResult? Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult? Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult? Function(_FaceTooSmall value)? faceTooSmall,
+    TResult? Function(_FaceTooLarge value)? faceTooLarge,
     TResult? Function(_Error value)? error,
   }) {
     return faceTooSmall?.call(this);
@@ -871,6 +916,7 @@ class _$FaceTooSmallImpl extends _FaceTooSmall {
     TResult Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult Function(_FaceTooSmall value)? faceTooSmall,
+    TResult Function(_FaceTooLarge value)? faceTooLarge,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -882,15 +928,208 @@ class _$FaceTooSmallImpl extends _FaceTooSmall {
 }
 
 abstract class _FaceTooSmall extends LocalFaceDetectionResult {
-  const factory _FaceTooSmall({required final Face face}) = _$FaceTooSmallImpl;
+  const factory _FaceTooSmall({
+    required final Face face,
+    required final double faceSizeRatio,
+  }) = _$FaceTooSmallImpl;
   const _FaceTooSmall._() : super._();
 
   Face get face;
+  double get faceSizeRatio;
 
   /// Create a copy of LocalFaceDetectionResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FaceTooSmallImplCopyWith<_$FaceTooSmallImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FaceTooLargeImplCopyWith<$Res> {
+  factory _$$FaceTooLargeImplCopyWith(
+    _$FaceTooLargeImpl value,
+    $Res Function(_$FaceTooLargeImpl) then,
+  ) = __$$FaceTooLargeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Face face, double faceSizeRatio});
+}
+
+/// @nodoc
+class __$$FaceTooLargeImplCopyWithImpl<$Res>
+    extends _$LocalFaceDetectionResultCopyWithImpl<$Res, _$FaceTooLargeImpl>
+    implements _$$FaceTooLargeImplCopyWith<$Res> {
+  __$$FaceTooLargeImplCopyWithImpl(
+    _$FaceTooLargeImpl _value,
+    $Res Function(_$FaceTooLargeImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of LocalFaceDetectionResult
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? face = null, Object? faceSizeRatio = null}) {
+    return _then(
+      _$FaceTooLargeImpl(
+        face:
+            null == face
+                ? _value.face
+                : face // ignore: cast_nullable_to_non_nullable
+                    as Face,
+        faceSizeRatio:
+            null == faceSizeRatio
+                ? _value.faceSizeRatio
+                : faceSizeRatio // ignore: cast_nullable_to_non_nullable
+                    as double,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$FaceTooLargeImpl extends _FaceTooLarge {
+  const _$FaceTooLargeImpl({required this.face, required this.faceSizeRatio})
+    : super._();
+
+  @override
+  final Face face;
+  @override
+  final double faceSizeRatio;
+
+  @override
+  String toString() {
+    return 'LocalFaceDetectionResult.faceTooLarge(face: $face, faceSizeRatio: $faceSizeRatio)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FaceTooLargeImpl &&
+            (identical(other.face, face) || other.face == face) &&
+            (identical(other.faceSizeRatio, faceSizeRatio) ||
+                other.faceSizeRatio == faceSizeRatio));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, face, faceSizeRatio);
+
+  /// Create a copy of LocalFaceDetectionResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FaceTooLargeImplCopyWith<_$FaceTooLargeImpl> get copyWith =>
+      __$$FaceTooLargeImplCopyWithImpl<_$FaceTooLargeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() skip,
+    required TResult Function() noFaceDetected,
+    required TResult Function(Face face) singleFaceDetected,
+    required TResult Function(List<Face> faces) multipleFacesDetected,
+    required TResult Function(Face face, double faceSizeRatio) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooLarge,
+    required TResult Function(String message) error,
+  }) {
+    return faceTooLarge(face, faceSizeRatio);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? skip,
+    TResult? Function()? noFaceDetected,
+    TResult? Function(Face face)? singleFaceDetected,
+    TResult? Function(List<Face> faces)? multipleFacesDetected,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooLarge,
+    TResult? Function(String message)? error,
+  }) {
+    return faceTooLarge?.call(face, faceSizeRatio);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? skip,
+    TResult Function()? noFaceDetected,
+    TResult Function(Face face)? singleFaceDetected,
+    TResult Function(List<Face> faces)? multipleFacesDetected,
+    TResult Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooLarge,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (faceTooLarge != null) {
+      return faceTooLarge(face, faceSizeRatio);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Skip value) skip,
+    required TResult Function(_NoFaceDetected value) noFaceDetected,
+    required TResult Function(_SingleFaceDetected value) singleFaceDetected,
+    required TResult Function(_MultipleFacesDetected value)
+    multipleFacesDetected,
+    required TResult Function(_FaceTooSmall value) faceTooSmall,
+    required TResult Function(_FaceTooLarge value) faceTooLarge,
+    required TResult Function(_Error value) error,
+  }) {
+    return faceTooLarge(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Skip value)? skip,
+    TResult? Function(_NoFaceDetected value)? noFaceDetected,
+    TResult? Function(_SingleFaceDetected value)? singleFaceDetected,
+    TResult? Function(_MultipleFacesDetected value)? multipleFacesDetected,
+    TResult? Function(_FaceTooSmall value)? faceTooSmall,
+    TResult? Function(_FaceTooLarge value)? faceTooLarge,
+    TResult? Function(_Error value)? error,
+  }) {
+    return faceTooLarge?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Skip value)? skip,
+    TResult Function(_NoFaceDetected value)? noFaceDetected,
+    TResult Function(_SingleFaceDetected value)? singleFaceDetected,
+    TResult Function(_MultipleFacesDetected value)? multipleFacesDetected,
+    TResult Function(_FaceTooSmall value)? faceTooSmall,
+    TResult Function(_FaceTooLarge value)? faceTooLarge,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (faceTooLarge != null) {
+      return faceTooLarge(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FaceTooLarge extends LocalFaceDetectionResult {
+  const factory _FaceTooLarge({
+    required final Face face,
+    required final double faceSizeRatio,
+  }) = _$FaceTooLargeImpl;
+  const _FaceTooLarge._() : super._();
+
+  Face get face;
+  double get faceSizeRatio;
+
+  /// Create a copy of LocalFaceDetectionResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FaceTooLargeImplCopyWith<_$FaceTooLargeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -969,7 +1208,8 @@ class _$ErrorImpl extends _Error {
     required TResult Function() noFaceDetected,
     required TResult Function(Face face) singleFaceDetected,
     required TResult Function(List<Face> faces) multipleFacesDetected,
-    required TResult Function(Face face) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooSmall,
+    required TResult Function(Face face, double faceSizeRatio) faceTooLarge,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -982,7 +1222,8 @@ class _$ErrorImpl extends _Error {
     TResult? Function()? noFaceDetected,
     TResult? Function(Face face)? singleFaceDetected,
     TResult? Function(List<Face> faces)? multipleFacesDetected,
-    TResult? Function(Face face)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult? Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -995,7 +1236,8 @@ class _$ErrorImpl extends _Error {
     TResult Function()? noFaceDetected,
     TResult Function(Face face)? singleFaceDetected,
     TResult Function(List<Face> faces)? multipleFacesDetected,
-    TResult Function(Face face)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooSmall,
+    TResult Function(Face face, double faceSizeRatio)? faceTooLarge,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1014,6 +1256,7 @@ class _$ErrorImpl extends _Error {
     required TResult Function(_MultipleFacesDetected value)
     multipleFacesDetected,
     required TResult Function(_FaceTooSmall value) faceTooSmall,
+    required TResult Function(_FaceTooLarge value) faceTooLarge,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -1027,6 +1270,7 @@ class _$ErrorImpl extends _Error {
     TResult? Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult? Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult? Function(_FaceTooSmall value)? faceTooSmall,
+    TResult? Function(_FaceTooLarge value)? faceTooLarge,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -1040,6 +1284,7 @@ class _$ErrorImpl extends _Error {
     TResult Function(_SingleFaceDetected value)? singleFaceDetected,
     TResult Function(_MultipleFacesDetected value)? multipleFacesDetected,
     TResult Function(_FaceTooSmall value)? faceTooSmall,
+    TResult Function(_FaceTooLarge value)? faceTooLarge,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

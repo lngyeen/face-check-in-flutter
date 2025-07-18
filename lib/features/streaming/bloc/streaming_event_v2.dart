@@ -31,4 +31,7 @@ class SeparatedRestartableStreamingEventV2 extends StreamingEventV2
   const factory SeparatedRestartableStreamingEventV2.processingResultReceived(
     HybridProcessingResult result,
   ) = _ProcessingResultReceived;
+  const factory SeparatedRestartableStreamingEventV2.livenessProgressUpdated(
+    LivenessProgressViewModel progress,
+  ) = _LivenessProgressUpdated;
 }

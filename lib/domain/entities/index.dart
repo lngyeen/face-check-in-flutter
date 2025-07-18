@@ -3,7 +3,6 @@ export 'local_face_detection_result.dart';
 
 // Liveness Detection
 export 'liveness_frame.dart';
-export 'liveness_check_result.dart';
 export 'liveness_result.dart';
 
 // Image Processing
@@ -23,3 +22,5 @@ export 'check_in_error.dart';
 export 'app_connection_status.dart';
 export 'websocket_connection_status.dart';
 export 'streaming_status.dart';
+export 'liveness_metrics.dart';
+export 'liveness_challenge.dart';

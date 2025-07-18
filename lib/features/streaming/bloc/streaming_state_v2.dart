@@ -9,6 +9,7 @@ class StreamingStateV2 with _$StreamingStateV2 {
     @Default(ProcessingStatus.waitingForFace) ProcessingStatus processingStatus,
     LocalFaceDetectionResult? faceDetectionResult,
     LivenessResult? livenessResult,
+    LivenessProgressViewModel? livenessProgress, // Thêm field mới
   }) = _StreamingStateV2;
 
   const StreamingStateV2._();
@@ -23,4 +24,7 @@ class StreamingStateV2 with _$StreamingStateV2 {
   bool get hasNoValidFace =>
       processingStatus == ProcessingStatus.waitingForFace;
   bool get hasProcessingError => processingStatus == ProcessingStatus.error;
+
+  // Getter cho liveness progress
+  bool get hasLivenessProgress => livenessProgress != null;
 }

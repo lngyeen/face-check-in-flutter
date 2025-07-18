@@ -21,7 +21,6 @@ import '../../features/connection/bloc/connection_bloc.dart' as _i348;
 import '../../features/streaming/bloc/streaming_bloc_v2.dart' as _i782;
 import '../services/camera_service_v2.dart' as _i41;
 import '../services/face_detection_service_v2.dart' as _i874;
-import '../services/image_stream_service_interface.dart' as _i721;
 import '../services/image_stream_service_v2.dart' as _i251;
 import '../services/liveness_service_v2.dart' as _i893;
 import '../services/network_connectivity_service.dart' as _i234;
@@ -56,10 +55,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i555.WebSocketService>(
       () => _i555.WebSocketServiceImpl(gh<_i234.NetworkConnectivityService>()),
     );
-    gh.lazySingleton<_i721.ImageStreamServiceV2>(
+    gh.lazySingleton<_i251.ImageStreamServiceV2>(
       () => _i251.ImageStreamServiceV2Impl(
         gh<_i555.WebSocketService>(),
-        gh<_i893.LivenessServiceV2>(),
         gh<_i874.FaceDetectionServiceV2>(),
       ),
     );
@@ -67,7 +65,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i463.CameraBlocV2(gh<_i41.CameraServiceV2>()),
     );
     gh.lazySingleton<_i782.StreamingBlocV2>(
-      () => _i782.StreamingBlocV2(gh<_i721.ImageStreamServiceV2>()),
+      () => _i782.StreamingBlocV2(gh<_i251.ImageStreamServiceV2>()),
     );
     gh.lazySingleton<_i348.ConnectionBloc>(
       () => _i348.ConnectionBloc(gh<_i555.WebSocketService>()),

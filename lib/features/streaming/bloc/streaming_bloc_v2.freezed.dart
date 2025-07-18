@@ -720,44 +720,45 @@ abstract class _ProcessingStatusChanged
 
 /// @nodoc
 mixin _$SeparatedRestartableStreamingEventV2 {
-  HybridProcessingResult get result => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(HybridProcessingResult result)
     processingResultReceived,
+    required TResult Function(LivenessProgressViewModel progress)
+    livenessProgressUpdated,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(HybridProcessingResult result)? processingResultReceived,
+    TResult? Function(LivenessProgressViewModel progress)?
+    livenessProgressUpdated,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(HybridProcessingResult result)? processingResultReceived,
+    TResult Function(LivenessProgressViewModel progress)?
+    livenessProgressUpdated,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ProcessingResultReceived value)
     processingResultReceived,
+    required TResult Function(_LivenessProgressUpdated value)
+    livenessProgressUpdated,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ProcessingResultReceived value)?
     processingResultReceived,
+    TResult? Function(_LivenessProgressUpdated value)? livenessProgressUpdated,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ProcessingResultReceived value)? processingResultReceived,
+    TResult Function(_LivenessProgressUpdated value)? livenessProgressUpdated,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
-
-  /// Create a copy of SeparatedRestartableStreamingEventV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $SeparatedRestartableStreamingEventV2CopyWith<
-    SeparatedRestartableStreamingEventV2
-  >
-  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -770,8 +771,6 @@ abstract class $SeparatedRestartableStreamingEventV2CopyWith<$Res> {
         $Res,
         SeparatedRestartableStreamingEventV2
       >;
-  @useResult
-  $Res call({HybridProcessingResult result});
 }
 
 /// @nodoc
@@ -789,30 +788,14 @@ class _$SeparatedRestartableStreamingEventV2CopyWithImpl<
 
   /// Create a copy of SeparatedRestartableStreamingEventV2
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? result = null}) {
-    return _then(
-      _value.copyWith(
-            result:
-                null == result
-                    ? _value.result
-                    : result // ignore: cast_nullable_to_non_nullable
-                        as HybridProcessingResult,
-          )
-          as $Val,
-    );
-  }
 }
 
 /// @nodoc
-abstract class _$$ProcessingResultReceivedImplCopyWith<$Res>
-    implements $SeparatedRestartableStreamingEventV2CopyWith<$Res> {
+abstract class _$$ProcessingResultReceivedImplCopyWith<$Res> {
   factory _$$ProcessingResultReceivedImplCopyWith(
     _$ProcessingResultReceivedImpl value,
     $Res Function(_$ProcessingResultReceivedImpl) then,
   ) = __$$ProcessingResultReceivedImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({HybridProcessingResult result});
 }
@@ -885,6 +868,8 @@ class _$ProcessingResultReceivedImpl implements _ProcessingResultReceived {
   TResult when<TResult extends Object?>({
     required TResult Function(HybridProcessingResult result)
     processingResultReceived,
+    required TResult Function(LivenessProgressViewModel progress)
+    livenessProgressUpdated,
   }) {
     return processingResultReceived(result);
   }
@@ -893,6 +878,8 @@ class _$ProcessingResultReceivedImpl implements _ProcessingResultReceived {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(HybridProcessingResult result)? processingResultReceived,
+    TResult? Function(LivenessProgressViewModel progress)?
+    livenessProgressUpdated,
   }) {
     return processingResultReceived?.call(result);
   }
@@ -901,6 +888,8 @@ class _$ProcessingResultReceivedImpl implements _ProcessingResultReceived {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(HybridProcessingResult result)? processingResultReceived,
+    TResult Function(LivenessProgressViewModel progress)?
+    livenessProgressUpdated,
     required TResult orElse(),
   }) {
     if (processingResultReceived != null) {
@@ -914,6 +903,8 @@ class _$ProcessingResultReceivedImpl implements _ProcessingResultReceived {
   TResult map<TResult extends Object?>({
     required TResult Function(_ProcessingResultReceived value)
     processingResultReceived,
+    required TResult Function(_LivenessProgressUpdated value)
+    livenessProgressUpdated,
   }) {
     return processingResultReceived(this);
   }
@@ -923,6 +914,7 @@ class _$ProcessingResultReceivedImpl implements _ProcessingResultReceived {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ProcessingResultReceived value)?
     processingResultReceived,
+    TResult? Function(_LivenessProgressUpdated value)? livenessProgressUpdated,
   }) {
     return processingResultReceived?.call(this);
   }
@@ -931,6 +923,7 @@ class _$ProcessingResultReceivedImpl implements _ProcessingResultReceived {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ProcessingResultReceived value)? processingResultReceived,
+    TResult Function(_LivenessProgressUpdated value)? livenessProgressUpdated,
     required TResult orElse(),
   }) {
     if (processingResultReceived != null) {
@@ -945,14 +938,171 @@ abstract class _ProcessingResultReceived
   const factory _ProcessingResultReceived(final HybridProcessingResult result) =
       _$ProcessingResultReceivedImpl;
 
-  @override
   HybridProcessingResult get result;
 
   /// Create a copy of SeparatedRestartableStreamingEventV2
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProcessingResultReceivedImplCopyWith<_$ProcessingResultReceivedImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LivenessProgressUpdatedImplCopyWith<$Res> {
+  factory _$$LivenessProgressUpdatedImplCopyWith(
+    _$LivenessProgressUpdatedImpl value,
+    $Res Function(_$LivenessProgressUpdatedImpl) then,
+  ) = __$$LivenessProgressUpdatedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({LivenessProgressViewModel progress});
+}
+
+/// @nodoc
+class __$$LivenessProgressUpdatedImplCopyWithImpl<$Res>
+    extends
+        _$SeparatedRestartableStreamingEventV2CopyWithImpl<
+          $Res,
+          _$LivenessProgressUpdatedImpl
+        >
+    implements _$$LivenessProgressUpdatedImplCopyWith<$Res> {
+  __$$LivenessProgressUpdatedImplCopyWithImpl(
+    _$LivenessProgressUpdatedImpl _value,
+    $Res Function(_$LivenessProgressUpdatedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of SeparatedRestartableStreamingEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? progress = null}) {
+    return _then(
+      _$LivenessProgressUpdatedImpl(
+        null == progress
+            ? _value.progress
+            : progress // ignore: cast_nullable_to_non_nullable
+                as LivenessProgressViewModel,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$LivenessProgressUpdatedImpl implements _LivenessProgressUpdated {
+  const _$LivenessProgressUpdatedImpl(this.progress);
+
+  @override
+  final LivenessProgressViewModel progress;
+
+  @override
+  String toString() {
+    return 'SeparatedRestartableStreamingEventV2.livenessProgressUpdated(progress: $progress)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LivenessProgressUpdatedImpl &&
+            (identical(other.progress, progress) ||
+                other.progress == progress));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, progress);
+
+  /// Create a copy of SeparatedRestartableStreamingEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LivenessProgressUpdatedImplCopyWith<_$LivenessProgressUpdatedImpl>
+  get copyWith => __$$LivenessProgressUpdatedImplCopyWithImpl<
+    _$LivenessProgressUpdatedImpl
+  >(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(HybridProcessingResult result)
+    processingResultReceived,
+    required TResult Function(LivenessProgressViewModel progress)
+    livenessProgressUpdated,
+  }) {
+    return livenessProgressUpdated(progress);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(HybridProcessingResult result)? processingResultReceived,
+    TResult? Function(LivenessProgressViewModel progress)?
+    livenessProgressUpdated,
+  }) {
+    return livenessProgressUpdated?.call(progress);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(HybridProcessingResult result)? processingResultReceived,
+    TResult Function(LivenessProgressViewModel progress)?
+    livenessProgressUpdated,
+    required TResult orElse(),
+  }) {
+    if (livenessProgressUpdated != null) {
+      return livenessProgressUpdated(progress);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ProcessingResultReceived value)
+    processingResultReceived,
+    required TResult Function(_LivenessProgressUpdated value)
+    livenessProgressUpdated,
+  }) {
+    return livenessProgressUpdated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ProcessingResultReceived value)?
+    processingResultReceived,
+    TResult? Function(_LivenessProgressUpdated value)? livenessProgressUpdated,
+  }) {
+    return livenessProgressUpdated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ProcessingResultReceived value)? processingResultReceived,
+    TResult Function(_LivenessProgressUpdated value)? livenessProgressUpdated,
+    required TResult orElse(),
+  }) {
+    if (livenessProgressUpdated != null) {
+      return livenessProgressUpdated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LivenessProgressUpdated
+    implements SeparatedRestartableStreamingEventV2 {
+  const factory _LivenessProgressUpdated(
+    final LivenessProgressViewModel progress,
+  ) = _$LivenessProgressUpdatedImpl;
+
+  LivenessProgressViewModel get progress;
+
+  /// Create a copy of SeparatedRestartableStreamingEventV2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LivenessProgressUpdatedImplCopyWith<_$LivenessProgressUpdatedImpl>
   get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -964,6 +1114,8 @@ mixin _$StreamingStateV2 {
   LocalFaceDetectionResult? get faceDetectionResult =>
       throw _privateConstructorUsedError;
   LivenessResult? get livenessResult => throw _privateConstructorUsedError;
+  LivenessProgressViewModel? get livenessProgress =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of StreamingStateV2
   /// with the given fields replaced by the non-null parameter values.
@@ -985,10 +1137,12 @@ abstract class $StreamingStateV2CopyWith<$Res> {
     ProcessingStatus processingStatus,
     LocalFaceDetectionResult? faceDetectionResult,
     LivenessResult? livenessResult,
+    LivenessProgressViewModel? livenessProgress,
   });
 
   $StreamingErrorCopyWith<$Res>? get error;
   $LocalFaceDetectionResultCopyWith<$Res>? get faceDetectionResult;
+  $LivenessResultCopyWith<$Res>? get livenessResult;
 }
 
 /// @nodoc
@@ -1011,6 +1165,7 @@ class _$StreamingStateV2CopyWithImpl<$Res, $Val extends StreamingStateV2>
     Object? processingStatus = null,
     Object? faceDetectionResult = freezed,
     Object? livenessResult = freezed,
+    Object? livenessProgress = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -1039,6 +1194,11 @@ class _$StreamingStateV2CopyWithImpl<$Res, $Val extends StreamingStateV2>
                     ? _value.livenessResult
                     : livenessResult // ignore: cast_nullable_to_non_nullable
                         as LivenessResult?,
+            livenessProgress:
+                freezed == livenessProgress
+                    ? _value.livenessProgress
+                    : livenessProgress // ignore: cast_nullable_to_non_nullable
+                        as LivenessProgressViewModel?,
           )
           as $Val,
     );
@@ -1074,6 +1234,20 @@ class _$StreamingStateV2CopyWithImpl<$Res, $Val extends StreamingStateV2>
       },
     );
   }
+
+  /// Create a copy of StreamingStateV2
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LivenessResultCopyWith<$Res>? get livenessResult {
+    if (_value.livenessResult == null) {
+      return null;
+    }
+
+    return $LivenessResultCopyWith<$Res>(_value.livenessResult!, (value) {
+      return _then(_value.copyWith(livenessResult: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1091,12 +1265,15 @@ abstract class _$$StreamingStateV2ImplCopyWith<$Res>
     ProcessingStatus processingStatus,
     LocalFaceDetectionResult? faceDetectionResult,
     LivenessResult? livenessResult,
+    LivenessProgressViewModel? livenessProgress,
   });
 
   @override
   $StreamingErrorCopyWith<$Res>? get error;
   @override
   $LocalFaceDetectionResultCopyWith<$Res>? get faceDetectionResult;
+  @override
+  $LivenessResultCopyWith<$Res>? get livenessResult;
 }
 
 /// @nodoc
@@ -1118,6 +1295,7 @@ class __$$StreamingStateV2ImplCopyWithImpl<$Res>
     Object? processingStatus = null,
     Object? faceDetectionResult = freezed,
     Object? livenessResult = freezed,
+    Object? livenessProgress = freezed,
   }) {
     return _then(
       _$StreamingStateV2Impl(
@@ -1146,6 +1324,11 @@ class __$$StreamingStateV2ImplCopyWithImpl<$Res>
                 ? _value.livenessResult
                 : livenessResult // ignore: cast_nullable_to_non_nullable
                     as LivenessResult?,
+        livenessProgress:
+            freezed == livenessProgress
+                ? _value.livenessProgress
+                : livenessProgress // ignore: cast_nullable_to_non_nullable
+                    as LivenessProgressViewModel?,
       ),
     );
   }
@@ -1160,6 +1343,7 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
     this.processingStatus = ProcessingStatus.waitingForFace,
     this.faceDetectionResult,
     this.livenessResult,
+    this.livenessProgress,
   }) : super._();
 
   @override
@@ -1174,10 +1358,12 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
   final LocalFaceDetectionResult? faceDetectionResult;
   @override
   final LivenessResult? livenessResult;
+  @override
+  final LivenessProgressViewModel? livenessProgress;
 
   @override
   String toString() {
-    return 'StreamingStateV2(error: $error, streamingStatus: $streamingStatus, processingStatus: $processingStatus, faceDetectionResult: $faceDetectionResult, livenessResult: $livenessResult)';
+    return 'StreamingStateV2(error: $error, streamingStatus: $streamingStatus, processingStatus: $processingStatus, faceDetectionResult: $faceDetectionResult, livenessResult: $livenessResult, livenessProgress: $livenessProgress)';
   }
 
   @override
@@ -1193,7 +1379,9 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
             (identical(other.faceDetectionResult, faceDetectionResult) ||
                 other.faceDetectionResult == faceDetectionResult) &&
             (identical(other.livenessResult, livenessResult) ||
-                other.livenessResult == livenessResult));
+                other.livenessResult == livenessResult) &&
+            (identical(other.livenessProgress, livenessProgress) ||
+                other.livenessProgress == livenessProgress));
   }
 
   @override
@@ -1204,6 +1392,7 @@ class _$StreamingStateV2Impl extends _StreamingStateV2 {
     processingStatus,
     faceDetectionResult,
     livenessResult,
+    livenessProgress,
   );
 
   /// Create a copy of StreamingStateV2
@@ -1225,6 +1414,7 @@ abstract class _StreamingStateV2 extends StreamingStateV2 {
     final ProcessingStatus processingStatus,
     final LocalFaceDetectionResult? faceDetectionResult,
     final LivenessResult? livenessResult,
+    final LivenessProgressViewModel? livenessProgress,
   }) = _$StreamingStateV2Impl;
   const _StreamingStateV2._() : super._();
 
@@ -1238,6 +1428,8 @@ abstract class _StreamingStateV2 extends StreamingStateV2 {
   LocalFaceDetectionResult? get faceDetectionResult;
   @override
   LivenessResult? get livenessResult;
+  @override
+  LivenessProgressViewModel? get livenessProgress;
 
   /// Create a copy of StreamingStateV2
   /// with the given fields replaced by the non-null parameter values.

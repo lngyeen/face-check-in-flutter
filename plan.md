@@ -1,135 +1,446 @@
-# Plan: Cải thiện LivenessServiceV2
+# Plan: Khắc phục Liveness Detection Issues & Frame Queue Management
 
 ## Mục tiêu
-Cải thiện độ chính xác và độ tin cậy của liveness detection service thông qua việc điều chỉnh config values và logic.
+Khắc phục các vấn đề nghiêm trọng trong hệ thống face detection và liveness check, bao gồm:
+1. Frame spam sau khi pass liveness
+2. User rời camera nhưng hệ thống vẫn gửi frame
+3. UI không ổn định khi chuyển trạng thái
+4. Thiếu cơ chế completion persistence
 
-## Các vấn đề hiện tại
-1. **Blink Detection**: Logic đơn giản, dễ bị spoof
-2. **Stability Check**: Chỉ so sánh frame đầu-cuối, thiếu pattern analysis
-3. **Quality Check**: Chỉ check head angles, thiếu face size, lighting
-4. **Config Values**: Một số giá trị không phù hợp với thực tế
+## 🔍 **COMPREHENSIVE REVIEW FINDINGS**
 
-## Plan thực hiện
+### 🚨 **CRITICAL ARCHITECTURAL ISSUES**
 
-### Phase 1: Điều chỉnh Config Values (Ưu tiên cao)
-- **Step 1.1**: Điều chỉnh blink detection configs
-  - Tăng `minFramesForBlink` từ 3 → 7
-  - Thêm `maxBlinkDurationFrames = 5`
-  - Thêm `minOpenFramesBeforeBlink = 2`
-  - Thêm `minOpenFramesAfterBlink = 2`
+#### 1. **Missing Completion Persistence**
+- **Problem**: System resets completely when user leaves camera after passing liveness
+- **Impact**: Loss of completion state, continued frame processing, UI instability
+- **Solution**: Add completion persistence mechanism
 
-- **Step 1.2**: Điều chỉnh stability configs
-  - Tăng `maxStabilityMovement` từ 15.0 → 25.0
-  - Thêm `maxMovementVariance = 10.0`
-  - Thêm `minStableFrames = 3`
+#### 2. **Frame Queue Management Issues**
+- **Problem**: Frames continue to be processed and sent after completion
+- **Impact**: Unnecessary server load, poor user experience
+- **Solution**: Implement proper frame queue management
 
-- **Step 1.3**: Điều chỉnh quality configs
-  - Giảm `minQualityFrameRatio` từ 0.7 → 0.6
-  - Thêm `minFaceSizeRatio = 0.1`
-  - Thêm `maxBlurThreshold = 0.3`
-  - Thêm `minLightingQuality = 0.5`
+#### 3. **Inconsistent State Management**
+- **Problem**: Multiple state trackers don't coordinate properly
+- **Impact**: State conflicts between face detection, liveness, and processing
+- **Solution**: Unify state management approach
 
-- **Step 1.4**: Điều chỉnh overall thresholds
-  - Giảm `livenessThreshold` từ 0.75 → 0.65
-  - Điều chỉnh weights: blink(0.5→0.4), quality(0.3→0.4), stability(0.2)
+### 🔴 **Vấn đề nghiêm trọng nhất**
 
-### Phase 2: Cải thiện Logic (Ưu tiên trung bình)
-- **Step 2.1**: Cải thiện blink detection logic
-  - Thêm temporal validation
-  - Validate blink pattern timing
-  - Tính confidence dựa trên pattern quality
+#### 1. **No Completion Lock Mechanism**
+```dart
+// Vấn đề: Sau khi pass, hệ thống vẫn tiếp tục xử lý
+if (data.livenessResult is Passed) {
+  await _convertImageConcurrently(data); // ← Vẫn gửi frame
+}
+```
 
-- **Step 2.2**: Cải thiện stability check
-  - Thêm variance analysis
-  - Check consecutive stable frames
-  - Weighted stability scoring
+#### 2. **Face Detection Cache Reset After Pass**
+```dart
+// Vấn đề: Khi user rời camera, cache bị reset
+} else {
+  _livenessStateTracker.handleFaceLost(); // ← Reset mất trạng thái
+  data.livenessResult = const LivenessResult.needMoreFrames();
+}
+```
 
-- **Step 2.3**: Cải thiện quality check
-  - Thêm face size validation
-  - Thêm lighting quality check
-  - Multi-factor quality scoring
+#### 3. **Throttle Duration Not Updated Immediately**
+```dart
+// Vấn đề: Delay trong cập nhật throttle
+void _updateThrottleDuration() {
+  // Có delay khi chuyển từ 15fps xuống 1fps
+}
+```
 
-### Phase 3: Advanced Features (Ưu tiên thấp)
-- **Step 3.1**: Temporal analysis
-  - Thêm temporal pattern recognition
-  - Analyze timing consistency across frames
-  - Detect unnatural timing patterns
-- **Step 3.2**: Multi-factor blink validation
-  - Thêm eye movement analysis
-  - Validate blink symmetry
-  - Detect forced vs natural blinks
-- **Step 3.3**: Adaptive thresholds
-  - Dynamic threshold adjustment based on conditions
-  - Environment-aware scoring
-  - Performance-based optimization
+#### 4. **Missing Completed State**
+```dart
+// Vấn đề: Không có trạng thái completed
+enum ProcessingStatus {
+  waitingForFace,
+  livenessChecking,
+  readyForCheckIn,
+  // ← Thiếu completed state
+  error,
+}
+```
+
+### 🟡 **Vấn đề trung bình**
+
+#### 5. **Liveness State Tracker Logic Issues**
+- Không có cơ chế one-time pass
+- Reset tracker khi không cần thiết
+- Không persist completion state
+
+#### 6. **WebSocket Send Logic**
+- Gửi frame ngay cả khi đã hoàn thành
+- Không có điều kiện dừng gửi
+
+#### 7. **UI State Management**
+- Status không ổn định khi user rời camera
+- Reset về "waiting for face" thay vì duy trì completion
+
+## 📋 **DETAILED IMPROVEMENT PLAN**
+
+### **Phase 0: Add Completion Persistence (HIGHEST PRIORITY)**
+
+#### Step 0.1: Add Completed State to ProcessingStatus
+**Actions**:
+- Add `ProcessingStatus.completed` to enum
+- Update all status mapping logic
+- Add completion state handling
+
+#### Step 0.2: Add Completion Flag to ImageStreamService
+**Actions**:
+- Add `_hasCompletedLiveness` boolean flag
+- Implement completion persistence logic
+- Prevent reset after completion
+
+#### Step 0.3: Add Completed State to LivenessResult
+**Actions**:
+- Add `LivenessResult.completed()` factory
+- Update all result handling logic
+- Add completion state validation
+
+### **Phase 1: Implement Frame Queue Management (HIGH PRIORITY)**
+
+#### Step 1.1: Add Frame Queue Control
+**Actions**:
+- Add frame queue clearing mechanism
+- Implement immediate throttle update
+- Add completion-based frame filtering
+
+#### Step 1.2: Improve Throttle Logic
+**Actions**:
+- Add 0fps support for completed state
+- Implement immediate throttle updates
+- Add frame queue draining
+
+#### Step 1.3: Add WebSocket Send Control
+**Actions**:
+- Add completion-based send conditions
+- Implement frame send blocking
+- Add completion state validation
+
+### **Phase 2: Fix State Management (MEDIUM PRIORITY)**
+
+#### Step 2.1: Improve Face Detection Cache
+**Actions**:
+- Add completion persistence to cache
+- Prevent cache reset after completion
+- Add completion state coordination
+
+#### Step 2.2: Fix Liveness State Tracker
+**Actions**:
+- Add one-time pass mechanism
+- Prevent unnecessary resets
+- Add completion state handling
+
+#### Step 2.3: Unify State Coordination
+**Actions**:
+- Coordinate between all state trackers
+- Add completion state propagation
+- Implement consistent state management
+
+### **Phase 3: UI State Stability (MEDIUM PRIORITY)**
+
+#### Step 3.1: Fix Status Mapping Logic
+**Actions**:
+- Update `_mapPipelineToOutput` logic
+- Add completion state handling
+- Prevent status reset after completion
+
+#### Step 3.2: Improve Processing Output Handling
+**Actions**:
+- Add completion state validation
+- Implement proper state transitions
+- Add completion persistence
+
+### **Phase 4: Performance Optimization (LOW PRIORITY)**
+
+#### Step 4.1: Optimize Frame Processing
+**Actions**:
+- Add early termination for completed state
+- Implement frame skipping
+- Add performance monitoring
+
+#### Step 4.2: Memory Management
+**Actions**:
+- Clear unnecessary data after completion
+- Implement proper cleanup
+- Add memory optimization
+
+## 🎯 **SPECIFIC IMPLEMENTATION DETAILS**
+
+### **Step 0.1: Add Completed State**
+
+```dart
+// In processing_mode.dart
+enum ProcessingStatus {
+  waitingForFace,
+  livenessChecking,
+  readyForCheckIn,
+  completed, // ← NEW
+  error,
+}
+```
+
+### **Step 0.2: Add Completion Flag**
+
+```dart
+// In image_stream_service_v2.dart
+class ImageStreamServiceV2Impl {
+  bool _hasCompletedLiveness = false; // ← NEW
+  
+  Future<FramePipelineData> _performLivenessAndConversion(
+    FramePipelineData data,
+  ) async {
+    // ← Check completion first
+    if (_hasCompletedLiveness) {
+      data.livenessResult = const LivenessResult.completed();
+      return data;
+    }
+    
+    // ... existing logic
+    
+    if (data.livenessResult is Passed) {
+      _hasCompletedLiveness = true; // ← Set completion
+      await _convertImageConcurrently(data);
+    }
+    
+    return data;
+  }
+}
+```
+
+### **Step 0.3: Add Completed Result**
+
+```dart
+// In liveness_result.dart
+@freezed
+class LivenessResult with _$LivenessResult {
+  const factory LivenessResult.completed() = Completed; // ← NEW
+  
+  bool get isCompleted => this is Completed;
+}
+```
+
+### **Step 1.1: Frame Queue Control**
+
+```dart
+void _handleProcessingOutput(
+  (HybridProcessingResult, ProcessedFrame?)? output,
+) {
+  if (output == null || !_isStreaming || _processingResultSubject.isClosed) {
+    return;
+  }
+
+  final (processingResult, processedFrame) = output;
+  
+  // ← NEW: Check completion
+  if (processingResult.status == ProcessingStatus.completed) {
+    _clearFrameQueue();
+    _processingResultSubject.add(processingResult);
+    return;
+  }
+  
+  _processingResultSubject.add(processingResult);
+  _updateThrottleDuration();
+
+  if (processedFrame != null) {
+    _sendFrameToWebSocket(processedFrame);
+  }
+}
+
+void _clearFrameQueue() {
+  // ← NEW: Clear frame queue
+  _frameSubject.drain();
+}
+```
+
+### **Step 1.2: Improved Throttle Logic**
+
+```dart
+Duration _getThrottleForCurrentStage(ProcessingStatus status) {
+  return switch (status) {
+    ProcessingStatus.waitingForFace => fpsToDuration(2),
+    ProcessingStatus.livenessChecking => fpsToDuration(15),
+    ProcessingStatus.readyForCheckIn => fpsToDuration(1),
+    ProcessingStatus.completed => fpsToDuration(0), // ← NEW: Stop completely
+    ProcessingStatus.error => fpsToDuration(2),
+  };
+}
+
+static Duration fpsToDuration(int fps) {
+  if (fps <= 0) return const Duration(milliseconds: 0); // ← NEW: Stop completely
+  return Duration(milliseconds: (1000 / fps).round());
+}
+```
+
+### **Step 1.3: WebSocket Send Control**
+
+```dart
+void _sendFrameToWebSocket(ProcessedFrame frame) {
+  // ← NEW: Check completion
+  if (_hasCompletedLiveness) return;
+  
+  if (_webSocketService.currentStatus !=
+      WebSocketConnectionStatus.connected) {
+    return;
+  }
+  final payload = {'type': 'processFrame', 'image': frame.base64Image};
+  _webSocketService.sendMessage(json.encode(payload));
+}
+```
+
+### **Step 2.1: Improved Face Detection Cache**
+
+```dart
+class FaceDetectionCache {
+  bool _hasCompletedLiveness = false; // ← NEW
+  
+  void process(LocalFaceDetectionResult newResult) {
+    // ← NEW: Don't reset if completed
+    if (_hasCompletedLiveness) return;
+    
+    // ... existing logic
+  }
+  
+  void markCompleted() {
+    _hasCompletedLiveness = true; // ← NEW
+  }
+  
+  void reset() {
+    _hasCompletedLiveness = false; // ← NEW: Reset flag
+    invalidate();
+  }
+}
+```
+
+### **Step 2.2: Fixed Liveness State Tracker**
+
+```dart
+class LivenessStateTracker {
+  bool _hasCompleted = false; // ← NEW
+  
+  Future<LivenessResult> processCurrentChallenge() async {
+    // ← NEW: Check completion
+    if (_hasCompleted) {
+      return const LivenessResult.completed();
+    }
+    
+    // ... existing logic
+    
+    if (finalResult.isPassed && _challengeIndex == completed) {
+      _hasCompleted = true; // ← NEW: Set completion
+    }
+    
+    return finalResult;
+  }
+  
+  void reset() {
+    _hasCompleted = false; // ← NEW: Reset flag
+    // ... existing reset logic
+  }
+}
+```
+
+### **Step 2.3: Status Mapping Fix**
+
+```dart
+(HybridProcessingResult, ProcessedFrame?)? _mapPipelineToOutput(
+  FramePipelineData data,
+) {
+  // ← NEW: Check completion first
+  if (_hasCompletedLiveness) {
+    return (
+      HybridProcessingResult(
+        status: ProcessingStatus.completed,
+        faceDetectionResult: data.faceResult,
+        livenessResult: const LivenessResult.completed(),
+      ),
+      null, // ← Don't send frame
+    );
+  }
+  
+  // ... existing logic
+}
+```
+
+## 📊 **TESTING STRATEGY**
+
+### **Test Cases**
+
+#### 1. **Completion Persistence Test**
+- Pass liveness check
+- Leave camera (no face detected)
+- Verify completion state is maintained
+- Verify no frames are sent
+
+#### 2. **Frame Queue Management Test**
+- Pass liveness check
+- Verify frame queue is cleared
+- Verify throttle is set to 0fps
+- Verify no new frames are processed
+
+#### 3. **State Stability Test**
+- Pass liveness check
+- Leave and return to camera
+- Verify completion state persists
+- Verify UI shows correct status
+
+#### 4. **Performance Test**
+- Monitor memory usage during completion
+- Verify no memory leaks
+- Verify proper cleanup
+
+## 🔧 **CONFIGURATION UPDATES**
+
+### **New Configuration Values**
+
+```dart
+class ImageStreamConfig {
+  static const int waitingForFaceFps = 2;
+  static const int livenessCheckingFps = 15;
+  static const int readyForCheckInFps = 1;
+  static const int completedFps = 0; // ← NEW: Stop processing
+}
+```
 
 ## Trạng thái
-- [x] Phase 1: Config Values
-  - [x] Step 1.1: Blink configs (Time-based approach)
-  - [x] Step 1.2: Stability configs  
-  - [x] Step 1.3: Quality configs
-  - [x] Step 1.4: Overall thresholds
-- [x] Phase 2: Logic Improvements
-  - [x] Step 2.1: Cải thiện blink detection logic
-  - [x] Step 2.2: Cải thiện stability check logic
-  - [x] Step 2.3: Cải thiện quality check logic
-  - [x] Step 2.4: Cải thiện overall confidence calculation
-- [x] Phase 3: Advanced Features
-  - [x] Step 3.1: Temporal analysis
-  - [x] Step 3.2: Multi-factor blink validation
-  - [x] Step 3.3: Adaptive thresholds
+- [x] Phase 0: Add Completion Persistence
+  - [x] Step 0.1: Add Completed State to ProcessingStatus
+  - [x] Step 0.2: Add Completion Flag to ImageStreamService
+  - [x] Step 0.3: Add Completed State to LivenessResult
+- [x] Phase 1: Implement Frame Queue Management
+  - [x] Step 1.1: Add Frame Queue Control
+  - [x] Step 1.2: Improve Throttle Logic
+  - [x] Step 1.3: Add WebSocket Send Control
+- [x] Phase 2: Fix State Management
+  - [x] Step 2.1: Improve Face Detection Cache
+  - [x] Step 2.2: Fix Liveness State Tracker
+  - [x] Step 2.3: Unify State Coordination
+- [x] Phase 3: UI State Stability
+  - [x] Step 3.1: Fix Status Mapping Logic
+  - [x] Step 3.2: Improve Processing Output Handling
+- [ ] Phase 4: Performance Optimization
+  - [ ] Step 4.1: Optimize Frame Processing
+  - [ ] Step 4.2: Memory Management
 
 ## Notes
 - Mỗi step sẽ được thực hiện riêng biệt và cần approval trước khi thực hiện
 - Test sau mỗi step để đảm bảo không break existing functionality
 - Có thể rollback nếu cần thiết
+- Ưu tiên sửa các vấn đề nghiêm trọng trước (Phase 0 & 1)
+- Focus on completion persistence and frame queue management
 
-## Phase 2 Completion Summary
-### Step 2.1: Enhanced Blink Detection Logic ✅
-- Added temporal validation with smoothing algorithm
-- Implemented pattern quality scoring
-- Added detailed logging and error handling
-
-### Step 2.2: Enhanced Stability Check Logic ✅
-- Added variance analysis of face movement
-- Implemented consecutive stable frames counting
-- Added weighted scoring based on movement, variance, and stability
-
-### Step 2.3: Enhanced Quality Check Logic ✅
-- Added multi-factor quality analysis (face size, aspect ratio, head angle)
-- Implemented weighted quality scoring system
-- Added comprehensive quality validation with detailed logging
-
-### Step 2.4: Enhanced Overall Confidence Calculation ✅
-- Added multi-factor confidence enhancement
-- Implemented consistency bonuses and quality penalties
-- Added anti-spoofing penalties for suspicious patterns
-- Enhanced decision reasoning and comprehensive logging
-
-## Config Alignment (Completed)
-- ✅ Removed duplicate minFaceSizeRatio from LivenessConfig
-- ✅ Aligned frame requirements with LivenessBatchProcessorConfig.minFramesForLiveness = 8
-- ✅ Added clear documentation about config responsibilities
-
-## Phase 3 Completion Summary
-### Step 3.1: Temporal Analysis ✅
-- Added temporal pattern recognition with frame interval analysis
-- Implemented timing consistency checks based on expected FPS
-- Added pattern naturalness validation to detect artificial patterns
-- Integrated frame rate stability metrics with variance analysis
-- Added temporal analysis bonuses and penalties to confidence calculation
-
-### Step 3.2: Multi-factor Blink Validation ✅
-- Added eye symmetry analysis between left and right eyes
-- Implemented movement naturalness checks for state transitions
-- Added timing naturalness validation for blink intervals
-- Integrated overall quality scoring with weighted factors
-- Added detailed logging and failure reasoning for debugging
-
-### Step 3.3: Adaptive Thresholds ✅
-- Added adaptive threshold management with base and adjusted values
-- Implemented dynamic threshold adjustment based on lighting, movement, quality, and confidence
-- Added lighting-based threshold adjustments (±10%)
-- Added movement-based threshold adjustments (±15%)
-- Added quality-based threshold adjustments (±12%)
-- Integrated adaptive thresholds into main detection logic with comprehensive logging 
+## ✅ Hoàn thành
+- **Analysis Complete**: Đã phân tích đầy đủ các vấn đề
+- **Plan Created**: Đã tạo kế hoạch chi tiết
+- **Phase 0 Complete**: Đã thêm completion persistence mechanism
+- **Phase 1 Complete**: Đã implement frame queue management
+- **Phase 2 Complete**: Đã fix state management coordination
+- **Phase 3 Complete**: Đã fix UI state stability
+- **Frame Sending Fix Complete**: Đã fix logic gửi frame sau khi pass
+- **Build Success**: Code compile và build thành công
+- **Ready for Testing**: Sẵn sàng test các cải thiện 

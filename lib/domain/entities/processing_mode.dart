@@ -18,6 +18,9 @@ enum ProcessingStatus {
   /// Liveness passed, ready for server-side recognition.
   readyForCheckIn,
 
+  /// Liveness check completed successfully, no further processing needed.
+  completed,
+
   /// An error occurred during processing.
   error,
 }

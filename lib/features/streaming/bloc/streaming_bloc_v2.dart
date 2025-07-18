@@ -2,14 +2,15 @@ import 'dart:async';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:camera/camera.dart';
+import 'package:face_check_in_flutter/domain/entities/liveness_result.dart';
+import 'package:face_check_in_flutter/domain/entities/local_face_detection_result.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:face_check_in_flutter/core/services/image_stream_service_interface.dart';
+import 'package:face_check_in_flutter/core/services/image_stream_service_v2.dart';
+import 'package:face_check_in_flutter/core/services/liveness_progress_view_model.dart';
 import 'package:face_check_in_flutter/domain/entities/hybrid_processing_result.dart';
-import 'package:face_check_in_flutter/domain/entities/liveness_result.dart';
-import 'package:face_check_in_flutter/domain/entities/local_face_detection_result.dart';
 import 'package:face_check_in_flutter/domain/entities/processing_mode.dart';
 import 'package:face_check_in_flutter/domain/entities/streaming_status.dart';
 
@@ -28,6 +29,7 @@ class StreamingBlocV2 extends Bloc<StreamingEventV2, StreamingStateV2> {
   StreamSubscription? _streamingStatusSubscription;
   StreamSubscription? _processingStatusSubscription;
   StreamSubscription? _processingResultSubscription;
+  StreamSubscription? _livenessProgressSubscription;
 
   StreamingBlocV2(this._imageStreamService) : super(const StreamingStateV2()) {
     _registerEventHandlers();
@@ -58,6 +60,8 @@ class StreamingBlocV2 extends Bloc<StreamingEventV2, StreamingStateV2> {
       event.whenOrNull(
         processingResultReceived:
             (result) => _onProcessingResultReceived(result, emit),
+        livenessProgressUpdated:
+            (progress) => _onLivenessProgressUpdated(progress, emit),
       );
     }, transformer: restartable());
   }
@@ -89,6 +93,16 @@ class StreamingBlocV2 extends Bloc<StreamingEventV2, StreamingStateV2> {
           (result) => add(
             SeparatedRestartableStreamingEventV2.processingResultReceived(
               result,
+            ),
+          ),
+        );
+
+    _livenessProgressSubscription?.cancel();
+    _livenessProgressSubscription = _imageStreamService.livenessProgressStream
+        .listen(
+          (progress) => add(
+            SeparatedRestartableStreamingEventV2.livenessProgressUpdated(
+              progress,
             ),
           ),
         );
@@ -144,11 +158,19 @@ class StreamingBlocV2 extends Bloc<StreamingEventV2, StreamingStateV2> {
     );
   }
 
+  void _onLivenessProgressUpdated(
+    LivenessProgressViewModel progress,
+    Emitter<StreamingStateV2> emit,
+  ) {
+    emit(state.copyWith(livenessProgress: progress));
+  }
+
   @override
   Future<void> close() async {
     await _streamingStatusSubscription?.cancel();
     await _processingStatusSubscription?.cancel();
     await _processingResultSubscription?.cancel();
+    await _livenessProgressSubscription?.cancel();
     return super.close();
   }
 }
