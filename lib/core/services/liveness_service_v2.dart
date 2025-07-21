@@ -6,7 +6,7 @@ import 'package:face_check_in_flutter/domain/entities/liveness_frame.dart';
 import 'package:face_check_in_flutter/domain/entities/liveness_result.dart';
 
 import 'liveness_config.dart';
-import 'liveness_validators.dart';
+import 'validators/index.dart';
 
 /// Abstract class định nghĩa hợp đồng cho LivenessService.
 abstract class LivenessServiceV2 {

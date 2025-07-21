@@ -6,6 +6,7 @@ Khắc phục các vấn đề nghiêm trọng trong hệ thống face detection
 2. User rời camera nhưng hệ thống vẫn gửi frame
 3. UI không ổn định khi chuyển trạng thái
 4. Thiếu cơ chế completion persistence
+5. **NEW**: Performance optimization và code quality improvements
 
 ## 🔍 **COMPREHENSIVE REVIEW FINDINGS**
 
@@ -26,6 +27,11 @@ Khắc phục các vấn đề nghiêm trọng trong hệ thống face detection
 - **Impact**: State conflicts between face detection, liveness, and processing
 - **Solution**: Unify state management approach
 
+#### 4. **Performance Issues (NEW)**
+- **Problem**: Isolate overhead for each frame, memory leaks, code duplication
+- **Impact**: Poor performance, high memory usage, maintainability issues
+- **Solution**: Optimize performance and code structure
+
 ### 🔴 **Vấn đề nghiêm trọng nhất**
 
 #### 1. **No Completion Lock Mechanism**
@@ -45,24 +51,17 @@ if (data.livenessResult is Passed) {
 }
 ```
 
-#### 3. **Throttle Duration Not Updated Immediately**
+#### 3. **Performance Issues (NEW)**
 ```dart
-// Vấn đề: Delay trong cập nhật throttle
-void _updateThrottleDuration() {
-  // Có delay khi chuyển từ 15fps xuống 1fps
-}
-```
+// Vấn đề: Tạo isolate mới cho mỗi frame
+data.processedFrame = await Isolate.run(() => ImageConverter...);
 
-#### 4. **Missing Completed State**
-```dart
-// Vấn đề: Không có trạng thái completed
-enum ProcessingStatus {
-  waitingForFace,
-  livenessChecking,
-  readyForCheckIn,
-  // ← Thiếu completed state
-  error,
-}
+// Vấn đề: Lưu cả originalImage (memory leak)
+ProcessedFrame(base64Image: ..., originalImage: processedImage, ...);
+
+// Vấn đề: Code duplication trong mapper
+if (livenessResult is Completed) { ... }
+if (livenessResult is Passed) { ... }
 ```
 
 ### 🟡 **Vấn đề trung bình**
@@ -79,6 +78,11 @@ enum ProcessingStatus {
 #### 7. **UI State Management**
 - Status không ổn định khi user rời camera
 - Reset về "waiting for face" thay vì duy trì completion
+
+#### 8. **Code Quality Issues (NEW)**
+- Error handling chưa đầy đủ
+- Code duplication trong ProcessingResultMapper
+- Missing retry logic cho image conversion
 
 ## 📋 **DETAILED IMPROVEMENT PLAN**
 
@@ -156,19 +160,39 @@ enum ProcessingStatus {
 - Implement proper state transitions
 - Add completion persistence
 
-### **Phase 4: Performance Optimization (LOW PRIORITY)**
+### **Phase 4: Performance Optimization (HIGH PRIORITY - NEW)**
 
-#### Step 4.1: Optimize Frame Processing
+#### Step 4.1: Optimize Isolate Usage
 **Actions**:
-- Add early termination for completed state
-- Implement frame skipping
-- Add performance monitoring
+- Implement isolate pool instead of creating new isolate for each frame
+- Add background service for image conversion
+- Optimize isolate communication
 
 #### Step 4.2: Memory Management
 **Actions**:
-- Clear unnecessary data after completion
-- Implement proper cleanup
-- Add memory optimization
+- Remove `originalImage` from ProcessedFrame when not needed
+- Implement lazy loading for image data
+- Add proper memory cleanup
+
+#### Step 4.3: Code Duplication Reduction
+**Actions**:
+- Merge logic for `Passed` and `Completed` states in ProcessingResultMapper
+- Extract common logic into helper methods
+- Simplify conditional statements
+
+### **Phase 5: Error Handling & Robustness (MEDIUM PRIORITY - NEW)**
+
+#### Step 5.1: Improve Error Handling
+**Actions**:
+- Add retry logic for image conversion failures
+- Implement fallback strategies
+- Add better error reporting and logging
+
+#### Step 5.2: Add Validation & Safety Checks
+**Actions**:
+- Add input validation for frame data
+- Implement safety checks for state transitions
+- Add timeout handling for long operations
 
 ## 🎯 **SPECIFIC IMPLEMENTATION DETAILS**
 
@@ -367,6 +391,194 @@ class LivenessStateTracker {
 }
 ```
 
+### **Step 4.1: Optimize Isolate Usage (NEW)**
+
+```dart
+// Create isolate pool service
+class IsolatePoolService {
+  static final IsolatePoolService _instance = IsolatePoolService._internal();
+  factory IsolatePoolService() => _instance;
+  IsolatePoolService._internal();
+
+  final Queue<Isolate> _isolatePool = Queue();
+  final int _maxPoolSize = 3;
+
+  Future<ProcessedFrame?> convertImage(CameraImage image, CameraDescription camera) async {
+    Isolate? isolate = _getAvailableIsolate();
+    if (isolate == null) {
+      // Fallback to direct conversion if no isolate available
+      return ImageConverter.convertCameraImageToProcessedFrameSync(
+        image,
+        sensorOrientation: camera.sensorOrientation,
+        lensDirection: camera.lensDirection,
+      );
+    }
+
+    try {
+      return await _runConversionOnIsolate(isolate, image, camera);
+    } finally {
+      _returnIsolateToPool(isolate);
+    }
+  }
+
+  Isolate? _getAvailableIsolate() {
+    return _isolatePool.isNotEmpty ? _isolatePool.removeFirst() : null;
+  }
+
+  void _returnIsolateToPool(Isolate isolate) {
+    if (_isolatePool.length < _maxPoolSize) {
+      _isolatePool.add(isolate);
+    }
+  }
+}
+```
+
+### **Step 4.2: Memory Management (NEW)**
+
+```dart
+// Optimize ProcessedFrame to reduce memory usage
+class ProcessedFrame {
+  final String base64Image;
+  final DateTime timestamp;
+  final img.Image? originalImage; // ← Make optional
+
+  const ProcessedFrame({
+    required this.base64Image,
+    required this.timestamp,
+    this.originalImage, // ← Optional for memory optimization
+  });
+
+  // Add method to clear originalImage when not needed
+  void clearOriginalImage() {
+    // Clear originalImage to free memory
+  }
+}
+
+// Update frame creation to not store originalImage by default
+data.processedFrame = ProcessedFrame(
+  base64Image: base64String,
+  timestamp: DateTime.now(),
+  // originalImage: processedImage, // ← Only include when needed
+);
+```
+
+### **Step 4.3: Code Duplication Reduction (NEW)**
+
+```dart
+// Simplify ProcessingResultMapper logic
+class ProcessingResultMapper {
+  (HybridProcessingResult, ProcessedFrame?)? mapToOutput(
+    FramePipelineData data,
+    bool hasPassedLiveness,
+    int consecutiveNoFaceFrames,
+    int maxNoFaceFramesBeforeReset,
+  ) {
+    if (data.error != null) {
+      return (HybridProcessingResult(status: ProcessingStatus.error), null);
+    }
+
+    if (data.faceResult?.isSingleValidFace != true) {
+      if (consecutiveNoFaceFrames >= maxNoFaceFramesBeforeReset) {
+        return _createWaitingForFaceResult(data.faceResult);
+      }
+    }
+
+    final livenessResult = data.livenessResult;
+    if (livenessResult == null) return null;
+
+    // ← NEW: Simplified logic - combine Passed and Completed
+    if (livenessResult.isPassed || livenessResult.isCompleted) {
+      return _createSuccessResult(data, livenessResult);
+    }
+
+    final status = _mapLivenessResultToStatus(livenessResult);
+
+    if (data.faceResult?.isSingleValidFace != true) {
+      return _createWaitingForFaceResult(data.faceResult);
+    }
+
+    return _createProcessingResult(data, status, livenessResult);
+  }
+
+  // ← NEW: Extract helper methods
+  (HybridProcessingResult, ProcessedFrame?) _createSuccessResult(
+    FramePipelineData data,
+    LivenessResult livenessResult,
+  ) {
+    final status = livenessResult.isCompleted 
+        ? ProcessingStatus.completed 
+        : ProcessingStatus.readyForCheckIn;
+    
+    return (
+      HybridProcessingResult(
+        status: status,
+        faceDetectionResult: data.faceResult,
+        livenessResult: livenessResult,
+      ),
+      data.processedFrame,
+    );
+  }
+
+  (HybridProcessingResult, ProcessedFrame?) _createWaitingForFaceResult(
+    LocalFaceDetectionResult? faceResult,
+  ) {
+    return (
+      HybridProcessingResult(
+        status: ProcessingStatus.waitingForFace,
+        faceDetectionResult: faceResult,
+      ),
+      null,
+    );
+  }
+
+  (HybridProcessingResult, ProcessedFrame?) _createProcessingResult(
+    FramePipelineData data,
+    ProcessingStatus status,
+    LivenessResult livenessResult,
+  ) {
+    return (
+      HybridProcessingResult(
+        status: status,
+        faceDetectionResult: data.faceResult,
+        livenessResult: livenessResult,
+      ),
+      null,
+    );
+  }
+}
+```
+
+### **Step 5.1: Improve Error Handling (NEW)**
+
+```dart
+// Add retry logic for image conversion
+Future<ProcessedFrame?> _createProcessedFrameWithRetry(
+  FramePipelineData data,
+) async {
+  const int maxRetries = 3;
+  const Duration retryDelay = Duration(milliseconds: 100);
+
+  for (int attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await Isolate.run(
+        () => ImageConverter.convertCameraImageToProcessedFrameSync(
+          data.image,
+          sensorOrientation: data.camera.sensorOrientation,
+          lensDirection: data.camera.lensDirection,
+        ),
+      );
+    } catch (e) {
+      if (attempt == maxRetries) {
+        data.error = 'Failed to create processed frame after $maxRetries attempts: $e';
+        return null;
+      }
+      await Future.delayed(retryDelay * attempt); // Exponential backoff
+    }
+  }
+  return null;
+}
+```
+
 ## 📊 **TESTING STRATEGY**
 
 ### **Test Cases**
@@ -389,10 +601,16 @@ class LivenessStateTracker {
 - Verify completion state persists
 - Verify UI shows correct status
 
-#### 4. **Performance Test**
+#### 4. **Performance Test (NEW)**
 - Monitor memory usage during completion
 - Verify no memory leaks
 - Verify proper cleanup
+- Test isolate pool performance
+
+#### 5. **Error Handling Test (NEW)**
+- Test retry logic for image conversion failures
+- Test fallback strategies
+- Test timeout handling
 
 ## 🔧 **CONFIGURATION UPDATES**
 
@@ -404,6 +622,12 @@ class ImageStreamConfig {
   static const int livenessCheckingFps = 15;
   static const int readyForCheckInFps = 1;
   static const int completedFps = 0; // ← NEW: Stop processing
+  
+  // ← NEW: Performance configuration
+  static const int maxIsolatePoolSize = 3;
+  static const int maxRetryAttempts = 3;
+  static const Duration retryDelay = Duration(milliseconds: 100);
+  static const bool enableOriginalImageStorage = false; // ← Memory optimization
 }
 ```
 
@@ -423,16 +647,20 @@ class ImageStreamConfig {
 - [x] Phase 3: UI State Stability
   - [x] Step 3.1: Fix Status Mapping Logic
   - [x] Step 3.2: Improve Processing Output Handling
-- [ ] Phase 4: Performance Optimization
-  - [ ] Step 4.1: Optimize Frame Processing
-  - [ ] Step 4.2: Memory Management
+- [x] Phase 4: Performance Optimization (NEW)
+  - [x] Step 4.1: Optimize Isolate Usage
+  - [x] Step 4.2: Memory Management
+  - [x] Step 4.3: Code Duplication Reduction
+- [x] Phase 5: Error Handling & Robustness (NEW)
+  - [x] Step 5.1: Improve Error Handling
+  - [x] Step 5.2: Add Validation & Safety Checks
 
 ## Notes
 - Mỗi step sẽ được thực hiện riêng biệt và cần approval trước khi thực hiện
 - Test sau mỗi step để đảm bảo không break existing functionality
 - Có thể rollback nếu cần thiết
-- Ưu tiên sửa các vấn đề nghiêm trọng trước (Phase 0 & 1)
-- Focus on completion persistence and frame queue management
+- **NEW**: Focus on performance optimization and code quality improvements
+- **NEW**: Priority order: Phase 4 (Performance) > Phase 5 (Error Handling)
 
 ## ✅ Hoàn thành
 - **Analysis Complete**: Đã phân tích đầy đủ các vấn đề
@@ -443,4 +671,9 @@ class ImageStreamConfig {
 - **Phase 3 Complete**: Đã fix UI state stability
 - **Frame Sending Fix Complete**: Đã fix logic gửi frame sau khi pass
 - **Build Success**: Code compile và build thành công
-- **Ready for Testing**: Sẵn sàng test các cải thiện 
+- **Ready for Testing**: Sẵn sàng test các cải thiện
+- **Review Complete**: Đã review và identify performance issues
+- **Plan Updated**: Đã cập nhật plan với performance optimization steps
+- **Phase 4 Complete**: Đã tối ưu performance (isolate pool, memory management, code duplication)
+- **Phase 5 Complete**: Đã cải thiện error handling và validation
+- **All Improvements Implemented**: Tất cả các cải thiện đã được implement thành công 

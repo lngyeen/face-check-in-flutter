@@ -6,7 +6,7 @@ import 'package:face_check_in_flutter/domain/entities/liveness_frame.dart';
 import 'package:face_check_in_flutter/domain/entities/liveness_metrics.dart';
 import 'package:face_check_in_flutter/domain/entities/liveness_result.dart';
 
-import 'liveness_validators.dart';
+import 'validators/index.dart';
 
 class LivenessStateTracker {
   final List<LivenessValidator> _validators;

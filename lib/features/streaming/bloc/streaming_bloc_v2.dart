@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:face_check_in_flutter/core/services/image_stream_service_v2.dart';
+import 'package:face_check_in_flutter/core/services/image_stream/index.dart';
 import 'package:face_check_in_flutter/core/services/liveness_progress_view_model.dart';
 import 'package:face_check_in_flutter/domain/entities/hybrid_processing_result.dart';
 import 'package:face_check_in_flutter/domain/entities/processing_mode.dart';

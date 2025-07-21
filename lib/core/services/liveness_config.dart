@@ -1,4 +1,4 @@
-import 'package:face_check_in_flutter/core/services/liveness_validators.dart';
+import 'package:face_check_in_flutter/core/services/validators/index.dart';
 import 'package:face_check_in_flutter/domain/entities/liveness_challenge.dart';
 
 class ChallengeConfig {
